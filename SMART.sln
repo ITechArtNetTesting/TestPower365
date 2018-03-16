@@ -20,8 +20,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphTest", "GraphTest\Grap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITechArtTestFramework", "ITechArtTestFramework\ITechArtTestFramework.csproj", "{E56552A3-44A5-495B-9381-B1F16DAF25E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{D22A765A-CED9-4103-B348-A383818F610B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,14 +76,6 @@ Global
 		{E56552A3-44A5-495B-9381-B1F16DAF25E2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E56552A3-44A5-495B-9381-B1F16DAF25E2}.Release|x64.ActiveCfg = Release|Any CPU
 		{E56552A3-44A5-495B-9381-B1F16DAF25E2}.Release|x64.Build.0 = Release|Any CPU
-		{D22A765A-CED9-4103-B348-A383818F610B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D22A765A-CED9-4103-B348-A383818F610B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D22A765A-CED9-4103-B348-A383818F610B}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{D22A765A-CED9-4103-B348-A383818F610B}.Debug|x64.Build.0 = Debug|Any CPU
-		{D22A765A-CED9-4103-B348-A383818F610B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D22A765A-CED9-4103-B348-A383818F610B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D22A765A-CED9-4103-B348-A383818F610B}.Release|x64.ActiveCfg = Release|Any CPU
-		{D22A765A-CED9-4103-B348-A383818F610B}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
