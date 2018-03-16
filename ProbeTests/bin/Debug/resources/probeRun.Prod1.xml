@@ -1,0 +1,176 @@
+<xml>
+
+  <baseurl>https://power365.binarytree.com/</baseurl>
+  <o365url>https://ps.outlook.com/powershell</o365url>
+  <msolconnectargs></msolconnectargs>
+  <Timeout>60</Timeout>
+  <browser>chrome</browser>
+  <arc>x64</arc>
+
+  <MigrationProbe   client="client1" project="project1" />
+  <DiscoveryProbe   client="client1" project="project2" adgroup="adgroup1" tenants="T5->T6" />
+  <IntegrationProbe client="client1" project="project3" adgroup="adgroup1" tenants="T1->T2" />
+  <ArsProbe         tenantA="T7" tenantB="T8" />
+  <DiscoveryQueueProbe connectionString="" threshold="1000" />
+  
+  <!-- Test data -->
+  <clients>
+    <client>
+      <metaname>client1</metaname>
+      <name>BT-Monitor</name>
+      <user>BT-ProbeMonitorUser01@btpower365.onmicrosoft.com</user>
+      <password>BinTree123</password>
+      <projects>
+        <project>
+          <metaname>project1</metaname>
+          <name>BTPD-Monitor-Project1</name>
+          <tenantmigrations>
+            <tenantmigration metaname="T1->T2" source="BT Corp7" target="BTCorp9" />
+          </tenantmigrations>
+          <usermigration>
+            <entry>
+              <metaname>entry1</metaname>
+              <source>P365PDProbe1@btcorp7.onmicrosoft.com</source>
+              <target>P365PDProbe1@btcorp9.onmicrosoft.com</target>
+              <group>Wave1</group>
+              <profile>Profile 1</profile>
+            </entry>
+          </usermigration>
+          <file>
+            <metaname>file1</metaname>
+            <filename>Probe_migration.csv</filename>
+          </file>
+        </project>
+        <project>
+          <metaname>project2</metaname>
+          <name>BTPD-Monitor-Project2</name>
+          <tenantmigrations>
+            <tenantmigration metaname="T5->T6" source="BTCloud1" target="BTCloud3" />
+          </tenantmigrations>
+          <dirsync>
+            <password>Password1</password>
+            <ou>P365PDProbe</ou>
+          </dirsync>
+          <adgroups>
+            <adgroup>
+              <metaname>adgroup1</metaname>
+              <name>BTPDMonitor-1</name>
+              <amount>1</amount>
+            </adgroup>
+          </adgroups>
+          <usermigration>
+            <entry>
+              <metaname>entry1</metaname>
+			  <probeprefix>pdmailprobe</probeprefix>
+              <source>corp29.cmtsandbox.com</source>
+              <target>corp30.cmtsandbox.com</target>
+              <group>Wave1</group>
+              <profile>Profile 1</profile>
+            </entry>
+          </usermigration>
+        </project>
+        <project>
+          <metaname>project3</metaname>
+          <name>BTPD-Monitor-Project3</name>
+          <tenantmigrations>
+            <tenantmigration metaname="T1->T2" source="BT Corp7" target="BTCorp9" />
+          </tenantmigrations>
+          <dirsync>
+            <password>Password1</password>
+            <forest>corp7.cmtsandbox.com</forest>
+            <ou>P365PDProbe</ou>
+          </dirsync>
+          <adgroups>
+            <adgroup>
+              <metaname>adgroup1</metaname>
+              <name>P365PDProbeGrp</name>
+              <amount></amount>
+            </adgroup>
+          </adgroups>
+          <usermigration>
+            <entry>
+              <metaname>entry1</metaname>
+              <probeprefix>P365PDUserProbe</probeprefix>
+              <source>@corp7.cmtsandbox.com</source>
+              <target>@corp9.cmtsandbox.com</target>
+              <group></group>
+              <profile></profile>
+            </entry>
+          </usermigration>
+        </project>
+      </projects>
+    </client>
+  </clients>
+
+  <tenants>
+    <tenant metaname="T1">
+      <name>BT Corp7</name>
+      <user>C7O365Admin@btcorp7.onmicrosoft.com</user>
+      <password>BinTree123</password>
+      <domain>btcorp7.onmicrosoft.com</domain>
+      <aduser>corp7\administrator</aduser>
+      <adpassword>BinTree123</adpassword>
+      <azureAdSyncServer>W28DS</azureAdSyncServer>
+      <uri>https://10.1.137.25/PowerShell</uri>
+    </tenant>
+    <tenant metaname="T2">
+      <name>BTCorp9</name>
+      <user>corp9O365admin@btcorp9.onmicrosoft.com</user>
+      <password>BinTree123</password>
+      <domain>btcorp9.onmicrosoft.com</domain>
+      <aduser>corp9\administrator</aduser>
+      <adpassword>BinTree123</adpassword>
+      <azureAdSyncServer>C9-W28DS</azureAdSyncServer>
+    </tenant>
+    <tenant metaname="T3">
+      <name>BTCorp3</name>
+      <user>E2E.Admin@btcorp3.onmicrosoft.com</user>
+      <password>Password3</password>
+      <domain>btcorp3.onmicrosoft.com</domain>
+    </tenant>
+    <tenant metaname="T4">
+      <name>BTCorp11</name>
+      <user>C11O365Admin@btcorp11.onmicrosoft.com</user>
+      <password>BinTree123</password>
+      <domain>btcorp11.onmicrosoft.com</domain>
+    </tenant>
+    <tenant metaname="T5">
+      <name>BTCloud1</name>
+      <user>PDProbeAdmin@corp29.cmtsandbox.com</user>
+      <password>Password29</password>
+      <domain>corp29.cmtsandbox.com</domain>
+      <uid>046b73c8-6531-443f-a66f-0064a84a2b0e</uid>
+      <appid>c292b087-abe4-4aa9-b5ac-aa4ed31fe545</appid>
+      <uri>https://10.1.141.20/powershell</uri>
+      <azureAdSyncServer>W12-C29-EX13</azureAdSyncServer>
+      <aduser>administrator@corp29.cmtsandbox.com</aduser>
+      <adpassword>Password29</adpassword>
+    </tenant>
+    <tenant metaname="T6">
+      <name>BTCloud3</name>
+      <user>PDProbeAdmin@corp30.cmtsandbox.com</user>
+      <password>Password30</password>
+      <domain>corp30.cmtsandbox.com</domain>
+      <uid>d9ef29f8-4517-4036-b7c8-4a126df22172</uid>
+      <appid>5eff8276-1553-4736-91aa-87e88db9e354</appid>
+      <uri>https://10.1.141.40/powershell</uri>
+      <azureAdSyncServer>W12-C30-EX13</azureAdSyncServer>
+      <aduser>administrator@corp30.cmtsandbox.com</aduser>
+      <adpassword>Password30</adpassword>
+    </tenant>
+    <tenant metaname="T7">
+      <uid>d267d328-cc1e-41b2-82b6-d36eb45df191</uid>
+      <name>BTCorp39</name>
+      <user>BTARSAdmin@Corp39.cmtsandbox.com</user>
+      <password>BinTree123</password>
+      <domain>btcorp39.onmicrosoft.com</domain>
+    </tenant>
+    <tenant metaname="T8">
+      <uid>32b85833-84c3-490d-b5bd-1d598f175ea3</uid>
+      <name>BTCorp40</name>
+      <user>BTARSAdmin@Corp40.cmtsandbox.com</user>
+      <password>BinTree123</password>
+      <domain>btcorp40.onmicrosoft.com</domain>
+    </tenant>
+  </tenants>
+</xml>

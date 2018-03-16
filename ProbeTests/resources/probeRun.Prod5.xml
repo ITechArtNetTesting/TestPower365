@@ -1,0 +1,172 @@
+<xml>
+  <baseurl>https://power365-de.binarytree.com/</baseurl>
+  <o365url>https://outlook.office.de/powershell</o365url>
+  <msolconnectargs>-AzureEnvironment AzureGermanyCloud</msolconnectargs>
+  <Timeout>60</Timeout>
+  <browser>chrome</browser>
+  <arc>x64</arc>
+
+  <MigrationProbe   client="client1" project="project1" />
+  <DiscoveryProbe   client="client1" project="project2" adgroup="adgroup1" tenants="T3->T4" />
+  <IntegrationProbe client="client1" project="project3" adgroup="adgroup1" tenants="T1->T2" />
+  <ArsProbe tenantA="T5" tenantB="T6" />
+  <DiscoveryQueueProbe connectionString="" threshold="1000" />
+
+  <!-- Test data -->
+  <clients>
+    <client>
+      <metaname>client1</metaname>
+      <name>BT-Monitor</name>
+      <user>BT-ProbeMonitorUser01@btpower365de.onmicrosoft.de</user>
+      <password>BinTree123</password>
+      <projects>
+        <project>
+          <metaname>project1</metaname>
+          <name>BTPD-Monitor-Project1</name>
+          <tenantmigrations>
+            <tenantmigration metaname="T1->T2" source="RMH" target="BLR" />
+          </tenantmigrations>
+          <usermigration>
+            <entry>
+              <metaname>entry1</metaname>
+              <source>P365PDProbe1@p365rmh.onmicrosoft.de</source>
+              <target>P365PDProbe1@p365blr.onmicrosoft.de</target>
+              <group>Wave1</group>
+              <profile>Profile 1</profile>
+            </entry>
+          </usermigration>
+          <file>
+            <metaname>file1</metaname>
+            <filename>Probe_migration.csv</filename>
+          </file>
+        </project>
+        <project>
+          <metaname>project2</metaname>
+          <name>BTPD-Monitor-Project2</name>
+          <tenantmigrations>
+            <tenantmigration metaname="T3->T4" source="GAR" target="OTF" />
+          </tenantmigrations>
+          <dirsync>
+            <password>Password1</password>
+            <ou>P365DEProbe</ou>
+          </dirsync>
+          <adgroups>
+            <adgroup>
+              <metaname>adgroup1</metaname>
+              <name>BTPDMonitor-1</name>
+              <amount>1</amount>
+            </adgroup>
+          </adgroups>
+          <usermigration>
+            <entry>
+              <metaname>entry1</metaname>
+              <probeprefix>pdmailprobe</probeprefix>
+              <source>greenacresranch.de</source>
+              <target>orangetreefarms.de</target>
+              <group>Wave1</group>
+              <profile>Profile 1</profile>
+            </entry>
+          </usermigration>
+        </project>
+        <project>
+          <metaname>project3</metaname>
+          <name>BTPD-Monitor-Project3</name>
+          <tenantmigrations>
+            <tenantmigration metaname="T1->T2" source="RMH" target="BLR" />
+          </tenantmigrations>
+          <dirsync>
+            <password>Password1</password>
+            <forest>redmaplehotels.de</forest>
+            <ou>P365DEProbe</ou>
+          </dirsync>
+          <adgroups>
+            <adgroup>
+              <metaname>adgroup1</metaname>
+              <name>P365PDProbeGrp</name>
+              <amount></amount>
+            </adgroup>
+          </adgroups>
+          <usermigration>
+            <entry>
+              <metaname>entry1</metaname>
+              <probeprefix>P365PDUserProbe</probeprefix>
+              <source>@redmaplehotels.de</source>
+              <target>@bluelagoonresourts.de</target>
+              <group></group>
+              <profile></profile>
+            </entry>
+          </usermigration>
+        </project>
+      </projects>
+    </client>
+  </clients>
+
+  <tenants>
+    <tenant metaname="T1">
+      <name>RMH</name>
+      <user>admin@p365rmh.onmicrosoft.de</user>
+      <password>BinTree123</password>
+      <domain>redmaplehotels.de</domain>
+      <aduser>rmh\btadmin</aduser>
+      <adpassword>Password1</adpassword>
+      <azureAdSyncServer>RMH-EX13</azureAdSyncServer>
+      <uri>https://mail.redmaplehotels.de/powershell</uri>
+      <uid>3890d3b6-719b-45b1-8475-b354939b5134</uid>
+    </tenant>
+    <tenant metaname="T2">
+      <name>BLR</name>
+      <user>admin@p365blr.onmicrosoft.de</user>
+      <password>BinTree123</password>
+      <domain>bluelagoonresourts.de</domain>
+      <aduser>blr\btadmin</aduser>
+      <adpassword>Password1</adpassword>
+      <azureAdSyncServer>BLR-EX13</azureAdSyncServer>
+      <uri>https://mail.bluelagoonresorts.de/powershell</uri>
+      <uid>3b0c75a2-4dec-4660-8533-f93d7e01f468</uid>
+    </tenant>
+    <tenant metaname="T3">
+      <name>GAR</name>
+      <user>DEProbeAdmin@p365gar.onmicrosoft.de</user>
+      <password>BinTree123</password>
+      <domain>greenacresranch.de</domain>
+      <uri>https://mail.greenacresranch.de/powershell</uri>
+      <aduser>gar\btadmin</aduser>
+      <adpassword>Password1</adpassword>
+      <azureAdSyncServer>GAR-EX13</azureAdSyncServer>
+      <appid>4221a9cc-082c-46dd-8d80-f67854d34568</appid>
+      <uid>597bf431-6218-414a-8b98-828aa5618c4a</uid>
+    </tenant>
+    <tenant metaname="T4">
+      <name>OTF</name>
+      <user>admin@p365otf.onmicrosoft.de</user>
+      <password>BinTree123</password>
+      <domain>orangetreefarms.de</domain>
+      <uri>https://mail.orangetreefarms.de/powershell</uri>
+      <aduser>otf\btadmin</aduser>
+      <adpassword>Password1</adpassword>
+      <azureAdSyncServer>OTF-EX13</azureAdSyncServer>
+      <uid>f26b6fa4-5a99-47e1-850a-1c47e55df62e</uid>
+      <appid>7ec10425-a63d-4dcd-a830-fae7387d87e6</appid>
+    </tenant>
+    <tenant metaname="T5">
+      <name>RMH</name>
+      <user>RMHOnPremUser2@RedMapleHotels.de</user>
+      <password>Password1</password>
+      <domain>P365RMH.onmicrosoft.de</domain>
+      <aduser>rmh\btadmin</aduser>
+      <adpassword>Password1</adpassword>
+      <uri>https://mail.redmaplehotels.de/powershell</uri>
+      <uid>3890d3b6-719b-45b1-8475-b354939b5134</uid>
+    </tenant>
+    <tenant metaname="T6">
+      <name>BLR</name>
+      <user>RMHOnPremUser2@BlueLagoonResorts.de</user>
+      <password>Password1</password>
+      <domain>P365BLR.onmicrosoft.de</domain>
+      <aduser>blr\btadmin</aduser>
+      <adpassword>Password1</adpassword>
+      <uri>https://mail.bluelagoonresorts.de/powershell</uri>
+      <uid>3b0c75a2-4dec-4660-8533-f93d7e01f468</uid>
+    </tenant>
+  </tenants>
+</xml>

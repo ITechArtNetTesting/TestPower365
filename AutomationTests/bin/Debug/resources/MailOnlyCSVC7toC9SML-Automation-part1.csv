@@ -1,0 +1,11 @@
+Source Email,Target Email,Migration Wave,Profile Name
+C7O365SML1@btcorp7.onmicrosoft.com,C7O365SML1@btcorp9.onmicrosoft.com,Wave1,Profile 1
+C7O365SML2@btcorp7.onmicrosoft.com,C7O365SML2@btcorp9.onmicrosoft.com,Wave1,Profile 1
+C7O365SML3@btcorp7.onmicrosoft.com,C7O365SML3@btcorp9.onmicrosoft.com,Wave1,Profile 1
+C7O365SML4@btcorp7.onmicrosoft.com,C7O365SML4@btcorp9.onmicrosoft.com,Wave1,Profile 2
+C7O365SML5@btcorp7.onmicrosoft.com,C7O365SML5@btcorp9.onmicrosoft.com,Wave2,Profile 1
+C7O365SML6@btcorp7.onmicrosoft.com,C7O365SML6@btcorp9.onmicrosoft.com,Wave1,Profile 1
+C7O365SML7@btcorp7.onmicrosoft.com,C7O365SML7@btcorp9.onmicrosoft.com,Wave1,Profile 1
+C7O365SML8@btcorp7.onmicrosoft.com,C7O365SML8@btcorp9.onmicrosoft.com,Wave1,Profile 1
+C7O365SML9@btcorp7.onmicrosoft.com,C7O365SML9@btcorp9.onmicrosoft.com,Wave2,Profile 1
+C7O365SML10@btcorp7.onmicrosoft.com,C7O365SML10@btcorp9.onmicrosoft.com,Wave2,Profile 1
