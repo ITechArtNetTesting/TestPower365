@@ -4,20 +4,22 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using System;
 using System.Collections.Generic;
-using ITechArtTestFramework.StaticClasses;
 
-namespace ITechArtTestFramework.Drivers
+namespace TP365Framework.Drivers
 {
     public class Driver:IDriver
     {
+        private string startPage { get; set; }
+
         private WebBrowsers browser;        
 
         private Guid driverKey;
 
         private static readonly IDictionary<Guid, IWebDriver> Drivers = new Dictionary<Guid, IWebDriver>();
 
-        public Driver(WebBrowsers browser)
+        public Driver(WebBrowsers browser,string startPage)
         {
+            this.startPage = startPage;
             this.browser = browser;            
             InitBrowser(browser);
             LoadApplication();
@@ -39,7 +41,7 @@ namespace ITechArtTestFramework.Drivers
 
         private void LoadApplication()
         {
-            GetDriver.Url = FrameworkConstants.StartPage;
+            GetDriver.Url = startPage;
         }
 
         public void GoToUrl(string url)
