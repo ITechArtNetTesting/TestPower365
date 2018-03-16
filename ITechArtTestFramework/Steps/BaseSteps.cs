@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
-using ITechArtTestFramework.Drivers;
-using ITechArtTestFramework.PageObjects;
-using ITechArtTestFramework.StaticClasses;
+using TP365Framework.Drivers;
+using TP365Framework.PageObjects;
+using TP365Framework.StaticClasses;
 
-namespace ITechArtTestFramework.Steps
+namespace TP365Framework.Steps
 {
     public abstract class BaseSteps
     {

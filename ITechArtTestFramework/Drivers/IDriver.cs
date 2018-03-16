@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace ITechArtTestFramework.Drivers
+namespace TP365Framework.Drivers
 {
     public interface IDriver
     {

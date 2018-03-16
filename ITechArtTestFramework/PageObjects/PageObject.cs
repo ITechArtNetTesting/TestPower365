@@ -2,12 +2,9 @@
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using ITechArtTestFramework.Drivers;
-using ITechArtTestFramework.StaticClasses;
+using TP365Framework.Drivers;
 
-namespace ITechArtTestFramework.PageObjects
+namespace TP365Framework.PageObjects
 {
     public abstract class PageObject
     {        
@@ -17,19 +14,6 @@ namespace ITechArtTestFramework.PageObjects
         {
             this.driver = driver;           
             PageFactory.InitElements(driver.GetDriver, this);            
-        }
-
-        public void Wait(IWebElement element)
-        {
-            DefaultWait<IWebElement> wait = new DefaultWait<IWebElement>(element);
-            wait.Timeout = TimeSpan.FromMinutes(2);
-            wait.PollingInterval = TimeSpan.FromMilliseconds(250);
-
-            Func<IWebElement, bool> waiter = new Func<IWebElement, bool>((IWebElement ele) =>
-            {
-                return ele.Enabled;
-            });
-            wait.Until(waiter);
-        }
+        }        
     }
 }

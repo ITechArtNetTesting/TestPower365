@@ -1,25 +1,23 @@
 ﻿using System;
 using System.Linq;
-using ITechArtTestFramework.Drivers;
-using ITechArtTestFramework.StaticClasses;
-using ITechArtTestFramework.Steps;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Product.Framework;
+using TP365Framework.Drivers;
+using TP365Framework.StaticClasses;
+using TP365Framework.Steps;
 
-namespace ITechArtTestFramework.TestCases
+namespace Product.Tests.TP365TestCases.Abstractions
 {
     [TestClass]
     public abstract class TestCase
-    {        
-        public Driver driver = new Driver(WebBrowsers.Chrome);
-
-        //Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-        //    RunConfigurator.RunPath = "resources/run.xml";
-        //    RunConfigurator.DownloadPath = downloadPath;
-        //    RunConfigurator.ResourcesPath = "resources/";
-
+    {
+        public Driver driver;
+        
         [TestInitialize]
         public void BeforeAllTests()
-        {                    
+        {
+            RunConfigurator.RunPath = "resources/run.xml";
+            driver = new Driver(WebBrowsers.Chrome, RunConfigurator.GetValue("baseurl"));
             InitSteps();
         }
 

@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphHelper", "GraphHelper\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphTest", "GraphTest\GraphTest.csproj", "{717CB347-B958-4752-823B-A5E042B998CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITechArtTestFramework", "ITechArtTestFramework\ITechArtTestFramework.csproj", "{E56552A3-44A5-495B-9381-B1F16DAF25E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP365Framework", "ITechArtTestFramework\TP365Framework.csproj", "{E56552A3-44A5-495B-9381-B1F16DAF25E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
