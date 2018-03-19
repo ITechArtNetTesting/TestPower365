@@ -21,6 +21,9 @@ namespace Product.WorkElements.Pages
         [FindsBy(How = How.Id, Using = "i0118")]
         public IWebElement passwordInputText { get; set; }
 
+        [FindsBy(How = How.Id, Using = "idSIButton9")]
+        IWebElement StaySignedButton { get; set; }
+
         public void ClickSignIn()
         {
             signInButton.Click();
@@ -39,6 +42,10 @@ namespace Product.WorkElements.Pages
         public void SetPassword(string password)
         {           
             passwordInputText.SendKeys(password);
-        }        
+        }
+        public void ClickStaySignedButton()
+        {
+            StaySignedButton.Click();
+        }
     }
 }
