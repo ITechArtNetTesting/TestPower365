@@ -30,8 +30,7 @@ namespace Product.WorkElements.Steps
             loginPage.WaitElementShows(loginPage.passwordInputText);
             loginPage.SetPassword(password);
             loginPage.NextClick();
-
-
+            loginPage.ClickStaySignedButton();
             try
             {
                 // User.AtTenantRestructuringForm().WaitForProjectsContainer();
