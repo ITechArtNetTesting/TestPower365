@@ -1419,6 +1419,114 @@
             <param name="parent">Driver in use</param>
             <param name="elementId">Id of the element</param>
         </member>
+        <member name="T:OpenQA.Selenium.ElementClickInterceptedException">
+            <summary>
+            The exception that is thrown when an element is not visible.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementClickInterceptedException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementClickInterceptedException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class with
+            a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementClickInterceptedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class with
+            a specified error message and a reference to the inner exception that is the
+            cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception,
+            or <see langword="null" /> if no inner exception is specified.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementClickInterceptedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized
+            object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual
+            information about the source or destination.</param>
+        </member>
+        <member name="T:OpenQA.Selenium.ElementNotInteractableException">
+            <summary>
+            The exception that is thrown when an element is not visible.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementNotInteractableException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementNotInteractableException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class with
+            a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementNotInteractableException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class with
+            a specified error message and a reference to the inner exception that is the
+            cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception,
+            or <see langword="null" /> if no inner exception is specified.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementNotInteractableException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized
+            object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual
+            information about the source or destination.</param>
+        </member>
+        <member name="T:OpenQA.Selenium.ElementNotSelectableException">
+            <summary>
+            The exception that is thrown when an element is not visible.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementNotSelectableException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementNotSelectableException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class with
+            a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementNotSelectableException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class with
+            a specified error message and a reference to the inner exception that is the
+            cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception,
+            or <see langword="null" /> if no inner exception is specified.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementNotSelectableException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized
+            object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual
+            information about the source or destination.</param>
+        </member>
         <member name="T:OpenQA.Selenium.ElementNotVisibleException">
             <summary>
             The exception that is thrown when an element is not visible.
@@ -3691,6 +3799,22 @@
             </summary>
             <returns>A <see cref="T:System.Collections.Generic.List`1" /> suitable for transmission across the wire.</returns>
         </member>
+        <member name="T:OpenQA.Selenium.Interactions.MoveToElementOffsetOrigin">
+            <summary>
+            Provides values that indicate from where element offsets for MoveToElement
+            are calculated.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Interactions.MoveToElementOffsetOrigin.TopLeft">
+            <summary>
+            Offsets are calculated from the top-left corner of the element.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Interactions.MoveToElementOffsetOrigin.Center">
+            <summary>
+            Offsets are calcuated from the center of the element.
+            </summary>
+        </member>
         <member name="T:OpenQA.Selenium.Interactions.Actions">
             <summary>
             Provides a mechanism for building advanced interactions with the browser.
@@ -3815,6 +3939,15 @@
             <returns>A self-reference to this <see cref="T:OpenQA.Selenium.Interactions.Actions" />.</returns>
         </member>
         <member name="M:OpenQA.Selenium.Interactions.Actions.MoveToElement(OpenQA.Selenium.IWebElement,System.Int32,System.Int32)">
+            <summary>
+            Moves the mouse to the specified offset of the top-left corner of the specified element.
+            </summary>
+            <param name="toElement">The element to which to move the mouse.</param>
+            <param name="offsetX">The horizontal offset to which to move the mouse.</param>
+            <param name="offsetY">The vertical offset to which to move the mouse.</param>
+            <returns>A self-reference to this <see cref="T:OpenQA.Selenium.Interactions.Actions" />.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Interactions.Actions.MoveToElement(OpenQA.Selenium.IWebElement,System.Int32,System.Int32,OpenQA.Selenium.Interactions.MoveToElementOffsetOrigin)">
             <summary>
             Moves the mouse to the specified offset of the top-left corner of the specified element.
             </summary>

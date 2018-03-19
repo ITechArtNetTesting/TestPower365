@@ -8,7 +8,8 @@ namespace Product.Framework.Forms
 	{
         private static readonly By TitleLocator = By.Name("f1");
        
-        private readonly TextBox loginTextBox = new TextBox(By.Name("loginfmt"), "Login textbox");
+      //  private readonly TextBox loginTextBox = new TextBox(By.Name("loginfmt"), "Login textbox");
+        private readonly TextBox loginTextBox = new TextBox(By.Id("i0116"), "Login textbox");
         private readonly TextBox passwordTextBox = new TextBox(By.Name("passwd"), "Password textbox");
 
         private readonly Button nextButton = new Button(By.ClassName("btn-primary"), "Next button");

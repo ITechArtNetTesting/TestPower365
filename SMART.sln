@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomationTests", "AutomationTests\AutomationTests.csproj", "{F38B1EE7-460B-472A-B0A5-D283AB749376}"
 EndProject
@@ -14,11 +14,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbeTests", "ProbeTests\Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbeTests.Model", "ProbeTests.Model\ProbeTests.Model.csproj", "{19D29549-735E-4B7B-AA30-2EB75FE8ED65}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitor.Lib", "..\Monitoring\Monitor.Lib\Monitor.Lib.csproj", "{48D4F265-64CE-4B20-A626-88F3D88F56E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthProbe", "..\Monitoring\HealthProbe\HealthProbe.csproj", "{B3C3B0D3-1E2E-495B-8A9F-3509A4A245DB}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphHelper", "GraphHelper\GraphHelper.csproj", "{E71ADC79-9789-4B6E-9EB8-E981077BC233}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphTest", "GraphTest\GraphTest.csproj", "{717CB347-B958-4752-823B-A5E042B998CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP365Framework", "ITechArtTestFramework\TP365Framework.csproj", "{E56552A3-44A5-495B-9381-B1F16DAF25E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTCloud.Lib", "..\Apps\BTCloud.Web\BTCloud.Lib\BTCloud.Lib.csproj", "{13769355-6704-46C6-A855-EBF61B828DC6}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ProbeTests.Database", "..\Databases\ProbeTests.Database\ProbeTests.Database.sqlproj", "{48F4C94B-1D29-4717-A23C-45863DD4F71C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +58,22 @@ Global
 		{19D29549-735E-4B7B-AA30-2EB75FE8ED65}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19D29549-735E-4B7B-AA30-2EB75FE8ED65}.Release|x64.ActiveCfg = Release|Any CPU
 		{19D29549-735E-4B7B-AA30-2EB75FE8ED65}.Release|x64.Build.0 = Release|Any CPU
+		{48D4F265-64CE-4B20-A626-88F3D88F56E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48D4F265-64CE-4B20-A626-88F3D88F56E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48D4F265-64CE-4B20-A626-88F3D88F56E0}.Debug|x64.ActiveCfg = Debug|x64
+		{48D4F265-64CE-4B20-A626-88F3D88F56E0}.Debug|x64.Build.0 = Debug|x64
+		{48D4F265-64CE-4B20-A626-88F3D88F56E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48D4F265-64CE-4B20-A626-88F3D88F56E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48D4F265-64CE-4B20-A626-88F3D88F56E0}.Release|x64.ActiveCfg = Release|x64
+		{48D4F265-64CE-4B20-A626-88F3D88F56E0}.Release|x64.Build.0 = Release|x64
+		{B3C3B0D3-1E2E-495B-8A9F-3509A4A245DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3C3B0D3-1E2E-495B-8A9F-3509A4A245DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3C3B0D3-1E2E-495B-8A9F-3509A4A245DB}.Debug|x64.ActiveCfg = Debug|x64
+		{B3C3B0D3-1E2E-495B-8A9F-3509A4A245DB}.Debug|x64.Build.0 = Debug|x64
+		{B3C3B0D3-1E2E-495B-8A9F-3509A4A245DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3C3B0D3-1E2E-495B-8A9F-3509A4A245DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3C3B0D3-1E2E-495B-8A9F-3509A4A245DB}.Release|x64.ActiveCfg = Release|x64
+		{B3C3B0D3-1E2E-495B-8A9F-3509A4A245DB}.Release|x64.Build.0 = Release|x64
 		{E71ADC79-9789-4B6E-9EB8-E981077BC233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E71ADC79-9789-4B6E-9EB8-E981077BC233}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E71ADC79-9789-4B6E-9EB8-E981077BC233}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -68,19 +90,60 @@ Global
 		{717CB347-B958-4752-823B-A5E042B998CA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{717CB347-B958-4752-823B-A5E042B998CA}.Release|x64.ActiveCfg = Release|Any CPU
 		{717CB347-B958-4752-823B-A5E042B998CA}.Release|x64.Build.0 = Release|Any CPU
-		{E56552A3-44A5-495B-9381-B1F16DAF25E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E56552A3-44A5-495B-9381-B1F16DAF25E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E56552A3-44A5-495B-9381-B1F16DAF25E2}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{E56552A3-44A5-495B-9381-B1F16DAF25E2}.Debug|x64.Build.0 = Debug|Any CPU
-		{E56552A3-44A5-495B-9381-B1F16DAF25E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E56552A3-44A5-495B-9381-B1F16DAF25E2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E56552A3-44A5-495B-9381-B1F16DAF25E2}.Release|x64.ActiveCfg = Release|Any CPU
-		{E56552A3-44A5-495B-9381-B1F16DAF25E2}.Release|x64.Build.0 = Release|Any CPU
+		{13769355-6704-46C6-A855-EBF61B828DC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13769355-6704-46C6-A855-EBF61B828DC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13769355-6704-46C6-A855-EBF61B828DC6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{13769355-6704-46C6-A855-EBF61B828DC6}.Debug|x64.Build.0 = Debug|Any CPU
+		{13769355-6704-46C6-A855-EBF61B828DC6}.Release|Any CPU.ActiveCfg = Release|x64
+		{13769355-6704-46C6-A855-EBF61B828DC6}.Release|x64.ActiveCfg = Release|x64
+		{13769355-6704-46C6-A855-EBF61B828DC6}.Release|x64.Build.0 = Release|x64
+		{48F4C94B-1D29-4717-A23C-45863DD4F71C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48F4C94B-1D29-4717-A23C-45863DD4F71C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48F4C94B-1D29-4717-A23C-45863DD4F71C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{48F4C94B-1D29-4717-A23C-45863DD4F71C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{48F4C94B-1D29-4717-A23C-45863DD4F71C}.Debug|x64.Build.0 = Debug|Any CPU
+		{48F4C94B-1D29-4717-A23C-45863DD4F71C}.Debug|x64.Deploy.0 = Debug|Any CPU
+		{48F4C94B-1D29-4717-A23C-45863DD4F71C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48F4C94B-1D29-4717-A23C-45863DD4F71C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48F4C94B-1D29-4717-A23C-45863DD4F71C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{48F4C94B-1D29-4717-A23C-45863DD4F71C}.Release|x64.ActiveCfg = Release|Any CPU
+		{48F4C94B-1D29-4717-A23C-45863DD4F71C}.Release|x64.Build.0 = Release|Any CPU
+		{48F4C94B-1D29-4717-A23C-45863DD4F71C}.Release|x64.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AB98D6C4-098B-4539-8FE6-473B77952D52}
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 10
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfsdata13:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = AutomationTests\\AutomationTests.csproj
+		SccProjectName1 = AutomationTests
+		SccLocalPath1 = AutomationTests
+		SccProjectUniqueName2 = ProbeTests\\ProbeTests.csproj
+		SccProjectName2 = ProbeTests
+		SccLocalPath2 = ProbeTests
+		SccProjectUniqueName3 = ProbeTests.Model\\ProbeTests.Model.csproj
+		SccProjectName3 = ProbeTests.Model
+		SccLocalPath3 = ProbeTests.Model
+		SccProjectUniqueName4 = ..\\Monitoring\\Monitor.Lib\\Monitor.Lib.csproj
+		SccProjectName4 = ../Monitoring/Monitor.Lib
+		SccLocalPath4 = ..\\Monitoring\\Monitor.Lib
+		SccProjectUniqueName5 = ..\\Monitoring\\HealthProbe\\HealthProbe.csproj
+		SccProjectName5 = ../Monitoring/HealthProbe
+		SccLocalPath5 = ..\\Monitoring\\HealthProbe
+		SccProjectUniqueName6 = GraphHelper\\GraphHelper.csproj
+		SccProjectName6 = GraphHelper
+		SccLocalPath6 = GraphHelper
+		SccProjectUniqueName7 = GraphTest\\GraphTest.csproj
+		SccProjectName7 = GraphTest
+		SccLocalPath7 = GraphTest
+		SccProjectUniqueName8 = ..\\Apps\\BTCloud.Web\\BTCloud.Lib\\BTCloud.Lib.csproj
+		SccProjectName8 = ../Apps/BTCloud.Web/BTCloud.Lib
+		SccLocalPath8 = ..\\Apps\\BTCloud.Web\\BTCloud.Lib
+		SccProjectUniqueName9 = ..\\Databases\\ProbeTests.Database\\ProbeTests.Database.sqlproj
+		SccProjectName9 = ../Databases/ProbeTests.Database
+		SccLocalPath9 = ..\\Databases\\ProbeTests.Database
 	EndGlobalSection
 EndGlobal

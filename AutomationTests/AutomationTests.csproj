@@ -238,10 +238,6 @@
     <Compile Include="Tests\PowerShellTests\StartDeltaDiscoveryTest.cs" />
     <Compile Include="Tests\PublicFoldersTests\DemoTest.cs" />
     <Compile Include="Tests\PublicFoldersTests\PublicFoldersTest.cs" />
-    <Compile Include="Tests\TP365TestCases\Abstractions\TestCase.cs" />
-    <Compile Include="Tests\TP365TestCases\LogInTest.cs" />
-    <Compile Include="WorkElements\Pages\LoginPage.cs" />
-    <Compile Include="WorkElements\Steps\LoginSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\chromedriver.exe">
@@ -534,12 +530,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lib\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ITechArtTestFramework\TP365Framework.csproj">
-      <Project>{e56552a3-44a5-495b-9381-b1f16daf25e2}</Project>
-      <Name>TP365Framework</Name>
-    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

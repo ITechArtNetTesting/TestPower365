@@ -51,7 +51,7 @@ namespace Product.Framework.Elements
 					}
 				}
 			}
-			GetElement().Clear();
+			//GetElement().Clear();
 			GetElement().SendKeys(text);
 			Log.Info($"{GetName()} :: type text '{text}'");
 		}

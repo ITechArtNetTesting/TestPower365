@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-//using BTCloud.HealthProbe;
+using BTCloud.HealthProbe;
 using ProbeTests.Model;
 using Product.Framework;
-//using BTCloud.Monitor;
+using BTCloud.Monitor;
 using System.Configuration;
 
 namespace ProbeTests.ProbeTests
@@ -36,53 +36,53 @@ namespace ProbeTests.ProbeTests
 
         public void Run()
         {
-            //try
-            //{
-            //    RecipSettings TenantARecip = new RecipSettings
-            //    {
-            //        DisplayName = "tenantA",
-            //        Email = TenantAUser,
-            //        Mailbox = TenantAUser,
-            //        Password = TenantAPwd
-            //    };
+            try
+            {
+                RecipSettings TenantARecip = new RecipSettings
+                {
+                    DisplayName = "tenantA",
+                    Email = TenantAUser,
+                    Mailbox = TenantAUser,
+                    Password = TenantAPwd
+                };
 
-            //    RecipSettings TenantBRecip = new RecipSettings
-            //    {
-            //        DisplayName = "tenantB",
-            //        Email = TenantBUser,
-            //        Mailbox = TenantBUser,
-            //        Password = TenantBPwd
-            //    };
+                RecipSettings TenantBRecip = new RecipSettings
+                {
+                    DisplayName = "tenantB",
+                    Email = TenantBUser,
+                    Mailbox = TenantBUser,
+                    Password = TenantBPwd
+                };
 
-            //    HealthProbe healthProbe = new HealthProbe();
+                HealthProbe healthProbe = new HealthProbe();
 
-            //    int sequence = 0;
-            //    CancellationTokenSource cancel = new CancellationTokenSource();
+                int sequence = 0;
+                CancellationTokenSource cancel = new CancellationTokenSource();
 
-            //    HealthProbeSettings hpSettingsAB = new HealthProbeSettings();
-            //    hpSettingsAB.SequenceId = GetSequenceId(ref sequence);
-            //    hpSettingsAB.Name = $"BT-IntegrationPro-{TenantAUid}-{TenantBUid}";
-            //    hpSettingsAB.TestAddressSent = $"BT-IntegrationPro-Probe-{TenantAUid}-{TenantBUid}@{TenantADomain}";
-            //    hpSettingsAB.TestAddressSentExpected = $"BT-IntegrationPro-Probe-{TenantAUid}-{TenantBUid}@{TenantBDomain}";
-            //    hpSettingsAB.Sender = TenantARecip;
-            //    hpSettingsAB.Recipient = TenantBRecip;
-            //    HealthProbeResult resultAB = healthProbe.RunAsync(hpSettingsAB, null, cancel.Token).GetAwaiter().GetResult();
-            //    CheckProbeResult(resultAB, ProbeType.ArsAToB);
+                HealthProbeSettings hpSettingsAB = new HealthProbeSettings();
+                hpSettingsAB.SequenceId = GetSequenceId(ref sequence);
+                hpSettingsAB.Name = $"BT-IntegrationPro-{TenantAUid}-{TenantBUid}";
+                hpSettingsAB.TestAddressSent = $"BT-IntegrationPro-Probe-{TenantAUid}-{TenantBUid}@{TenantADomain}";
+                hpSettingsAB.TestAddressSentExpected = $"BT-IntegrationPro-Probe-{TenantAUid}-{TenantBUid}@{TenantBDomain}";
+                hpSettingsAB.Sender = TenantARecip;
+                hpSettingsAB.Recipient = TenantBRecip;
+                HealthProbeResult resultAB = healthProbe.RunAsync(hpSettingsAB, null, cancel.Token).GetAwaiter().GetResult();
+                CheckProbeResult(resultAB, ProbeType.ArsAToB);
 
-            //    HealthProbeSettings hpSettingsBA = new HealthProbeSettings();
-            //    hpSettingsBA.SequenceId = GetSequenceId(ref sequence);
-            //    hpSettingsBA.Name = $"BT-IntegrationPro-{TenantBUid}-{TenantAUid}";
-            //    hpSettingsBA.TestAddressSent = $"BT-IntegrationPro-Probe-{TenantAUid}-{TenantBUid}@{TenantBDomain}";
-            //    hpSettingsBA.TestAddressSentExpected = $"BT-IntegrationPro-Probe-{TenantAUid}-{TenantBUid}@{TenantADomain}";
-            //    hpSettingsBA.Sender = TenantBRecip;
-            //    hpSettingsBA.Recipient = TenantARecip;
-            //    HealthProbeResult resultBA = healthProbe.RunAsync(hpSettingsBA, null, cancel.Token).GetAwaiter().GetResult();
-            //    CheckProbeResult(resultBA, ProbeType.ArsBToA);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.Error.WriteLine(ex);
-            //}
+                HealthProbeSettings hpSettingsBA = new HealthProbeSettings();
+                hpSettingsBA.SequenceId = GetSequenceId(ref sequence);
+                hpSettingsBA.Name = $"BT-IntegrationPro-{TenantBUid}-{TenantAUid}";
+                hpSettingsBA.TestAddressSent = $"BT-IntegrationPro-Probe-{TenantAUid}-{TenantBUid}@{TenantBDomain}";
+                hpSettingsBA.TestAddressSentExpected = $"BT-IntegrationPro-Probe-{TenantAUid}-{TenantBUid}@{TenantADomain}";
+                hpSettingsBA.Sender = TenantBRecip;
+                hpSettingsBA.Recipient = TenantARecip;
+                HealthProbeResult resultBA = healthProbe.RunAsync(hpSettingsBA, null, cancel.Token).GetAwaiter().GetResult();
+                CheckProbeResult(resultBA, ProbeType.ArsBToA);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex);
+            }
         }
 
         public void SetUp()
@@ -106,31 +106,31 @@ namespace ProbeTests.ProbeTests
         {
         }
 
-        //private static void CheckProbeResult(HealthProbeResult result, ProbeType probeType)
-        //{
-        //    string instanceName = ConfigurationManager.AppSettings.Get("Instance");
+        private static void CheckProbeResult(HealthProbeResult result, ProbeType probeType)
+        {
+            string instanceName = ConfigurationManager.AppSettings.Get("Instance");
 
-        //    using (var probesDB = new ProbesDb())
-        //    {
-        //        Probe probe = new Probe
-        //        {
-        //            Completed = result.EndTimeUtc,
-        //            ProbeType = probeType,
-        //            ErrorText = result.ErrorText,
-        //            IsSuccess = result.Succeeded,
-        //            Started = result.StartTimeUtc.HasValue ? result.StartTimeUtc.Value : DateTime.MinValue,
-        //            Instance = instanceName.ToLower()
-        //    };
+            using (var probesDB = new ProbesDb())
+            {
+                Probe probe = new Probe
+                {
+                    Completed = result.EndTimeUtc,
+                    ProbeType = probeType,
+                    ErrorText = result.ErrorText,
+                    IsSuccess = result.Succeeded,
+                    Started = result.StartTimeUtc.HasValue ? result.StartTimeUtc.Value : DateTime.MinValue,
+                    Instance = instanceName.ToLower()
+            };
 
-        //        Probe foo = probesDB.Probes.Add(probe);
-        //        int saved = probesDB.SaveChanges();
+                Probe foo = probesDB.Probes.Add(probe);
+                int saved = probesDB.SaveChanges();
 
-        //        probesDB.Database.ExecuteSqlCommand(
-        //            "dbo.ArchiveProbes @ProbeType, @InstanceName",
-        //            new SqlParameter("@ProbeType", probeType),
-        //            new SqlParameter("@InstanceName", instanceName));
-        //    }
-        //}
+                probesDB.Database.ExecuteSqlCommand(
+                    "dbo.ArchiveProbes @ProbeType, @InstanceName",
+                    new SqlParameter("@ProbeType", probeType),
+                    new SqlParameter("@InstanceName", instanceName));
+            }
+        }
 
         private static string GetSequenceId(ref int sequence)
         {
