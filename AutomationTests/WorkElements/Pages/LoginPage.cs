@@ -1,5 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
+using System;
 using TP365Framework.PageObjects;
 
 namespace Product.WorkElements.Pages
@@ -37,6 +39,6 @@ namespace Product.WorkElements.Pages
         public void SetPassword(string password)
         {           
             passwordInputText.SendKeys(password);
-        }
+        }        
     }
 }

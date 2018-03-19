@@ -14,6 +14,18 @@ namespace TP365Framework.PageObjects
         {
             this.driver = driver;           
             PageFactory.InitElements(driver.GetDriver, this);            
-        }        
+        }
+        public void WaitElementShows(IWebElement element)
+        {
+            DefaultWait<IWebElement> wait = new DefaultWait<IWebElement>(element);
+            wait.Timeout = TimeSpan.FromSeconds(10);
+            wait.PollingInterval = TimeSpan.FromMilliseconds(250);
+
+            Func<IWebElement, bool> waiter = new Func<IWebElement, bool>((IWebElement ele) =>
+            {
+                return ele.Displayed;
+            });
+            wait.Until(waiter);
+        }
     }
 }
