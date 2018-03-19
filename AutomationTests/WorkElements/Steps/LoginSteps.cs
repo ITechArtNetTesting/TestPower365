@@ -26,9 +26,11 @@ namespace Product.WorkElements.Steps
         {
             loginPage.ClickSignIn();
             loginPage.SetLogin(login);
-            loginPage.NextClick();            
+            loginPage.NextClick();
+            loginPage.WaitElementShows(loginPage.passwordInputText);
             loginPage.SetPassword(password);
             loginPage.NextClick();
+
 
             try
             {
