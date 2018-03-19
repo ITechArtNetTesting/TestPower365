@@ -15,3 +15,6 @@ C:\Users\valery.piniazik\Desktop\TestPower365\ITechArtTestFramework\bin\Debug\We
 C:\Users\valery.piniazik\Desktop\TestPower365\ITechArtTestFramework\bin\Debug\WebDriver.Support.dll
 C:\Users\valery.piniazik\Desktop\TestPower365\ITechArtTestFramework\bin\Debug\WebDriver.xml
 C:\Users\valery.piniazik\Desktop\TestPower365\ITechArtTestFramework\bin\Debug\WebDriver.Support.xml
+C:\Users\valery.piniazik\Desktop\TestPower365\ITechArtTestFramework\bin\Debug\nunit.framework.dll
+C:\Users\valery.piniazik\Desktop\TestPower365\ITechArtTestFramework\bin\Debug\nunit.framework.pdb
+C:\Users\valery.piniazik\Desktop\TestPower365\ITechArtTestFramework\bin\Debug\nunit.framework.xml
