@@ -2,7 +2,7 @@ Param
 (
     [Parameter(Mandatory=$true)]
     [string]$instanceName,
-    [Parameter(Mandatory=$false)]
+    [Parameter(Mandatory=$true)]
     [string]$subInstanceName
 )
 
