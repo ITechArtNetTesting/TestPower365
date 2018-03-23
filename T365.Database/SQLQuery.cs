@@ -27,9 +27,11 @@ namespace T365.Database
         {
             return DataBase.Execute("delete from Project where ClientId='" + clientId + "'");
         }
-        public string SelectClientIdByName(string clientName)
+
+        public String GetClientId(string clientName)
         {
-            return DataBase.ReturnFirstExecuted("select ClientId from Client where ClientName='" + clientName+"'");
+            return DataBase.ReturnFirstExecuted("select ClientId from Client where ClientName='" + clientName + "'");
         }
+
     }
 }

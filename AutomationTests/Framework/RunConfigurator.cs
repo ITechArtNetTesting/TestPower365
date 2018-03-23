@@ -54,6 +54,7 @@ namespace Product.Framework
 
         public static string GetRole(string client)
         {
+            xmlDoc.Load(RunPath);
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/../name").InnerText;
         }
 
@@ -266,11 +267,22 @@ namespace Product.Framework
 
         public static string GetConnectionString()
         {
-            return xmlDoc.SelectSingleNode($"//database//connectionString").InnerText;
+            xmlDoc.Load(RunPath);
+            String initialCatalog = xmlDoc.SelectSingleNode("//database//initialCatalog").InnerText;
+            String userID = xmlDoc.SelectSingleNode("//database//userID").InnerText;
+            String password = xmlDoc.SelectSingleNode("//database//password").InnerText;
+            return ($"Server=tcp:bt-qa-sql.database.windows.net,1433; Initial Catalog = {initialCatalog}; Persist Security Info = False; User ID = {userID}; Password ={password}; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
+            
         }
-        public static string GetClientsConnectionString()
+
+        public static string GetConnectionStringDBClients()
         {
-            return xmlDoc.SelectSingleNode($"//database//ClientsConnectionString").InnerText;
+            xmlDoc.Load(RunPath);
+            String initialCatalog = xmlDoc.SelectSingleNode("//database//initialClientsCatalog").InnerText;
+            String userID = xmlDoc.SelectSingleNode("//database//userID").InnerText;
+            String password = xmlDoc.SelectSingleNode("//database//password").InnerText;
+            return ($"Server=tcp:bt-qa-sql.database.windows.net,1433; Initial Catalog={initialCatalog}; Persist Security Info = False; User ID ={userID}; Password ={password}; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
+        
         }
     }
 }

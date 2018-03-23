@@ -7,9 +7,9 @@ namespace Product.Framework.Forms
 	public class Office365LoginForm : BaseForm
 	{
         private static readonly By TitleLocator = By.XPath("//*/title");
-       
-      //  private readonly TextBox loginTextBox = new TextBox(By.Name("loginfmt"), "Login textbox");
+
         private readonly TextBox loginTextBox = new TextBox(By.Id("i0116"), "Login textbox");
+
         private readonly TextBox passwordTextBox = new TextBox(By.Name("passwd"), "Password textbox");
 
         private readonly Button nextButton = new Button(By.Id("idSIButton9"), "Next button");
@@ -60,8 +60,11 @@ namespace Product.Framework.Forms
             try
             {
                 //Handle Don't Show Again page.
-                dontShowAgain.WaitForElementPresent(1000);
-                nextButton.Click();
+                if (dontShowAgain.IsPresent()) //wait if element present
+                {
+                    dontShowAgain.WaitForElementPresent(1000);
+                    nextButton.Click();
+                }
             }
             catch (Exception)
             {
