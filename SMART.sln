@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomationTests", "AutomationTests\AutomationTests.csproj", "{F38B1EE7-460B-472A-B0A5-D283AB749376}"
 EndProject
@@ -25,6 +25,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTCloud.Lib", "..\Apps\BTCloud.Web\BTCloud.Lib\BTCloud.Lib.csproj", "{13769355-6704-46C6-A855-EBF61B828DC6}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ProbeTests.Database", "..\Databases\ProbeTests.Database\ProbeTests.Database.sqlproj", "{48F4C94B-1D29-4717-A23C-45863DD4F71C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T365.Database", "T365.Database\T365.Database.csproj", "{06091402-4BB2-44D5-B443-32AAB04713C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,41 +111,19 @@ Global
 		{48F4C94B-1D29-4717-A23C-45863DD4F71C}.Release|x64.ActiveCfg = Release|Any CPU
 		{48F4C94B-1D29-4717-A23C-45863DD4F71C}.Release|x64.Build.0 = Release|Any CPU
 		{48F4C94B-1D29-4717-A23C-45863DD4F71C}.Release|x64.Deploy.0 = Release|Any CPU
+		{06091402-4BB2-44D5-B443-32AAB04713C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06091402-4BB2-44D5-B443-32AAB04713C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06091402-4BB2-44D5-B443-32AAB04713C5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{06091402-4BB2-44D5-B443-32AAB04713C5}.Debug|x64.Build.0 = Debug|Any CPU
+		{06091402-4BB2-44D5-B443-32AAB04713C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06091402-4BB2-44D5-B443-32AAB04713C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06091402-4BB2-44D5-B443-32AAB04713C5}.Release|x64.ActiveCfg = Release|Any CPU
+		{06091402-4BB2-44D5-B443-32AAB04713C5}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfsdata13:8080/tfs/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = AutomationTests\\AutomationTests.csproj
-		SccProjectName1 = AutomationTests
-		SccLocalPath1 = AutomationTests
-		SccProjectUniqueName2 = ProbeTests\\ProbeTests.csproj
-		SccProjectName2 = ProbeTests
-		SccLocalPath2 = ProbeTests
-		SccProjectUniqueName3 = ProbeTests.Model\\ProbeTests.Model.csproj
-		SccProjectName3 = ProbeTests.Model
-		SccLocalPath3 = ProbeTests.Model
-		SccProjectUniqueName4 = ..\\Monitoring\\Monitor.Lib\\Monitor.Lib.csproj
-		SccProjectName4 = ../Monitoring/Monitor.Lib
-		SccLocalPath4 = ..\\Monitoring\\Monitor.Lib
-		SccProjectUniqueName5 = ..\\Monitoring\\HealthProbe\\HealthProbe.csproj
-		SccProjectName5 = ../Monitoring/HealthProbe
-		SccLocalPath5 = ..\\Monitoring\\HealthProbe
-		SccProjectUniqueName6 = GraphHelper\\GraphHelper.csproj
-		SccProjectName6 = GraphHelper
-		SccLocalPath6 = GraphHelper
-		SccProjectUniqueName7 = GraphTest\\GraphTest.csproj
-		SccProjectName7 = GraphTest
-		SccLocalPath7 = GraphTest
-		SccProjectUniqueName8 = ..\\Apps\\BTCloud.Web\\BTCloud.Lib\\BTCloud.Lib.csproj
-		SccProjectName8 = ../Apps/BTCloud.Web/BTCloud.Lib
-		SccLocalPath8 = ..\\Apps\\BTCloud.Web\\BTCloud.Lib
-		SccProjectUniqueName9 = ..\\Databases\\ProbeTests.Database\\ProbeTests.Database.sqlproj
-		SccProjectName9 = ../Databases/ProbeTests.Database
-		SccLocalPath9 = ..\\Databases\\ProbeTests.Database
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {77C43FFC-5DDD-4F95-BEAF-39D1A4536339}
 	EndGlobalSection
 EndGlobal

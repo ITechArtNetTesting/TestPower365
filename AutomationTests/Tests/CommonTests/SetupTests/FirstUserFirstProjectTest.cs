@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
+using T365.Database;
 
 namespace Product.Tests.CommonTests.SetupTests
 {
@@ -14,16 +15,23 @@ namespace Product.Tests.CommonTests.SetupTests
 		[TestMethod]
 		[TestCategory("Setup")]
 		public void SetupFirstUserFirstProject()
-		{
-			LoginAndSelectRole(RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user"),
-				RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password"), 
-				RunConfigurator.GetValueByXpath("//metaname[text()='client1']/../name"));
-			AddMailOnlyProject(RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//name"),
-				RunConfigurator.GetTenantValue("T1->T2", "source", "user"),
-				RunConfigurator.GetTenantValue("T1->T2", "source", "password"),
-				RunConfigurator.GetTenantValue("T1->T2", "target", "user"),
-				RunConfigurator.GetTenantValue("T1->T2", "target", "password"),
-				RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='file1']/..//filename"));
+           {
+            SQLQuery sqlForDelete = new SQLQuery(RunConfigurator.GetConnectionString());
+            sqlForDelete.DeleteProject("2");
+            sqlForDelete.DeleteTenant("2");
+            SQLQuery sqlForSelect = new SQLQuery(RunConfigurator.GetClientsConnectionString());
+            string test = sqlForSelect.SelectClientIdByName("BT-AutoQA1");
+
+            LoginAndSelectRole(RunConfigurator.GetUserLogin("client1"),
+			                   RunConfigurator.GetPassword("client1"),
+                               RunConfigurator.GetRole("client1"));
+           
+			AddMailOnlyProject(RunConfigurator.GetProjectName("client1","project1"),
+				                RunConfigurator.GetTenantValue("T1->T2", "source", "user"),
+				                RunConfigurator.GetTenantValue("T1->T2", "source", "password"),
+			                	RunConfigurator.GetTenantValue("T1->T2", "target", "user"),
+			                	RunConfigurator.GetTenantValue("T1->T2", "target", "password"),
+			                	RunConfigurator.GetFileName("client1","project1", "file1"));
 			User.AtProjectOverviewForm().OpenUsersList();
 		}
 	}

@@ -6,13 +6,13 @@ namespace Product.Framework.Forms
 {
 	public class Office365LoginForm : BaseForm
 	{
-        private static readonly By TitleLocator = By.Name("f1");
+        private static readonly By TitleLocator = By.XPath("//*/title");
        
       //  private readonly TextBox loginTextBox = new TextBox(By.Name("loginfmt"), "Login textbox");
         private readonly TextBox loginTextBox = new TextBox(By.Id("i0116"), "Login textbox");
         private readonly TextBox passwordTextBox = new TextBox(By.Name("passwd"), "Password textbox");
 
-        private readonly Button nextButton = new Button(By.ClassName("btn-primary"), "Next button");
+        private readonly Button nextButton = new Button(By.Id("idSIButton9"), "Next button");
 
         private readonly Button useAnotherAccountButton = new Button(By.Id("otherTile"), "Use another account button");
 

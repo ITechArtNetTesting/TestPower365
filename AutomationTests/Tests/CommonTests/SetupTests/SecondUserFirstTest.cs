@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using Product.Framework;
 using Product.Framework.Elements;
+using T365.Database;
 
 namespace Product.Tests.CommonTests.SetupTests
 {
@@ -18,7 +19,11 @@ namespace Product.Tests.CommonTests.SetupTests
 		[TestCategory("Setup")]
 		public void SetupSecondUserFirstProject()
 		{
-			LoginAndSelectRole(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user"),
+            SQLQuery sqlForDelete = new SQLQuery(RunConfigurator.GetConnectionString());
+            sqlForDelete.DeleteProject("2");
+            sqlForDelete.DeleteTenant("2");
+
+            LoginAndSelectRole(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user"),
 				RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//password"),
 				RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name"));
 			User.AtTenantRestructuringForm().AddProjectClick();
