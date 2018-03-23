@@ -18,6 +18,8 @@ namespace T365.Database
 
         public bool Execute(string commandStr)
         {
+
+
             using (SqlConnection connection =
             new SqlConnection(connectionString))
             {
@@ -34,6 +36,7 @@ namespace T365.Database
                 }
             }
         }
+
         public string ReturnFirstExecuted(string commandStr)
         {
             string result = null;
@@ -59,6 +62,5 @@ namespace T365.Database
 
             }
         }
-
     }
 }

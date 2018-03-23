@@ -24,14 +24,15 @@ namespace Product.Tests.CommonTests.SetupTests
 		[TestCategory("Setup")]
 		public void SetupSecondUserSecondProject()
 		{
-			LoginAndSelectRole(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user"),
-			RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//password"),
-			RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name"));
+            LoginAndSelectRole(RunConfigurator.GetUserLogin("client2"),
+                               RunConfigurator.GetPassword("client2"),
+                               RunConfigurator.GetRole("client2"));
+                     
 			User.AtTenantRestructuringForm().AddProjectClick();
 			User.AtChooseYourProjectTypeForm().ChooseIntegration();
 			User.AtChooseYourProjectTypeForm().GoNext();
-			User.AtSetProjectNameForm().SetName(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/../name"));
-			User.AtSetProjectNameForm().GoNext();
+            User.AtSetProjectNameForm().SetName(RunConfigurator.GetProjectName("client2","project2"));
+            User.AtSetProjectNameForm().GoNext();
 			User.AtSetProjectDescriptionForm().SetDescription(StringRandomazer.MakeRandomString(20));
 			User.AtSetProjectDescriptionForm().GoNext();
 			User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
