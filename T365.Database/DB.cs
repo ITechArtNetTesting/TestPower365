@@ -19,7 +19,7 @@ namespace T365.Database
         public bool Execute(string commandStr)
         {
 
-
+          
             using (SqlConnection connection =
             new SqlConnection(connectionString))
             {
@@ -33,7 +33,7 @@ namespace T365.Database
                 catch (Exception ex)
                 {
                     return false;
-                }
+                }                
             }
         }
 
@@ -63,4 +63,3 @@ namespace T365.Database
             }
         }
     }
-}
