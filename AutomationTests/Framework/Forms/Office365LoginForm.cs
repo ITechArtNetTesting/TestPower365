@@ -18,6 +18,9 @@ namespace Product.Framework.Forms
 
         private readonly Button dontShowAgain = new Button(By.Name("DontShowAgain"), "Don't show again button");
 
+       
+
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="Office365LoginForm" /> class.
         /// </summary>
@@ -53,13 +56,9 @@ namespace Product.Framework.Forms
 
         public void NextClick()
         {
-            Log.Info($"Clicking Next");
-            nextButton.WaitForElementPresent();
-            nextButton.Click();
-
+            AccertClick();
             try
             {
-                var test = dontShowAgain;
                 //Handle Don't Show Again page.
                 if (dontShowAgain.IsPresent()) //wait if element present
                 {
@@ -67,10 +66,18 @@ namespace Product.Framework.Forms
                     nextButton.Click();
                 }
             }
-            catch (NoSuchWindowException)
+            catch (Exception)
             {
                 //Ignore Timeout
             }
         }
-	}
+
+        public void AccertClick()
+        {
+           Log.Info($"Clicking Next");
+           nextButton.WaitForElementPresent();
+           nextButton.Click();
+                     
+        }
+    }
 }

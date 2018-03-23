@@ -87,7 +87,8 @@ namespace Product.Tests.CommonTests.SetupTests
 			User.AtGoodToGoForm().GoNext();
 			User.AtBeginDiscoveryForm().GoNext();
 			User.AtDiscoveryProgressForm().WaitForDiscoveryIsCompleted();
-			User.AtDiscoveryIsCompleteForm().GoNext();
+            User.AtDiscoveryIsCompleteForm().ScrollToTheBottom();
+            User.AtDiscoveryIsCompleteForm().GoNext();
 			User.AtUserMigrationExpirienceForm().GoNext();
 			User.AtSyncAddressBooksForm().SelectDontSyncAtAll();
 			User.AtSyncAddressBooksForm().GoNext();
