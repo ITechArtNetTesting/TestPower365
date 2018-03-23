@@ -10,7 +10,8 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
 {
     public class ProfileFilterNoteForm : BaseWizardStepForm
     {
-        private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'How would you like to filter note items')]");
+        //private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'How would you like to filter note items')]");
+        private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='HowWouldYouLikeToFilterCalendarAppointments']");
 
         public ProfileFilterNoteForm() : base(TitleLocator, "Profile Filter note form")
         {
