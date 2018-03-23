@@ -110,7 +110,6 @@
     <Compile Include="ProbeTests\CDSC2CTest.cs" />
     <Compile Include="ProbeTests\ArsProbeTest.cs" />
     <Compile Include="ProbeTests\DiscoveryQueueTest.cs" />
-    <Compile Include="ProbeTests\IProbeTest.cs" />
     <Compile Include="ProbeTests\ProbeDiscoverAndMatchingTest.cs" />
     <Compile Include="ProbeTests\ProbeIntegrationTest.cs" />
     <Compile Include="ProbeTests\CDSP2PTest.cs" />

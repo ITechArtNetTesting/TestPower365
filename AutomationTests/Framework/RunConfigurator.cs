@@ -41,12 +41,37 @@ namespace Product.Framework
 			return xmlDoc.SelectSingleNode($"//tenant//name[text()='{tenantName}']/..//{value}").InnerText;
 		}
 
-		/// <summary>
-		///     Sets the value.
-		/// </summary>
-		/// <param name="tag">The tag.</param>
-		/// <param name="value">The value.</param>
-		public static void SetValue(string tag, string value)
+        public static string GetUserLogin(string client)
+        {
+            xmlDoc.Load(RunPath);
+            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//user").InnerText; ;
+        }
+
+        public static string GetPassword(string client)
+        {
+             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//password").InnerText;
+        }
+
+        public static string GetRole(string client)
+        {
+            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/../name").InnerText;
+        }
+
+        public static string GetProjectName(string client, string project )
+        {
+            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//name").InnerText;
+        }
+
+        public static string GetFileName(string client, string project, string file)
+        {
+            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{file}']/..//filename").InnerText;
+        }
+        /// <summary>
+        ///     Sets the value.
+        /// </summary>
+        /// <param name="tag">The tag.</param>
+        /// <param name="value">The value.</param>
+        public static void SetValue(string tag, string value)
 		{
 			xmlDoc.Load(RunPath); // Load the XML document from the specified file
 			var element = xmlDoc.GetElementsByTagName(tag);
@@ -237,5 +262,15 @@ namespace Product.Framework
 		{
 			File.Create(path).Dispose();
 		}
-	}
+
+
+        public static string GetConnectionString()
+        {
+            return xmlDoc.SelectSingleNode($"//database//connectionString").InnerText;
+        }
+        public static string GetClientsConnectionString()
+        {
+            return xmlDoc.SelectSingleNode($"//database//ClientsConnectionString").InnerText;
+        }
+    }
 }

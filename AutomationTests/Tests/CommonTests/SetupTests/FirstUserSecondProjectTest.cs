@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
+using T365.Database;
 
 namespace Product.Tests.CommonTests.SetupTests
 {
@@ -16,17 +17,21 @@ namespace Product.Tests.CommonTests.SetupTests
 		[TestCategory("Setup")]
 		public void SetupFirstUserSecondProject()
 		{
-		    LoginAndSelectRole(RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user"),
-		        RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password"),
-		        RunConfigurator.GetValueByXpath("//metaname[text()='client1']/../name"));
+            SQLQuery sqlForDelete = new SQLQuery(RunConfigurator.GetConnectionString());
+            sqlForDelete.DeleteProject("2");
+            sqlForDelete.DeleteTenant("2");
 
-		    AddMailOnlyProject(RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//name"),
-		        RunConfigurator.GetTenantValue("T3->T4", "source", "user"),
+            LoginAndSelectRole(RunConfigurator.GetUserLogin("client1"),
+                                RunConfigurator.GetPassword("client1"),
+                                RunConfigurator.GetRole("client1"));
+          
+            AddMailOnlyProject(RunConfigurator.GetProjectName("client1", "project2"),
+                RunConfigurator.GetTenantValue("T3->T4", "source", "user"),
 		        RunConfigurator.GetTenantValue("T3->T4", "source", "password"),
 		        RunConfigurator.GetTenantValue("T3->T4", "target", "user"),
 		        RunConfigurator.GetTenantValue("T3->T4", "target", "password"),
-		        RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//metaname[text()='file1']/..//filename"));
-		    User.AtProjectOverviewForm().OpenUsersList();
+                RunConfigurator.GetFileName("client1", "project2", "file1"));
+            User.AtProjectOverviewForm().OpenUsersList();
         }
 
 	    public void SetupTest()

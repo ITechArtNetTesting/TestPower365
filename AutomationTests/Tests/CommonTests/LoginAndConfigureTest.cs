@@ -73,7 +73,7 @@ namespace Product.Tests.CommonTests
 
             User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
 
-            Office365TenantAuthorization(sourceTenant, sourcePassword);
+            Office365TenantAuthorization(targetTenant, targetPassword);
 
             Browser.GetDriver().SwitchTo().Window(Store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(2);

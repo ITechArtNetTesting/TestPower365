@@ -6,6 +6,7 @@ using Product.Framework.Steps;
 using System.Management.Automation;
 using System.Threading;
 using TestContext = Microsoft.VisualStudio.TestTools.UnitTesting.TestContext;
+using T365.Database;
 
 namespace Product.Framework
 {
@@ -31,8 +32,8 @@ namespace Product.Framework
 		/// </summary>
 		[TestInitialize]
 		public virtual void SetUp()
-		{
-			RunOnce();
+		{            
+            RunOnce();
 			RunConfigurator.RunPath = "resources/run.xml";
 			RunConfigurator.DownloadPath = downloadPath;
 			RunConfigurator.ResourcesPath = "resources/";
