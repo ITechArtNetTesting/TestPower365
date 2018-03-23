@@ -496,6 +496,7 @@
   <!--database connection string.Initial Catalog = databasename -->
   <database>
     <connectionString>Server=tcp:bt-qa-sql.database.windows.net,1433;Initial Catalog=sqlt2t01-QA;Persist Security Info=False;User ID=btcloudsqladmin;Password=NSHEtMDq0Q9zGJZfpFVemOr.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;</connectionString>
+    <ClientsConnectionString>Server=tcp:bt-qa-sql.database.windows.net,1433;Initial Catalog=sqlclients-QA;Persist Security Info=False;User ID=btcloudsqladmin;Password=NSHEtMDq0Q9zGJZfpFVemOr.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;</ClientsConnectionString>
  </database>
   
   <client.usermail>BT-Automation-QA1@btpower365dev.onmicrosoft.com</client.usermail>
