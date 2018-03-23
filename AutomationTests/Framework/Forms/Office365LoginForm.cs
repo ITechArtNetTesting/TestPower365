@@ -59,6 +59,7 @@ namespace Product.Framework.Forms
 
             try
             {
+                var test = dontShowAgain;
                 //Handle Don't Show Again page.
                 if (dontShowAgain.IsPresent()) //wait if element present
                 {
@@ -66,7 +67,7 @@ namespace Product.Framework.Forms
                     nextButton.Click();
                 }
             }
-            catch (Exception)
+            catch (NoSuchWindowException)
             {
                 //Ignore Timeout
             }
