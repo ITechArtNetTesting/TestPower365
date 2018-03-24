@@ -7,6 +7,7 @@ using Product.Framework;
 using Product.Tests.CommonTests;
 using ProbeTests.Model;
 using System.Configuration;
+using T365Framework;
 
 namespace ProbeTests.ProbeTests
 {

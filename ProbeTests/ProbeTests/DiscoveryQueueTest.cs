@@ -5,6 +5,7 @@ using Microsoft.WindowsAzure.Storage.Queue;
 using ProbeTests.Model;
 using Product.Framework;
 using System.Data.SqlClient;
+using T365Framework;
 //using BTCloud.Lib;
 //using log4net;
 //using log4net.Config;

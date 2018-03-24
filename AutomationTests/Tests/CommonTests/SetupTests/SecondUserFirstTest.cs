@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using Product.Framework;
 using Product.Framework.Elements;
+using T365Framework;
 
 namespace Product.Tests.CommonTests.SetupTests
 {

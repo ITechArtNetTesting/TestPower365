@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Product.Framework;
+using T365Framework;
 
 namespace Product.Tests.CommonTests
 {

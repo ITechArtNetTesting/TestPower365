@@ -1,0 +1,13 @@
+C:\Users\valery.piniazik\Documents\TestPower365\T365Framework\bin\Debug\T365Framework.dll
+C:\Users\valery.piniazik\Documents\TestPower365\T365Framework\bin\Debug\T365Framework.pdb
+C:\Users\valery.piniazik\Documents\TestPower365\T365Framework\bin\Debug\log4net.dll
+C:\Users\valery.piniazik\Documents\TestPower365\T365Framework\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\valery.piniazik\Documents\TestPower365\T365Framework\bin\Debug\WebDriver.dll
+C:\Users\valery.piniazik\Documents\TestPower365\T365Framework\bin\Debug\WebDriver.Support.dll
+C:\Users\valery.piniazik\Documents\TestPower365\T365Framework\bin\Debug\log4net.xml
+C:\Users\valery.piniazik\Documents\TestPower365\T365Framework\bin\Debug\WebDriver.xml
+C:\Users\valery.piniazik\Documents\TestPower365\T365Framework\bin\Debug\WebDriver.Support.xml
+C:\Users\valery.piniazik\Documents\TestPower365\T365Framework\obj\Debug\T365Framework.csproj.CoreCompileInputs.cache
+C:\Users\valery.piniazik\Documents\TestPower365\T365Framework\obj\Debug\T365Framework.dll
+C:\Users\valery.piniazik\Documents\TestPower365\T365Framework\obj\Debug\T365Framework.pdb
+C:\Users\valery.piniazik\Documents\TestPower365\T365Framework\obj\Debug\T365Framework.csprojResolveAssemblyReference.cache

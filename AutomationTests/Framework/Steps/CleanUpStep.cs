@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using T365.Database;
+using T365Framework;
 
 namespace Product.Framework.Steps
 {

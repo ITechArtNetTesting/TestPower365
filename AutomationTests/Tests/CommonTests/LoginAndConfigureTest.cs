@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Product.Framework;
+using T365Framework;
 
 namespace Product.Tests.CommonTests
 {

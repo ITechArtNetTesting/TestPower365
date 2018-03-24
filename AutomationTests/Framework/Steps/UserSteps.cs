@@ -6,6 +6,7 @@ using Product.Framework.Forms.NewProjectWizardForms.IntegrationForms;
 using Product.Framework.Forms.ProfileForms;
 using Product.Framework.Forms.ProfileForms.WizardForms;
 using Product.Framework.Forms.PublicFolderMigrationForms;
+using T365Framework;
 
 namespace Product.Framework.Steps
 {

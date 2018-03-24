@@ -5,6 +5,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using Product.Framework.Elements;
 using Product.Framework.Steps;
+using T365Framework;
 
 namespace Product.Framework.Forms
 {

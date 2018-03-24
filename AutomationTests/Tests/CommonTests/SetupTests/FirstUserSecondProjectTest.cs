@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
+using T365Framework;
 
 namespace Product.Tests.CommonTests.SetupTests
 {

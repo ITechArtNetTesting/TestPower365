@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using ProbeTests.Model;
 using Product.Framework;
+using T365Framework;
 
 namespace ProbeTests.ProbeTests
 {

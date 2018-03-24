@@ -4,6 +4,7 @@ using System.Threading;
 using ProbeTests.Model;
 using Product.Framework;
 using Product.Framework.Enums;
+using T365Framework;
 
 namespace ProbeTests.ProbeTests
 {

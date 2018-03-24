@@ -6,6 +6,9 @@ using Product.Framework.Steps;
 using System.Management.Automation;
 using System.Threading;
 using TestContext = Microsoft.VisualStudio.TestTools.UnitTesting.TestContext;
+using T365Framework;
+using TestFramework.IoC;
+using TestFramework.Users;
 
 namespace Product.Framework
 {
@@ -20,6 +23,8 @@ namespace Product.Framework
 		protected static TestContext _testContext;
 		private string _baseUrl;
 		public UserSteps User;
+
+        protected Tester Tester = new Tester();
 
 		private void GetResolution()
 		{
@@ -54,7 +59,8 @@ namespace Product.Framework
 			Browser.GetInstance(RunConfigurator.DownloadPath);
 			Browser.GetDriver().Manage().Window.Maximize();
 			Browser.GetDriver().Navigate().GoToUrl(_baseUrl);
-		}
+            DependencyResolver.Initialize();
+        }
 
 		
 		/// <summary>

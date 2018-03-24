@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using OpenQA.Selenium;
 using Product.Framework.Elements;
+using T365Framework;
 
 namespace Product.Framework.Forms.NewProjectWizardForms
 {
