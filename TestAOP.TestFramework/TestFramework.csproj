@@ -67,20 +67,25 @@
     <Compile Include="PageObjects\Interfaces\IMicrosoftLoginPage.cs" />
     <Compile Include="PageObjects\Interfaces\IProjectCreatePage.cs" />
     <Compile Include="PageObjects\Interfaces\IProjectsListPage.cs" />
+    <Compile Include="PageObjects\Interfaces\IRightBar.cs" />
     <Compile Include="PageObjects\Interfaces\IStartPage.cs" />
     <Compile Include="PageObjects\MicrosoftLoginPage.cs" />
     <Compile Include="PageObjects\ProjectCreatePage.cs" />
     <Compile Include="PageObjects\ProjectsListPage.cs" />
+    <Compile Include="PageObjects\RightBar.cs" />
     <Compile Include="PageObjects\StartPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\Interfaces\IMicrosoftLoginPageSteps.cs" />
     <Compile Include="Steps\Interfaces\IProjectsSteps.cs" />
+    <Compile Include="Steps\Interfaces\IRightBarSteps.cs" />
     <Compile Include="Steps\Interfaces\IStartPageSteps.cs" />
     <Compile Include="Steps\MicrosoftLoginPageSteps.cs" />
     <Compile Include="Steps\ProjectSteps.cs" />
+    <Compile Include="Steps\RightBarSteps.cs" />
     <Compile Include="Steps\StartPageSteps.cs" />
     <Compile Include="Users\Tester.cs" />
     <Compile Include="Waiters\DefaultWaiter.cs" />
+    <Compile Include="Waiters\WebDriverWaiter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

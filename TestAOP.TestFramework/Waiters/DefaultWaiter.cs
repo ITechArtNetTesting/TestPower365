@@ -16,10 +16,10 @@ namespace TestFramework.Waiters
             wait.Timeout = TimeSpan.FromMinutes(2);
             wait.PollingInterval = TimeSpan.FromMilliseconds(250);
             Func<IWebElement, bool> waiter = new Func<IWebElement, bool>((IWebElement ele) =>
-            {
-                return ele.Displayed;
+            {                
+                    return ele.Displayed;                
             });
             wait.Until(waiter);
-        }
+        }        
     }
 }

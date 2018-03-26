@@ -11,9 +11,9 @@ namespace Product.Tests.CommonTests
 		protected void LoginAndSelectRole(string login, string password, string role)
 		{
             LogIn(login, password);
-		    //NOTE: Temp solution to avoid 1 symbol in role textbox
+            //NOTE: Temp solution to avoid 1 symbol in role textbox
             Thread.Sleep(2000);
-			User.AtTenantRestructuringForm().OpenMainMenu();
+            User.AtTenantRestructuringForm().OpenMainMenu();
 			User.AtTenantRestructuringForm().AtMainMenu().SelectRole(role);
             User.AtTenantRestructuringForm().GoToProjects();
 		}

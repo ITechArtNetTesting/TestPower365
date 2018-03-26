@@ -32,6 +32,11 @@ namespace TestFramework.IoC
                          .Interceptors(InterceptorReference.ForType<PageLoggingInterceptor>()).Anywhere);
 
             kernel.Register(
+                Component.For<IRightBar>()
+                         .ImplementedBy<RightBar>()
+                         .Interceptors(InterceptorReference.ForType<PageLoggingInterceptor>()).Anywhere);
+
+            kernel.Register(
                 Component.For<IProjectsListPage>()
                          .ImplementedBy<ProjectsListPage>()
                          .Interceptors(InterceptorReference.ForType<PageLoggingInterceptor>()).Anywhere);
@@ -49,6 +54,12 @@ namespace TestFramework.IoC
             kernel.Register(
                 Component.For<IProjectSteps>()
                          .ImplementedBy<ProjectSteps>()
+                         .Interceptors(InterceptorReference.ForType<StepsLoggingInterceptor>()).Anywhere);
+
+
+            kernel.Register(
+                Component.For<IRightBarSteps>()
+                         .ImplementedBy<RightBarSteps>()
                          .Interceptors(InterceptorReference.ForType<StepsLoggingInterceptor>()).Anywhere);
         }
     }

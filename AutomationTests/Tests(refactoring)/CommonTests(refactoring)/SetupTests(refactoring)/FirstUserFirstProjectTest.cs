@@ -1,10 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using T365.Database;
 using T365Framework;
 
@@ -27,7 +22,9 @@ namespace Product.Tests_refactoring_.CommonTests_refactoring_.SetupTests_refacto
             sqlForDelete.DeleteTenant("2");
 
             Tester.AtStartPage().SignIn();
-            Tester.AtMicrosoftLoginPage().LogIn(RunConfigurator.GetUserLogin("client1"), RunConfigurator.GetPassword("client1"));                        
+            Tester.AtMicrosoftLoginPage().LogIn(RunConfigurator.GetUserLogin("client1"), RunConfigurator.GetPassword("client1"));
+            Tester.AtStartPage().OpenRightBar();
+            Tester.AtRightBar().ChooseClientByKeys(RunConfigurator.GetUserLogin("client1"));
         }
     }
 }

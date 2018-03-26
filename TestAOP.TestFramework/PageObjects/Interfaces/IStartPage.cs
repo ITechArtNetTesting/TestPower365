@@ -9,5 +9,6 @@ namespace TestFramework.PageObjects.Interfaces
     public interface IStartPage
     {
         void ClickSignIn();
+        void ClickOpenRightBarButton();
     }
 }

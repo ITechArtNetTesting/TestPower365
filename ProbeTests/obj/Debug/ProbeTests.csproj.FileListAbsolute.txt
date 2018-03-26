@@ -426,3 +426,9 @@ C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\zh-Hans\Sys
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\zh-Hant\System.Spatial.resources.dll
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\obj\Debug\ProbeTests.exe
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\obj\Debug\ProbeTests.pdb
+C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\TestFramework.dll
+C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\Castle.Windsor.dll
+C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\Castle.Core.dll
+C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\TestFramework.pdb
+C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\Castle.Windsor.xml
+C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\Castle.Core.xml

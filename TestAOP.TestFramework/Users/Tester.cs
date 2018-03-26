@@ -13,5 +13,9 @@ namespace TestFramework.Users
         {
             return DependencyResolver.For<IMicrosoftLoginPageSteps>();
         }
+        public IRightBarSteps AtRightBar()
+        {
+            return DependencyResolver.For<IRightBarSteps>();
+        }
     }
 }
