@@ -395,5 +395,14 @@ namespace Product.Framework.Steps
         public ProfileFilterTasksForm AtProfileFilterTasksForm => new ProfileFilterTasksForm();
         public ProfileFilterNoteForm AtProfileFilterNoteForm => new ProfileFilterNoteForm();
         public ProfileLargeItemsHandleForm AtProfileLargeItemsHandleForm => new ProfileLargeItemsHandleForm();
-	}
+
+        public ProfileTranslateSourceEmailForm AtProfileTranslateSourceEmailForm => new ProfileTranslateSourceEmailForm();
+        public ProfileTypeOfMailboxContentForm AtProfileTypeOfMailboxContentForm => new ProfileTypeOfMailboxContentForm();
+        public ProfileHandleBadItemsForm AtProfileHandleBadItemsForm => new ProfileHandleBadItemsForm();
+        public ProfileHandleFoldersForm AtProfileHandleFoldersForm => new ProfileHandleFoldersForm();
+        public ProfileToLicenseMailboxesForm AtProfileToLicenseMailboxesForm => new ProfileToLicenseMailboxesForm();
+      
+
+
+    }
 }

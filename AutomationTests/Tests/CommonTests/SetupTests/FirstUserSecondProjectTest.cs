@@ -64,6 +64,7 @@ namespace Product.Tests.CommonTests.SetupTests
             User.AtAddTenantsForm().GoNext();
             User.AtUploadFilesForm().DownloadSample();
             RunConfigurator.CheckUserMatchFileIsDownloaded();
+             User.AtUploadFilesForm().SelectFile(RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//metaname[text()='file1']/..//filename"));
             User.AtUploadFilesForm().SelectFile(RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//metaname[text()='file1']/..//filename"));
             User.AtUploadFilesForm().WaitUntillFileUploaded();
             User.AtUploadFilesForm().GoNext();

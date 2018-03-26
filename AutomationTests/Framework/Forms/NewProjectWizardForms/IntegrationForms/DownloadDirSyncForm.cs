@@ -11,8 +11,10 @@ namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
     {
         //private readonly static By TitleLocator = By.XPath(
         //    "//div[contains(@class, 'wizard-body')]//*[contains(text(), 'download the Power365 Directory Sync Pro')]");
+
         private readonly static By TitleLocator = By.XPath(
             "//*/span[@data-translation='LetsDownloadPower365DirectorySyncLiteApplication']");
+
 
         public DownloadDirSyncForm() : base(TitleLocator, "Download dirsync app form")
         {

@@ -23,10 +23,11 @@ namespace Product.Tests.CommonTests.SetupTests
         [TestCategory("Setup")]
         public void ConfigureProfileTest()
         {
-            string userName = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user");
-            string password = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//password");
-            string client = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name");
-            string project = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//name");
+            string userName = RunConfigurator.GetUserLogin("client2");
+            string password = RunConfigurator.GetPassword("client2");
+                               
+            string client = RunConfigurator.GetRole("client2"); 
+            string project = RunConfigurator.GetProjectName("client2","project2"); 
             string sourceMailbox14 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry14']/..//source");
             string sourceMailbox15 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry15']/..//source");
             LoginAndSelectRole(userName, password, client);
@@ -43,11 +44,17 @@ namespace Product.Tests.CommonTests.SetupTests
             User.AtProfileCreateDistributionGroupsForm().GoNext();
             User.AtProfileSyncDistributionGroupsForm().GoNext();
             User.AtProfileContentToMigrateForm.GoNext();
+            User.AtProfileTranslateSourceEmailForm.GoNext();
+            User.AtProfileTypeOfMailboxContentForm.GoNext();
             User.AtProfileFilterMessagesForm.GoNext();
             User.AtProfileFilterCalendarForm.GoNext();
             User.AtProfileFilterTasksForm.GoNext();
             User.AtProfileFilterNoteForm.GoNext();
+     
             User.AtProfileLargeItemsHandleForm.GoNext();
+            User.AtProfileHandleBadItemsForm.GoNext();
+            User.AtProfileHandleFoldersForm.GoNext();
+            User.AtProfileToLicenseMailboxesForm.GoNext();
             User.AtAlmostDoneForm().GoNext();
 
 
@@ -61,18 +68,35 @@ namespace Product.Tests.CommonTests.SetupTests
             User.AtProfileCreateDistributionGroupsForm().SelectYes();
             User.AtProfileCreateDistributionGroupsForm().GoNext();
             User.AtProfileSyncDistributionGroupsForm().GoNext();
-            User.AtProfileContentToMigrateForm.SelectType(ContentType.Calendar);
-            User.AtProfileContentToMigrateForm.SelectType(ContentType.Contacts);
-            User.AtProfileContentToMigrateForm.SelectType(ContentType.Email);
-            User.AtProfileContentToMigrateForm.SelectType(ContentType.Notes);
-            User.AtProfileContentToMigrateForm.SelectType(ContentType.Tasks);
             User.AtProfileContentToMigrateForm.GoNext();
+            User.AtProfileTranslateSourceEmailForm.GoNext();
+          
+
+            User.AtProfileTypeOfMailboxContentForm.SelectType(ContentType.Calendar);
+            User.AtProfileTypeOfMailboxContentForm.SelectType(ContentType.Contacts);
+            User.AtProfileTypeOfMailboxContentForm.SelectType(ContentType.Email);
+            User.AtProfileTypeOfMailboxContentForm.SelectType(ContentType.Notes);
+            User.AtProfileTypeOfMailboxContentForm.SelectType(ContentType.Tasks);
+
+            // User.AtProfileContentToMigrateForm.SelectType(ContentType.Calendar);
+            //User.AtProfileContentToMigrateForm.SelectType(ContentType.Contacts);
+            //User.AtProfileContentToMigrateForm.SelectType(ContentType.Email);
+            //User.AtProfileContentToMigrateForm.SelectType(ContentType.Notes);
+            //User.AtProfileContentToMigrateForm.SelectType(ContentType.Tasks);
+            User.AtProfileTypeOfMailboxContentForm.GoNext();
+           // User.AtProfileContentToMigrateForm.GoNext();
+
+
             User.AtProfileFilterMessagesForm.GoNext();
             User.AtProfileFilterCalendarForm.GoNext();
             User.AtProfileFilterTasksForm.GoNext();
             User.AtProfileFilterNoteForm.GoNext();
             User.AtProfileLargeItemsHandleForm.GoNext();
+            User.AtProfileHandleBadItemsForm.GoNext();
+            User.AtProfileHandleFoldersForm.GoNext();
+            User.AtProfileToLicenseMailboxesForm.GoNext();
             User.AtAlmostDoneForm().GoNext();
+
             User.AtProfilesOverviewForm().GoToProjectOverview();
             User.AtProjectOverviewForm().OpenUsersList();
             User.AtUsersForm().PerformSearch(sourceMailbox14);

@@ -1,28 +1,26 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using Product.Framework.Forms.NewProjectWizardForms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
 using Product.Framework.Elements;
 using Product.Framework.Enums;
 using Product.Framework.Forms.NewProjectWizardForms;
 
+
 namespace Product.Framework.Forms.ProfileForms.WizardForms
 {
-    public class ProfileContentToMigrateForm : BaseWizardStepForm
+    public class ProfileTypeOfMailboxContentForm : BaseWizardStepForm
     {
-       // private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'What type of mailbox content would you like to migrate')]");
-        private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='DoYouWantToCopyLitigationHoldSettingsAndData']");
 
-        public ProfileContentToMigrateForm() : base(TitleLocator, "Content to migrate form")
+        private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='WhatTypeOfMailboxContentWouldYouLikeToMigrate']");
+
+        public ProfileTypeOfMailboxContentForm() : base(TitleLocator, "Profile translate type email to migrate")
         {
         }
-
         public void SelectType(ContentType type)
         {
-            Log.Info("Selecting: "+type.GetValue());
+            Log.Info("Selecting: " + type.GetValue());
             Label typeLabel = new Label(By.XPath($"//label[contains(@for, '{type.GetValue()}')]"), "Type label");
             RadioButton typeRadioButton = new RadioButton(By.Id($"{type.GetValue()}"), "Type radiobutton");
             typeLabel.Click();
@@ -36,5 +34,6 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
                 typeLabel.Click();
             }
         }
+
     }
 }
