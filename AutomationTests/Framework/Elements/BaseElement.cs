@@ -213,16 +213,9 @@ namespace Product.Framework.Elements
 			try
 			{
 				wait.Until(waiting =>
-				{
-                    try
-                    {
+				{                   
                         var webElements = Browser.GetDriver().FindElements(locator);
-                        return webElements.Count != 0;
-                    }
-                    catch(Exception)
-                    {
-                        return false;
-                    }
+                        return webElements.Count != 0;                   
 				});
 			}
 			catch (TimeoutException)

@@ -189,6 +189,7 @@
     <Compile Include="Framework\PsLauncher.cs" />
     <Compile Include="Framework\RunConfigurator.cs" />
     <Compile Include="Framework\Steps\AddTenantsSteps.cs" />
+    <Compile Include="Framework\Steps\CleanUpStep.cs" />
     <Compile Include="Framework\Steps\UserSteps.cs" />
     <Compile Include="Framework\Store.cs" />
     <Compile Include="Framework\StringRandomazer.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="Tests\ClientAdministrationTests\ClientRegistration.cs" />
     <Compile Include="Tests\CommonTests\LoginAndConfigureTest.cs" />
     <Compile Include="Tests\CommonTests\ProbeTest.cs" />
+    <Compile Include="Tests\CommonTests\SetupTests\DatabaseCleanup.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\FirstUserFirstProjectTest.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\FirstUserSecondProjectTest.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\ProfileConfigurationTest.cs" />

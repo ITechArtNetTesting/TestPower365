@@ -45,7 +45,7 @@ namespace Product.Tests.CommonTests
         {
             User.AtOffice365LoginForm().UseAnotherAccountClick();
             Office365Login(login, password);
-            User.AtOffice365LoginForm().NextClick();
+            User.AtOffice365LoginForm().AccertClick();
         }
 
 	    protected void SelectProject(string projectName)

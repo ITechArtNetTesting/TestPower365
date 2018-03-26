@@ -3,7 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using Product.Framework;
 using Product.Framework.Elements;
-using T365.Database;
 
 namespace Product.Tests.CommonTests.SetupTests
 {
@@ -19,17 +18,16 @@ namespace Product.Tests.CommonTests.SetupTests
 		[TestCategory("Setup")]
 		public void SetupSecondUserFirstProject()
 		{
-            SQLQuery sqlForDelete = new SQLQuery(RunConfigurator.GetConnectionString());
-            sqlForDelete.DeleteProject("2");
-            sqlForDelete.DeleteTenant("2");
+            LoginAndSelectRole(RunConfigurator.GetUserLogin("client2"),
+                               RunConfigurator.GetPassword("client2"),
+                               RunConfigurator.GetRole("client2"));
 
-            LoginAndSelectRole(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user"),
-				RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//password"),
-				RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name"));
 			User.AtTenantRestructuringForm().AddProjectClick();
 			User.AtChooseYourProjectTypeForm().ChooseMailWithDiscovery();
 			User.AtChooseYourProjectTypeForm().GoNext();
-			User.AtSetProjectNameForm().SetName(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/../name"));
+            User.AtSetProjectNameForm().SetName(RunConfigurator.GetProjectName("client2", "project1"));
+
+            User.AtSetProjectNameForm().SetName(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/../name"));
 			User.AtSetProjectNameForm().GoNext();
 			User.AtSetProjectDescriptionForm().SetDescription(StringRandomazer.MakeRandomString(20));
 			User.AtSetProjectDescriptionForm().GoNext();
