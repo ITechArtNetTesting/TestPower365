@@ -65,8 +65,11 @@ namespace Product.Tests.CommonTests.SetupTests
 			User.AtReviewDomainsPairsForm().GoNext();
 			User.AtMigrationTypeForm().SelectGroupsOption();
 			User.AtMigrationTypeForm().GoNext();
-			User.AtSelectMigrationGroupForm().SetGroup(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='adgroup1']/../name")); 
-			User.AtSelectMigrationGroupForm().SelectGroup(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='adgroup1']/../name")); 
+            User.AtSelectMigrationGroupForm().SetGroup(RunConfigurator.GetADGroupName ("client2", "project2", "adgroup1"));
+            User.AtSelectMigrationGroupForm().SelectGroup(RunConfigurator.GetADGroupName("client2", "project2", "adgroup1"));
+
+           // User.AtSelectMigrationGroupForm().SetGroup(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='adgroup1']/../name")); 
+			//User.AtSelectMigrationGroupForm().SelectGroup(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='adgroup1']/../name")); 
 			User.AtSelectMigrationGroupForm().GoNext();
 			User.AtReviewGroupsForm().GoNext();
 			User.AtHowToMatchUsersForm().GoNext();
@@ -74,7 +77,7 @@ namespace Product.Tests.CommonTests.SetupTests
 			User.AtCreateUsersForm().GoNext();
 			User.AtMigrateDistributionGroupsForm().SelectUploadList();
 			User.AtMigrateDistributionGroupsForm().GoNext();
-			User.AtUploadDistributionListForm().SelectFile(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='file1']/..//filename"));
+            User.AtUploadDistributionListForm().SelectFile(RunConfigurator.GetFileName("client2","project2","file1")); 
 			User.AtUploadDistributionListForm().GoNext();
 			User.AtHowToMatchGroupsForm().GoNext();
 			User.AtCreateDistributionGroupsForm().SelectCreateGroups();
@@ -96,8 +99,12 @@ namespace Product.Tests.CommonTests.SetupTests
 			User.AtShareCalendarForm().GoNext();
 			User.AtWhichUsersShareCalendarForm().SelectByAd();
 			User.AtWhichUsersShareCalendarForm().GoNext();
-			User.AtCalendarActiveDirectoryGroupForm().SetGroup(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='adgroup1']/../name"));
-			User.AtCalendarActiveDirectoryGroupForm().SelectGroup(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='adgroup1']/../name"));
+
+            User.AtCalendarActiveDirectoryGroupForm().SetGroup(RunConfigurator.GetADGroupName("client2", "project2", "adgroup1"));
+            User.AtCalendarActiveDirectoryGroupForm().SelectGroup(RunConfigurator.GetADGroupName("client2", "project2", "adgroup1"));
+          
+         //   User.AtCalendarActiveDirectoryGroupForm().SetGroup(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='adgroup1']/../name"));
+			//User.AtCalendarActiveDirectoryGroupForm().SelectGroup(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='adgroup1']/../name"));
 			User.AtCalendarActiveDirectoryGroupForm().GoNext();
 			User.AtEnablePublicFoldersForm().SetYes();
 			User.AtEnablePublicFoldersForm().GoNext();

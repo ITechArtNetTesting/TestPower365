@@ -11,8 +11,9 @@ namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'How would you like to discover')]");
 
 		private readonly Button groupsButton = new Button(By.XPath("//label[@for='groupsRadio']"), "Groups button");
-
-		public MigrationTypeForm() : base(TitleLocator, "Migration type form")
+      //  private readonly Button groupsButton = new Button(By.Id("uploadGroupsRadio"), "Groups button");
+       
+        public MigrationTypeForm() : base(TitleLocator, "Migration type form")
 		{
 		}
 

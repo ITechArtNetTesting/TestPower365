@@ -26,8 +26,7 @@ namespace Product.Tests.CommonTests.SetupTests
 			User.AtChooseYourProjectTypeForm().ChooseMailWithDiscovery();
 			User.AtChooseYourProjectTypeForm().GoNext();
             User.AtSetProjectNameForm().SetName(RunConfigurator.GetProjectName("client2", "project1"));
-
-            User.AtSetProjectNameForm().SetName(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/../name"));
+                       
 			User.AtSetProjectNameForm().GoNext();
 			User.AtSetProjectDescriptionForm().SetDescription(StringRandomazer.MakeRandomString(20));
 			User.AtSetProjectDescriptionForm().GoNext();
@@ -56,8 +55,12 @@ namespace Product.Tests.CommonTests.SetupTests
 			User.AtReviewDomainsPairsForm().GoNext();
 			User.AtMigrationTypeForm().SelectGroupsOption();
 			User.AtMigrationTypeForm().GoNext();
-			User.AtSelectMigrationGroupForm().SetGroup(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='adgroup1']/../name"));
-			User.AtSelectMigrationGroupForm().SelectGroup(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='adgroup1']/../name"));
+          
+            User.AtSelectMigrationGroupForm().SetGroup(RunConfigurator.GetADGroupName("client2", "project1", "adgroup1"));
+            User.AtSelectMigrationGroupForm().SelectGroup(RunConfigurator.GetADGroupName("client2", "project1", "adgroup1"));
+
+           // User.AtSelectMigrationGroupForm().SetGroup(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='adgroup1']/../name"));
+			//User.AtSelectMigrationGroupForm().SelectGroup(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='adgroup1']/../name"));
 			User.AtSelectMigrationGroupForm().GoNext();
 			User.AtReviewGroupsForm().GoNext();
 			User.AtHowToMatchUsersForm().GoNext();

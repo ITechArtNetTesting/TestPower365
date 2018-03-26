@@ -13,13 +13,16 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
     public class ProfileCreateDistributionGroupsForm : BaseWizardStepForm
     {
         private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you want to create new distribution groups in the target tenant')]");
+      //  private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='DoYouWantToCreateNewDistributionGroupsInTheTargetTenant']");
+ 
 
         public ProfileCreateDistributionGroupsForm() : base(TitleLocator, "Create distributon groups form")
         {
         }
 
+     
         private Label yesLabel = new Label(By.XPath("//label[contains(@for, 'createGroups')]"), "Yes label");
-        private RadioButton yesRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'createGroups')]"), "Yes radiobutton");
+        private RadioButton yesRadioButton = new RadioButton(By.Id("createGroups"), "Yes radiobutton");
         private Label noLabel = new Label(By.XPath("//label[contains(@for, 'dontCreateGroups')]"), "No label");
         private RadioButton noRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'dontCreateGroups')]"), "No radiobutton");
 
@@ -38,7 +41,7 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
             }
         }
 
-        public void SelectNo()
+              public void SelectNo()
         {
             Log.Info("Selecting no");
             noLabel.Click();
