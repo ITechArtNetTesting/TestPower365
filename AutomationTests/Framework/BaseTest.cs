@@ -59,6 +59,8 @@ namespace Product.Framework
 			Browser.GetInstance(RunConfigurator.DownloadPath);
 			Browser.GetDriver().Manage().Window.Maximize();
 			Browser.GetDriver().Navigate().GoToUrl(_baseUrl);
+            Browser.GetDriver().Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(15);
+            Browser.GetDriver().Manage().Timeouts().AsynchronousJavaScript= TimeSpan.FromSeconds(15);
             DependencyResolver.Initialize();
         }
 

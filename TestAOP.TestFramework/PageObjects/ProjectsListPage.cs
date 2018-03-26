@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TestFramework.PageObjects.BasePages;
 using TestFramework.PageObjects.Interfaces;
+using TestFramework.Waiters;
 
 namespace TestFramework.PageObjects
 {
@@ -17,6 +18,7 @@ namespace TestFramework.PageObjects
 
         public void ClickNewProjectButton()
         {
+            WebDriverWaiter.WaitForElementIsClickable(NewProjectButton);
             NewProjectButton.Click();
         }
     }

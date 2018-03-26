@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TestFramework.PageObjects.BasePages;
 using TestFramework.PageObjects.Interfaces;
+using TestFramework.Waiters;
 
 namespace TestFramework.PageObjects
 {
@@ -20,14 +21,18 @@ namespace TestFramework.PageObjects
 
         public void ChooseClient(string clientName)
         {
+            WebDriverWaiter.WaitForElementIsClickable(ClientDropDown);
             ClientDropDown.Click();
             foreach (var client in ListOfClients)
             {
-                if (client.Text == clientName)
+                if (client.Text == clientName.ToUpper())
                 {
+                    WebDriverWaiter.WaitForElementIsClickable(client);
                     client.Click();
+                    break;
                 }
             }
+            DefaultWaiter.WaitElementDisapear(ClientDropDown);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestFramework.Waiters;
 
 namespace TestFramework.Interceptors
 {
@@ -14,7 +15,7 @@ namespace TestFramework.Interceptors
             var methodName = invocation.Method.Name;
             try
             {
-                //Entered Method
+                WebDriverWaiter.WaitForJSLoad();
                 invocation.Proceed();
                 //Sucessfully executed method
             }

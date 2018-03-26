@@ -17,5 +17,9 @@ namespace TestFramework.Users
         {
             return DependencyResolver.For<IRightBarSteps>();
         }
+        public IProjectSteps AtProjectsPage()
+        {
+            return DependencyResolver.For<IProjectSteps>();
+        }
     }
 }

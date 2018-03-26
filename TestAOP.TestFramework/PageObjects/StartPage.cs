@@ -15,8 +15,7 @@ namespace TestFramework.PageObjects
         IWebElement OpenRightBarButton { get; set; }
 
         public void ClickOpenRightBarButton()
-        {
-            WebDriverWaiter.WaitForJSLoad();
+        {            
             OpenRightBarButton.Click();
         }
 

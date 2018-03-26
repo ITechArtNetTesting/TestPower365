@@ -16,6 +16,7 @@ namespace TestFramework.Steps
         public void AddNewProject(string testName, string sourceTenant, string sourcePassword, string targetTenant, string targetPassword, string fileName)
         {
             projectsListPage.ClickNewProjectButton();
+
         }
     }
 }

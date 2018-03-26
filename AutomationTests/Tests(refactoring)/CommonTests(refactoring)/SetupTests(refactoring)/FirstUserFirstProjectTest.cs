@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
+using System.Threading;
 using T365.Database;
 using T365Framework;
 
@@ -24,7 +25,13 @@ namespace Product.Tests_refactoring_.CommonTests_refactoring_.SetupTests_refacto
             Tester.AtStartPage().SignIn();
             Tester.AtMicrosoftLoginPage().LogIn(RunConfigurator.GetUserLogin("client1"), RunConfigurator.GetPassword("client1"));
             Tester.AtStartPage().OpenRightBar();
-            Tester.AtRightBar().ChooseClientByKeys(RunConfigurator.GetUserLogin("client1"));
+            Tester.AtRightBar().ChooseClientByKeys(RunConfigurator.GetRole("client1"));
+            Tester.AtProjectsPage().AddNewProject(RunConfigurator.GetProjectName("client1", "project1"),
+                                RunConfigurator.GetTenantValue("T1->T2", "source", "user"),
+                                RunConfigurator.GetTenantValue("T1->T2", "source", "password"),
+                                RunConfigurator.GetTenantValue("T1->T2", "target", "user"),
+                                RunConfigurator.GetTenantValue("T1->T2", "target", "password"),
+                                RunConfigurator.GetFileName("client1", "project1", "file1"));            
         }
     }
 }
