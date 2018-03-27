@@ -73,7 +73,7 @@ namespace Product.Framework
 		public void TearDown()
 		{
             Browser.GetDriver()?.Close();
-			Browser.GetDriver()?.Quit();
+            Browser.GetDriver()?.Quit();          		
 		}
 
 		/// <summary>

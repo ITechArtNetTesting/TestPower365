@@ -541,7 +541,7 @@
       <Project>{3be7f696-96fc-4356-9c87-26d4a95d07b5}</Project>
       <Name>T365Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TestAOP.TestFramework\TestFramework.csproj">
+    <ProjectReference Include="..\TestFramework\TestFramework.csproj">
       <Project>{8020d38d-9d37-4db0-953e-7c4bf3c729c2}</Project>
       <Name>TestFramework</Name>
     </ProjectReference>
