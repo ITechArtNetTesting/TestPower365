@@ -10,9 +10,3 @@ D:\Project\BTCloud\SeleniumTests\T365.Database\obj\Debug\T365.Database.csproj.Co
 D:\Project\BTCloud\SeleniumTests\T365.Database\obj\Debug\T365.Database.dll
 D:\Project\BTCloud\SeleniumTests\T365.Database\obj\Debug\T365.Database.pdb
 D:\Project\BTCloud\SeleniumTests\T365.Database\obj\Debug\T365.Database.csprojResolveAssemblyReference.cache
-C:\Users\valery.piniazik\Documents\TestPower365\T365.Database\obj\Debug\T365.Database.csprojResolveAssemblyReference.cache
-C:\Users\valery.piniazik\Documents\TestPower365\T365.Database\obj\Debug\T365.Database.csproj.CoreCompileInputs.cache
-C:\Users\valery.piniazik\Documents\TestPower365\T365.Database\obj\Debug\T365.Database.dll
-C:\Users\valery.piniazik\Documents\TestPower365\T365.Database\obj\Debug\T365.Database.pdb
-C:\Users\valery.piniazik\Documents\TestPower365\T365.Database\bin\Debug\T365.Database.dll
-C:\Users\valery.piniazik\Documents\TestPower365\T365.Database\bin\Debug\T365.Database.pdb

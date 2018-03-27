@@ -136,7 +136,8 @@ namespace Product.Framework.Forms
 		public void OpenMainMenu()
 		{
 			Log.Info("Opening main menu");
-			menuButton.Click();
+            menuButton.WaitForElementPresent();
+            menuButton.Click();
 		}
 
 		public void OpenTenantRestructuring()
