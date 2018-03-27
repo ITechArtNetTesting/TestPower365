@@ -156,11 +156,16 @@
     <Compile Include="Framework\Forms\ProfileForms\WizardForms\ProfileFilterMessagesForm.cs" />
     <Compile Include="Framework\Forms\ProfileForms\WizardForms\ProfileFilterNoteForm.cs" />
     <Compile Include="Framework\Forms\ProfileForms\WizardForms\ProfileFilterTasksForm.cs" />
+    <Compile Include="Framework\Forms\ProfileForms\WizardForms\ProfileHandleBadItemsForm.cs" />
+    <Compile Include="Framework\Forms\ProfileForms\WizardForms\ProfileHandleFoldersForm.cs" />
     <Compile Include="Framework\Forms\ProfileForms\WizardForms\ProfileLargeItemsHandleForm.cs" />
     <Compile Include="Framework\Forms\ProfileForms\WizardForms\ProfileMailboxUpdateForm.cs" />
     <Compile Include="Framework\Forms\ProfileForms\WizardForms\ProfileNameForm.cs" />
     <Compile Include="Framework\Forms\ProfileForms\WizardForms\ProfileOutlookConfigForm.cs" />
     <Compile Include="Framework\Forms\ProfileForms\WizardForms\ProfileSyncDistributionGroupsForm.cs" />
+    <Compile Include="Framework\Forms\ProfileForms\WizardForms\ProfileToLicenseMailboxesForm.cs" />
+    <Compile Include="Framework\Forms\ProfileForms\WizardForms\ProfileTranslateSourceEmailForm.cs" />
+    <Compile Include="Framework\Forms\ProfileForms\WizardForms\ProfileTypeOfMailboxContentForm.cs" />
     <Compile Include="Framework\Forms\ProjectDetailsForm.cs" />
     <Compile Include="Framework\Forms\ProjectOverviewForm.cs" />
     <Compile Include="Framework\Forms\PublicFolderMigrationForms\BasePublicFolderWizardForm.cs" />

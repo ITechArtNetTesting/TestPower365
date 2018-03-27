@@ -12,11 +12,18 @@ namespace TestFramework.Steps
     public class ProjectSteps : IProjectSteps
     {
         IProjectsListPage projectsListPage = DependencyResolver.For<IProjectsListPage>();
+        IProjectCreatePage projectCreatePage = DependencyResolver.For<IProjectCreatePage>();
 
         public void AddNewProject(string testName, string sourceTenant, string sourcePassword, string targetTenant, string targetPassword, string fileName)
         {
             projectsListPage.ClickNewProjectButton();
-
+            projectCreatePage.ChooseEmailFromFileProjectType();
+            projectCreatePage.ClickNextButton();
+            projectCreatePage.CallProjectWithKeys(testName);
+            projectCreatePage.ClickNextButton();
+            projectCreatePage.SendRandomKeysToDescription();
+            projectCreatePage.ClickNextButton();
+            projectCreatePage.ClickAddTenantButton();
         }
     }
 }

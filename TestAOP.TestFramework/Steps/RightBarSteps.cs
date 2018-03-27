@@ -14,6 +14,7 @@ namespace TestFramework.Steps
         IRightBar rightBar = DependencyResolver.For<IRightBar>();
         public void ChooseClientByKeys(string keys)
         {
+            rightBar.ClickClientDropDown();
             rightBar.ChooseClient(keys);
         }
     }

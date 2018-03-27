@@ -8,6 +8,7 @@ namespace TestFramework.PageObjects.Interfaces
 {
     public interface IRightBar
     {
-        void ChooseClient(string clientName);        
+        void ChooseClient(string clientName);
+        void ClickClientDropDown();
     }
 }

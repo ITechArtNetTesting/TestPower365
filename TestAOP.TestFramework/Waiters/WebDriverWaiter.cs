@@ -20,8 +20,20 @@ namespace TestFramework.Waiters
         public static void WaitForJSLoad()
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)Browser.GetDriver();
-            WebDriverWait wait = new WebDriverWait(Browser.GetDriver(),TimeSpan.FromSeconds(15));
+            WebDriverWait wait = new WebDriverWait(Browser.GetDriver(),TimeSpan.FromMinutes(1));
             wait.Until(wd => (string)js.ExecuteScript("return document.readyState") == "complete");
+        }
+        public static void WaitForElementIsStalenessOf(IWebElement element)
+        {
+            var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromMinutes(1));
+            wait.Until(ExpectedConditions.StalenessOf(element));
+        }
+        public static void Wait(int SecondsToWait)
+        {            
+            var now = DateTime.Now;
+            var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(SecondsToWait));
+            wait.PollingInterval = TimeSpan.FromMilliseconds(100);
+            wait.Until(wd => (DateTime.Now - now) - TimeSpan.FromSeconds(SecondsToWait) > TimeSpan.Zero);
         }
     }
 }

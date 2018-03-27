@@ -61,6 +61,7 @@ namespace Product.Framework
 			Browser.GetDriver().Navigate().GoToUrl(_baseUrl);
             Browser.GetDriver().Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(15);
             Browser.GetDriver().Manage().Timeouts().AsynchronousJavaScript= TimeSpan.FromSeconds(15);
+            Browser.GetDriver().Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
             DependencyResolver.Initialize();
         }
 

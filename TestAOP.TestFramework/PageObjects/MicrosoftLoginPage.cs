@@ -27,29 +27,28 @@ namespace TestFramework.PageObjects
         IWebElement PasswordInput { get; set; }
 
         public void ClickNextButton()
-        {
-            NextButton.Click();
+        {            
+            Performe.Click(NextButton);
         }
 
         public void ClickSignInButton()
-        {
-            SignInButton.Click();
+        {            
+            Performe.Click(SignInButton);
         }
 
         public void ClickYesToStaySignedButton()
-        {
-            YesToStaySignedButton.Click();
+        {            
+            Performe.Click(YesToStaySignedButton);
         }
 
         public void SendKeysToEmailPhoneOrSkypeInput(string keys)
-        {
-            EmailPhoneOrSkypeInput.SendKeys(keys);
+        {            
+            Performe.SendKeys(EmailPhoneOrSkypeInput, keys);
         }
 
         public void SendKeysToPasswordInput(string keys)
         {
-            DefaultWaiter.WaitForElementIsDisplayed(PasswordInput);
-            PasswordInput.SendKeys(keys);
+            Performe.SendKeys(PasswordInput, keys);
         }
     }
 }

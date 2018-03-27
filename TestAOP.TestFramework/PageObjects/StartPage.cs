@@ -15,13 +15,13 @@ namespace TestFramework.PageObjects
         IWebElement OpenRightBarButton { get; set; }
 
         public void ClickOpenRightBarButton()
-        {            
-            OpenRightBarButton.Click();
+        {
+            Performe.Click(OpenRightBarButton);            
         }
 
         public void ClickSignIn()
-        {
-            SignInButton.Click();
+        {            
+            Performe.Click(SignInButton);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,8 @@ namespace TestFramework.PageObjects
         IWebElement NewProjectButton { get; set; }
 
         public void ClickNewProjectButton()
-        {
-            WebDriverWaiter.WaitForElementIsClickable(NewProjectButton);
-            NewProjectButton.Click();
+        {                                    
+            Performe.Click(NewProjectButton,1);
         }
     }
 }

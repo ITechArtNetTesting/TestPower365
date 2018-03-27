@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
 using System.Collections.Generic;
@@ -20,19 +21,20 @@ namespace TestFramework.PageObjects
         IList<IWebElement> ListOfClients { get; set; }
 
         public void ChooseClient(string clientName)
-        {
-            WebDriverWaiter.WaitForElementIsClickable(ClientDropDown);
-            ClientDropDown.Click();
+        {            
             foreach (var client in ListOfClients)
             {
                 if (client.Text == clientName.ToUpper())
-                {
-                    WebDriverWaiter.WaitForElementIsClickable(client);
-                    client.Click();
+                {                                        
+                    Performe.Click(client);
                     break;
                 }
-            }
-            DefaultWaiter.WaitElementDisapear(ClientDropDown);
+            }            
+        }
+
+        public void ClickClientDropDown()
+        {            
+            Performe.Click(ClientDropDown,1);
         }
     }
 }

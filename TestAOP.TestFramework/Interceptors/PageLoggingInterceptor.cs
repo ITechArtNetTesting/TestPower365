@@ -13,21 +13,24 @@ namespace TestFramework.Interceptors
         public void Intercept(IInvocation invocation)
         {
             var methodName = invocation.Method.Name;
-            try
+            bool ExecutedWithoutExeptions = false;
+            while (ExecutedWithoutExeptions == false) 
             {
-                WebDriverWaiter.WaitForJSLoad();
-                invocation.Proceed();
-                //Sucessfully executed method
-            }
-            catch (Exception e)
-            {
-                //Exception
-                throw;
-            }
-            finally
-            {
-                //Exiting Method
-            }
+                try
+                {
+                    WebDriverWaiter.WaitForJSLoad();
+                    invocation.Proceed();
+                    ExecutedWithoutExeptions = true;                    
+                }
+                catch (Exception e)
+                {
+                    //Exception                    
+                }
+                finally
+                {
+                    //Exiting Method
+                }
+            }            
         }
     }
 }

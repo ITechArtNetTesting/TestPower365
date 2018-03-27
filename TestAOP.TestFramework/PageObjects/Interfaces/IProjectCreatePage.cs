@@ -6,5 +6,7 @@
         void ClickBackButton();
         void ChooseEmailFromFileProjectType();
         void CallProjectWithKeys(string keys);
+        void SendRandomKeysToDescription();
+        void ClickAddTenantButton();
     }
 }
