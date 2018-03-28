@@ -34,7 +34,7 @@ namespace TestFramework.PageObjects
 
         public void ClickClientDropDown()
         {            
-            Performe.Click(ClientDropDown,1);
+            Performe.Click(ClientDropDown);
         }
     }
 }

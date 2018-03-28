@@ -43,7 +43,7 @@ namespace TestFramework.PageObjects
 
         public void ClickAddTenantButton()
         {
-            Performe.Click(AddTenantButton,1);
+            Performe.Click(AddTenantButton);
         }
 
         public void ClickBackButton()

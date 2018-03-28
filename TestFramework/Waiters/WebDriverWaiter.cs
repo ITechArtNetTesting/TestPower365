@@ -15,12 +15,12 @@ namespace TestFramework.Waiters
         public static void WaitForElementIsClickable(IWebElement element)
         {
             var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromMinutes(1));
-            wait.Until(ExpectedConditions.ElementToBeClickable(element));            
+            wait.Until(ExpectedConditions.ElementToBeClickable(element));
         }
         public static void WaitForDOMLoad()
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)Browser.GetDriver();
-            WebDriverWait wait = new WebDriverWait(Browser.GetDriver(),TimeSpan.FromMinutes(1));
+            WebDriverWait wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromMinutes(1));
             wait.Until(wd => (string)js.ExecuteScript("return document.readyState") == "complete");
         }
         public static void WaitForElementIsStalenessOf(IWebElement element)
@@ -29,29 +29,32 @@ namespace TestFramework.Waiters
             wait.Until(ExpectedConditions.StalenessOf(element));
         }
         public static void Wait(int SecondsToWait)
-        {            
+        {
             var now = DateTime.Now;
             var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(SecondsToWait));
             wait.PollingInterval = TimeSpan.FromMilliseconds(100);
             wait.Until(wd => (DateTime.Now - now) - TimeSpan.FromSeconds(SecondsToWait) > TimeSpan.Zero);
         }
         public static void WaitForAjaxLoad()
-        {
-            bool test = (bool)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0");
-            var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromMinutes(1));
-            wait.PollingInterval = TimeSpan.FromMilliseconds(100);
+        {            
+            if (jQueryExists())
+            {
+                var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromMinutes(1));
+                wait.PollingInterval = TimeSpan.FromMilliseconds(100);
+                wait.Until(wd => (bool)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0"));
+            }
+        }
+        static bool jQueryExists()
+        {            
             try
             {
-                wait.Until(wd =>
-
-                    (bool)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0")
-
-                );
+                (Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0");
+                return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                var t = ex.Message;
-            }
+                return false;                     
+            }            
         }
     }
 }

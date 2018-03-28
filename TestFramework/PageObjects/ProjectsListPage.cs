@@ -19,7 +19,7 @@ namespace TestFramework.PageObjects
 
         public void ClickNewProjectButton()
         {                                    
-            Performe.Click(NewProjectButton,1);
+            Performe.Click(NewProjectButton);
         }
     }
 }
