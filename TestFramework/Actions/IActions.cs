@@ -13,5 +13,6 @@ namespace TestFramework.Actions
         void SendKeys(IWebElement element, string keys);
         void Click(IWebElement element,int delay);
         void SendKeys(IWebElement element, string keys,int delay);
+        void UploadFile(IWebElement element, string file);
     }
 }

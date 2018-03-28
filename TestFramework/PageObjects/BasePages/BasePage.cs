@@ -2,21 +2,33 @@
 using System;
 using T365Framework;
 using TestFramework.Actions;
+using TestFramework.Driver;
 using TestFramework.Waiters;
 
 namespace TestFramework.PageObjects.BasePages
 {
     public abstract class BasePage
     {
-        protected string PageWindow = Browser.GetDriver().CurrentWindowHandle;
+        protected string PageWindow;
         protected IActions Performe = new ActionsWithWait();
         public BasePage()
-        {            
+        {               
             PageFactory.InitElements(Browser.GetDriver(), this);         
-        }
-        public string GetPageWindow()
+        }        
+        public void SwitchWindow()
         {
-            return PageWindow;
+            if (PageWindow == null)
+            {
+                PageWindow = Browser.GetDriver().WindowHandles[Browser.GetDriver().WindowHandles.Count - 1];
+            }
+            else
+            {
+                if (!Browser.GetDriver().WindowHandles.Contains(PageWindow))
+                {
+                    PageWindow = Browser.GetDriver().WindowHandles[Browser.GetDriver().WindowHandles.Count - 1];
+                }
+            }
+            SwitchDriver.ToWindow(PageWindow);
         }
     }
 }

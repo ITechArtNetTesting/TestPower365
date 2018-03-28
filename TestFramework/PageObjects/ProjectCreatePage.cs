@@ -2,9 +2,11 @@
 using OpenQA.Selenium.Support.PageObjects;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using T365Framework;
 using TestFramework.PageObjects.BasePages;
 using TestFramework.PageObjects.Interfaces;
 using TestFramework.Waiters;
@@ -20,7 +22,7 @@ namespace TestFramework.PageObjects
         IWebElement DescriptionInput { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//*/label[@for='mailOnlyRadio']/span[@data-translation='EmailFromFile']")]
-        IWebElement EmailFromFile { get; set; }
+        IWebElement EmailFromFileProjectType { get; set; }
 
         [FindsBy(How = How.Id, Using = "projectName")]
         IWebElement CallProjectInput { get; set; }
@@ -30,6 +32,15 @@ namespace TestFramework.PageObjects
 
         [FindsBy(How = How.XPath, Using = "//*/span[@data-translation='Next']")]
         IWebElement NextButton { get; set; }
+        
+        [FindsBy(How = How.XPath, Using = "//*/input[@type='file']")]
+        IWebElement SelectFile { get; set; }
+        
+        [FindsBy(How = How.XPath, Using = "//*/span[@data-translation='Submit']")]
+        IWebElement SubmitButton { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//*/span[@data-translation='EmailWithDiscovery']")]
+        IWebElement EmailWithDiscoveryProjectType { get; set; }
 
         public void CallProjectWithKeys(string keys)
         {
@@ -38,7 +49,7 @@ namespace TestFramework.PageObjects
 
         public void ChooseEmailFromFileProjectType()
         {                        
-            Performe.Click(EmailFromFile);
+            Performe.Click(EmailFromFileProjectType);
         }
 
         public void ClickAddTenantButton()
@@ -56,9 +67,24 @@ namespace TestFramework.PageObjects
             Performe.Click(NextButton);
         }
 
+        public void UploadFile(string keys)
+        {
+            Performe.UploadFile(SelectFile, Path.GetFullPath(RunConfigurator.ResourcesPath + keys));
+        }
+
         public void SendRandomKeysToDescription()
         {
             Performe.SendKeys(DescriptionInput, new string(Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 15).Select(s => s[new Random().Next(s.Length)]).ToArray()));
+        }
+
+        public void ClickSubmitButton()
+        {
+            Performe.Click(SubmitButton);
+        }
+
+        public void ChooseEmailWithDiscoveryProjectType()
+        {
+            Performe.Click(EmailWithDiscoveryProjectType);
         }
     }
 }

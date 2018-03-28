@@ -16,7 +16,7 @@ namespace Product.Tests.CommonTests.SetupTests
 		[TestMethod]
 		[TestCategory("Setup")]
 		public void SetupFirstUserSecondProject()
-		{
+		{            
             LoginAndSelectRole(RunConfigurator.GetUserLogin("client1"),
                                 RunConfigurator.GetPassword("client1"),
                                 RunConfigurator.GetRole("client1"));

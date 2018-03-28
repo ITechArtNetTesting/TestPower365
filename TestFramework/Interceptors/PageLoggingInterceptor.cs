@@ -16,7 +16,7 @@ namespace TestFramework.Interceptors
             {
                 try
                 {
-                    SwitchDriver.ToWindow(((BasePage)invocation.InvocationTarget).GetPageWindow());
+                    ((BasePage)invocation.InvocationTarget).SwitchWindow();                    
                     WebDriverWaiter.WaitForDOMLoad();
                     WebDriverWaiter.WaitForAjaxLoad();
                     invocation.Proceed();

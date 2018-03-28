@@ -22,7 +22,8 @@ namespace Product.Framework.Forms.NewProjectWizardForms
 		}
 		public void SelectFile(string fileName)
 		{
-			Log.Info("Selecting file");
+            string test = Path.GetFullPath(RunConfigurator.ResourcesPath + fileName);
+            Log.Info("Selecting file");
 			selectFileInputButton.GetElement().SendKeys(Path.GetFullPath(RunConfigurator.ResourcesPath + fileName));
 		}
 

@@ -8,5 +8,8 @@
         void CallProjectWithKeys(string keys);
         void SendRandomKeysToDescription();
         void ClickAddTenantButton();
+        void UploadFile(string keys);
+        void ClickSubmitButton();
+        void ChooseEmailWithDiscoveryProjectType();
     }
 }

@@ -13,8 +13,9 @@ namespace TestFramework.Steps
     {
         IProjectsListPage projectsListPage = DependencyResolver.For<IProjectsListPage>();
         IProjectCreatePage projectCreatePage = DependencyResolver.For<IProjectCreatePage>();
+        IMicrosoftLoginPageWindow microsoftPageWindow = DependencyResolver.For<IMicrosoftLoginPageWindow>();
 
-        public void AddNewProject(string testName, string sourceTenant, string sourcePassword, string targetTenant, string targetPassword, string fileName)
+        public void AddNewEmailFromFileProject(string testName, string sourceTenant, string sourcePassword, string targetTenant, string targetPassword, string fileName)
         {
             projectsListPage.ClickNewProjectButton();
             projectCreatePage.ChooseEmailFromFileProjectType();
@@ -23,7 +24,52 @@ namespace TestFramework.Steps
             projectCreatePage.ClickNextButton();
             projectCreatePage.SendRandomKeysToDescription();
             projectCreatePage.ClickNextButton();
-            projectCreatePage.ClickAddTenantButton();          
+            projectCreatePage.ClickAddTenantButton();
+            microsoftPageWindow.ClickUseAnotherAccount();
+            microsoftPageWindow.SendKeysToEmailInput(sourceTenant);
+            microsoftPageWindow.ClickNextButton();
+            microsoftPageWindow.SendKeysToPasswordInput(sourcePassword);
+            microsoftPageWindow.ClickNextButton();
+            microsoftPageWindow.ClickNextButton();
+            projectCreatePage.ClickAddTenantButton();
+            microsoftPageWindow.ClickUseAnotherAccount();
+            microsoftPageWindow.SendKeysToEmailInput(targetTenant);
+            microsoftPageWindow.ClickNextButton();
+            microsoftPageWindow.SendKeysToPasswordInput(targetPassword);
+            microsoftPageWindow.ClickNextButton();
+            microsoftPageWindow.ClickNextButton();
+            projectCreatePage.ClickNextButton();
+            projectCreatePage.UploadFile(fileName);
+            projectCreatePage.ClickNextButton();
+            projectCreatePage.ClickNextButton();
+            projectCreatePage.ClickNextButton();
+            projectCreatePage.ClickSubmitButton();
+        }
+
+        public void AddNewEmailWithDiscoveryProject(string projectName, string sourceUserLogin, string sourceUserPassword, string targetUserLogin, string targetUserPassword)
+        {
+            projectsListPage.ClickNewProjectButton();
+            projectCreatePage.ChooseEmailWithDiscoveryProjectType();
+            projectCreatePage.ClickNextButton();
+            projectCreatePage.CallProjectWithKeys(projectName);
+            projectCreatePage.ClickNextButton();
+            projectCreatePage.SendRandomKeysToDescription();
+            projectCreatePage.ClickNextButton();
+            projectCreatePage.ClickAddTenantButton();
+            microsoftPageWindow.ClickUseAnotherAccount();
+            microsoftPageWindow.SendKeysToEmailInput(sourceUserLogin);
+            microsoftPageWindow.ClickNextButton();
+            microsoftPageWindow.SendKeysToPasswordInput(sourceUserPassword);
+            microsoftPageWindow.ClickNextButton();
+            microsoftPageWindow.ClickNextButton();
+            projectCreatePage.ClickAddTenantButton();
+            microsoftPageWindow.ClickUseAnotherAccount();
+            microsoftPageWindow.SendKeysToEmailInput(targetUserLogin);
+            microsoftPageWindow.ClickNextButton();
+            microsoftPageWindow.SendKeysToPasswordInput(targetUserPassword);
+            microsoftPageWindow.ClickNextButton();
+            microsoftPageWindow.ClickNextButton();
+
         }
     }
 }

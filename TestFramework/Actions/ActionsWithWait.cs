@@ -47,5 +47,10 @@ namespace TestFramework.Actions
             WebDriverWaiter.Wait(delay);
             element.SendKeys(keys);
         }
+
+        public void UploadFile(IWebElement element, string file)
+        {            
+            element.SendKeys(file);
+        }
     }
 }

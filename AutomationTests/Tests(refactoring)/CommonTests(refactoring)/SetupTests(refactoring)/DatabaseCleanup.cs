@@ -26,11 +26,13 @@ namespace Product.Tests_refactoring_.CommonTests_refactoring_.SetupTests_refacto
         [TestMethod]
         [TestCategory("Setup")]
         public void СleaningUp()
-        {
-            cleanUpStep = new CleanUpStep();
-            cleanUpStep.CleanUpProjectAndTenant(RunConfigurator.GetRole("client1"));
-            cleanUpStep.CleanUpProjectAndTenant(RunConfigurator.GetRole("client2"));        
+        {                       
+            CleanUp(RunConfigurator.GetRole("client1"));
+            CleanUp(RunConfigurator.GetRole("client2"));
         }
-
+        public void CleanUp(string client)
+        {            
+            cleanUpStep.CleanUpProjectAndTenant(client);
+        }
     }
 }

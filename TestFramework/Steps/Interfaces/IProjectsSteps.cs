@@ -8,6 +8,7 @@ namespace TestFramework.Steps.Interfaces
 {
     public interface IProjectSteps
     {
-        void AddNewProject(string testName, string sourceTenant, string sourcePassword, string targetTenant, string targetPassword, string fileName);
+        void AddNewEmailFromFileProject(string testName, string sourceTenant, string sourcePassword, string targetTenant, string targetPassword, string fileName);
+        void AddNewEmailWithDiscoveryProject(string projectName,string sourceUserLogin,string sourceUserPassword,string targetUserLogin,string targetUserPassword);
     }
 }

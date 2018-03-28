@@ -12,7 +12,7 @@ namespace TestFramework.IoC
     public class ComponentRegistration:IRegistration
     {
         public void Register(IKernelInternal kernel)
-        {
+        {            
             kernel.Register(
                 Component.For<PageLoggingInterceptor>()
                     .ImplementedBy<PageLoggingInterceptor>());
@@ -21,6 +21,8 @@ namespace TestFramework.IoC
                 Component.For<StepsLoggingInterceptor>()
                 .ImplementedBy<StepsLoggingInterceptor>());
 
+
+            //Pages
             kernel.Register(
                 Component.For<IStartPage>()
                          .ImplementedBy<StartPage>()
@@ -30,6 +32,11 @@ namespace TestFramework.IoC
                 Component.For<IMicrosoftLoginPage>()
                          .ImplementedBy<MicrosoftLoginPage>()
                          .Interceptors(InterceptorReference.ForType<PageLoggingInterceptor>()).Anywhere);
+
+            kernel.Register(
+               Component.For<IMicrosoftLoginPageWindow>()
+                        .ImplementedBy<MicrosoftLoginPageWindow>()
+                        .Interceptors(InterceptorReference.ForType<PageLoggingInterceptor>()).Anywhere);
 
             kernel.Register(
                 Component.For<IRightBar>()
@@ -46,6 +53,8 @@ namespace TestFramework.IoC
                          .ImplementedBy<ProjectsListPage>()
                          .Interceptors(InterceptorReference.ForType<PageLoggingInterceptor>()).Anywhere);
 
+
+            //Steps
             kernel.Register(
                 Component.For<IStartPageSteps>()
                          .ImplementedBy<StartPageSteps>()

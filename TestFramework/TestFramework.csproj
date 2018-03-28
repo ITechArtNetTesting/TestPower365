@@ -69,11 +69,13 @@
     <Compile Include="IoC\DependencyResolver.cs" />
     <Compile Include="PageObjects\BasePages\BasePage.cs" />
     <Compile Include="PageObjects\Interfaces\IMicrosoftLoginPage.cs" />
+    <Compile Include="PageObjects\Interfaces\IMicrosoftLoginPageWindow.cs" />
     <Compile Include="PageObjects\Interfaces\IProjectCreatePage.cs" />
     <Compile Include="PageObjects\Interfaces\IProjectsListPage.cs" />
     <Compile Include="PageObjects\Interfaces\IRightBar.cs" />
     <Compile Include="PageObjects\Interfaces\IStartPage.cs" />
     <Compile Include="PageObjects\MicrosoftLoginPage.cs" />
+    <Compile Include="PageObjects\MicrosoftLoginPageWindow.cs" />
     <Compile Include="PageObjects\ProjectCreatePage.cs" />
     <Compile Include="PageObjects\ProjectsListPage.cs" />
     <Compile Include="PageObjects\RightBar.cs" />
