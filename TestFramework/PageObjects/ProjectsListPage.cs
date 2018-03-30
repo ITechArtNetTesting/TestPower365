@@ -16,10 +16,24 @@ namespace TestFramework.PageObjects
     {
         [FindsBy(How = How.XPath, Using = "//*/font[text()='NEW PROJECT']")]
         IWebElement NewProjectButton { get; set; }
+        
+        [FindsBy(How = How.XPath, Using = "//*/tbody//*/span[@data-bind='text: projectName']")]
+        IList<IWebElement> ListOfProjects { get; set; }
+
+        public void ChooseProjectByName(string projectName)
+        {
+            foreach (var project in ListOfProjects)
+            {
+                if (project.Text == projectName.ToUpper())
+                {
+                    Performe.Click(project);
+                }
+            }
+        }
 
         public void ClickNewProjectButton()
         {                                    
             Performe.Click(NewProjectButton);
-        }
+        }       
     }
 }

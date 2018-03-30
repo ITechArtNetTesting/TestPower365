@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Xml;
 
-namespace T365Framework
+namespace T365.Framework
 {
     /// <summary>
     ///     Class RunConfigurator.

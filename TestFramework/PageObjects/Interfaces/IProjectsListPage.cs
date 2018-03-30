@@ -9,5 +9,6 @@ namespace TestFramework.PageObjects.Interfaces
     public interface IProjectsListPage
     {
         void ClickNewProjectButton();
+        void ChooseProjectByName(string projectName);
     }
 }

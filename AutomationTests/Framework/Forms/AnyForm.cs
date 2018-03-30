@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 using Product.Framework.Elements;
-using T365Framework;
+using T365.Framework;
 
 namespace Product.Framework.Forms
 {

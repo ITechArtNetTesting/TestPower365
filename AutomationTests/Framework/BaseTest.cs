@@ -6,7 +6,7 @@ using Product.Framework.Steps;
 using System.Management.Automation;
 using System.Threading;
 using TestContext = Microsoft.VisualStudio.TestTools.UnitTesting.TestContext;
-using T365Framework;
+using T365.Framework;
 using TestFramework.IoC;
 using TestFramework.Users;
 

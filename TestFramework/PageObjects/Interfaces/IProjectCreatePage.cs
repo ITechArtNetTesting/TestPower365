@@ -11,5 +11,11 @@
         void UploadFile(string keys);
         void ClickSubmitButton();
         void ChooseEmailWithDiscoveryProjectType();
+        void SelectTenantByName(string name);
+        void SelectDomainByName(string name);
+        void ChooseSelectUsersByActiveDirectoryGroup();
+        void SendKeysToFindGroupInput(string groupName);
+        void ClickFoundGroup();
+        void SelectNoThanksToDefineMyMigrationWavesNow();
     }
 }

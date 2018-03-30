@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using T365Framework;
+using T365.Framework;
 
 namespace Product.Framework.Elements
 {

@@ -3,7 +3,7 @@ using System.Globalization;
 using ProbeTests.Model;
 using Product.Framework;
 using Product.Framework.Enums;
-using T365Framework;
+using T365.Framework;
 
 namespace ProbeTests.ProbeTests
 {

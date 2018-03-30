@@ -9,7 +9,7 @@ using GraphTest;
 using Microsoft.Graph;
 using ProbeTests.Model;
 using Product.Framework;
-using T365Framework;
+using T365.Framework;
 
 namespace ProbeTests.ProbeTests
 {

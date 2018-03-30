@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
-using T365Framework;
+using T365.Framework;
 
 namespace Product.Framework.Elements
 {
@@ -82,6 +82,8 @@ namespace Product.Framework.Elements
 
         public void Click()
         {
+            WaitForDOM();
+            WaitForAjaxLoad();
             WaitForElementPresent();
             WaitForElementIsVisible();
             WaitForElementIsClickable();
@@ -99,6 +101,8 @@ namespace Product.Framework.Elements
                     return false;
                 }
             });
+            WaitForDOM();
+            WaitForAjaxLoad();
         }
 
         public void DoubleClick()
@@ -125,8 +129,8 @@ namespace Product.Framework.Elements
 		/// </summary>
 		/// <returns>Boolean.</returns>
 		public bool IsPresent()
-		{
-			return Browser.GetDriver().FindElements(locator).Count > 0;
+		{            
+            return Browser.GetDriver().FindElements(locator).Count>0;           
 		}
 
 		public bool IsPresent(int count)
@@ -366,8 +370,29 @@ namespace Product.Framework.Elements
 				Log.Fatal($"Element with locator: '{locator}' still exists!");
 			}
 		}
+        public static void WaitForAjaxLoad()
+        {
+            if (jQueryExists())
+            {
+                var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromMinutes(1));
+                wait.PollingInterval = TimeSpan.FromMilliseconds(100);
+                wait.Until(wd => (bool)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0"));
+            }
+        }
+        static bool jQueryExists()
+        {
+            try
+            {
+                (Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0");
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
-		public void ScrollTillVisible()
+        public void ScrollTillVisible()
 		{
 			((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript("arguments[0].scrollIntoView();", GetElement());
 		}

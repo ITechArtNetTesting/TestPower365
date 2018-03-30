@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
 using Product.Tests.CommonTests;
-using T365Framework;
+using T365.Framework;
 
 namespace Product.Tests.PublicFoldersTests
 {

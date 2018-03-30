@@ -2,7 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace T365Framework
+namespace T365.Framework
 {
 	/// <summary>
 	///     Class Browser.

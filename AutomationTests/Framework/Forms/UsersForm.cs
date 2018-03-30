@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using Product.Framework.Elements;
 using Product.Framework.Enums;
-using T365Framework;
+using T365.Framework;
 
 namespace Product.Framework.Forms
 {

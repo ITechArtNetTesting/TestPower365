@@ -101,6 +101,7 @@
     <Compile Include="Framework\Forms\BaseForm.cs" />
     <Compile Include="Framework\Forms\CmtLoginForm.cs" />
     <Compile Include="Framework\Forms\CoexSettingsForm.cs" />
+    <Compile Include="Framework\Forms\DiscoveryOverviewForm.cs" />
     <Compile Include="Framework\Forms\GroupsMigrationForm.cs" />
     <Compile Include="Framework\Forms\MainForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\AddTenantsForm.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="Framework\Forms\PublicFolderMigrationForms\PublicFolderSyncLevelForm.cs" />
     <Compile Include="Framework\Forms\PublicFolderMigrationForms\PublicFolderTargetFilePathForm.cs" />
     <Compile Include="Framework\Forms\PublicFolderMigrationForms\PublicFolderTenantPareForm.cs" />
+    <Compile Include="Framework\Forms\PublicFoldersOverviewForm.cs" />
     <Compile Include="Framework\Forms\RegistrationForm.cs" />
     <Compile Include="Framework\Forms\SubmittedProjectForm.cs" />
     <Compile Include="Framework\Forms\TenantRestructuringForm.cs" />
@@ -191,10 +193,11 @@
     <Compile Include="Framework\StringRandomazer.cs" />
     <Compile Include="IProbeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests%28refactoring%29\CommonTests%28refactoring%29\IntegrationTests%28refactoring%29\GroupsViewTest.cs" />
     <Compile Include="Tests%28refactoring%29\CommonTests%28refactoring%29\SetupTests%28refactoring%29\DatabaseCleanup.cs" />
     <Compile Include="Tests%28refactoring%29\CommonTests%28refactoring%29\SetupTests%28refactoring%29\FirstUserFirstProjectTest.cs" />
     <Compile Include="Tests%28refactoring%29\CommonTests%28refactoring%29\SetupTests%28refactoring%29\FirstUserSecondProject.cs" />
-    <Compile Include="Tests%28refactoring%29\CommonTests%28refactoring%29\SetupTests%28refactoring%29\SecondUserFirstProject.cs" />
+    <Compile Include="Tests%28refactoring%29\CommonTests%28refactoring%29\SetupTests%28refactoring%29\FirstUserProject.cs" />
     <Compile Include="Tests\ClientAdministrationTests\ClientRegistration.cs" />
     <Compile Include="Tests\CommonTests\LoginAndConfigureTest.cs" />
     <Compile Include="Tests\CommonTests\ProbeTest.cs" />
@@ -206,6 +209,7 @@
     <Compile Include="Framework\Forms\NewProjectWizardForms\SetProjectDescriptionForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\DiscoveryForms\SelectSourceDomainForm.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\SecondUserSecondProjectTest.cs" />
+    <Compile Include="Tests\IntegrationTests\ArchiveProjectTest.cs" />
     <Compile Include="Tests\IntegrationTests\CutoverTest.cs" />
     <Compile Include="Tests\IntegrationTests\DistributionGroupsInitialTest.cs" />
     <Compile Include="Tests\IntegrationTests\DistributionGroupsValidationTest.cs" />
@@ -539,9 +543,9 @@
       <Project>{06091402-4bb2-44d5-b443-32aab04713c5}</Project>
       <Name>T365.Database</Name>
     </ProjectReference>
-    <ProjectReference Include="..\T365Framework\T365Framework.csproj">
+    <ProjectReference Include="..\T365Framework\T365.Framework.csproj">
       <Project>{3be7f696-96fc-4356-9c87-26d4a95d07b5}</Project>
-      <Name>T365Framework</Name>
+      <Name>T365.Framework</Name>
     </ProjectReference>
     <ProjectReference Include="..\TestFramework\TestFramework.csproj">
       <Project>{8020d38d-9d37-4db0-953e-7c4bf3c729c2}</Project>

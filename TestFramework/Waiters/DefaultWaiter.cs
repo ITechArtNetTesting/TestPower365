@@ -36,7 +36,22 @@ namespace TestFramework.Waiters
                 {
                     return !ele.Displayed;
                 }
-                catch (Exception) { throw; }
+                catch (Exception) { return true; }
+            });
+            wait.Until(waiter);
+        }
+        public static void WaitElementDisapear(IWebElement element, int delay)
+        {
+            DefaultWait<IWebElement> wait = new DefaultWait<IWebElement>(element);
+            wait.Timeout = TimeSpan.FromMinutes(delay);
+            wait.PollingInterval = TimeSpan.FromMilliseconds(250);
+            Func<IWebElement, bool> waiter = new Func<IWebElement, bool>((IWebElement ele) =>
+            {
+                try
+                {
+                    return !ele.Displayed;
+                }
+                catch (Exception) { return true; }
             });
             wait.Until(waiter);
         }

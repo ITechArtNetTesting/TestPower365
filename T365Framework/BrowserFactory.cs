@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 
-namespace T365Framework
+namespace T365.Framework
 {
 	/// <summary>
 	///     Class BrowserFactory.

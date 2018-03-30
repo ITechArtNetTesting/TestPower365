@@ -14,6 +14,8 @@ namespace TestFramework.Steps
         IProjectsListPage projectsListPage = DependencyResolver.For<IProjectsListPage>();
         IProjectCreatePage projectCreatePage = DependencyResolver.For<IProjectCreatePage>();
         IMicrosoftLoginPageWindow microsoftPageWindow = DependencyResolver.For<IMicrosoftLoginPageWindow>();
+        IProjectOverviewPage projectOverviewPage = DependencyResolver.For<IProjectOverviewPage>();
+        IProjectGroupsPage projectGroupsPage = DependencyResolver.For<IProjectGroupsPage>();
 
         public void AddNewEmailFromFileProject(string testName, string sourceTenant, string sourcePassword, string targetTenant, string targetPassword, string fileName)
         {
@@ -70,6 +72,15 @@ namespace TestFramework.Steps
             microsoftPageWindow.ClickNextButton();
             microsoftPageWindow.ClickNextButton();
 
+
+        }
+
+        public void ViewGroups(string projectName,string groupName)
+        {
+            projectsListPage.ChooseProjectByName(projectName);
+            projectOverviewPage.ClickGroupsEditButton();
+            projectGroupsPage.SearchGroupByName(groupName);
+            projectGroupsPage.ClickTargetGroup();
         }
     }
 }

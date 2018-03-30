@@ -6,7 +6,7 @@ using Product.Framework.Enums;
 using Product.Tests.CommonTests;
 using System.Collections.Generic;
 using System.Text;
-using T365Framework;
+using T365.Framework;
 
 namespace Product.Tests.PowerShellTests
 {

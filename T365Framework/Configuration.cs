@@ -1,6 +1,6 @@
 using System.Configuration;
 
-namespace T365Framework
+namespace T365.Framework
 {
     /// <summary>
     ///     Class Configuration.

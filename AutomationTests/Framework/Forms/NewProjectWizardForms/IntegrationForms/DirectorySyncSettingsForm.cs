@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using Product.Framework.Elements;
 using Product.Framework.Forms.PublicFolderMigrationForms;
-using T365Framework;
+using T365.Framework;
 
 namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {

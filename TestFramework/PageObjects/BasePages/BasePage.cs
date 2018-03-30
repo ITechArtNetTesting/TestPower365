@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium.Support.PageObjects;
 using System;
-using T365Framework;
+using T365.Framework;
 using TestFramework.Actions;
 using TestFramework.Driver;
 using TestFramework.Waiters;
@@ -10,7 +10,7 @@ namespace TestFramework.PageObjects.BasePages
     public abstract class BasePage
     {
         protected string PageWindow;
-        protected IActions Performe = new ActionsWithWait();
+        protected IActions Performe = new Actions.Actions();
         public BasePage()
         {               
             PageFactory.InitElements(Browser.GetDriver(), this);         

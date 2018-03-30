@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace T365Framework
+namespace T365.Framework
 {
 	public class Store
 	{

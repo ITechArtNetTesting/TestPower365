@@ -60,7 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\ActionsWithWait.cs" />
+    <Compile Include="Actions\Actions.cs" />
     <Compile Include="Actions\IActions.cs" />
     <Compile Include="Driver\SwitchDriver.cs" />
     <Compile Include="Interceptors\PageLoggingInterceptor.cs" />
@@ -71,12 +71,16 @@
     <Compile Include="PageObjects\Interfaces\IMicrosoftLoginPage.cs" />
     <Compile Include="PageObjects\Interfaces\IMicrosoftLoginPageWindow.cs" />
     <Compile Include="PageObjects\Interfaces\IProjectCreatePage.cs" />
+    <Compile Include="PageObjects\Interfaces\IProjectGroupsPage.cs" />
+    <Compile Include="PageObjects\Interfaces\IProjectOverviewPage.cs" />
     <Compile Include="PageObjects\Interfaces\IProjectsListPage.cs" />
     <Compile Include="PageObjects\Interfaces\IRightBar.cs" />
     <Compile Include="PageObjects\Interfaces\IStartPage.cs" />
     <Compile Include="PageObjects\MicrosoftLoginPage.cs" />
     <Compile Include="PageObjects\MicrosoftLoginPageWindow.cs" />
     <Compile Include="PageObjects\ProjectCreatePage.cs" />
+    <Compile Include="PageObjects\ProjectGroupsPage.cs" />
+    <Compile Include="PageObjects\ProjectOverviewPage.cs" />
     <Compile Include="PageObjects\ProjectsListPage.cs" />
     <Compile Include="PageObjects\RightBar.cs" />
     <Compile Include="PageObjects\StartPage.cs" />
@@ -98,9 +102,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\T365Framework\T365Framework.csproj">
+    <ProjectReference Include="..\T365Framework\T365.Framework.csproj">
       <Project>{3be7f696-96fc-4356-9c87-26d4a95d07b5}</Project>
-      <Name>T365Framework</Name>
+      <Name>T365.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

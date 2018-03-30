@@ -28,7 +28,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ProbeTests.Database", "..\D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T365.Database", "T365.Database\T365.Database.csproj", "{06091402-4BB2-44D5-B443-32AAB04713C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T365Framework", "T365Framework\T365Framework.csproj", "{3BE7F696-96FC-4356-9C87-26D4A95D07B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T365.Framework", "T365Framework\T365.Framework.csproj", "{3BE7F696-96FC-4356-9C87-26D4A95D07B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFramework", "TestFramework\TestFramework.csproj", "{8020D38D-9D37-4DB0-953E-7C4BF3C729C2}"
 EndProject

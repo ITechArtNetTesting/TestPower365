@@ -8,7 +8,7 @@ using TestFramework.Waiters;
 
 namespace TestFramework.Actions
 {
-    public class ActionsWithWait : IActions
+    public class Actions : IActions
     {
         public void Click(IWebElement element)
         {            

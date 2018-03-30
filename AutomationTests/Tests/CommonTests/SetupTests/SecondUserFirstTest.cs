@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using Product.Framework;
 using Product.Framework.Elements;
-using T365Framework;
+using T365.Framework;
 
 namespace Product.Tests.CommonTests.SetupTests
 {
@@ -18,7 +18,7 @@ namespace Product.Tests.CommonTests.SetupTests
 		[TestMethod]
 		[TestCategory("Setup")]
 		public void SetupSecondUserFirstProject()
-		{
+		{            
             LoginAndSelectRole(RunConfigurator.GetUserLogin("client2"),
                                RunConfigurator.GetPassword("client2"),
                                RunConfigurator.GetRole("client2"));

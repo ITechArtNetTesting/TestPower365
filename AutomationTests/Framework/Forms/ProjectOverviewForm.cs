@@ -4,13 +4,18 @@ using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using Product.Framework.Elements;
-using T365Framework;
+using T365.Framework;
 
 namespace Product.Framework.Forms
 {
 	public class ProjectOverviewForm : BaseForm
 	{
 		private static readonly By TitleLocator = By.XPath("//a[contains(@href, 'Edit?project')]");
+
+        private readonly Button EditDiscoveryOverviewButton = new Button(By.XPath("//*/a[@data-bind='attr: { href: discoveryLink }']"),
+            "EditDiscoveryOverviewButton");
+
+        private readonly Button P365Logo = new Button(By.XPath("//*/ul[@class='topnav-menu']"), "P365 Logo");
 
 		private readonly Button allUsersAmountButton =
 			new Button(
@@ -81,6 +86,12 @@ namespace Product.Framework.Forms
 		{
             descriptionLabel.WaitForElementPresent();
 		}
+
+        public void OpenDiscoveryOverview()
+        {
+            Log.Info("Opening DiscoveryOverview");
+            EditDiscoveryOverviewButton.Click();
+        }
 
 		public void OpenCoexSettings()
 		{
@@ -375,6 +386,10 @@ namespace Product.Framework.Forms
 			discoveryLabel.WaitForElementDisappear();
 		}
 
+        public void GoToStartPage()
+        {
+            P365Logo.Click();
+        }
 		#endregion
 	}
 }

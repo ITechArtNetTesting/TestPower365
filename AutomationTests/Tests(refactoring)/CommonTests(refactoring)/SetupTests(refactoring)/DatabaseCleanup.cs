@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using T365Framework;
+using T365.Framework;
 
 namespace Product.Tests_refactoring_.CommonTests_refactoring_.SetupTests_refactoring_
 {

@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using T365Framework;
+using T365.Framework;
 using TestFramework.PageObjects.BasePages;
 using TestFramework.PageObjects.Interfaces;
 using TestFramework.Waiters;
@@ -41,6 +41,25 @@ namespace TestFramework.PageObjects
 
         [FindsBy(How = How.XPath, Using = "//*/span[@data-translation='EmailWithDiscovery']")]
         IWebElement EmailWithDiscoveryProjectType { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//*/div[@data-bind='foreach: tenants']//*/label")]
+        IList<IWebElement> TenantsToSelect { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//*/div[@data-bind='foreach: sourceDomains']//*/label")]
+        IList<IWebElement> DomainsToSelect { get; set; }
+        
+        [FindsBy(How = How.XPath, Using = "//*/label[@for='groupsRadio']")]
+        IWebElement SelectUsersByActiveDirectoryGroup { get; set; }
+
+        [FindsBy(How = How.Id, Using = "groupSelector")]
+        IWebElement FindGroupInput { get; set; }
+        
+        [FindsBy(How = How.XPath, Using = "//*/div[@class='dropdown dropdown-large open']//*/a")]
+        IWebElement FoundGroup { get; set; }
+        
+        [FindsBy(How = How.XPath, Using = "//*/span[@data-translation='NoThanks']")]
+        IWebElement NoThanksToDefineMyMigrationWavesNow { get; set; }
+
 
         public void CallProjectWithKeys(string keys)
         {
@@ -85,6 +104,48 @@ namespace TestFramework.PageObjects
         public void ChooseEmailWithDiscoveryProjectType()
         {
             Performe.Click(EmailWithDiscoveryProjectType);
+        }
+
+        public void SelectTenantByName(string name)
+        {
+            foreach (var tenant in TenantsToSelect)
+            {
+                if (tenant.Text == name.ToUpper())
+                {
+                    Performe.Click(tenant);
+                }
+            }
+        }
+
+        public void SelectDomainByName(string name)
+        {
+            foreach (var domain in DomainsToSelect)
+            {
+                if (domain.Text == name.ToUpper())
+                {
+                    Performe.Click(domain);
+                }
+            }
+        }
+
+        public void ChooseSelectUsersByActiveDirectoryGroup()
+        {
+            Performe.Click(SelectUsersByActiveDirectoryGroup);
+        }
+
+        public void SendKeysToFindGroupInput(string groupName)
+        {
+            Performe.SendKeys(FindGroupInput, groupName);
+        }
+
+        public void ClickFoundGroup()
+        {
+            Performe.Click(FoundGroup);
+        }
+
+        public void SelectNoThanksToDefineMyMigrationWavesNow()
+        {
+            Performe.Click(NoThanksToDefineMyMigrationWavesNow);
         }
     }
 }

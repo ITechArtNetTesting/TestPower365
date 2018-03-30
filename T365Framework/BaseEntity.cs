@@ -2,7 +2,7 @@
 using log4net;
 using log4net.Config;
 
-namespace T365Framework
+namespace T365.Framework
 {
 	/// <summary>
 	///     Class BaseEntity.

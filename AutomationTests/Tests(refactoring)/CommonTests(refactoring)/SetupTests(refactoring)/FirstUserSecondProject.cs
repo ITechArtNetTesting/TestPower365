@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
 using T365.Database;
-using T365Framework;
+using T365.Framework;
 
 namespace Product.Tests_refactoring_.CommonTests_refactoring_.SetupTests_refactoring_
 {
@@ -16,10 +16,7 @@ namespace Product.Tests_refactoring_.CommonTests_refactoring_.SetupTests_refacto
         [TestMethod]
         [TestCategory("Setup")]
         public void SetupFirstUserSecondProject()
-        {
-            DatabaseCleanup cleaner = new DatabaseCleanup();
-            cleaner.CleanUp(RunConfigurator.GetRole("client1"));
-
+        {           
             Tester.AtStartPage().SignIn();
             Tester.AtMicrosoftLoginPage().LogIn(RunConfigurator.GetUserLogin("client1"), RunConfigurator.GetPassword("client1"));
             Tester.AtStartPage().OpenRightBar();

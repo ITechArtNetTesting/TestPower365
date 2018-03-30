@@ -29,6 +29,16 @@ namespace TestFramework.IoC
                          .Interceptors(InterceptorReference.ForType<PageLoggingInterceptor>()).Anywhere);
 
             kernel.Register(
+                            Component.For<IProjectOverviewPage>()
+                                     .ImplementedBy<ProjectOverviewPage>()
+                                     .Interceptors(InterceptorReference.ForType<PageLoggingInterceptor>()).Anywhere);
+
+            kernel.Register(
+                Component.For<IProjectGroupsPage>()
+                         .ImplementedBy<ProjectGroupsPage>()
+                         .Interceptors(InterceptorReference.ForType<PageLoggingInterceptor>()).Anywhere);
+
+            kernel.Register(
                 Component.For<IMicrosoftLoginPage>()
                          .ImplementedBy<MicrosoftLoginPage>()
                          .Interceptors(InterceptorReference.ForType<PageLoggingInterceptor>()).Anywhere);
