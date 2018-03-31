@@ -14,5 +14,7 @@ namespace TestFramework.Actions
         void Click(IWebElement element,int delay);
         void SendKeys(IWebElement element, string keys,int delay);
         void UploadFile(IWebElement element, string file);
+        void HowerElement(IWebElement element);
+        void HowerThenClick(IWebElement element);
     }
 }

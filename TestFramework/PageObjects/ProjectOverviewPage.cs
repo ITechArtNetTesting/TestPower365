@@ -14,10 +14,26 @@ namespace TestFramework.PageObjects
     {        
         [FindsBy(How = How.XPath, Using = "//*/a[@data-bind='attr: { href: allGroupsLink }']/span")]
         IWebElement GroupsEditButton { get; set; }
+        
+        [FindsBy(How = How.XPath, Using = "//*/a[@data-bind='attr: { href: discoveryLink }']")]
+        IWebElement DiscoveryOverviewEditButton { get; set;}
+
+        [FindsBy(How = How.XPath, Using = "//*[contains(text(), 'Public folders')]/ancestor::div[contains(@class, 'ibox-title')]//a")]
+        IWebElement PublicFoldersEditButton { get; set; }
+
+        public void ClickDiscoveryOverviewEditButton()
+        {
+            Perform.Click(DiscoveryOverviewEditButton);
+        }
 
         public void ClickGroupsEditButton()
         {
-            Performe.Click(GroupsEditButton);
+            Perform.Click(GroupsEditButton);
+        }
+
+        public void ClickPublicFoldersEditButton()
+        {
+            Perform.Click(PublicFoldersEditButton);
         }
     }
 }

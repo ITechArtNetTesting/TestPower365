@@ -10,5 +10,7 @@ namespace TestFramework.PageObjects.Interfaces
     {
         void ClickNewProjectButton();
         void ChooseProjectByName(string projectName);
+        void ClickArchiveProjectByName(string projectName);
+        void ClickYesToArchiveButton();
     }
 }

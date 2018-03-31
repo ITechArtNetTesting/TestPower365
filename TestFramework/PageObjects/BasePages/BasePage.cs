@@ -10,10 +10,10 @@ namespace TestFramework.PageObjects.BasePages
     public abstract class BasePage
     {
         protected string PageWindow;
-        protected IActions Performe = new Actions.Actions();
+        protected IActions Perform = new Actions.Actions();
         public BasePage()
         {               
-            PageFactory.InitElements(Browser.GetDriver(), this);         
+            PageFactory.InitElements(Browser.GetDriver(), this);               
         }        
         public void SwitchWindow()
         {
@@ -29,6 +29,10 @@ namespace TestFramework.PageObjects.BasePages
                 }
             }
             SwitchDriver.ToWindow(PageWindow);
+        }
+        protected void UpdateElements()
+        {
+            PageFactory.InitElements(Browser.GetDriver(), this);
         }
     }
 }

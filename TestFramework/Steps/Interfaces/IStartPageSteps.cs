@@ -9,6 +9,6 @@ namespace TestFramework.Steps.Interfaces
     public interface IStartPageSteps
     {
         void SignIn();
-        void OpenRightBar();
+        void OpenRightBar();        
     }
 }

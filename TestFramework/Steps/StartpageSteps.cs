@@ -16,6 +16,6 @@ namespace TestFramework.Steps
         public void SignIn()
         {
             startPage.ClickSignIn();
-        }
+        }        
     }
 }

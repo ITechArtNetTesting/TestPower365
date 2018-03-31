@@ -26,7 +26,7 @@ namespace TestFramework.PageObjects
             {
                 if (client.Text == clientName.ToUpper())
                 {                                        
-                    Performe.Click(client);
+                    Perform.Click(client);
                     break;
                 }
             }            
@@ -34,7 +34,7 @@ namespace TestFramework.PageObjects
 
         public void ClickClientDropDown()
         {            
-            Performe.Click(ClientDropDown);
+            Perform.Click(ClientDropDown);
         }
     }
 }

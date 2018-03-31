@@ -26,7 +26,7 @@ namespace TestFramework.Waiters
         public static void WaitForElementIsStalenessOf(IWebElement element)
         {
             var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromMinutes(1));
-            wait.Until(ExpectedConditions.StalenessOf(element));
+            wait.Until(ExpectedConditions.StalenessOf(element));            
         }
         public static void Wait(int SecondsToWait)
         {

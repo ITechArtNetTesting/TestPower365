@@ -10,5 +10,6 @@ namespace TestFramework.PageObjects.Interfaces
     {
         void ClickSignIn();
         void ClickOpenRightBarButton();
+        void ClickOnLogo();
     }
 }

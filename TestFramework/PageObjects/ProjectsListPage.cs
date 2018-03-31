@@ -19,6 +19,12 @@ namespace TestFramework.PageObjects
         
         [FindsBy(How = How.XPath, Using = "//*/tbody//*/span[@data-bind='text: projectName']")]
         IList<IWebElement> ListOfProjects { get; set; }
+        
+        [FindsBy(How = How.XPath, Using = "//*/span[@data-translation='Archive']")]
+        IList<IWebElement> ArchiveButtons { get; set; }
+        
+        [FindsBy(How = How.XPath, Using = "//*/span[text()='Yes']")]
+        IWebElement YesToArchiveButton { get; set; }
 
         public void ChooseProjectByName(string projectName)
         {
@@ -26,14 +32,32 @@ namespace TestFramework.PageObjects
             {
                 if (project.Text == projectName.ToUpper())
                 {
-                    Performe.Click(project);
+                    Perform.Click(project);
+                    break;
+                }
+            }
+        }
+
+        public void ClickArchiveProjectByName(string projectName)
+        {
+            for (int i = 0; i < ListOfProjects.Count; i++)
+            {
+                if (ListOfProjects[i].Text == projectName.ToUpper())
+                {
+                    Perform.Click(ArchiveButtons[i]);
+                    break;
                 }
             }
         }
 
         public void ClickNewProjectButton()
         {                                    
-            Performe.Click(NewProjectButton);
-        }       
+            Perform.Click(NewProjectButton);
+        }
+
+        public void ClickYesToArchiveButton()
+        {
+            Perform.Click(YesToArchiveButton);
+        }
     }
 }

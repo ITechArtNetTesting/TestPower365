@@ -68,42 +68,42 @@ namespace TestFramework.PageObjects
 
         public void ChooseEmailFromFileProjectType()
         {                        
-            Performe.Click(EmailFromFileProjectType);
+            Perform.Click(EmailFromFileProjectType);
         }
 
         public void ClickAddTenantButton()
         {
-            Performe.Click(AddTenantButton);
+            Perform.Click(AddTenantButton);
         }
 
         public void ClickBackButton()
         {            
-            Performe.Click(BackButton);
+            Perform.Click(BackButton);
         }
 
         public void ClickNextButton()
         {            
-            Performe.Click(NextButton);
+            Perform.Click(NextButton);
         }
 
         public void UploadFile(string keys)
         {
-            Performe.UploadFile(SelectFile, Path.GetFullPath(RunConfigurator.ResourcesPath + keys));
+            Perform.UploadFile(SelectFile, Path.GetFullPath(RunConfigurator.ResourcesPath + keys));
         }
 
         public void SendRandomKeysToDescription()
         {
-            Performe.SendKeys(DescriptionInput, new string(Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 15).Select(s => s[new Random().Next(s.Length)]).ToArray()));
+            Perform.SendKeys(DescriptionInput, new string(Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 15).Select(s => s[new Random().Next(s.Length)]).ToArray()));
         }
 
         public void ClickSubmitButton()
         {
-            Performe.Click(SubmitButton);
+            Perform.Click(SubmitButton);
         }
 
         public void ChooseEmailWithDiscoveryProjectType()
         {
-            Performe.Click(EmailWithDiscoveryProjectType);
+            Perform.Click(EmailWithDiscoveryProjectType);
         }
 
         public void SelectTenantByName(string name)
@@ -112,7 +112,7 @@ namespace TestFramework.PageObjects
             {
                 if (tenant.Text == name.ToUpper())
                 {
-                    Performe.Click(tenant);
+                    Perform.Click(tenant);
                 }
             }
         }
@@ -123,29 +123,29 @@ namespace TestFramework.PageObjects
             {
                 if (domain.Text == name.ToUpper())
                 {
-                    Performe.Click(domain);
+                    Perform.Click(domain);
                 }
             }
         }
 
         public void ChooseSelectUsersByActiveDirectoryGroup()
         {
-            Performe.Click(SelectUsersByActiveDirectoryGroup);
+            Perform.Click(SelectUsersByActiveDirectoryGroup);
         }
 
         public void SendKeysToFindGroupInput(string groupName)
         {
-            Performe.SendKeys(FindGroupInput, groupName);
+            Perform.SendKeys(FindGroupInput, groupName);
         }
 
         public void ClickFoundGroup()
         {
-            Performe.Click(FoundGroup);
+            Perform.Click(FoundGroup);
         }
 
         public void SelectNoThanksToDefineMyMigrationWavesNow()
         {
-            Performe.Click(NoThanksToDefineMyMigrationWavesNow);
+            Perform.Click(NoThanksToDefineMyMigrationWavesNow);
         }
     }
 }

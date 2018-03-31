@@ -16,6 +16,9 @@ namespace TestFramework.Steps
         IMicrosoftLoginPageWindow microsoftPageWindow = DependencyResolver.For<IMicrosoftLoginPageWindow>();
         IProjectOverviewPage projectOverviewPage = DependencyResolver.For<IProjectOverviewPage>();
         IProjectGroupsPage projectGroupsPage = DependencyResolver.For<IProjectGroupsPage>();
+        ITenantManagementPage tenantManagementPage = DependencyResolver.For<ITenantManagementPage>();
+        IPublicFolderMigrationPage publicFolderMigrationPage = DependencyResolver.For<IPublicFolderMigrationPage>();
+        IStartPage startPage = DependencyResolver.For<IStartPage>();
 
         public void AddNewEmailFromFileProject(string testName, string sourceTenant, string sourcePassword, string targetTenant, string targetPassword, string fileName)
         {
@@ -75,7 +78,25 @@ namespace TestFramework.Steps
 
         }
 
-        public void ViewGroups(string projectName,string groupName)
+        public void ArchiveProject(string projectName)
+        {
+            projectsListPage.ChooseProjectByName(projectName);
+            projectOverviewPage.ClickDiscoveryOverviewEditButton();
+            tenantManagementPage.DisableAllTenants();
+            tenantManagementPage.ClickBackToDashboardButton();
+            projectOverviewPage.ClickPublicFoldersEditButton();
+            publicFolderMigrationPage.SelectAllPublicFolders();
+            publicFolderMigrationPage.ClickActionsDropdown();
+            publicFolderMigrationPage.SelectArchiveAction();
+            publicFolderMigrationPage.ClickApplyActionButton();
+            publicFolderMigrationPage.ClickYesSureArchiveButton();
+            publicFolderMigrationPage.ClickBackToDashboardButton();
+            startPage.ClickOnLogo();
+            projectsListPage.ClickArchiveProjectByName(projectName);
+            projectsListPage.ClickYesToArchiveButton();
+        }
+
+        public void ViewProjectsGroups(string projectName,string groupName)
         {
             projectsListPage.ChooseProjectByName(projectName);
             projectOverviewPage.ClickGroupsEditButton();

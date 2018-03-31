@@ -1,8 +1,8 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.Generic;
 using TestFramework.PageObjects.BasePages;
 using TestFramework.PageObjects.Interfaces;
-using TestFramework.Waiters;
 
 namespace TestFramework.PageObjects
 {
@@ -13,15 +13,23 @@ namespace TestFramework.PageObjects
 
         [FindsBy(How = How.XPath, Using = "//*[@id='hamburger']")]
         IWebElement OpenRightBarButton { get; set; }
+        
+        [FindsBy(How = How.XPath, Using = "//*/ul[@class='topnav-menu']")]
+        IWebElement P365Logo { get; set; }
+
+        public void ClickOnLogo()
+        {
+            Perform.Click(P365Logo);
+        }
 
         public void ClickOpenRightBarButton()
         {
-            Performe.Click(OpenRightBarButton);            
+            Perform.Click(OpenRightBarButton);            
         }
 
         public void ClickSignIn()
         {            
-            Performe.Click(SignInButton);
+            Perform.Click(SignInButton);
         }
     }
 }

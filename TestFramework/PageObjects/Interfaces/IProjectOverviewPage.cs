@@ -9,5 +9,7 @@ namespace TestFramework.PageObjects.Interfaces
     public interface IProjectOverviewPage
     {
         void ClickGroupsEditButton();
+        void ClickDiscoveryOverviewEditButton();
+        void ClickPublicFoldersEditButton();             
     }
 }

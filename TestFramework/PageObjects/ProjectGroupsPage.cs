@@ -23,13 +23,13 @@ namespace TestFramework.PageObjects
 
         public void ClickTargetGroup()
         {
-            Performe.Click(TargetGroup);
+            Perform.Click(TargetGroup);
         }
 
         public void SearchGroupByName(string name)
         {
-            Performe.SendKeys(SearchGroupsInput, name);
-            Performe.Click(SearchButton);            
+            Perform.SendKeys(SearchGroupsInput, name);
+            Perform.Click(SearchButton);            
         }
     }
 }

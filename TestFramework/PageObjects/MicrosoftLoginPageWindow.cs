@@ -26,22 +26,22 @@ namespace TestFramework.PageObjects
 
         public void ClickNextButton()
         {
-            Performe.Click(NextButton);
+            Perform.Click(NextButton);
         }
 
         public void ClickUseAnotherAccount()
         {
-            Performe.Click(UseAnotherAccountButton);
+            Perform.Click(UseAnotherAccountButton);
         }
 
         public void SendKeysToEmailInput(string keys)
         {
-            Performe.SendKeys(EmailInput, keys);
+            Perform.SendKeys(EmailInput, keys);
         }
 
         public void SendKeysToPasswordInput(string keys)
         {
-            Performe.SendKeys(PasswordInput, keys);
+            Perform.SendKeys(PasswordInput, keys);
         }
     }
 }

@@ -28,27 +28,27 @@ namespace TestFramework.PageObjects
 
         public void ClickNextButton()
         {            
-            Performe.Click(NextButton);
+            Perform.Click(NextButton);
         }
 
         public void ClickSignInButton()
         {            
-            Performe.Click(SignInButton);
+            Perform.Click(SignInButton);
         }
 
         public void ClickYesToStaySignedButton()
         {            
-            Performe.Click(YesToStaySignedButton);
+            Perform.Click(YesToStaySignedButton);
         }
 
         public void SendKeysToEmailPhoneOrSkypeInput(string keys)
         {            
-            Performe.SendKeys(EmailPhoneOrSkypeInput, keys);
+            Perform.SendKeys(EmailPhoneOrSkypeInput, keys);
         }
 
         public void SendKeysToPasswordInput(string keys)
         {
-            Performe.SendKeys(PasswordInput, keys);
+            Perform.SendKeys(PasswordInput, keys);
         }
     }
 }

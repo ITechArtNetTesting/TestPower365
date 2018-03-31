@@ -193,6 +193,7 @@
     <Compile Include="Framework\StringRandomazer.cs" />
     <Compile Include="IProbeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests%28refactoring%29\CommonTests%28refactoring%29\IntegrationTests%28refactoring%29\ArchiveProject.cs" />
     <Compile Include="Tests%28refactoring%29\CommonTests%28refactoring%29\IntegrationTests%28refactoring%29\GroupsViewTest.cs" />
     <Compile Include="Tests%28refactoring%29\CommonTests%28refactoring%29\SetupTests%28refactoring%29\DatabaseCleanup.cs" />
     <Compile Include="Tests%28refactoring%29\CommonTests%28refactoring%29\SetupTests%28refactoring%29\FirstUserFirstProjectTest.cs" />

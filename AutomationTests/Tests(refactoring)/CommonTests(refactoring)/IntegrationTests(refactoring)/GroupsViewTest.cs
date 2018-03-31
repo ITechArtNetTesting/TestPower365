@@ -31,7 +31,7 @@ namespace Product.Tests_refactoring_.CommonTests_refactoring_.IntegrationTests_r
             Tester.AtMicrosoftLoginPage().LogIn(userName, password);
             Tester.AtStartPage().OpenRightBar();
             Tester.AtRightBar().ChooseClientByKeys(client);
-            Tester.AtProjectsPage().ViewGroups(project, adGroup2);
+            Tester.AtProjectsPage().ViewProjectsGroups(project, adGroup2);
         }
 
     }
