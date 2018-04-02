@@ -14,7 +14,7 @@ namespace Product.Tests_refactoring_.CommonTests_refactoring_.SetupTests_refacto
         }
         [TestMethod]
         [TestCategory("Setup")]
-        public void SetupSecondUserFirstProject()
+        public void SetupSecondUserFirstEmailWithDiscoveryProject()
         {          
             Tester.AtStartPage().SignIn();
             Tester.AtMicrosoftLoginPage().LogIn(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"));

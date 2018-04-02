@@ -16,7 +16,7 @@ namespace Product.Tests_refactoring_.CommonTests_refactoring_.SetupTests_refacto
         }
         [TestMethod]
         [TestCategory("Setup")]
-        public void SetupFirstUserFirstProject()
+        public void SetupFirstUserEmailFromFileFirstProject()
         {           
             Tester.AtStartPage().SignIn();
             Tester.AtMicrosoftLoginPage().LogIn(RunConfigurator.GetUserLogin("client1"), RunConfigurator.GetPassword("client1"));
