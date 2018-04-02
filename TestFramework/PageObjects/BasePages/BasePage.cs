@@ -2,7 +2,7 @@
 using System;
 using T365.Framework;
 using TestFramework.Actions;
-using TestFramework.Driver;
+using TestFramework.Drivers;
 using TestFramework.Waiters;
 
 namespace TestFramework.PageObjects.BasePages
@@ -28,7 +28,7 @@ namespace TestFramework.PageObjects.BasePages
                     PageWindow = Browser.GetDriver().WindowHandles[Browser.GetDriver().WindowHandles.Count - 1];
                 }
             }
-            SwitchDriver.ToWindow(PageWindow);
+            Drivers.Driver.SwitchWindowTo(PageWindow);
         }
         protected void UpdateElements()
         {

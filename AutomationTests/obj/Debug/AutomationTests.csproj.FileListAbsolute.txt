@@ -226,3 +226,7 @@ C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\Castle
 C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\Castle.Core.xml
 C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\TestFramework.dll
 C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\TestFramework.pdb
+C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\log4net.dll
+C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\Selenium.WebDriverBackedSelenium.dll
+C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\WebDriver.dll
+C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\WebDriver.Support.dll

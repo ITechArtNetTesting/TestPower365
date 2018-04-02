@@ -62,7 +62,7 @@
   <ItemGroup>
     <Compile Include="Actions\Actions.cs" />
     <Compile Include="Actions\IActions.cs" />
-    <Compile Include="Driver\SwitchDriver.cs" />
+    <Compile Include="Drivers\Driver.cs" />
     <Compile Include="Interceptors\PageLoggingInterceptor.cs" />
     <Compile Include="Interceptors\StepsLoggingInterceptor.cs" />
     <Compile Include="IoC\ComponentRegistration.cs" />
@@ -104,7 +104,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Screenshots\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\T365Framework\T365.Framework.csproj">
       <Project>{3be7f696-96fc-4356-9c87-26d4a95d07b5}</Project>

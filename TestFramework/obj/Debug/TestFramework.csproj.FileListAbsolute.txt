@@ -34,3 +34,5 @@ C:\Users\valery.piniazik\Documents\TestPower365\TestFramework\obj\Debug\TestFram
 C:\Users\valery.piniazik\Documents\TestPower365\TestFramework\obj\Debug\TestFramework.csproj.CoreCompileInputs.cache
 C:\Users\valery.piniazik\Documents\TestPower365\TestFramework\obj\Debug\TestFramework.dll
 C:\Users\valery.piniazik\Documents\TestPower365\TestFramework\obj\Debug\TestFramework.pdb
+C:\Users\valery.piniazik\Documents\TestPower365\TestFramework\bin\Debug\WebDriver.dll
+C:\Users\valery.piniazik\Documents\TestPower365\TestFramework\bin\Debug\WebDriver.Support.dll

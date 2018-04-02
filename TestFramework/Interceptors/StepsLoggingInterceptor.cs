@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 namespace TestFramework.Interceptors
 {
     public class StepsLoggingInterceptor : IInterceptor
-    {
+    {        
         public void Intercept(IInvocation invocation)
         {
-            var methodName = invocation.Method.Name;
+            var methodName = invocation.Method.Name;            
 
             try
             {

@@ -1,6 +1,9 @@
 ﻿using Castle.DynamicProxy;
+using OpenQA.Selenium;
 using System;
-using TestFramework.Driver;
+using System.IO;
+using T365.Framework;
+using TestFramework.Drivers;
 using TestFramework.PageObjects.BasePages;
 using TestFramework.Waiters;
 
@@ -9,8 +12,7 @@ namespace TestFramework.Interceptors
     public class PageLoggingInterceptor: IInterceptor
     {
         public void Intercept(IInvocation invocation)
-        {
-            var methodName = invocation.Method.Name;
+        {            
             bool ExecutedWithoutExeptions = false;
             while (ExecutedWithoutExeptions == false) 
             {
@@ -19,7 +21,9 @@ namespace TestFramework.Interceptors
                     ((BasePage)invocation.InvocationTarget).SwitchWindow();                    
                     WebDriverWaiter.WaitForDOMLoad();
                     WebDriverWaiter.WaitForAjaxLoad();
+                    Driver.TakeScreenShot(invocation.Method.Name, ((BasePage)invocation.InvocationTarget).GetType().Name, true);
                     invocation.Proceed();
+                    Driver.TakeScreenShot(invocation.Method.Name, ((BasePage)invocation.InvocationTarget).GetType().Name,false);
                     ExecutedWithoutExeptions = true;                    
                 }
                 catch (Exception e)
