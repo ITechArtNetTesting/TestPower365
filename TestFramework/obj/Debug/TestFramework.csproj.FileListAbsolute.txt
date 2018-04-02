@@ -23,8 +23,6 @@ C:\Users\valery.piniazik\Documents\TestPower365\TestFramework\bin\Debug\Castle.C
 C:\Users\valery.piniazik\Documents\TestPower365\TestFramework\bin\Debug\Castle.Windsor.dll
 C:\Users\valery.piniazik\Documents\TestPower365\TestFramework\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Users\valery.piniazik\Documents\TestPower365\TestFramework\bin\Debug\T365Framework.dll
-C:\Users\valery.piniazik\Documents\TestPower365\TestFramework\bin\Debug\WebDriver.dll
-C:\Users\valery.piniazik\Documents\TestPower365\TestFramework\bin\Debug\WebDriver.Support.dll
 C:\Users\valery.piniazik\Documents\TestPower365\TestFramework\bin\Debug\log4net.dll
 C:\Users\valery.piniazik\Documents\TestPower365\TestFramework\bin\Debug\T365Framework.pdb
 C:\Users\valery.piniazik\Documents\TestPower365\TestFramework\bin\Debug\Castle.Core.xml

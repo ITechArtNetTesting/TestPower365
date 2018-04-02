@@ -346,7 +346,6 @@ C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\AutomationT
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\EntityFramework.dll
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\GraphHelper.dll
-C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\log4net.dll
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\Microsoft.Azure.KeyVault.Core.dll
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\Microsoft.Data.Edm.dll
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\Microsoft.Data.OData.dll

@@ -207,14 +207,10 @@ C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\resour
 C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\AutomationTests.dll.config
 C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\AutomationTests.dll
 C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\AutomationTests.pdb
-C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\log4net.dll
-C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\Selenium.WebDriverBackedSelenium.dll
 C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\System.Management.Automation.dll
 C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\T365.Database.dll
 C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\T365Framework.dll
 C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\ThoughtWorks.Selenium.Core.dll
-C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\WebDriver.dll
-C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\WebDriver.Support.dll
 C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\T365.Database.pdb
 C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\T365Framework.pdb
 C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\log4net.xml
