@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace T365.Database
 {
@@ -18,49 +14,73 @@ namespace T365.Database
 
         public bool Execute(string commandStr)
         {
-
-
-            using (SqlConnection connection =
-            new SqlConnection(connectionString))
+            var now = DateTime.Now;
+            int delay = 60;
+            bool ExecutedWithoutExeptions = false;
+            while (ExecutedWithoutExeptions == false)
             {
-                SqlCommand command = new SqlCommand(commandStr, connection);
+                if ((DateTime.Now - now) - TimeSpan.FromSeconds(delay) > TimeSpan.Zero)
+                {
+                    break;
+                }
                 try
                 {
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                    return true;
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        SqlCommand command = new SqlCommand(commandStr, connection);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        ExecutedWithoutExeptions = true;
+                    }
                 }
                 catch (Exception ex)
                 {
-                    return false;
+                    //Log exeption
                 }
+            }
+            if (ExecutedWithoutExeptions)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
         public string ReturnFirstExecuted(string commandStr)
         {
+            var now = DateTime.Now;
+            int delay = 60;
+            bool ExecutedWithoutExeptions = false;
             string result = null;
-            using (SqlConnection connection =
-              new SqlConnection(connectionString))
+            while (ExecutedWithoutExeptions == false)
             {
-                SqlCommand command = new SqlCommand(commandStr, connection);
+                if ((DateTime.Now - now) - TimeSpan.FromSeconds(delay) > TimeSpan.Zero)
+                {
+                    break;
+                }
                 try
                 {
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
+                    using (SqlConnection connection = new SqlConnection(connectionString))
                     {
-                        result = Convert.ToString(reader[0]);
+                        SqlCommand command = new SqlCommand(commandStr, connection);
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            result = Convert.ToString(reader[0]);
+                        }
+                        reader.Close();
+                        ExecutedWithoutExeptions = true;
                     }
-                    reader.Close();
-                    return result;
                 }
                 catch (Exception ex)
                 {
-                    return result;
+                    //Log exeption
                 }
-
             }
+            return result;
         }
     }
 }
