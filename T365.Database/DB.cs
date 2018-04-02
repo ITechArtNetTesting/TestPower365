@@ -32,6 +32,7 @@ namespace T365.Database
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine($"Connection error {ex}");
                     return false;
                 }
             }
@@ -57,6 +58,7 @@ namespace T365.Database
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine($"Query ReturnFirstExecuted. Error {ex}");
                     return result;
                 }
 

@@ -60,11 +60,9 @@ namespace Product.Framework.Forms
             try
             {
                 //Handle Don't Show Again page.
-                if (dontShowAgain.IsPresent()) //wait if element present
-                {
                     dontShowAgain.WaitForElementPresent(1000);
                     nextButton.Click();
-                }
+                
             }
             catch (Exception)
             {

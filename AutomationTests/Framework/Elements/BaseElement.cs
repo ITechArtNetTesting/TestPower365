@@ -214,9 +214,9 @@ namespace Product.Framework.Elements
 			try
 			{
 				wait.Until(waiting =>
-				{                   
-                        var webElements = Browser.GetDriver().FindElements(locator);
-                        return webElements.Count != 0;                   
+				{
+					var webElements = Browser.GetDriver().FindElements(locator);
+					return webElements.Count != 0;
 				});
 			}
 			catch (TimeoutException)
@@ -284,7 +284,7 @@ namespace Product.Framework.Elements
 		/// </summary>
 		public void WaitForElementIsVisible()
 		{
-			var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(30));
+			var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(50));
 			wait.Until(ExpectedConditions.ElementIsVisible(locator));
 		}
 
