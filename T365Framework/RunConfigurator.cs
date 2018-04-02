@@ -67,6 +67,12 @@ namespace T365.Framework
         {
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{file}']/..//filename").InnerText;
         }
+
+        public static string GetADGroupName(string client, string project, string group)
+        {
+            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{group}']/../name").InnerText;
+        }
+ 
         /// <summary>
         ///     Sets the value.
         /// </summary>
