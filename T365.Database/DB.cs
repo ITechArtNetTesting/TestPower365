@@ -16,76 +16,45 @@ namespace T365.Database
             this.connectionString = connectionString;
         }
 
-        public bool Execute(string commandStr)
+        public void Execute(string commandStr)
         {
-            var now = DateTime.Now;
-            int delay = 60;
-            bool ExecutedWithoutExeptions = false;
-            while (ExecutedWithoutExeptions == false)
+            try
             {
-                if ((DateTime.Now - now) - TimeSpan.FromSeconds(delay) > TimeSpan.Zero)
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    break;
-                }
-                try
-                {
-                    using (SqlConnection connection = new SqlConnection(connectionString))
-                    {
-                        throw new Exception();
-                        SqlCommand command = new SqlCommand(commandStr, connection);
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        ExecutedWithoutExeptions = true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    //Log exeption
-                    throw ex;
+                    SqlCommand command = new SqlCommand(commandStr, connection);
+                    command.CommandTimeout = 80;
+                    connection.Open();
+                    command.ExecuteNonQuery();
                 }
             }
-            if (ExecutedWithoutExeptions)
+            catch (Exception ex)
             {
-                return true;
-            }
-            else
-            {
-                return false;
+                throw new Exception("Can not execute " + commandStr, ex);
             }
         }
 
         public string ReturnFirstExecuted(string commandStr)
         {
-            var now = DateTime.Now;
-            int delay = 60;
-            bool ExecutedWithoutExeptions = false;
             string result = null;
-            while (ExecutedWithoutExeptions == false)
+            try
             {
-                if ((DateTime.Now - now) - TimeSpan.FromSeconds(delay) > TimeSpan.Zero)
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    break;
-                }
-                try
-                {
-                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    SqlCommand command = new SqlCommand(commandStr, connection);
+                    command.CommandTimeout = 80;
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
                     {
-                        throw new Exception();
-                        SqlCommand command = new SqlCommand(commandStr, connection);
-                        connection.Open();
-                        SqlDataReader reader = command.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            result = Convert.ToString(reader[0]);
-                        }
-                        reader.Close();
-                        ExecutedWithoutExeptions = true;
+                        result = Convert.ToString(reader[0]);
                     }
+                    reader.Close();
                 }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Can not execute " + commandStr, ex);
             }
             return result;
         }

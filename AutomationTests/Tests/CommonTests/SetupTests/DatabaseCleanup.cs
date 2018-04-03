@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 namespace Product.Tests.CommonTests.SetupTests
 {
     [TestClass]
-    public class DatabaseCleanup 
+    public class DatabaseCleanup
     {
         CleanUpStep cleanUpStep;
-        
+
         public DatabaseCleanup()
         {
             cleanUpStep = new CleanUpStep();

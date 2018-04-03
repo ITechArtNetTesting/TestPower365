@@ -13,11 +13,11 @@ namespace T365.Database
         {
             DataBase = new DB(connectionString);
         }
-        public bool DeleteTenant(string clientId, string tenantName)
+        public void DeleteTenant(string clientId, string tenantName)
         {
             try
             {
-                return DataBase.Execute("delete from Tenant where ClientId='" + clientId + "'and  TenantName='" + tenantName + "'");
+                DataBase.Execute("delete from Tenant where ClientId='" + clientId + "'and  TenantName='" + tenantName + "'");
             }
             catch (Exception ex)
             {
@@ -25,11 +25,11 @@ namespace T365.Database
             }
         }
 
-        public bool DeleteTenant(string clientId)
+        public void DeleteTenant(string clientId)
         {
             try
             {
-                return DataBase.Execute("delete from Tenant where ClientId='" + clientId + "'");
+                DataBase.Execute("delete from Tenant where ClientId='" + clientId + "'");
             }
             catch (Exception ex)
             {
@@ -37,11 +37,11 @@ namespace T365.Database
             }
         }
 
-        public bool DeleteProject(string clientId)
+        public void DeleteProject(string clientId)
         {
             try
             {
-                return DataBase.Execute("delete from Project where ClientId='" + clientId + "'");
+                DataBase.Execute("delete from Project where ClientId='" + clientId + "'");
             }
             catch (Exception ex)
             {
