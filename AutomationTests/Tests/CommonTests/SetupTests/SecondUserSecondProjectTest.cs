@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
-using T365.Framework;
 
 namespace Product.Tests.CommonTests.SetupTests
 {
@@ -66,12 +65,12 @@ namespace Product.Tests.CommonTests.SetupTests
 			User.AtReviewDomainsPairsForm().GoNext();
 			User.AtMigrationTypeForm().SelectGroupsOption();
 			User.AtMigrationTypeForm().GoNext();
-            //User.AtSelectMigrationGroupForm().SetGroup(RunConfigurator.GetADGroupName ("client2", "project2", "adgroup1"));
-            //User.AtSelectMigrationGroupForm().SelectGroup(RunConfigurator.GetADGroupName("client2", "project2", "adgroup1"));
+            User.AtSelectMigrationGroupForm().SetGroup(RunConfigurator.GetADGroupName ("client2", "project2", "adgroup1"));
+            User.AtSelectMigrationGroupForm().SelectGroup(RunConfigurator.GetADGroupName("client2", "project2", "adgroup1"));
 
-            User.AtSelectMigrationGroupForm().SetGroup(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='adgroup1']/../name"));
-            User.AtSelectMigrationGroupForm().SelectGroup(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='adgroup1']/../name"));
-            User.AtSelectMigrationGroupForm().GoNext();
+           // User.AtSelectMigrationGroupForm().SetGroup(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='adgroup1']/../name")); 
+			//User.AtSelectMigrationGroupForm().SelectGroup(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='adgroup1']/../name")); 
+			User.AtSelectMigrationGroupForm().GoNext();
 			User.AtReviewGroupsForm().GoNext();
 			User.AtHowToMatchUsersForm().GoNext();
 			User.AtCreateUsersForm().SelectCreateUsers();
@@ -101,8 +100,8 @@ namespace Product.Tests.CommonTests.SetupTests
 			User.AtWhichUsersShareCalendarForm().SelectByAd();
 			User.AtWhichUsersShareCalendarForm().GoNext();
 
-            //User.AtCalendarActiveDirectoryGroupForm().SetGroup(RunConfigurator.GetADGroupName("client2", "project2", "adgroup1"));
-            //User.AtCalendarActiveDirectoryGroupForm().SelectGroup(RunConfigurator.GetADGroupName("client2", "project2", "adgroup1"));
+            User.AtCalendarActiveDirectoryGroupForm().SetGroup(RunConfigurator.GetADGroupName("client2", "project2", "adgroup1"));
+            User.AtCalendarActiveDirectoryGroupForm().SelectGroup(RunConfigurator.GetADGroupName("client2", "project2", "adgroup1"));
           
          //   User.AtCalendarActiveDirectoryGroupForm().SetGroup(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='adgroup1']/../name"));
 			//User.AtCalendarActiveDirectoryGroupForm().SelectGroup(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='adgroup1']/../name"));

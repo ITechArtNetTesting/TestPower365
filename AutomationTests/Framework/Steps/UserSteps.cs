@@ -6,7 +6,6 @@ using Product.Framework.Forms.NewProjectWizardForms.IntegrationForms;
 using Product.Framework.Forms.ProfileForms;
 using Product.Framework.Forms.ProfileForms.WizardForms;
 using Product.Framework.Forms.PublicFolderMigrationForms;
-using T365.Framework;
 
 namespace Product.Framework.Steps
 {
@@ -401,7 +400,8 @@ namespace Product.Framework.Steps
         public ProfileHandleBadItemsForm AtProfileHandleBadItemsForm => new ProfileHandleBadItemsForm();
         public ProfileHandleFoldersForm AtProfileHandleFoldersForm => new ProfileHandleFoldersForm();
         public ProfileToLicenseMailboxesForm AtProfileToLicenseMailboxesForm => new ProfileToLicenseMailboxesForm();
-        public DiscoveryOverviewForm AtDiscoveryOverviewForm => new DiscoveryOverviewForm();
-        public PublicFoldersOverviewForm AtPublicFoldersOverviewForm => new PublicFoldersOverviewForm();
+      
+
+
     }
 }

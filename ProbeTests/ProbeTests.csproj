@@ -45,9 +45,7 @@
       <HintPath>$(SolutionDir)packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
-    </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a" />
     <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
       <Private>True</Private>
@@ -220,10 +218,6 @@
     <ProjectReference Include="..\ProbeTests.Model\ProbeTests.Model.csproj">
       <Project>{19d29549-735e-4b7b-aa30-2eb75fe8ed65}</Project>
       <Name>ProbeTests.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\T365Framework\T365.Framework.csproj">
-      <Project>{3be7f696-96fc-4356-9c87-26d4a95d07b5}</Project>
-      <Name>T365.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

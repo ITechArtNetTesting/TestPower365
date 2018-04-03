@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
-using T365.Framework;
 
 namespace Product.Tests.CommonTests.SetupTests
 {
@@ -16,7 +15,7 @@ namespace Product.Tests.CommonTests.SetupTests
 		[TestMethod]
 		[TestCategory("Setup")]
 		public void SetupFirstUserSecondProject()
-		{            
+		{
             LoginAndSelectRole(RunConfigurator.GetUserLogin("client1"),
                                 RunConfigurator.GetPassword("client1"),
                                 RunConfigurator.GetRole("client1"));

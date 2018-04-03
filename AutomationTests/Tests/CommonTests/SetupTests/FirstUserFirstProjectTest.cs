@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
 using T365.Database;
-using T365.Framework;
 
 namespace Product.Tests.CommonTests.SetupTests
 {
@@ -17,10 +16,7 @@ namespace Product.Tests.CommonTests.SetupTests
 		[TestCategory("Setup")]
 		public void SetupFirstUserFirstProject()
            {
-            //SQLQuery sqlForDelete = new SQLQuery(RunConfigurator.GetConnectionString());
-            //sqlForDelete.DeleteProject("2");
-            //sqlForDelete.DeleteTenant("2");
-
+                      
             LoginAndSelectRole(RunConfigurator.GetUserLogin("client1"),
 			                   RunConfigurator.GetPassword("client1"),
                                RunConfigurator.GetRole("client1"));

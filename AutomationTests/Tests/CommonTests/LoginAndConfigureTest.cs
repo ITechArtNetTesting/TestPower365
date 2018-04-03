@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading;
-using OpenQA.Selenium;
 using Product.Framework;
-using T365.Framework;
 
 namespace Product.Tests.CommonTests
 {
@@ -12,9 +10,9 @@ namespace Product.Tests.CommonTests
 		protected void LoginAndSelectRole(string login, string password, string role)
 		{
             LogIn(login, password);
-            //NOTE: Temp solution to avoid 1 symbol in role textbox
-            //Thread.Sleep(2000);
-            User.AtTenantRestructuringForm().OpenMainMenu();
+		    //NOTE: Temp solution to avoid 1 symbol in role textbox
+            Thread.Sleep(2000);
+			User.AtTenantRestructuringForm().OpenMainMenu();
 			User.AtTenantRestructuringForm().AtMainMenu().SelectRole(role);
             User.AtTenantRestructuringForm().GoToProjects();
 		}
@@ -54,12 +52,6 @@ namespace Product.Tests.CommonTests
 		{
 			User.AtTenantRestructuringForm().SelectProject(projectName);
 		}
-
-        public void ArchiveProject(string projectName)
-        {
-            User.AtTenantRestructuringForm().ArchiveProject(projectName);
-            Browser.GetDriver().FindElement(By.XPath("//*/span[text()='Yes']")).Click();
-        }
 
 		protected void AddMailOnlyProject(string testName, string sourceTenant, string sourcePassword, string targetTenant,
 			string targetPassword, string fileName)

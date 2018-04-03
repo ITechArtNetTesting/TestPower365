@@ -1,6 +1,4 @@
-﻿using T365.Framework;
-
-namespace Product.Framework.Steps
+﻿namespace Product.Framework.Steps
 {
 	public class AddTenantsSteps : BaseEntity
 	{

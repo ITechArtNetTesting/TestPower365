@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using OpenQA.Selenium;
 using Product.Framework.Elements;
-using T365.Framework;
 
 namespace Product.Framework.Forms.NewProjectWizardForms
 {
@@ -22,8 +21,7 @@ namespace Product.Framework.Forms.NewProjectWizardForms
 		}
 		public void SelectFile(string fileName)
 		{
-            string test = Path.GetFullPath(RunConfigurator.ResourcesPath + fileName);
-            Log.Info("Selecting file");
+			Log.Info("Selecting file");
 			selectFileInputButton.GetElement().SendKeys(Path.GetFullPath(RunConfigurator.ResourcesPath + fileName));
 		}
 

@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace T365.Database
 {
@@ -31,7 +35,7 @@ namespace T365.Database
                         SqlCommand command = new SqlCommand(commandStr, connection);
                         connection.Open();
                         command.ExecuteNonQuery();
-                        ExecutedWithoutExeptions = true;                        
+                        ExecutedWithoutExeptions = true;
                     }
                 }
                 catch (Exception ex)

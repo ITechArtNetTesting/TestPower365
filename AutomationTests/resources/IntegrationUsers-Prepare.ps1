@@ -209,7 +209,7 @@ if ($ResultCode -eq 0)
 if ($ResultCode -eq 0)
 {
     If ($MBXLocation = get-msoluser -SearchString  $RemoteMailbox | select-object UsageLocation)
-	    {            
+	    {
             $ResultCode = 0
 	    }
 	    Else
@@ -221,6 +221,26 @@ if ($ResultCode -eq 0)
 
 }
 
+
+if ($ResultCode -eq 0)
+{
+
+        if ($MBXUsageLocation.CompareTo($MBXLocation.UsageLocation) -eq 0)
+        {
+            $ResultCode = 0
+            $ResultText = 'Mailbox location set correctly'
+             Write-Host($ResultText)
+        }
+        Else
+
+        {
+            $ResultCode = 1
+            Write-Error "Mailbox location set incorrectly"
+            $ResultText = 'Mailbox location set incorrectly'
+             Write-Host($ResultText)
+        
+        }
+ }
 
 if ($ResultCode -eq 0)
  {

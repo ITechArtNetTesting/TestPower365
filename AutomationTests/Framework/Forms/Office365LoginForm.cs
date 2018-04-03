@@ -32,7 +32,7 @@ namespace Product.Framework.Forms
 		public void SetLogin(string login)
 		{
             Log.Info("Clicking user");
-            //loginTextBox.WaitForElementPresent();
+            loginTextBox.WaitForElementPresent();
             loginTextBox.Click();
             Log.Info($"Setting {login} login");
             loginTextBox.ClearSetText(login);
@@ -41,7 +41,7 @@ namespace Product.Framework.Forms
 		public void SetPassword(string password)
 		{
             Log.Info("Clicking password");
-            //passwordTextBox.WaitForElementPresent();
+            passwordTextBox.WaitForElementPresent();
             passwordTextBox.Click();
             Log.Info($"Setting {password} password");
             passwordTextBox.ClearSetText(password);

@@ -5,10 +5,9 @@ using Microsoft.WindowsAzure.Storage.Queue;
 using ProbeTests.Model;
 using Product.Framework;
 using System.Data.SqlClient;
-using T365.Framework;
 //using BTCloud.Lib;
-//using log4net;
-//using log4net.Config;
+using log4net;
+using log4net.Config;
 
 namespace ProbeTests.ProbeTests
 {
@@ -17,7 +16,7 @@ namespace ProbeTests.ProbeTests
         private string connectionString;
         private int threshold;
         private string instanceName;
-       // private ILog Log;
+        private ILog Log;
 
         public DiscoveryQueueTest()
         {
@@ -25,8 +24,8 @@ namespace ProbeTests.ProbeTests
             //connectionString = RunConfigurator.GetValueByXpath("//DiscoveryQueueProbe/@connectionString").DecryptChk();
             threshold = int.Parse(RunConfigurator.GetValueByXpath("//DiscoveryQueueProbe/@threshold"));
             instanceName = ConfigurationManager.AppSettings.Get("Instance");
-          //  XmlConfigurator.Configure();
-           // Log = LogManager.GetLogger(typeof(DiscoveryQueueTest));
+            XmlConfigurator.Configure();
+            Log = LogManager.GetLogger(typeof(DiscoveryQueueTest));
         }
 
         public void Run()
@@ -40,9 +39,9 @@ namespace ProbeTests.ProbeTests
 
             try
             {
-              //  Log.Info("Checking the discovery queue");
+                Log.Info("Checking the discovery queue");
                 int? discoveryQueueSize = GetDiscoveryQueueSize();
-             //   Log.Info(string.Format("Discovery queue checked - {0} elements", discoveryQueueSize.ToString()));
+                Log.Info(string.Format("Discovery queue checked - {0} elements", discoveryQueueSize.ToString()));
 
                 if (discoveryQueueSize > threshold)
                 {

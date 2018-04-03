@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using Product.Framework.Elements;
-using T365.Framework;
 
 namespace Product.Framework.Forms
 {
@@ -56,7 +54,7 @@ namespace Product.Framework.Forms
 
 		public void AddProjectClick()
 		{
-			//Thread.Sleep(5000);
+			Thread.Sleep(5000);
 			Log.Info("Clicking Add Project button");
 		    if (addProjectButton.IsPresent())
 		    {
@@ -71,7 +69,7 @@ namespace Product.Framework.Forms
 	    public void GoToProjects()
 	    {
             Log.Info("Going to projects");
-            //Thread.Sleep(5000);
+            Thread.Sleep(5000);
 	        try
 	        {
 	            logoButton.Click();
@@ -117,20 +115,6 @@ namespace Product.Framework.Forms
 			var projectButton = new Button(By.XPath($"//span[contains(text(), '{projectName}')][contains(@class, 'notranslate')]"), projectName + " button");
 			projectButton.Click();
 		}
-
-        public void ArchiveProject(string projectName)
-        {
-            Log.Info("Archiving project: " + projectName);
-            var ListOfProjects = Browser.GetDriver().FindElements(By.XPath("//*/span[@data-bind='text: projectName']"));
-            var ListOfArchive = Browser.GetDriver().FindElements(By.XPath("//*/span[@data-translation='Archive']"));
-            for (int i = 0; i < ListOfProjects.Count; i++)
-            {
-                if (ListOfProjects[i].Text == projectName.ToUpper())
-                {
-                    ListOfArchive[i].Click();
-                }
-            }
-        }
 
 		public void SelectMailFromFile()
 		{

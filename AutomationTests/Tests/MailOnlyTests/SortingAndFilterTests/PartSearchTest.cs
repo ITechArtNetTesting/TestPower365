@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
 using Product.Tests.CommonTests;
-using T365.Framework;
 
 namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 {

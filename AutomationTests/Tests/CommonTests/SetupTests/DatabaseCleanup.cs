@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using T365.Framework;
 
 namespace Product.Tests.CommonTests.SetupTests
 {
@@ -30,8 +29,6 @@ namespace Product.Tests.CommonTests.SetupTests
             cleanUpStep = new CleanUpStep();
             cleanUpStep.CleanUpProjectAndTenant(RunConfigurator.GetRole("client1"));
             cleanUpStep.CleanUpProjectAndTenant(RunConfigurator.GetRole("client2"));
-
-
         }
 
     }

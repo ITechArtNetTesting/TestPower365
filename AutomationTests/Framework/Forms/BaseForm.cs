@@ -3,7 +3,6 @@ using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using Product.Framework.Elements;
-using T365.Framework;
 
 namespace Product.Framework.Forms
 {
@@ -165,7 +164,7 @@ namespace Product.Framework.Forms
 				favoritesButton.Click();
 			}
 
-			//Thread.Sleep(2000);
+			Thread.Sleep(2000);
 		}
 
 		/// <summary>

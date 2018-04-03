@@ -16,7 +16,6 @@ namespace Product.Framework.Elements
 		/// <param name="text">The text.</param>
 		public void SetText(string text)
 		{
-            WaitForAjaxLoad();
 			WaitForElementPresent();
 			GetElement().Click();
 			GetElement().SendKeys(text);
@@ -30,8 +29,6 @@ namespace Product.Framework.Elements
 		/// <param name="text">The text.</param>
 		public void ClearSetText(string text)
 		{
-            WaitForDOM();
-            WaitForAjaxLoad();
 			WaitForElementPresent();
 			WaitForElementIsVisible();
 			bool ready = false;
@@ -57,9 +54,7 @@ namespace Product.Framework.Elements
 			GetElement().Clear();
 			GetElement().SendKeys(text);
 			Log.Info($"{GetName()} :: type text '{text}'");
-            WaitForDOM();
-            WaitForAjaxLoad();
-        }
+		}
 
 		/// <summary>
 		///     Presses the enter button.
