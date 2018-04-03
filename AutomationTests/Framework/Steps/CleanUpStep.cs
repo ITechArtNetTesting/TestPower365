@@ -9,22 +9,22 @@ namespace Product.Framework.Steps
         public void CleanUpProjectAndTenant(String clientname)
         {
             SQLQuery queryClients = new SQLQuery(RunConfigurator.GetConnectionStringDBClients());
-            String clientId = queryClients.GetClientId(clientname);
-            if (clientId != null)
+            try
             {
-                SQLQuery query = new SQLQuery(RunConfigurator.GetConnectionString());
-                try
+                String clientId = queryClients.GetClientId(clientname);
+                if (clientId != null)
                 {
+                    SQLQuery query = new SQLQuery(RunConfigurator.GetConnectionString());
                     query.DeleteProject(clientId);
                     query.DeleteTenant(clientId);
                 }
-                catch (Exception exception)
-                { throw exception; }
+                else
+                {
+                    Log.Info($"Client with id {clientId} can not be found");
+                }
             }
-            else
-            {                
-                Log.Info($"Client with id {clientId} can not be found");
-            }
+            catch (Exception exception)
+            { throw exception; }
         }
     }
 }

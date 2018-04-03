@@ -27,15 +27,17 @@ namespace T365.Database
                 {
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
+                        throw new Exception();
                         SqlCommand command = new SqlCommand(commandStr, connection);
                         connection.Open();
                         command.ExecuteNonQuery();
-                        ExecutedWithoutExeptions = true;
+                        ExecutedWithoutExeptions = true;                        
                     }
                 }
                 catch (Exception ex)
                 {
                     //Log exeption
+                    throw ex;
                 }
             }
             if (ExecutedWithoutExeptions)
@@ -64,6 +66,7 @@ namespace T365.Database
                 {
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
+                        throw new Exception();
                         SqlCommand command = new SqlCommand(commandStr, connection);
                         connection.Open();
                         SqlDataReader reader = command.ExecuteReader();
@@ -77,7 +80,7 @@ namespace T365.Database
                 }
                 catch (Exception ex)
                 {
-                    //Log exeption
+                    throw ex;
                 }
             }
             return result;

@@ -15,23 +15,50 @@ namespace T365.Database
         }
         public bool DeleteTenant(string clientId, string tenantName)
         {
-            return DataBase.Execute("delete from Tenant where ClientId='" + clientId + "'and  TenantName='" + tenantName + "'");
+            try
+            {
+                return DataBase.Execute("delete from Tenant where ClientId='" + clientId + "'and  TenantName='" + tenantName + "'");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public bool DeleteTenant(string clientId)
         {
-            return DataBase.Execute("delete from Tenant where ClientId='" + clientId + "'");
+            try
+            {
+                return DataBase.Execute("delete from Tenant where ClientId='" + clientId + "'");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public bool DeleteProject(string clientId)
         {
-            return DataBase.Execute("delete from Project where ClientId='" + clientId + "'");
+            try
+            {
+                return DataBase.Execute("delete from Project where ClientId='" + clientId + "'");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public String GetClientId(string clientName)
         {
-            return DataBase.ReturnFirstExecuted("select ClientId from Client where ClientName='" + clientName + "'");
+            try
+            {
+                return DataBase.ReturnFirstExecuted("select ClientId from Client where ClientName='" + clientName + "'");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-
     }
 }
