@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Product.Tests.MailOnlyTests.MigrationTests
 {
     [TestClass]
-    public class TC23091_UI_Verify_submitting_delta_sync_job_for_a_Synced_user : LoginAndConfigureTest
+    public class TC23092_UI_Verify_an_in_progress_job_can_be_stopped : LoginAndConfigureTest
     {
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
@@ -19,7 +19,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
         }
         [TestMethod]
         [TestCategory("MailOnly")]
-        public void VerifySubmittingDeltaSyncJobForASyncedUser()
+        public void VerifyAnInProgressJobCanBeStopped()
         {
             string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
             string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");
@@ -40,18 +40,11 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
                 User.AtUsersForm().VerifyStateIS("Syncing");
                 User.AtUsersForm().WaitForJobIsCreated();
                 User.AtUsersForm().AssertDetailsStopButtonIsEnabled();
-                User.AtUsersForm().WaitForSyncedState();           
+                User.AtUsersForm().StopSyncing();
+                User.AtUsersForm().ConfirmStop();
+                User.AtUsersForm().WaitForSyncedState();
                 User.AtUsersForm().AssertDetailsSyncButtonIsEnabled();
-                User.AtUsersForm().CloseUserDetails();
-                User.AtUsersForm().SyncUserByLocator(sourceMailbox3);
-                User.AtUsersForm().ConfirmSync();
-                User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox3);
-                User.AtUsersForm().OpenDetailsByLocator(sourceMailbox3);
-                User.AtUsersForm().VerifyStateIS("Syncing");
-                User.AtUsersForm().WaitForJobIsCreated();
-                User.AtUsersForm().AssertDetailsStopButtonIsEnabled();
-                User.AtUsersForm().WaitForSyncedState();             
-                User.AtUsersForm().AssertDetailsSyncButtonIsEnabled();                
+                User.AtUsersForm().AssertSyncingWasStoped();
                 User.AtUsersForm().CloseUserDetails();
             }
             catch (Exception ex)

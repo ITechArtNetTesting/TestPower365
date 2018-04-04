@@ -225,6 +225,7 @@
     <Compile Include="Tests\MailOnlyTests\MigrationTests\MailMigrationTest.cs" />
     <Compile Include="Tests\MailOnlyTests\MigrationTests\RollbackTest.cs" />
     <Compile Include="Tests\MailOnlyTests\MigrationTests\TC23091_UI_Verify_submitting_delta_sync_job_for_a_Synced_user.cs" />
+    <Compile Include="Tests\MailOnlyTests\MigrationTests\TC23092_UI_Verify_an_in_progress_job_can_be_stopped.cs" />
     <Compile Include="Tests\MailOnlyTests\MigrationTests\UserMigrationTest.cs" />
     <Compile Include="Tests\MailOnlyTests\ProjectCreationTests\ReplaceUsersTest.cs" />
     <Compile Include="Tests\MailOnlyTests\SortingAndFilterTests\ArchiveTest.cs" />
