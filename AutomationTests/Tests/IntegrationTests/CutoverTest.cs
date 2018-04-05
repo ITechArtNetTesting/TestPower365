@@ -19,20 +19,20 @@ namespace Product.Tests.IntegrationTests
         [TestMethod]
         public void Automation_IN_PS_CutoverTest()
         {
-            string userName = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user");
-            string password = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//password");
-            string client = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name");
-            string project = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//name");
-            string sourceMailbox13 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry13']/..//source");
-            string sourceMailbox14 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry14']/..//source");
-            string sourceMailbox15 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry15']/..//source");
+            string userName = RunConfigurator.GetUserLogin("client2");
+            string password = RunConfigurator.GetPassword("client2");
+            string client = RunConfigurator.GetRole("client2");
+            string project = RunConfigurator.GetProjectName("client2","project2");
+            string sourceMailbox13 = RunConfigurator.GetSourceMailbox("client2","project2","entry13");
+            string sourceMailbox14 = RunConfigurator.GetSourceMailbox("client2","project2","entry14");
+            string sourceMailbox15 = RunConfigurator.GetSourceMailbox("client2","project2","entry15");
             string targetLogin = RunConfigurator.GetTenantValue("T5->T6", "target", "user");
             string targetPassword = RunConfigurator.GetTenantValue("T5->T6", "target", "password");
             string sourceLogin = RunConfigurator.GetTenantValue("T5->T6", "source", "user");
             string sourcePassword = RunConfigurator.GetTenantValue("T5->T6", "source", "password");
-            string targetMailbox13 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry13']/..//target");
-            string targetMailbox13Smtp = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry13']/..//targetsmtp");
-            string targetMailbox13X500 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry13']/..//targetx500");
+            string targetMailbox13 = RunConfigurator.GetTargetMailbox("client2","project2","entry13");
+            string targetMailbox13Smtp = RunConfigurator.GetTargetSmtpMailbox("client2","project2","entry13");
+            string targetMailbox13X500 = RunConfigurator.GetTargetX500Mailbox("client2","project2","entry13");
             string targetOnPremLogin = RunConfigurator.GetTenantValue("T5->T6", "target", "aduser");
             string targetOnPremPassword = RunConfigurator.GetTenantValue("T5->T6", "target", "adpassword");
             string targetOnPremUri = RunConfigurator.GetTenantValue("T5->T6", "target", "uri");

@@ -18,25 +18,25 @@ namespace Product.Tests.IntegrationTests
         [TestMethod]
         public void Automation_IN_PS_DistributionGroupsValidationTest()
         {
-            string userName = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user");
-            string password = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//password");
-            string client = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name");
-            string project = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//name");
+            string userName = RunConfigurator.GetUserLogin("client2");
+            string password = RunConfigurator.GetPassword("client2");
+            string client = RunConfigurator.GetRole("client2");
+            string project = RunConfigurator.GetProjectName("client2","project2");
             string sourceTenantName = RunConfigurator.GetTenantValue("T5->T6", "source", "name");
             string targetTenantName = RunConfigurator.GetTenantValue("T5->T6", "target", "name");
-            string group1Name = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='group1']/..//name");
-            string group2Name = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='group2']/..//name");
-            string group3Name = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='group3']/..//name");
-            string group4Name = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='group4']/..//name");
-            string group5Name = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='group5']/..//name");
-            string group6Name = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='group6']/..//name");
+            string group1Name = RunConfigurator.GetGroupName("client2", "project2", "group1");
+            string group2Name = RunConfigurator.GetGroupName("client2", "project2", "group2");
+            string group3Name = RunConfigurator.GetGroupName("client2", "project2", "group3");
+            string group4Name = RunConfigurator.GetGroupName("client2", "project2", "group4");
+            string group5Name = RunConfigurator.GetGroupName("client2", "project2", "group5");
+            string group6Name = RunConfigurator.GetGroupName("client2", "project2", "group6");
             string targetCloudLogin = RunConfigurator.GetTenantValue("T5->T6", "target", "user");
             string targetCloudPassword = RunConfigurator.GetTenantValue("T5->T6", "target", "password");
-            string group2Mail = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='group2']/..//mail");
-            string group1Member1 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='group1']/..//member1");
-            string group1Owner = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='group1']/..//owner");
-            string group3Member1 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='group3']/..//member1");
-            string group3Owner = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='group3']/..//owner");
+            string group2Mail = RunConfigurator.GetGroupMail("client2","project2","group2");
+            string group1Member1 = RunConfigurator.GetGroupFirstMember("client2","project2","group1");
+            string group1Owner = RunConfigurator.GetGroupOwner("client2","project2","group1");
+            string group3Member1 = RunConfigurator.GetGroupFirstMember("client2","project2","group3");
+            string group3Owner = RunConfigurator.GetGroupOwner("client2","project2","group3");
             string targetOnPremLogin = RunConfigurator.GetTenantValue("T5->T6", "target", "aduser");
             string targetOnPremPassword = RunConfigurator.GetTenantValue("T5->T6", "target", "adpassword");
             string targetOnPremUri = RunConfigurator.GetTenantValue("T5->T6", "target", "uri");

@@ -22,11 +22,11 @@ namespace Product.Tests.IntegrationTests
         [TestMethod]
         public void Automation_IN_GroupsViewTest()
         {
-            string userName = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user");
-            string password = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//password");
-            string client = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name");
-            string project = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//name");
-            string adGroup2 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='adgroup2']/../name");
+            string userName = RunConfigurator.GetUserLogin("client2");
+            string password = RunConfigurator.GetPassword("client2");
+            string client = RunConfigurator.GetRole("client2");
+            string project = RunConfigurator.GetProjectName("client2","project2");
+            string adGroup2 = RunConfigurator.GetADGroupName("client2","project2","adgroup2");
 
             try
             {
