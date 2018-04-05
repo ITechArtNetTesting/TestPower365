@@ -215,7 +215,6 @@
     <Compile Include="Tests\IntegrationTests\DistributionGroupsInitialTest.cs" />
     <Compile Include="Tests\IntegrationTests\DistributionGroupsValidationTest.cs" />
     <Compile Include="Tests\IntegrationTests\GroupsViewTest.cs" />
-    <Compile Include="Tests\IntegrationTests\Test.cs" />
     <Compile Include="Tests\MailOnlyTests\ActionButtonsTests\StoppingStateButtonsTest.cs" />
     <Compile Include="Tests\MailOnlyTests\ActionButtonsTests\SyncingButtonsTest.cs" />
     <Compile Include="Tests\MailOnlyTests\ActionButtonsTests\UserMigrationButtonsTest.cs" />

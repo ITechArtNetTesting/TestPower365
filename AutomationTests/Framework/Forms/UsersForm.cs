@@ -688,7 +688,7 @@ namespace Product.Framework.Forms
         {
             ScrollToTop();
             Log.Info("Syncing user by locator: " + locator);
-            Thread.Sleep(2000);
+            //Thread.Sleep(2000);
             SelectEntryBylocator(locator);
             SelectAction(ActionType.Sync);
             Apply();

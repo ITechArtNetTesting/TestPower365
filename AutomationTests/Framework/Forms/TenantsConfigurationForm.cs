@@ -114,7 +114,7 @@ namespace Product.Framework.Forms
 			{
 				Log.Info("Run discovery button does not appear");
 				discoveryTabButton.Move();
-				Thread.Sleep(1000);	
+				//Thread.Sleep(1000);	
 				tenantLabelButton.Move();
 			}
 			try

@@ -30,8 +30,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
             try
             {
                 LoginAndSelectRole(login, password, client);
-                SelectProject(projectName);
-                User.AtProjectOverviewForm().GetUsersCount();
+                SelectProject(projectName);                
                 User.AtProjectOverviewForm().OpenUsersList();
                 User.AtUsersForm().SyncUserByLocator(sourceMailbox3);
                 User.AtUsersForm().ConfirmSync();

@@ -27,7 +27,7 @@ namespace Product.Framework.Forms
 		{
 			ScrollToTop();
 			Log.Info("Syncing group by locator: " + locator);
-			Thread.Sleep(2000);
+			//Thread.Sleep(2000);
 			SelectEntryBylocator(locator);
 			SelectAction(ActionType.Sync);
 			Apply();

@@ -81,6 +81,8 @@ namespace Product.Framework.Elements
 
         public void Click()
         {
+            WaitForDOM();
+            WaitForAjaxLoad();
             WaitForElementPresent();
             WaitForElementIsVisible();
             WaitForElementIsClickable();
@@ -278,10 +280,33 @@ namespace Product.Framework.Elements
 			}
 		}
 
-		/// <summary>
-		///     Waits for element is visible.
-		/// </summary>
-		public void WaitForElementIsVisible()
+        public static void WaitForAjaxLoad()
+        {
+            if (jQueryExists())
+            {
+                var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromMinutes(1));
+                wait.PollingInterval = TimeSpan.FromMilliseconds(100);
+                wait.Until(wd => (bool)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0"));
+            }
+        }
+
+        static bool jQueryExists()
+        {
+            try
+            {
+                (Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0");
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        ///     Waits for element is visible.
+        /// </summary>
+        public void WaitForElementIsVisible()
 		{
 			var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(50));
 			wait.Until(ExpectedConditions.ElementIsVisible(locator));

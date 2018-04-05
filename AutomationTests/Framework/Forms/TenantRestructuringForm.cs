@@ -69,7 +69,7 @@ namespace Product.Framework.Forms
 	    public void GoToProjects()
 	    {
             Log.Info("Going to projects");
-            Thread.Sleep(5000);
+            //Thread.Sleep(5000);
 	        try
 	        {
 	            logoButton.Click();
