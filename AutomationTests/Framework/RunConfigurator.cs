@@ -49,8 +49,13 @@ namespace Product.Framework
 
         public static string GetPassword(string client)
         {
+             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//password").InnerText;
+        }
+
+        public static string GetClient(string client)
+        {
             xmlDoc.Load(RunPath);
-            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//password").InnerText;
+            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/../name").InnerText;
         }
 
         public static string GetRole(string client)
@@ -61,82 +66,29 @@ namespace Product.Framework
 
         public static string GetProjectName(string client, string project )
         {
-            xmlDoc.Load(RunPath);
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//name").InnerText;
         }
 
         public static string GetFileName(string client, string project, string file)
         {
-            xmlDoc.Load(RunPath);
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{file}']/..//filename").InnerText;
         }
 
         public static string GetADGroupName(string client, string project, string group)
         {
-            xmlDoc.Load(RunPath);
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{group}']/../name").InnerText;
         }
 
-        public static string GetSourceMailbox(string client, string project, string entry)
+        public static string GetMail(string client, string project, string group)
         {
-            xmlDoc.Load(RunPath);
-            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{entry}']/..//source").InnerText;
-        }
-
-        public static string GetTargetMailbox(string client,string project,string entry)
-        {
-            xmlDoc.Load(RunPath);
-            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{entry}']/..//target").InnerText;
-        }
-
-        public static string GetTargetSmtpMailbox(string client, string project, string entry)
-        {
-            xmlDoc.Load(RunPath);
-            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{entry}']/..//targetsmtp").InnerText;
-        }
-
-        public static string GetTargetX500Mailbox(string client, string project, string entry)
-        {
-            xmlDoc.Load(RunPath);
-            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{entry}']/..//targetx500").InnerText;
-        }
-
-        public static string GetGroupName(string client,string project,string group)
-        {
-            xmlDoc.Load(RunPath);
-            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{group}']/..//name").InnerText;
-        }
-
-        public static string GetGroupFirstMember(string client, string project, string group)
-        {
-            xmlDoc.Load(RunPath);
-            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{group}']/..//member1").InnerText;
-        }
-
-        public static string GetGroupOwner(string client, string project, string group)
-        {
-            xmlDoc.Load(RunPath);
-            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{group}']/..//owner").InnerText;
-        }
-
-        public static string GetGroupMail(string client, string project, string group)
-        {
-            xmlDoc.Load(RunPath);
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{group}']/..//mail").InnerText;
         }
 
-        public static string GetSourceSmtpMailbox(string client, string project, string entry)
+        public static string GetGroupMember(string client, string project, string group, string member)
         {
-            xmlDoc.Load(RunPath);
-            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{entry}']/..//smtp").InnerText;
+            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{group}']/..//{member}").InnerText;
         }
-
-        public static string GetUpnMailbox(string client, string project, string entry)
-        {
-            xmlDoc.Load(RunPath);
-            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{entry}']/..//upn").InnerText;
-        }
-
+       
         /// <summary>
         ///     Sets the value.
         /// </summary>
