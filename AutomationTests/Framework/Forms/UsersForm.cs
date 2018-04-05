@@ -1510,6 +1510,14 @@ namespace Product.Framework.Forms
             Assert.AreEqual("Stopped", LastJobState);
         }
 
+        public void AssertProgressAndState()
+        {
+            Log.Info("Checking progress");
+            string LastProgressColor = Browser.GetDriver().FindElements(By.XPath("//*/td/div[@class='progress']/div")).LastOrDefault().GetCssValue("background-color");
+            string LastJobState = Browser.GetDriver().FindElements(By.XPath("//*/div[@class='modal-content']//*/div[@class='table-responsive table-frame m-t-sm']//*/tbody/tr/td[2]/span")).LastOrDefault().Text;
+            Assert.AreEqual(LastProgressColor == "rgba(37, 107, 147, 1)", LastJobState == "Synced");
+        }
+
         public void AssertDetailsSyncButtonIsEnabled()
         {
             Log.Info("Asserting details sync button is enabled");
@@ -1547,6 +1555,11 @@ namespace Product.Framework.Forms
             }
             jobLabel.WaitForElementPresent();
             Assert.IsTrue(!dangerProgressBarLabel.IsPresent(), "SYNC ERROR!");
+        }
+
+        public void CheckProgressStatus()
+        {
+
         }
 
         public void WaitForSyncJobAppear(int count)

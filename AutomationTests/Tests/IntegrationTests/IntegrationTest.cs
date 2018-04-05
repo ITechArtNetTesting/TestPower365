@@ -20,30 +20,30 @@ namespace Product.Tests.IntegrationTests
 		[TestMethod] 
 		public void Automation_IN_PS_PrepareTest()
 		{
-		    string targetEntry = RunConfigurator.GetTargetMailbox("client2","project2","entry1");
+            string targetEntry = RunConfigurator.GetTargetMailbox("client2", "project2", "entry1");
             string userName = RunConfigurator.GetUserLogin("client2");
-		    string password = RunConfigurator.GetPassword("client2");
-		    string client = RunConfigurator.GetRole("client2");
-            string project = RunConfigurator.GetProjectName("client2","project2");
-            string sourceMailbox1 = RunConfigurator.GetSourceMailbox("client2","project2","entry1");
+            string password = RunConfigurator.GetPassword("client2");
+            string client = RunConfigurator.GetRole("client2");
+            string project = RunConfigurator.GetProjectName("client2", "project2");
+            string sourceMailbox1 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry1");
             string sourceMailbox2 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry2");
             string sourceMailbox3 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry3");
             string sourceMailbox6 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry6");
             string sourceMailbox8 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry8");
             string sourceMailbox9 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry9");
             string sourceMailbox11 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry11");
-            string sourceMailbox11Upn = RunConfigurator.GetUpnMailbox("client2","project2","entry11");
+            string sourceMailbox11Upn = RunConfigurator.GetUpnMailbox("client2", "project2", "entry11");
             string sourceMailbox12 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry12");
             string sourceMailbox13 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry13");
             string sourceMailbox14 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry14");
             string sourceMailbox15 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry15");
-		    string targetLogin = RunConfigurator.GetTenantValue("T5->T6", "target", "user");
-		    string targetPassword = RunConfigurator.GetTenantValue("T5->T6", "target", "password");
-            string sourceMailbox1Smtp = RunConfigurator.GetSourceSmtpMailbox("client2","project2","entry1");
-		    string targetOnPremLogin = RunConfigurator.GetTenantValue("T5->T6", "target", "aduser");
-		    string targetOnPremPassword = RunConfigurator.GetTenantValue("T5->T6", "target", "adpassword");
+            string targetLogin = RunConfigurator.GetTenantValue("T5->T6", "target", "user");
+            string targetPassword = RunConfigurator.GetTenantValue("T5->T6", "target", "password");
+            string sourceMailbox1Smtp = RunConfigurator.GetSourceSmtpMailbox("client2", "project2", "entry1");
+            string targetOnPremLogin = RunConfigurator.GetTenantValue("T5->T6", "target", "aduser");
+            string targetOnPremPassword = RunConfigurator.GetTenantValue("T5->T6", "target", "adpassword");
 
-		    try
+            try
 		    {
 		        LoginAndSelectRole(userName, password, client);
 		        SelectProject(project);

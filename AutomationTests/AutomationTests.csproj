@@ -223,6 +223,7 @@
     <Compile Include="Tests\MailOnlyTests\LandingPageTests\ContentExistsTest.cs" />
     <Compile Include="Tests\MailOnlyTests\MigrationTests\MailMigrationTest.cs" />
     <Compile Include="Tests\MailOnlyTests\MigrationTests\RollbackTest.cs" />
+    <Compile Include="Tests\MailOnlyTests\MigrationTests\TC22938_UI_Verify_Migration_Job_Progress_Bar_will_be_updated_correctly_while_job_is_running.cs" />
     <Compile Include="Tests\MailOnlyTests\MigrationTests\TC23091_UI_Verify_submitting_delta_sync_job_for_a_Synced_user.cs" />
     <Compile Include="Tests\MailOnlyTests\MigrationTests\TC23092_UI_Verify_an_in_progress_job_can_be_stopped.cs" />
     <Compile Include="Tests\MailOnlyTests\MigrationTests\UserMigrationTest.cs" />
