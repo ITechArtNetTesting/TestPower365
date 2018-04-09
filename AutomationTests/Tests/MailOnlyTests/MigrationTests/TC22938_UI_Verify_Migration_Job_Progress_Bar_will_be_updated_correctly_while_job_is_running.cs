@@ -47,6 +47,6 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
                 LogHtml(Browser.GetDriver().PageSource);
                 throw ex;
             }
-        }
+        }        
     }
 }
