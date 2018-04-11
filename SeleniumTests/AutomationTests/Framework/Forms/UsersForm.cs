@@ -261,6 +261,7 @@ namespace Product.Framework.Forms
 		            filterButton.Click();
                 }
 		    }
+            WaitForAjaxLoad();
 
 		}
 
@@ -1344,6 +1345,7 @@ namespace Product.Framework.Forms
 				Log.Info("Radiobutton is not ready");
 				itemButton.Click();
 			}
+            WaitForAjaxLoad();
 		}
 
 		public void CheckFilterGroup(string group)
