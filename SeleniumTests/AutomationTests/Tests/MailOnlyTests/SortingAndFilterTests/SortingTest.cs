@@ -29,22 +29,23 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		    {
 		        LoginAndReloadFile(login, password, client, projectName, filename);
 		        User.AtProjectOverviewForm().OpenUsersList();
-		        
-		        User.AtUsersForm().StoreEntriesData();
+
+              
+                User.AtUsersForm().StoreEntriesData();
 		        User.AtUsersForm().SortSource();
-		      
-		        User.AtUsersForm().AssertSourceSorted();
+              
+                User.AtUsersForm().AssertSourceSorted();
 		        User.AtUsersForm().StoreEntriesData();
 		        User.AtUsersForm().SortTarget();
 		        User.AtUsersForm().AssertTargetSorted();
-
-		        User.AtUsersForm().SyncUserByLocator(sourceMailbox4);
+              
+                User.AtUsersForm().SyncUserByLocator(sourceMailbox4);
 		        User.AtUsersForm().ConfirmSync();
 		        User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox4);
 		        User.AtUsersForm().StoreEntriesData();
 		        User.AtUsersForm().SortStatus();
-		     
-		        User.AtUsersForm().AssertStatusSorted();
+             
+                User.AtUsersForm().AssertStatusSorted();
 		        User.AtUsersForm().StoreEntriesData();
             }
 		    catch (Exception)
