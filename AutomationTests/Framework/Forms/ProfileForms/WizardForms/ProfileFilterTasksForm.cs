@@ -10,7 +10,7 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
 {
     public class ProfileFilterTasksForm : BaseWizardStepForm
     {
-        //private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'How would you like to filter task items')]");
+      
         private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='HowWouldYouLikeToFilterTaskItems']");
 
         public ProfileFilterTasksForm() : base(TitleLocator, "Profile filter tasks form")

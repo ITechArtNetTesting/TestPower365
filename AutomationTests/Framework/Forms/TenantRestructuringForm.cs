@@ -54,8 +54,9 @@ namespace Product.Framework.Forms
 
 		public void AddProjectClick()
 		{
-			Thread.Sleep(5000);
-			Log.Info("Clicking Add Project button");
+            WaitForDOM();
+            Log.Info("Clicking Add Project button");
+
 		    if (addProjectButton.IsPresent())
 		    {
 		        addProjectButton.Click();
@@ -69,7 +70,7 @@ namespace Product.Framework.Forms
 	    public void GoToProjects()
 	    {
             Log.Info("Going to projects");
-            //Thread.Sleep(5000);
+         
 	        try
 	        {
 	            logoButton.Click();

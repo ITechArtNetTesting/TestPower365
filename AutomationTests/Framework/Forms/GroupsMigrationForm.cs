@@ -23,11 +23,13 @@ namespace Product.Framework.Forms
 				By.XPath(
 					"//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"),
 				"Actions dropdown");
-		public new void SyncUserByLocator(string locator)
+
+        public new void SyncUserByLocator(string locator)
 		{
-			ScrollToTop();
+            WaitForAjaxLoad();
+            ScrollToTop();
 			Log.Info("Syncing group by locator: " + locator);
-			//Thread.Sleep(2000);
+            WaitForAjaxLoad();
 			SelectEntryBylocator(locator);
 			SelectAction(ActionType.Sync);
 			Apply();

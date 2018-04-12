@@ -25,7 +25,7 @@ namespace Product.Tests.CommonTests.SetupTests
             string userName = RunConfigurator.GetUserLogin("client2");
             string password = RunConfigurator.GetPassword("client2");
                                
-            string client = RunConfigurator.GetRole("client2"); 
+            string client = RunConfigurator.GetClient("client2"); 
             string project = RunConfigurator.GetProjectName("client2","project2"); 
             string sourceMailbox14 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry14']/..//source");
             string sourceMailbox15 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry15']/..//source");
@@ -77,15 +77,8 @@ namespace Product.Tests.CommonTests.SetupTests
             User.AtProfileTypeOfMailboxContentForm.SelectType(ContentType.Notes);
             User.AtProfileTypeOfMailboxContentForm.SelectType(ContentType.Tasks);
 
-            // User.AtProfileContentToMigrateForm.SelectType(ContentType.Calendar);
-            //User.AtProfileContentToMigrateForm.SelectType(ContentType.Contacts);
-            //User.AtProfileContentToMigrateForm.SelectType(ContentType.Email);
-            //User.AtProfileContentToMigrateForm.SelectType(ContentType.Notes);
-            //User.AtProfileContentToMigrateForm.SelectType(ContentType.Tasks);
             User.AtProfileTypeOfMailboxContentForm.GoNext();
-           // User.AtProfileContentToMigrateForm.GoNext();
-
-
+           
             User.AtProfileFilterMessagesForm.GoNext();
             User.AtProfileFilterCalendarForm.GoNext();
             User.AtProfileFilterTasksForm.GoNext();

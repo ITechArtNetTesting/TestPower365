@@ -20,7 +20,7 @@ namespace Product.Tests.CommonTests.SetupTests
 		{
             LoginAndSelectRole(RunConfigurator.GetUserLogin("client2"),
                                RunConfigurator.GetPassword("client2"),
-                               RunConfigurator.GetRole("client2"));
+                               RunConfigurator.GetClient("client2"));
 
 			User.AtTenantRestructuringForm().AddProjectClick();
 			User.AtChooseYourProjectTypeForm().ChooseMailWithDiscovery();

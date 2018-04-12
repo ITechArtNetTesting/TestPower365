@@ -7,24 +7,26 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Product.Framework
 {
-	/// <summary>
-	///     Class RunConfigurator.
-	/// </summary>
-	public class RunConfigurator : BaseEntity
-	{
-		private static readonly XmlDocument xmlDoc = new XmlDocument(); // Create an XML document object
-		public static string RunPath;
-		public static string DownloadPath;
-		public static string ResourcesPath;
-		/// <summary>
-		///     Gets the value.
-		/// </summary>
-		/// <param name="tag">The tag.</param>
-		/// <returns>String.</returns>
-		public static string GetValue(string tag)
+    /// <summary>
+    ///     Class RunConfigurator.
+    /// </summary>
+    public class RunConfigurator : BaseEntity
+    {
+        private static readonly XmlDocument xmlDoc = new XmlDocument(); // Create an XML document object
+        public static string RunPath;
+        public static string DownloadPath;
+        public static string ResourcesPath;
+        
+        /// <summary>
+        ///     Gets the value.
+        /// </summary>
+        /// <param name="tag">The tag.</param>
+        /// <returns>String.</returns>
+        public static string GetValue(string tag)
 		{
-			xmlDoc.Load(RunPath); // Load the XML document from the specified file
-			var browser = xmlDoc.GetElementsByTagName(tag);
+           
+           xmlDoc.Load(RunPath); // Load the XML document from the specified file
+           var browser = xmlDoc.GetElementsByTagName(tag);
 			return browser[0].InnerText;
 		}
 
@@ -88,6 +90,7 @@ namespace Product.Framework
         {
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{group}']/..//{member}").InnerText;
         }
+
         public static string GetSourceMailbox(string client, string project, string entry)
         {
             xmlDoc.Load(RunPath);
@@ -110,12 +113,6 @@ namespace Product.Framework
         {
             xmlDoc.Load(RunPath);
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{entry}']/..//targetx500").InnerText;
-        }
-
-        public static string GetGroupName(string client, string project, string group)
-        {
-            xmlDoc.Load(RunPath);
-            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{group}']/..//name").InnerText;
         }
 
         public static string GetGroupFirstMember(string client, string project, string group)
@@ -148,12 +145,14 @@ namespace Product.Framework
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{entry}']/..//upn").InnerText;
         }
 
-            /// <summary>
-            ///     Sets the value.
-            /// </summary>
-            /// <param name="tag">The tag.</param>
-            /// <param name="value">The value.</param>
-            public static void SetValue(string tag, string value)
+
+
+        /// <summary>
+        ///     Sets the value.
+        /// </summary>
+        /// <param name="tag">The tag.</param>
+        /// <param name="value">The value.</param>
+        public static void SetValue(string tag, string value)
 		{
 			xmlDoc.Load(RunPath); // Load the XML document from the specified file
 			var element = xmlDoc.GetElementsByTagName(tag);
