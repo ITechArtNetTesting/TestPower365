@@ -30,6 +30,13 @@ namespace Product.Framework.Enums
         [Description("Rollback Complete")]
         RollbackCompleted,
         [Description("Provisioning")]
-        Provisioning
+        Provisioning,
+        [Description("1 sync(s) complete")]
+        Synced1,
+        [Description("3 sync(s) complete")]
+        Synced3,
+        [Description("5 sync(s) complete")]
+        Synced4
+
     }
 }
