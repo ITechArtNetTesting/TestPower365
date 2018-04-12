@@ -15,11 +15,6 @@ namespace Product.Framework.Elements
 			var move = new Actions(Browser.GetDriver());
 			move.MoveToElement(GetElement()).Build().Perform();
 			Log.Info($"Mouse pointer hover over '{GetName()}'");
-		}
-
-     public By Getlocator()
-        {
-         return  base.GetLocator();
-        }
+		}            
     }
 }

@@ -28,7 +28,7 @@ namespace Product.Tests.CommonTests.SetupTests
         {
             cleanUpStep = new CleanUpStep();
             cleanUpStep.CleanUpProjectAndTenant(RunConfigurator.GetClient("client1"));
-            cleanUpStep.CleanUpProjectAndTenant(RunConfigurator.GetClient("client2"));
+          //  cleanUpStep.CleanUpProjectAndTenant(RunConfigurator.GetClient("client2"));
         }
 
     }

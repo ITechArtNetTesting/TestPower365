@@ -173,10 +173,7 @@ namespace Product.Framework.Forms
 		public void WaitTillDiscoveryIsComplete(int timeout)
 		{
 			Log.Info("Waiting till discovery is completed");
-			var counter = 0;
-            //if (!IsElementVisible(discoveryCompleteStateLabel.Getlocator(), timeout,0))
-            //    throw new Exception("Discovery cann't completed");
-
+			var counter = 0;           
          while (!discoveryCompleteStateLabel.IsPresent(2) && counter < timeout)
             {
                 Thread.Sleep(60000);
