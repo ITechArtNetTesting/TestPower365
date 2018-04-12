@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace T365.Database
 {
+    //@@@This needs overhaul
     public class SQLQuery
     {
         DB DataBase;
@@ -33,5 +34,9 @@ namespace T365.Database
             return DataBase.ReturnFirstExecuted("select ClientId from Client where ClientName='" + clientName + "'");
         }
 
+        public void SetDirSyncAppKeyByProjectName(string projectName, string appKey)
+        {
+            DataBase.Execute(string.Format("UPDATE Project SET DirSyncAppKey = '{1}' WHERE ProjectName = '{0}'", projectName, appKey));
+        }
     }
 }

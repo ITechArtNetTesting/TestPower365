@@ -144,7 +144,7 @@ namespace Product.Tests.CommonTests.SetupTests
             Assert.IsFalse(string.IsNullOrWhiteSpace(projectName));
 
             SQLQuery dbUpdate = new SQLQuery(RunConfigurator.GetConnectionString());
-           // dbUpdate.SetDirSyncAppKeyByProjectName(projectName, appKey);
+          //  dbUpdate.SetDirSyncAppKeyByProjectName(projectName, appKey);
         }
 	}
 }

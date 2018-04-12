@@ -44,7 +44,7 @@ namespace Product.Framework.Elements
 			return name;
 		}
 
-		protected By GetLocator()
+		public By GetLocator()
 		{
 			return locator;
 		}
