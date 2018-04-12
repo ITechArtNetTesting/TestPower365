@@ -6,6 +6,7 @@
 	
 	$Session1 = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.outlook.com/powershell -Credential $creds -Authentication Basic -AllowRedirection
 	Import-PSSession $Session1
+	Start-Sleep -Seconds 10
 
 	Import-Module msonline
 	Connect-MsolService -Credential $Creds

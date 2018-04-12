@@ -3,6 +3,8 @@
 	$creds = New-Object System.Management.Automation.PSCredential ($slogin, $password)
 	
 	$Session1 = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.outlook.com/powershell -Credential $creds -Authentication Basic -AllowRedirection
+	Start-Sleep -Seconds 10
+
 	Import-PSSession $Session1
 
 	Import-Module msonline
