@@ -63,8 +63,7 @@ namespace Product.Framework.Elements
 		/// </summary>
 		public void PressEnter()
 		{
-		//	WaitForElementPresent();
-			WaitForElementIsVisible();
+		    WaitForElementIsVisible();
 			GetElement().SendKeys(Keys.Enter);
 			Log.Info($"{GetName()} :: Press Enter'");
 		}

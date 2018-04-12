@@ -224,8 +224,8 @@ namespace Product.Framework.Forms
             WaitForRowsAppear();
 			searchTextBox.ClearSetText(search);
 			searchTextBox.PressEnter();
-            WaitForAjaxLoad();
-           // Thread.Sleep(2000);//Badd fixme
+          //  WaitForAjaxLoad();
+            Thread.Sleep(2000);//Badd fixme
 		}
 
 	    public void ModifyProfile(string profile)
@@ -562,8 +562,7 @@ namespace Product.Framework.Forms
              while (!entryLabel.IsPresent() && counter < 65)
                 {
 					Thread.Sleep(timeout/2);
-                    Browser.GetDriver().Navigate().Refresh();
-                    if (entryLabel.IsPresent()) { break; };
+                   if (entryLabel.IsPresent()) { break; };
                     Thread.Sleep(timeout / 2);
                     Browser.GetDriver().Navigate().Refresh();
                     counter++;
@@ -742,7 +741,7 @@ namespace Product.Framework.Forms
 		{
 			ScrollToTop();
 			Log.Info("Syncing user by locator: " + locator);
-			Thread.Sleep(2000);
+            WaitForAjaxLoad();
 			SelectEntryBylocator(locator);
 			SelectAction(ActionType.Sync);
 			Apply();
@@ -752,7 +751,7 @@ namespace Product.Framework.Forms
         {
             ScrollToTop();
             Log.Info("Syncing user by locator: " + locator);
-            Thread.Sleep(2000);
+            WaitForAjaxLoad();
             SelectEntryBylocator(locator);
             SelectAction(ActionType.Rollback);
             Apply();
