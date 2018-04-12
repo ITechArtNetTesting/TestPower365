@@ -18,7 +18,7 @@ namespace Product.Tests.CommonTests.SetupTests
 		{
             LoginAndSelectRole(RunConfigurator.GetUserLogin("client1"),
                                 RunConfigurator.GetPassword("client1"),
-                                RunConfigurator.GetRole("client1"));
+                                RunConfigurator.GetClient("client1"));
           
             AddMailOnlyProject(RunConfigurator.GetProjectName("client1", "project2"),
                 RunConfigurator.GetTenantValue("T3->T4", "source", "user"),
@@ -63,8 +63,8 @@ namespace Product.Tests.CommonTests.SetupTests
             User.AtAddTenantsForm().GoNext();
             User.AtUploadFilesForm().DownloadSample();
             RunConfigurator.CheckUserMatchFileIsDownloaded();
-             User.AtUploadFilesForm().SelectFile(RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//metaname[text()='file1']/..//filename"));
-            User.AtUploadFilesForm().SelectFile(RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//metaname[text()='file1']/..//filename"));
+            User.AtUploadFilesForm().SelectFile(RunConfigurator.GetFileName("client1", "project2", "file1"));
+            User.AtUploadFilesForm().SelectFile(RunConfigurator.GetFileName("client1", "project2", "file1"));
             User.AtUploadFilesForm().WaitUntillFileUploaded();
             User.AtUploadFilesForm().GoNext();
             User.AtUploadedUsersForm().GoNext();

@@ -8,10 +8,10 @@ namespace Product.Framework.Forms.NewProjectWizardForms
 		private static readonly By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Describe this project in just a few words')]");
 
-		private readonly TextBox descriptionTextBox = new TextBox(By.XPath("//div[@class='wizard-body']//input"),
-			"Description textbox");
+	        private readonly TextBox descriptionTextBox = new TextBox(By.Id("projectDescription"),
+            "Description textbox");
 
-		public SetProjectDescriptionForm() : base(TitleLocator, "Set project description form")
+        public SetProjectDescriptionForm() : base(TitleLocator, "Set project description form")
 		{
 		}
 

@@ -42,7 +42,7 @@ namespace Product.Tests.MailOnlyTests.ImportAndExportTests
 		        User.AtUsersForm().SelectEntryBylocator(sourceMailbox2);
 		        User.AtUsersForm().OpenGroupFilter();
 		        User.AtUsersForm().SelectFilterGroup(groupMailbox3);
-		        Thread.Sleep(3000);
+		      
 		        User.AtUsersForm().CloseModalWindow();
 		        User.AtUsersForm().SelectEntryBylocator(sourceMailbox3);
 		        User.AtUsersForm().ExportUsers();

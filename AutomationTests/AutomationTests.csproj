@@ -42,6 +42,7 @@
     <Reference Include="log4net">
       <HintPath>$(SolutionDir)packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Exchange.WebServices, Version=15.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="Selenium.WebDriverBackedSelenium, Version=3.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>$(SolutionDir)packages\Selenium.WebDriverBackedSelenium.3.4.0\lib\net40\Selenium.WebDriverBackedSelenium.dll</HintPath>
       <Private>True</Private>
@@ -57,6 +58,10 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
+    <Reference Include="T2TMigrationTestUtil, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>resources\MailEngine\Engine\T2TMigrationTestUtil.dll</HintPath>
+    </Reference>
     <Reference Include="ThoughtWorks.Selenium.Core, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Selenium.RC.3.1.0\lib\net40\ThoughtWorks.Selenium.Core.dll</HintPath>
@@ -200,10 +205,10 @@
     <Compile Include="Framework\StringRandomazer.cs" />
     <Compile Include="IProbeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\ClientAdministrationTests\ClientRegistration.cs" />
     <Compile Include="Tests\CommonTests\LoginAndConfigureTest.cs" />
     <Compile Include="Tests\CommonTests\ProbeTest.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\DatabaseCleanup.cs" />
+    <Compile Include="Tests\CommonTests\SetupTests\EnvironmentCleanup.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\FirstUserFirstProjectTest.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\FirstUserSecondProjectTest.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\ProfileConfigurationTest.cs" />
@@ -223,9 +228,6 @@
     <Compile Include="Tests\MailOnlyTests\LandingPageTests\ContentExistsTest.cs" />
     <Compile Include="Tests\MailOnlyTests\MigrationTests\MailMigrationTest.cs" />
     <Compile Include="Tests\MailOnlyTests\MigrationTests\RollbackTest.cs" />
-    <Compile Include="Tests\MailOnlyTests\MigrationTests\TC22938_UI_Verify_Migration_Job_Progress_Bar_will_be_updated_correctly_while_job_is_running.cs" />
-    <Compile Include="Tests\MailOnlyTests\MigrationTests\TC23091_UI_Verify_submitting_delta_sync_job_for_a_Synced_user.cs" />
-    <Compile Include="Tests\MailOnlyTests\MigrationTests\TC23092_UI_Verify_an_in_progress_job_can_be_stopped.cs" />
     <Compile Include="Tests\MailOnlyTests\MigrationTests\UserMigrationTest.cs" />
     <Compile Include="Tests\MailOnlyTests\ProjectCreationTests\ReplaceUsersTest.cs" />
     <Compile Include="Tests\MailOnlyTests\SortingAndFilterTests\ArchiveTest.cs" />
@@ -239,6 +241,7 @@
     <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\DiscoveryTest.cs" />
     <Compile Include="Tests\PowerShellTests\AddressTransformTest.cs" />
     <Compile Include="Tests\PowerShellTests\AddTest.cs" />
+    <Compile Include="Tests\PowerShellTests\MailEngineTest.cs" />
     <Compile Include="Tests\PowerShellTests\PermissionsPrepareTest.cs" />
     <Compile Include="Tests\PowerShellTests\CompareTest.cs" />
     <Compile Include="Tests\PowerShellTests\CompleteDeltaDiscoveryTest.cs" />
@@ -252,11 +255,209 @@
   <ItemGroup>
     <Content Include="..\chromedriver.exe">
       <Link>resources\chromedriver.exe</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="download\dummy.xml" />
     <Content Include="resources\attach.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\BinaryTree-T2T.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\BinaryTree-T2T.pdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\BTCloud.Lib.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\BTCloud.Lib.pdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\de\Microsoft.Data.Edm.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\de\Microsoft.Data.OData.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\de\Microsoft.Data.Services.Client.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\de\System.Spatial.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\es\Microsoft.Data.Edm.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\es\Microsoft.Data.OData.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\es\Microsoft.Data.Services.Client.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\es\System.Spatial.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\fr\Microsoft.Data.Edm.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\fr\Microsoft.Data.OData.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\fr\Microsoft.Data.Services.Client.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\fr\System.Spatial.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\it\Microsoft.Data.Edm.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\it\Microsoft.Data.OData.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\it\Microsoft.Data.Services.Client.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\it\System.Spatial.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\ja\Microsoft.Data.Edm.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\ja\Microsoft.Data.OData.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\ja\Microsoft.Data.Services.Client.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\ja\System.Spatial.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\ko\Microsoft.Data.Edm.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\ko\Microsoft.Data.OData.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\ko\Microsoft.Data.Services.Client.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\ko\System.Spatial.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\Logging.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\Logging.pdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\MapiOHtttplib.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\MapiOHtttplib.pdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\Microsoft.Data.Edm.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\Microsoft.Data.Edm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\Microsoft.Data.OData.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\Microsoft.Data.OData.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\Microsoft.Data.Services.Client.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\Microsoft.Data.Services.Client.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\Microsoft.Exchange.WebServices.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\Microsoft.Exchange.WebServices.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\Microsoft.Protocols.TestTools.Messages.Runtime.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\Microsoft.Protocols.TestTools.Messages.Runtime.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\Microsoft.WindowsAzure.Storage.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\Microsoft.WindowsAzure.Storage.pdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\Microsoft.WindowsAzure.Storage.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\Newtonsoft.Json.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\NLog.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\NLog.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\ru\Microsoft.Data.Edm.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\ru\Microsoft.Data.OData.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\ru\Microsoft.Data.Services.Client.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\ru\System.Spatial.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\System.Management.Automation.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\System.Spatial.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\System.Spatial.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\zh-Hans\Microsoft.Data.Edm.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\zh-Hans\Microsoft.Data.OData.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\zh-Hans\Microsoft.Data.Services.Client.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\zh-Hans\System.Spatial.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\zh-Hant\Microsoft.Data.Edm.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\zh-Hant\Microsoft.Data.OData.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\zh-Hant\Microsoft.Data.Services.Client.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Engine\zh-Hant\System.Spatial.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\Microsoft.Exchange.WebServices.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\MailEngine\working\0">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\probeRun.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -421,12 +622,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="MailEngine.orderedtest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Ordered.orderedtest" />
     <None Include="OrderedPowershell.orderedtest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="OrderedIntegration.orderedtest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="ProjectSetup.orderedtest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -476,6 +682,270 @@
     </None>
     <None Include="resources\Integration_Probe.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\Engine\BinaryTree-T2T.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\Engine\btT2TPSModule.psd1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\Engine\csvRun.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\Engine\MapiOHtttplib.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\Engine\mapping.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Connection\Connect-Exchange.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Connection\Connect-P365Mailboxes.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Connection\Connect-RemotePowershell.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Connection\Set-PublicFolderContentRoutingHeader.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Other\Get-P365FolderFromPath.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Other\Invoke-P365ArchiveCopy.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Other\Invoke-P365ArchiveRollback.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Other\Invoke-P365FillArchive.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Other\Invoke-P365FindAppointment.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Other\Invoke-P365FindContact.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Other\Invoke-P365FindFolder.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Other\Invoke-P365FindMessage.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Other\Invoke-P365FindMessageReply.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Other\Invoke-P365FindTask.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Other\Invoke-P365MailboxCopy.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Other\Invoke-P365MailboxPermissionsCopy.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Other\Invoke-P365MailboxRollback.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Other\New-P365TranslationFile.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\PublicFolders\Get-P365PublicFolderFromPath.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\PublicFolders\Get-P365PublicFolderIdFromPath.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Results\Get-P365TestResults.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test22384.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test22490.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test22491.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test22497.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test22500.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test22504.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test22507.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test22513.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test22516.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test22537.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test22546.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test22623.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test22624.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test22625.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test22728.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test26765.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test37613.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test37613b.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test37613c.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test37614.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test39541.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test39544.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test39545.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test39550.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test39551.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test39570.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test48974.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test48980.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test48983.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate22384.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate22490.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate22491.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate22497.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate22500.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate22504.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate22507.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate22513.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate22516.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate22537.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate22546.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate22623.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate22624.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate22625.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate22728.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate26765.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate37613.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate37613b.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate37613c.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate37614.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate39541.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate39544.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate39545.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate39550.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate39551.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate39570..ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate48974.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate48980.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate48983.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\internal\scripts\postimport.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\internal\scripts\preimport.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\Power365-Test.psd1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\Power365-Test.psm1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\MailOnlyCSVC3toC11ShMBX-Automation.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -541,6 +1011,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lib\" />
+    <Folder Include="resources\MailEngine\internal\functions\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\T365.Database\T365.Database.csproj">
