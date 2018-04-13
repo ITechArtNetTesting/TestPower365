@@ -217,7 +217,14 @@ namespace Product.Framework.Forms
 		    descriptionLabel.WaitForElementPresent();
         }
 
-		public void PerformSearch(string search)
+
+        public void StopSyncing()
+        {
+            Log.Info("Stoping syncing");
+            enabledDetailsStopButton.Click();
+        }
+
+        public void PerformSearch(string search)
 		{
 			Log.Info("Searching: " + search);
 			ScrollToTop();
@@ -1568,12 +1575,29 @@ namespace Product.Framework.Forms
 			enabledDetailsStopButton.WaitForElementPresent();
 		}
 
-		public void AssertDetailsSyncButtonIsEnabled()
+        public void AssertProgressAndState()
+        {
+            Log.Info("Checking progress");
+            string LastProgressColor = Browser.GetDriver().FindElements(By.XPath("//*/td/div[@class='progress']/div")).LastOrDefault().GetCssValue("background-color");
+            string LastJobState = Browser.GetDriver().FindElements(By.XPath("//*/div[@class='modal-content']//*/div[@class='table-responsive table-frame m-t-sm']//*/tbody/tr/td[2]/span")).LastOrDefault().Text;
+            Assert.AreEqual(LastProgressColor == "rgba(37, 107, 147, 1)", LastJobState == "Synced");
+        }
+
+        public void AssertDetailsSyncButtonIsEnabled()
 		{
 			Log.Info("Asserting details sync button is enabled");
 			enabledDetailsSyncButton.WaitForElementPresent();
 		}
-		public void AssertDetailsSyncButtonIsDisabled()
+
+        public void AssertSyncingWasStoped()
+        {
+            Log.Info("Checking last syncing was stoped");
+            IList<IWebElement> Jobs = Browser.GetDriver().FindElements(By.XPath("//*/div[@class='modal-content']//*/div[@class='table-responsive table-frame m-t-sm']//*/tbody/tr/td[2]/span"));
+            string LastJobState = Jobs[Jobs.Count - 1].Text;
+            Assert.AreEqual("Stopped", LastJobState);
+        }
+
+        public void AssertDetailsSyncButtonIsDisabled()
 		{
 			Log.Info("Asserting details sync button is disabled");
 			enabledDetailsSyncButton.WaitForElementDisappear();

@@ -133,7 +133,7 @@ namespace Product.Framework
         {
             if (timeoutInSec > 0 || pollIntervalSec > 0)
             {
-                var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(timeoutInSec));
+                var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(timeoutInSec));                
                 wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
                 if (pollIntervalSec > 0)
                 {
@@ -146,8 +146,14 @@ namespace Product.Framework
                             throw new Exception("Page failed to reach ready state in time.");
                         if (!IsAjaxActive())
                             throw new Exception("AJAX failed to completed in time.");
-
-                        return condition(webDriver);
+                        try
+                        {
+                            return condition(webDriver);
+                        }
+                        catch (NoSuchElementException)
+                        {
+                            return (T)(object)null;
+                        }
                     });
                 }
                 return wait.Until(condition);
