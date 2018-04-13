@@ -26,6 +26,8 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
 
             try
             {
+                ExcelReader reader = new ExcelReader(@"C:\Users\valery.piniazik\Desktop\GroupSyncJob686Logs.csv");
+                reader.IsMessageExist("Message");
                 LoginAndSelectRole(login, password, client);
                 SelectProject(projectName);
                 User.AtProjectOverviewForm().OpenUsersList();
@@ -37,8 +39,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
                 User.AtUsersForm().WaitForJobIsCreated();
                 User.AtUsersForm().AssertDetailsStopButtonIsEnabled();
                 User.AtUsersForm().WaitForSyncedState();
-                User.AtUsersForm().CloseUserDetails();
-                User.AtUsersForm().SelectEntryBylocator(sourceMailbox9);
+                User.AtUsersForm().CloseUserDetails();                
                 User.AtUsersForm().SelectAction(ActionType.Archive);
                 User.AtUsersForm().Apply();
                 User.AtUsersForm().ConfirmArchive();

@@ -537,3 +537,4 @@ C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\obj\Debug\Automa
 C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\obj\Debug\AutomationTests.csproj.CoreCompileInputs.cache
 C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\obj\Debug\AutomationTests.dll
 C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\obj\Debug\AutomationTests.pdb
+C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\obj\Debug\AutomationTests.csproj.ResolveComReference.cache
