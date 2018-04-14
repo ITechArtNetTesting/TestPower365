@@ -9,11 +9,14 @@ namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
 	public class UploadDistributionListForm : UploadFilesForm
 	{
-		private static readonly By TitleLocator =
+        private Guid driverId;
+
+        private static readonly By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Upload your list of distribution groups')]");
 
-		public UploadDistributionListForm() : base(TitleLocator, "Upload distribution list form")
+		public UploadDistributionListForm(Guid driverId) : base(TitleLocator, "Upload distribution list form")
 		{
+            this.driverId = driverId;
 		}
 
 

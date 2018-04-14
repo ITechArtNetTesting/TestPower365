@@ -13,9 +13,11 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
        
         private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='HowWouldYouLikeToFilterCalendarAppointments']");
 
+        private Guid driverId;
 
-        public ProfileFilterCalendarForm() : base(TitleLocator, "Profile filter calendar form")
+        public ProfileFilterCalendarForm(Guid driverId) : base(TitleLocator, "Profile filter calendar form")
         {
+            this.driverId = driverId;
         }
     }
 }

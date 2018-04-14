@@ -15,8 +15,11 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
        
         private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='HowWouldYouLikeToSyncDistributionGroups']");
 
-        public ProfileSyncDistributionGroupsForm() : base(TitleLocator, "Sync distribution grops form")
+        private Guid driverId;
+
+        public ProfileSyncDistributionGroupsForm(Guid driverId) : base(TitleLocator, "Sync distribution grops form")
         {
+            this.driverId = driverId;
         }
 
         private Label manuallyLabel = new Label(By.XPath("//label[contains(@for, 'manual')]"), "Yes label");

@@ -5,7 +5,7 @@ namespace Product.Framework.Elements
 {
 	public class TextBox : BaseElement
 	{
-		public TextBox(By locator, string name) : base(locator, name)
+		public TextBox(By locator, string name,Guid driverId) : base(locator, name,driverId)
 		{
 		}
 

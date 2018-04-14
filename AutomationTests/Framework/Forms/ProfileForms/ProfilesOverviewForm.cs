@@ -12,8 +12,11 @@ namespace Product.Framework.Forms.ProfileForms
     {
         private static readonly By TitleLocator = By.XPath("//*[contains(text(), 'Double-click on any profile details')]");
 
-        public ProfilesOverviewForm() : base(TitleLocator, "Profiles overview form")
+        private Guid driverId;
+
+        public ProfilesOverviewForm(Guid driverId) : base(TitleLocator, "Profiles overview form")
         {
+            this.driverId = driverId;
         }
         private Button addProfileButton => new Button(By.XPath("//div[contains(@class, 'ibox-content')]//*[contains(text(), 'Add Profile')]"), "Add profile button");
         

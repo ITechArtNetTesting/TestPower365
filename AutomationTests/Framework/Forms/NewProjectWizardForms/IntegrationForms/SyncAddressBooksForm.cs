@@ -10,10 +10,13 @@ namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
 	public class SyncAddressBooksForm : BaseWizardStepForm
 	{
-		private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Would you like to create a unified address book')]");
 
-		public SyncAddressBooksForm() : base(TitleLocator, "How would you like to sync Address Books form")
+        private Guid driverId;
+        private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Would you like to create a unified address book')]");
+
+		public SyncAddressBooksForm(Guid driverId) : base(TitleLocator, "How would you like to sync Address Books form")
 		{
+            this.driverId = driverId;
 		}
 
 		private readonly Label dontSyncAtAllLabel = new Label(By.XPath("//label[contains(@for, 'abDontSync')]"), "Don`t sync at all label");

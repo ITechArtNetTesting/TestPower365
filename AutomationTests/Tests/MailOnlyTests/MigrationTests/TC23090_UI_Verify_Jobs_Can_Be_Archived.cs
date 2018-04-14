@@ -27,7 +27,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
             try
             {
                 ExcelReader reader = new ExcelReader(@"C:\Users\valery.piniazik\Desktop\GroupSyncJob686Logs.csv");
-                reader.IsMessageExist("Message");
+                bool FileHasMessage= reader.IsTextExistDoc("Created a DirSync job");
                 LoginAndSelectRole(login, password, client);
                 SelectProject(projectName);
                 User.AtProjectOverviewForm().OpenUsersList();

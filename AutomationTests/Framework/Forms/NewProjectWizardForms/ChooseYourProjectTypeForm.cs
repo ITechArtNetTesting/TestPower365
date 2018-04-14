@@ -6,19 +6,23 @@ namespace Product.Framework.Forms.NewProjectWizardForms
 {
 	public class ChooseYourProjectTypeForm : BaseWizardStepForm
 	{
-		private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Choose your project type')]");
+        private Guid driverId;
 
-		private readonly Button mailOnlyButton = new Button(By.XPath("//label[contains(@for, 'mailOnlyRadio')]"),"Mail only button");
-        
-        private readonly Button mailWithDiscoveryButton =
-			new Button(By.XPath("//label[contains(@for, 'mailWithDiscoveryRadio')]"), "Mail with discovery button");
+        private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Choose your project type')]");
 
-        private readonly Button integrationButton = new Button(By.XPath("//label[contains(@for, 'integrationRadio')]"),
-     "Integration button");
+		private readonly Button mailOnlyButton ;
         
-		public ChooseYourProjectTypeForm() : base(TitleLocator, "Choose your project type form")
+        private readonly Button mailWithDiscoveryButton ;
+
+        private readonly Button integrationButton ;
+        
+		public ChooseYourProjectTypeForm(Guid driverId) : base(TitleLocator, "Choose your project type form")
 		{
-		}
+            this.driverId = driverId;
+            mailOnlyButton = new Button(By.XPath("//label[contains(@for, 'mailOnlyRadio')]"), "Mail only button",driverId);
+            mailWithDiscoveryButton =new Button(By.XPath("//label[contains(@for, 'mailWithDiscoveryRadio')]"), "Mail with discovery button",driverId);
+            integrationButton = new Button(By.XPath("//label[contains(@for, 'integrationRadio')]"),"Integration button",driverId);
+        }
 
 		public void ChooseMailOnly()
 		{

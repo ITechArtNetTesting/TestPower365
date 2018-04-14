@@ -10,11 +10,14 @@ namespace Product.Framework.Forms.PublicFolderMigrationForms
 {
     public class PublicFolderListForm : BasePublicFolderWizardForm
     {
+        private Guid driverId;
+
         private static readonly By TitleLocator = By.XPath(
                 "//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you already have a list of public folders that you would like to sync')]");
 
-        public PublicFolderListForm() : base(TitleLocator, "PF list form")
+        public PublicFolderListForm(Guid driverId) : base(TitleLocator, "PF list form")
         {
+            this.driverId = driverId;
         }
 
         private readonly RadioButton yesRadioButton = new RadioButton(By.Id("csvFile"), "Yes radiobutton");

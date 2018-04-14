@@ -10,10 +10,13 @@ namespace Product.Framework.Forms.PublicFolderMigrationForms
 {
 	public class PublicFolderMigrtationListForm : BasePublicFolderWizardForm
 	{
-		private static readonly By TitleLocator = By.XPath("//h2[contains(text(), 'Do you have a list')]");
+        private Guid driverId;
 
-		public PublicFolderMigrtationListForm() : base(TitleLocator, "Do you have a list form")
+        private static readonly By TitleLocator = By.XPath("//h2[contains(text(), 'Do you have a list')]");
+
+		public PublicFolderMigrtationListForm(Guid driverId) : base(TitleLocator, "Do you have a list form")
 		{
+            this.driverId = driverId;
 		}
 
 		private readonly Button createNewButton = new Button(By.XPath("//label[@for='manual']"), "Create new public folder migration button");

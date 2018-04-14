@@ -11,6 +11,12 @@ namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
 {
 	public class DiscoveryProgressForm
 	{
+        private Guid driverId;
+
+        public DiscoveryProgressForm(Guid driverId)
+        {
+            this.driverId = driverId;
+        }
 		private Label discoveryIsInProgressLabel = new Label(By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Discovery is in progress')]"), "Discovery is in Progress label");
 
 		public void WaitForDiscoveryIsCompleted()

@@ -10,13 +10,16 @@ namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
 	public class CalendarActiveDirectoryGroupForm : SelectMigrationGroupForm
 	{
-		private readonly static By TitleLocator =
+        private Guid driverId;
+
+        private readonly static By TitleLocator =
 			By.XPath(
                 "//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Active Directory Group would you like to use to share calendar availability')]");
 
-		public CalendarActiveDirectoryGroupForm()
+		public CalendarActiveDirectoryGroupForm(Guid driverId)
 			: base(TitleLocator, "Which Active Directory group would you like to use to share calendar form")
 		{
+            this.driverId = driverId;
 		}
 
 	}

@@ -10,11 +10,14 @@ namespace Product.Framework.Forms.PublicFolderMigrationForms
 {
 	public class PublicFoldersScheduleForm : BasePublicFolderWizardForm
 	{
-		private static readonly By TitleLocator =
+        private Guid driverId;
+
+        private static readonly By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you want to run this migration on a schedule')]");
 
-		public PublicFoldersScheduleForm() : base(TitleLocator, "Schedule sync form")
+		public PublicFoldersScheduleForm(Guid driverId) : base(TitleLocator, "Schedule sync form")
 		{
+            this.driverId = driverId;
 		}
 		private readonly Button scheduleButton = new Button(By.XPath("//label[contains(@for, 'schedule')]"), "Schedule button");
 		private readonly Button onDemandButton = new Button(By.XPath("//label[contains(@for, 'onDemand')]"), "On demand button");

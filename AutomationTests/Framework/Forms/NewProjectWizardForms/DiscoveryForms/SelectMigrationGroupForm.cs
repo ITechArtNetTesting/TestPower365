@@ -1,17 +1,21 @@
 ﻿using OpenQA.Selenium;
 using Product.Framework.Elements;
+using System;
 
 namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
 {
 	public class SelectMigrationGroupForm : BaseWizardStepForm
 	{
-		private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Which Active Directory groups')]");
+        private Guid driverId;
+
+        private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Which Active Directory groups')]");
 
 		private readonly TextBox groupTextBox = new TextBox(By.XPath("//input[contains(@data-bind, 'searchQuery')]"),
 			"Group textbox");
 		
-		public SelectMigrationGroupForm() : base(TitleLocator, "Select migration group form")
+		public SelectMigrationGroupForm(Guid driverId) : base(TitleLocator, "Select migration group form")
 		{
+            this.driverId = driverId;
 		}
 
 		public SelectMigrationGroupForm(By _TitleLocator, string _name) : base(_TitleLocator, _name)

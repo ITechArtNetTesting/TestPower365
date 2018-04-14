@@ -18,8 +18,11 @@ namespace Product.Framework.Forms
 			new Button(By.XPath("//div[contains(@id, 'submitted')]//a[contains(@href, 'projectId')]"),
 				"Review your project status button");
 
-		public SubmittedProjectForm() : base(TitleLocator, "Submitted project form")
+        private Guid driverId;
+
+        public SubmittedProjectForm(Guid driverId) : base(TitleLocator, "Submitted project form")
 		{
+            this.driverId = driverId;
 		}
 
 		public void ReviewProject()

@@ -10,10 +10,13 @@ namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
 	public class CreateUsersForm : BaseWizardStepForm
 	{
-		private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you want to create users')]");
+        private Guid driverId;
 
-		public CreateUsersForm() : base(TitleLocator, "Create users form")
+        private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you want to create users')]");
+
+		public CreateUsersForm(Guid driverId) : base(TitleLocator, "Create users form")
 		{
+            this.driverId = driverId;
 		}
 
 		public CreateUsersForm(By _TitleLocator) : base(_TitleLocator, "Create distribution groups form")

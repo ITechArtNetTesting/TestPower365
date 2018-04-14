@@ -13,8 +13,11 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
     {
         private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'What should we call this migration profile')]");
 
-        public ProfileNameForm() : base(TitleLocator, "Profile name form")
+        private Guid driverId;
+
+        public ProfileNameForm(Guid driverId) : base(TitleLocator, "Profile name form")
         {
+            this.driverId = driverId;
         }
 
         private TextBox nameTextBox => new TextBox(By.Id("profileName"), "Profile name textbox");

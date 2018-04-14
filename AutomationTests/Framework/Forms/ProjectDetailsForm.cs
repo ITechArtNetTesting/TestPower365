@@ -200,8 +200,11 @@ namespace Product.Framework.Forms
 				By.XPath("//div[@aria-expanded='true']//h3[contains(text(), 'Which domains would you like to migrate?')]"),
 				"Which domains would you like to migrate? label");
 
-		public ProjectDetailsForm() : base(TitleLocator, "Project details form")
+        private Guid driverId;
+
+        public ProjectDetailsForm(Guid driverId) : base(TitleLocator, "Project details form")
 		{
+            this.driverId = driverId;
 		}
 
 		public void SetProjectName(string name)
@@ -290,8 +293,9 @@ namespace Product.Framework.Forms
 
 		public void ScrollToElement(IWebElement element)
 		{
-			((IJavaScriptExecutor) Browser.GetDriver()).ExecuteScript("arguments[0].scrollIntoView();", element);
-		}
+            //((IJavaScriptExecutor) Browser.GetDriver()).ExecuteScript("arguments[0].scrollIntoView();", element);
+            ((IJavaScriptExecutor)Driver.GetDriver(driverId)).ExecuteScript("arguments[0].scrollIntoView();", element);
+        }
 
 		public void SelectFinishStep()
 		{
@@ -372,27 +376,39 @@ namespace Product.Framework.Forms
 		public void OpenOffice365LoginFormPopup()
 		{
 			Log.Info("Switching to new window");
-			Store.MainHandle = Browser.GetDriver().CurrentWindowHandle;
-			var finder = new PopupWindowFinder(Browser.GetDriver());
-			addTenantButton.WaitForElementPresent();
+            //Store.MainHandle = Browser.GetDriver().CurrentWindowHandle;
+            Store.MainHandle = Driver.GetDriver(driverId).CurrentWindowHandle;
+            //var finder = new PopupWindowFinder(Browser.GetDriver());
+            var finder = new PopupWindowFinder(Driver.GetDriver(driverId));
+            addTenantButton.WaitForElementPresent();
 			addTenantButton.WaitForElementIsClickable();
 			try
 			{
-				var popupWindowHandle =
-					finder.Click(
-						Browser.GetDriver()
-							.FindElement(By.XPath("//div[@aria-expanded='true']//button[contains(@data-bind, 'addTenant')]")));
-				Browser.GetDriver().SwitchTo().Window(popupWindowHandle);
-			}
+                //var popupWindowHandle =
+                //	finder.Click(
+                //		Browser.GetDriver()
+                //			.FindElement(By.XPath("//div[@aria-expanded='true']//button[contains(@data-bind, 'addTenant')]")));
+                var popupWindowHandle =
+                    finder.Click(
+                        Driver.GetDriver(driverId)
+                            .FindElement(By.XPath("//div[@aria-expanded='true']//button[contains(@data-bind, 'addTenant')]")));
+                //Browser.GetDriver().SwitchTo().Window(popupWindowHandle);
+                Driver.GetDriver(driverId).SwitchTo().Window(popupWindowHandle);
+            }
 			catch (Exception)
 			{
 				Log.Info("Add tenant button is not ready");
-				var popupWindowHandle =
-					finder.Click(
-						Browser.GetDriver()
-							.FindElement(By.XPath("//div[@aria-expanded='true']//button[contains(@data-bind, 'addTenant')]")));
-				Browser.GetDriver().SwitchTo().Window(popupWindowHandle);
-			}
+                //var popupWindowHandle =
+                //	finder.Click(
+                //		Browser.GetDriver()
+                //			.FindElement(By.XPath("//div[@aria-expanded='true']//button[contains(@data-bind, 'addTenant')]")));
+                var popupWindowHandle =
+                    finder.Click(
+                        Driver.GetDriver(driverId)
+                            .FindElement(By.XPath("//div[@aria-expanded='true']//button[contains(@data-bind, 'addTenant')]")));
+                //Browser.GetDriver().SwitchTo().Window(popupWindowHandle);
+                Driver.GetDriver(driverId).SwitchTo().Window(popupWindowHandle);
+            }
 		}
 
 		public void WaitForTenantAdded()
@@ -482,8 +498,9 @@ namespace Product.Framework.Forms
 		public new void ScrollToTheBottom()
 		{
 			Log.Info("Scrolling to the bottom of the page");
-			((IJavaScriptExecutor) Browser.GetDriver()).ExecuteScript("window.scrollTo(0, document.body.scrollHeight - 10)");
-		}
+            //((IJavaScriptExecutor) Browser.GetDriver()).ExecuteScript("window.scrollTo(0, document.body.scrollHeight - 10)");
+            ((IJavaScriptExecutor)Driver.GetDriver(driverId)).ExecuteScript("window.scrollTo(0, document.body.scrollHeight - 10)");
+        }
 
 		public void OpenFirstTenantDropDown()
 		{

@@ -1,4 +1,5 @@
-﻿using System.Management.Automation;
+﻿using System;
+using System.Management.Automation;
 using Product.Framework.Forms;
 using Product.Framework.Forms.NewProjectWizardForms;
 using Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms;
@@ -11,395 +12,402 @@ namespace Product.Framework.Steps
 {
 	public class UserSteps : BaseEntity
 	{
+        private Guid driverId;
+
+        public UserSteps(Guid driverId)
+        {
+            this.driverId = driverId;
+        }
+
 		public MainForm AtMainForm()
 		{
-			return new MainForm();
+			return new MainForm(driverId);
 		}
 
 		public RegistrationForm AtRegistrationForm()
 		{
-			return new RegistrationForm();
+			return new RegistrationForm(driverId);
 		}
 
 		public ChooseYourProjectTypeForm AtChooseYourProjectTypeForm()
 		{
-			return new ChooseYourProjectTypeForm();
+			return new ChooseYourProjectTypeForm(driverId);
 		}
 
 		public PublicFolderMigrationViewForm AtPublicFolderMigrationViewForm()
 		{
-			return new PublicFolderMigrationViewForm();
+			return new PublicFolderMigrationViewForm(driverId);
 		}
 
 		public GroupsMigrationForm AtGroupsMigrationForm()
 		{
-			return new GroupsMigrationForm();
+			return new GroupsMigrationForm(driverId);
 		}
 
 		public SyncScheduleForm AtSyncScheduleForm()
 		{
-			return new SyncScheduleForm();
+			return new SyncScheduleForm(driverId);
 		}
 
 		public PublicFolderMigrtationListForm AtPublicFolderMigrtationListForm()
 		{
-			return new PublicFolderMigrtationListForm();
+			return new PublicFolderMigrtationListForm(driverId);
 		}
 
 		public EnablePublicFoldersForm AtEnablePublicFoldersForm()
 		{
-			return  new EnablePublicFoldersForm();
+			return  new EnablePublicFoldersForm(driverId);
 		}
 
 	    public PublicFolderListForm AtPublicFolderListForm()
 	    {
-            return new PublicFolderListForm();
+            return new PublicFolderListForm(driverId);
 	    }
 
 	    public PublicFolderTenantPareForm AtTenantPareForm()
 		{
-			return new PublicFolderTenantPareForm();
+			return new PublicFolderTenantPareForm(driverId);
 		}
 
 		public SetProjectNameForm AtSetProjectNameForm()
 		{
-			return new SetProjectNameForm();
+			return new SetProjectNameForm(driverId);
 		}
 
 		public PublicFolderSourceFilePathForm AtPublicFolderSourceFilePathForm()
 		{
-			return new PublicFolderSourceFilePathForm();
+			return new PublicFolderSourceFilePathForm(driverId);
 		}
 
 		public PublicFolderTargetFilePathForm AtPublicFolderTargetFilePathForm()
 		{
-			return new PublicFolderTargetFilePathForm();
+			return new PublicFolderTargetFilePathForm(driverId);
 		}
 
 		public PublicFolderSyncLevelForm AtPublicFolderSyncLevelForm()
 		{
-			return new PublicFolderSyncLevelForm();
+			return new PublicFolderSyncLevelForm(driverId);
 		}
 
 		public HowToMatchGroupsForm AtHowToMatchGroupsForm()
 		{
-			return new HowToMatchGroupsForm();
+			return new HowToMatchGroupsForm(driverId);
 		}
 
 		public UserMigrationExpirienceForm AtUserMigrationExpirienceForm()
 		{
-			return new UserMigrationExpirienceForm();
+			return new UserMigrationExpirienceForm(driverId);
 		}
 
 		public MigrateDistributionGroupsForm AtMigrateDistributionGroupsForm()
 		{
-			return new MigrateDistributionGroupsForm();
+			return new MigrateDistributionGroupsForm(driverId);
 		}
 
 		public PublicFolderCompleteForm AtPublicFolderCompleteForm()
 		{
-			return new PublicFolderCompleteForm();
+			return new PublicFolderCompleteForm(driverId);
 		}
 
 		public PublicFolderConflictsForm AtPublicFolderConflictsForm()
 		{
-			return new PublicFolderConflictsForm();
+			return new PublicFolderConflictsForm(driverId);
 		}
 
 		public PublicFoldersScheduleForm AtPublicFolderScheduleForm()
 		{
-			return new PublicFoldersScheduleForm();
+			return new PublicFoldersScheduleForm(driverId);
 		}
 
 		public SetProjectDescriptionForm AtSetProjectDescriptionForm()
 		{
-			return new SetProjectDescriptionForm();
+			return new SetProjectDescriptionForm(driverId);
 		}
 
 		public Office365LoginForm AtOffice365LoginForm()
 		{
-			return new Office365LoginForm();
+			return new Office365LoginForm(driverId);
 		}
 
 		public Office365AccountTypeForm AtOffice365AccountTypeForm()
 		{
-			return new Office365AccountTypeForm();
+			return new Office365AccountTypeForm(driverId);
 		}
 
 		public DiscoveryIsCompleteForm AtDiscoveryIsCompleteForm()
 		{
-			return new DiscoveryIsCompleteForm();
+			return new DiscoveryIsCompleteForm(driverId);
 		}
 
 		public AddTenantsForm AtAddTenantsForm()
 		{
-			return new AddTenantsForm();
+			return new AddTenantsForm(driverId);
 		}
 
 		public UploadFilesForm AtUploadFilesForm()
 		{
-			return new UploadFilesForm();
+			return new UploadFilesForm(driverId);
 		}
 
 		public SyncAddressBooksForm AtSyncAddressBooksForm()
 		{
-			return new SyncAddressBooksForm();
+			return new SyncAddressBooksForm(driverId);
 		}
 
 		
 
 		public ShareCalendarForm AtShareCalendarForm()
 		{
-			return new ShareCalendarForm();
+			return new ShareCalendarForm(driverId);
 		}
 
 		public EnterPasswordForm AtEnterPasswordForm()
 		{
-			return new EnterPasswordForm();
+			return new EnterPasswordForm(driverId);
 		}
 
 		public DirectorySyncSettingsForm AtDirectorySyncSettingsForm()
 		{
-			return new DirectorySyncSettingsForm();
+			return new DirectorySyncSettingsForm(driverId);
 		}
 
 	    public DownloadDirSyncForm AtDownloadDirSyncForm()
 	    {
-            return new DownloadDirSyncForm();
+            return new DownloadDirSyncForm(driverId);
 	    }
 
 	    public DirectorySyncStatusForm AtDirectorySyncStatusForm()
 		{
-			return new DirectorySyncStatusForm();
+			return new DirectorySyncStatusForm(driverId);
 		}
 
 		public UploadedUsersForm AtUploadedUsersForm()
 		{
-			return new UploadedUsersForm();
+			return new UploadedUsersForm(driverId);
 		}
 
 		public SelectTargetTenantForm AtSelectTargetTenantForm()
 		{
-			return new SelectTargetTenantForm();
+			return new SelectTargetTenantForm(driverId);
 		}
 
 		public CreateDistributionGroupsForm AtCreateDistributionGroupsForm()
 		{
-			return new CreateDistributionGroupsForm();
+			return new CreateDistributionGroupsForm(driverId);
 		}
 
 		public ReviewTenantPairsForm AtReviewTenantPairsForm()
 		{
-			return new ReviewTenantPairsForm();
+			return new ReviewTenantPairsForm(driverId);
 		}
 
 		public SelectSourceDomainForm AtSelectSourceDomainForm()
 		{
-			return new SelectSourceDomainForm();
+			return new SelectSourceDomainForm(driverId);
 		}
 
 		public ReviewDomainsPairsForm AtReviewDomainsPairsForm()
 		{
-			return new ReviewDomainsPairsForm();
+			return new ReviewDomainsPairsForm(driverId);
 		}
 
 		public WhichUsersShareCalendarForm AtWhichUsersShareCalendarForm()
 		{
-			return new WhichUsersShareCalendarForm();
+			return new WhichUsersShareCalendarForm(driverId);
 		}
 
 		public CalendarActiveDirectoryGroupForm AtCalendarActiveDirectoryGroupForm()
 		{
-			return new CalendarActiveDirectoryGroupForm();
+			return new CalendarActiveDirectoryGroupForm(driverId);
 		}
 
 		public MigrationTypeForm AtMigrationTypeForm()
 		{
-			return new MigrationTypeForm();
+			return new MigrationTypeForm(driverId);
 		}
 
 		public SelectMigrationGroupForm AtSelectMigrationGroupForm()
 		{
-			return new SelectMigrationGroupForm();
+			return new SelectMigrationGroupForm(driverId);
 		}
 
 		public ReviewGroupsForm AtReviewGroupsForm()
 		{
-			return new ReviewGroupsForm();
+			return new ReviewGroupsForm(driverId);
 		}
 
 		public HowToMatchUsersForm AtHowToMatchUsersForm()
 		{
-			return new HowToMatchUsersForm();
+			return new HowToMatchUsersForm(driverId);
 		}
 
 		public DiscoveryIsInProgressForm AtDiscoveryIsInProgressForm()
 		{
-			return new DiscoveryIsInProgressForm();
+			return new DiscoveryIsInProgressForm(driverId);
 		}
 
 		public DiscoveryProgressForm AtDiscoveryProgressForm()
 		{
-			return new DiscoveryProgressForm();
+			return new DiscoveryProgressForm(driverId);
 		}
 
 		public KeepUsersForm AtKeepUsersForm()
 		{
-			return new KeepUsersForm();
+			return new KeepUsersForm(driverId);
 		}
 
 		public CreateUsersForm AtCreateUsersForm()
 		{
-			return new CreateUsersForm();
+			return new CreateUsersForm(driverId);
 		}
 
 		public UploadDistributionListForm AtUploadDistributionListForm()
 		{
-			return new UploadDistributionListForm();
+			return new UploadDistributionListForm(driverId);
 		}
 
 		public ConfigureDirectorySyncForm AtConfigureDirectorySyncForm()
 		{
-			return new ConfigureDirectorySyncForm();
+			return new ConfigureDirectorySyncForm(driverId);
 		}
 
 		public EmailRewritingForm AtEmailRewritingForm()
 		{
-			return new EmailRewritingForm();
+			return new EmailRewritingForm(driverId);
 		}
 
 		public ConfigureEmailRewrittingForm AtConfigureEmailRewrittingForm()
 		{
-			return new ConfigureEmailRewrittingForm();
+			return new ConfigureEmailRewrittingForm(driverId);
 		}
 
 		public PublicFolderTenantPareForm AtPublicFolderTenantPareForm()
 		{
-			return new PublicFolderTenantPareForm();
+			return new PublicFolderTenantPareForm(driverId);
 		}
 
 		public AnyForm AtAnyForm()
 		{
-			return new AnyForm();
+			return new AnyForm(driverId);
 		}
 
 		public GoodToGoForm AtGoodToGoForm()
 		{
-			return new GoodToGoForm();
+			return new GoodToGoForm(driverId);
 		}
 
 		public MigrationWavesForm AtMigrationWavesForm()
 		{
-			return new MigrationWavesForm();
+			return new MigrationWavesForm(driverId);
 		}
 
 		public SelectTargetDomainForm AtSelectTargetDomainForm()
 		{
-			return new SelectTargetDomainForm();
+			return new SelectTargetDomainForm(driverId);
 		}
 
 		public DefineMigrationWavesForm AtDefineMigrationWavesForm()
 		{
-			return new DefineMigrationWavesForm();
+			return new DefineMigrationWavesForm(driverId);
 		}
 
 		public BeginDiscoveryForm AtBeginDiscoveryForm()
 		{
-			return new BeginDiscoveryForm();
+			return new BeginDiscoveryForm(driverId);
 		}
 
 		public AlmostDoneForm AtAlmostDoneForm()
 		{
-			return new AlmostDoneForm();
+			return new AlmostDoneForm(driverId);
 		}
 
 		public SelectSourceTenantForm AtSelectSourceTenantForm()
 		{
-			return new SelectSourceTenantForm();
+			return new SelectSourceTenantForm(driverId);
 		}
 
 		public TenantRestructuringForm AtTenantRestructuringForm()
 		{
-			return new TenantRestructuringForm();
+			return new TenantRestructuringForm(driverId);
 		}
 
 		public ProjectDetailsForm AtProjectDetailsForm()
 		{
-			return new ProjectDetailsForm();
+			return new ProjectDetailsForm(driverId);
 		}
 
 		public CmtLoginForm AtCmtLoginForm()
 		{
-			return new CmtLoginForm();
+			return new CmtLoginForm(driverId);
 		}
 
 		public SubmittedProjectForm AtSubmittedProjectForm()
 		{
-			return new SubmittedProjectForm();
+			return new SubmittedProjectForm(driverId);
 		}
 
 		public ProjectOverviewForm AtProjectOverviewForm()
 		{
-			return new ProjectOverviewForm();
+			return new ProjectOverviewForm(driverId);
 		}
 
 		public UsersForm AtUsersForm()
 		{
-			return new UsersForm();
+			return new UsersForm(driverId);
 		}
 
 		public TenantsConfigurationForm AtTenantsConfigurationForm()
 		{
-			return new TenantsConfigurationForm();
+			return new TenantsConfigurationForm(driverId);
 		}
 
 	    public ProfilesOverviewForm AtProfilesOverviewForm()
 	    {
-            return new ProfilesOverviewForm();
+            return new ProfilesOverviewForm(driverId);
 	    }
 
 	    public ProfileNameForm AtProfileNameForm()
 	    {
-            return new ProfileNameForm();
+            return new ProfileNameForm(driverId);
 	    }
 
 	    public ProfileOutlookConfigForm AtProfileOutlookConfigForm()
 	    {
-            return new ProfileOutlookConfigForm();
+            return new ProfileOutlookConfigForm(driverId);
 	    }
 
 	    public ProfileMailboxUpdateForm AtProfileMailboxUpdateForm()
 	    {
-            return new ProfileMailboxUpdateForm();
+            return new ProfileMailboxUpdateForm(driverId);
 	    }
 
 	    public ProfileCreateUsersForm AtProfileCreateUsersForm()
 	    {
-            return new ProfileCreateUsersForm();
+            return new ProfileCreateUsersForm(driverId);
 	    }
 
 	    public ProfileCreateDistributionGroupsForm AtProfileCreateDistributionGroupsForm()
 	    {
-            return new ProfileCreateDistributionGroupsForm();
+            return new ProfileCreateDistributionGroupsForm(driverId);
 	    }
 
 	    public ProfileSyncDistributionGroupsForm AtProfileSyncDistributionGroupsForm()
 	    {
-            return new ProfileSyncDistributionGroupsForm();
+            return new ProfileSyncDistributionGroupsForm(driverId);
 	    }
 
-        public ProfileContentToMigrateForm AtProfileContentToMigrateForm => new ProfileContentToMigrateForm();
-        public ProfileFilterMessagesForm AtProfileFilterMessagesForm => new ProfileFilterMessagesForm();
-        public ProfileFilterCalendarForm AtProfileFilterCalendarForm => new ProfileFilterCalendarForm();
-        public ProfileFilterTasksForm AtProfileFilterTasksForm => new ProfileFilterTasksForm();
-        public ProfileFilterNoteForm AtProfileFilterNoteForm => new ProfileFilterNoteForm();
-        public ProfileLargeItemsHandleForm AtProfileLargeItemsHandleForm => new ProfileLargeItemsHandleForm();
+        public ProfileContentToMigrateForm AtProfileContentToMigrateForm => new ProfileContentToMigrateForm(driverId);
+        public ProfileFilterMessagesForm AtProfileFilterMessagesForm => new ProfileFilterMessagesForm(driverId);
+        public ProfileFilterCalendarForm AtProfileFilterCalendarForm => new ProfileFilterCalendarForm(driverId);
+        public ProfileFilterTasksForm AtProfileFilterTasksForm => new ProfileFilterTasksForm(driverId);
+        public ProfileFilterNoteForm AtProfileFilterNoteForm => new ProfileFilterNoteForm(driverId);
+        public ProfileLargeItemsHandleForm AtProfileLargeItemsHandleForm => new ProfileLargeItemsHandleForm(driverId);
 
-        public ProfileTranslateSourceEmailForm AtProfileTranslateSourceEmailForm => new ProfileTranslateSourceEmailForm();
-        public ProfileTypeOfMailboxContentForm AtProfileTypeOfMailboxContentForm => new ProfileTypeOfMailboxContentForm();
-        public ProfileHandleBadItemsForm AtProfileHandleBadItemsForm => new ProfileHandleBadItemsForm();
-        public ProfileHandleFoldersForm AtProfileHandleFoldersForm => new ProfileHandleFoldersForm();
-        public ProfileToLicenseMailboxesForm AtProfileToLicenseMailboxesForm => new ProfileToLicenseMailboxesForm();
+        public ProfileTranslateSourceEmailForm AtProfileTranslateSourceEmailForm => new ProfileTranslateSourceEmailForm(driverId);
+        public ProfileTypeOfMailboxContentForm AtProfileTypeOfMailboxContentForm => new ProfileTypeOfMailboxContentForm(driverId);
+        public ProfileHandleBadItemsForm AtProfileHandleBadItemsForm => new ProfileHandleBadItemsForm(driverId);
+        public ProfileHandleFoldersForm AtProfileHandleFoldersForm => new ProfileHandleFoldersForm(driverId);
+        public ProfileToLicenseMailboxesForm AtProfileToLicenseMailboxesForm => new ProfileToLicenseMailboxesForm(driverId);
       
 
 

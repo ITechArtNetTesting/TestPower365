@@ -15,8 +15,11 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
     {
               private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='DoYouWantToCopyLitigationHoldSettingsAndData']");
 
-        public ProfileContentToMigrateForm() : base(TitleLocator, "Content to migrate form")
+        private Guid driverId;
+
+        public ProfileContentToMigrateForm(Guid driverId) : base(TitleLocator, "Content to migrate form")
         {
+            this.driverId = driverId;
         }
 
         public void SelectType(ContentType type)

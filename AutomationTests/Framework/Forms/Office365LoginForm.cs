@@ -18,15 +18,16 @@ namespace Product.Framework.Forms
 
         private readonly Button dontShowAgain = new Button(By.Name("DontShowAgain"), "Don't show again button");
 
-       
+        private Guid driverId;
 
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Office365LoginForm" /> class.
         /// </summary>
-        public Office365LoginForm() 
+        public Office365LoginForm(Guid driverId) 
             : base(TitleLocator, "Office365 login form")
 		{
+            this.driverId = driverId;
 		}
         
 		public void SetLogin(string login)

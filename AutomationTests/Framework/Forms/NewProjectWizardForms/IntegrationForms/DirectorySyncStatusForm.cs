@@ -9,11 +9,14 @@ namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
 	public class DirectorySyncStatusForm : BaseWizardStepForm
 	{
-		private static readonly By TitleLocator =
+        private Guid driverId;
+
+        private static readonly By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Below are your')]");
 
-		public DirectorySyncStatusForm() : base(TitleLocator, "Durectory sync status")
+		public DirectorySyncStatusForm(Guid driverId) : base(TitleLocator, "Durectory sync status")
 		{
+            this.driverId = driverId;
 		}
 	}
 }

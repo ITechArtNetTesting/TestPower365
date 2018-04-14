@@ -10,10 +10,13 @@ namespace Product.Framework.Forms.PublicFolderMigrationForms
 {
 	public class PublicFolderTenantPareForm : BasePublicFolderWizardForm
 	{
-		private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Which tenant pair')]");
+        private Guid driverId;
 
-		public PublicFolderTenantPareForm() : base(TitleLocator, "Tenant pare form")
+        private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Which tenant pair')]");
+
+		public PublicFolderTenantPareForm(Guid driverId) : base(TitleLocator, "Tenant pare form")
 		{
+            this.driverId = driverId;
 		}
 
 		private readonly Button selectTenantPareButton = new Button(By.XPath("//button[contains(@data-toggle, 'dropdown')]"), "Select tenant pare button");

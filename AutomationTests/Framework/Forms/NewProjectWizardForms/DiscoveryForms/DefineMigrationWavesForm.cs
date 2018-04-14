@@ -11,11 +11,14 @@ namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
 {
 	public class DefineMigrationWavesForm : BaseWizardStepForm
 	{
-		private static readonly By TitleLocator =
+        private Guid driverId;
+
+        private static readonly By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Would you like to define your migration waves now')]");
 
-		public DefineMigrationWavesForm() : base(TitleLocator, "Define migration waves form")
+		public DefineMigrationWavesForm(Guid driverId) : base(TitleLocator, "Define migration waves form")
 		{
+            this.driverId = driverId;
 		}
 		private Label yesWavesLabel = new Label(By.XPath("//label[contains(@for, 'wavesYes')]"), "Yes, define waves now label");
 		private RadioButton yesWavesRadioButton =new RadioButton(By.XPath("//input[contains(@id, 'wavesYes')]"), "Yes, define waves now radiobutton");

@@ -10,10 +10,13 @@ namespace Product.Framework.Forms.NewProjectWizardForms
 {
 	public class EnablePublicFoldersForm : BaseWizardStepForm
 	{
-		private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you want to migrate public folders')]");
+        private Guid driverId;
 
-		public EnablePublicFoldersForm() : base(TitleLocator, "Enable public folders form")
+        private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you want to migrate public folders')]");
+
+		public EnablePublicFoldersForm(Guid driverId) : base(TitleLocator, "Enable public folders form")
 		{
+            this.driverId = driverId;
 		}
 
 		private readonly Button yesButton = new Button(By.XPath("//label[contains(@for, 'yesFolders')]"), "Yes button");

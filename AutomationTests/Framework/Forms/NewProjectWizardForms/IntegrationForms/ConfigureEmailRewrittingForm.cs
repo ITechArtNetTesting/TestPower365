@@ -10,11 +10,14 @@ namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
 	public class ConfigureEmailRewrittingForm : BaseWizardStepForm
 	{
-		private static readonly By TitleLocator =
+        private Guid driverId;
+
+        private static readonly By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you want to have email rewritten')]");
 
-		public ConfigureEmailRewrittingForm() : base(TitleLocator, "Do you want to configure email rewriting form")
+		public ConfigureEmailRewrittingForm(Guid driverId) : base(TitleLocator, "Do you want to configure email rewriting form")
 		{
+            this.driverId = driverId;
 		}
 
 		private readonly Label yesLabel = new Label(By.XPath("//label[contains(@for, 'yesFolders')]"), "Yes label");

@@ -13,8 +13,11 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
       
         private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='HowWouldYouLikeToHandleLargeItems']");
 
-        public ProfileLargeItemsHandleForm() : base(TitleLocator, "Profile large items handle form")
+        private Guid driverId;
+
+        public ProfileLargeItemsHandleForm(Guid driverId) : base(TitleLocator, "Profile large items handle form")
         {
+            this.driverId = driverId;
         }
 
     }

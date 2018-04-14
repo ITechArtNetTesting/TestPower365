@@ -6,9 +6,12 @@ namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
 {
 	public class SelectTargetTenantForm : BaseWizardStepForm
 	{
-		private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Select A Target Tenant')]");
-		public SelectTargetTenantForm() : base(TitleLocator, "Select target tenant form")
+        private Guid driverId;
+
+        private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Select A Target Tenant')]");
+		public SelectTargetTenantForm(Guid driverId) : base(TitleLocator, "Select target tenant form")
 		{
+            this.driverId = driverId;
 		}
 		public void SelectTenant(string tenant)
 		{

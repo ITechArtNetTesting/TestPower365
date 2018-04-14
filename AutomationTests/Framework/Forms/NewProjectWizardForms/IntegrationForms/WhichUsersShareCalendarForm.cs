@@ -10,11 +10,13 @@ namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
 	public class WhichUsersShareCalendarForm : BaseWizardStepForm
 	{
-		private readonly static By TitleLocator =
+        private Guid driverId;
+        private readonly static By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'How should we identify the users that will share calendar')]");
 
-		public WhichUsersShareCalendarForm() : base(TitleLocator, "Which users would you like to share calendar form")
+		public WhichUsersShareCalendarForm(Guid driverId) : base(TitleLocator, "Which users would you like to share calendar form")
 		{
+            this.driverId = driverId;
 		}
 
 		private Label byActiveDirectoryLabel = new Label(By.XPath("//label[contains(@for, 'importGroupsRadio')]"), "By active directory group label");

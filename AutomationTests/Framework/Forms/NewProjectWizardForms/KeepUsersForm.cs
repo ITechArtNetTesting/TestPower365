@@ -10,10 +10,13 @@ namespace Product.Framework.Forms.NewProjectWizardForms
 {
 	public class KeepUsersForm : BaseWizardStepForm
 	{
-		private static readonly By TitleLocator = By.XPath("//span[contains(text(), 'Which user list do you want to use')]");
+        private Guid driverId;
 
-		public KeepUsersForm() : base(TitleLocator, "Keep users list form")
+        private static readonly By TitleLocator = By.XPath("//span[contains(text(), 'Which user list do you want to use')]");
+
+		public KeepUsersForm(Guid driverId) : base(TitleLocator, "Keep users list form")
 		{
+            this.driverId = driverId;
 		}
 
 		private readonly Label keepExistingLabel = new Label(By.XPath("//label[contains(@for, 'keepExisting')]"), "Keep existing label");

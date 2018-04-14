@@ -10,10 +10,13 @@ namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
 	public class CreateDistributionGroupsForm : BaseWizardStepForm
 	{
-		private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you want to create distribution groups')]");
+        private Guid driverId;
 
-		public CreateDistributionGroupsForm() : base(TitleLocator, "Create distributian groups")
+        private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you want to create distribution groups')]");
+
+		public CreateDistributionGroupsForm(Guid driverId) : base(TitleLocator, "Create distributian groups")
 		{
+            this.driverId = driverId;
 		}
 
 		private readonly Button yesCreateGroupsButton = new Button(By.XPath("//label[contains(@for, 'createGroups')]"), "Yes create groups button");

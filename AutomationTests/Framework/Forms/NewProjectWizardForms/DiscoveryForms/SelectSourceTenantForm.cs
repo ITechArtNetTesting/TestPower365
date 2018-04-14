@@ -6,11 +6,14 @@ namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
 {
 	public class SelectSourceTenantForm : BaseWizardStepForm
 	{
-		private static readonly By TitleLocator =
+        private Guid driverId;
+
+        private static readonly By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Where do you want to migrate email accounts from')]");
 
-		public SelectSourceTenantForm() : base(TitleLocator, "Select source tenant")
+		public SelectSourceTenantForm(Guid driverId) : base(TitleLocator, "Select source tenant")
 		{
+            this.driverId = driverId;
 		}
 		public void SelectTenant(string tenant)
 		{

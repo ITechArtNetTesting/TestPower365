@@ -24,8 +24,11 @@ namespace Product.Framework.Forms
 			"Go to dashboard button");
 	    protected Label descriptionLabel => new Label(By.XPath("//*[contains(@data-bind, 'projectDescription')]"), "Description Label");
 
-        public TenantsConfigurationForm() : base(TitleLocator, "Tenants configuration form")
+        private Guid driverId;
+
+        public TenantsConfigurationForm(Guid driverId) : base(TitleLocator, "Tenants configuration form")
 		{
+            this.driverId = driverId;
             descriptionLabel.WaitForElementPresent();
 		}
 

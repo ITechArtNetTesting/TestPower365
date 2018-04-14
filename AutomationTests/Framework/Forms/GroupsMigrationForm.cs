@@ -13,10 +13,13 @@ namespace Product.Framework.Forms
 {
 	public class GroupsMigrationForm : UsersForm
 	{
-		private static readonly By TitleLocator = By.XPath("//a[contains(@data-bind, 'GroupMigrationsDialog')]");
+        private Guid driverId;
 
-		public GroupsMigrationForm() : base(TitleLocator, "Groups migration form")
+        private static readonly By TitleLocator = By.XPath("//a[contains(@data-bind, 'GroupMigrationsDialog')]");
+
+		public GroupsMigrationForm(Guid driverId) : base(TitleLocator, "Groups migration form")
 		{
+            this.driverId = driverId;
 		}
 		private readonly Button actionsDropdownButton =
 			new Button(

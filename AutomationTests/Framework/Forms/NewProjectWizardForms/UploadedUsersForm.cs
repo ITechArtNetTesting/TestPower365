@@ -1,13 +1,17 @@
 ﻿using OpenQA.Selenium;
 using Product.Framework.Elements;
+using System;
 
 namespace Product.Framework.Forms.NewProjectWizardForms
 {
 	public class UploadedUsersForm : BaseWizardStepForm
 	{
-		private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Upload was a success')]");
-		public UploadedUsersForm() : base(TitleLocator, "Uploaded users form")
+        private Guid driverId;
+
+        private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Upload was a success')]");
+		public UploadedUsersForm(Guid driverId) : base(TitleLocator, "Uploaded users form")
 		{
+            this.driverId = driverId;
 		}
 
 		public UploadedUsersForm(By _TitleLocator, string name) : base(_TitleLocator, name)

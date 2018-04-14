@@ -10,10 +10,13 @@ namespace Product.Framework.Forms.PublicFolderMigrationForms
 {
 	public class PublicFolderConflictsForm : BasePublicFolderWizardForm
 	{
-		private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'How do you want to resolve conflicts')]");
+        private Guid driverId;
 
-		public PublicFolderConflictsForm() : base(TitleLocator, "Conflicts form")
+        private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'How do you want to resolve conflicts')]");
+
+		public PublicFolderConflictsForm(Guid driverId) : base(TitleLocator, "Conflicts form")
 		{
+            this.driverId = driverId;
 		}
 
 		private readonly Button lastUpdatedButton = new Button(By.XPath("//label[contains(@for, 'useLastUpdated')]"), "Last updated button");

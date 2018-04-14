@@ -13,10 +13,12 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
     public class ProfileCreateDistributionGroupsForm : BaseWizardStepForm
     {
         private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you want to create new distribution groups in the target tenant')]");
-     
 
-        public ProfileCreateDistributionGroupsForm() : base(TitleLocator, "Create distributon groups form")
+        private Guid driverId;
+
+        public ProfileCreateDistributionGroupsForm(Guid driverId) : base(TitleLocator, "Create distributon groups form")
         {
+            this.driverId = driverId;
         }
 
      

@@ -207,8 +207,11 @@ namespace Product.Framework.Forms
         protected string ProfileModifyLocator = "//div[contains(@class, 'modal in')]//tr[.//*[contains(text(), '{0}')]]//*[contains(text(), 'Modify')]";
         protected string ProfileLabelLocator = "//div[contains(@class, 'modal in')]//tr[.//*[contains(text(), '{0}')]]//label";
         protected string ProfileRadioLocator = "//div[contains(@class, 'modal in')]//tr[.//*[contains(text(), 'Defa')]]//input";
-        public UsersForm() : base(TitleLocator, "Users list form")
+        private Guid driverId;
+
+        public UsersForm(Guid driverId) : base(TitleLocator, "Users list form")
 		{
+            this.driverId = driverId;
             descriptionLabel.WaitForElementPresent();
 		}
 
@@ -464,20 +467,23 @@ namespace Product.Framework.Forms
 		public new void ScrollToTheBottom()
 		{
 			Log.Info("Scrolling to the bottom of the page");
-			((IJavaScriptExecutor) Browser.GetDriver()).ExecuteScript("window.scrollTo(0, document.body.scrollHeight - 10)");
-		}
+            //((IJavaScriptExecutor) Browser.GetDriver()).ExecuteScript("window.scrollTo(0, document.body.scrollHeight - 10)");
+            ((IJavaScriptExecutor)Driver.GetDriver(driverId)).ExecuteScript("window.scrollTo(0, document.body.scrollHeight - 10)");
+        }
 
 		public new void ScrollToTop()
 		{
 			Log.Info("Scrolling to the Top of the page");
-			((IJavaScriptExecutor) Browser.GetDriver()).ExecuteScript("window.scrollTo(0, 0)");
-		}
+            //((IJavaScriptExecutor) Browser.GetDriver()).ExecuteScript("window.scrollTo(0, 0)");
+            ((IJavaScriptExecutor)Driver.GetDriver(driverId)).ExecuteScript("window.scrollTo(0, 0)");
+        }
 
 		public void ScrollToElement(IWebElement element)
 		{
             Log.Info("Scrolling to element: "+element);
-		   ((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript("arguments[0].scrollIntoView(false);", element);
-		}
+            //((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript("arguments[0].scrollIntoView(false);", element);
+            ((IJavaScriptExecutor)Driver.GetDriver(driverId)).ExecuteScript("arguments[0].scrollIntoView(false);", element);
+        }
 
 		public void SelectEntryBylocator(string locator)
 		{
@@ -551,8 +557,9 @@ namespace Product.Framework.Forms
 				while (!entryLabel.IsPresent() && !twiceSyncedLabel.IsPresent() && counter < 40)
 				{
 					Thread.Sleep(timeout);
-					Browser.GetDriver().Navigate().Refresh();
-					counter++;
+                    //Browser.GetDriver().Navigate().Refresh();
+                    Driver.GetDriver(driverId).Navigate().Refresh();
+                    counter++;
 					entryNonStateLabel.WaitForElementPresent();
 				}
 				if (entryLabel.IsPresent())
@@ -571,7 +578,8 @@ namespace Product.Framework.Forms
 					Thread.Sleep(timeout/2);
                    if (entryLabel.IsPresent()) { break; };
                     Thread.Sleep(timeout / 2);
-                    Browser.GetDriver().Navigate().Refresh();
+                    //Browser.GetDriver().Navigate().Refresh();
+                    Driver.GetDriver(driverId).Navigate().Refresh();
                     counter++;
 					entryNonStateLabel.WaitForElementPresent();
                   
@@ -894,13 +902,19 @@ namespace Product.Framework.Forms
 				By.XPath(
 					$"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{source.ToLower()}')]]/ancestor::tr//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{target.ToLower()}')]]/ancestor::tr"),
 				"");
-			Assert.IsTrue(
-				Browser.GetDriver()
-					.FindElements(
-						By.XPath(
-							$"//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{source.ToLower()}')]]/ancestor::tr//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{target.ToLower()}')]]/ancestor::tr"))
-					.Count == count, "Invalid count of lines");
-		}
+            //Assert.IsTrue(
+            //	Browser.GetDriver()
+            //		.FindElements(
+            //			By.XPath(
+            //				$"//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{source.ToLower()}')]]/ancestor::tr//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{target.ToLower()}')]]/ancestor::tr"))
+            //		.Count == count, "Invalid count of lines");
+            Assert.IsTrue(
+                Driver.GetDriver(driverId)
+                    .FindElements(
+                        By.XPath(
+                            $"//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{source.ToLower()}')]]/ancestor::tr//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{target.ToLower()}')]]/ancestor::tr"))
+                    .Count == count, "Invalid count of lines");
+        }
 
 		public void VerifyLinesCountAndProperties(string group, int count)
 		{
@@ -910,13 +924,19 @@ namespace Product.Framework.Forms
 					$"//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//*[text()[contains(.,'{group}')]]/ancestor::tr"),
 				"");
 			linesLabel.WaitForSeveralElementsPresent(count);
-			Assert.IsTrue(
-				Browser.GetDriver()
-					.FindElements(
-						By.XPath(
-							$"//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//*[text()[contains(.,'{group}')]]/ancestor::tr"))
-					.Count == count, "Invalid count of lines");
-		}
+            //Assert.IsTrue(
+            //	Browser.GetDriver()
+            //		.FindElements(
+            //			By.XPath(
+            //				$"//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//*[text()[contains(.,'{group}')]]/ancestor::tr"))
+            //		.Count == count, "Invalid count of lines");
+            Assert.IsTrue(
+                Driver.GetDriver(driverId)
+                    .FindElements(
+                        By.XPath(
+                            $"//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//*[text()[contains(.,'{group}')]]/ancestor::tr"))
+                    .Count == count, "Invalid count of lines");
+        }
 
 		public void VerifyLinesCount(int count)
 		{
@@ -924,20 +944,26 @@ namespace Product.Framework.Forms
 			var locator = By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr");
 			var lineButton = new Button(locator, "");
 			lineButton.WaitForSeveralElementsPresent(count);
-			Assert.IsTrue(Browser.GetDriver().FindElements(locator).Count == count);
-		}
+            //Assert.IsTrue(Browser.GetDriver().FindElements(locator).Count == count);
+            Assert.IsTrue(Driver.GetDriver(driverId).FindElements(locator).Count == count);
+        }
 
 		public void AssertSourceSorted()
 		{
 			Log.Info("Asserting source is sorted");
 			BaseElement.WaitForElementIsClickable(
 				By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//tr"));
-			var existingList =
-				GetEntriesText(
-					Browser.GetDriver()
-						.FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
-					"source");
-			var sortedList = new List<string>();
+            //var existingList =
+            //	GetEntriesText(
+            //		Browser.GetDriver()
+            //			.FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
+            //		"source");
+            var existingList =
+                GetEntriesText(
+                    Driver.GetDriver(driverId)
+                        .FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
+                    "source");
+            var sortedList = new List<string>();
 			if (sortedAscSourceButton.IsPresent())
 			{
 				sortedList = Store.SourceList.OrderBy(i => i).ToList();
@@ -957,12 +983,17 @@ namespace Product.Framework.Forms
 			Log.Info("Asserting target sorted");
 			BaseElement.WaitForElementIsClickable(
 				By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//tr"));
-			var existingList =
-				GetEntriesText(
-					Browser.GetDriver()
-						.FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
-					"target");
-			var sortedList = new List<string>();
+            //var existingList =
+            //	GetEntriesText(
+            //		Browser.GetDriver()
+            //			.FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
+            //		"target");
+            var existingList =
+                GetEntriesText(
+                    Driver.GetDriver(driverId)
+                        .FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
+                    "target");
+            var sortedList = new List<string>();
 			if (sortedAscTargetButton.IsPresent())
 			{
 				sortedList = Store.TargetList.OrderBy(i => i).ToList();
@@ -982,12 +1013,17 @@ namespace Product.Framework.Forms
 			Log.Info("Asserting group sorted");
 			BaseElement.WaitForElementIsClickable(
 				By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//tr"));
-			var existingList =
-				GetEntriesText(
-					Browser.GetDriver()
-						.FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
-					"group");
-			var sortedList = new List<string>();
+            //var existingList =
+            //	GetEntriesText(
+            //		Browser.GetDriver()
+            //			.FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
+            //		"group");
+            var existingList =
+                GetEntriesText(
+                    Driver.GetDriver(driverId)
+                        .FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
+                    "group");
+            var sortedList = new List<string>();
 			if (sortedAscGroupButton.IsPresent())
 			{
 				sortedList = Store.GroupList.OrderBy(i => i).ToList();
@@ -1007,12 +1043,17 @@ namespace Product.Framework.Forms
 			Log.Info("Asserting profile sorted");
 			BaseElement.WaitForElementIsClickable(
 				By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//tr"));
-			var existingList =
-				GetEntriesText(
-					Browser.GetDriver()
-						.FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
-					"profile");
-			var sortedList = new List<string>();
+            //var existingList =
+            //	GetEntriesText(
+            //		Browser.GetDriver()
+            //			.FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
+            //		"profile");
+            var existingList =
+                GetEntriesText(
+                    Driver.GetDriver(driverId)
+                        .FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
+                    "profile");
+            var sortedList = new List<string>();
 			if (sortedAscProfileButton.IsPresent())
 			{
 				sortedList = Store.ProfileList.OrderBy(i => i).ToList();
@@ -1052,12 +1093,17 @@ namespace Product.Framework.Forms
 			Log.Info("Asserting State sorted");
 			BaseElement.WaitForElementIsClickable(
 				By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//tr"));
-			var existingList =
-				GetEntriesText(
-					Browser.GetDriver()
-						.FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
-					"state");
-			var sortedList = new List<string>();
+            //var existingList =
+            //	GetEntriesText(
+            //		Browser.GetDriver()
+            //			.FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
+            //		"state");
+            var existingList =
+                GetEntriesText(
+                    Driver.GetDriver(driverId)
+                        .FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
+                    "state");
+            var sortedList = new List<string>();
 			if (sortedAscStateButton.IsPresent())
 			{
 				sortedList = Store.StateList.OrderBy(i => i).ToList();
@@ -1086,12 +1132,17 @@ namespace Product.Framework.Forms
 			Log.Info("Asserting mailbox sorted");
 			BaseElement.WaitForElementIsClickable(
 				By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//tr"));
-			var existingList =
-				GetEntriesText(
-					Browser.GetDriver()
-						.FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
-					"mailbox");
-			var sortedList = new List<string>();
+            //var existingList =
+            //	GetEntriesText(
+            //		Browser.GetDriver()
+            //			.FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
+            //		"mailbox");
+            var existingList =
+                GetEntriesText(
+                    Driver.GetDriver(driverId)
+                        .FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
+                    "mailbox");
+            var sortedList = new List<string>();
 			if (sortedAscMailboxSizeButton.IsPresent())
 			{
 				sortedList = Store.MailboxSizeList.OrderBy(i => i).ToList();
@@ -1111,12 +1162,17 @@ namespace Product.Framework.Forms
 			Log.Info("Asserting archives sorted");
 			BaseElement.WaitForElementIsClickable(
 				By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//tr"));
-			var existingList =
-				GetEntriesText(
-					Browser.GetDriver()
-						.FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
-					"archive");
-			var sortedList = new List<string>();
+            //var existingList =
+            //	GetEntriesText(
+            //		Browser.GetDriver()
+            //			.FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
+            //		"archive");
+            var existingList =
+                GetEntriesText(
+                    Driver.GetDriver(driverId)
+                        .FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")),
+                    "archive");
+            var sortedList = new List<string>();
 			if (sortedAscArchiveSizeButton.IsPresent())
 			{
 				sortedList = Store.MailboxSizeList.OrderBy(i => i).ToList();
@@ -1143,9 +1199,11 @@ namespace Product.Framework.Forms
 			Store.ProfileList.Clear();
 			BaseElement.WaitForElementIsClickable(
 				By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr"));
-			var elements = Browser.GetDriver()
-				.FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr"));
-			foreach (var element in elements)
+            //var elements = Browser.GetDriver()
+            //	.FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr"));
+            var elements = Driver.GetDriver(driverId)
+                .FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr"));
+            foreach (var element in elements)
 			{
 				Store.SourceList.Add(
 					element.FindElement(
@@ -1289,8 +1347,9 @@ namespace Product.Framework.Forms
 			while (!IsMailboxesSizeEmpty() && counter < 31)
 			{
 				Thread.Sleep(20000);
-				Browser.GetDriver().Navigate().Refresh();
-				Thread.Sleep(10000);
+                //Browser.GetDriver().Navigate().Refresh();
+                Driver.GetDriver(driverId).Navigate().Refresh();
+                Thread.Sleep(10000);
 			}
 		}
 
@@ -1301,8 +1360,9 @@ namespace Product.Framework.Forms
 			while (!IsArchiveSizeEmpty() && counter < 31)
 			{
 				Thread.Sleep(20000);
-				Browser.GetDriver().Navigate().Refresh();
-				Thread.Sleep(10000);
+                //Browser.GetDriver().Navigate().Refresh();
+                Driver.GetDriver(driverId).Navigate().Refresh();
+                Thread.Sleep(10000);
 			}
 		}
 
@@ -1578,8 +1638,10 @@ namespace Product.Framework.Forms
         public void AssertProgressAndState()
         {
             Log.Info("Checking progress");
-            string LastProgressColor = Browser.GetDriver().FindElements(By.XPath("//*/td/div[@class='progress']/div")).LastOrDefault().GetCssValue("background-color");
-            string LastJobState = Browser.GetDriver().FindElements(By.XPath("//*/div[@class='modal-content']//*/div[@class='table-responsive table-frame m-t-sm']//*/tbody/tr/td[2]/span")).LastOrDefault().Text;
+            //string LastProgressColor = Browser.GetDriver().FindElements(By.XPath("//*/td/div[@class='progress']/div")).LastOrDefault().GetCssValue("background-color");
+            string LastProgressColor = Driver.GetDriver(driverId).FindElements(By.XPath("//*/td/div[@class='progress']/div")).LastOrDefault().GetCssValue("background-color");
+            //string LastJobState = Browser.GetDriver().FindElements(By.XPath("//*/div[@class='modal-content']//*/div[@class='table-responsive table-frame m-t-sm']//*/tbody/tr/td[2]/span")).LastOrDefault().Text;
+            string LastJobState = Driver.GetDriver(driverId).FindElements(By.XPath("//*/div[@class='modal-content']//*/div[@class='table-responsive table-frame m-t-sm']//*/tbody/tr/td[2]/span")).LastOrDefault().Text;
             Assert.AreEqual(LastProgressColor == "rgba(37, 107, 147, 1)", LastJobState == "Synced");
         }
 
@@ -1592,7 +1654,8 @@ namespace Product.Framework.Forms
         public void AssertSyncingWasStoped()
         {
             Log.Info("Checking last syncing was stoped");
-            IList<IWebElement> Jobs = Browser.GetDriver().FindElements(By.XPath("//*/div[@class='modal-content']//*/div[@class='table-responsive table-frame m-t-sm']//*/tbody/tr/td[2]/span"));
+            //IList<IWebElement> Jobs = Browser.GetDriver().FindElements(By.XPath("//*/div[@class='modal-content']//*/div[@class='table-responsive table-frame m-t-sm']//*/tbody/tr/td[2]/span"));
+            IList<IWebElement> Jobs = Driver.GetDriver(driverId).FindElements(By.XPath("//*/div[@class='modal-content']//*/div[@class='table-responsive table-frame m-t-sm']//*/tbody/tr/td[2]/span"));
             string LastJobState = Jobs[Jobs.Count - 1].Text;
             Assert.AreEqual("Stopped", LastJobState);
         }

@@ -19,6 +19,7 @@ namespace Product.Framework
 		protected virtual string downloadPath {get { return "../../download/"; }}
 		protected static TestContext _testContext;
 		private string _baseUrl;
+        protected Driver driver;
 		public UserSteps User;
 
 		private void GetResolution()
@@ -32,6 +33,7 @@ namespace Product.Framework
 		[TestInitialize]
 		public virtual void SetUp()
 		{
+            driver = new Driver(WebBrowsers.Chrome);           
 			RunOnce();
 			RunConfigurator.RunPath = "resources/run.xml";
 			RunConfigurator.DownloadPath = downloadPath;
@@ -48,12 +50,13 @@ namespace Product.Framework
 				}
 			}
 			RunConfigurator.ClearDownloads();
-			User = new UserSteps();
-			_baseUrl = RunConfigurator.GetValue("baseurl");
+            //User = new UserSteps();
+            User = new UserSteps(driver.GetDriverKey());
+            _baseUrl = RunConfigurator.GetValue("baseurl");
 			GetResolution();
-			Browser.GetInstance(RunConfigurator.DownloadPath);
-			Browser.GetDriver().Manage().Window.Maximize();
-			Browser.GetDriver().Navigate().GoToUrl(_baseUrl);
+			//Browser.GetInstance(RunConfigurator.DownloadPath);
+			//Browser.GetDriver().Manage().Window.Maximize();
+			//Browser.GetDriver().Navigate().GoToUrl(_baseUrl);
 		}
 
 		
@@ -63,9 +66,10 @@ namespace Product.Framework
 		[TestCleanup]
 		public void TearDown()
 		{
-            Browser.GetDriver()?.Close();
-			Browser.GetDriver()?.Quit();
-		}
+            driver.CloseDriver();
+            //Browser.GetDriver()?.Close();
+            //Browser.GetDriver()?.Quit();
+        }
 
 		/// <summary>
 		///     Runs the once.

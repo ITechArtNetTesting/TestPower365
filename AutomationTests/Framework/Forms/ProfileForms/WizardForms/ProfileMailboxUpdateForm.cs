@@ -14,8 +14,11 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
     {
         private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'When users switch to their target mailbox, how would you like their source mailbox to be updated')]");
 
-        public ProfileMailboxUpdateForm() : base(TitleLocator, "Update mailbox form")
+        private Guid driverId;
+
+        public ProfileMailboxUpdateForm(Guid driverId) : base(TitleLocator, "Update mailbox form")
         {
+            this.driverId = driverId;
         }
         private Label hideLabel = new Label(By.XPath("//label[contains(@for, 'hiddenSource')]"), "Yes label");
         private RadioButton hideRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'hiddenSource')]"), "Yes radiobutton");

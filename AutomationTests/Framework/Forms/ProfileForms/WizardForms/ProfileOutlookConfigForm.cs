@@ -14,8 +14,11 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
     {
         private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Will users need to update their Outlook profile to their new e-mail address')]");
 
-        public ProfileOutlookConfigForm() : base(TitleLocator, "Profile outlook configuration form")
+        private Guid driverId;
+
+        public ProfileOutlookConfigForm(Guid driverId) : base(TitleLocator, "Profile outlook configuration form")
         {
+            this.driverId = driverId;
         }
 
         private Label yesLabel = new Label(By.XPath("//label[contains(@for, 'runAgentYes')]"), "Yes label");

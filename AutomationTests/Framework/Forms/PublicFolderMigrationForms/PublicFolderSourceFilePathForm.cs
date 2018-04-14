@@ -10,10 +10,13 @@ namespace Product.Framework.Forms.PublicFolderMigrationForms
 {
 	public class PublicFolderSourceFilePathForm : BasePublicFolderWizardForm
 	{
-		private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'What is the path to the public folder that you want to migrate')]");
+        private Guid driverId;
 
-		public PublicFolderSourceFilePathForm() : base(TitleLocator, "What source file path form")
+        private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'What is the path to the public folder that you want to migrate')]");
+
+		public PublicFolderSourceFilePathForm(Guid driverId) : base(TitleLocator, "What source file path form")
 		{
+            this.driverId = driverId;
 		}
 
 		private readonly TextBox filePathTextBox = new TextBox(By.XPath("//input[contains(@data-bind, 'textInput')]"), "File path textbox");

@@ -12,9 +12,11 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
     {
         private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='HowWouldYouLikeToHandleFoldersThatCannotBeSynced']");
 
+        private Guid driverId;
 
-        public ProfileHandleFoldersForm() : base(TitleLocator, "Profile handle folders items form")
+        public ProfileHandleFoldersForm(Guid driverId) : base(TitleLocator, "Profile handle folders items form")
         {
+            this.driverId = driverId;
         }
     }
 }

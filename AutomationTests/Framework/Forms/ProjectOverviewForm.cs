@@ -76,8 +76,11 @@ namespace Product.Framework.Forms
 		private readonly Button migrationGroupsButton = new Button(By.XPath("//a[contains(@data-bind, 'distGroupsLink')]"), "Migration groups button");
         private readonly Button totalGroupsButton = new Button(By.XPath("//div[contains(@class, 'ibox-content')]//a[contains(@data-bind, 'allGroupsLink')]"), "Total groups button");
 	    protected Label descriptionLabel => new Label(By.XPath("//*[contains(@data-bind, 'projectDescription')]"), "Description Label");
-        public ProjectOverviewForm() : base(TitleLocator, "Project overview form")
+        private Guid driverId;
+
+        public ProjectOverviewForm(Guid driverId) : base(TitleLocator, "Project overview form")
 		{
+            this.driverId = driverId;
             descriptionLabel.WaitForElementPresent();
 		}
 
@@ -128,20 +131,24 @@ namespace Product.Framework.Forms
 
 		public void ScrollToElement(IWebElement element)
 		{
-			((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript("arguments[0].scrollIntoView();", element);
-		}
+            //((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript("arguments[0].scrollIntoView();", element);
+            ((IJavaScriptExecutor)Driver.GetDriver(driverId)).ExecuteScript("arguments[0].scrollIntoView();", element);
+        }
 
 		public void ScrollToElement(IWebElement element, string options)
 		{
-			((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript($"arguments[0].scrollIntoView({options});", element);
-			((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript("var element = arguments[0]; var bodyRect = document.body.getBoundingClientRect(), elemRect = element.getBoundingClientRect(), offset = elemRect.top - bodyRect.top; window.scrollTo(0, offset - 100);", element);
-		}
+            //((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript($"arguments[0].scrollIntoView({options});", element);
+            ((IJavaScriptExecutor)Driver.GetDriver(driverId)).ExecuteScript($"arguments[0].scrollIntoView({options});", element);
+            //((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript("var element = arguments[0]; var bodyRect = document.body.getBoundingClientRect(), elemRect = element.getBoundingClientRect(), offset = elemRect.top - bodyRect.top; window.scrollTo(0, offset - 100);", element);
+            ((IJavaScriptExecutor)Driver.GetDriver(driverId)).ExecuteScript("var element = arguments[0]; var bodyRect = document.body.getBoundingClientRect(), elemRect = element.getBoundingClientRect(), offset = elemRect.top - bodyRect.top; window.scrollTo(0, offset - 100);", element);
+        }
 
 		public new void ScrollToTheBottom()
 		{
 			Log.Info("Scrolling to the bottom of the page");
-			((IJavaScriptExecutor) Browser.GetDriver()).ExecuteScript("window.scrollTo(0, document.body.scrollHeight - 10)");
-		}
+            //((IJavaScriptExecutor) Browser.GetDriver()).ExecuteScript("window.scrollTo(0, document.body.scrollHeight - 10)");
+            ((IJavaScriptExecutor)Driver.GetDriver(driverId)).ExecuteScript("window.scrollTo(0, document.body.scrollHeight - 10)");
+        }
 
 		public void AssertAllContentBlocksArePresent()
 		{
@@ -210,16 +217,18 @@ namespace Product.Framework.Forms
 			while (counter < time)
 			{
 				Thread.Sleep(40000);
-				Browser.GetDriver().Navigate().Refresh();
-				Thread.Sleep(20000);
+                //Browser.GetDriver().Navigate().Refresh();
+                Driver.GetDriver(driverId).Navigate().Refresh();
+                Thread.Sleep(20000);
 				counter++;
 			}
 		}
 
 		private void Refresh()
 		{
-			//Thread.Sleep(22000);
-			Browser.GetDriver().Navigate().Refresh();
+            //Thread.Sleep(22000);
+            //Browser.GetDriver().Navigate().Refresh();
+            Driver.GetDriver(driverId).Navigate().Refresh();
             WaitForAjaxLoad();
 			//Thread.Sleep(8000);
 		}
@@ -301,8 +310,9 @@ namespace Product.Framework.Forms
 			while (!completedUsersLabel.IsPresent() && counter<35)
 			{
 				Thread.Sleep(50000);
-				Browser.GetDriver().Navigate().Refresh();
-				Thread.Sleep(10000);
+                //Browser.GetDriver().Navigate().Refresh();
+                Driver.GetDriver(driverId).Navigate().Refresh();
+                Thread.Sleep(10000);
 				counter++;
 			}
             Assert.IsTrue(int.Parse(finalizingValueLabel.GetText().Trim()) == count, "Finalizing users amount is invalid");

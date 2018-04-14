@@ -15,8 +15,11 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
 
         private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='WhatTypeOfMailboxContentWouldYouLikeToMigrate']");
 
-        public ProfileTypeOfMailboxContentForm() : base(TitleLocator, "Profile translate type email to migrate")
+        private Guid driverId;
+
+        public ProfileTypeOfMailboxContentForm(Guid driverId) : base(TitleLocator, "Profile translate type email to migrate")
         {
+            this.driverId = driverId;
         }
         public void SelectType(ContentType type)
         {

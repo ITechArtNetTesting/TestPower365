@@ -10,11 +10,14 @@ namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
 	public class EnterPasswordForm : BaseWizardStepForm
 	{
-		private static readonly By TitleLocator =
+        private Guid driverId;
+
+        private static readonly By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Enter a password')]");
 
-		public EnterPasswordForm() : base(TitleLocator, "Enter password form")
+		public EnterPasswordForm(Guid driverId) : base(TitleLocator, "Enter password form")
 		{
+            this.driverId = driverId;
 		}
 
 		private readonly TextBox passwordTextBox = new TextBox(By.XPath("//input[contains(@data-bind, 'textInput: password')]"), "Password textbox");

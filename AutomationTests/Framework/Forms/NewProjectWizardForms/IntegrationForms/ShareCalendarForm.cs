@@ -11,11 +11,14 @@ namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
 	public class ShareCalendarForm : BaseWizardStepForm
 	{
-		private static readonly By TitleLocator =
+        private Guid driverId;
+
+        private static readonly By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Would you like to share calendar availability')]");
 
-		public ShareCalendarForm() : base(TitleLocator, "Share calendar form")
+		public ShareCalendarForm(Guid driverId) : base(TitleLocator, "Share calendar form")
 		{
+            this.driverId = driverId;
 		}
 
 		private readonly Label yesLabel = new Label(By.XPath("//label[contains(@for, 'fbYes')]"), "Yes label");

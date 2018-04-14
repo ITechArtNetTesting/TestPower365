@@ -9,13 +9,15 @@ namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
     public class DownloadDirSyncForm : BaseWizardStepForm
     {
-       
+        private Guid driverId;
+
         private readonly static By TitleLocator = By.XPath(
             "//*/span[@data-translation='LetsDownloadPower365DirectorySyncLiteApplication']");
 
 
-        public DownloadDirSyncForm() : base(TitleLocator, "Download dirsync app form")
+        public DownloadDirSyncForm(Guid driverId) : base(TitleLocator, "Download dirsync app form")
         {
+            this.driverId = driverId;
         }
     }
 }

@@ -10,11 +10,14 @@ namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
 	public class MigrateDistributionGroupsForm : BaseWizardStepForm
 	{
-		private static readonly By TitleLocator =
+        private Guid driverId;
+
+        private static readonly By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'How would you like to discover distribution groups')]");
 
-		public MigrateDistributionGroupsForm() : base(TitleLocator, "Migrate distribution groups form")
+		public MigrateDistributionGroupsForm(Guid driverId) : base(TitleLocator, "Migrate distribution groups form")
 		{
+            this.driverId = driverId;
 		}
 		private readonly Button allGroupsFoundButton = new Button(By.XPath("//label[contains(@for, 'migrateAllGroupsRadio')]"), "All groups found");
 		private readonly Button uploadListButton = new Button(By.XPath("//label[contains(@for, 'uploadGroupsRadio')]"), "Upload list button");

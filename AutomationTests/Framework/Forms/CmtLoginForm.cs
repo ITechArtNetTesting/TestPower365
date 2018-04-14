@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using Product.Framework.Elements;
+using System;
 
 namespace Product.Framework.Forms
 {
@@ -15,8 +16,11 @@ namespace Product.Framework.Forms
 
 		private readonly Button signInButton = new Button(By.Id("ctl00_ContentPlaceHolder1_SubmitButton"), "Sign in button");
 
-		public CmtLoginForm() : base(TitleLocator, "CMT login form")
+        private Guid driverId;
+
+        public CmtLoginForm(Guid driverId) : base(TitleLocator, "CMT login form")
 		{
+            this.driverId = driverId;
 		}
 
 		public void SetLogin(string login)

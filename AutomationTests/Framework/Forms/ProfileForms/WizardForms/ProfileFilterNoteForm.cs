@@ -12,8 +12,12 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
     {
        
         private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='HowWouldYouLikeToFilterNoteItems']");
-           public ProfileFilterNoteForm() : base(TitleLocator, "Profile Filter note form")
+
+        private Guid driverId;
+        
+        public ProfileFilterNoteForm(Guid driverId) : base(TitleLocator, "Profile Filter note form")
         {
+            this.driverId = driverId;
         }
     }
 }

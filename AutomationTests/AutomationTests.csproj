@@ -93,9 +93,8 @@
   <ItemGroup>
     <Compile Include="Framework\BaseEntity.cs" />
     <Compile Include="Framework\BaseTest.cs" />
-    <Compile Include="Framework\Browser.cs" />
-    <Compile Include="Framework\BrowserFactory.cs" />
     <Compile Include="Framework\Configuration.cs" />
+    <Compile Include="Framework\Driver.cs" />
     <Compile Include="Framework\Elements\BaseElement.cs" />
     <Compile Include="Framework\Elements\Button.cs" />
     <Compile Include="Framework\Elements\ComboBox.cs" />

@@ -47,9 +47,12 @@ namespace Product.Framework.Forms
 			new Button(By.XPath("//div[contains(@class, 'popover-content')]//a[contains(@href, 'SignOut')]"), "Sign out button");
         private readonly Label projectsContainerLabel = new Label(By.XPath("//*[contains(@id, 'projectsContainer')] | //video"), "Projects container");
 
+        private Guid driverId;
+
         private Button logoButton = new Button(By.XPath("//ul[contains(@class, 'topnav-menu')]"), "Logo button");
-		public TenantRestructuringForm() : base(TitleLocator, "Tenant Restructuring Form")
+		public TenantRestructuringForm(Guid driverId) : base(TitleLocator, "Tenant Restructuring Form")
 		{
+            this.driverId = driverId;
 		}
 
 		public void AddProjectClick()
@@ -173,8 +176,9 @@ namespace Product.Framework.Forms
 
 		public void ScrollToElement(IWebElement element)
 		{
-			((IJavaScriptExecutor) Browser.GetDriver()).ExecuteScript("arguments[0].scrollIntoView();", element);
-		}
+            //((IJavaScriptExecutor) Browser.GetDriver()).ExecuteScript("arguments[0].scrollIntoView();", element);
+            ((IJavaScriptExecutor)Driver.GetDriver(driverId)).ExecuteScript("arguments[0].scrollIntoView();", element);
+        }
 
 		public void SetRoleByDropDown(string role)
 		{

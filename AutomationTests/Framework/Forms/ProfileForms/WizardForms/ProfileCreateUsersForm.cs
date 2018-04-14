@@ -13,10 +13,12 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
     public class ProfileCreateUsersForm : BaseWizardStepForm
     {
         private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you want to create users in the target that we cannot find a match for')]");
-       
 
-        public ProfileCreateUsersForm() : base(TitleLocator, "Create users form")
+        private Guid driverId;
+
+        public ProfileCreateUsersForm(Guid driverId) : base(TitleLocator, "Create users form")
         {
+            this.driverId = driverId;
         }
 
         private Label yesLabel = new Label(By.XPath("//label[contains(@for, 'createUsers')]"), "Yes label");
