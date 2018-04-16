@@ -32,7 +32,7 @@ namespace Product.Tests.CommonTests.SetupTests
             LoginAndSelectRole(userName, password, client);
             SelectProject(project);
             User.AtProjectOverviewForm().OpenMainMenu();
-            User.AtProjectOverviewForm().AtMainMenu().OpenProfiles();
+            User.AtProjectOverviewForm().AtMainMenu(driver.GetDriverKey()).OpenProfiles();
             User.AtProfilesOverviewForm().ModifyProfile("Default Profile");
             User.AtProfileNameForm().GoNext();
             User.AtProfileOutlookConfigForm().SelectNo();

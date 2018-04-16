@@ -9,18 +9,19 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
 	public class WhichUsersShareCalendarForm : BaseWizardStepForm
-	{
-        private Guid driverId;
+	{        
         private readonly static By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'How should we identify the users that will share calendar')]");
 
-		public WhichUsersShareCalendarForm(Guid driverId) : base(TitleLocator, "Which users would you like to share calendar form")
+		public WhichUsersShareCalendarForm(Guid driverId) : base(TitleLocator, "Which users would you like to share calendar form",driverId)
 		{
             this.driverId = driverId;
-		}
+            byActiveDirectoryLabel = new Label(By.XPath("//label[contains(@for, 'importGroupsRadio')]"), "By active directory group label",driverId);
+            byActiveDirectoryRadioButton = new RadioButton(By.Id("importGroupsRadio"), "By active directory group radiobutton",driverId);
+        }
 
-		private Label byActiveDirectoryLabel = new Label(By.XPath("//label[contains(@for, 'importGroupsRadio')]"), "By active directory group label");
-		private RadioButton byActiveDirectoryRadioButton = new RadioButton(By.Id("importGroupsRadio"), "By active directory group radiobutton");
+		private Label byActiveDirectoryLabel;
+		private RadioButton byActiveDirectoryRadioButton ;
 
 		public void SelectByAd()
 		{

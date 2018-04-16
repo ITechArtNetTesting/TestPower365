@@ -224,7 +224,7 @@ namespace Product.Tests.IntegrationTests
             }
             catch (Exception)
             {
-                LogHtml(Browser.GetDriver().PageSource);
+                LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
                 throw;
             }
 		}

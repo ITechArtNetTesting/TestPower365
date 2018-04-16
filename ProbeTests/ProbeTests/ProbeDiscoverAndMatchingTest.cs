@@ -195,7 +195,7 @@ namespace ProbeTests.ProbeTests
                 while (!User.AtUsersForm().IsLineExist(sourceUpn) && counter<35)
                 {
                     Log.Info("Source mailbox is not displayed");
-                    Browser.GetDriver().Navigate().Refresh();
+                    Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
                     counter++;
                 }
                 User.AtUsersForm().VerifyLineisExist(sourceUpn);
@@ -213,7 +213,7 @@ namespace ProbeTests.ProbeTests
                 while (!User.AtUsersForm().IsLineExist(targetUpn) && counter<35)
                 {
                     Log.Info("Target mailbox is not displayed");
-                    Browser.GetDriver().Navigate().Refresh();
+                    Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
                     counter++;
                 }
                 User.AtUsersForm().VerifyLineisExist(targetUpn);

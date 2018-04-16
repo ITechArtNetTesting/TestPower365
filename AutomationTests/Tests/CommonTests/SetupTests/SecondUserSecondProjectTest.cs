@@ -42,13 +42,13 @@ namespace Product.Tests.CommonTests.SetupTests
 
             Office365TenantAuthorization(RunConfigurator.GetTenantValue("T5->T6", "source", "user"), RunConfigurator.GetTenantValue("T5->T6", "source", "password"));
             
-			Browser.GetDriver().SwitchTo().Window(Store.MainHandle);
+			Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(Store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(1);
 
             User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
             Office365TenantAuthorization(RunConfigurator.GetTenantValue("T5->T6", "target", "user"), RunConfigurator.GetTenantValue("T5->T6", "target", "password"));
 
-			Browser.GetDriver().SwitchTo().Window(Store.MainHandle);
+			Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(Store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(2);
 			User.AtAddTenantsForm().GoNext();
 			User.AtSelectSourceTenantForm().SelectTenant(RunConfigurator.GetTenantValue("T5->T6", "source", "name"));

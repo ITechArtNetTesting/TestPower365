@@ -9,21 +9,24 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
 	public class ConfigureEmailRewrittingForm : BaseWizardStepForm
-	{
-        private Guid driverId;
+	{        
 
         private static readonly By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you want to have email rewritten')]");
 
-		public ConfigureEmailRewrittingForm(Guid driverId) : base(TitleLocator, "Do you want to configure email rewriting form")
+		public ConfigureEmailRewrittingForm(Guid driverId) : base(TitleLocator, "Do you want to configure email rewriting form",driverId)
 		{
             this.driverId = driverId;
-		}
+            yesLabel = new Label(By.XPath("//label[contains(@for, 'yesFolders')]"), "Yes label",driverId);
+            yesRadioButton = new RadioButton(By.Id("yesFolders"), "Yes radiobutton",driverId);
+            noLabel = new Label(By.XPath("//label[contains(@for, 'noFolders')]"), "No label",driverId);
+            noRadioButton = new RadioButton(By.Id("noFolders"), "",driverId);
+        }
 
-		private readonly Label yesLabel = new Label(By.XPath("//label[contains(@for, 'yesFolders')]"), "Yes label");
-		private readonly RadioButton yesRadioButton = new RadioButton(By.Id("yesFolders"), "Yes radiobutton");
-		private readonly Label noLabel = new Label(By.XPath("//label[contains(@for, 'noFolders')]"), "No label");
-		private readonly RadioButton noRadioButton = new RadioButton(By.Id("noFolders"), "");
+		private readonly Label yesLabel ;
+		private readonly RadioButton yesRadioButton ;
+		private readonly Label noLabel ;
+		private readonly RadioButton noRadioButton ;
 
 		public void SelectYes()
 		{

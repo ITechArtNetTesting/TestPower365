@@ -6,20 +6,21 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms.NewProjectWizardForms
 {
 	public class AddTenantsForm : BaseWizardStepForm
-	{
-        private Guid driverId;
-
+	{        
         private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'First, we have to add your tenants')]");
 
-		private readonly Button addTenantButton = new Button(By.XPath("//span[contains(text(), 'Add tenant')]"),
-			"Add tenant button");
-		private readonly Label tenantLabel = new Label(By.XPath("//span[contains(@data-bind, 'tenantName')]"), "Tenant label");
-		private readonly Button yesButton = new Button(By.XPath("//div[contains(@class, 'modal in')]//button[contains(text(), 'Yes')]"), "Yes button");
-		private readonly Button noButton = new Button(By.XPath("//div[contains(@class, 'modal in')]//button[contains(text(), 'No')]"), "No button");
-		public AddTenantsForm(Guid driverId) : base(TitleLocator, "Add tenants form")
+		private readonly Button addTenantButton ;
+		private readonly Label tenantLabel ;
+		private readonly Button yesButton ;
+		private readonly Button noButton ;
+		public AddTenantsForm(Guid driverId) : base(TitleLocator, "Add tenants form",driverId)
 		{
             this.driverId = driverId;
-		}
+            addTenantButton = new Button(By.XPath("//span[contains(text(), 'Add tenant')]"),"Add tenant button",driverId);
+            tenantLabel = new Label(By.XPath("//span[contains(@data-bind, 'tenantName')]"), "Tenant label",driverId);
+            yesButton = new Button(By.XPath("//div[contains(@class, 'modal in')]//button[contains(text(), 'Yes')]"), "Yes button",driverId);
+            noButton = new Button(By.XPath("//div[contains(@class, 'modal in')]//button[contains(text(), 'No')]"), "No button",driverId);
+        }
 
 		public void OpenOffice365LoginFormPopup()
 		{
@@ -57,7 +58,7 @@ namespace Product.Framework.Forms.NewProjectWizardForms
 			Log.Info("Removing tenant");
 			var removeTenantButton =
 				new Button(By.XPath($"//span[contains(text(), '{tenant}')]/..//button[contains(@data-bind, 'removeTenant')]"),
-					tenant + " remove button");
+					tenant + " remove button",driverId);
 			removeTenantButton.Click();
 			try
 			{

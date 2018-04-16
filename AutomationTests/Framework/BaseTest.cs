@@ -15,7 +15,7 @@ namespace Product.Framework
 	/// <seealso cref="BaseEntity" />
 	[TestClass]
 	public class BaseTest : BaseEntity
-	{
+	{        
 		protected virtual string downloadPath {get { return "../../download/"; }}
 		protected static TestContext _testContext;
 		private string _baseUrl;
@@ -32,9 +32,10 @@ namespace Product.Framework
 		/// </summary>
 		[TestInitialize]
 		public virtual void SetUp()
-		{
-            driver = new Driver(WebBrowsers.Chrome);           
-			RunOnce();
+		{            
+            driver = new Driver(WebBrowsers.Chrome);
+            driverId = driver.GetDriverKey();
+            RunOnce();
 			RunConfigurator.RunPath = "resources/run.xml";
 			RunConfigurator.DownloadPath = downloadPath;
 			RunConfigurator.ResourcesPath = "resources/";

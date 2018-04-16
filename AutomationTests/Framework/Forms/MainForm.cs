@@ -5,8 +5,7 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms
 {
 	public class MainForm : BaseForm
-	{
-        private Guid driverId;
+	{        
 
         private static readonly By TitleLocator = By.XPath("//a[contains(@href, 'SignIn')][contains(@class, 'btn')]");
         
@@ -18,7 +17,7 @@ namespace Product.Framework.Forms
         private readonly Button englishLanguageListOptionButton ;
         private readonly Button currentlySelectedLanguageButton;
         
-		public MainForm(Guid driverId) : base(TitleLocator, "Main Form")
+		public MainForm(Guid driverId) : base(TitleLocator, "Main Form",driverId)
 		{
             this.driverId = driverId;
             registerButton = new Button(By.XPath("//a[contains(@href, 'Register')][contains(@class, 'btn')]"), "Register button", driverId);

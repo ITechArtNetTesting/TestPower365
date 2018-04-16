@@ -11,10 +11,9 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
     public class ProfileTranslateSourceEmailForm : BaseWizardStepForm
     {
         private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='WouldYouLikeToTranslateSourceEmail']");
+        
 
-        private Guid driverId;
-
-        public ProfileTranslateSourceEmailForm(Guid driverId) : base(TitleLocator, "Profile translate source email")
+        public ProfileTranslateSourceEmailForm(Guid driverId) : base(TitleLocator, "Profile translate source email",driverId)
         {
             this.driverId = driverId;
         }

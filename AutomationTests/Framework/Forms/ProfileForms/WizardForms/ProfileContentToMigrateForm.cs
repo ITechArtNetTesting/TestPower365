@@ -14,10 +14,9 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
     public class ProfileContentToMigrateForm : BaseWizardStepForm
     {
               private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='DoYouWantToCopyLitigationHoldSettingsAndData']");
+        
 
-        private Guid driverId;
-
-        public ProfileContentToMigrateForm(Guid driverId) : base(TitleLocator, "Content to migrate form")
+        public ProfileContentToMigrateForm(Guid driverId) : base(TitleLocator, "Content to migrate form",driverId)
         {
             this.driverId = driverId;
         }
@@ -25,8 +24,8 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
         public void SelectType(ContentType type)
         {
             Log.Info("Selecting: "+type.GetValue());
-            Label typeLabel = new Label(By.XPath($"//label[contains(@for, '{type.GetValue()}')]"), "Type label");
-            RadioButton typeRadioButton = new RadioButton(By.Id($"{type.GetValue()}"), "Type radiobutton");
+            Label typeLabel = new Label(By.XPath($"//label[contains(@for, '{type.GetValue()}')]"), "Type label",driverId);
+            RadioButton typeRadioButton = new RadioButton(By.Id($"{type.GetValue()}"), "Type radiobutton",driverId);
             typeLabel.Click();
             try
             {

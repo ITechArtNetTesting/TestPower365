@@ -12,46 +12,53 @@ namespace Product.Framework.Forms
 	/// </summary>
 	/// <seealso cref="BaseEntity" />
 	public class BaseForm : BaseEntity
-	{
+	{        
+       
         //NOTE: CHECK 1.10 version
-		private readonly Button allProjectsButton = new Button(By.XPath("//*[@id='actionbar']//a[contains(@href, 'Project/List')]"),
-			"All projects button");
+		private readonly Button allProjectsButton ;
 
-		private readonly Button favoritesButton =
-			new Button(By.XPath("//*[@id='projectToolbar']//i[contains(@class, 'fa-star-o')]/.."), "Favorites button");
+		private readonly Button favoritesButton ;
 
-		private readonly Button homeButton = new Button(By.XPath(".//*[@id='breadcrumbsContainer']//a[text()='Home']"),
-			"Home button");
+		private readonly Button homeButton ;
 
-	    private readonly Button backToDashboardButton = new Button(
-	        By.XPath("//button[contains(@data-bind, 'goToDashboard')]"), "Back to dashboard button");
+	    private readonly Button backToDashboardButton;
 
         /// <summary>
         ///     The locator
         /// </summary>
         private readonly By locator;
 
-		private readonly Button menuButton = new Button(By.Id("hamburger"), "Main menu button");
+		private readonly Button menuButton ;
 
 		/// <summary>
 		///     The name
 		/// </summary>
 		private readonly string name;
 
-		private readonly Button tenantRestruncuringButton =
-			new Button(By.XPath("//div[@class='side-menu']//a[contains(@href, 'TenantRestructuring')]"),
-				"Tenant restructuring button");
+		private readonly Button tenantRestruncuringButton ;
 
 		/// <summary>
 		///     Initializes a new instance of the <see cref="BaseForm" /> class.
 		/// </summary>
 		/// <param name="locator">The locator.</param>
 		/// <param name="name">The name.</param>
-		protected BaseForm(By locator, string name)
+		protected BaseForm(By locator, string name, Guid driverId)
 		{
+            this.driverId = driverId;
 			this.locator = locator;
 			this.name = name;
-			AssertIsPresent();
+            allProjectsButton = new Button(By.XPath("//*[@id='actionbar']//a[contains(@href, 'Project/List')]"),"All projects button",driverId);
+            favoritesButton =new Button(By.XPath("//*[@id='projectToolbar']//i[contains(@class, 'fa-star-o')]/.."), "Favorites button",driverId);
+            homeButton = new Button(By.XPath(".//*[@id='breadcrumbsContainer']//a[text()='Home']"),"Home button",driverId);
+            backToDashboardButton = new Button(By.XPath("//button[contains(@data-bind, 'goToDashboard')]"), "Back to dashboard button",driverId);
+            menuButton = new Button(By.Id("hamburger"), "Main menu button",driverId);
+            tenantRestruncuringButton =new Button(By.XPath("//div[@class='side-menu']//a[contains(@href, 'TenantRestructuring')]"),"Tenant restructuring button",driverId);
+            addLinkButton =new Button(By.XPath("//div[contains(@class, 'popover-content')]//i[contains(@class, 'fa-plus')]/.."),"Add link button",driverId);
+            favoriteNameTextBox =new TextBox(By.XPath("//div[contains(@class, 'popover-content')]//input[contains(@data-bind, 'description')]"),"Favorite link name",driverId);
+            okButton =new Button(By.XPath("//div[contains(@class, 'popover-content')]//div[contains(@class, 'panel-footer')]//a[contains(text(), 'OK')]"),"OK button",driverId);
+            editLinksButton =new Button(By.XPath("//div[contains(@class, 'popover-content')]//a[contains(@data-bind, 'openEditLinks')]"),"Edit links button",driverId);
+            closeEditLinksDialogButton =new Button(By.XPath("//div[contains(@class, 'modal in')]//button[contains(text(), 'Close')]"),"Close edit links dialog",driverId);
+            AssertIsPresent();
 		}
 
 		/// <summary>
@@ -59,14 +66,15 @@ namespace Product.Framework.Forms
 		/// </summary>
 		private void AssertIsPresent()
 		{
-			BaseElement.WaitForElementPresent(locator, "Form " + name);
+            //BaseElement.WaitForElementPresent(locator, "Form " + name);
+            new Element(locator, "Form " + name, driverId).WaitForElementPresent();
 			Log.Info($"Form '{name}' is ready:");
 		}
 
 	    public void GoToClientRegistration()
 	    {
             Log.Info("Navigating to client registration");
-            Browser.GetDriver().Navigate().GoToUrl(RunConfigurator.GetValue("baseurl")+ "Account/Register");
+            Driver.GetDriver(driverId).Navigate().GoToUrl(RunConfigurator.GetValue("baseurl")+ "Account/Register");
 	    }
 
 	    /// <summary>
@@ -75,20 +83,21 @@ namespace Product.Framework.Forms
 		/// <param name="text">The text.</param>
 		public void CheckTextOnForm(string text)
 		{
-			BaseElement.WaitForElementPresent(By.XPath("//*[contains(.,'" + text + "')]"), text);
+            //BaseElement.WaitForElementPresent(By.XPath("//*[contains(.,'" + text + "')]"), text);
+            new Element(By.XPath("//*[contains(.,'" + text + "')]"), text, driverId).WaitForElementPresent();
 			Log.Info($"Text '{text}' is shown on the page");
 		}
 
 		public void ScrollToTheBottom()
 		{
 			Log.Info("Scrolling to the bottom of the page");
-			((IJavaScriptExecutor) Browser.GetDriver()).ExecuteScript("window.scrollTo(0, document.body.scrollHeight - 10)");
+			((IJavaScriptExecutor) Driver.GetDriver(driverId)).ExecuteScript("window.scrollTo(0, document.body.scrollHeight - 10)");
 		}
 
 		public void ScrollToTop()
 		{
 			Log.Info("Scrolling to the bottom of the page");
-			((IJavaScriptExecutor) Browser.GetDriver()).ExecuteScript("window.scrollTo(0, 0)");
+			((IJavaScriptExecutor) Driver.GetDriver(driverId)).ExecuteScript("window.scrollTo(0, 0)");
 		}
 
 		/// <summary>
@@ -98,7 +107,8 @@ namespace Product.Framework.Forms
 		/// <param name="name">The name.</param>
 		private void ElementIsPresent(By element, string name)
 		{
-			BaseElement.WaitForElementPresent(element, "Form " + name);
+            //BaseElement.WaitForElementPresent(element, "Form " + name);
+            new Element(element, "Form " + name, driverId).WaitForElementPresent();
 			Log.Info($"Form '{name}' has appeared");
 		}
 
@@ -109,7 +119,7 @@ namespace Product.Framework.Forms
 		/// <returns>System.String.</returns>
 		public void GoToMainPage()
 		{
-			Browser.GetDriver().Navigate().GoToUrl(RunConfigurator.GetValue("baseurl"));
+			Driver.GetDriver(driverId).Navigate().GoToUrl(RunConfigurator.GetValue("baseurl"));
 		}
 
 		/// <summary>
@@ -118,8 +128,9 @@ namespace Product.Framework.Forms
 		/// <param name="text">The text.</param>
 		public void AssertTextIsPresent(string text)
 		{
-			BaseElement.WaitForElementPresent(By.XPath("//*[contains(text(),'" + text + "')]"), "");
-			var elements = Browser.GetDriver().FindElements(By.XPath("//*[contains(text(),'" + text + "')]"));
+            //BaseElement.WaitForElementPresent(By.XPath("//*[contains(text(),'" + text + "')]"), "");
+            new Element(By.XPath("//*[contains(text(),'" + text + "')]"), "", driverId).WaitForElementPresent();
+			var elements = Driver.GetDriver(driverId).FindElements(By.XPath("//*[contains(text(),'" + text + "')]"));
 			Assert.IsTrue(elements.Count > 0);
 		}
 
@@ -131,7 +142,7 @@ namespace Product.Framework.Forms
 
 	    public void SwitchToMainWindow()
 		{
-			Browser.GetDriver().SwitchTo().Window(Store.MainHandle);
+			Driver.GetDriver(driverId).SwitchTo().Window(Store.MainHandle);
 		}
 
 		public void OpenMainMenu()
@@ -174,25 +185,37 @@ namespace Product.Framework.Forms
 		///     Ats the main menu.
 		/// </summary>
 		/// <returns>MainMenu.</returns>
-		public MainMenu AtMainMenu()
+		public MainMenu AtMainMenu(Guid driverId)
 		{
-			return new MainMenu();
+			return new MainMenu(driverId);
 		}
 
 		#region[Menu]
 
 		public class MainMenu
 		{
-			private readonly Button allProjectsButton =
-				new Button(By.XPath("//ul[@id='actionbar']//a[contains(text(), 'All Projects')]"), "All projects button");
-			private readonly Button licensingButton = new Button(By.XPath("//a[contains(@href, 'Licensing')]"), "Licensing button");
-		    private readonly Button languageListButton = new Button(By.Id("language-list"), "Language list button");
-		    private readonly Label expandedDropdownLabel = new Label(By.XPath("//button[contains(@class, 'dropdown-toggle') and contains(@aria-expanded, 'true')]"), "Expanded dropdown");
+            private Guid driverId;
+
+            public MainMenu(Guid driverId)
+            {
+                this.driverId = driverId;
+                allProjectsButton = new Button(By.XPath("//ul[@id='actionbar']//a[contains(text(), 'All Projects')]"), "All projects button", driverId);
+                licensingButton = new Button(By.XPath("//a[contains(@href, 'Licensing')]"), "Licensing button", driverId);
+                languageListButton = new Button(By.Id("language-list"), "Language list button",driverId);
+                expandedDropdownLabel = new Label(By.XPath("//button[contains(@class, 'dropdown-toggle') and contains(@aria-expanded, 'true')]"), "Expanded dropdown",driverId);
+                clientDropdownButton = new Button(By.XPath("//li[.//input[contains(@id, 'set-client-url')]]//button[contains(@class, 'dropdown')]"), "Client dropdown button",driverId);
+                profilesButton = new Button(By.XPath("//div[@id='actionbar' and not(contains(@class, 'hidden'))]//*[contains(@class, 'menulink')]//*[contains(text(), 'Migration Profiles')]"), "Profiles button",driverId);
+            }
+
+			private readonly Button allProjectsButton ;
+			private readonly Button licensingButton ;
+		    private readonly Button languageListButton ;
+		    private readonly Label expandedDropdownLabel ;
 		    private const string LanguageLocator = "//div[contains(@id, 'language-list')]//a[contains(text(), '{0}')]";
 		    private const string ClientLocator = "//div[contains(@class, 'open')]//a[contains(text(), '{0}')]";
             private const string CurrentLanguageLocator = "//*[contains(@data-bind, 'selectedLanguage') and contains(text(), '{0}')]";
-            private readonly Button clientDropdownButton = new Button(By.XPath("//li[.//input[contains(@id, 'set-client-url')]]//button[contains(@class, 'dropdown')]"), "Client dropdown button");
-            private Button profilesButton => new Button(By.XPath("//div[@id='actionbar' and not(contains(@class, 'hidden'))]//*[contains(@class, 'menulink')]//*[contains(text(), 'Migration Profiles')]"), "Profiles button");
+            private readonly Button clientDropdownButton ;
+            private Button profilesButton ;
             public void OpenLicensing()
 			{
 				Log.Info("Opening licensing");
@@ -217,12 +240,12 @@ namespace Product.Framework.Forms
 			     {
 			       clientDropdownButton.Click();
                  }
-			     new Button(By.XPath(String.Format(ClientLocator, role)), role + " button").Click();
+			     new Button(By.XPath(String.Format(ClientLocator, role)), role + " button",driverId).Click();
 			}
 
 		    public void SelectLanguage(string language)
 		    {
-		        if (!new Label(By.XPath(String.Format(CurrentLanguageLocator, language)), "Current language locator").IsPresent())
+		        if (!new Label(By.XPath(String.Format(CurrentLanguageLocator, language)), "Current language locator",driverId).IsPresent())
 		        {
 		            languageListButton.Click();
 		            try
@@ -233,7 +256,7 @@ namespace Product.Framework.Forms
 		            {
 		                languageListButton.Click();
 		            }
-		            new Button(By.XPath(String.Format(LanguageLocator, language)), language + " language").Click();
+		            new Button(By.XPath(String.Format(LanguageLocator, language)), language + " language",driverId).Click();
                 }
 		    }
 
@@ -250,16 +273,16 @@ namespace Product.Framework.Forms
         {
             if (jQueryExists())
             {
-                var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromMinutes(1));
+                var wait = new WebDriverWait(Driver.GetDriver(driverId), TimeSpan.FromMinutes(1));
                 wait.PollingInterval = TimeSpan.FromMilliseconds(100);
-                wait.Until(wd => (bool)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0"));
+                wait.Until(wd => (bool)(Driver.GetDriver(driverId) as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0"));
             }
         }
-        static bool jQueryExists()
+        public bool jQueryExists()
         {
             try
             {
-                (Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0");
+                (Driver.GetDriver(driverId) as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0");
                 return true;
             }
             catch (Exception)
@@ -269,7 +292,7 @@ namespace Product.Framework.Forms
         }
         public void WaitForDOM()
         {
-            var wait = new WebDriverWait(Browser.GetDriver(),
+            var wait = new WebDriverWait(Driver.GetDriver(driverId),
                 TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
             try
             {
@@ -278,7 +301,7 @@ namespace Product.Framework.Forms
                     try
                     {
                         return
-                            ((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript("return document.readyState")
+                            ((IJavaScriptExecutor)Driver.GetDriver(driverId)).ExecuteScript("return document.readyState")
                                 .Equals("complete");
                     }
                     catch (Exception)
@@ -294,23 +317,13 @@ namespace Product.Framework.Forms
 
         #region [Favorites]
 
-        private readonly Button addLinkButton =
-			new Button(By.XPath("//div[contains(@class, 'popover-content')]//i[contains(@class, 'fa-plus')]/.."),
-				"Add link button");
+        private readonly Button addLinkButton ;
 
-		private readonly TextBox favoriteNameTextBox =
-			new TextBox(By.XPath("//div[contains(@class, 'popover-content')]//input[contains(@data-bind, 'description')]"),
-				"Favorite link name");
+		private readonly TextBox favoriteNameTextBox ;
 
-		private readonly Button okButton =
-			new Button(
-				By.XPath(
-					"//div[contains(@class, 'popover-content')]//div[contains(@class, 'panel-footer')]//a[contains(text(), 'OK')]"),
-				"OK button");
+		private readonly Button okButton ;
 
-		private readonly Button editLinksButton =
-			new Button(By.XPath("//div[contains(@class, 'popover-content')]//a[contains(@data-bind, 'openEditLinks')]"),
-				"Edit links button");
+		private readonly Button editLinksButton ;
 
 		public void OpenAddLinkDialog()
 		{
@@ -323,8 +336,8 @@ namespace Product.Framework.Forms
 			Log.Info("Opening link: " + linkName);
 			var linkButton =
 				new Button(By.XPath($"//div[contains(@class, 'popover-content')]//a[contains(text(), '{linkName}')]"),
-					"Link " + linkName);
-			var je = (IJavaScriptExecutor) Browser.GetDriver();
+					"Link " + linkName,driverId);
+			var je = (IJavaScriptExecutor) Driver.GetDriver(driverId);
 			je.ExecuteScript("arguments[0].scrollIntoView(true);", linkButton.GetElement());
 			linkButton.Click();
 		}
@@ -353,7 +366,7 @@ namespace Product.Framework.Forms
 			Log.Info("Asserting link is present: " + linkName);
 			var linkButton =
 				new Button(By.XPath($"//div[contains(@class, 'popover-content')]//a[contains(text(), '{linkName}')]"),
-					"Link " + linkName);
+					"Link " + linkName,driverId);
 			linkButton.WaitForElementPresent();
 		}
 
@@ -362,7 +375,7 @@ namespace Product.Framework.Forms
 			Log.Info("Asserting link is absent: " + linkName);
 			var linkButton =
 				new Button(By.XPath($"//div[contains(@class, 'popover-content')]//a[contains(text(), '{linkName}')]"),
-					"Link " + linkName);
+					"Link " + linkName,driverId);
 			linkButton.WaitForElementDisappear();
 		}
 
@@ -370,9 +383,7 @@ namespace Product.Framework.Forms
 
 		#region [Edit Links dialog]
 
-		private readonly Button closeEditLinksDialogButton =
-			new Button(By.XPath("//div[contains(@class, 'modal in')]//button[contains(text(), 'Close')]"),
-				"Close edit links dialog");
+		private readonly Button closeEditLinksDialogButton;
 
 		public void CloseEditLinksDialog()
 		{
@@ -385,7 +396,7 @@ namespace Product.Framework.Forms
 		{
 			Log.Info("Removing link: " + linkName);
 			var links =
-				Browser.GetDriver()
+				Driver.GetDriver(driverId)
 					.FindElements(
 						By.XPath(
 							"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));
@@ -395,7 +406,7 @@ namespace Product.Framework.Forms
 					link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).GetAttribute("value").Trim().ToLower() ==
 					linkName.Trim().ToLower())
 				{
-					var je = (IJavaScriptExecutor) Browser.GetDriver();
+					var je = (IJavaScriptExecutor) Driver.GetDriver(driverId);
 					je.ExecuteScript("arguments[0].scrollIntoView(true);", link.FindElement(By.XPath(".//button")));
 					link.FindElement(By.XPath(".//button")).Click();
 				}
@@ -406,7 +417,7 @@ namespace Product.Framework.Forms
 		{
 			Log.Info($"Reordering link {name} to {url} url");
 			var links =
-				Browser.GetDriver()
+				Driver.GetDriver(driverId)
 					.FindElements(
 						By.XPath(
 							"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));
@@ -416,7 +427,7 @@ namespace Product.Framework.Forms
 					link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).GetAttribute("value").Trim().ToLower() ==
 					name.Trim().ToLower())
 				{
-					var je = (IJavaScriptExecutor) Browser.GetDriver();
+					var je = (IJavaScriptExecutor) Driver.GetDriver(driverId);
 					je.ExecuteScript("arguments[0].scrollIntoView(true);",
 						link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")));
 					link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")).Clear();
@@ -430,7 +441,7 @@ namespace Product.Framework.Forms
 		{
 			Log.Info($"Renaming link {oldName} to {newName}");
 			var links =
-				Browser.GetDriver()
+				Driver.GetDriver(driverId)
 					.FindElements(
 						By.XPath(
 							"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));
@@ -440,7 +451,7 @@ namespace Product.Framework.Forms
 					link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).GetAttribute("value").Trim().ToLower() ==
 					oldName.Trim().ToLower())
 				{
-					var je = (IJavaScriptExecutor) Browser.GetDriver();
+					var je = (IJavaScriptExecutor) Driver.GetDriver(driverId);
 					je.ExecuteScript("arguments[0].scrollIntoView(true);",
 						link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")));
 					link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).Clear();
@@ -454,7 +465,7 @@ namespace Product.Framework.Forms
 		{
 			Log.Info($"Asserting link {name} is reorderd to {url}");
 			var links =
-				Browser.GetDriver()
+				Driver.GetDriver(driverId)
 					.FindElements(
 						By.XPath(
 							"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));

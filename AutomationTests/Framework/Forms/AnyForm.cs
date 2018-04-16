@@ -5,17 +5,16 @@ using System;
 namespace Product.Framework.Forms
 {
     public class AnyForm : BaseForm
-    {
-        private Guid driverId;
+    {        
 
         private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'p365-logo')]");
 
-        private readonly Label landingLabel =
-            new Label(By.XPath("//p[contains(text(), 'Check out the Power 365 Migration process')]"), "Landing label");
+        private readonly Label landingLabel ;
 
-        public AnyForm(Guid driverId) : base(TitleLocator, "Any form")
+        public AnyForm(Guid driverId) : base(TitleLocator, "Any form",driverId)
         {
             this.driverId = driverId;
+            landingLabel =new Label(By.XPath("//p[contains(text(), 'Check out the Power 365 Migration process')]"), "Landing label",driverId);
         }
 
         public bool IsLandingForm()

@@ -9,15 +9,15 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms
 {
 	public class Office365AccountTypeForm : BaseForm
-	{
-        private Guid driverId;
+	{        
 
         private static readonly By TitleLocator = By.XPath("//div[contains(text(), 'Work or school account')]");
-		private readonly Button workAccountButton = new Button(By.XPath("//div[contains(text(), 'Work or school account')]"), "Work account button");
-		public Office365AccountTypeForm(Guid driverId) : base(TitleLocator, "Office 365 account type form")
+		private readonly Button workAccountButton ;
+		public Office365AccountTypeForm(Guid driverId) : base(TitleLocator, "Office 365 account type form",driverId)
 		{
             this.driverId = driverId;
-		}
+            workAccountButton = new Button(By.XPath("//div[contains(text(), 'Work or school account')]"), "Work account button",driverId);
+        }
 
 		public void SelectWorkAccount()
 		{

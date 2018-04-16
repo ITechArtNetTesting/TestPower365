@@ -10,20 +10,23 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
 {
 	public class DefineMigrationWavesForm : BaseWizardStepForm
-	{
-        private Guid driverId;
+	{        
 
         private static readonly By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Would you like to define your migration waves now')]");
 
-		public DefineMigrationWavesForm(Guid driverId) : base(TitleLocator, "Define migration waves form")
+		public DefineMigrationWavesForm(Guid driverId) : base(TitleLocator, "Define migration waves form",driverId)
 		{
             this.driverId = driverId;
-		}
-		private Label yesWavesLabel = new Label(By.XPath("//label[contains(@for, 'wavesYes')]"), "Yes, define waves now label");
-		private RadioButton yesWavesRadioButton =new RadioButton(By.XPath("//input[contains(@id, 'wavesYes')]"), "Yes, define waves now radiobutton");
-		private Label noWavesLabel =new Label(By.XPath("//label[contains(@for, 'wavesNo')]"), "No, thanks label");
-		private RadioButton noWavesRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'wavesNo')]"), "No, thanks radiobutton");
+            yesWavesLabel = new Label(By.XPath("//label[contains(@for, 'wavesYes')]"), "Yes, define waves now label",driverId);
+            yesWavesRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'wavesYes')]"), "Yes, define waves now radiobutton",driverId);
+            noWavesLabel = new Label(By.XPath("//label[contains(@for, 'wavesNo')]"), "No, thanks label",driverId);
+            noWavesRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'wavesNo')]"), "No, thanks radiobutton",driverId);
+        }
+		private Label yesWavesLabel ;
+		private RadioButton yesWavesRadioButton ;
+		private Label noWavesLabel ;
+		private RadioButton noWavesRadioButton ;
 
 		public void SelectYes()
 		{

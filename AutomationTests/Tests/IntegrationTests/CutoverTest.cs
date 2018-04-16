@@ -54,7 +54,7 @@ namespace Product.Tests.IntegrationTests
                 catch (Exception)
                 {
                     Log.Info("Apply button is not enabled");
-                    Browser.GetDriver().Navigate().Refresh();
+                    Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
                     User.AtUsersForm().SelectEntryBylocator(sourceMailbox13);
                     User.AtUsersForm().SelectAction(ActionType.Sync);
                     User.AtUsersForm().Apply();
@@ -72,7 +72,7 @@ namespace Product.Tests.IntegrationTests
                 catch (Exception)
                 {
                     Log.Info("Apply button is not enabled");
-                    Browser.GetDriver().Navigate().Refresh();
+                    Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
                     User.AtUsersForm().SelectEntryBylocator(sourceMailbox14);
                     User.AtUsersForm().SelectAction(ActionType.Sync);
                     User.AtUsersForm().Apply();
@@ -90,7 +90,7 @@ namespace Product.Tests.IntegrationTests
                 catch (Exception)
                 {
                     Log.Info("Apply button is not enabled");
-                    Browser.GetDriver().Navigate().Refresh();
+                    Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
                     User.AtUsersForm().SelectEntryBylocator(sourceMailbox15);
                     User.AtUsersForm().SelectAction(ActionType.Sync);
                     User.AtUsersForm().Apply();
@@ -117,7 +117,7 @@ namespace Product.Tests.IntegrationTests
                 catch (Exception)
                 {
                     Log.Info("Apply button is not enabled");
-                    Browser.GetDriver().Navigate().Refresh();
+                    Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
                     User.AtUsersForm().SelectEntryBylocator(sourceMailbox15);
                     User.AtUsersForm().SelectAction(ActionType.Cutover);
                     User.AtUsersForm().Apply();
@@ -135,7 +135,7 @@ namespace Product.Tests.IntegrationTests
                 catch (Exception)
                 {
                     Log.Info("Apply button is not enabled");
-                    Browser.GetDriver().Navigate().Refresh();
+                    Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
                     User.AtUsersForm().SelectEntryBylocator(sourceMailbox14);
                     User.AtUsersForm().SelectAction(ActionType.Cutover);
                     User.AtUsersForm().Apply();
@@ -153,7 +153,7 @@ namespace Product.Tests.IntegrationTests
                 catch (Exception)
                 {
                     Log.Info("Apply button is not enabled");
-                    Browser.GetDriver().Navigate().Refresh();
+                    Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
                     User.AtUsersForm().SelectEntryBylocator(sourceMailbox13);
                     User.AtUsersForm().SelectAction(ActionType.Cutover);
                     User.AtUsersForm().Apply();
@@ -244,7 +244,7 @@ namespace Product.Tests.IntegrationTests
             }
             catch (Exception)
             {
-                LogHtml(Browser.GetDriver().PageSource);
+                LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
                 throw;
             }
         }

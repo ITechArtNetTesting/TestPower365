@@ -8,12 +8,11 @@ using OpenQA.Selenium;
 namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
 {
 	public class DiscoveryIsCompleteForm : BaseWizardStepForm
-	{
-        private Guid driverId;
+	{        
 
         private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Discovery is Complete')]");
 
-		public DiscoveryIsCompleteForm(Guid driverId) : base(TitleLocator, "Discovery is complete form")
+		public DiscoveryIsCompleteForm(Guid driverId) : base(TitleLocator, "Discovery is complete form",driverId)
 		{
             this.driverId = driverId;
 		}

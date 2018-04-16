@@ -12,10 +12,9 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
     {
        
         private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='HowWouldYouLikeToFilterEmailMessages']");
+        
 
-        private Guid driverId;
-
-        public ProfileFilterMessagesForm(Guid driverId) : base(TitleLocator, "Profile filter messages form")
+        public ProfileFilterMessagesForm(Guid driverId) : base(TitleLocator, "Profile filter messages form",driverId)
         {
             this.driverId = driverId;
         }

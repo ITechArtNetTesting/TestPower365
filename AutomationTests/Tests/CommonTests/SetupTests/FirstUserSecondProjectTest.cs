@@ -45,19 +45,19 @@ namespace Product.Tests.CommonTests.SetupTests
             User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
             Office365TenantAuthorization(RunConfigurator.GetTenantValue("T3->T4", "source", "user"), RunConfigurator.GetTenantValue("T3->T4", "source", "password"));
             
-            Browser.GetDriver().SwitchTo().Window(Store.MainHandle);
+            Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(Store.MainHandle);
             User.AtAddTenantsForm().WaitForTenantAdded(1);
 
             User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
             Office365TenantAuthorization(RunConfigurator.GetTenantValue("T3->T4", "target", "user"), RunConfigurator.GetTenantValue("T3->T4", "target", "password"));
 
-            Browser.GetDriver().SwitchTo().Window(Store.MainHandle);
+            Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(Store.MainHandle);
             User.AtAddTenantsForm().WaitForTenantAdded(2);
 
             User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
             Office365TenantAuthorization(RunConfigurator.GetTenantValue("T1->T2", "target", "user"), RunConfigurator.GetTenantValue("T1->T2", "target", "password"));
             
-            Browser.GetDriver().SwitchTo().Window(Store.MainHandle);
+            Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(Store.MainHandle);
             User.AtAddTenantsForm().WaitForTenantAdded(3);
 
             User.AtAddTenantsForm().GoNext();

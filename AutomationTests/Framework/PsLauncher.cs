@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Product.Framework
 {
 	public class PsLauncher : BaseEntity
-	{
+	{       
 		[DllImport("kernel32.dll", SetLastError = true)]
 		public static extern bool Wow64DisableWow64FsRedirection(ref IntPtr ptr);
 	    [Flags]

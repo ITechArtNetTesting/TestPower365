@@ -55,7 +55,7 @@ namespace Product.Tests.MailOnlyTests.ImportAndExportTests
             }
 		    catch (Exception e)
 		    {
-		        LogHtml(Browser.GetDriver().PageSource);
+		        LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
                 throw e;
             }
 		}

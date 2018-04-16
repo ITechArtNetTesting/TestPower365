@@ -13,19 +13,22 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
     public class ProfileCreateDistributionGroupsForm : BaseWizardStepForm
     {
         private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you want to create new distribution groups in the target tenant')]");
+        
 
-        private Guid driverId;
-
-        public ProfileCreateDistributionGroupsForm(Guid driverId) : base(TitleLocator, "Create distributon groups form")
+        public ProfileCreateDistributionGroupsForm(Guid driverId) : base(TitleLocator, "Create distributon groups form",driverId)
         {
             this.driverId = driverId;
+            yesLabel = new Label(By.XPath("//label[contains(@for, 'createGroups')]"), "Yes label",driverId);
+            yesRadioButton = new RadioButton(By.Id("createGroups"), "Yes radiobutton",driverId);
+            noLabel = new Label(By.XPath("//label[contains(@for, 'dontCreateGroups')]"), "No label",driverId);
+            noRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'dontCreateGroups')]"), "No radiobutton",driverId);
         }
 
      
-        private Label yesLabel = new Label(By.XPath("//label[contains(@for, 'createGroups')]"), "Yes label");
-        private RadioButton yesRadioButton = new RadioButton(By.Id("createGroups"), "Yes radiobutton");
-        private Label noLabel = new Label(By.XPath("//label[contains(@for, 'dontCreateGroups')]"), "No label");
-        private RadioButton noRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'dontCreateGroups')]"), "No radiobutton");
+        private Label yesLabel;
+        private RadioButton yesRadioButton ;
+        private Label noLabel ;
+        private RadioButton noRadioButton ;
 
         public void SelectYes()
         {

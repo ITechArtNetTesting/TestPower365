@@ -8,22 +8,17 @@ namespace Product.Framework.Forms
 	{
 		private static readonly By TitleLocator = By.XPath("//h2[contains(text(), 'Your project has been submitted!')]");
 
-		private readonly Label discoveryWarningLabel =
-			new Label(
-				By.XPath(
-					"//h3[contains(text(), 'Please note that the initial discovery of users will take some time to complete.') and contains(text(), 'In the mean time, you may wish to:')]"),
-				"Discovery warning label");
+		private readonly Label discoveryWarningLabel ;
 
-		private readonly Button reviewStatusButton =
-			new Button(By.XPath("//div[contains(@id, 'submitted')]//a[contains(@href, 'projectId')]"),
-				"Review your project status button");
+		private readonly Button reviewStatusButton ;
+        
 
-        private Guid driverId;
-
-        public SubmittedProjectForm(Guid driverId) : base(TitleLocator, "Submitted project form")
+        public SubmittedProjectForm(Guid driverId) : base(TitleLocator, "Submitted project form",driverId)
 		{
             this.driverId = driverId;
-		}
+            discoveryWarningLabel =new Label(By.XPath("//h3[contains(text(), 'Please note that the initial discovery of users will take some time to complete.') and contains(text(), 'In the mean time, you may wish to:')]"),"Discovery warning label",driverId);
+            reviewStatusButton =new Button(By.XPath("//div[contains(@id, 'submitted')]//a[contains(@href, 'projectId')]"),"Review your project status button",driverId);
+        }
 
 		public void ReviewProject()
 		{

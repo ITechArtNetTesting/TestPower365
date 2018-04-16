@@ -77,7 +77,7 @@ namespace Product.Tests.PowerShellTests
 		                    catch (Exception)
 		                    {
 		                        Log.Info("Apply button is disabled");
-		                        Browser.GetDriver().Navigate().Refresh();
+		                        Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
 		                        User.AtUsersForm().SelectEntryBylocator(psMailbox);
 		                        User.AtUsersForm().SelectAction(ActionType.Sync);
 		                        User.AtUsersForm().Apply();
@@ -94,7 +94,7 @@ namespace Product.Tests.PowerShellTests
             }
 		    catch (Exception)
 		    {
-		        LogHtml(Browser.GetDriver().PageSource);
+		        LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
                 throw;
             }
 		}

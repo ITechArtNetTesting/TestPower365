@@ -40,7 +40,7 @@ namespace Product.Framework.Forms
 
 		private readonly Button submitButton ;
 
-		public RegistrationForm(Guid driverId) : base(TitleLocator, "Registration Form")
+		public RegistrationForm(Guid driverId) : base(TitleLocator, "Registration Form",driverId)
 		{
             this.driverId = driverId;
             AddressCityTextBox= new TextBox(By.Id("AddressCity"), "Address City",driverId);

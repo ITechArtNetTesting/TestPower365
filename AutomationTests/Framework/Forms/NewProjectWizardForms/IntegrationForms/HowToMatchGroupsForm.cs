@@ -9,13 +9,12 @@ using Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms;
 namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
 	public class HowToMatchGroupsForm : HowToMatchUsersForm
-	{
-        private Guid driverId;
+	{        
 
         private static readonly By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'How would you like to match source distribution groups')]");
 
-		public HowToMatchGroupsForm(Guid driverId) : base(TitleLocator, "How to match distribution groups form")
+		public HowToMatchGroupsForm(Guid driverId) : base(TitleLocator, "How to match distribution groups form",driverId)
 		{
             this.driverId = driverId;
 		}

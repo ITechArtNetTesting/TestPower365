@@ -5,16 +5,16 @@ using System;
 namespace Product.Framework.Forms.NewProjectWizardForms
 {
 	public class SetProjectNameForm : BaseWizardStepForm
-	{
-        private Guid driverId;
+	{        
 
         private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'What should we call this project?')]");
-	        private readonly TextBox nameTextBox = new TextBox(By.Id("projectName"), "Name textbox");
+	        private readonly TextBox nameTextBox ;
 
-        public SetProjectNameForm(Guid driverId) : base(TitleLocator, "Set project name form")
+        public SetProjectNameForm(Guid driverId) : base(TitleLocator, "Set project name form",driverId)
 		{
             this.driverId = driverId;
-		}
+            nameTextBox = new TextBox(By.Id("projectName"), "Name textbox",driverId);
+        }
 
 		public void SetName(string name)
 		{

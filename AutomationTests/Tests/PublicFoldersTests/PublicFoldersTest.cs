@@ -18,7 +18,7 @@ namespace Product.Tests.PublicFoldersTests
 	{
 		[ClassInitialize]
 		public static void ClassInit(TestContext testContext)
-		{
+		{            
 			_testContext = testContext;
 		}
 
@@ -436,7 +436,7 @@ namespace Product.Tests.PublicFoldersTests
             }
 		    catch (Exception)
 		    {
-		        LogHtml(Browser.GetDriver().PageSource);
+		        LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
                 throw;
             }
 		}

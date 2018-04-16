@@ -1,21 +1,31 @@
-﻿namespace Product.Framework.Steps
+﻿using System;
+
+namespace Product.Framework.Steps
 {
 	public class AddTenantsSteps : BaseEntity
 	{
-		private readonly UserSteps User = new UserSteps();
+        private Guid driverId;
+
+        public AddTenantsSteps(Guid driverId)
+        {
+            this.driverId = driverId;
+            User = new UserSteps(driverId);
+        }
+
+        private readonly UserSteps User;
 
 		public void PerformTwoTenantsAdding()
 		{
 			User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
             Office365TenantAuthorization(RunConfigurator.GetTenantValue("T1->T2", "source", "user"), RunConfigurator.GetTenantValue("T1->T2", "source", "password"));
 
-			Browser.GetDriver().SwitchTo().Window(Store.MainHandle);
+			Driver.GetDriver(driverId).SwitchTo().Window(Store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(1);
 
 			User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
             Office365TenantAuthorization(RunConfigurator.GetTenantValue("T1->T2", "target", "user"), RunConfigurator.GetTenantValue("T1->T2", "target", "password"));
 
-			Browser.GetDriver().SwitchTo().Window(Store.MainHandle);
+			Driver.GetDriver(driverId).SwitchTo().Window(Store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(2);
 		}
 
@@ -25,13 +35,13 @@
 			User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
             Office365TenantAuthorization(sourceTenant, sourcePassword);
             
-			Browser.GetDriver().SwitchTo().Window(Store.MainHandle);
+			Driver.GetDriver(driverId).SwitchTo().Window(Store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(1);
 
             User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
             Office365TenantAuthorization(targetTenant, targetPassword);
 
-			Browser.GetDriver().SwitchTo().Window(Store.MainHandle);
+			Driver.GetDriver(driverId).SwitchTo().Window(Store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(2);
 		}
 
@@ -40,7 +50,7 @@
 			User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
             Office365TenantAuthorization(tenant, password);
             
-			Browser.GetDriver().SwitchTo().Window(Store.MainHandle);
+			Driver.GetDriver(driverId).SwitchTo().Window(Store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(1);
 		}
 

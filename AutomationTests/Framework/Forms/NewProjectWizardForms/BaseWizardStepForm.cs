@@ -11,24 +11,26 @@ namespace Product.Framework.Forms.NewProjectWizardForms
 	public abstract class BaseWizardStepForm : BaseForm
 	{
 	    private By _titleLocator;
-		protected BaseWizardStepForm(By TitleLocator, string name) : base(TitleLocator, name)
+		protected BaseWizardStepForm(By TitleLocator, string name,Guid driverId) : base(TitleLocator, name,driverId)
 		{
-		    _titleLocator = TitleLocator;
+            this.driverId = driverId;
+            nextButton =new Button(By.XPath("//div[contains(@class, 'wizard-footer')]//button[contains(@class, 'pull-right')][not(@disabled='')]"), "Next button",driverId);
+            backButton = new Button(By.XPath("//button[contains(@data-bind, 'goBack')]"), "Back button",driverId);
+            _titleLocator = TitleLocator;
 		}
-		protected Button nextButton =
-			new Button(By.XPath("//div[contains(@class, 'wizard-footer')]//button[contains(@class, 'pull-right')][not(@disabled='')]"), "Next button");
-		protected readonly Button backButton = new Button(By.XPath("//button[contains(@data-bind, 'goBack')]"), "Back button");
+		protected Button nextButton ;
+		protected readonly Button backButton ;
 		public void GoNext()
 		{
 			Log.Info("Going next");
 			nextButton.Click();
 		    try
 		    {
-                new Label(_titleLocator, "Form locator").WaitForElementDisappear(30000);
+                new Label(_titleLocator, "Form locator",driverId).WaitForElementDisappear(30000);
 		    }
 		    catch (Exception)
 		    {
-		        nextButton = new Button(By.XPath("//button[contains(@class, 'pull-right')][not(@disabled='')][not(contains(@class, 'close'))]"), "Next button");
+		        nextButton = new Button(By.XPath("//button[contains(@class, 'pull-right')][not(@disabled='')][not(contains(@class, 'close'))]"), "Next button",driverId);
                 nextButton.Click();
             }
 		}

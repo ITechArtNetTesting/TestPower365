@@ -9,7 +9,8 @@ using T365.Database;
 namespace Product.Framework.Steps
 {
     public class CleanUpStep:BaseEntity
-    {
+    {       
+
         public void CleanUpProjectAndTenant(String clientname)
         {
             SQLQuery queryClients = new SQLQuery(RunConfigurator.GetConnectionStringDBClients());

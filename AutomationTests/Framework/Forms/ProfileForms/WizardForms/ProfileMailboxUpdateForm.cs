@@ -13,17 +13,20 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
     public class ProfileMailboxUpdateForm : BaseWizardStepForm
     {
         private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'When users switch to their target mailbox, how would you like their source mailbox to be updated')]");
+        
 
-        private Guid driverId;
-
-        public ProfileMailboxUpdateForm(Guid driverId) : base(TitleLocator, "Update mailbox form")
+        public ProfileMailboxUpdateForm(Guid driverId) : base(TitleLocator, "Update mailbox form",driverId)
         {
             this.driverId = driverId;
+            hideLabel = new Label(By.XPath("//label[contains(@for, 'hiddenSource')]"), "Yes label",driverId);
+            hideRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'hiddenSource')]"), "Yes radiobutton",driverId);
+            leaveLabel = new Label(By.XPath("//label[contains(@for, 'leaveSource')]"), "No label",driverId);
+            leaveRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'leaveSource')]"), "No radiobutton",driverId);
         }
-        private Label hideLabel = new Label(By.XPath("//label[contains(@for, 'hiddenSource')]"), "Yes label");
-        private RadioButton hideRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'hiddenSource')]"), "Yes radiobutton");
-        private Label leaveLabel = new Label(By.XPath("//label[contains(@for, 'leaveSource')]"), "No label");
-        private RadioButton leaveRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'leaveSource')]"), "No radiobutton");
+        private Label hideLabel ;
+        private RadioButton hideRadioButton ;
+        private Label leaveLabel ;
+        private RadioButton leaveRadioButton ;
 
         public void SelectHide()
         {

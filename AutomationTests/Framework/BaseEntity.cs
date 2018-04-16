@@ -11,10 +11,11 @@ namespace Product.Framework
 	/// </summary>
 	public class BaseEntity
 	{
+        protected Guid driverId;
 		protected static ILog Log;
 
 		protected BaseEntity()
-		{
+		{                        
 			XmlConfigurator.Configure();
 			Log = LogManager.GetLogger(typeof(BaseEntity));
 		}
@@ -133,7 +134,7 @@ namespace Product.Framework
         {
             if (timeoutInSec > 0 || pollIntervalSec > 0)
             {
-                var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(timeoutInSec));                
+                var wait = new WebDriverWait(Driver.GetDriver(driverId), TimeSpan.FromSeconds(timeoutInSec));                
                 wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
                 if (pollIntervalSec > 0)
                 {
@@ -158,24 +159,24 @@ namespace Product.Framework
                 }
                 return wait.Until(condition);
             }
-            return condition(Browser.GetDriver());
+            return condition(Driver.GetDriver(driverId));
         }
 
         protected T EvaluateScript<T>(string script, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
             if (timeoutInSec > 0 || pollIntervalSec > 0)
             {
-                var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(timeoutInSec));
+                var wait = new WebDriverWait(Driver.GetDriver(driverId), TimeSpan.FromSeconds(timeoutInSec));
 
                 if (pollIntervalSec > 0)
                     wait.PollingInterval = TimeSpan.FromSeconds(pollIntervalSec);
 
                 return wait.Until((webDriver) =>
                 {
-                    return (T)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript(script);
+                    return (T)(Driver.GetDriver(driverId) as IJavaScriptExecutor).ExecuteScript(script);
                 });
             }
-            return (T)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript(script);
+            return (T)(Driver.GetDriver(driverId) as IJavaScriptExecutor).ExecuteScript(script);
         }
 
         protected bool IsAjaxActive(int timeoutInSec = 10)

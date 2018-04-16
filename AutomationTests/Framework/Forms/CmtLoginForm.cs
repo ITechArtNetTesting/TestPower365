@@ -8,20 +8,20 @@ namespace Product.Framework.Forms
 	{
 		private static readonly By TitleLocator = By.Id("ctl00_PageTitleLabel");
 
-		private readonly TextBox loginTextBox = new TextBox(By.Id("ctl00_ContentPlaceHolder1_UsernameTextBox"),
-			"Login textbox");
+		private readonly TextBox loginTextBox ;
 
-		private readonly TextBox passwordTextBox = new TextBox(By.Id("ctl00_ContentPlaceHolder1_PasswordTextBox"),
-			"Password textbox");
+		private readonly TextBox passwordTextBox ;
 
-		private readonly Button signInButton = new Button(By.Id("ctl00_ContentPlaceHolder1_SubmitButton"), "Sign in button");
+		private readonly Button signInButton ;
+        
 
-        private Guid driverId;
-
-        public CmtLoginForm(Guid driverId) : base(TitleLocator, "CMT login form")
+        public CmtLoginForm(Guid driverId) : base(TitleLocator, "CMT login form",driverId)
 		{
             this.driverId = driverId;
-		}
+            loginTextBox = new TextBox(By.Id("ctl00_ContentPlaceHolder1_UsernameTextBox"),"Login textbox",driverId);
+            passwordTextBox = new TextBox(By.Id("ctl00_ContentPlaceHolder1_PasswordTextBox"),"Password textbox",driverId);
+            signInButton = new Button(By.Id("ctl00_ContentPlaceHolder1_SubmitButton"), "Sign in button",driverId);
+        }
 
 		public void SetLogin(string login)
 		{

@@ -46,7 +46,7 @@ namespace Product.Tests.IntegrationTests
                 catch (Exception)
                 {
                     Log.Info("Failed to open migration groups form");
-                    Browser.GetDriver().Navigate().Refresh();
+                    Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
                     User.AtProjectOverviewForm().OpenMigrationGroups();
                 }
                 User.AtGroupsMigrationForm().SyncUserByLocator(group1Name);
@@ -93,7 +93,7 @@ namespace Product.Tests.IntegrationTests
             }
 		    catch (Exception)
 		    {
-		        LogHtml(Browser.GetDriver().PageSource);
+		        LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
                 throw;
             }
 		}

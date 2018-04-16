@@ -9,18 +9,19 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms.PublicFolderMigrationForms
 {
 	public class PublicFolderMigrtationListForm : BasePublicFolderWizardForm
-	{
-        private Guid driverId;
+	{        
 
         private static readonly By TitleLocator = By.XPath("//h2[contains(text(), 'Do you have a list')]");
 
-		public PublicFolderMigrtationListForm(Guid driverId) : base(TitleLocator, "Do you have a list form")
+		public PublicFolderMigrtationListForm(Guid driverId) : base(TitleLocator, "Do you have a list form",driverId)
 		{
             this.driverId = driverId;
-		}
+            createNewButton = new Button(By.XPath("//label[@for='manual']"), "Create new public folder migration button",driverId);
+            uploadListButton = new Button(By.XPath("//label[@for='csvFile']"), "Upload list button",driverId);
+        }
 
-		private readonly Button createNewButton = new Button(By.XPath("//label[@for='manual']"), "Create new public folder migration button");
-		private readonly Button uploadListButton = new Button(By.XPath("//label[@for='csvFile']"), "Upload list button");
+		private readonly Button createNewButton ;
+		private readonly Button uploadListButton ;
 		public void CreatePublicMigration()
 		{
 			Log.Info("Creating public folder migration");

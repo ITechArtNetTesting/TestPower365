@@ -12,20 +12,16 @@ using Product.Framework.Enums;
 namespace Product.Framework.Forms
 {
 	public class GroupsMigrationForm : UsersForm
-	{
-        private Guid driverId;
+	{        
 
         private static readonly By TitleLocator = By.XPath("//a[contains(@data-bind, 'GroupMigrationsDialog')]");
 
-		public GroupsMigrationForm(Guid driverId) : base(TitleLocator, "Groups migration form")
+		public GroupsMigrationForm(Guid driverId) : base(TitleLocator, "Groups migration form",driverId)
 		{
             this.driverId = driverId;
-		}
-		private readonly Button actionsDropdownButton =
-			new Button(
-				By.XPath(
-					"//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"),
-				"Actions dropdown");
+            actionsDropdownButton =new Button(By.XPath("//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"),"Actions dropdown",driverId);
+        }
+		private readonly Button actionsDropdownButton;
 
         public new void SyncUserByLocator(string locator)
 		{

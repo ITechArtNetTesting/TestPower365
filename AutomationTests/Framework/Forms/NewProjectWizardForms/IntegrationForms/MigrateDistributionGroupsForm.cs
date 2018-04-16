@@ -9,19 +9,21 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
 	public class MigrateDistributionGroupsForm : BaseWizardStepForm
-	{
-        private Guid driverId;
+	{        
 
         private static readonly By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'How would you like to discover distribution groups')]");
 
-		public MigrateDistributionGroupsForm(Guid driverId) : base(TitleLocator, "Migrate distribution groups form")
+		public MigrateDistributionGroupsForm(Guid driverId) : base(TitleLocator, "Migrate distribution groups form",driverId)
 		{
             this.driverId = driverId;
-		}
-		private readonly Button allGroupsFoundButton = new Button(By.XPath("//label[contains(@for, 'migrateAllGroupsRadio')]"), "All groups found");
-		private readonly Button uploadListButton = new Button(By.XPath("//label[contains(@for, 'uploadGroupsRadio')]"), "Upload list button");
-		private readonly RadioButton uploadListRadioButton = new RadioButton(By.Id("uploadGroupsRadio"), "Upload list radiobutton");
+            allGroupsFoundButton = new Button(By.XPath("//label[contains(@for, 'migrateAllGroupsRadio')]"), "All groups found",driverId);
+            uploadListButton = new Button(By.XPath("//label[contains(@for, 'uploadGroupsRadio')]"), "Upload list button",driverId);
+            uploadListRadioButton = new RadioButton(By.Id("uploadGroupsRadio"), "Upload list radiobutton",driverId);
+        }
+		private readonly Button allGroupsFoundButton ;
+		private readonly Button uploadListButton ;
+		private readonly RadioButton uploadListRadioButton ;
 		public void SelectUploadList()
 		{
 			Log.Info("Selecting upload list");

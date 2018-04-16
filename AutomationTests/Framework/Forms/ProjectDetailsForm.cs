@@ -13,199 +13,158 @@ namespace Product.Framework.Forms
 		private static readonly By TitleLocator =
 			By.XPath("//*[@id='breadcrumbsContainer']//strong[contains(text(), 'Setup')]");
 
-		private readonly TextBox activeDirectoryTextBox =
-			new TextBox(By.XPath("//div[@aria-expanded='true']//input[contains(@class, 'k-input')]"), "Active directory textvox");
+		private readonly TextBox activeDirectoryTextBox ;
 
-		private readonly Button addGroupButton = new Button(By.Id("addGroupsBtn"), "Add group button");
+		private readonly Button addGroupButton ;
 
-		private readonly Button addTenantButton =
-			new Button(By.XPath("//div[@aria-expanded='true']//button[contains(@data-bind, 'addTenant')]"), "Add tenant button");
+		private readonly Button addTenantButton ;
 
-		private readonly Button addTenantsAccordianButton =
-			new Button(By.XPath("//h5//span[contains(text(), 'Add')][contains(text(), 'Tenants')]"),
-				"Add your tenants accordian button");
+		private readonly Button addTenantsAccordianButton ;
 
-		private readonly Button addTenantSmallButton =
-			new Button(By.XPath("//div[@aria-expanded='true']//button[text()[contains(.,'Add Tenant')]]"),
-				"Small add tenant button");
+		private readonly Button addTenantSmallButton ;
 
-		private readonly Label addTenantsStepSuccessIconLabel =
-			new Label(
-				By.XPath("//span[contains(text(), 'Add')][contains(text(), 'Tenants')]/..//i[contains(@class, 'icon-success')]"),
-				"Second step success icon");
+		private readonly Label addTenantsStepSuccessIconLabel ;
 
-		private readonly TextBox chooseFilesInput =
-			new TextBox(By.XPath("//div[contains(@class, 'modal fade in')]//input[@type='file']"), "Choose files input");
+		private readonly TextBox chooseFilesInput ;
 
-		private readonly Button configureDomainsAccordianButton =
-			new Button(By.XPath("//h5//span[contains(text(), 'Configure Your Domains')]"),
-				"Configure your domains accordian button");
+		private readonly Button configureDomainsAccordianButton ;
 
-		private readonly Label configureDomainStepSuccessIconLabel =
-			new Label(By.XPath("//span[contains(text(), 'Configure Your Domains')]/..//i[contains(@class, 'icon-success')]"),
-				"Configure domains step success icon label");
+		private readonly Label configureDomainStepSuccessIconLabel ;
 
-		private readonly Button configureTenantsAccordianButton =
-			new Button(By.XPath("//h5//span[contains(text(), 'Configure Your Tenants')]"), "Configure your tenants accordian");
+		private readonly Button configureTenantsAccordianButton ;
 
-		private readonly Label configureTenantsStepSuccessIconLabel =
-			new Label(By.XPath("//span[contains(text(), 'Configure Your Tenants')]/..//i[contains(@class, 'icon-success')]"),
-				"Configure your tenants success icon label");
+		private readonly Label configureTenantsStepSuccessIconLabel ;
 
-		private readonly Button defineCriteriaAccordianButton =
-			new Button(By.XPath("//h5//span[contains(text(), 'Define Your Matching Criteria')]"), "Define your matching criteria");
+		private readonly Button defineCriteriaAccordianButton ;
 
-		private readonly Label defineCriteriaStepSuccessIconLabel =
-			new Label(
-				By.XPath("//span[contains(text(), 'Define Your Matching Criteria')]/..//i[contains(@class, 'icon-success')]"),
-				"Define matching criteria success icon label");
+		private readonly Label defineCriteriaStepSuccessIconLabel ;
 
-		private readonly TextBox descriptionTextBox =
-			new TextBox(By.XPath("//div[@aria-expanded='true']//textarea[contains(@data-bind, 'projectDescription')]"),
-				"Description textbox");
+		private readonly TextBox descriptionTextBox ;
 
-		private readonly Button disabledSubmitButton =
-			new Button(
-				By.XPath("//div[@aria-expanded='true']//button[@class='btn btn-large raised btn-success'][@disabled='']"),
-				"Disabled submit button");
+		private readonly Button disabledSubmitButton ;
 
-		private readonly Button enabledNextButton =
-			new Button(By.XPath("//div[@aria-expanded='true']//button[not(@disabled)][contains(@class, 'raised')]"),
-				"Enabled Next button");
+		private readonly Button enabledNextButton ;
 
-		private readonly Button enterProjectDescriptionAccordianButton =
-			new Button(By.XPath("//h5//span[contains(text(), 'Enter a Project Description')]"),
-				"Enter project description accordian button");
+		private readonly Button enterProjectDescriptionAccordianButton ;
 
-		private readonly Button enterProjectNameAccordianButton =
-			new Button(By.XPath("//h5//span[contains(text(), 'Enter a Project Name')]"), "Enter project name accordian button");
+		private readonly Button enterProjectNameAccordianButton ;
 
-		private readonly Label enterProjectNameStepSuccessIconLabel =
-			new Label(By.XPath("//span[contains(text(), 'Enter a Project Name')]/..//i[contains(@class, 'icon-success')]"),
-				"First step success icon");
+		private readonly Label enterProjectNameStepSuccessIconLabel ;
 
-		private readonly Label expandedAreaLabel = new Label(By.XPath("//div[@aria-expanded='true']//h3"),
-			"Expanded area label");
+		private readonly Label expandedAreaLabel ;
 
-		private readonly Button expandedFirstTenantButton =
-			new Button(
-				By.XPath(
-					"//div[@aria-expanded='true']//td//i[contains(@class, 'fa-question-circle')]/../following::td[1]//button[contains(@aria-expanded, 'true')]"),
-				"Expanded first tenant dropdown");
+		private readonly Button expandedFirstTenantButton ;
 
-		private readonly Button expandedSecondTenantButton =
-			new Button(
-				By.XPath(
-					"//div[@aria-expanded='true']//td//i[contains(@class, 'fa-long-arrow-right')]/../following::td[1]//button[contains(@aria-expanded, 'true')]"),
-				"Extended second tenant button");
+		private readonly Button expandedSecondTenantButton ;
 
-		private readonly Button exportedUsers =
-			new Button(By.XPath("//div[@aria-expanded='true']//a[contains(@href, 'ExportUserMigrationsForDomain')]"),
-				"Exported users button");
+		private readonly Button exportedUsers ;
 
-		private readonly Label failedStatusIconLabel =
-			new Label(By.XPath("//i[contains(@class, 'icon-danger')]/..//span[contains(text(), 'FINISH')]"), "Failed status icon");
+		private readonly Label failedStatusIconLabel ;
 
-		private readonly Label failedToUpladLabel =
-			new Label(By.XPath("//div[@aria-expanded='true']//*[contains(text(), 'failed to upload')]"), "Failed to upload label");
+		private readonly Label failedToUpladLabel ;
 
-		private readonly Button finishAccordionButton = new Button(By.XPath("//h5//span[contains(text(), 'FINISH')]"),
-			"Finish accordian button");
+		private readonly Button finishAccordionButton ;
 
-		private readonly Label finishStepSuccessIconLabel =
-			new Label(By.XPath("//span[contains(text(), 'FINISH')]/..//i[contains(@class, 'icon-success')]"),
-				"Fifth step success icon");
+		private readonly Label finishStepSuccessIconLabel ;
 
-		private readonly Button firstTenantButton =
-			new Button(
-				By.XPath("//div[@aria-expanded='true']//td//i[contains(@class, 'fa-question-circle')]/../following::td[1]//div"),
-				"First tenant button");
+		private readonly Button firstTenantButton ;
 
-		private readonly Label howDoYouLikeToIdentifyLabel =
-			new Label(By.XPath("//div[@aria-expanded='true']//h3[contains(text(), 'How would you like to identify your')]"),
-				"How would you like to identify your... label");
+		private readonly Label howDoYouLikeToIdentifyLabel ;
 
-		private readonly Label howDoYouLikeToMatchLabel =
-			new Label(By.XPath("//div[@aria-expanded='true']//h3[contains(text(), 'How would you like to match users?')]"),
-				"How would you like to match users? label");
+		private readonly Label howDoYouLikeToMatchLabel ;
 
-		private readonly Button identifyTenantsAccordianButton =
-			new Button(By.XPath("//h5//span[contains(text(), 'Identify Your')]"), "Identify tenants accordion button");
+		private readonly Button identifyTenantsAccordianButton ;
 
-		private readonly Label identifyTenantsStepSuccessIconLabel =
-			new Label(By.XPath("//span[contains(text(), 'Identify Your')]/..//i[contains(@class, 'icon-success')]"),
-				"Identify tenants step success icon label");
+		private readonly Label identifyTenantsStepSuccessIconLabel ;
 
-		private readonly Button identifyUsersAccordianButton =
-			new Button(By.XPath("//span[contains(text(), 'Identify Your Users')]"), "Identify users accordian button");
+		private readonly Button identifyUsersAccordianButton ;
 
-		private readonly Label identifyUsersStepSuccessIconLabel =
-			new Label(By.XPath("//span[contains(text(), 'Identify Your Users')]/..//i[contains(@class, 'icon-success')]"),
-				"Third step success icon");
+		private readonly Label identifyUsersStepSuccessIconLabel ;
 
-		private readonly Button okButton =
-			new Button(By.XPath("//div[contains(@class, 'modal fade in')]//button[text()='OK']"), "OK button");
+		private readonly Button okButton ;
 
-		private readonly TextBox projectNameTextBox =
-			new TextBox(By.XPath("//div[@aria-expanded='true']//input[contains(@data-bind, 'projectName')]"),
-				"Project name textbox");
+		private readonly TextBox projectNameTextBox ;
 
-		private readonly Button replaceUsersButton =
-			new Button(By.XPath("//div[contains(@class, 'modal fade in')]//label[@for='replace4']"), "Replace users radiobutton");
+		private readonly Button replaceUsersButton ;
 
-		private readonly Button sampleFileButton =
-			new Button(By.XPath("//div[contains(@class, 'modal fade in')]//a[contains(@href, 'Download')]"), "Sample file button");
+		private readonly Button sampleFileButton ;
 
-		private readonly Button secondTenantButton =
-			new Button(
-				By.XPath("//div[@aria-expanded='true']//td//i[contains(@class, 'fa-long-arrow-right')]/../following::td[1]//button"),
-				"Second tenant button");
+		private readonly Button secondTenantButton ;
 
-		private readonly Label selectUsersByGroupLabel =
-			new Label(By.XPath("//div[@aria-expanded='true']//label[contains(text(), 'Select users by group membership')]"),
-				"Select users by group membership label");
+		private readonly Label selectUsersByGroupLabel ;
 
-		private readonly Button submitButton =
-			new Button(
-				By.XPath("//div[@aria-expanded='true']//button[@class='btn btn-large raised btn-success'][not(@disabled='')]"),
-				"Submit button");
+		private readonly Button submitButton ;
 
-		private readonly Label successFilterStatusLabel =
-			new Label(
-				By.XPath("//div[@aria-expanded='true']//i[contains(@class, 'icon-success')][contains(@data-bind, 'filtersStatus')]"),
-				"Success groups filter status label");
+		private readonly Label successFilterStatusLabel ;
 
-		private readonly Label successStatusIconLabel =
-			new Label(By.XPath("//div[contains(@class, 'modal fade in')]//i[contains(@class, 'icon-success')]"), "Status icon");
+		private readonly Label successStatusIconLabel ;
 
-		private readonly Label tenantLabel =
-			new Label(By.XPath("//div[@aria-expanded='true']//h4[contains(@data-bind, 'tenantName')]"), "Tenant label");
+		private readonly Label tenantLabel ;
 
-		private readonly Button uploadFilesButton =
-			new Button(By.XPath("//div[@aria-expanded='true']//a[contains(@data-bind, 'openUploadDialog')]"),
-				"Upload file button");
+		private readonly Button uploadFilesButton ;
 
-		private readonly Button verifyUsersAccrordianButton =
-			new Button(By.XPath("//h5//span[contains(text(), 'Verify Uploaded Users')]"), "Verify users accordian button");
+		private readonly Button verifyUsersAccrordianButton ;
 
-		private readonly Label verifyUsersStepSuccessIconLabel =
-			new Label(By.XPath("//span[contains(text(), 'Verify Uploaded Users')]/..//i[contains(@class, 'icon-success')]"),
-				"Fourth step success icon");
+		private readonly Label verifyUsersStepSuccessIconLabel ;
 
-		private readonly Label wereUploadedLabel =
-			new Label(By.XPath("//div[@aria-expanded='true']//*[contains(text(), 'were uploaded')]"), "Were uploaded label");
+		private readonly Label wereUploadedLabel ;
 
-		private readonly Label whichDomainLabel =
-			new Label(
-				By.XPath("//div[@aria-expanded='true']//h3[contains(text(), 'Which domains would you like to migrate?')]"),
-				"Which domains would you like to migrate? label");
+		private readonly Label whichDomainLabel ;
+        
 
-        private Guid driverId;
-
-        public ProjectDetailsForm(Guid driverId) : base(TitleLocator, "Project details form")
+        public ProjectDetailsForm(Guid driverId) : base(TitleLocator, "Project details form",driverId)
 		{
             this.driverId = driverId;
-		}
+            activeDirectoryTextBox =new TextBox(By.XPath("//div[@aria-expanded='true']//input[contains(@class, 'k-input')]"), "Active directory textvox",driverId);
+            addGroupButton = new Button(By.Id("addGroupsBtn"), "Add group button",driverId);
+            addTenantButton =new Button(By.XPath("//div[@aria-expanded='true']//button[contains(@data-bind, 'addTenant')]"), "Add tenant button",driverId);
+            addTenantsAccordianButton =new Button(By.XPath("//h5//span[contains(text(), 'Add')][contains(text(), 'Tenants')]"),"Add your tenants accordian button",driverId);
+            addTenantSmallButton =new Button(By.XPath("//div[@aria-expanded='true']//button[text()[contains(.,'Add Tenant')]]"),"Small add tenant button",driverId);
+            addTenantsStepSuccessIconLabel =new Label(By.XPath("//span[contains(text(), 'Add')][contains(text(), 'Tenants')]/..//i[contains(@class, 'icon-success')]"),"Second step success icon",driverId);
+            chooseFilesInput =new TextBox(By.XPath("//div[contains(@class, 'modal fade in')]//input[@type='file']"), "Choose files input",driverId);
+            configureDomainsAccordianButton =new Button(By.XPath("//h5//span[contains(text(), 'Configure Your Domains')]"),"Configure your domains accordian button",driverId);
+            configureDomainStepSuccessIconLabel =new Label(By.XPath("//span[contains(text(), 'Configure Your Domains')]/..//i[contains(@class, 'icon-success')]"),"Configure domains step success icon label",driverId);
+            configureTenantsAccordianButton =new Button(By.XPath("//h5//span[contains(text(), 'Configure Your Tenants')]"), "Configure your tenants accordian",driverId);
+            configureTenantsStepSuccessIconLabel =new Label(By.XPath("//span[contains(text(), 'Configure Your Tenants')]/..//i[contains(@class, 'icon-success')]"),"Configure your tenants success icon label",driverId);
+            defineCriteriaAccordianButton =new Button(By.XPath("//h5//span[contains(text(), 'Define Your Matching Criteria')]"), "Define your matching criteria",driverId);
+            defineCriteriaStepSuccessIconLabel =new Label(By.XPath("//span[contains(text(), 'Define Your Matching Criteria')]/..//i[contains(@class, 'icon-success')]"),"Define matching criteria success icon label",driverId);
+            descriptionTextBox =new TextBox(By.XPath("//div[@aria-expanded='true']//textarea[contains(@data-bind, 'projectDescription')]"),"Description textbox",driverId);
+            disabledSubmitButton =new Button(By.XPath("//div[@aria-expanded='true']//button[@class='btn btn-large raised btn-success'][@disabled='']"),"Disabled submit button",driverId);
+            enabledNextButton =new Button(By.XPath("//div[@aria-expanded='true']//button[not(@disabled)][contains(@class, 'raised')]"),"Enabled Next button",driverId);
+            enterProjectDescriptionAccordianButton =new Button(By.XPath("//h5//span[contains(text(), 'Enter a Project Description')]"),"Enter project description accordian button",driverId);
+            enterProjectNameAccordianButton =new Button(By.XPath("//h5//span[contains(text(), 'Enter a Project Name')]"), "Enter project name accordian button",driverId);
+            enterProjectNameStepSuccessIconLabel =new Label(By.XPath("//span[contains(text(), 'Enter a Project Name')]/..//i[contains(@class, 'icon-success')]"),"First step success icon",driverId);
+            expandedFirstTenantButton =new Button(By.XPath("//div[@aria-expanded='true']//td//i[contains(@class, 'fa-question-circle')]/../following::td[1]//button[contains(@aria-expanded, 'true')]"),"Expanded first tenant dropdown",driverId);
+            expandedSecondTenantButton =new Button(By.XPath("//div[@aria-expanded='true']//td//i[contains(@class, 'fa-long-arrow-right')]/../following::td[1]//button[contains(@aria-expanded, 'true')]"),"Extended second tenant button",driverId);
+            expandedAreaLabel = new Label(By.XPath("//div[@aria-expanded='true']//h3"),"Expanded area label",driverId);
+            exportedUsers =new Button(By.XPath("//div[@aria-expanded='true']//a[contains(@href, 'ExportUserMigrationsForDomain')]"),"Exported users button",driverId);
+            failedStatusIconLabel =new Label(By.XPath("//i[contains(@class, 'icon-danger')]/..//span[contains(text(), 'FINISH')]"), "Failed status icon",driverId);
+            failedToUpladLabel =new Label(By.XPath("//div[@aria-expanded='true']//*[contains(text(), 'failed to upload')]"), "Failed to upload label",driverId);
+            finishAccordionButton = new Button(By.XPath("//h5//span[contains(text(), 'FINISH')]"),"Finish accordian button",driverId);
+            finishStepSuccessIconLabel =new Label(By.XPath("//span[contains(text(), 'FINISH')]/..//i[contains(@class, 'icon-success')]"),"Fifth step success icon",driverId);
+            firstTenantButton =new Button(By.XPath("//div[@aria-expanded='true']//td//i[contains(@class, 'fa-question-circle')]/../following::td[1]//div"),"First tenant button",driverId);
+            howDoYouLikeToIdentifyLabel =new Label(By.XPath("//div[@aria-expanded='true']//h3[contains(text(), 'How would you like to identify your')]"),"How would you like to identify your... label",driverId);
+            howDoYouLikeToMatchLabel =new Label(By.XPath("//div[@aria-expanded='true']//h3[contains(text(), 'How would you like to match users?')]"),"How would you like to match users? label",driverId);
+            identifyTenantsAccordianButton =new Button(By.XPath("//h5//span[contains(text(), 'Identify Your')]"), "Identify tenants accordion button",driverId);
+            identifyTenantsStepSuccessIconLabel =new Label(By.XPath("//span[contains(text(), 'Identify Your')]/..//i[contains(@class, 'icon-success')]"),"Identify tenants step success icon label",driverId);
+            identifyUsersAccordianButton =new Button(By.XPath("//span[contains(text(), 'Identify Your Users')]"), "Identify users accordian button",driverId);
+            identifyUsersStepSuccessIconLabel =new Label(By.XPath("//span[contains(text(), 'Identify Your Users')]/..//i[contains(@class, 'icon-success')]"),"Third step success icon",driverId);
+            okButton =new Button(By.XPath("//div[contains(@class, 'modal fade in')]//button[text()='OK']"), "OK button",driverId);
+            projectNameTextBox =new TextBox(By.XPath("//div[@aria-expanded='true']//input[contains(@data-bind, 'projectName')]"),"Project name textbox",driverId);
+            replaceUsersButton =new Button(By.XPath("//div[contains(@class, 'modal fade in')]//label[@for='replace4']"), "Replace users radiobutton",driverId);
+            sampleFileButton =new Button(By.XPath("//div[contains(@class, 'modal fade in')]//a[contains(@href, 'Download')]"), "Sample file button",driverId);
+            secondTenantButton =new Button(By.XPath("//div[@aria-expanded='true']//td//i[contains(@class, 'fa-long-arrow-right')]/../following::td[1]//button"),"Second tenant button",driverId);
+            selectUsersByGroupLabel =new Label(By.XPath("//div[@aria-expanded='true']//label[contains(text(), 'Select users by group membership')]"),"Select users by group membership label",driverId);
+            submitButton =new Button(By.XPath("//div[@aria-expanded='true']//button[@class='btn btn-large raised btn-success'][not(@disabled='')]"),"Submit button",driverId);
+            successFilterStatusLabel =new Label(By.XPath("//div[@aria-expanded='true']//i[contains(@class, 'icon-success')][contains(@data-bind, 'filtersStatus')]"),"Success groups filter status label",driverId);
+            successStatusIconLabel =new Label(By.XPath("//div[contains(@class, 'modal fade in')]//i[contains(@class, 'icon-success')]"), "Status icon",driverId);
+            tenantLabel =new Label(By.XPath("//div[@aria-expanded='true']//h4[contains(@data-bind, 'tenantName')]"), "Tenant label",driverId);
+            uploadFilesButton =new Button(By.XPath("//div[@aria-expanded='true']//a[contains(@data-bind, 'openUploadDialog')]"),"Upload file button",driverId);
+            verifyUsersAccrordianButton =new Button(By.XPath("//h5//span[contains(text(), 'Verify Uploaded Users')]"), "Verify users accordian button",driverId);
+            verifyUsersStepSuccessIconLabel =new Label(By.XPath("//span[contains(text(), 'Verify Uploaded Users')]/..//i[contains(@class, 'icon-success')]"),"Fourth step success icon",driverId);
+            wereUploadedLabel =new Label(By.XPath("//div[@aria-expanded='true']//*[contains(text(), 'were uploaded')]"), "Were uploaded label",driverId);
+            whichDomainLabel =new Label(By.XPath("//div[@aria-expanded='true']//h3[contains(text(), 'Which domains would you like to migrate?')]"),"Which domains would you like to migrate? label",driverId);
+        }
 
 		public void SetProjectName(string name)
 		{
@@ -231,7 +190,7 @@ namespace Product.Framework.Forms
 			Log.Info("Removing tenant: " + tenant);
 			var tenantRemoveButton =
 				new Button(By.XPath($"//h4[contains(text(), '{tenant}')]/../..//button[contains(@data-bind, 'removeTenant')]"),
-					tenant + " tenant remove button");
+					tenant + " tenant remove button",driverId);
 			tenantRemoveButton.Click();
 		}
 
@@ -272,7 +231,7 @@ namespace Product.Framework.Forms
 		{
 			Log.Info("Selecting active directory tooltip: " + group);
 			var tooltipLabel = new Label(By.XPath($"//ul[contains(@aria-hidden, 'false')]//li[contains(text(), '{group}')]"),
-				group + " tooltip");
+				group + " tooltip",driverId);
 			tooltipLabel.Click();
 		}
 
@@ -519,19 +478,19 @@ namespace Product.Framework.Forms
 
 		public void AddTwoTenants()
 		{
-			var tenantSteps = new AddTenantsSteps();
+			var tenantSteps = new AddTenantsSteps(driverId);
 			tenantSteps.PerformTwoTenantsAdding();
 		}
 
 		public void AddTenant(string tenant, string password)
 		{
-			var tenantSteps = new AddTenantsSteps();
+			var tenantSteps = new AddTenantsSteps(driverId);
 			tenantSteps.PerformOneTenantAdding(tenant, password);
 		}
 
 		public void AddTwoTenants(string sourceTenant, string sourcePassword, string targetTenant, string targetPassword)
 		{
-			var tenantSteps = new AddTenantsSteps();
+			var tenantSteps = new AddTenantsSteps(driverId);
 			tenantSteps.PerformTwoTenantsAdding(sourceTenant, sourcePassword, targetTenant, targetPassword);
 		}
 
@@ -554,7 +513,7 @@ namespace Product.Framework.Forms
 		{
 			Log.Info($"Selecting {name} option");
 			var optionButton = new Button(By.XPath($"//button[@aria-expanded='true']/..//a[contains(text(), '{name}')]"),
-				$"{name} option");
+				$"{name} option",driverId);
 			optionButton.Click();
 		}
 

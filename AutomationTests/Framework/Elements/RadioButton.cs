@@ -10,7 +10,7 @@ namespace Product.Framework.Elements
 {
 	public class RadioButton : BaseElement
 	{
-		public RadioButton(By locator, string name) : base(locator, name)
+		public RadioButton(By locator, string name,Guid driverId) : base(locator, name,driverId)
 		{
 		}
 
@@ -22,7 +22,7 @@ namespace Product.Framework.Elements
 
 		public void WaitForSelected(int count)
 		{
-			var wait = new WebDriverWait(Browser.GetDriver(),
+			var wait = new WebDriverWait(Driver.GetDriver(driverId),
 				TimeSpan.FromMilliseconds(Convert.ToDouble(count)));
 			try
 			{
@@ -36,7 +36,7 @@ namespace Product.Framework.Elements
 
 		public void WaitForUnselected(int count)
 		{
-			var wait = new WebDriverWait(Browser.GetDriver(),
+			var wait = new WebDriverWait(Driver.GetDriver(driverId),
 			TimeSpan.FromMilliseconds(Convert.ToDouble(count)));
 			try
 			{

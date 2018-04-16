@@ -11,12 +11,11 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms.PublicFolderMigrationForms
 {
 	public class PublicFolderMigrationViewForm : UsersForm
-	{
-        private Guid driverId;
+	{        
 
         private static readonly By TitleLocator = By.XPath("//a[contains(@href, 'PublicFolderMigration/Edit')]");
 
-		public PublicFolderMigrationViewForm(Guid driverId) : base(TitleLocator, "Public folder migration view")
+		public PublicFolderMigrationViewForm(Guid driverId) : base(TitleLocator, "Public folder migration view",driverId)
 		{
             this.driverId = driverId;
             addPublicFolderMigrationButton = new Button(By.XPath("//a[contains(@href, 'PublicFolderMigration/Edit')]"), "Add public folder migration button",driverId);
@@ -47,6 +46,16 @@ namespace Product.Framework.Forms.PublicFolderMigrationForms
             sortConfllictResolutionButton = new Button(By.XPath("//span[text()='Conflict Resolution'][contains(@data-bind, 'sortModel')]"), "Sort Conflict Resolution button",driverId);
             nextConflictResolutionSortedAscLabel = new Label(By.XPath("//span[text()='Conflict Resolution']//i[contains(@class, 'fa-sort-asc')]"), "Conflict Resolution ASC label",driverId);
             conflictResolutionSortedDescLabel = new Label(By.XPath("//span[text()='Conflict Resolution']//i[contains(@class, 'fa-sort-desc')]"), "Conflict Resolution DESC label",driverId);
+            sourceTenantLabel = new Label(By.XPath("//dd[contains(@data-bind, 'sourceTenantName')]"), "Source tenant label",driverId);
+            sourceTenantPathLabel = new Label(By.XPath("//dd[contains(@data-bind, 'sourceTenantPath')]"), "Source tenant label",driverId);
+            targetTenantLabel = new Label(By.XPath("//dd[contains(@data-bind, 'targetTenantName')]"), "Target tenant label",driverId);
+            targetTenantPathLabel = new Label(By.XPath("//dd[contains(@data-bind, 'targetTenantPath')]"), "Target tenant path label",driverId);
+            copySubfoldersLabel = new Label(By.XPath("//dd[contains(@data-bind, 'recursive ?')]"), "Copy subfolders label",driverId);
+            lastSyncLabel = new Label(By.XPath("//dd[contains(@data-bind, 'lastSyncCompleted')]"), "Last sync label",driverId);
+            conflictResolutionLabel = new Label(By.XPath("//dd[contains(@data-bind, 'conflictResolutionString')]"), "",driverId);
+            provisioningJobLabel = new Label(By.XPath("//*[text()[contains(., 'Provisioning')]]"), "Provisioning job label",driverId);
+            contentCopyJobLabel = new Label(By.XPath("//*[text()[contains(., 'Content Copy')]]"), "Content Copy job label",driverId);
+
         }
 
 		private readonly Button addPublicFolderMigrationButton;
@@ -115,17 +124,19 @@ namespace Product.Framework.Forms.PublicFolderMigrationForms
 		{
 			ScrollToTop();
 			Log.Info("Selecting checkbox for: " + locator);
-			BaseElement.WaitForElementPresent(By.XPath(
-						$"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]/ancestor::tr//input"),
-					locator + " entry checkbox");
-			var entryCheckboxButton =
+            //BaseElement.WaitForElementPresent(By.XPath(
+            //			$"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]/ancestor::tr//input"),
+            //		locator + " entry checkbox");
+            var elementToWait =new Element(By.XPath($"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]/ancestor::tr//input"),locator + " entry checkbox",driverId);
+            elementToWait.WaitForElementPresent();
+            var entryCheckboxButton =
 				new RadioButton(
 					By.XPath(
 						$"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]/ancestor::tr//input"),
-					locator + " entry checkbox");
+					locator + " entry checkbox",driverId);
 			var entryLabel = new Button(By.XPath(
 					$"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]"),
-				locator + " entry label");
+				locator + " entry label",driverId);
 			ScrollToElement(entryCheckboxButton.GetElement());
 			try
 			{
@@ -145,20 +156,18 @@ namespace Product.Framework.Forms.PublicFolderMigrationForms
 				new Label(
 					By.XPath(
 						$"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]/ancestor::tr//*[text()='Syncing']"),
-					locator + " syncing state");
+					locator + " syncing state",driverId);
 			syncingState.WaitForElementPresent();
 		}
 		public new void OpenDetailsByLocator(string locator)
 		{
 			Log.Info($"Opening details by locator: {locator}");
-			BaseElement.WaitForElementPresent(By.XPath(
-						$"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]"),
-					$"{locator} details button");
-			var detailsButton =
-				new Button(
-					By.XPath(
-						$"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]"),
-					$"{locator} details button");
+            //BaseElement.WaitForElementPresent(By.XPath(
+            //			$"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]"),
+            //		$"{locator} details button");
+            var elementToWait = new Element(By.XPath($"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]"), $"{locator} details button",driverId);
+            elementToWait.WaitForElementPresent();
+            var detailsButton =new Button(By.XPath($"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]"),$"{locator} details button",driverId);
 			ScrollToElement(detailsButton.GetElement());
 			detailsButton.DoubleClick();
 		}
@@ -172,18 +181,18 @@ namespace Product.Framework.Forms.PublicFolderMigrationForms
 			Apply();
 		}
 		#region[Details modal]
-		private readonly Label sourceTenantLabel = new Label(By.XPath("//dd[contains(@data-bind, 'sourceTenantName')]"), "Source tenant label");
-		private readonly Label sourceTenantPathLabel = new Label(By.XPath("//dd[contains(@data-bind, 'sourceTenantPath')]"), "Source tenant label");
-		private readonly Label targetTenantLabel = new Label(By.XPath("//dd[contains(@data-bind, 'targetTenantName')]"), "Target tenant label");
-		private readonly Label targetTenantPathLabel = new Label(By.XPath("//dd[contains(@data-bind, 'targetTenantPath')]"), "Target tenant path label");
-		private readonly Label copySubfoldersLabel = new Label(By.XPath("//dd[contains(@data-bind, 'recursive ?')]"), "Copy subfolders label");
-		private readonly Label lastSyncLabel = new Label(By.XPath("//dd[contains(@data-bind, 'lastSyncCompleted')]"), "Last sync label");
-		private readonly Label conflictResolutionLabel = new Label(By.XPath("//dd[contains(@data-bind, 'conflictResolutionString')]"), "");
-		private readonly Label provisioningJobLabel = new Label(By.XPath("//*[text()[contains(., 'Provisioning')]]"), "Provisioning job label");
-		private readonly Label contentCopyJobLabel = new Label(By.XPath("//*[text()[contains(., 'Content Copy')]]"), "Content Copy job label");
+		private readonly Label sourceTenantLabel ;
+		private readonly Label sourceTenantPathLabel ;
+		private readonly Label targetTenantLabel ;
+		private readonly Label targetTenantPathLabel ;
+		private readonly Label copySubfoldersLabel ;
+		private readonly Label lastSyncLabel ;
+		private readonly Label conflictResolutionLabel ;
+		private readonly Label provisioningJobLabel ;
+		private readonly Label contentCopyJobLabel ;
 		private Label GetJobLine(string state)
 		{
-			return new Label(By.XPath($"//*[text()[contains(.,'{state}')]]/ancestor::tr"),state+ " line");  
+			return new Label(By.XPath($"//*[text()[contains(.,'{state}')]]/ancestor::tr"),state+ " line",driverId);  
 		}
 
 		public void WaitForProvisioningJobAppear(int count)

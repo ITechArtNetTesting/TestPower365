@@ -9,17 +9,18 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms.PublicFolderMigrationForms
 {
 	public class PublicFolderSyncLevelForm : BasePublicFolderWizardForm
-	{
-        private Guid driverId;
+	{        
 
         private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you want to synchronize only')]");
 
-		public PublicFolderSyncLevelForm(Guid driverId) : base(TitleLocator, "Sync level form")
+		public PublicFolderSyncLevelForm(Guid driverId) : base(TitleLocator, "Sync level form",driverId)
 		{
             this.driverId = driverId;
-		}
-		private readonly Button topLevelOnlyButton = new Button(By.XPath("//label[contains(@for, 'topLevelOnly')]"), "Top level only button");
-		private readonly Button allSubfoldersButton = new Button(By.XPath("//label[contains(@for, 'allSubfolders')]"), "All subfolders button");
+            topLevelOnlyButton = new Button(By.XPath("//label[contains(@for, 'topLevelOnly')]"), "Top level only button",driverId);
+            allSubfoldersButton = new Button(By.XPath("//label[contains(@for, 'allSubfolders')]"), "All subfolders button",driverId);
+        }
+		private readonly Button topLevelOnlyButton ;
+		private readonly Button allSubfoldersButton ;
 
 		public void SelectTopLEvelOnly()
 		{

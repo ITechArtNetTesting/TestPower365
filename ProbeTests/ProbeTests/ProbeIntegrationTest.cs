@@ -160,7 +160,7 @@ namespace ProbeTests.ProbeTests
 				while (!User.AtUsersForm().IsLineExist(sourceMailbox) && counter<35)
 				{
 					Log.Info("Source mailbox is not displayed");
-					Browser.GetDriver().Navigate().Refresh();
+					Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
 					counter++;
 				}
 					User.AtUsersForm().VerifyLineisExist(sourceMailbox);
@@ -190,7 +190,7 @@ namespace ProbeTests.ProbeTests
 				catch (Exception)
 				{
 					Log.Info("Apply button is not enabled");
-					Browser.GetDriver().Navigate().Refresh();
+					Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
 					User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
 					User.AtUsersForm().SelectAction(ActionType.Prepare);
 					User.AtUsersForm().Apply();
@@ -201,7 +201,7 @@ namespace ProbeTests.ProbeTests
                 }
 			    catch (Exception)
 			    {
-			        Browser.GetDriver().Navigate().Refresh();
+			        Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
 			        User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
 			        User.AtUsersForm().SelectAction(ActionType.Prepare);
 			        User.AtUsersForm().Apply();

@@ -5,8 +5,7 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms.NewProjectWizardForms
 {
 	public class ChooseYourProjectTypeForm : BaseWizardStepForm
-	{
-        private Guid driverId;
+	{        
 
         private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Choose your project type')]");
 
@@ -16,7 +15,7 @@ namespace Product.Framework.Forms.NewProjectWizardForms
 
         private readonly Button integrationButton ;
         
-		public ChooseYourProjectTypeForm(Guid driverId) : base(TitleLocator, "Choose your project type form")
+		public ChooseYourProjectTypeForm(Guid driverId) : base(TitleLocator, "Choose your project type form",driverId)
 		{
             this.driverId = driverId;
             mailOnlyButton = new Button(By.XPath("//label[contains(@for, 'mailOnlyRadio')]"), "Mail only button",driverId);
