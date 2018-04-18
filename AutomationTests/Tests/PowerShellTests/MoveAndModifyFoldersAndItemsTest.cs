@@ -77,7 +77,7 @@ namespace Product.Tests.PowerShellTests
 		                    catch (Exception)
 		                    {
 		                        Log.Info("Apply button is disabled");
-		                        Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
+		                        Browser.GetDriver().Navigate().Refresh();
 		                        User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
 		                        User.AtUsersForm().SelectAction(ActionType.Sync);
 		                        User.AtUsersForm().Apply();
@@ -100,13 +100,13 @@ namespace Product.Tests.PowerShellTests
 		                    catch (Exception)
 		                    {
 		                        Log.Info("Apply button is disabled");
-		                        Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
+		                        Browser.GetDriver().Navigate().Refresh();
 		                        User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
 		                        User.AtUsersForm().SelectAction(ActionType.Sync);
 		                        User.AtUsersForm().Apply();
 		                    }
 		                    User.AtUsersForm().ConfirmSync();
-		                    Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
+		                    Browser.GetDriver().Navigate().Refresh();
 		                    User.AtUsersForm().WaitForState(sourceMailbox,
 		                       State.Synced, 60000);
 		                    RunConfigurator.CreateEmptyFile(stopFile2);
@@ -118,7 +118,7 @@ namespace Product.Tests.PowerShellTests
             }
 		    catch (Exception)
 		    {
-		        LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
+		        LogHtml(Browser.GetDriver().PageSource);
                 throw;
             }
 		}

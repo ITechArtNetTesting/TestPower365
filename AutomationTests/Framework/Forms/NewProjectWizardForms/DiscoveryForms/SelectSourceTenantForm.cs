@@ -5,19 +5,17 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
 {
 	public class SelectSourceTenantForm : BaseWizardStepForm
-	{        
-
-        private static readonly By TitleLocator =
+	{
+		private static readonly By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Where do you want to migrate email accounts from')]");
 
-		public SelectSourceTenantForm(Guid driverId) : base(TitleLocator, "Select source tenant",driverId)
+		public SelectSourceTenantForm() : base(TitleLocator, "Select source tenant")
 		{
-            this.driverId = driverId;
 		}
 		public void SelectTenant(string tenant)
 		{
 			Log.Info("Selecting source tenant");
-			var tenantButton = new Button(By.XPath($"//span[contains(text(), '{tenant}')]"), tenant + " button",driverId);
+			var tenantButton = new Button(By.XPath($"//span[contains(text(), '{tenant}')]"), tenant + " button");
 			tenantButton.Click();
 			try
 			{

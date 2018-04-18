@@ -39,7 +39,7 @@ namespace Product.Tests.PublicFoldersTests
             }
 	        catch (Exception e)
 	        {
-                Log.Info(Driver.GetDriver(driver.GetDriverKey()).PageSource);
+                Log.Info(Browser.GetDriver().PageSource);
 	           throw e;
 	        }
 	    }

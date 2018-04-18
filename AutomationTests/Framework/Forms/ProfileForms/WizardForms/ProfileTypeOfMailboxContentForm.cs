@@ -14,17 +14,15 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
     {
 
         private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='WhatTypeOfMailboxContentWouldYouLikeToMigrate']");
-        
 
-        public ProfileTypeOfMailboxContentForm(Guid driverId) : base(TitleLocator, "Profile translate type email to migrate",driverId)
+        public ProfileTypeOfMailboxContentForm() : base(TitleLocator, "Profile translate type email to migrate")
         {
-            this.driverId = driverId;
         }
         public void SelectType(ContentType type)
         {
             Log.Info("Selecting: " + type.GetValue());
-            Label typeLabel = new Label(By.XPath($"//label[contains(@for, '{type.GetValue()}')]"), "Type label",driverId);
-            RadioButton typeRadioButton = new RadioButton(By.Id($"{type.GetValue()}"), "Type radiobutton",driverId);
+            Label typeLabel = new Label(By.XPath($"//label[contains(@for, '{type.GetValue()}')]"), "Type label");
+            RadioButton typeRadioButton = new RadioButton(By.Id($"{type.GetValue()}"), "Type radiobutton");
             typeLabel.Click();
             try
             {

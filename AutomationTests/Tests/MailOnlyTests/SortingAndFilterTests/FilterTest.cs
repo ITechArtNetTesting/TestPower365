@@ -32,35 +32,35 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		        LoginAndSelectRole(login, password, client);
 		        SelectProject(projectName);
 		        User.AtProjectOverviewForm().OpenUsersList();
-                User.AtUsersForm().SyncUserByLocator(sourceMailbox6);
-                User.AtUsersForm().ConfirmSync();
-                User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox6);
-                User.AtUsersForm().SwitchFilter(FilterState.Open);
+		        User.AtUsersForm().SyncUserByLocator(sourceMailbox6);
+		        User.AtUsersForm().ConfirmSync();
+		        User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox6);
+		        User.AtUsersForm().SwitchFilter(FilterState.Open);
 		        User.AtUsersForm().SetMatched();
 		        User.AtUsersForm().SwitchFilter(FilterState.Closed);
-		 
+		        Thread.Sleep(5000);
 		        User.AtUsersForm().StoreEntriesData();
 		        User.AtUsersForm().AssertStateIsFilteredFor("Matched");
 		        User.AtUsersForm().SwitchFilter(FilterState.Open);
 		        User.AtUsersForm().SetMatched();
-		     
+		        Thread.Sleep(5000);
 		        User.AtUsersForm().CheckFilterGroup(groupMailbox6);
 		        User.AtUsersForm().SwitchFilter(FilterState.Closed);
-		
+		        Thread.Sleep(5000);
 		        User.AtUsersForm().StoreEntriesData();
 		        User.AtUsersForm().AssertGroupIsFilteredFor(groupMailbox6);
 		        User.AtUsersForm().SwitchFilter(FilterState.Open);
 		        User.AtUsersForm().UncheckFilterGroup(groupMailbox6);
-		
+		        Thread.Sleep(5000);
 		        User.AtUsersForm().CheckFilterGroup(profileMailbox6);
 		        User.AtUsersForm().SwitchFilter(FilterState.Closed);
-		     
+		        Thread.Sleep(5000);
 		        User.AtUsersForm().StoreEntriesData();
 		        User.AtUsersForm().AssertProfileIsFilteredFor(profileMailbox6);
             }
 		    catch (Exception)
 		    {
-		        LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
+		        LogHtml(Browser.GetDriver().PageSource);
                 throw;
             }
 		}

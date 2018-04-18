@@ -10,42 +10,23 @@ using Product.Framework.Forms.PublicFolderMigrationForms;
 namespace Product.Framework.Forms.AdminsForms
 {
 	public class LicensingForm : BaseForm
-	{        
+	{
 		private static readonly By TitleLocator = By.XPath("//h4[contains(text(), 'LICENSES')]");
 
-		public LicensingForm(Guid driverId) : base(TitleLocator, "Licensing form",driverId)
-		{            
-            this.driverId = driverId;
-            addLicenseButton = new Button(By.XPath("//a[contains(@href, 'Licensing/Create')]"), "Add license",driverId);
-            mailLicenseLabel = new Label(By.XPath("//td[text()='Mail']"), "Mail license label",driverId);
-            integrationProLabel = new Label(By.XPath("//td[text()='Integration Pro']"), "Integration Pro label",driverId);
-            publicFoldersLabel = new Label(By.XPath("//td[text()='Public Folders']"), "Public folders label",driverId);
-            publicFoldersDetailsButton = new Button(By.XPath("//td[text()='Public Folders']/..//a[contains(@data-modal, 'licenseModal')]"), "Public folders details button",driverId);
-            publicFoldersHistoryButton = new Button(By.XPath("//td[text()='Public Folders']/..//a[contains(@data-modal, 'History')]"), "Public folders history button",driverId);
-            mailDetailsButton = new Button(By.XPath("//td[text()='Mail']/..//a[contains(@data-modal, 'licenseModal')]"), "Mail details button",driverId);
-            mailHistoryButton = new Button(By.XPath("//td[text()='Mail']/..//a[contains(@data-modal, 'History')]"), "Mail history button",driverId);
-            integrationProDetailsButton = new Button(By.XPath("//td[text()='Integration Pro']/..//a[contains(@data-modal, 'licenseModal')]"), "Integration Pro details button",driverId);
-            integratiobProHistoryButton = new Button(By.XPath("//td[text()='Integration Pro']/..//a[contains(@data-modal, 'History')]"), "Integration Pro history button",driverId);
-            okButton = new Button(By.XPath("//div[contains(@class, 'modal fade in')]//button[contains(@type, 'submit')]"), "Ok button",driverId);
-            licenseTypeDropdownButton = new ComboBox(By.XPath("//div[contains(@class, 'modal fade in')]//select[@id='LicenseTypeId']"), "License type drop down",driverId);
-            totalCountTextBox = new TextBox(By.XPath("//div[contains(@c)]//*[@id='TotalCount']"), "Total count textbox",driverId);
-            expireTextBox = new TextBox(By.XPath("//div[contains(@class, 'modal fade in')]//*[@id='ExpirationDate']"), "Expire textbox",driverId);
-            submitButton = new Button(By.XPath("//div[contains(@class, 'modal fade in')]//button[contains(@type, 'submit')]"), "Submit button",driverId);
-            licenseCancelButton = new Button(By.XPath("//div[@id='licenseModal'][contains(@class, 'modal fade in')]//button[contains(@data-dismiss, 'modal')][contains(text(), 'Cancel')]"), "License cancel button",driverId);
-            licenseSubTypeComboBox = new ComboBox(By.Id("LicenseSubTypeId"), "License subtype combobox",driverId);
-            cancelHistoryButton = new Button(By.XPath("//div[@id='licenseHistoryModal'][contains(@class, 'modal fade in')]//button[contains(text(), 'Cancel')]"), "Cancel history button",driverId);
-        }
+		public LicensingForm() : base(TitleLocator, "Licensing form")
+		{
+		}
 
-		private readonly Button addLicenseButton ;
-		private readonly Label mailLicenseLabel ;
-		private readonly Label integrationProLabel ;
-		private readonly Label publicFoldersLabel ;
-		private readonly Button publicFoldersDetailsButton ;
-		private readonly Button publicFoldersHistoryButton ;
-		private readonly Button mailDetailsButton ;
-		private readonly Button mailHistoryButton ;
-		private readonly Button integrationProDetailsButton ;
-		private readonly Button integratiobProHistoryButton ;
+		private readonly Button addLicenseButton = new Button(By.XPath("//a[contains(@href, 'Licensing/Create')]"), "Add license");
+		private readonly Label mailLicenseLabel = new Label(By.XPath("//td[text()='Mail']"), "Mail license label");
+		private readonly Label integrationProLabel = new Label(By.XPath("//td[text()='Integration Pro']"), "Integration Pro label");
+		private readonly Label publicFoldersLabel = new Label(By.XPath("//td[text()='Public Folders']"), "Public folders label");
+		private readonly Button publicFoldersDetailsButton = new Button(By.XPath("//td[text()='Public Folders']/..//a[contains(@data-modal, 'licenseModal')]"), "Public folders details button");
+		private readonly Button publicFoldersHistoryButton = new Button(By.XPath("//td[text()='Public Folders']/..//a[contains(@data-modal, 'History')]"), "Public folders history button");
+		private readonly Button mailDetailsButton = new Button(By.XPath("//td[text()='Mail']/..//a[contains(@data-modal, 'licenseModal')]"), "Mail details button");
+		private readonly Button mailHistoryButton = new Button(By.XPath("//td[text()='Mail']/..//a[contains(@data-modal, 'History')]"), "Mail history button");
+		private readonly Button integrationProDetailsButton = new Button(By.XPath("//td[text()='Integration Pro']/..//a[contains(@data-modal, 'licenseModal')]"), "Integration Pro details button");
+		private readonly Button integratiobProHistoryButton = new Button(By.XPath("//td[text()='Integration Pro']/..//a[contains(@data-modal, 'History')]"), "Integration Pro history button");
 
 		public void OpenPublicFoldersDetails()
 		{
@@ -156,13 +137,13 @@ namespace Product.Framework.Forms.AdminsForms
 		}
 
 		#region[Add license modal]
-		private readonly Button okButton ;
-		private readonly ComboBox licenseTypeDropdownButton ;
-		private readonly TextBox totalCountTextBox ;
-		private readonly TextBox expireTextBox ;
-		private  readonly Button submitButton ;
-		private readonly Button licenseCancelButton ;
-		private readonly ComboBox licenseSubTypeComboBox ;
+		private readonly Button okButton = new Button(By.XPath("//div[contains(@class, 'modal fade in')]//button[contains(@type, 'submit')]"), "Ok button");
+		private readonly ComboBox licenseTypeDropdownButton = new ComboBox(By.XPath("//div[contains(@class, 'modal fade in')]//select[@id='LicenseTypeId']"), "License type drop down");
+		private readonly TextBox totalCountTextBox = new TextBox(By.XPath("//div[contains(@c)]//*[@id='TotalCount']"), "Total count textbox");
+		private readonly TextBox expireTextBox = new TextBox(By.XPath("//div[contains(@class, 'modal fade in')]//*[@id='ExpirationDate']"), "Expire textbox");
+		private  readonly Button submitButton = new Button(By.XPath("//div[contains(@class, 'modal fade in')]//button[contains(@type, 'submit')]"), "Submit button");
+		private readonly Button licenseCancelButton = new Button(By.XPath("//div[@id='licenseModal'][contains(@class, 'modal fade in')]//button[contains(@data-dismiss, 'modal')][contains(text(), 'Cancel')]"), "License cancel button");
+		private readonly ComboBox licenseSubTypeComboBox = new ComboBox(By.Id("LicenseSubTypeId"), "License subtype combobox");
 
 		public void SelectSmall()
 		{
@@ -231,7 +212,7 @@ namespace Product.Framework.Forms.AdminsForms
 		#endregion
 
 		#region[History modal]
-		private readonly Button cancelHistoryButton ;
+		private readonly Button cancelHistoryButton = new Button(By.XPath("//div[@id='licenseHistoryModal'][contains(@class, 'modal fade in')]//button[contains(text(), 'Cancel')]"), "Cancel history button");
 #endregion
 	}
 }

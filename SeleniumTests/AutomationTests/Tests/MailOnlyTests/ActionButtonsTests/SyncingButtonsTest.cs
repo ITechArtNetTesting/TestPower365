@@ -37,7 +37,7 @@ namespace Product.Tests.MailOnlyTests.ActionButtonsTests
 		        User.AtUsersForm().ConfirmSync();
 		        User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 50000);
                 // User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 60000);
-                User.AtUsersForm().WaitForState(sourceMailbox, State.Synced4, 600000);
+                User.AtUsersForm().WaitForState(sourceMailbox, State.Synced3, 60000);
                 User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
 		        User.AtUsersForm().SelectAction(ActionType.Sync);
 		        User.AtUsersForm().AssertApplyIsEnabled();

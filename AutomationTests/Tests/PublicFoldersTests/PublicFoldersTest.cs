@@ -18,72 +18,56 @@ namespace Product.Tests.PublicFoldersTests
 	{
 		[ClassInitialize]
 		public static void ClassInit(TestContext testContext)
-		{            
+		{
 			_testContext = testContext;
 		}
 
 		[TestMethod]
 		public void Automation_IN_PublicFoldersTest()
 		{
-            Log.Debug("Enter Automation_IN_PublicFoldersTest");
 		    try
 		    {
 		        bool result = false;
 		        int counter = 0;
 		        while (!result && counter < 3)
 		        {
-                    Log.Debug("Starting SourcePrepScript.ps1");
 		            using (
 		                var sourcePreparation = new PsLauncher().LaunchPowerShellInstance("PF/SourcePrepScript.ps1",
 		                    $" -slogin {RunConfigurator.GetTenantValue("T5->T6", "source", "user")} -spassword {RunConfigurator.GetTenantValue("T5->T6", "source", "password")}", "x64")
 		            )
 		            {
-                        Log.Debug("Script has started.");
 		                while (!sourcePreparation.StandardOutput.EndOfStream)
 		                {
-                            Log.Debug("In stream loop");
 		                    string line = sourcePreparation.StandardOutput.ReadLine();
 		                    Log.Info(line);
 		                    if (line.Contains("Public Folder successfully created"))
 		                    {
-                                Log.Debug("Found Success Line");
 		                        result = true;
 		                    }
 		                }
-                        Log.Debug("Script stream end");
 		                sourcePreparation.WaitForExit(30000);
-                        Log.Debug("Script has finished");
 		                counter++;
 		            }
-                    Log.DebugFormat("result: {0}, counter: {1}", result, counter);
 		        }
 		        result = false;
 		        counter = 0;
 		        while (!result && counter < 3)
 		        {
-                    Log.Debug("Starting TargetPrepScript.ps1");
-                    using (var targetPreparation = new PsLauncher().LaunchPowerShellInstance("PF/TargetPrepScript.ps1", $" -slogin {RunConfigurator.GetTenantValue("T5->T6", "target", "user")} -spassword {RunConfigurator.GetTenantValue("T5->T6", "target", "password")}", "x64"))
+		            using (var targetPreparation = new PsLauncher().LaunchPowerShellInstance("PF/TargetPrepScript.ps1", $" -slogin {RunConfigurator.GetTenantValue("T5->T6", "target", "user")} -spassword {RunConfigurator.GetTenantValue("T5->T6", "target", "password")}", "x64"))
 		            {
-                        Log.Debug("Script has started.");
-                        while (!targetPreparation.StandardOutput.EndOfStream)
+		                while (!targetPreparation.StandardOutput.EndOfStream)
 		                {
-                            Log.Debug("In stream loop");
-                            string line = targetPreparation.StandardOutput.ReadLine();
+		                    string line = targetPreparation.StandardOutput.ReadLine();
 		                    Log.Info(line);
 		                    if (line.Contains("Public Folder successfully created"))
 		                    {
-                                Log.Debug("Found Success Line");
-                                result = true;
+		                        result = true;
 		                    }
 		                }
-                        Log.Debug("Script stream end");
-                        targetPreparation.WaitForExit(30000);
-                        Log.Debug("Script has finished");
-                        counter++;
+		                targetPreparation.WaitForExit(30000);
+		                counter++;
 		            }
-                    Log.DebugFormat("result: {0}, counter: {1}", result, counter);
-                }
-                Log.Debug("Starting UI Automation");
+		        }
 		        RunConfigurator.CreateFlagFolder(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//stopfolder"));
 		        LoginAndSelectRole(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user"), RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//password"), RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name"));
 		        SelectProject(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//name"));
@@ -125,8 +109,6 @@ namespace Product.Tests.PublicFoldersTests
 		        RunConfigurator.CheckProvisioningLogsFileIsDownloadedAndNotEmpty();
 		        //Note: add logs for second job
 		        User.AtPublicFolderMigrationViewForm().CloseUserDetails();
-
-                Log.Debug("Starting PfAutomationScript.ps1");
 		        using (var mainScript = new PsLauncher().LaunchPowerShellInstance("PF/PfAutomationScript.ps1", $" -sourceUserName {RunConfigurator.GetTenantValue("T5->T6", "source", "user")}" +
 		                                                                                                       $" -sourcepasswd {RunConfigurator.GetTenantValue("T5->T6", "source", "password")}" +
 		                                                                                                       $" -TargetUserName {RunConfigurator.GetTenantValue("T5->T6", "target", "user")}" +
@@ -143,12 +125,10 @@ namespace Product.Tests.PublicFoldersTests
 		        {
 		            while (!mainScript.StandardOutput.EndOfStream)
 		            {
-                        Log.Debug("In stream loop");
-                        var line = mainScript.StandardOutput.ReadLine();
+		                var line = mainScript.StandardOutput.ReadLine();
 		                Log.Info(line);
 		                if (line.Contains("Powershell will pause until Migration is complete - 1"))
 		                {
-                            Log.Debug("Found line waiting for migration 1.....");
 		                    Thread.Sleep(180000);
 		                    User.AtPublicFolderMigrationViewForm().OpenDetailsByLocator(RunConfigurator.GetValueByXpath(
 		                        "//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry4']/..//source"));
@@ -165,8 +145,7 @@ namespace Product.Tests.PublicFoldersTests
 		                }
 		                if (line.Contains("Powershell will pause until Migration is complete - 2"))
 		                {
-                            Log.Debug("Found line waiting for migration 2.....");
-                            Thread.Sleep(180000);
+		                    Thread.Sleep(180000);
 		                    try
 		                    {
 		                        User.AtPublicFolderMigrationViewForm().SyncFromDetails();
@@ -424,19 +403,16 @@ namespace Product.Tests.PublicFoldersTests
 		                    Store.PfValidationDictionary["validateProxy"] = true;
 		                }
 		            }
-                    Log.Debug("Script stream complete");
 		            mainScript.WaitForExit(30000);
-                    Log.Debug("Script exit");
 		        }
 		        foreach (var check in Store.PfValidationDictionary)
 		        {
-                    Log.DebugFormat("key: {0}, value: {1}", check.Key, check.Value);
 		            Assert.IsTrue(check.Value, check.Key + " check failed");
 		        }
             }
 		    catch (Exception)
 		    {
-		        LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
+		        LogHtml(Browser.GetDriver().PageSource);
                 throw;
             }
 		}

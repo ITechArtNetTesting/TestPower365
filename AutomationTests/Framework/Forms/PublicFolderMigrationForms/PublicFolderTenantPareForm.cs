@@ -9,19 +9,15 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms.PublicFolderMigrationForms
 {
 	public class PublicFolderTenantPareForm : BasePublicFolderWizardForm
-	{        
+	{
+		private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Which tenant pair')]");
 
-        private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Which tenant pair')]");
-
-		public PublicFolderTenantPareForm(Guid driverId) : base(TitleLocator, "Tenant pare form",driverId)
+		public PublicFolderTenantPareForm() : base(TitleLocator, "Tenant pare form")
 		{
-            this.driverId = driverId;
-            selectTenantPareButton = new Button(By.XPath("//button[contains(@data-toggle, 'dropdown')]"), "Select tenant pare button",driverId);
-            expandedDropButton = new Button(By.XPath("//button[contains(@data-toggle, 'dropdown')][contains(@aria-expanded, 'true')]"), "Expanded dropdown",driverId);
-        }
+		}
 
-		private readonly Button selectTenantPareButton ;
-		private readonly Button expandedDropButton ;
+		private readonly Button selectTenantPareButton = new Button(By.XPath("//button[contains(@data-toggle, 'dropdown')]"), "Select tenant pare button");
+		private readonly Button expandedDropButton = new Button(By.XPath("//button[contains(@data-toggle, 'dropdown')][contains(@aria-expanded, 'true')]"), "Expanded dropdown");
 		public void OpenDropDown()
 		{
 			Log.Info("Opening dropdown");
@@ -40,7 +36,7 @@ namespace Product.Framework.Forms.PublicFolderMigrationForms
 		public void SelectPare(string tenant)
 		{
 			Log.Info("Selecting pare with: "+tenant);
-			Button tenantPareButton = new Button(By.XPath($"//*[contains(text(), '{tenant}')]"), tenant+" tenant pare",driverId);
+			Button tenantPareButton = new Button(By.XPath($"//*[contains(text(), '{tenant}')]"), tenant+" tenant pare");
 			tenantPareButton.Click();
 			try
 			{

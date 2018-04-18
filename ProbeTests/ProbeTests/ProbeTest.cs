@@ -73,7 +73,7 @@ namespace ProbeTests.ProbeTests
             //NOTE: DEBUG
             try
             {
-                LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
+                LogHtml(Browser.GetDriver().PageSource);
                 TakeScreenshot();
             }
             catch (Exception)
@@ -95,7 +95,7 @@ namespace ProbeTests.ProbeTests
 
 	    public void TakeScreenshot()
 	    {
-            Screenshot screenshot = ((ITakesScreenshot)Driver.GetDriver(driver.GetDriverKey())).GetScreenshot();
+            Screenshot screenshot = ((ITakesScreenshot)Browser.GetDriver()).GetScreenshot();
             try
             {
                 screenshot.SaveAsFile(Path.GetFullPath("../Logs/" + _probeType + DateTime.UtcNow.ToString("MM_dd_HH_mm_ss") + ".png"), ScreenshotImageFormat.Png);

@@ -9,19 +9,15 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms.NewProjectWizardForms
 {
 	public class EnablePublicFoldersForm : BaseWizardStepForm
-	{        
+	{
+		private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you want to migrate public folders')]");
 
-        private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you want to migrate public folders')]");
-
-		public EnablePublicFoldersForm(Guid driverId) : base(TitleLocator, "Enable public folders form",driverId)
+		public EnablePublicFoldersForm() : base(TitleLocator, "Enable public folders form")
 		{
-            this.driverId = driverId;
-            yesButton = new Button(By.XPath("//label[contains(@for, 'yesFolders')]"), "Yes button",driverId);
-            noFoldersButton = new Button(By.XPath("//label[contains(@for, 'noFolders')]"), "No button",driverId);
-        }
+		}
 
-        private readonly Button yesButton;
-		private readonly Button noFoldersButton ;
+		private readonly Button yesButton = new Button(By.XPath("//label[contains(@for, 'yesFolders')]"), "Yes button");
+		private readonly Button noFoldersButton = new Button(By.XPath("//label[contains(@for, 'noFolders')]"), "No button");
 
 		public void SetYes()
 		{

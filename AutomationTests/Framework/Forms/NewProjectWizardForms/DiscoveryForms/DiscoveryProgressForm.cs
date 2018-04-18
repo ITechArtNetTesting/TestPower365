@@ -11,14 +11,7 @@ namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
 {
 	public class DiscoveryProgressForm
 	{
-        private Guid driverId;
-
-        public DiscoveryProgressForm(Guid driverId)
-        {
-            this.driverId = driverId;
-            discoveryIsInProgressLabel = new Label(By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Discovery is in progress')]"), "Discovery is in Progress label",driverId);
-        }
-		private Label discoveryIsInProgressLabel ;
+		private Label discoveryIsInProgressLabel = new Label(By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Discovery is in progress')]"), "Discovery is in Progress label");
 
 		public void WaitForDiscoveryIsCompleted()
 		{
@@ -27,7 +20,7 @@ namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
 			while (discoveryIsInProgressLabel.IsPresent() && counter<60)
 			{
 				Thread.Sleep(30000);
-				discoveryIsInProgressLabel = new Label(By.XPath("//span[contains(text(), 'Discovery is in progress')]"), "Discovery is in Progress label",driverId);
+				discoveryIsInProgressLabel = new Label(By.XPath("//span[contains(text(), 'Discovery is in progress')]"), "Discovery is in Progress label");
 				counter++;
 			}
 		}

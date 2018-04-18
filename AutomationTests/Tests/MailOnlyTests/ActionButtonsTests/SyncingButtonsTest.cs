@@ -35,10 +35,9 @@ namespace Product.Tests.MailOnlyTests.ActionButtonsTests
 		        User.AtUsersForm().AssertApplyIsEnabled();
 		        User.AtUsersForm().Apply();
 		        User.AtUsersForm().ConfirmSync();
-		        User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 50000);
-                // User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 60000);
-                User.AtUsersForm().WaitForState(sourceMailbox, State.Synced4, 600000);
-                User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
+		        User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 10000);
+		        User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 60000);
+		        User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
 		        User.AtUsersForm().SelectAction(ActionType.Sync);
 		        User.AtUsersForm().AssertApplyIsEnabled();
 		        User.AtUsersForm().SelectAction(ActionType.Complete);
@@ -46,7 +45,7 @@ namespace Product.Tests.MailOnlyTests.ActionButtonsTests
             }
 		    catch (Exception e)
 		    {
-		        LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
+		        LogHtml(Browser.GetDriver().PageSource);
                 throw e;
 		    }
 		}

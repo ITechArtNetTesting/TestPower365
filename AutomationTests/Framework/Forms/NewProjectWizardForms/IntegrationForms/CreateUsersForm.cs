@@ -9,23 +9,19 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
 	public class CreateUsersForm : BaseWizardStepForm
-	{        
+	{
+		private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you want to create users')]");
 
-        private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you want to create users')]");
-
-		public CreateUsersForm(Guid driverId) : base(TitleLocator, "Create users form",driverId)
-		{
-            this.driverId = driverId;
-            createUsersButton = new Button(By.XPath("//label[contains(@for, 'createUsers')]"), "Create users button",driverId);
-            dontCreateUsersButton = new Button(By.XPath("//label[contains(@for, 'dontCreateUsers')]"), "Dont create users button",driverId);
-        }
-
-		public CreateUsersForm(By _TitleLocator,Guid driverId) : base(_TitleLocator, "Create distribution groups form",driverId)
+		public CreateUsersForm() : base(TitleLocator, "Create users form")
 		{
 		}
 
-		private readonly Button createUsersButton ;
-		private readonly Button dontCreateUsersButton ;
+		public CreateUsersForm(By _TitleLocator) : base(_TitleLocator, "Create distribution groups form")
+		{
+		}
+
+		private readonly Button createUsersButton = new Button(By.XPath("//label[contains(@for, 'createUsers')]"), "Create users button");
+		private readonly Button dontCreateUsersButton = new Button(By.XPath("//label[contains(@for, 'dontCreateUsers')]"), "Dont create users button");
 
 		public void SelectCreateUsers()
 		{

@@ -10,13 +10,12 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
 {
     public class ProfileFilterMessagesForm : BaseWizardStepForm
     {
-       
+        //private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'How would you like to filter e-mail messages')]");
         private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='HowWouldYouLikeToFilterEmailMessages']");
-        
 
-        public ProfileFilterMessagesForm(Guid driverId) : base(TitleLocator, "Profile filter messages form",driverId)
+
+        public ProfileFilterMessagesForm() : base(TitleLocator, "Profile filter messages form")
         {
-            this.driverId = driverId;
         }
     }
 }

@@ -8,14 +8,12 @@ using OpenQA.Selenium;
 namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
 	public class UploadDistributionListForm : UploadFilesForm
-	{        
-
-        private static readonly By TitleLocator =
+	{
+		private static readonly By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Upload your list of distribution groups')]");
 
-		public UploadDistributionListForm(Guid driverId) : base(TitleLocator, "Upload distribution list form",driverId)
+		public UploadDistributionListForm() : base(TitleLocator, "Upload distribution list form")
 		{
-            this.driverId = driverId;
 		}
 
 

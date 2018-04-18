@@ -33,7 +33,7 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
             }
 		    catch (Exception)
 		    {
-		        LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
+		        LogHtml(Browser.GetDriver().PageSource);
                 throw;
             }
 		}

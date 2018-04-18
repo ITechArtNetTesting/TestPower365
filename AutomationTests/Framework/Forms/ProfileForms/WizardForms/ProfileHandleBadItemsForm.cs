@@ -12,11 +12,10 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
     {
 
         private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='HowWouldYouLikeToHandleBadItems']");
-        
 
-        public ProfileHandleBadItemsForm(Guid driverId) : base(TitleLocator, "Profile handle bad items form",driverId)
+
+        public ProfileHandleBadItemsForm() : base(TitleLocator, "Profile handle bad items form")
         {
-            this.driverId = driverId;
         }
     }
 }

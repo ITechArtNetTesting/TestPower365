@@ -16,43 +16,41 @@ namespace Product.Tests.IntegrationTests
 		}
 		
 		[TestMethod]
-        [TestCategory("Integration_test")]
-        public void Automation_IN_PS_DistributionGroupsInitialTest()
-        {
-            string userName = RunConfigurator.GetUserLogin("client2");
-            string password = RunConfigurator.GetPassword("client2");
-            string client = RunConfigurator.GetClient("client2");
+		public void Automation_IN_PS_DistributionGroupsInitialTest()
+		{
+		    string userName = RunConfigurator.GetUserLogin("client2");
+		    string password = RunConfigurator.GetPassword("client2");
+		    string client = RunConfigurator.GetRole("client2");
             string project = RunConfigurator.GetProjectName("client2","project2");
-            string group1Name = RunConfigurator.GetADGroupName("client2", "project2", "group1");
-            string group2Name = RunConfigurator.GetADGroupName("client2", "project2", "group2");
-            string group3Name = RunConfigurator.GetADGroupName("client2", "project2", "group3");
-            string group4Name = RunConfigurator.GetADGroupName("client2", "project2", "group4");
-            string group5Name = RunConfigurator.GetADGroupName("client2", "project2", "group5");
-            string group6Name = RunConfigurator.GetADGroupName("client2", "project2", "group6");
-            string sourceLogin = RunConfigurator.GetTenantValue("T5->T6", "source", "aduser");
+            string group1Name = RunConfigurator.GetGroupName("client2","project2","group1");
+            string group2Name = RunConfigurator.GetGroupName("client2","project2","group2");
+            string group3Name = RunConfigurator.GetGroupName("client2","project2","group3");
+            string group4Name = RunConfigurator.GetGroupName("client2","project2","group4");
+            string group5Name = RunConfigurator.GetGroupName("client2","project2","group5");
+            string group6Name = RunConfigurator.GetGroupName("client2","project2","group6");
+		    string sourceLogin = RunConfigurator.GetTenantValue("T5->T6", "source", "aduser");
 		    string sourcePassword = RunConfigurator.GetTenantValue("T5->T6", "source", "adpassword");
-            string group3Member1 = RunConfigurator.GetGroupMember("client2", "project2", "group3", "member1");         
-            string group3Owner = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='group3']/..//owner");
+            string group3Member1 = RunConfigurator.GetGroupFirstMember("client2","project2","group3");
+            string group3Owner = RunConfigurator.GetGroupOwner("client2","project2","group3");
 		    string sourceUri = RunConfigurator.GetTenantValue("T5->T6", "source", "uri");
 
 		    try
 		    {
 		        LoginAndSelectRole(userName, password, client);
 		        SelectProject(project);
-                try
-                {
-                    User.AtProjectOverviewForm().OpenMigrationGroups();
-                }
-                catch (Exception)
-                {
-                    Log.Info("Failed to open migration groups form");
-                    Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
-                    User.AtProjectOverviewForm().OpenMigrationGroups();
-                }
-                User.AtGroupsMigrationForm().SyncUserByLocator(group1Name);
+		        try
+		        {
+		            User.AtProjectOverviewForm().OpenMigrationGroups();
+		        }
+		        catch (Exception)
+		        {
+		            Log.Info("Failed to open migration groups form");
+		            Browser.GetDriver().Navigate().Refresh();
+		            User.AtProjectOverviewForm().OpenMigrationGroups();
+		        }
+		        User.AtGroupsMigrationForm().SyncUserByLocator(group1Name);
 		        User.AtGroupsMigrationForm().ConfirmSync();
 		        User.AtGroupsMigrationForm().WaitForState(group1Name, State.Syncing, 10000);
-
 		        User.AtGroupsMigrationForm().SyncUserByLocator(group2Name);
 		        User.AtGroupsMigrationForm().ConfirmSync();
 		        User.AtGroupsMigrationForm().WaitForState(group2Name, State.Syncing, 10000);
@@ -93,7 +91,7 @@ namespace Product.Tests.IntegrationTests
             }
 		    catch (Exception)
 		    {
-		        LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
+		        LogHtml(Browser.GetDriver().PageSource);
                 throw;
             }
 		}

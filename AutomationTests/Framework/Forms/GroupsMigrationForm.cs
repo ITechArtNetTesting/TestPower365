@@ -12,23 +12,22 @@ using Product.Framework.Enums;
 namespace Product.Framework.Forms
 {
 	public class GroupsMigrationForm : UsersForm
-	{        
+	{
+		private static readonly By TitleLocator = By.XPath("//a[contains(@data-bind, 'GroupMigrationsDialog')]");
 
-        private static readonly By TitleLocator = By.XPath("//a[contains(@data-bind, 'GroupMigrationsDialog')]");
-
-		public GroupsMigrationForm(Guid driverId) : base(TitleLocator, "Groups migration form",driverId)
+		public GroupsMigrationForm() : base(TitleLocator, "Groups migration form")
 		{
-            this.driverId = driverId;
-            actionsDropdownButton =new Button(By.XPath("//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"),"Actions dropdown",driverId);
-        }
-		private readonly Button actionsDropdownButton;
-
-        public new void SyncUserByLocator(string locator)
+		}
+		private readonly Button actionsDropdownButton =
+			new Button(
+				By.XPath(
+					"//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"),
+				"Actions dropdown");
+		public new void SyncUserByLocator(string locator)
 		{
-            WaitForAjaxLoad();
-            ScrollToTop();
+			ScrollToTop();
 			Log.Info("Syncing group by locator: " + locator);
-            WaitForAjaxLoad();
+			//Thread.Sleep(2000);
 			SelectEntryBylocator(locator);
 			SelectAction(ActionType.Sync);
 			Apply();

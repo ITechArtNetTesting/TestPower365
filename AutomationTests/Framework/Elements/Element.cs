@@ -9,7 +9,7 @@ namespace Product.Framework.Elements
 {
     public class Element : BaseElement
     {
-        public Element(By locator, string name,Guid driverId) : base(locator, name, driverId)
+        public Element(By locator, string name) : base(locator, name)
         {
         }
     }

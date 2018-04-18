@@ -34,9 +34,7 @@ namespace Product.Framework.Enums
         [Description("1 sync(s) complete")]
         Synced1,
         [Description("3 sync(s) complete")]
-        Synced3,
-        [Description("5 sync(s) complete")]
-        Synced4
-
+        Synced3
+        
     }
 }

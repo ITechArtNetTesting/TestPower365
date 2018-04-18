@@ -4,14 +4,16 @@ using Product.Framework;
 
 namespace Product.Tests.CommonTests
 {
-    public class LoginAndConfigureTest : BaseTest
-    {        
+	public class LoginAndConfigureTest : BaseTest
+	{
+
 		protected void LoginAndSelectRole(string login, string password, string role)
 		{
             LogIn(login, password);
             //NOTE: Temp solution to avoid 1 symbol in role textbox
+            //Thread.Sleep(2000);
             User.AtTenantRestructuringForm().OpenMainMenu();
-			User.AtTenantRestructuringForm().AtMainMenu(driver.GetDriverKey()).SelectRole(role);
+			User.AtTenantRestructuringForm().AtMainMenu().SelectRole(role);
             User.AtTenantRestructuringForm().GoToProjects();
 		}
 
@@ -66,14 +68,14 @@ namespace Product.Tests.CommonTests
 
             Office365TenantAuthorization(sourceTenant, sourcePassword);
             
-            Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(Store.MainHandle);
+            Browser.GetDriver().SwitchTo().Window(Store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(1);
 
             User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
 
             Office365TenantAuthorization(targetTenant, targetPassword);
 
-            Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(Store.MainHandle);
+            Browser.GetDriver().SwitchTo().Window(Store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(2);
 			User.AtAddTenantsForm().GoNext();
 			User.AtUploadFilesForm().SelectFile(fileName);

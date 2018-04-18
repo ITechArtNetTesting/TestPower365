@@ -10,12 +10,11 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
 {
     public class ProfileToLicenseMailboxesForm : BaseWizardStepForm
     {
-        private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='HowWouldYouLikeToLicenseYourTargetMailboxes']");    
-       
+        private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='HowWouldYouLikeToLicenseYourTargetMailboxes']");
 
-        public ProfileToLicenseMailboxesForm(Guid driverId) : base(TitleLocator, "Profile to license the target mailboxes",driverId)
+
+        public ProfileToLicenseMailboxesForm() : base(TitleLocator, "Profile to license the target mailboxes")
         {
-            this.driverId = driverId;
         }
     }
 }

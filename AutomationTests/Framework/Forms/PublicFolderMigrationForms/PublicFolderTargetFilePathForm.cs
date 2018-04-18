@@ -9,16 +9,13 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms.PublicFolderMigrationForms
 {
 	public class PublicFolderTargetFilePathForm : BasePublicFolderWizardForm
-	{        
+	{
+		private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//span[contains(text(), 'What target folder path do you want to migrate to')]");
 
-        private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//span[contains(text(), 'What target folder path do you want to migrate to')]");
-
-		public PublicFolderTargetFilePathForm(Guid driverId) : base(TitleLocator, "Target file path form",driverId)
+		public PublicFolderTargetFilePathForm() : base(TitleLocator, "Target file path form")
 		{
-            this.driverId = driverId;
-            filePathTextBox = new TextBox(By.XPath("//input[contains(@data-bind, 'textInput')]"), "File path textbox",driverId);
-        }
-		private readonly TextBox filePathTextBox ;
+		}
+		private readonly TextBox filePathTextBox = new TextBox(By.XPath("//input[contains(@data-bind, 'textInput')]"), "File path textbox");
 
 		public void SetFilePath(string path)
 		{

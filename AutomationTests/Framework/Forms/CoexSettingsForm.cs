@@ -13,31 +13,20 @@ namespace Product.Framework.Forms
 		private static readonly By TitleLocator =
 			By.XPath("//div[contains(@id, 'breadcrumbsContainer')]//strong[contains(text(), 'Configure')]");
 
-		public CoexSettingsForm(Guid driverId) : base(TitleLocator, "COEX settings form",driverId)
+		public CoexSettingsForm() : base(TitleLocator, "COEX settings form")
 		{
-            this.driverId = driverId;
-            directorySyncAccordianButton = new Button(By.XPath("//span[contains(text(), 'Directory Sync Status')]"), "Directory sync accordian",driverId);
-            expandedDirectorySyncAccordianButton = new Button(By.XPath("//span[contains(text(), 'Directory Sync Status')]/../../../..//div[contains(@class, 'collapse in')]"), "Expanded directory sync accordian",driverId);
-            addressBooksSyncAccordianButton = new Button(By.XPath("//span[contains(text(), 'Address Book Sync')]"), "Address books sync accordian",driverId);
-            expandedBooksSyncAccordianButton = new Button(By.XPath("//span[contains(text(), 'Address Book Sync')]/../../../..//div[contains(@class, 'collapse in')]"), "Expanded address books accordian",driverId);
-            freeBusyAccordianButton = new Button(By.XPath("//span[contains(text(), 'Free\\Busy')]"), "Free\\Busy accordian",driverId);
-            expandedFreeBusyAccordianButton = new Button(By.XPath("//span[contains(text(), 'Free\\Busy')]/../../../..//div[contains(@class, 'collapse in')]"), "Expanded Free\\Busy accordian",driverId);
-            emailRewrittingAccordianButton = new Button(By.XPath("//span[contains(text(), 'E-mail Rewriting')]"), "E-mail Rewriting accordian",driverId);
-            expandedEmailRewrittingAccordianButton = new Button(By.XPath("//span[contains(text(), 'E-mail Rewriting')]/../../../..//div[contains(@class, 'collapse in')]"), "Expanded E-mail Rewriting accordian",driverId);
-            finishAccordianButton = new Button(By.XPath("//span[contains(text(), 'FINISH')]"), "FINISH accordian",driverId);
-            expandedFinishAccordianButton = new Button(By.XPath("//span[contains(text(), 'FINISH')]/../../../..//div[contains(@class, 'collapse in')]"), "Expanded FINISH Rewriting accordian",driverId);
-        }
+		}
 
-		private readonly Button directorySyncAccordianButton ;
-		private readonly Button expandedDirectorySyncAccordianButton ;
-		private readonly Button addressBooksSyncAccordianButton ;
-		private readonly Button expandedBooksSyncAccordianButton ;
-		private readonly Button freeBusyAccordianButton ;
-		private readonly Button expandedFreeBusyAccordianButton ;
-		private readonly Button emailRewrittingAccordianButton ;
-		private readonly Button expandedEmailRewrittingAccordianButton ;
-		private readonly Button finishAccordianButton ;
-		private readonly Button expandedFinishAccordianButton ;
+		private readonly Button directorySyncAccordianButton = new Button(By.XPath("//span[contains(text(), 'Directory Sync Status')]"), "Directory sync accordian");
+		private readonly Button expandedDirectorySyncAccordianButton = new Button(By.XPath("//span[contains(text(), 'Directory Sync Status')]/../../../..//div[contains(@class, 'collapse in')]"), "Expanded directory sync accordian");
+		private readonly Button addressBooksSyncAccordianButton = new Button(By.XPath("//span[contains(text(), 'Address Book Sync')]"), "Address books sync accordian");
+		private readonly Button expandedBooksSyncAccordianButton = new Button(By.XPath("//span[contains(text(), 'Address Book Sync')]/../../../..//div[contains(@class, 'collapse in')]"), "Expanded address books accordian");
+		private readonly Button freeBusyAccordianButton = new Button(By.XPath("//span[contains(text(), 'Free\\Busy')]"), "Free\\Busy accordian");
+		private readonly Button expandedFreeBusyAccordianButton = new Button(By.XPath("//span[contains(text(), 'Free\\Busy')]/../../../..//div[contains(@class, 'collapse in')]"), "Expanded Free\\Busy accordian");
+		private readonly Button emailRewrittingAccordianButton = new Button(By.XPath("//span[contains(text(), 'E-mail Rewriting')]"), "E-mail Rewriting accordian");
+		private readonly Button expandedEmailRewrittingAccordianButton = new Button(By.XPath("//span[contains(text(), 'E-mail Rewriting')]/../../../..//div[contains(@class, 'collapse in')]"), "Expanded E-mail Rewriting accordian");
+		private readonly Button finishAccordianButton = new Button(By.XPath("//span[contains(text(), 'FINISH')]"), "FINISH accordian");
+		private readonly Button expandedFinishAccordianButton = new Button(By.XPath("//span[contains(text(), 'FINISH')]/../../../..//div[contains(@class, 'collapse in')]"), "Expanded FINISH Rewriting accordian");
 		public void ExpandDirectorySyncAccordian()
 		{
 			Log.Info("Expanding directory sync accordian");

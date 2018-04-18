@@ -6,59 +6,46 @@ namespace Product.Framework.Forms
 {
 	public class RegistrationForm : BaseForm
 	{
-        private Guid driverId;
+		private static readonly By TitleLocator = By.XPath("//span[contains(text(), 'NEW USER REGISTRATION')]");
 
-        private static readonly By TitleLocator = By.XPath("//span[contains(text(), 'NEW USER REGISTRATION')]");
+		private readonly TextBox AddressCityTextBox = new TextBox(By.Id("AddressCity"), "Address City");
 
-		private readonly TextBox AddressCityTextBox ;
+		private readonly Button AddressCountryButton = new Button(By.Id("countrySelector"), "Address Country");
 
-		private readonly Button AddressCountryButton;
+		private readonly TextBox AddressLine1TextBox = new TextBox(By.Id("AddressLine1"), "Address Line1");
 
-		private readonly TextBox AddressLine1TextBox ;
+		private readonly TextBox AddressStateTextBox = new TextBox(By.Id("AddressState"), "Address State");
 
-		private readonly TextBox AddressStateTextBox ;
+		private readonly TextBox AddressZipTextBox = new TextBox(By.Id("AddressZip"), "Address Zip");
 
-		private readonly TextBox AddressZipTextBox;
+		private readonly Button backButton = new Button(By.XPath("//a[contains(@href, 'history.back')]"), "Back button");
 
-		private readonly Button backButton ;
+		private readonly TextBox CientNameTextBox = new TextBox(By.Id("ClientName"), "Client Name");
 
-		private readonly TextBox CientNameTextBox;
+		private readonly TextBox ContactEmailTextBox = new TextBox(By.Id("ContactEmail"), "Email");
 
-		private readonly TextBox ContactEmailTextBox;
+		private readonly TextBox ContactFirstNameTextBox = new TextBox(By.Id("ContactFirstName"), "First Name");
 
-		private readonly TextBox ContactFirstNameTextBox;
+		private readonly TextBox ContactLastNameTextBox = new TextBox(By.Id("ContactLastName"), "Last Name");
 
-		private readonly TextBox ContactLastNameTextBox;
+		private readonly TextBox ContactPhoneTextBox = new TextBox(By.XPath("//input[contains(@data-bind, 'phoneNumber')]"),
+			"Phone");
 
-		private readonly TextBox ContactPhoneTextBox;
+		private readonly Button expandedDropdownButton =
+			new Button(By.XPath("//div[contains(@class, 'open')]//*[@id='countrySelector']"),
+				"Expanded country dropdown");
 
-		private readonly Button expandedDropdownButton;
+		private readonly Button nextButton =
+			new Button(By.XPath("//button[contains(@class, 'pull-right')][not(@disabled='')]//span[contains(text(), 'NEXT')]"), "Next button");
 
-		private readonly Button nextButton ;
+		private readonly Button registerButton = new Button(By.XPath("//button[contains(@type, 'submit')]"), "Register button");
 
-		private readonly Button registerButton;
+		private readonly Button submitButton =
+			new Button(By.XPath("//button[contains(@class, 'pull-right')][not(@disabled='')]//span[contains(text(), 'REGISTER')]"), "Submit button");
 
-		private readonly Button submitButton ;
-
-		public RegistrationForm(Guid driverId) : base(TitleLocator, "Registration Form",driverId)
+		public RegistrationForm() : base(TitleLocator, "Registration Form")
 		{
-            this.driverId = driverId;
-            AddressCityTextBox= new TextBox(By.Id("AddressCity"), "Address City",driverId);
-            AddressCountryButton = new Button(By.Id("countrySelector"), "Address Country", driverId);
-            AddressLine1TextBox = new TextBox(By.Id("AddressLine1"), "Address Line1", driverId);
-            AddressStateTextBox = new TextBox(By.Id("AddressState"), "Address State",driverId);
-            AddressZipTextBox = new TextBox(By.Id("AddressZip"), "Address Zip",driverId);
-            backButton = new Button(By.XPath("//a[contains(@href, 'history.back')]"), "Back button",driverId);
-            CientNameTextBox = new TextBox(By.Id("ClientName"), "Client Name",driverId);
-            ContactEmailTextBox = new TextBox(By.Id("ContactEmail"), "Email",driverId);
-            ContactFirstNameTextBox = new TextBox(By.Id("ContactFirstName"), "First Name",driverId);
-            ContactLastNameTextBox = new TextBox(By.Id("ContactLastName"), "Last Name",driverId);
-            ContactPhoneTextBox = new TextBox(By.XPath("//input[contains(@data-bind, 'phoneNumber')]"),"Phone",driverId);
-            expandedDropdownButton =new Button(By.XPath("//div[contains(@class, 'open')]//*[@id='countrySelector']"),"Expanded country dropdown",driverId);
-            nextButton =new Button(By.XPath("//button[contains(@class, 'pull-right')][not(@disabled='')]//span[contains(text(), 'NEXT')]"), "Next button",driverId);
-            registerButton = new Button(By.XPath("//button[contains(@type, 'submit')]"), "Register button",driverId);
-            submitButton =new Button(By.XPath("//button[contains(@class, 'pull-right')][not(@disabled='')]//span[contains(text(), 'REGISTER')]"), "Submit button",driverId);
-        }
+		}
 
 
 		public void ClickBack()
@@ -150,7 +137,7 @@ namespace Product.Framework.Forms
 		{
 			Log.Info($"Setting {name} Country");
 			OpenCountryDropDown();
-			var countryOptionButton = new Button(By.XPath($"//div[contains(@class, 'open')]//a[text()='{name}']/.."), name + " option",driverId);
+			var countryOptionButton = new Button(By.XPath($"//div[contains(@class, 'open')]//a[text()='{name}']/.."), name + " option");
 			countryOptionButton.Click();
 			Store.Country = name;
 		}

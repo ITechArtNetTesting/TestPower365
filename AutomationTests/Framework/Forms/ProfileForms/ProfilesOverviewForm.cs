@@ -11,14 +11,11 @@ namespace Product.Framework.Forms.ProfileForms
     public class ProfilesOverviewForm : BaseForm
     {
         private static readonly By TitleLocator = By.XPath("//*[contains(text(), 'Double-click on any profile details')]");
-        
 
-        public ProfilesOverviewForm(Guid driverId) : base(TitleLocator, "Profiles overview form",driverId)
+        public ProfilesOverviewForm() : base(TitleLocator, "Profiles overview form")
         {
-            this.driverId = driverId;
-            addProfileButton = new Button(By.XPath("//div[contains(@class, 'ibox-content')]//*[contains(text(), 'Add Profile')]"), "Add profile button",driverId);
         }
-        private Button addProfileButton ;
+        private Button addProfileButton => new Button(By.XPath("//div[contains(@class, 'ibox-content')]//*[contains(text(), 'Add Profile')]"), "Add profile button");
         
         private string ProfileLabelLocator = "//*[contains(text(), '{0}')]";
         private string ProfileModifyLocator = "//tr[.//*[contains(text(), '{0}')]]//div[contains(@class, 'table-actions')]//*[contains(text(), 'Modify')]";
@@ -31,14 +28,14 @@ namespace Product.Framework.Forms.ProfileForms
         public void HoverOverProfileLabel(string label)
         {
             Log.Info("Hovering over profile label: " + label);
-            new Label(By.XPath(String.Format(ProfileLabelLocator, label)), "Profile Label",driverId).Move();
+            new Label(By.XPath(String.Format(ProfileLabelLocator, label)), "Profile Label").Move();
         }
 
         public void ModifyProfile(string profile)
         {
             Log.Info("Modifying profile: "+profile);
             HoverOverProfileLabel(profile);
-            new Button(By.XPath(String.Format(ProfileModifyLocator, profile)), "Profile modify button",driverId).Click();
+            new Button(By.XPath(String.Format(ProfileModifyLocator, profile)), "Profile modify button").Click();
         }
     }
 }

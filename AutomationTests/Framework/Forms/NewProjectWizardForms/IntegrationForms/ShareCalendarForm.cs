@@ -10,24 +10,18 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
 	public class ShareCalendarForm : BaseWizardStepForm
-	{        
-
-        private static readonly By TitleLocator =
+	{
+		private static readonly By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Would you like to share calendar availability')]");
 
-		public ShareCalendarForm(Guid driverId) : base(TitleLocator, "Share calendar form",driverId)
+		public ShareCalendarForm() : base(TitleLocator, "Share calendar form")
 		{
-            this.driverId = driverId;
-            yesLabel = new Label(By.XPath("//label[contains(@for, 'fbYes')]"), "Yes label",driverId);
-            yesRadioButton = new RadioButton(By.Id("fbYes"), "Yes radio",driverId);
-            noLabel = new Label(By.XPath("//label[contains(@for, 'fbNo')]"), "No label",driverId);
-            noRadioButton = new RadioButton(By.Id("fbNo"), "No radio",driverId);
-        }
+		}
 
-		private readonly Label yesLabel ;
-		private readonly RadioButton yesRadioButton;
-		private readonly Label noLabel;
-		private readonly RadioButton noRadioButton;
+		private readonly Label yesLabel = new Label(By.XPath("//label[contains(@for, 'fbYes')]"), "Yes label");
+		private readonly RadioButton yesRadioButton = new RadioButton(By.Id("fbYes"), "Yes radio");
+		private readonly Label noLabel = new Label(By.XPath("//label[contains(@for, 'fbNo')]"), "No label");
+		private readonly RadioButton noRadioButton = new RadioButton(By.Id("fbNo"), "No radio");
 
 		public void SelectYes()
 		{

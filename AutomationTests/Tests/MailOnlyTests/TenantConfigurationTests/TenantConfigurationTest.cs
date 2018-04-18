@@ -33,7 +33,7 @@ namespace Product.Tests.MailOnlyTests.TenantConfigurationTests
             }
 		    catch (Exception)
 		    {
-                LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
+                LogHtml(Browser.GetDriver().PageSource);
 		        throw;
             }
 		}

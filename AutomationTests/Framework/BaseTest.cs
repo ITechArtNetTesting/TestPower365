@@ -15,11 +15,10 @@ namespace Product.Framework
 	/// <seealso cref="BaseEntity" />
 	[TestClass]
 	public class BaseTest : BaseEntity
-	{        
+	{
 		protected virtual string downloadPath {get { return "../../download/"; }}
 		protected static TestContext _testContext;
 		private string _baseUrl;
-        protected Driver driver;
 		public UserSteps User;
 
 		private void GetResolution()
@@ -32,10 +31,8 @@ namespace Product.Framework
 		/// </summary>
 		[TestInitialize]
 		public virtual void SetUp()
-		{            
-            driver = new Driver(WebBrowsers.Chrome);
-            driverId = driver.GetDriverKey();
-            RunOnce();
+		{
+			RunOnce();
 			RunConfigurator.RunPath = "resources/run.xml";
 			RunConfigurator.DownloadPath = downloadPath;
 			RunConfigurator.ResourcesPath = "resources/";
@@ -51,13 +48,12 @@ namespace Product.Framework
 				}
 			}
 			RunConfigurator.ClearDownloads();
-            //User = new UserSteps();
-            User = new UserSteps(driver.GetDriverKey());
-            _baseUrl = RunConfigurator.GetValue("baseurl");
+			User = new UserSteps();
+			_baseUrl = RunConfigurator.GetValue("baseurl");
 			GetResolution();
-			//Browser.GetInstance(RunConfigurator.DownloadPath);
-			//Browser.GetDriver().Manage().Window.Maximize();
-			//Browser.GetDriver().Navigate().GoToUrl(_baseUrl);
+			Browser.GetInstance(RunConfigurator.DownloadPath);
+			Browser.GetDriver().Manage().Window.Maximize();
+			Browser.GetDriver().Navigate().GoToUrl(_baseUrl);
 		}
 
 		
@@ -67,10 +63,9 @@ namespace Product.Framework
 		[TestCleanup]
 		public void TearDown()
 		{
-            driver.CloseDriver();
-            //Browser.GetDriver()?.Close();
-            //Browser.GetDriver()?.Quit();
-        }
+            Browser.GetDriver()?.Close();
+			Browser.GetDriver()?.Quit();
+		}
 
 		/// <summary>
 		///     Runs the once.

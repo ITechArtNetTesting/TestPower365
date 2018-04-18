@@ -10,13 +10,12 @@ namespace Product.Framework.Forms.PublicFolderMigrationForms
 {
 	public class BasePublicFolderWizardForm : BaseForm
 	{
-		public BasePublicFolderWizardForm(By TitleLocator, string name,Guid driverId) : base(TitleLocator, name,driverId)
+		public BasePublicFolderWizardForm(By TitleLocator, string name) : base(TitleLocator, name)
 		{
-            this.driverId = driverId;
-            nextButton =new Button(By.XPath("//button[contains(@class, 'pull-right')][not(@disabled='')]"), "Next button",driverId);
-        }
+		}
 
-		protected readonly Button nextButton ;
+		protected readonly Button nextButton =
+			new Button(By.XPath("//button[contains(@class, 'pull-right')][not(@disabled='')]"), "Next button");
 		public void GoNext()
 		{
 			Log.Info("Going next");

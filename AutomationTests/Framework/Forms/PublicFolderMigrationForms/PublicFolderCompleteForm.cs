@@ -8,13 +8,11 @@ using OpenQA.Selenium;
 namespace Product.Framework.Forms.PublicFolderMigrationForms
 {
 	public class PublicFolderCompleteForm : BasePublicFolderWizardForm
-	{        
+	{
+		private static readonly By Titlelocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Ok, so you want to migrate')]");
 
-        private static readonly By Titlelocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Ok, so you want to migrate')]");
-
-		public PublicFolderCompleteForm(Guid driverId) : base(Titlelocator, "Complete form",driverId)
+		public PublicFolderCompleteForm() : base(Titlelocator, "Complete form")
 		{
-            this.driverId = driverId;
 		}
 
 

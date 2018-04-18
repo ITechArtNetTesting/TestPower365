@@ -10,53 +10,52 @@ namespace Product.Framework.Forms
 	{
 		private static readonly By TitleLocator = By.XPath("//*[contains(@id, 'projectsContainer')] | //video");
 
-		private readonly Button addProjectButton ;
-        private readonly Button addProjectBottomButton ;
+		private readonly Button addProjectButton =
+			new Button(By.XPath("//div[contains(@class, 'topnav')]//a[contains(@href, 'Project/Create')]"),
+				"Add project button");
+        private readonly Button addProjectBottomButton = new Button(By.XPath("//a[contains(@href, 'Project/Create')]"), "Bottom add project button");
 
-		private readonly Button clientRoleButton ;
+		private readonly Button clientRoleButton = new Button(
+			By.XPath("//a[@role='button']//i[contains(@class, 'fa-users')]"),
+			"Client role button");
 
-		private readonly TextBox clientRoleTextBox ;
+		private readonly TextBox clientRoleTextBox = new TextBox(By.XPath("//div[contains(@class, 'dropdown inline m-r')]"),
+			"Client role textbox");
 
-		private readonly Label fakeLabel ;
+		private readonly Label fakeLabel = new Label(By.XPath("//span[@class='m-r'][text()='1']"), "Fake 1 label");
 
-		private readonly Button mailFromFileButton ;
+		private readonly Button mailFromFileButton =
+			new Button(By.XPath("//div[contains(@class, 'modal in')]//button[contains(@data-bind, 'addMailOnlyProject')]"),
+				"Mail only from file button");
 
-		private readonly Button mailWithDiscovery ;
+		private readonly Button mailWithDiscovery =
+			new Button(
+				By.XPath("//div[contains(@class, 'modal in')]//button[contains(@data-bind, 'addMailWithDiscoveryProject')]"),
+				"Mail with discovery button");
 
-		private readonly Button moreButton ;
+		private readonly Button moreButton =
+			new Button(By.XPath("//*[@id='recentClientsPane']//div[contains(@role, 'tooltip')]//*[@id='moreClientsLink']"),
+				"More button");
 
-		private readonly Button profileButton ;
+		private readonly Button profileButton = new Button(By.XPath("//i[contains(@class, 'glyphicon-user')]/.."),
+			"Profile button");
 
-		private readonly Button roleDropdownButton ;
+		private readonly Button roleDropdownButton =
+			new Button(By.XPath("//div[contains(@class, 'dropdown inline m-r')]"), "Role dropdown");
 
-		private readonly Button signOutButton ;
-        private readonly Label projectsContainerLabel ;
-        
+		private readonly Button signOutButton =
+			new Button(By.XPath("//div[contains(@class, 'popover-content')]//a[contains(@href, 'SignOut')]"), "Sign out button");
+        private readonly Label projectsContainerLabel = new Label(By.XPath("//*[contains(@id, 'projectsContainer')] | //video"), "Projects container");
 
-        private Button logoButton ;
-		public TenantRestructuringForm(Guid driverId) : base(TitleLocator, "Tenant Restructuring Form",driverId)
+        private Button logoButton = new Button(By.XPath("//ul[contains(@class, 'topnav-menu')]"), "Logo button");
+		public TenantRestructuringForm() : base(TitleLocator, "Tenant Restructuring Form")
 		{
-            this.driverId = driverId;
-            addProjectButton =new Button(By.XPath("//div[contains(@class, 'topnav')]//a[contains(@href, 'Project/Create')]"),"Add project button",driverId);
-            addProjectBottomButton = new Button(By.XPath("//a[contains(@href, 'Project/Create')]"), "Bottom add project button",driverId);
-            clientRoleButton = new Button(By.XPath("//a[@role='button']//i[contains(@class, 'fa-users')]"),"Client role button",driverId);
-            clientRoleTextBox = new TextBox(By.XPath("//div[contains(@class, 'dropdown inline m-r')]"),"Client role textbox",driverId);
-            fakeLabel = new Label(By.XPath("//span[@class='m-r'][text()='1']"), "Fake 1 label",driverId);
-            mailFromFileButton =new Button(By.XPath("//div[contains(@class, 'modal in')]//button[contains(@data-bind, 'addMailOnlyProject')]"),"Mail only from file button",driverId);
-            mailWithDiscovery =new Button(By.XPath("//div[contains(@class, 'modal in')]//button[contains(@data-bind, 'addMailWithDiscoveryProject')]"),"Mail with discovery button",driverId);
-            moreButton =new Button(By.XPath("//*[@id='recentClientsPane']//div[contains(@role, 'tooltip')]//*[@id='moreClientsLink']"),"More button",driverId);
-            profileButton = new Button(By.XPath("//i[contains(@class, 'glyphicon-user')]/.."),"Profile button",driverId);
-            roleDropdownButton =new Button(By.XPath("//div[contains(@class, 'dropdown inline m-r')]"), "Role dropdown",driverId);
-            signOutButton =new Button(By.XPath("//div[contains(@class, 'popover-content')]//a[contains(@href, 'SignOut')]"), "Sign out button",driverId);
-            projectsContainerLabel = new Label(By.XPath("//*[contains(@id, 'projectsContainer')] | //video"), "Projects container",driverId);
-            logoButton = new Button(By.XPath("//ul[contains(@class, 'topnav-menu')]"), "Logo button",driverId);
-        }
+		}
 
 		public void AddProjectClick()
 		{
-            WaitForDOM();
-            Log.Info("Clicking Add Project button");
-
+			Thread.Sleep(5000);
+			Log.Info("Clicking Add Project button");
 		    if (addProjectButton.IsPresent())
 		    {
 		        addProjectButton.Click();
@@ -70,14 +69,14 @@ namespace Product.Framework.Forms
 	    public void GoToProjects()
 	    {
             Log.Info("Going to projects");
-         
+            //Thread.Sleep(5000);
 	        try
 	        {
 	            logoButton.Click();
             }
 	        catch (Exception e)
 	        {
-	            logoButton = new Button(By.XPath("//ul[contains(@class, 'topnav-menu')]"), "Logo button",driverId);
+	            logoButton = new Button(By.XPath("//ul[contains(@class, 'topnav-menu')]"), "Logo button");
 	            logoButton.Click();
             }
            
@@ -113,7 +112,7 @@ namespace Product.Framework.Forms
 		public void SelectProject(string projectName)
 		{
 			Log.Info("Selecting project: " + projectName);
-			var projectButton = new Button(By.XPath($"//span[contains(text(), '{projectName}')][contains(@class, 'notranslate')]"), projectName + " button",driverId);
+			var projectButton = new Button(By.XPath($"//span[contains(text(), '{projectName}')][contains(@class, 'notranslate')]"), projectName + " button");
 			projectButton.Click();
 		}
 
@@ -132,7 +131,7 @@ namespace Product.Framework.Forms
 		public void OpenProject(string name)
 		{
 			Log.Info($"Opening {name} project");
-			var projectButton = new Button(By.XPath($"//a[contains(text(), '{name}')]"), $"{name} project button",driverId);
+			var projectButton = new Button(By.XPath($"//a[contains(text(), '{name}')]"), $"{name} project button");
 			projectButton.Click();
 			try
 			{
@@ -173,9 +172,8 @@ namespace Product.Framework.Forms
 
 		public void ScrollToElement(IWebElement element)
 		{
-            //((IJavaScriptExecutor) Browser.GetDriver()).ExecuteScript("arguments[0].scrollIntoView();", element);
-            ((IJavaScriptExecutor)Driver.GetDriver(driverId)).ExecuteScript("arguments[0].scrollIntoView();", element);
-        }
+			((IJavaScriptExecutor) Browser.GetDriver()).ExecuteScript("arguments[0].scrollIntoView();", element);
+		}
 
 		public void SetRoleByDropDown(string role)
 		{
@@ -187,7 +185,7 @@ namespace Product.Framework.Forms
 			var dropDownSelectButton =
 				new Button(
 					By.XPath($"//button[contains(@aria-expanded, 'true')]/..//a[contains(text(), '{role}')]"),
-					$"{role} dropdown option",driverId);
+					$"{role} dropdown option");
 			try
 			{
 				ScrollToElement(dropDownSelectButton.GetElement());
@@ -207,14 +205,14 @@ namespace Product.Framework.Forms
 
 		private bool CheckRole(string role)
 		{
-			var roleLabel = new Label(By.XPath($"//span[@class='m-r'][text()='{role}']"), "Current role label",driverId);
+			var roleLabel = new Label(By.XPath($"//span[@class='m-r'][text()='{role}']"), "Current role label");
 			return roleLabel.IsPresent();
 		}
 
 		//Used for Assertion on New Client Registration
 		public void AssertNoDataForNewClient()
 		{
-			var NoDataElement = new Element(By.XPath("//span[contains(text(), 'No projects')]"), "No Data Element",driverId);
+			var NoDataElement = new Element(By.XPath("//span[contains(text(), 'No projects')]"), "No Data Element");
 			NoDataElement.WaitForElementPresent();
 			Assert.IsTrue(NoDataElement.IsPresent());
 		}

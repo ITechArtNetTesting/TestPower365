@@ -37,7 +37,7 @@ namespace Product.Tests.MailOnlyTests.ProjectCreationTests
             }
 		    catch (Exception e)
 		    {
-		        LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
+		        LogHtml(Browser.GetDriver().PageSource);
                 throw;
             }
 		}

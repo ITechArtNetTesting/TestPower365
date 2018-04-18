@@ -8,14 +8,12 @@ using System.Threading.Tasks;
 
 namespace Product.Framework.Forms.ProfileForms.WizardForms
 {
-    public class ProfileTranslateSourceEmailForm : BaseWizardStepForm
+   public class ProfileTranslateSourceEmailForm : BaseWizardStepForm
     {
-        private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='WouldYouLikeToTranslateSourceEmail']");
-        
+       private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='WouldYouLikeToTranslateSourceEmail']");
 
-        public ProfileTranslateSourceEmailForm(Guid driverId) : base(TitleLocator, "Profile translate source email",driverId)
+        public ProfileTranslateSourceEmailForm() : base(TitleLocator, "Profile translate source email")
         {
-            this.driverId = driverId;
         }
 
     }

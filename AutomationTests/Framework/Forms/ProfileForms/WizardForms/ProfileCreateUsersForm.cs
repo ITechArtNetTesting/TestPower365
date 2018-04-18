@@ -13,21 +13,16 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
     public class ProfileCreateUsersForm : BaseWizardStepForm
     {
         private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you want to create users in the target that we cannot find a match for')]");
-        
+        //private static readonly By TitleLocator = By.Id("editMigrationProfileContainer");
 
-        public ProfileCreateUsersForm(Guid driverId) : base(TitleLocator, "Create users form",driverId)
+        public ProfileCreateUsersForm() : base(TitleLocator, "Create users form")
         {
-            this.driverId = driverId;
-            yesLabel = new Label(By.XPath("//label[contains(@for, 'createUsers')]"), "Yes label",driverId);
-            yesRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'createUsers')]"), "Yes radiobutton",driverId);
-            noLabel = new Label(By.XPath("//label[contains(@for, 'dontCreateUsers')]"), "No label",driverId);
-            noRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'dontCreateUsers')]"), "No radiobutton",driverId);
         }
 
-        private Label yesLabel ;
-        private RadioButton yesRadioButton ;
-        private Label noLabel ;
-        private RadioButton noRadioButton ;
+        private Label yesLabel = new Label(By.XPath("//label[contains(@for, 'createUsers')]"), "Yes label");
+        private RadioButton yesRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'createUsers')]"), "Yes radiobutton");
+        private Label noLabel = new Label(By.XPath("//label[contains(@for, 'dontCreateUsers')]"), "No label");
+        private RadioButton noRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'dontCreateUsers')]"), "No radiobutton");
 
         public void SelectYes()
         {

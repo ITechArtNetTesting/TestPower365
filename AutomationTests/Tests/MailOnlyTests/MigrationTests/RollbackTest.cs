@@ -99,7 +99,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
                             catch (Exception)
                             {
                                 Log.Info("Apply button is disabled");
-                                Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
+                                Browser.GetDriver().Navigate().Refresh();
                                 User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
                                 User.AtUsersForm().SelectAction(ActionType.Sync);
                                 User.AtUsersForm().Apply();
@@ -137,7 +137,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
                             catch (Exception)
                             {
                                 Log.Info("Apply button is disabled");
-                                Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
+                                Browser.GetDriver().Navigate().Refresh();
                                 User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
                                 User.AtUsersForm().SelectAction(ActionType.Sync);
                                 User.AtUsersForm().Apply();
@@ -168,7 +168,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
             }
             catch (Exception)
             {
-                LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
+                LogHtml(Browser.GetDriver().PageSource);
                 throw;
             }
         }

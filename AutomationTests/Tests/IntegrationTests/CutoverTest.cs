@@ -17,23 +17,22 @@ namespace Product.Tests.IntegrationTests
         }
 
         [TestMethod]
-        [TestCategory("Integration_test")]
         public void Automation_IN_PS_CutoverTest()
         {
             string userName = RunConfigurator.GetUserLogin("client2");
             string password = RunConfigurator.GetPassword("client2");
-            string client = RunConfigurator.GetClient("client2");
-            string project = RunConfigurator.GetProjectName("client2", "project2");
-            string sourceMailbox13 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry13");
-            string sourceMailbox14 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry14");
-            string sourceMailbox15 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry15");
+            string client = RunConfigurator.GetRole("client2");
+            string project = RunConfigurator.GetProjectName("client2","project2");
+            string sourceMailbox13 = RunConfigurator.GetSourceMailbox("client2","project2","entry13");
+            string sourceMailbox14 = RunConfigurator.GetSourceMailbox("client2","project2","entry14");
+            string sourceMailbox15 = RunConfigurator.GetSourceMailbox("client2","project2","entry15");
             string targetLogin = RunConfigurator.GetTenantValue("T5->T6", "target", "user");
             string targetPassword = RunConfigurator.GetTenantValue("T5->T6", "target", "password");
             string sourceLogin = RunConfigurator.GetTenantValue("T5->T6", "source", "user");
             string sourcePassword = RunConfigurator.GetTenantValue("T5->T6", "source", "password");
-            string targetMailbox13 = RunConfigurator.GetTargetMailbox("client2", "project2", "entry13");
-            string targetMailbox13Smtp = RunConfigurator.GetTargetSmtpMailbox("client2", "project2", "entry13");
-            string targetMailbox13X500 = RunConfigurator.GetTargetX500Mailbox("client2", "project2", "entry13");
+            string targetMailbox13 = RunConfigurator.GetTargetMailbox("client2","project2","entry13");
+            string targetMailbox13Smtp = RunConfigurator.GetTargetSmtpMailbox("client2","project2","entry13");
+            string targetMailbox13X500 = RunConfigurator.GetTargetX500Mailbox("client2","project2","entry13");
             string targetOnPremLogin = RunConfigurator.GetTenantValue("T5->T6", "target", "aduser");
             string targetOnPremPassword = RunConfigurator.GetTenantValue("T5->T6", "target", "adpassword");
             string targetOnPremUri = RunConfigurator.GetTenantValue("T5->T6", "target", "uri");
@@ -54,7 +53,7 @@ namespace Product.Tests.IntegrationTests
                 catch (Exception)
                 {
                     Log.Info("Apply button is not enabled");
-                    Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
+                    Browser.GetDriver().Navigate().Refresh();
                     User.AtUsersForm().SelectEntryBylocator(sourceMailbox13);
                     User.AtUsersForm().SelectAction(ActionType.Sync);
                     User.AtUsersForm().Apply();
@@ -72,7 +71,7 @@ namespace Product.Tests.IntegrationTests
                 catch (Exception)
                 {
                     Log.Info("Apply button is not enabled");
-                    Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
+                    Browser.GetDriver().Navigate().Refresh();
                     User.AtUsersForm().SelectEntryBylocator(sourceMailbox14);
                     User.AtUsersForm().SelectAction(ActionType.Sync);
                     User.AtUsersForm().Apply();
@@ -90,7 +89,7 @@ namespace Product.Tests.IntegrationTests
                 catch (Exception)
                 {
                     Log.Info("Apply button is not enabled");
-                    Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
+                    Browser.GetDriver().Navigate().Refresh();
                     User.AtUsersForm().SelectEntryBylocator(sourceMailbox15);
                     User.AtUsersForm().SelectAction(ActionType.Sync);
                     User.AtUsersForm().Apply();
@@ -117,7 +116,7 @@ namespace Product.Tests.IntegrationTests
                 catch (Exception)
                 {
                     Log.Info("Apply button is not enabled");
-                    Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
+                    Browser.GetDriver().Navigate().Refresh();
                     User.AtUsersForm().SelectEntryBylocator(sourceMailbox15);
                     User.AtUsersForm().SelectAction(ActionType.Cutover);
                     User.AtUsersForm().Apply();
@@ -135,7 +134,7 @@ namespace Product.Tests.IntegrationTests
                 catch (Exception)
                 {
                     Log.Info("Apply button is not enabled");
-                    Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
+                    Browser.GetDriver().Navigate().Refresh();
                     User.AtUsersForm().SelectEntryBylocator(sourceMailbox14);
                     User.AtUsersForm().SelectAction(ActionType.Cutover);
                     User.AtUsersForm().Apply();
@@ -153,7 +152,7 @@ namespace Product.Tests.IntegrationTests
                 catch (Exception)
                 {
                     Log.Info("Apply button is not enabled");
-                    Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
+                    Browser.GetDriver().Navigate().Refresh();
                     User.AtUsersForm().SelectEntryBylocator(sourceMailbox13);
                     User.AtUsersForm().SelectAction(ActionType.Cutover);
                     User.AtUsersForm().Apply();
@@ -171,7 +170,6 @@ namespace Product.Tests.IntegrationTests
                 //NOTE: Wait till entry15 cutover completes
                 User.AtUsersForm().PerformSearch(sourceMailbox15);
                 User.AtUsersForm().WaitForState(sourceMailbox15, State.Complete, 60000);
-
                 Thread.Sleep(2700000);
                 //NOTE: Run PS script
                 bool tc32208 = false;
@@ -244,7 +242,7 @@ namespace Product.Tests.IntegrationTests
             }
             catch (Exception)
             {
-                LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
+                LogHtml(Browser.GetDriver().PageSource);
                 throw;
             }
         }

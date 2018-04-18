@@ -20,7 +20,7 @@ namespace Product.Tests.CommonTests.SetupTests
 		{
             LoginAndSelectRole(RunConfigurator.GetUserLogin("client2"),
                                RunConfigurator.GetPassword("client2"),
-                               RunConfigurator.GetClient("client2"));
+                               RunConfigurator.GetRole("client2"));
 
 			User.AtTenantRestructuringForm().AddProjectClick();
 			User.AtChooseYourProjectTypeForm().ChooseMailWithDiscovery();
@@ -34,13 +34,13 @@ namespace Product.Tests.CommonTests.SetupTests
             User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
             Office365TenantAuthorization(RunConfigurator.GetTenantValue("T1->T2", "source", "user"), RunConfigurator.GetTenantValue("T1->T2", "source", "password"));
             
-			Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(Store.MainHandle);
+			Browser.GetDriver().SwitchTo().Window(Store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(1);
 
 			User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
             Office365TenantAuthorization(RunConfigurator.GetTenantValue("T1->T2", "target", "user"), RunConfigurator.GetTenantValue("T1->T2", "target", "password"));
             
-			Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(Store.MainHandle);
+			Browser.GetDriver().SwitchTo().Window(Store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(2);
 			User.AtAddTenantsForm().GoNext();
 			User.AtSelectSourceTenantForm().SelectTenant(RunConfigurator.GetTenantValue("T1->T2", "source", "name"));

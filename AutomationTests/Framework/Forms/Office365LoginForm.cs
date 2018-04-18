@@ -8,31 +8,26 @@ namespace Product.Framework.Forms
 	{
         private static readonly By TitleLocator = By.XPath("//*/title");
 
-        private readonly TextBox loginTextBox ;
+        private readonly TextBox loginTextBox = new TextBox(By.Id("i0116"), "Login textbox");
 
-        private readonly TextBox passwordTextBox ;
+        private readonly TextBox passwordTextBox = new TextBox(By.Name("passwd"), "Password textbox");
 
-        private readonly Button nextButton ;
+        private readonly Button nextButton = new Button(By.Id("idSIButton9"), "Next button");
 
-        private readonly Button useAnotherAccountButton ;
+        private readonly Button useAnotherAccountButton = new Button(By.Id("otherTile"), "Use another account button");
 
-        private readonly Button dontShowAgain ;
-        
+        private readonly Button dontShowAgain = new Button(By.Name("DontShowAgain"), "Don't show again button");
+
+       
 
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Office365LoginForm" /> class.
         /// </summary>
-        public Office365LoginForm(Guid driverId) 
-            : base(TitleLocator, "Office365 login form",driverId)
+        public Office365LoginForm() 
+            : base(TitleLocator, "Office365 login form")
 		{
-            this.driverId = driverId;
-            loginTextBox = new TextBox(By.Id("i0116"), "Login textbox",driverId);
-            passwordTextBox = new TextBox(By.Name("passwd"), "Password textbox",driverId);
-            nextButton = new Button(By.Id("idSIButton9"), "Next button",driverId);
-            useAnotherAccountButton = new Button(By.Id("otherTile"), "Use another account button",driverId);
-            dontShowAgain = new Button(By.Name("DontShowAgain"), "Don't show again button",driverId);
-        }
+		}
         
 		public void SetLogin(string login)
 		{

@@ -12,23 +12,17 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
 {
     public class ProfileSyncDistributionGroupsForm : BaseWizardStepForm
     {
-       
+        // private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'How would you like to sync distribution groups')]");
         private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='HowWouldYouLikeToSyncDistributionGroups']");
-        
 
-        public ProfileSyncDistributionGroupsForm(Guid driverId) : base(TitleLocator, "Sync distribution grops form",driverId)
+        public ProfileSyncDistributionGroupsForm() : base(TitleLocator, "Sync distribution grops form")
         {
-            this.driverId = driverId;
-            manuallyLabel = new Label(By.XPath("//label[contains(@for, 'manual')]"), "Yes label",driverId);
-            manuallyRadioButton = new RadioButton(By.Id("manual"), "Yes radiobutton",driverId);
-            continuouslyLabel = new Label(By.XPath("//label[contains(@for, 'continuous')]"), "No label",driverId);
-            continuouslyRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'continuous')]"), "No radiobutton",driverId);
         }
 
-        private Label manuallyLabel ;
-        private RadioButton manuallyRadioButton ;
-        private Label continuouslyLabel ;
-        private RadioButton continuouslyRadioButton ;
+        private Label manuallyLabel = new Label(By.XPath("//label[contains(@for, 'manual')]"), "Yes label");
+        private RadioButton manuallyRadioButton = new RadioButton(By.Id("manual"), "Yes radiobutton");
+        private Label continuouslyLabel = new Label(By.XPath("//label[contains(@for, 'continuous')]"), "No label");
+        private RadioButton continuouslyRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'continuous')]"), "No radiobutton");
 
         public void SelectYes()
         {

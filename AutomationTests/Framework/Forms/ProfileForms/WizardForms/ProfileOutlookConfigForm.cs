@@ -14,21 +14,14 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
     {
         private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Will users need to update their Outlook profile to their new e-mail address')]");
 
-        
-
-        public ProfileOutlookConfigForm(Guid driverId) : base(TitleLocator, "Profile outlook configuration form",driverId)
+        public ProfileOutlookConfigForm() : base(TitleLocator, "Profile outlook configuration form")
         {
-            this.driverId = driverId;
-            yesLabel = new Label(By.XPath("//label[contains(@for, 'runAgentYes')]"), "Yes label",driverId);
-            yesRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'runAgentYes')]"), "Yes radiobutton",driverId);
-            noLabel = new Label(By.XPath("//label[contains(@for, 'runAgentNo')]"), "No label",driverId);
-            noRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'runAgentNo')]"), "No radiobutton",driverId);
         }
 
-        private Label yesLabel ;
-        private RadioButton yesRadioButton ;
-        private Label noLabel ;
-        private RadioButton noRadioButton ;
+        private Label yesLabel = new Label(By.XPath("//label[contains(@for, 'runAgentYes')]"), "Yes label");
+        private RadioButton yesRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'runAgentYes')]"), "Yes radiobutton");
+        private Label noLabel = new Label(By.XPath("//label[contains(@for, 'runAgentNo')]"), "No label");
+        private RadioButton noRadioButton = new RadioButton(By.XPath("//input[contains(@id, 'runAgentNo')]"), "No radiobutton");
 
         public void SelectYes()
         {

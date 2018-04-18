@@ -38,7 +38,7 @@ namespace Product.Tests.MailOnlyTests.ActionButtonsTests
             }
 		    catch (Exception e)
 		    {
-		        LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
+		        LogHtml(Browser.GetDriver().PageSource);
                 throw e;
             }
 		}

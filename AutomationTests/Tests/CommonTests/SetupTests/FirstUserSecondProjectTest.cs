@@ -18,7 +18,7 @@ namespace Product.Tests.CommonTests.SetupTests
 		{
             LoginAndSelectRole(RunConfigurator.GetUserLogin("client1"),
                                 RunConfigurator.GetPassword("client1"),
-                                RunConfigurator.GetClient("client1"));
+                                RunConfigurator.GetRole("client1"));
           
             AddMailOnlyProject(RunConfigurator.GetProjectName("client1", "project2"),
                 RunConfigurator.GetTenantValue("T3->T4", "source", "user"),
@@ -45,26 +45,26 @@ namespace Product.Tests.CommonTests.SetupTests
             User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
             Office365TenantAuthorization(RunConfigurator.GetTenantValue("T3->T4", "source", "user"), RunConfigurator.GetTenantValue("T3->T4", "source", "password"));
             
-            Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(Store.MainHandle);
+            Browser.GetDriver().SwitchTo().Window(Store.MainHandle);
             User.AtAddTenantsForm().WaitForTenantAdded(1);
 
             User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
             Office365TenantAuthorization(RunConfigurator.GetTenantValue("T3->T4", "target", "user"), RunConfigurator.GetTenantValue("T3->T4", "target", "password"));
 
-            Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(Store.MainHandle);
+            Browser.GetDriver().SwitchTo().Window(Store.MainHandle);
             User.AtAddTenantsForm().WaitForTenantAdded(2);
 
             User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
             Office365TenantAuthorization(RunConfigurator.GetTenantValue("T1->T2", "target", "user"), RunConfigurator.GetTenantValue("T1->T2", "target", "password"));
             
-            Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(Store.MainHandle);
+            Browser.GetDriver().SwitchTo().Window(Store.MainHandle);
             User.AtAddTenantsForm().WaitForTenantAdded(3);
 
             User.AtAddTenantsForm().GoNext();
             User.AtUploadFilesForm().DownloadSample();
             RunConfigurator.CheckUserMatchFileIsDownloaded();
-            User.AtUploadFilesForm().SelectFile(RunConfigurator.GetFileName("client1", "project2", "file1"));
-            User.AtUploadFilesForm().SelectFile(RunConfigurator.GetFileName("client1", "project2", "file1"));
+             User.AtUploadFilesForm().SelectFile(RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//metaname[text()='file1']/..//filename"));
+            User.AtUploadFilesForm().SelectFile(RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//metaname[text()='file1']/..//filename"));
             User.AtUploadFilesForm().WaitUntillFileUploaded();
             User.AtUploadFilesForm().GoNext();
             User.AtUploadedUsersForm().GoNext();

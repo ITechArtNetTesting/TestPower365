@@ -9,25 +9,19 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms.PublicFolderMigrationForms
 {
     public class PublicFolderListForm : BasePublicFolderWizardForm
-    {        
-
+    {
         private static readonly By TitleLocator = By.XPath(
                 "//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Do you already have a list of public folders that you would like to sync')]");
 
-        public PublicFolderListForm(Guid driverId) : base(TitleLocator, "PF list form",driverId)
+        public PublicFolderListForm() : base(TitleLocator, "PF list form")
         {
-            this.driverId = driverId;
-            yesRadioButton = new RadioButton(By.Id("csvFile"), "Yes radiobutton",driverId);
-            noRadioButton = new RadioButton(By.Id("manual"), "No radiobutton",driverId);
-            yesButton = new Button(By.XPath("//label[contains(@for, 'csvFile')]"), "Yes button",driverId);
-            noButton = new Button(By.XPath("//label[contains(@for, 'manual')]"), "No button",driverId);
         }
 
-        private readonly RadioButton yesRadioButton ;
-        private readonly RadioButton noRadioButton ;
+        private readonly RadioButton yesRadioButton = new RadioButton(By.Id("csvFile"), "Yes radiobutton");
+        private readonly RadioButton noRadioButton = new RadioButton(By.Id("manual"), "No radiobutton");
 
-        private readonly Button yesButton ;
-        private readonly Button noButton ;
+        private readonly Button yesButton = new Button(By.XPath("//label[contains(@for, 'csvFile')]"), "Yes button");
+        private readonly Button noButton = new Button(By.XPath("//label[contains(@for, 'manual')]"), "No button");
         public void SelectNo()
         {
             Log.Info("Selecting keep existing users");

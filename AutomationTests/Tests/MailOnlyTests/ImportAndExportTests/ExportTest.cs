@@ -42,7 +42,7 @@ namespace Product.Tests.MailOnlyTests.ImportAndExportTests
 		        User.AtUsersForm().SelectEntryBylocator(sourceMailbox2);
 		        User.AtUsersForm().OpenGroupFilter();
 		        User.AtUsersForm().SelectFilterGroup(groupMailbox3);
-		      
+		        Thread.Sleep(3000);
 		        User.AtUsersForm().CloseModalWindow();
 		        User.AtUsersForm().SelectEntryBylocator(sourceMailbox3);
 		        User.AtUsersForm().ExportUsers();
@@ -55,7 +55,7 @@ namespace Product.Tests.MailOnlyTests.ImportAndExportTests
             }
 		    catch (Exception e)
 		    {
-		        LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
+		        LogHtml(Browser.GetDriver().PageSource);
                 throw e;
             }
 		}

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<OrderedTest name="OrderedPowershell" storage="c:\source\btcloud\dev\seleniumtests\automationtests\orderedpowershell.orderedtest" id="82870acd-45e9-4bec-8264-263c82f6f8b7" continueAfterFailure="true" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+<OrderedTest name="orderedpowershell" storage="c:\source\btcloud\dev\seleniumtests\automationtests\orderedpowershell.orderedtest" id="82870acd-45e9-4bec-8264-263c82f6f8b7" continueAfterFailure="true" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
   <TestLinks>
     <TestLink id="2d8b9de5-c641-1524-70d9-24841b6b1f7e" name="Automation_PS_MO_CompareTest" storage="bin\debug\automationtests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <TestLink id="336bcfc6-92b2-09f5-dac5-0d5d0503f532" name="Automation_MO_RollbackTest" storage="bin\debug\automationtests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />

@@ -9,23 +9,17 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms.NewProjectWizardForms
 {
 	public class KeepUsersForm : BaseWizardStepForm
-	{        
+	{
+		private static readonly By TitleLocator = By.XPath("//span[contains(text(), 'Which user list do you want to use')]");
 
-        private static readonly By TitleLocator = By.XPath("//span[contains(text(), 'Which user list do you want to use')]");
-
-		public KeepUsersForm(Guid driverId) : base(TitleLocator, "Keep users list form",driverId)
+		public KeepUsersForm() : base(TitleLocator, "Keep users list form")
 		{
-            this.driverId = driverId;
-            keepExistingLabel = new Label(By.XPath("//label[contains(@for, 'keepExisting')]"), "Keep existing label",driverId);
-            keepExistingRadioButton = new RadioButton(By.Id("keepExisting"), "Keep existing radiobutton",driverId);
-            uploadNewUsersLabel = new Label(By.XPath("//label[contains(@for, 'manual')]"), "Upload new users label",driverId);
-            uploadNewUsersRadioButton = new RadioButton(By.Id("manual"), "Upload new users radiobutton",driverId);
-        }
+		}
 
-		private readonly Label keepExistingLabel ;
-		private readonly RadioButton keepExistingRadioButton ;
-		private readonly Label uploadNewUsersLabel ;
-		private readonly RadioButton uploadNewUsersRadioButton ;
+		private readonly Label keepExistingLabel = new Label(By.XPath("//label[contains(@for, 'keepExisting')]"), "Keep existing label");
+		private readonly RadioButton keepExistingRadioButton = new RadioButton(By.Id("keepExisting"), "Keep existing radiobutton");
+		private readonly Label uploadNewUsersLabel = new Label(By.XPath("//label[contains(@for, 'manual')]"), "Upload new users label");
+		private readonly RadioButton uploadNewUsersRadioButton = new RadioButton(By.Id("manual"), "Upload new users radiobutton");
 
 		public void SelectKeepExisting()
 		{

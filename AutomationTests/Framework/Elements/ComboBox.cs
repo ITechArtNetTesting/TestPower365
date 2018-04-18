@@ -8,8 +8,8 @@ namespace Product.Framework.Elements
 	{
 		private SelectElement @select;
 
-		public ComboBox(By locator, string name,Guid driverId)
-			: base(locator, name,driverId)
+		public ComboBox(By locator, string name)
+			: base(locator, name)
 		{
 		}
 

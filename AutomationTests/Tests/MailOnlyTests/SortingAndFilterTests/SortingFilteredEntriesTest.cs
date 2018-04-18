@@ -34,30 +34,30 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		        User.AtProjectOverviewForm().OpenUsersList();
 		        User.AtUsersForm().SwitchFilter(FilterState.Open);
 		        User.AtUsersForm().SelectFilterGroup(groupMailbox7);
-		    
+		        Thread.Sleep(5000);
 		        User.AtUsersForm().SelectFilterGroup(profileMailbox7);
 		        User.AtUsersForm().SwitchFilter(FilterState.Closed);
-		    
+		        Thread.Sleep(5000);
 		        User.AtUsersForm().StoreEntriesData();
 		        User.AtUsersForm().SortSource();
-		  
+		        Thread.Sleep(5000);
 		        User.AtUsersForm().AssertSourceSorted();
 		        User.AtUsersForm().StoreEntriesData();
 		        User.AtUsersForm().SortTarget();
-		  
+		        Thread.Sleep(5000);
 		        User.AtUsersForm().AssertTargetSorted();
-                User.AtUsersForm().SyncUserByLocator(sourceMailbox7);
-                User.AtUsersForm().ConfirmSync();
-                User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox7);
-
-                User.AtUsersForm().StoreEntriesData();
+		        User.AtUsersForm().SyncUserByLocator(sourceMailbox7);
+		        User.AtUsersForm().ConfirmSync();
+		        User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox7);
+		        Thread.Sleep(5000);
+		        User.AtUsersForm().StoreEntriesData();
 		        User.AtUsersForm().SortStatus();
-		     
+		        Thread.Sleep(5000);
 		        User.AtUsersForm().AssertStatusSorted();
             }
 		    catch (Exception)
 		    {
-		        LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
+		        LogHtml(Browser.GetDriver().PageSource);
                 throw;
             }
 		}

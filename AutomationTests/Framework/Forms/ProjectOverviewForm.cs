@@ -11,67 +11,73 @@ namespace Product.Framework.Forms
 	{
 		private static readonly By TitleLocator = By.XPath("//a[contains(@href, 'Edit?project')]");
 
-		private readonly Button allUsersAmountButton ;
+		private readonly Button allUsersAmountButton =
+			new Button(
+				By.XPath("//div[contains(@class, 'ibox-content')]/a[contains(@data-bind, 'total,')]"),
+				"All users amount button");
 
-		private readonly Button allUsersCompletedButton ;
+		private readonly Button allUsersCompletedButton =
+			new Button(
+				By.XPath(
+					"//*[contains(text(), 'users')]/ancestor::div[contains(@data-bind, 'overallStatusViewModel')]//a[contains(@data-bind, 'completedNumber')]"),
+				"All users completed button");
 
-		private readonly Button archiveProjectButton ;
+		private readonly Button archiveProjectButton = new Button(
+			By.XPath("//button[contains(@data-bind, 'deleteProject')]"), "Archive project button");
 
-		private readonly Label connectionStatusLabel ;
+		private readonly Label connectionStatusLabel =
+			new Label(
+				By.XPath(
+                    "//div[@class='page-content']/div[@class='ibox'][2]/div[@class='ibox-content']/div[@class='row']/div[@class='col-md-3 col-sm-6 col-xs-6'][1]/h3[@class='blue-text']/font/font[text()='Connected']"),
+                "Connection status label");
 
-		private readonly Label discoveryCompleteStateLabel ;
+		private readonly Label discoveryCompleteStateLabel =
+			new Label(By.XPath("//i[contains(@data-bind, 'discoveryState')][contains(@class, 'icon-success')][contains(@class, 'fa-check-circle')]"),
+				"Discovery Complete label");
 
-		private readonly Label discoveryCompleteWithErrorsLabel ;
+		private readonly Label discoveryCompleteWithErrorsLabel =
+			new Label(By.XPath("//i[contains(@data-bind, 'discoveryState')]/ancestor::tr//*[text()='Complete With Errors']"),
+				"Complete with errors label");
 
-		private readonly Button editProjectButton ;
+		private readonly Button editProjectButton = new Button(By.XPath("//a[contains(@href, 'Edit?project')]"),
+			"Edit Project button");
 
-		private readonly Button editTenantsButton ;
+		private readonly Button editTenantsButton = new Button(By.XPath("//div[contains(@class, 'ibox-title')]//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'tenant')]]//ancestor::div[contains(@class, 'ibox-title')]//a"),
+			"Edit tenants button");
 
-		private readonly Label finalizingValueLabel ;
+		private readonly Label finalizingValueLabel =
+			new Label(
+//				By.XPath("//div[contains(@class, 'ibox-content')]/a[contains(@data-bind, 'completedNumber')]"),
+				By.XPath("//div[@class='ibox'][1]/div[@class='ibox-content']//a[contains(@data-bind, 'completedNumber')][text()[contains(.,'2')]]"),
+                "Finalizing users value label");
 		
-		private readonly Label migrationGroupLabel ;
+		private readonly Label migrationGroupLabel = new Label(By.XPath("//div[contains(@class, 'ibox-title')]//*[contains(text(), 'Migration waves for users')]"),
+			"Migration groups label");
 
-		private readonly Label migrationReadyValueLabel ;
+		private readonly Label migrationReadyValueLabel =
+			new Label(
+				By.XPath(
+					"//*[contains(text(), 'Migration')]/ancestor::div[contains(@class, 'ibox')]//*[contains(text(), 'All Users')]/ancestor::tr//a[contains(@data-bind, 'readyNumber')]"),
+				"Migration block Ready value label");
 
-		private readonly Label readyUsersValueLabel ;
+		private readonly Label readyUsersValueLabel =
+			new Label(
+				By.XPath("//div[contains(@class, 'ibox-content')]/a[contains(@data-bind, 'readyLink')]"),
+				"Ready users value label");
 		
-		private readonly Label tenantsLabel ;
+		private readonly Label tenantsLabel = new Label(By.XPath("//div[contains(@class, 'ibox-title')]//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'tenant')]]"), "Tenants label");
 
-		private readonly Button yesButton ;
-		private readonly Button openPublicFoldersMigrationViewButton ;
-		private readonly Button coexSettingsButton ;
-		private readonly Button totalPublicFoldersMigrationsButton ;
-		private readonly Button migrationGroupsButton ;
-        private readonly Button totalGroupsButton ;	            
-
-        public ProjectOverviewForm(Guid driverId) : base(TitleLocator, "Project overview form",driverId)
+		private readonly Button yesButton =
+			new Button(By.XPath("//div[contains(@class, 'modal in')][@id='confirmationDialog']//button[text()='Yes']"),
+				"Yes button");
+		private readonly Button openPublicFoldersMigrationViewButton = new Button(By.XPath("//*[contains(text(), 'Public folders')]/ancestor::div[contains(@class, 'ibox-title')]//a"), "Edit Public folders button");
+		private readonly Button coexSettingsButton = new Button(By.XPath("//a[contains(@data-bind, 'configureProjectLink')]"), "COEX settings button");
+		private readonly Button totalPublicFoldersMigrationsButton = new Button(By.XPath("//*[contains(text(), 'Public folders')]/ancestor::div[contains(@class, 'ibox')]//div[contains(@class, 'ibox-content')]//a[contains(@data-bind, 'totalLink')]"), "Total migrations button");
+		private readonly Button migrationGroupsButton = new Button(By.XPath("//a[contains(@data-bind, 'distGroupsLink')]"), "Migration groups button");
+        private readonly Button totalGroupsButton = new Button(By.XPath("//div[contains(@class, 'ibox-content')]//a[contains(@data-bind, 'allGroupsLink')]"), "Total groups button");
+	    protected Label descriptionLabel => new Label(By.XPath("//*[contains(@data-bind, 'projectDescription')]"), "Description Label");
+        public ProjectOverviewForm() : base(TitleLocator, "Project overview form")
 		{
-            this.driverId = driverId;
-            allUsersAmountButton =new Button(By.XPath("//div[contains(@class, 'ibox-content')]/a[contains(@data-bind, 'total,')]"),"All users amount button",driverId);
-            allUsersCompletedButton =new Button(By.XPath("//*[contains(text(), 'users')]/ancestor::div[contains(@data-bind, 'overallStatusViewModel')]//a[contains(@data-bind, 'completedNumber')]"),"All users completed button",driverId);
-            archiveProjectButton = new Button(By.XPath("//button[contains(@data-bind, 'deleteProject')]"), "Archive project button",driverId);
-            connectionStatusLabel =new Label(By.XPath("//div[@class='page-content']/div[@class='ibox'][2]/div[@class='ibox-content']/div[@class='row']/div[@class='col-md-3 col-sm-6 col-xs-6'][1]/h3[@class='blue-text']/font/font[text()='Connected']"),"Connection status label",driverId);
-            discoveryCompleteStateLabel =new Label(By.XPath("//i[contains(@data-bind, 'discoveryState')][contains(@class, 'icon-success')][contains(@class, 'fa-check-circle')]"),"Discovery Complete label",driverId);
-            discoveryCompleteWithErrorsLabel =new Label(By.XPath("//i[contains(@data-bind, 'discoveryState')]/ancestor::tr//*[text()='Complete With Errors']"),"Complete with errors label",driverId);
-            editProjectButton = new Button(By.XPath("//a[contains(@href, 'Edit?project')]"),"Edit Project button",driverId);
-            editTenantsButton = new Button(By.XPath("//div[contains(@class, 'ibox-title')]//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'tenant')]]//ancestor::div[contains(@class, 'ibox-title')]//a"),"Edit tenants button",driverId);
-            finalizingValueLabel =new Label(By.XPath("//div[@class='ibox'][1]/div[@class='ibox-content']//a[contains(@data-bind, 'completedNumber')][text()[contains(.,'2')]]"),"Finalizing users value label",driverId);
-            migrationGroupLabel = new Label(By.XPath("//div[contains(@class, 'ibox-title')]//*[contains(text(), 'Migration waves for users')]"),"Migration groups label",driverId);
-            migrationReadyValueLabel =new Label(By.XPath("//*[contains(text(), 'Migration')]/ancestor::div[contains(@class, 'ibox')]//*[contains(text(), 'All Users')]/ancestor::tr//a[contains(@data-bind, 'readyNumber')]"),"Migration block Ready value label",driverId);
-            readyUsersValueLabel =new Label(By.XPath("//div[contains(@class, 'ibox-content')]/a[contains(@data-bind, 'readyLink')]"),"Ready users value label",driverId);
-            tenantsLabel = new Label(By.XPath("//div[contains(@class, 'ibox-title')]//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'tenant')]]"), "Tenants label",driverId);
-            yesButton =new Button(By.XPath("//div[contains(@class, 'modal in')][@id='confirmationDialog']//button[text()='Yes']"),"Yes button",driverId);
-            openPublicFoldersMigrationViewButton = new Button(By.XPath("//*[contains(text(), 'Public folders')]/ancestor::div[contains(@class, 'ibox-title')]//a"), "Edit Public folders button",driverId);
-            coexSettingsButton = new Button(By.XPath("//a[contains(@data-bind, 'configureProjectLink')]"), "COEX settings button",driverId);
-            totalPublicFoldersMigrationsButton = new Button(By.XPath("//*[contains(text(), 'Public folders')]/ancestor::div[contains(@class, 'ibox')]//div[contains(@class, 'ibox-content')]//a[contains(@data-bind, 'totalLink')]"), "Total migrations button",driverId);
-            migrationGroupsButton = new Button(By.XPath("//a[contains(@data-bind, 'distGroupsLink')]"), "Migration groups button",driverId);
-            totalGroupsButton = new Button(By.XPath("//div[contains(@class, 'ibox-content')]//a[contains(@data-bind, 'allGroupsLink')]"), "Total groups button",driverId);
-            Label descriptionLabel = new Label(By.XPath("//*[contains(@data-bind, 'projectDescription')]"), "Description Label",driverId);
-            timestampLabel =new Label(By.XPath("//div[contains(@class, 'modal fade in')]//ul[contains(@class, 'm-t')]//li"), "Timestamp label",driverId);
-            closeButton =new Button(By.XPath("//div[contains(@class, 'modal fade in')]//button[contains(text(), 'Close')]"),"Close popup button",driverId);
-            discoveryLabel =new Label(By.XPath("//div[contains(@class, 'modal fade in')]//strong[contains(text(), 'Discovery')]"),"Discovery label",driverId);
-            discoverySwitherButton =new Button(By.XPath("//div[contains(@class, 'modal fade in')]//input[contains(@id, 'discoveryEnabled')]/.."),"Discovery switcher",driverId);
-            runDiscoveryButton =new Button(By.XPath("//div[contains(@class, 'modal fade in')]//button[contains(@data-bind, 'startDiscovery')]"),"Run discovery button",driverId);
             descriptionLabel.WaitForElementPresent();
 		}
 
@@ -103,7 +109,6 @@ namespace Product.Framework.Forms
 		{
 			Log.Info("Opening users list");
 			allUsersAmountButton.Click();
-            WaitForAjaxLoad();
 		}
 
 		public void EditTenants()
@@ -122,24 +127,20 @@ namespace Product.Framework.Forms
 
 		public void ScrollToElement(IWebElement element)
 		{
-            //((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript("arguments[0].scrollIntoView();", element);
-            ((IJavaScriptExecutor)Driver.GetDriver(driverId)).ExecuteScript("arguments[0].scrollIntoView();", element);
-        }
+			((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript("arguments[0].scrollIntoView();", element);
+		}
 
 		public void ScrollToElement(IWebElement element, string options)
 		{
-            //((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript($"arguments[0].scrollIntoView({options});", element);
-            ((IJavaScriptExecutor)Driver.GetDriver(driverId)).ExecuteScript($"arguments[0].scrollIntoView({options});", element);
-            //((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript("var element = arguments[0]; var bodyRect = document.body.getBoundingClientRect(), elemRect = element.getBoundingClientRect(), offset = elemRect.top - bodyRect.top; window.scrollTo(0, offset - 100);", element);
-            ((IJavaScriptExecutor)Driver.GetDriver(driverId)).ExecuteScript("var element = arguments[0]; var bodyRect = document.body.getBoundingClientRect(), elemRect = element.getBoundingClientRect(), offset = elemRect.top - bodyRect.top; window.scrollTo(0, offset - 100);", element);
-        }
+			((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript($"arguments[0].scrollIntoView({options});", element);
+			((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript("var element = arguments[0]; var bodyRect = document.body.getBoundingClientRect(), elemRect = element.getBoundingClientRect(), offset = elemRect.top - bodyRect.top; window.scrollTo(0, offset - 100);", element);
+		}
 
 		public new void ScrollToTheBottom()
 		{
 			Log.Info("Scrolling to the bottom of the page");
-            //((IJavaScriptExecutor) Browser.GetDriver()).ExecuteScript("window.scrollTo(0, document.body.scrollHeight - 10)");
-            ((IJavaScriptExecutor)Driver.GetDriver(driverId)).ExecuteScript("window.scrollTo(0, document.body.scrollHeight - 10)");
-        }
+			((IJavaScriptExecutor) Browser.GetDriver()).ExecuteScript("window.scrollTo(0, document.body.scrollHeight - 10)");
+		}
 
 		public void AssertAllContentBlocksArePresent()
 		{
@@ -171,21 +172,21 @@ namespace Product.Framework.Forms
 		public void WaitTillDiscoveryIsComplete(int timeout)
 		{
 			Log.Info("Waiting till discovery is completed");
-			var counter = 0;           
-         while (!discoveryCompleteStateLabel.IsPresent(2) && counter < timeout)
-            {
-                Thread.Sleep(60000);
-                Refresh();
-                Assert.IsTrue(!discoveryCompleteWithErrorsLabel.IsPresent());
-                counter++;
-            }
-            discoveryCompleteStateLabel.WaitForSeveralElementsPresent(2);
+			var counter = 0;
+			while (!discoveryCompleteStateLabel.IsPresent(2) && counter < timeout)
+			{
+				Thread.Sleep(60000);
+				Refresh();
+				Assert.IsTrue(!discoveryCompleteWithErrorsLabel.IsPresent());
+				counter++;
+			}
+			discoveryCompleteStateLabel.WaitForSeveralElementsPresent(2);
 		}
 		public void WaitTillDiscoveryIsComplete(int timeout, string tenant)
 		{
 			Log.Info("Waiting till discovery is completed for: "+tenant);
 			var counter = 0;
-			Label discoveryCompletedLabel = new Label(By.XPath($"//*[contains(text(), '{tenant}')]/ancestor::tr//i[contains(@data-bind, 'discoveryState')][contains(@class, 'icon-success')][contains(@class, 'fa-check-circle')]"),tenant+ " discovery completed state",driverId);
+			Label discoveryCompletedLabel = new Label(By.XPath($"//*[contains(text(), '{tenant}')]/ancestor::tr//i[contains(@data-bind, 'discoveryState')][contains(@class, 'icon-success')][contains(@class, 'fa-check-circle')]"),tenant+ " discovery completed state");
 			while (!discoveryCompletedLabel.IsPresent() && counter < timeout)
 			{
 				Thread.Sleep(60000);
@@ -208,20 +209,17 @@ namespace Product.Framework.Forms
 			while (counter < time)
 			{
 				Thread.Sleep(40000);
-                //Browser.GetDriver().Navigate().Refresh();
-                Driver.GetDriver(driverId).Navigate().Refresh();
-                Thread.Sleep(20000);
+				Browser.GetDriver().Navigate().Refresh();
+				Thread.Sleep(20000);
 				counter++;
 			}
 		}
 
 		private void Refresh()
 		{
-            //Thread.Sleep(22000);
-            //Browser.GetDriver().Navigate().Refresh();
-            Driver.GetDriver(driverId).Navigate().Refresh();
-            WaitForAjaxLoad();
-			//Thread.Sleep(8000);
+			Thread.Sleep(22000);
+			Browser.GetDriver().Navigate().Refresh();
+			Thread.Sleep(8000);
 		}
 
 		public void OpenAllCompletedUsers()
@@ -297,13 +295,12 @@ namespace Product.Framework.Forms
 		{
 			Log.Info("Asserting Finalized user amount is equal to: " + count);
 			var counter = 0;
-			Label completedUsersLabel = new Label(By.XPath($"//div[@class='ibox'][1]/div[@class='ibox-content']//a[contains(@data-bind, 'completedNumber')][text()[contains(.,'{count}')]]"), "Finalized users label",driverId);
+			Label completedUsersLabel = new Label(By.XPath($"//div[@class='ibox'][1]/div[@class='ibox-content']//a[contains(@data-bind, 'completedNumber')][text()[contains(.,'{count}')]]"), "Finalized users label");
 			while (!completedUsersLabel.IsPresent() && counter<35)
 			{
 				Thread.Sleep(50000);
-                //Browser.GetDriver().Navigate().Refresh();
-                Driver.GetDriver(driverId).Navigate().Refresh();
-                Thread.Sleep(10000);
+				Browser.GetDriver().Navigate().Refresh();
+				Thread.Sleep(10000);
 				counter++;
 			}
             Assert.IsTrue(int.Parse(finalizingValueLabel.GetText().Trim()) == count, "Finalizing users amount is invalid");
@@ -323,15 +320,24 @@ namespace Product.Framework.Forms
 
 		#region [Settings popup]
 
-		private readonly Label timestampLabel ;
+		private readonly Label timestampLabel =
+			new Label(By.XPath("//div[contains(@class, 'modal fade in')]//ul[contains(@class, 'm-t')]//li"), "Timestamp label");
 
-		private readonly Button closeButton ;
+		private readonly Button closeButton =
+			new Button(By.XPath("//div[contains(@class, 'modal fade in')]//button[contains(text(), 'Close')]"),
+				"Close popup button");
 
-		private readonly Label discoveryLabel ;
+		private readonly Label discoveryLabel =
+			new Label(By.XPath("//div[contains(@class, 'modal fade in')]//strong[contains(text(), 'Discovery')]"),
+				"Discovery label");
 
-		private readonly Button discoverySwitherButton ;
+		private readonly Button discoverySwitherButton =
+			new Button(By.XPath("//div[contains(@class, 'modal fade in')]//input[contains(@id, 'discoveryEnabled')]/.."),
+				"Discovery switcher");
 
-		private readonly Button runDiscoveryButton ;
+		private readonly Button runDiscoveryButton =
+			new Button(By.XPath("//div[contains(@class, 'modal fade in')]//button[contains(@data-bind, 'startDiscovery')]"),
+				"Run discovery button");
 
 		public void AssertTime()
 		{

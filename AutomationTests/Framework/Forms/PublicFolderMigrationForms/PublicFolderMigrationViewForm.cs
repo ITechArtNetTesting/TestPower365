@@ -11,81 +11,49 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms.PublicFolderMigrationForms
 {
 	public class PublicFolderMigrationViewForm : UsersForm
-	{        
+	{
+		private static readonly By TitleLocator = By.XPath("//a[contains(@href, 'PublicFolderMigration/Edit')]");
 
-        private static readonly By TitleLocator = By.XPath("//a[contains(@href, 'PublicFolderMigration/Edit')]");
-
-		public PublicFolderMigrationViewForm(Guid driverId) : base(TitleLocator, "Public folder migration view",driverId)
+		public PublicFolderMigrationViewForm() : base(TitleLocator, "Public folder migration view")
 		{
-            this.driverId = driverId;
-            addPublicFolderMigrationButton = new Button(By.XPath("//a[contains(@href, 'PublicFolderMigration/Edit')]"), "Add public folder migration button",driverId);
-            actionsDropdownButton =new Button(By.XPath("//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"),"Actions dropdown",driverId);
-            expandedActionsDropdownButton =new Button(By.XPath("//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')][contains(@aria-expanded, 'true')]"),"Expanded actions dropdown",driverId);
-            toggleViewButton = new Button(By.XPath("//a[contains(@data-bind, 'toggleSelectionViewMode')]"), "Toggle view button",driverId);
-            sortSourceButton = new Button(By.XPath("//span[text()='Source'][contains(@data-bind, 'sortModel')]"), "Sort source button",driverId);
-            sourceSortedAscLabel = new Label(By.XPath("//span[text()='Source']//i[contains(@class, 'fa-sort-asc')]"), "Source sorted ASC label",driverId);
-            sourceSortedDescLabel = new Label(By.XPath("//span[text()='Source']//i[contains(@class, 'fa-sort-desc')]"), "Source sorted DESC label",driverId);
-            sortSourcePathButton = new Button(By.XPath("//span[text()='Source Path'][contains(@data-bind, 'sortModel')]"), "Sort Source Path button",driverId);
-            sourcePathSortedAscLabel = new Label(By.XPath("//span[text()='Source Path']//i[contains(@class, 'fa-sort-asc')]"), "Source Path ASC label",driverId);
-            sourcePathSortedDescLabel = new Label(By.XPath("//span[text()='Source Path']//i[contains(@class, 'fa-sort-desc')]"), "Source Path DESC label",driverId);
-            sortTargetButton = new Button(By.XPath("//span[text()='Target'][contains(@data-bind, 'sortModel')]"), "Sort Target button",driverId);
-            targetSortedAscLabel = new Label(By.XPath("//span[text()='Target']//i[contains(@class, 'fa-sort-asc')]"), "Target ASC label",driverId);
-            targetSortedDescLabel = new Label(By.XPath("//span[text()='Target']//i[contains(@class, 'fa-sort-desc')]"), "Target DESC label",driverId);
-            sortTargetPathButton = new Button(By.XPath("//span[text()='Target Path'][contains(@data-bind, 'sortModel')]"), "Sort Target Path button",driverId);
-            targetPathSortedAscLabel = new Label(By.XPath("//span[text()='Target Path']//i[contains(@class, 'fa-sort-asc')]"), "Target Path ASC label",driverId);
-            targetPathSortedDescLabel = new Label(By.XPath("//span[text()='Target Path']//i[contains(@class, 'fa-sort-desc')]"), "Target Path DESC label",driverId);
-            sortStatusButton = new Button(By.XPath("//span[text()='Status'][contains(@data-bind, 'sortModel')]"), "Sort Status button",driverId);
-            statusSortedAscLabel = new Label(By.XPath("//span[text()='Status']//i[contains(@class, 'fa-sort-asc')]"), "Status ASC label",driverId);
-            statusSortedDescLabel = new Label(By.XPath("//span[text()='Status']//i[contains(@class, 'fa-sort-desc')]"), "Target Path DESC label",driverId);
-            sortLastSyncButton = new Button(By.XPath("//span[text()='Last Sync'][contains(@data-bind, 'sortModel')]"), "Sort Last Sync button",driverId);
-            lastSyncSortedAscLabel = new Label(By.XPath("//span[text()='Last Sync']//i[contains(@class, 'fa-sort-asc')]"), "Last Sync ASC label",driverId);
-            lastSyncSortedDescLabel = new Label(By.XPath("//span[text()='Last Sync']//i[contains(@class, 'fa-sort-desc')]"), "Last Sync Path DESC label",driverId);
-            sortNextSyncButton = new Button(By.XPath("//span[text()='Next Sync'][contains(@data-bind, 'sortModel')]"), "Sort Next Sync button",driverId);
-            nextSyncSortedAscLabel = new Label(By.XPath("//span[text()='Next Sync']//i[contains(@class, 'fa-sort-asc')]"), "Next Sync ASC label",driverId);
-            nextSyncSortedDescLabel = new Label(By.XPath("//span[text()='Next Sync']//i[contains(@class, 'fa-sort-desc')]"), "Next Sync Path DESC label",driverId);
-            sortConfllictResolutionButton = new Button(By.XPath("//span[text()='Conflict Resolution'][contains(@data-bind, 'sortModel')]"), "Sort Conflict Resolution button",driverId);
-            nextConflictResolutionSortedAscLabel = new Label(By.XPath("//span[text()='Conflict Resolution']//i[contains(@class, 'fa-sort-asc')]"), "Conflict Resolution ASC label",driverId);
-            conflictResolutionSortedDescLabel = new Label(By.XPath("//span[text()='Conflict Resolution']//i[contains(@class, 'fa-sort-desc')]"), "Conflict Resolution DESC label",driverId);
-            sourceTenantLabel = new Label(By.XPath("//dd[contains(@data-bind, 'sourceTenantName')]"), "Source tenant label",driverId);
-            sourceTenantPathLabel = new Label(By.XPath("//dd[contains(@data-bind, 'sourceTenantPath')]"), "Source tenant label",driverId);
-            targetTenantLabel = new Label(By.XPath("//dd[contains(@data-bind, 'targetTenantName')]"), "Target tenant label",driverId);
-            targetTenantPathLabel = new Label(By.XPath("//dd[contains(@data-bind, 'targetTenantPath')]"), "Target tenant path label",driverId);
-            copySubfoldersLabel = new Label(By.XPath("//dd[contains(@data-bind, 'recursive ?')]"), "Copy subfolders label",driverId);
-            lastSyncLabel = new Label(By.XPath("//dd[contains(@data-bind, 'lastSyncCompleted')]"), "Last sync label",driverId);
-            conflictResolutionLabel = new Label(By.XPath("//dd[contains(@data-bind, 'conflictResolutionString')]"), "",driverId);
-            provisioningJobLabel = new Label(By.XPath("//*[text()[contains(., 'Provisioning')]]"), "Provisioning job label",driverId);
-            contentCopyJobLabel = new Label(By.XPath("//*[text()[contains(., 'Content Copy')]]"), "Content Copy job label",driverId);
+		}
 
-        }
-
-		private readonly Button addPublicFolderMigrationButton;
-		private readonly Button actionsDropdownButton ;
-		private new readonly Button expandedActionsDropdownButton ;
-		private readonly Button toggleViewButton;
-		private readonly Button sortSourceButton ;
-		private readonly Label sourceSortedAscLabel;
-		private readonly Label sourceSortedDescLabel;
-		private readonly Button sortSourcePathButton;
-		private readonly Label sourcePathSortedAscLabel ;
-		private readonly Label sourcePathSortedDescLabel;
-		private readonly Button sortTargetButton ;
-		private readonly Label targetSortedAscLabel ;
-		private readonly Label targetSortedDescLabel ;
-		private readonly Button sortTargetPathButton;
-		private readonly Label targetPathSortedAscLabel ;
-		private readonly Label targetPathSortedDescLabel ;
-		private readonly Button sortStatusButton ;
-		private readonly Label statusSortedAscLabel ;
-		private readonly Label statusSortedDescLabel ;
-		private readonly Button sortLastSyncButton ;
-		private readonly Label lastSyncSortedAscLabel ;
-		private readonly Label lastSyncSortedDescLabel;
-		private readonly Button sortNextSyncButton ;
-		private readonly Label nextSyncSortedAscLabel ;
-		private readonly Label nextSyncSortedDescLabel ;
-		private readonly Button sortConfllictResolutionButton ;
-		private readonly Label nextConflictResolutionSortedAscLabel ;
-		private readonly Label conflictResolutionSortedDescLabel ;
+		private readonly Button addPublicFolderMigrationButton = new Button(By.XPath("//a[contains(@href, 'PublicFolderMigration/Edit')]"), "Add public folder migration button");
+		private readonly Button actionsDropdownButton =
+		new Button(
+			By.XPath(
+				"//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"),
+			"Actions dropdown");
+		private new readonly Button expandedActionsDropdownButton =
+			new Button(
+				By.XPath(
+					"//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')][contains(@aria-expanded, 'true')]"),
+				"Expanded actions dropdown");
+		private readonly Button toggleViewButton = new Button(By.XPath("//a[contains(@data-bind, 'toggleSelectionViewMode')]"), "Toggle view button");
+		private readonly Button sortSourceButton = new Button(By.XPath("//span[text()='Source'][contains(@data-bind, 'sortModel')]"), "Sort source button");
+		private readonly Label sourceSortedAscLabel = new Label(By.XPath("//span[text()='Source']//i[contains(@class, 'fa-sort-asc')]"),"Source sorted ASC label");
+		private readonly Label sourceSortedDescLabel = new Label(By.XPath("//span[text()='Source']//i[contains(@class, 'fa-sort-desc')]"), "Source sorted DESC label");
+		private readonly Button sortSourcePathButton = new Button(By.XPath("//span[text()='Source Path'][contains(@data-bind, 'sortModel')]"), "Sort Source Path button");
+		private readonly Label sourcePathSortedAscLabel = new Label(By.XPath("//span[text()='Source Path']//i[contains(@class, 'fa-sort-asc')]"), "Source Path ASC label");
+		private readonly Label sourcePathSortedDescLabel = new Label(By.XPath("//span[text()='Source Path']//i[contains(@class, 'fa-sort-desc')]"), "Source Path DESC label");
+		private readonly Button sortTargetButton = new Button(By.XPath("//span[text()='Target'][contains(@data-bind, 'sortModel')]"), "Sort Target button");
+		private readonly Label targetSortedAscLabel = new Label(By.XPath("//span[text()='Target']//i[contains(@class, 'fa-sort-asc')]"), "Target ASC label");
+		private readonly Label targetSortedDescLabel = new Label(By.XPath("//span[text()='Target']//i[contains(@class, 'fa-sort-desc')]"), "Target DESC label");
+		private readonly Button sortTargetPathButton = new Button(By.XPath("//span[text()='Target Path'][contains(@data-bind, 'sortModel')]"), "Sort Target Path button");
+		private readonly Label targetPathSortedAscLabel = new Label(By.XPath("//span[text()='Target Path']//i[contains(@class, 'fa-sort-asc')]"), "Target Path ASC label");
+		private readonly Label targetPathSortedDescLabel = new Label(By.XPath("//span[text()='Target Path']//i[contains(@class, 'fa-sort-desc')]"), "Target Path DESC label");
+		private readonly Button sortStatusButton = new Button(By.XPath("//span[text()='Status'][contains(@data-bind, 'sortModel')]"), "Sort Status button");
+		private readonly Label statusSortedAscLabel = new Label(By.XPath("//span[text()='Status']//i[contains(@class, 'fa-sort-asc')]"), "Status ASC label");
+		private readonly Label statusSortedDescLabel = new Label(By.XPath("//span[text()='Status']//i[contains(@class, 'fa-sort-desc')]"), "Target Path DESC label");
+		private readonly Button sortLastSyncButton = new Button(By.XPath("//span[text()='Last Sync'][contains(@data-bind, 'sortModel')]"), "Sort Last Sync button");
+		private readonly Label lastSyncSortedAscLabel = new Label(By.XPath("//span[text()='Last Sync']//i[contains(@class, 'fa-sort-asc')]"), "Last Sync ASC label");
+		private readonly Label lastSyncSortedDescLabel = new Label(By.XPath("//span[text()='Last Sync']//i[contains(@class, 'fa-sort-desc')]"), "Last Sync Path DESC label");
+		private readonly Button sortNextSyncButton = new Button(By.XPath("//span[text()='Next Sync'][contains(@data-bind, 'sortModel')]"), "Sort Next Sync button");
+		private readonly Label nextSyncSortedAscLabel = new Label(By.XPath("//span[text()='Next Sync']//i[contains(@class, 'fa-sort-asc')]"), "Next Sync ASC label");
+		private readonly Label nextSyncSortedDescLabel = new Label(By.XPath("//span[text()='Next Sync']//i[contains(@class, 'fa-sort-desc')]"), "Next Sync Path DESC label");
+		private readonly Button sortConfllictResolutionButton = new Button(By.XPath("//span[text()='Conflict Resolution'][contains(@data-bind, 'sortModel')]"), "Sort Conflict Resolution button");
+		private readonly Label nextConflictResolutionSortedAscLabel = new Label(By.XPath("//span[text()='Conflict Resolution']//i[contains(@class, 'fa-sort-asc')]"), "Conflict Resolution ASC label");
+		private readonly Label conflictResolutionSortedDescLabel = new Label(By.XPath("//span[text()='Conflict Resolution']//i[contains(@class, 'fa-sort-desc')]"), "Conflict Resolution DESC label");
 		public void AddPublicFolderMigration()
 		{
 			Log.Info("Adding public folder migration");
@@ -124,19 +92,17 @@ namespace Product.Framework.Forms.PublicFolderMigrationForms
 		{
 			ScrollToTop();
 			Log.Info("Selecting checkbox for: " + locator);
-            //BaseElement.WaitForElementPresent(By.XPath(
-            //			$"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]/ancestor::tr//input"),
-            //		locator + " entry checkbox");
-            var elementToWait =new Element(By.XPath($"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]/ancestor::tr//input"),locator + " entry checkbox",driverId);
-            elementToWait.WaitForElementPresent();
-            var entryCheckboxButton =
+			BaseElement.WaitForElementPresent(By.XPath(
+						$"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]/ancestor::tr//input"),
+					locator + " entry checkbox");
+			var entryCheckboxButton =
 				new RadioButton(
 					By.XPath(
 						$"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]/ancestor::tr//input"),
-					locator + " entry checkbox",driverId);
+					locator + " entry checkbox");
 			var entryLabel = new Button(By.XPath(
 					$"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]"),
-				locator + " entry label",driverId);
+				locator + " entry label");
 			ScrollToElement(entryCheckboxButton.GetElement());
 			try
 			{
@@ -156,18 +122,20 @@ namespace Product.Framework.Forms.PublicFolderMigrationForms
 				new Label(
 					By.XPath(
 						$"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]/ancestor::tr//*[text()='Syncing']"),
-					locator + " syncing state",driverId);
+					locator + " syncing state");
 			syncingState.WaitForElementPresent();
 		}
 		public new void OpenDetailsByLocator(string locator)
 		{
 			Log.Info($"Opening details by locator: {locator}");
-            //BaseElement.WaitForElementPresent(By.XPath(
-            //			$"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]"),
-            //		$"{locator} details button");
-            var elementToWait = new Element(By.XPath($"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]"), $"{locator} details button",driverId);
-            elementToWait.WaitForElementPresent();
-            var detailsButton =new Button(By.XPath($"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]"),$"{locator} details button",driverId);
+			BaseElement.WaitForElementPresent(By.XPath(
+						$"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]"),
+					$"{locator} details button");
+			var detailsButton =
+				new Button(
+					By.XPath(
+						$"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]"),
+					$"{locator} details button");
 			ScrollToElement(detailsButton.GetElement());
 			detailsButton.DoubleClick();
 		}
@@ -181,18 +149,18 @@ namespace Product.Framework.Forms.PublicFolderMigrationForms
 			Apply();
 		}
 		#region[Details modal]
-		private readonly Label sourceTenantLabel ;
-		private readonly Label sourceTenantPathLabel ;
-		private readonly Label targetTenantLabel ;
-		private readonly Label targetTenantPathLabel ;
-		private readonly Label copySubfoldersLabel ;
-		private readonly Label lastSyncLabel ;
-		private readonly Label conflictResolutionLabel ;
-		private readonly Label provisioningJobLabel ;
-		private readonly Label contentCopyJobLabel ;
+		private readonly Label sourceTenantLabel = new Label(By.XPath("//dd[contains(@data-bind, 'sourceTenantName')]"), "Source tenant label");
+		private readonly Label sourceTenantPathLabel = new Label(By.XPath("//dd[contains(@data-bind, 'sourceTenantPath')]"), "Source tenant label");
+		private readonly Label targetTenantLabel = new Label(By.XPath("//dd[contains(@data-bind, 'targetTenantName')]"), "Target tenant label");
+		private readonly Label targetTenantPathLabel = new Label(By.XPath("//dd[contains(@data-bind, 'targetTenantPath')]"), "Target tenant path label");
+		private readonly Label copySubfoldersLabel = new Label(By.XPath("//dd[contains(@data-bind, 'recursive ?')]"), "Copy subfolders label");
+		private readonly Label lastSyncLabel = new Label(By.XPath("//dd[contains(@data-bind, 'lastSyncCompleted')]"), "Last sync label");
+		private readonly Label conflictResolutionLabel = new Label(By.XPath("//dd[contains(@data-bind, 'conflictResolutionString')]"), "");
+		private readonly Label provisioningJobLabel = new Label(By.XPath("//*[text()[contains(., 'Provisioning')]]"), "Provisioning job label");
+		private readonly Label contentCopyJobLabel = new Label(By.XPath("//*[text()[contains(., 'Content Copy')]]"), "Content Copy job label");
 		private Label GetJobLine(string state)
 		{
-			return new Label(By.XPath($"//*[text()[contains(.,'{state}')]]/ancestor::tr"),state+ " line",driverId);  
+			return new Label(By.XPath($"//*[text()[contains(.,'{state}')]]/ancestor::tr"),state+ " line");  
 		}
 
 		public void WaitForProvisioningJobAppear(int count)
@@ -293,16 +261,14 @@ namespace Product.Framework.Forms.PublicFolderMigrationForms
 
 		public IWebElement GetLastProvisioningJob()
 		{
-            //var provisioningJobsList = Browser.GetDriver().FindElements(By.XPath("//*[text()[contains(., 'Provisioning')]]/ancestor::tr"));           
-            var provisioningJobsList = Driver.GetDriver(driverId).FindElements(By.XPath("//*[text()[contains(., 'Provisioning')]]/ancestor::tr"));
-            return provisioningJobsList[0];
+			var provisioningJobsList = Browser.GetDriver().FindElements(By.XPath("//*[text()[contains(., 'Provisioning')]]/ancestor::tr"));
+			return provisioningJobsList[0];
 		}
 
 		public IWebElement GetLastContentCopyJob()
 		{
-            //var provisioningJobsList = Browser.GetDriver().FindElements(By.XPath("//*[text()[contains(., 'Content Copy')]]/ancestor::tr"));
-            var provisioningJobsList = Driver.GetDriver(driverId).FindElements(By.XPath("//*[text()[contains(., 'Content Copy')]]/ancestor::tr"));
-            return provisioningJobsList[0];
+			var provisioningJobsList = Browser.GetDriver().FindElements(By.XPath("//*[text()[contains(., 'Content Copy')]]/ancestor::tr"));
+			return provisioningJobsList[0];
 		}
 
 		#endregion

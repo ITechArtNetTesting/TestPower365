@@ -62,7 +62,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
             }
 		    catch (Exception)
 		    {
-		        LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
+		        LogHtml(Browser.GetDriver().PageSource);
                 throw;
             }
 		}

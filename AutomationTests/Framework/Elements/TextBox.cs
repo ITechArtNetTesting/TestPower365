@@ -5,7 +5,7 @@ namespace Product.Framework.Elements
 {
 	public class TextBox : BaseElement
 	{
-		public TextBox(By locator, string name,Guid driverId) : base(locator, name,driverId)
+		public TextBox(By locator, string name) : base(locator, name)
 		{
 		}
 
@@ -29,9 +29,7 @@ namespace Product.Framework.Elements
 		/// <param name="text">The text.</param>
 		public void ClearSetText(string text)
 		{
-            WaitForDOM();
-            WaitForAjaxLoad();
-            WaitForElementPresent();
+			WaitForElementPresent();
 			WaitForElementIsVisible();
 			bool ready = false;
 			int counter = 0;
@@ -53,7 +51,7 @@ namespace Product.Framework.Elements
 					}
 				}
 			}
-            GetElement().Clear();
+			GetElement().Clear();
 			GetElement().SendKeys(text);
 			Log.Info($"{GetName()} :: type text '{text}'");
 		}
@@ -63,7 +61,8 @@ namespace Product.Framework.Elements
 		/// </summary>
 		public void PressEnter()
 		{
-		    WaitForElementIsVisible();
+			WaitForElementPresent();
+			WaitForElementIsVisible();
 			GetElement().SendKeys(Keys.Enter);
 			Log.Info($"{GetName()} :: Press Enter'");
 		}

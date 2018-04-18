@@ -12,11 +12,9 @@ namespace Product.Framework.Elements
 		private readonly RemoteWebElement element;
 		private readonly By locator;
 		private readonly string name;
-        protected Guid driverId;
 
-		protected BaseElement(By locator, string name,Guid driverId)
+		protected BaseElement(By locator, string name)
 		{
-            this.driverId = driverId;
 			this.name = name;
 			this.locator = locator;
 		}
@@ -28,9 +26,8 @@ namespace Product.Framework.Elements
 		public string GetText()
 		{
 			WaitForElementPresent();
-            //return Browser.GetDriver().FindElement(locator).Text;
-            return Driver.GetDriver(driverId).FindElement(locator).Text;
-        }
+			return Browser.GetDriver().FindElement(locator).Text;
+		}
 
 		/// <summary>
 		///     Gets the element.
@@ -39,16 +36,15 @@ namespace Product.Framework.Elements
 		public RemoteWebElement GetElement()
 		{
 			WaitForElementPresent();
-            //return (RemoteWebElement)Browser.GetDriver().FindElement(locator);
-            return (RemoteWebElement)Driver.GetDriver(driverId).FindElement(locator);
-        }
+			return (RemoteWebElement)Browser.GetDriver().FindElement(locator);
+		}
 
 		protected string GetName()
 		{
 			return name;
 		}
 
-		public By GetLocator()
+		protected By GetLocator()
 		{
 			return locator;
 		}
@@ -85,13 +81,13 @@ namespace Product.Framework.Elements
 
         public void Click()
         {
+            WaitForDOM();
+            WaitForAjaxLoad();
+            WaitForElementPresent();
             WaitForElementIsVisible();
-            //DefaultWait<IWebDriver> fluentWait = new DefaultWait<IWebDriver>(Browser.GetDriver());
-            DefaultWait<IWebDriver> fluentWait = new DefaultWait<IWebDriver>(Driver.GetDriver(driverId));
-            fluentWait.Timeout = TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout()));
-            fluentWait.PollingInterval = TimeSpan.FromMilliseconds(250);
-            fluentWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-               fluentWait.Until(x =>
+            WaitForElementIsClickable();
+            var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
+            wait.Until(waiting =>
             {
                 try
                 {
@@ -104,14 +100,12 @@ namespace Product.Framework.Elements
                     return false;
                 }
             });
-            
         }
 
         public void DoubleClick()
 		{
-            //Actions action = new Actions(Browser.GetDriver());
-            Actions action = new Actions(Driver.GetDriver(driverId));
-            action.DoubleClick(GetElement()).Build().Perform();
+			Actions action = new Actions(Browser.GetDriver());
+			action.DoubleClick(GetElement()).Build().Perform();
 			Log.Info("Double clicking element: "+GetName());
 		}
 
@@ -133,15 +127,13 @@ namespace Product.Framework.Elements
 		/// <returns>Boolean.</returns>
 		public bool IsPresent()
 		{
-            //return Browser.GetDriver().FindElements(locator).Count > 0;
-            return Driver.GetDriver(driverId).FindElements(locator).Count > 0;
-        }
+			return Browser.GetDriver().FindElements(locator).Count > 0;
+		}
 
 		public bool IsPresent(int count)
 		{
-            //return Browser.GetDriver().FindElements(locator).Count == count;
-            return Driver.GetDriver(driverId).FindElements(locator).Count == count;
-        }
+			return Browser.GetDriver().FindElements(locator).Count == count;
+		}
 
 		/// <summary>
 		///     Determines whether this instance is displayed.
@@ -164,42 +156,33 @@ namespace Product.Framework.Elements
 		/// <summary>
 		///     Waits for element present.
 		/// </summary>
-		public bool WaitForElementPresent()
+		public void WaitForElementPresent()
 		{
-            Boolean result = true;
-            //var wait = new WebDriverWait(Browser.GetDriver(),
-            //	TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
-            var wait = new WebDriverWait(Driver.GetDriver(driverId),
-                TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
-            try
+			var wait = new WebDriverWait(Browser.GetDriver(),
+				TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
+			try
 			{
 				wait.Until(waiting =>
 				{
-                    //var webElements = Browser.GetDriver().FindElements(locator);
-                    var webElements = Driver.GetDriver(driverId).FindElements(locator);
-                    return webElements.Count != 0;
+					var webElements = Browser.GetDriver().FindElements(locator);
+					return webElements.Count != 0;
 				});
 			}
 			catch (TimeoutException)
 			{
 				Log.Fatal($"Element with locator: '{locator}' does not exists!");
-                result = false;
 			}
-            return result;
 		}
 		public void WaitForSeveralElementsPresent(int count)
 		{
-            //var wait = new WebDriverWait(Browser.GetDriver(),
-            //	TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
-            var wait = new WebDriverWait(Driver.GetDriver(driverId),
-                TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
-            try
+			var wait = new WebDriverWait(Browser.GetDriver(),
+				TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
+			try
 			{
 				wait.Until(waiting =>
 				{
-                    //var webElements = Browser.GetDriver().FindElements(locator);
-                    var webElements = Driver.GetDriver(driverId).FindElements(locator);
-                    return webElements.Count == count;
+					var webElements = Browser.GetDriver().FindElements(locator);
+					return webElements.Count == count;
 				});
 			}
 			catch (TimeoutException)
@@ -209,17 +192,14 @@ namespace Product.Framework.Elements
 		}
 		public void WaitForSeveralElementsPresent(int count, int timeout)
 		{
-            //var wait = new WebDriverWait(Browser.GetDriver(),
-            //	TimeSpan.FromMilliseconds(Convert.ToDouble(timeout)));
-            var wait = new WebDriverWait(Driver.GetDriver(driverId),
-                TimeSpan.FromMilliseconds(Convert.ToDouble(timeout)));
-            try
+			var wait = new WebDriverWait(Browser.GetDriver(),
+				TimeSpan.FromMilliseconds(Convert.ToDouble(timeout)));
+			try
 			{
 				wait.Until(waiting =>
 				{
-                    //var webElements = Browser.GetDriver().FindElements(locator);
-                    var webElements = Driver.GetDriver(driverId).FindElements(locator);
-                    return webElements.Count == count;
+					var webElements = Browser.GetDriver().FindElements(locator);
+					return webElements.Count == count;
 				});
 			}
 			catch (TimeoutException)
@@ -230,17 +210,14 @@ namespace Product.Framework.Elements
 
 		public void WaitForElementPresent(int timeout)
 		{
-            //var wait = new WebDriverWait(Browser.GetDriver(),
-            //	TimeSpan.FromMilliseconds(Convert.ToDouble(timeout)));
-            var wait = new WebDriverWait(Driver.GetDriver(driverId),
-                TimeSpan.FromMilliseconds(Convert.ToDouble(timeout)));
-            try
+			var wait = new WebDriverWait(Browser.GetDriver(),
+				TimeSpan.FromMilliseconds(Convert.ToDouble(timeout)));
+			try
 			{
 				wait.Until(waiting =>
 				{
-                    //var webElements = Browser.GetDriver().FindElements(locator);
-                    var webElements = Driver.GetDriver(driverId).FindElements(locator);
-                    return webElements.Count != 0;
+					var webElements = Browser.GetDriver().FindElements(locator);
+					return webElements.Count != 0;
 				});
 			}
 			catch (TimeoutException)
@@ -253,21 +230,18 @@ namespace Product.Framework.Elements
 		/// </summary>
 		/// <param name="locator">The locator.</param>
 		/// <param name="name">The name.</param>
-		public void WaitForElementPresent(By locator, string name)
+		public static void WaitForElementPresent(By locator, string name)
 		{
-            //var wait = new WebDriverWait(Browser.GetDriver(),
-            //	TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout()))); 
-            var wait = new WebDriverWait(Driver.GetDriver(driverId),
-                TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
-            try
+			var wait = new WebDriverWait(Browser.GetDriver(),
+				TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
+			try
 			{
 				wait.Until(waiting =>
 				{
 					try
 					{
-                        //var webElements = Browser.GetDriver().FindElements(locator);
-                        var webElements = Driver.GetDriver(driverId).FindElements(locator);
-                        return webElements.Count != 0;
+						var webElements = Browser.GetDriver().FindElements(locator);
+						return webElements.Count != 0;
 					}
 					catch (Exception)
 					{
@@ -281,25 +255,20 @@ namespace Product.Framework.Elements
 			}
 		}
 
-		public void WaitForDOM()
+		public static void WaitForDOM()
 		{
-            //var wait = new WebDriverWait(Browser.GetDriver(),
-            //	TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
-            var wait = new WebDriverWait(Driver.GetDriver(driverId),
-                TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
-            try
+			var wait = new WebDriverWait(Browser.GetDriver(),
+				TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
+			try
 			{
 				wait.Until(waiting =>
 				{
 					try
 					{
-                        //return
-                        //	((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript("return document.readyState")
-                        //		.Equals("complete");
-                        return
-                            ((IJavaScriptExecutor)Driver.GetDriver(driverId)).ExecuteScript("return document.readyState")
-                                .Equals("complete");
-                    }
+						return
+							((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript("return document.readyState")
+								.Equals("complete");
+					}
 					catch (Exception)
 					{
 						return false;
@@ -310,18 +279,37 @@ namespace Product.Framework.Elements
 			{
 			}
 		}
-        
+
+        public static void WaitForAjaxLoad()
+        {
+            if (jQueryExists())
+            {
+                var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromMinutes(1));
+                wait.PollingInterval = TimeSpan.FromMilliseconds(100);
+                wait.Until(wd => (bool)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0"));
+            }
+        }
+
+        static bool jQueryExists()
+        {
+            try
+            {
+                (Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0");
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         /// <summary>
         ///     Waits for element is visible.
         /// </summary>
         public void WaitForElementIsVisible()
 		{
-            //var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(50));
-            var wait = new WebDriverWait(Driver.GetDriver(driverId), TimeSpan.FromSeconds(50));
-            wait.Timeout = TimeSpan.FromMinutes(1);
-            wait.IgnoreExceptionTypes(typeof(NotFoundException));
-
-            wait.Until(ExpectedConditions.ElementIsVisible(locator));
+			var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(50));
+			wait.Until(ExpectedConditions.ElementIsVisible(locator));
 		}
 
 		/// <summary>
@@ -329,23 +317,18 @@ namespace Product.Framework.Elements
 		/// </summary>
 		public void WaitForElementIsClickable()
 		{
-            //var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(50));
-            var wait = new WebDriverWait(Driver.GetDriver(driverId), TimeSpan.FromSeconds(50));
-            wait.Timeout = TimeSpan.FromMinutes(1);
-            wait.IgnoreExceptionTypes(typeof(NotFoundException));
-            wait.Until(ExpectedConditions.ElementToBeClickable(locator));
-        
-        }
+			var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(10));
+			wait.Until(ExpectedConditions.ElementToBeClickable(locator));
+		}
 
 		/// <summary>
 		///     Waits for element is clickable.
 		/// </summary>
 		/// <param name="locator">The locator.</param>
-		public /*static*/ void WaitForElementIsClickable(By locator)
+		public static void WaitForElementIsClickable(By locator)
 		{
-            //var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(10));
-            var wait = new WebDriverWait(Driver.GetDriver(driverId), TimeSpan.FromSeconds(10));
-            wait.Until(ExpectedConditions.ElementToBeClickable(locator));
+			var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(10));
+			wait.Until(ExpectedConditions.ElementToBeClickable(locator));
 		}
 
 		/// <summary>
@@ -353,17 +336,14 @@ namespace Product.Framework.Elements
 		/// </summary>
 		public void WaitForElementDisappear()
 		{
-            //var wait = new WebDriverWait(Browser.GetDriver(),
-            //	TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
-            var wait = new WebDriverWait(Driver.GetDriver(driverId),
-                TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
-            try
+			var wait = new WebDriverWait(Browser.GetDriver(),
+				TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
+			try
 			{
 				wait.Until(waiting =>
 				{
-                    //var webElements = Browser.GetDriver().FindElements(locator);
-                    var webElements = Driver.GetDriver(driverId).FindElements(locator);
-                    return webElements.Count == 0;
+					var webElements = Browser.GetDriver().FindElements(locator);
+					return webElements.Count == 0;
 				});
 			}
 			catch (TimeoutException)
@@ -373,17 +353,14 @@ namespace Product.Framework.Elements
 		}
 		public void WaitForElementDisappear(int timeout)
 		{
-            //var wait = new WebDriverWait(Browser.GetDriver(),
-            //	TimeSpan.FromMilliseconds(Convert.ToDouble(timeout)));
-            var wait = new WebDriverWait(Driver.GetDriver(driverId),
-                TimeSpan.FromMilliseconds(Convert.ToDouble(timeout)));
-            try
+			var wait = new WebDriverWait(Browser.GetDriver(),
+				TimeSpan.FromMilliseconds(Convert.ToDouble(timeout)));
+			try
 			{
 				wait.Until(waiting =>
 				{
-                    //var webElements = Browser.GetDriver().FindElements(locator);
-                    var webElements = Driver.GetDriver(driverId).FindElements(locator);
-                    return webElements.Count == 0;
+					var webElements = Browser.GetDriver().FindElements(locator);
+					return webElements.Count == 0;
 				});
 			}
 			catch (TimeoutException)
@@ -396,19 +373,16 @@ namespace Product.Framework.Elements
 		///     Waits for element disappear.
 		/// </summary>
 		/// <param name="locator">The locator.</param>
-		public /*static*/ void WaitForElementDisappear(By locator)
+		public static void WaitForElementDisappear(By locator)
 		{
-            //var wait = new WebDriverWait(Browser.GetDriver(),
-            //	TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
-            var wait = new WebDriverWait(Driver.GetDriver(driverId),
-                TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
-            try
+			var wait = new WebDriverWait(Browser.GetDriver(),
+				TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
+			try
 			{
 				wait.Until(waiting =>
 				{
-                    //var webElements = Browser.GetDriver().FindElements(locator);
-                    var webElements = Driver.GetDriver(driverId).FindElements(locator);
-                    return webElements.Count == 0;
+					var webElements = Browser.GetDriver().FindElements(locator);
+					return webElements.Count == 0;
 				});
 			}
 			catch (TimeoutException)
@@ -416,34 +390,10 @@ namespace Product.Framework.Elements
 				Log.Fatal($"Element with locator: '{locator}' still exists!");
 			}
 		}
-        public void WaitForAjaxLoad()
-        {
-            if (jQueryExists())
-            {
-                //var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromMinutes(1));
-                var wait = new WebDriverWait(Driver.GetDriver(driverId), TimeSpan.FromMinutes(1));
-                wait.PollingInterval = TimeSpan.FromMilliseconds(100);
-                //wait.Until(wd => (bool)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0"));
-                wait.Until(wd => (bool)(Driver.GetDriver(driverId) as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0"));
-            }
-        }
-        /*static*/ bool jQueryExists()
-        {
-            try
-            {
-                //(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0");
-                (Driver.GetDriver(driverId) as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0");
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-            public void ScrollTillVisible()
+
+		public void ScrollTillVisible()
 		{
-            //((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript("arguments[0].scrollIntoView();", GetElement());
-            ((IJavaScriptExecutor)Driver.GetDriver(driverId)).ExecuteScript("arguments[0].scrollIntoView();", GetElement());
-        }
+			((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript("arguments[0].scrollIntoView();", GetElement());
+		}
 	}
 }

@@ -20,14 +20,13 @@ namespace Product.Tests.IntegrationTests
         }
 
         [TestMethod]
-        [TestCategory("Integration_test")]
         public void Automation_IN_GroupsViewTest()
         {
             string userName = RunConfigurator.GetUserLogin("client2");
             string password = RunConfigurator.GetPassword("client2");
-            string client = RunConfigurator.GetClient("client2");
-            string project = RunConfigurator.GetProjectName("client2", "project2");
-            string adGroup2 = RunConfigurator.GetADGroupName("client2", "project2", "adgroup2");           
+            string client = RunConfigurator.GetRole("client2");
+            string project = RunConfigurator.GetProjectName("client2","project2");
+            string adGroup2 = RunConfigurator.GetADGroupName("client2","project2","adgroup2");
 
             try
             {
@@ -46,7 +45,7 @@ namespace Product.Tests.IntegrationTests
             }
             catch (Exception)
             {
-                LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
+                LogHtml(Browser.GetDriver().PageSource);
                 throw;
             }
         }

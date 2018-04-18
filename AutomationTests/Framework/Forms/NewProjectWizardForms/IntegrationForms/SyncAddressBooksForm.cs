@@ -10,31 +10,20 @@ namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 {
 	public class SyncAddressBooksForm : BaseWizardStepForm
 	{
+		private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Would you like to create a unified address book')]");
 
-        private Guid driverId;
-        private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Would you like to create a unified address book')]");
-
-		public SyncAddressBooksForm(Guid driverId) : base(TitleLocator, "How would you like to sync Address Books form",driverId)
+		public SyncAddressBooksForm() : base(TitleLocator, "How would you like to sync Address Books form")
 		{
-            this.driverId = driverId;
-            dontSyncAtAllLabel = new Label(By.XPath("//label[contains(@for, 'abDontSync')]"), "Don`t sync at all label",driverId);
-            dontSyncAtAllRadioButton = new RadioButton(By.Id("abDontSync"), "Don`t sync at all radio",driverId);
-            fromSourceToTargetLabel = new Label(By.XPath("//label[contains(@for, 'abSyncSrcTgt')]"), "From source to target label",driverId);
-            fromSourceToTargetRadioButton = new RadioButton(By.Id("abSyncSrcTgt"), "From source to target radio",driverId);
-            fromTargetToSourceLabel = new Label(By.XPath("//label[contains(@for, 'abSyncTgtSrc')]"), "From target to source label",driverId);
-            fromTargetToSourceRadioButton = new RadioButton(By.Id("abSyncTgtSrc"), "From target to source radio",driverId);
-            inBothDirectionsLabel = new Label(By.XPath("//label[contains(@for, 'abSyncBiDi')]"), "In both directions label",driverId);
-            inBothDirectionsRadioButton = new RadioButton(By.Id("abSyncBiDi"), "In both directions radio",driverId);
-        }
+		}
 
-		private readonly Label dontSyncAtAllLabel ;
-		private readonly RadioButton dontSyncAtAllRadioButton ;
-		private readonly Label fromSourceToTargetLabel ;
-		private readonly RadioButton fromSourceToTargetRadioButton ;
-		private readonly Label fromTargetToSourceLabel ;
-		private readonly RadioButton fromTargetToSourceRadioButton ;
-		private readonly Label inBothDirectionsLabel ;
-		private readonly RadioButton inBothDirectionsRadioButton ;
+		private readonly Label dontSyncAtAllLabel = new Label(By.XPath("//label[contains(@for, 'abDontSync')]"), "Don`t sync at all label");
+		private readonly RadioButton dontSyncAtAllRadioButton = new RadioButton(By.Id("abDontSync"), "Don`t sync at all radio");
+		private readonly Label fromSourceToTargetLabel = new Label(By.XPath("//label[contains(@for, 'abSyncSrcTgt')]"), "From source to target label");
+		private readonly RadioButton fromSourceToTargetRadioButton = new RadioButton(By.Id("abSyncSrcTgt"), "From source to target radio");
+		private readonly Label fromTargetToSourceLabel = new Label(By.XPath("//label[contains(@for, 'abSyncTgtSrc')]"), "From target to source label");
+		private readonly RadioButton fromTargetToSourceRadioButton = new RadioButton(By.Id("abSyncTgtSrc"), "From target to source radio");
+		private readonly Label inBothDirectionsLabel =new Label(By.XPath("//label[contains(@for, 'abSyncBiDi')]"), "In both directions label");
+		private readonly RadioButton inBothDirectionsRadioButton = new RadioButton(By.Id("abSyncBiDi"), "In both directions radio");
 
 		public void SelectDontSyncAtAll()
 		{
