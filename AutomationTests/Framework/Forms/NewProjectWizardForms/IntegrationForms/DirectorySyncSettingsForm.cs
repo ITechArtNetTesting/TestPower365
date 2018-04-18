@@ -15,8 +15,11 @@ namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
         private static readonly By TitleLocator =
 			By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'You will need the information below')]");
 
-		public DirectorySyncSettingsForm(Guid driverId) : base(TitleLocator, "Directory Sync settings form",driverId)
+        Store store;
+
+		public DirectorySyncSettingsForm(Guid driverId,Store store) : base(TitleLocator, "Directory Sync settings form",driverId)
 		{
+            this.store = store;
             this.driverId = driverId;
             accessUrlLabel = new Label(By.XPath("//h4[contains(@data-bind, 'accessUrl')]"), "Public URL label",driverId);
             accessKeyLabel = new Label(By.XPath("//h4[contains(@data-bind, 'accessKey')]"), "Public key label",driverId);
@@ -27,13 +30,13 @@ namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 		public void StoreAccessUrl()
 		{
 			Log.Info("Storing access url");
-			Store.AccessUrl = accessUrlLabel.GetText();
+			store.AccessUrl = accessUrlLabel.GetText();
 		}
 
 		public void StoreAccessKey()
 		{
 			Log.Info("Storing access key");
-			Store.AccessKey = accessKeyLabel.GetText();
+            store.AccessKey = accessKeyLabel.GetText();
 		}
 	}
 }

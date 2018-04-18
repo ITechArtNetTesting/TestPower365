@@ -9,15 +9,22 @@ using T365.Database;
 namespace Product.Framework.Steps
 {
     public class CleanUpStep:BaseEntity
-    {       
+    {
+        RunConfigurator configurator ;
+        Store store = new Store();
+
+        public CleanUpStep()
+        {
+            configurator = new RunConfigurator(store);
+        }
 
         public void CleanUpProjectAndTenant(String clientname)
         {
-            SQLQuery queryClients = new SQLQuery(RunConfigurator.GetConnectionStringDBClients());
+            SQLQuery queryClients = new SQLQuery(configurator.GetConnectionStringDBClients());
             String clientId = queryClients.GetClientId(clientname);
             if (clientId != null)
             {
-                SQLQuery query = new SQLQuery(RunConfigurator.GetConnectionString());
+                SQLQuery query = new SQLQuery(configurator.GetConnectionString());
                 try
                 {
                     query.DeleteProject(clientId);

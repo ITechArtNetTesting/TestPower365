@@ -5,8 +5,7 @@ using Product.Framework.Elements;
 namespace Product.Framework.Forms
 {
 	public class RegistrationForm : BaseForm
-	{
-        private Guid driverId;
+	{        
 
         private static readonly By TitleLocator = By.XPath("//span[contains(text(), 'NEW USER REGISTRATION')]");
 
@@ -39,9 +38,11 @@ namespace Product.Framework.Forms
 		private readonly Button registerButton;
 
 		private readonly Button submitButton ;
+        Store store;
 
-		public RegistrationForm(Guid driverId) : base(TitleLocator, "Registration Form",driverId)
+		public RegistrationForm(Guid driverId,Store store) : base(TitleLocator, "Registration Form",driverId)
 		{
+            this.store = store;
             this.driverId = driverId;
             AddressCityTextBox= new TextBox(By.Id("AddressCity"), "Address City",driverId);
             AddressCountryButton = new Button(By.Id("countrySelector"), "Address Country", driverId);
@@ -87,63 +88,63 @@ namespace Product.Framework.Forms
 		{
 			Log.Info($"Setting {name} Client name");
 			CientNameTextBox.ClearSetText(name);
-			Store.ClientName = name;
+            store.ClientName = name;
 		}
 
 		public void SetFirstName(string name)
 		{
 			Log.Info($"Setting {name} First name");
 			ContactFirstNameTextBox.ClearSetText(name);
-			Store.FirstName = name;
+            store.FirstName = name;
 		}
 
 		public void SetLastName(string name)
 		{
 			Log.Info($"Setting {name} Last name");
 			ContactLastNameTextBox.ClearSetText(name);
-			Store.LastName = name;
+            store.LastName = name;
 		}
 
 		public void SetPhone(string name)
 		{
 			Log.Info($"Setting {name} Phone");
 			ContactPhoneTextBox.ClearSetText(name);
-			Store.Phone = name;
+            store.Phone = name;
 		}
 
 		public void SetEmail(string name)
 		{
 			Log.Info($"Setting {name} Email");
 			ContactEmailTextBox.ClearSetText(name);
-			Store.Email = name;
+            store.Email = name;
 		}
 
 		public void SetAddress(string name)
 		{
 			Log.Info($"Setting {name} Address");
 			AddressLine1TextBox.ClearSetText(name);
-			Store.Address = name;
+            store.Address = name;
 		}
 
 		public void SetCity(string name)
 		{
 			Log.Info($"Setting {name} City");
 			AddressCityTextBox.ClearSetText(name);
-			Store.City = name;
+            store.City = name;
 		}
 
 		public void SetState(string name)
 		{
 			Log.Info($"Setting {name} State");
 			AddressStateTextBox.ClearSetText(name);
-			Store.State = name;
+            store.State = name;
 		}
 
 		public void SetZip(string name)
 		{
 			Log.Info($"Setting {name} Zip");
 			AddressZipTextBox.ClearSetText(name);
-			Store.Zip = name;
+            store.Zip = name;
 		}
 
 		public void SetCountryDropDown(string name)
@@ -152,7 +153,7 @@ namespace Product.Framework.Forms
 			OpenCountryDropDown();
 			var countryOptionButton = new Button(By.XPath($"//div[contains(@class, 'open')]//a[text()='{name}']/.."), name + " option",driverId);
 			countryOptionButton.Click();
-			Store.Country = name;
+            store.Country = name;
 		}
 
 		public void OpenCountryDropDown()

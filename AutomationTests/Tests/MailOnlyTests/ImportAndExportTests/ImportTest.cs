@@ -18,19 +18,19 @@ namespace Product.Tests.MailOnlyTests.ImportAndExportTests
 		[TestCategory("MailOnly")]
 		public void Automation_MO_ImportTest()
 		{
-		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
-		    string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");
-		    string client = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/../name");
-		    string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//name");
-		    string fileName1 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='file1']/..//filename");
-		    string fileName2 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//metaname[text()='file1']/..//filename");
+		    string login = configurator.GetValueByXpath("//metaname[text()='client1']/..//user");
+		    string password = configurator.GetValueByXpath("//metaname[text()='client1']/..//password");
+		    string client = configurator.GetValueByXpath("//metaname[text()='client1']/../name");
+		    string projectName = configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//name");
+		    string fileName1 = configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='file1']/..//filename");
+		    string fileName2 = configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//metaname[text()='file1']/..//filename");
 
 		    try
 		    {
 		        LoginAndSelectRole(login, password, client);
 		        SelectProject(projectName);
 		        User.AtProjectOverviewForm().OpenUsersList();
-		        User.AtUsersForm().VerifyLinesCount(RunConfigurator.GetCSVlinesCount(Path.GetFullPath(RunConfigurator.ResourcesPath + fileName2)));
+		        User.AtUsersForm().VerifyLinesCount(configurator.GetCSVlinesCount(Path.GetFullPath(configurator.ResourcesPath + fileName2)));
 		        User.AtUsersForm().OpenImportDialog();
 		        User.AtUsersForm().ChooseFile(fileName1);
 		        User.AtUsersForm().ConfirmUploading();

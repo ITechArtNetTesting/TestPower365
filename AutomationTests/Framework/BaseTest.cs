@@ -21,6 +21,8 @@ namespace Product.Framework
 		private string _baseUrl;
         protected Driver driver;
 		public UserSteps User;
+        protected RunConfigurator configurator;
+        protected Store store;
 
 		private void GetResolution()
 		{
@@ -32,33 +34,37 @@ namespace Product.Framework
 		/// </summary>
 		[TestInitialize]
 		public virtual void SetUp()
-		{            
+		{
+            store = new Store();
+            configurator = new RunConfigurator(store);
             driver = new Driver(WebBrowsers.Chrome);
             driverId = driver.GetDriverKey();
             RunOnce();
-			RunConfigurator.RunPath = "resources/run.xml";
-			RunConfigurator.DownloadPath = downloadPath;
-			RunConfigurator.ResourcesPath = "resources/";
+			configurator.RunPath = "resources/run.xml";
+            configurator.DownloadPath = downloadPath;
+            configurator.ResourcesPath = "resources/";
 			if (_testContext == null)
 			{
-				RunConfigurator.RunPath = "resources/probeRun.xml";
+                configurator.RunPath = "resources/probeRun.xml";
 				Directory.CreateDirectory(downloadPath);
-				RunConfigurator.DownloadPath = downloadPath;
-				RunConfigurator.ResourcesPath = "resources/";
+                configurator.DownloadPath = downloadPath;
+                configurator.ResourcesPath = "resources/";
 				if (Screen.PrimaryScreen.Bounds.Width != 1920)
 				{
 					ChangeResolutionToFHD();
 				}
 			}
-			RunConfigurator.ClearDownloads();
-            //User = new UserSteps();
-            User = new UserSteps(driver.GetDriverKey());
-            _baseUrl = RunConfigurator.GetValue("baseurl");
+            configurator.ClearDownloads();
+            //User = new UserSteps();           
+            User = new UserSteps(driver.GetDriverKey(),configurator,store);
+            _baseUrl = configurator.GetValue("baseurl");
 			GetResolution();
 			//Browser.GetInstance(RunConfigurator.DownloadPath);
 			//Browser.GetDriver().Manage().Window.Maximize();
-			//Browser.GetDriver().Navigate().GoToUrl(_baseUrl);
-		}
+            Driver.GetDriver(driverId).Manage().Window.Maximize();
+            //Browser.GetDriver().Navigate().GoToUrl(_baseUrl);
+            Driver.GetDriver(driverId).Navigate().GoToUrl(_baseUrl);
+        }
 
 		
 		/// <summary>

@@ -29,11 +29,11 @@ namespace Product.Tests.PublicFoldersTests
 	    {
 	        try
 	        {
-	            string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
-	            string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");
-	            string client = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/../name");
-	            string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//name");
-	            string sourceMailbox = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry2']/..//source");
+	            string login = configurator.GetValueByXpath("//metaname[text()='client1']/..//user");
+	            string password = configurator.GetValueByXpath("//metaname[text()='client1']/..//password");
+	            string client = configurator.GetValueByXpath("//metaname[text()='client1']/../name");
+	            string projectName = configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//name");
+	            string sourceMailbox = configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry2']/..//source");
 
 	            LoginAndSelectRole(login, password, client);
             }
@@ -47,7 +47,7 @@ namespace Product.Tests.PublicFoldersTests
         [TestMethod]
 		public void PSwaits()
 		{
-			LoginAndSelectRole(RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user"), RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password"), RunConfigurator.GetValueByXpath("//metaname[text()='client1']/../name"));
+			LoginAndSelectRole(configurator.GetValueByXpath("//metaname[text()='client1']/..//user"), configurator.GetValueByXpath("//metaname[text()='client1']/..//password"), configurator.GetValueByXpath("//metaname[text()='client1']/../name"));
             var launcher = new PsLauncher();
 			var testProc = launcher.TestLaunchPowerShellInstance("TestScript.ps1", String.Empty, "x64");
 			while (!testProc.StandardOutput.EndOfStream)
@@ -66,7 +66,7 @@ namespace Product.Tests.PublicFoldersTests
 				}
 			}
 			testProc.WaitForExit(5000);
-			SelectProject(RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//name"));
+			SelectProject(configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//name"));
 		}
 	}
 

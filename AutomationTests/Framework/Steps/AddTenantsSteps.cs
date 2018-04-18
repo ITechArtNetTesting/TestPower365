@@ -6,10 +6,16 @@ namespace Product.Framework.Steps
 	{
         private Guid driverId;
 
-        public AddTenantsSteps(Guid driverId)
+        RunConfigurator configurator;
+
+        Store store;
+
+        public AddTenantsSteps(Guid driverId,RunConfigurator configurator,Store store)
         {
+            this.store = store;
+            this.configurator = configurator;
             this.driverId = driverId;
-            User = new UserSteps(driverId);
+            User = new UserSteps(driverId, configurator,store);
         }
 
         private readonly UserSteps User;
@@ -17,15 +23,15 @@ namespace Product.Framework.Steps
 		public void PerformTwoTenantsAdding()
 		{
 			User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
-            Office365TenantAuthorization(RunConfigurator.GetTenantValue("T1->T2", "source", "user"), RunConfigurator.GetTenantValue("T1->T2", "source", "password"));
+            Office365TenantAuthorization(configurator.GetTenantValue("T1->T2", "source", "user"), configurator.GetTenantValue("T1->T2", "source", "password"));
 
-			Driver.GetDriver(driverId).SwitchTo().Window(Store.MainHandle);
+			Driver.GetDriver(driverId).SwitchTo().Window(store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(1);
 
 			User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
-            Office365TenantAuthorization(RunConfigurator.GetTenantValue("T1->T2", "target", "user"), RunConfigurator.GetTenantValue("T1->T2", "target", "password"));
+            Office365TenantAuthorization(configurator.GetTenantValue("T1->T2", "target", "user"), configurator.GetTenantValue("T1->T2", "target", "password"));
 
-			Driver.GetDriver(driverId).SwitchTo().Window(Store.MainHandle);
+			Driver.GetDriver(driverId).SwitchTo().Window(store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(2);
 		}
 
@@ -35,13 +41,13 @@ namespace Product.Framework.Steps
 			User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
             Office365TenantAuthorization(sourceTenant, sourcePassword);
             
-			Driver.GetDriver(driverId).SwitchTo().Window(Store.MainHandle);
+			Driver.GetDriver(driverId).SwitchTo().Window(store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(1);
 
             User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
             Office365TenantAuthorization(targetTenant, targetPassword);
 
-			Driver.GetDriver(driverId).SwitchTo().Window(Store.MainHandle);
+			Driver.GetDriver(driverId).SwitchTo().Window(store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(2);
 		}
 
@@ -50,7 +56,7 @@ namespace Product.Framework.Steps
 			User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
             Office365TenantAuthorization(tenant, password);
             
-			Driver.GetDriver(driverId).SwitchTo().Window(Store.MainHandle);
+			Driver.GetDriver(driverId).SwitchTo().Window(store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(1);
 		}
 

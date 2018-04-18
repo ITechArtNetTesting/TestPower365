@@ -20,23 +20,23 @@ namespace Product.Tests.IntegrationTests
         [TestCategory("Integration_test")]
         public void Automation_IN_PS_CutoverTest()
         {
-            string userName = RunConfigurator.GetUserLogin("client2");
-            string password = RunConfigurator.GetPassword("client2");
-            string client = RunConfigurator.GetClient("client2");
-            string project = RunConfigurator.GetProjectName("client2", "project2");
-            string sourceMailbox13 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry13");
-            string sourceMailbox14 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry14");
-            string sourceMailbox15 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry15");
-            string targetLogin = RunConfigurator.GetTenantValue("T5->T6", "target", "user");
-            string targetPassword = RunConfigurator.GetTenantValue("T5->T6", "target", "password");
-            string sourceLogin = RunConfigurator.GetTenantValue("T5->T6", "source", "user");
-            string sourcePassword = RunConfigurator.GetTenantValue("T5->T6", "source", "password");
-            string targetMailbox13 = RunConfigurator.GetTargetMailbox("client2", "project2", "entry13");
-            string targetMailbox13Smtp = RunConfigurator.GetTargetSmtpMailbox("client2", "project2", "entry13");
-            string targetMailbox13X500 = RunConfigurator.GetTargetX500Mailbox("client2", "project2", "entry13");
-            string targetOnPremLogin = RunConfigurator.GetTenantValue("T5->T6", "target", "aduser");
-            string targetOnPremPassword = RunConfigurator.GetTenantValue("T5->T6", "target", "adpassword");
-            string targetOnPremUri = RunConfigurator.GetTenantValue("T5->T6", "target", "uri");
+            string userName = configurator.GetUserLogin("client2");
+            string password = configurator.GetPassword("client2");
+            string client = configurator.GetClient("client2");
+            string project = configurator.GetProjectName("client2", "project2");
+            string sourceMailbox13 = configurator.GetSourceMailbox("client2", "project2", "entry13");
+            string sourceMailbox14 = configurator.GetSourceMailbox("client2", "project2", "entry14");
+            string sourceMailbox15 = configurator.GetSourceMailbox("client2", "project2", "entry15");
+            string targetLogin = configurator.GetTenantValue("T5->T6", "target", "user");
+            string targetPassword = configurator.GetTenantValue("T5->T6", "target", "password");
+            string sourceLogin = configurator.GetTenantValue("T5->T6", "source", "user");
+            string sourcePassword = configurator.GetTenantValue("T5->T6", "source", "password");
+            string targetMailbox13 = configurator.GetTargetMailbox("client2", "project2", "entry13");
+            string targetMailbox13Smtp = configurator.GetTargetSmtpMailbox("client2", "project2", "entry13");
+            string targetMailbox13X500 = configurator.GetTargetX500Mailbox("client2", "project2", "entry13");
+            string targetOnPremLogin = configurator.GetTenantValue("T5->T6", "target", "aduser");
+            string targetOnPremPassword = configurator.GetTenantValue("T5->T6", "target", "adpassword");
+            string targetOnPremUri = configurator.GetTenantValue("T5->T6", "target", "uri");
 
             try
             {

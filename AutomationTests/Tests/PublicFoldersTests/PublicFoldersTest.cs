@@ -35,7 +35,7 @@ namespace Product.Tests.PublicFoldersTests
                     Log.Debug("Starting SourcePrepScript.ps1");
 		            using (
 		                var sourcePreparation = new PsLauncher().LaunchPowerShellInstance("PF/SourcePrepScript.ps1",
-		                    $" -slogin {RunConfigurator.GetTenantValue("T5->T6", "source", "user")} -spassword {RunConfigurator.GetTenantValue("T5->T6", "source", "password")}", "x64")
+		                    $" -slogin {configurator.GetTenantValue("T5->T6", "source", "user")} -spassword {configurator.GetTenantValue("T5->T6", "source", "password")}", "x64")
 		            )
 		            {
                         Log.Debug("Script has started.");
@@ -62,7 +62,7 @@ namespace Product.Tests.PublicFoldersTests
 		        while (!result && counter < 3)
 		        {
                     Log.Debug("Starting TargetPrepScript.ps1");
-                    using (var targetPreparation = new PsLauncher().LaunchPowerShellInstance("PF/TargetPrepScript.ps1", $" -slogin {RunConfigurator.GetTenantValue("T5->T6", "target", "user")} -spassword {RunConfigurator.GetTenantValue("T5->T6", "target", "password")}", "x64"))
+                    using (var targetPreparation = new PsLauncher().LaunchPowerShellInstance("PF/TargetPrepScript.ps1", $" -slogin {configurator.GetTenantValue("T5->T6", "target", "user")} -spassword {configurator.GetTenantValue("T5->T6", "target", "password")}", "x64"))
 		            {
                         Log.Debug("Script has started.");
                         while (!targetPreparation.StandardOutput.EndOfStream)
@@ -84,9 +84,9 @@ namespace Product.Tests.PublicFoldersTests
                     Log.DebugFormat("result: {0}, counter: {1}", result, counter);
                 }
                 Log.Debug("Starting UI Automation");
-		        RunConfigurator.CreateFlagFolder(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//stopfolder"));
-		        LoginAndSelectRole(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user"), RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//password"), RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name"));
-		        SelectProject(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//name"));
+                configurator.CreateFlagFolder(configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//stopfolder"));
+		        LoginAndSelectRole(configurator.GetValueByXpath("//metaname[text()='client2']/..//user"), configurator.GetValueByXpath("//metaname[text()='client2']/..//password"), configurator.GetValueByXpath("//metaname[text()='client2']/../name"));
+		        SelectProject(configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//name"));
 		        try
 		        {
 		            User.AtProjectOverviewForm().OpenPublicFolders();
@@ -98,48 +98,48 @@ namespace Product.Tests.PublicFoldersTests
 		        }
 		        try
 		        {
-		            User.AtPublicFolderMigrationViewForm().SyncUserByLocator(RunConfigurator.GetValueByXpath(
+		            User.AtPublicFolderMigrationViewForm().SyncUserByLocator(configurator.GetValueByXpath(
 		                "//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry4']/..//source"));
 		        }
 		        catch (Exception)
 		        {
 		            Log.Info("PF migration view form was not opened");
 		            User.AtProjectOverviewForm().OpenPublicFolders();
-		            User.AtPublicFolderMigrationViewForm().SyncUserByLocator(RunConfigurator.GetValueByXpath(
+		            User.AtPublicFolderMigrationViewForm().SyncUserByLocator(configurator.GetValueByXpath(
 		                "//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry4']/..//source"));
 		        }
 
 		        User.AtPublicFolderMigrationViewForm().ConfirmSync();
-		        User.AtPublicFolderMigrationViewForm().AssertUserHaveSyncingState(RunConfigurator.GetValueByXpath(
+		        User.AtPublicFolderMigrationViewForm().AssertUserHaveSyncingState(configurator.GetValueByXpath(
 		            "//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry4']/..//source"));
-		        User.AtPublicFolderMigrationViewForm().OpenDetailsByLocator(RunConfigurator.GetValueByXpath(
+		        User.AtPublicFolderMigrationViewForm().OpenDetailsByLocator(configurator.GetValueByXpath(
 		            "//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry4']/..//source"));
 		        User.AtPublicFolderMigrationViewForm().WaitForProvisioningJobAppear(1);
 		        User.AtPublicFolderMigrationViewForm().WaitForProvisioningJobDone();
 		        User.AtPublicFolderMigrationViewForm().WaitForContentCopyJobAppear(1);
 		        User.AtPublicFolderMigrationViewForm().WaitForContentCopyJobDone();
-		        User.AtPublicFolderMigrationViewForm().VerifyProccessedFolders(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='processed1']/..//amount"));
+		        User.AtPublicFolderMigrationViewForm().VerifyProccessedFolders(configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='processed1']/..//amount"));
 		        User.AtPublicFolderMigrationViewForm().VerifyProvisioningTimeStampsAreNotEmpty();
 		        User.AtPublicFolderMigrationViewForm().VerifyContentCopyTimeStampsAreNotEmpty();
 		        User.AtPublicFolderMigrationViewForm().DownloadProvisioningLogs();
-		        RunConfigurator.CheckProvisioningLogsFileIsDownloadedAndNotEmpty();
+                configurator.CheckProvisioningLogsFileIsDownloadedAndNotEmpty();
 		        //Note: add logs for second job
 		        User.AtPublicFolderMigrationViewForm().CloseUserDetails();
 
                 Log.Debug("Starting PfAutomationScript.ps1");
-		        using (var mainScript = new PsLauncher().LaunchPowerShellInstance("PF/PfAutomationScript.ps1", $" -sourceUserName {RunConfigurator.GetTenantValue("T5->T6", "source", "user")}" +
-		                                                                                                       $" -sourcepasswd {RunConfigurator.GetTenantValue("T5->T6", "source", "password")}" +
-		                                                                                                       $" -TargetUserName {RunConfigurator.GetTenantValue("T5->T6", "target", "user")}" +
-		                                                                                                       $" -Targetpasswd {RunConfigurator.GetTenantValue("T5->T6", "target", "password")}" +
-		                                                                                                       $" -StopFilePath1 {RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='stopfile1']/..//path")}" +
-		                                                                                                       $" -StopFilePath2 {RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='stopfile2']/..//path")}" +
-		                                                                                                       $" -AttachmentPath {Path.GetFullPath(RunConfigurator.ResourcesPath + "test.txt")}" +
-		                                                                                                       $" -SendAsSourceUserName {RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//source")}" +
-		                                                                                                       $" -TargetAsSourceUserName {RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//target")}" +
-		                                                                                                       $" -Sourcex400Address \"{RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//sourcex400")}\"" +
-		                                                                                                       $" -Targetx400Address \"{RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//targetx400")}\"" +
-		                                                                                                       $" -SourceProxyAddress {RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//sourceproxy")}" +
-		                                                                                                       $" -TargetProxyAddress {RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//targetproxy")}"))
+		        using (var mainScript = new PsLauncher().LaunchPowerShellInstance("PF/PfAutomationScript.ps1", $" -sourceUserName {configurator.GetTenantValue("T5->T6", "source", "user")}" +
+		                                                                                                       $" -sourcepasswd {configurator.GetTenantValue("T5->T6", "source", "password")}" +
+		                                                                                                       $" -TargetUserName {configurator.GetTenantValue("T5->T6", "target", "user")}" +
+		                                                                                                       $" -Targetpasswd {configurator.GetTenantValue("T5->T6", "target", "password")}" +
+		                                                                                                       $" -StopFilePath1 {configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='stopfile1']/..//path")}" +
+		                                                                                                       $" -StopFilePath2 {configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='stopfile2']/..//path")}" +
+		                                                                                                       $" -AttachmentPath {Path.GetFullPath(configurator.ResourcesPath + "test.txt")}" +
+		                                                                                                       $" -SendAsSourceUserName {configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//source")}" +
+		                                                                                                       $" -TargetAsSourceUserName {configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//target")}" +
+		                                                                                                       $" -Sourcex400Address \"{configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//sourcex400")}\"" +
+		                                                                                                       $" -Targetx400Address \"{configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//targetx400")}\"" +
+		                                                                                                       $" -SourceProxyAddress {configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//sourceproxy")}" +
+		                                                                                                       $" -TargetProxyAddress {configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//targetproxy")}"))
 		        {
 		            while (!mainScript.StandardOutput.EndOfStream)
 		            {
@@ -150,7 +150,7 @@ namespace Product.Tests.PublicFoldersTests
 		                {
                             Log.Debug("Found line waiting for migration 1.....");
 		                    Thread.Sleep(180000);
-		                    User.AtPublicFolderMigrationViewForm().OpenDetailsByLocator(RunConfigurator.GetValueByXpath(
+		                    User.AtPublicFolderMigrationViewForm().OpenDetailsByLocator(configurator.GetValueByXpath(
 		                        "//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry4']/..//source"));
 		                    User.AtPublicFolderMigrationViewForm().SyncFromDetails();
 		                    User.AtPublicFolderMigrationViewForm().ConfirmSync();
@@ -160,8 +160,8 @@ namespace Product.Tests.PublicFoldersTests
 		                    User.AtPublicFolderMigrationViewForm().WaitForProvisioningJobDone();
 		                    User.AtPublicFolderMigrationViewForm().WaitForContentCopyJobAppear(2);
 		                    User.AtPublicFolderMigrationViewForm().WaitForContentCopyJobDone();
-		                    User.AtPublicFolderMigrationViewForm().VerifyProccessedFolders(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='processed2']/..//amount"));
-		                    RunConfigurator.CreateEmptyFile(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='stopfile1']/..//path"));
+		                    User.AtPublicFolderMigrationViewForm().VerifyProccessedFolders(configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='processed2']/..//amount"));
+                            configurator.CreateEmptyFile(configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='stopfile1']/..//path"));
 		                }
 		                if (line.Contains("Powershell will pause until Migration is complete - 2"))
 		                {
@@ -181,254 +181,254 @@ namespace Product.Tests.PublicFoldersTests
 		                    User.AtPublicFolderMigrationViewForm().WaitForProvisioningJobDone();
 		                    User.AtPublicFolderMigrationViewForm().WaitForContentCopyJobAppear(3);
 		                    User.AtPublicFolderMigrationViewForm().WaitForContentCopyJobDone();
-		                    RunConfigurator.CreateEmptyFile(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='stopfile2']/..//path"));
+                            configurator.CreateEmptyFile(configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='stopfile2']/..//path"));
 		                }
 		                if (line.Contains("Folder existance Check succeeded"))
 		                {
-		                    Store.PfValidationDictionary["folderExistance"] = true;
+                            store.PfValidationDictionary["folderExistance"] = true;
 		                }
 		                if (line.Contains("Source Target Item existance Check succeeded"))
 		                {
-		                    Store.PfValidationDictionary["itemExistance"] = true;
+                            store.PfValidationDictionary["itemExistance"] = true;
 		                }
 		                if (line.Contains("Add New MailFolder Check succeeded-1"))
 		                {
-		                    Store.PfValidationDictionary["addMailFolder1"] = true;
+                            store.PfValidationDictionary["addMailFolder1"] = true;
 		                }
 		                if (line.Contains("Add New FolderTree Check succeeded-1"))
 		                {
-		                    Store.PfValidationDictionary["addFolderTree1"] = true;
+                            store.PfValidationDictionary["addFolderTree1"] = true;
 		                }
 		                if (line.Contains("Add New MailFolder Check succeeded-2"))
 		                {
-		                    Store.PfValidationDictionary["addMailFolder2"] = true;
+                            store.PfValidationDictionary["addMailFolder2"] = true;
 		                }
 		                if (line.Contains("Add New Contacts Check succeeded"))
 		                {
-		                    Store.PfValidationDictionary["addContancs"] = true;
+                            store.PfValidationDictionary["addContancs"] = true;
 		                }
 		                if (line.Contains("Add New Calendar Check succeeded"))
 		                {
-		                    Store.PfValidationDictionary["addCalendar"] = true;
+                            store.PfValidationDictionary["addCalendar"] = true;
 		                }
 		                if (line.Contains("Add Folder to Test Folder Delete succeeded"))
 		                {
-		                    Store.PfValidationDictionary["addFolderDelete"] = true;
+                            store.PfValidationDictionary["addFolderDelete"] = true;
 		                }
 		                if (line.Contains("Add Folder to Test Folder Move succeeded"))
 		                {
-		                    Store.PfValidationDictionary["addFolderMove"] = true;
+                            store.PfValidationDictionary["addFolderMove"] = true;
 		                }
 		                if (line.Contains("Add Folder to Test Folder Rename succeeded"))
 		                {
-		                    Store.PfValidationDictionary["addFolderRename"] = true;
+                            store.PfValidationDictionary["addFolderRename"] = true;
 		                }
 		                if (line.Contains("Add Item Test succeeded-1"))
 		                {
-		                    Store.PfValidationDictionary["addNewItem1"] = true;
+                            store.PfValidationDictionary["addNewItem1"] = true;
 		                }
 		                if (line.Contains("Add Item Test succeeded-2"))
 		                {
-		                    Store.PfValidationDictionary["addNewItem2"] = true;
+                            store.PfValidationDictionary["addNewItem2"] = true;
 		                }
 		                if (line.Contains("Add Item Test succeeded-3"))
 		                {
-		                    Store.PfValidationDictionary["addNewItem3"] = true;
+                            store.PfValidationDictionary["addNewItem3"] = true;
 		                }
 		                if (line.Contains("Add Contact Test succeeded"))
 		                {
-		                    Store.PfValidationDictionary["addContact"] = true;
+                            store.PfValidationDictionary["addContact"] = true;
 		                }
 		                if (line.Contains("Add Meeting Test succeeded"))
 		                {
-		                    Store.PfValidationDictionary["addMeeting"] = true;
+                            store.PfValidationDictionary["addMeeting"] = true;
 		                }
 		                if (line.Contains("Add Custom Item Test succeeded"))
 		                {
-		                    Store.PfValidationDictionary["addCustomItem"] = true;
+                            store.PfValidationDictionary["addCustomItem"] = true;
 		                }
 		                if (line.Contains("SMTP Address Rewriting Test succeeded"))
 		                {
-		                    Store.PfValidationDictionary["smtpRewritting"] = true;
+                            store.PfValidationDictionary["smtpRewritting"] = true;
 		                }
 		                if (line.Contains("X400 Address Rewriting Test succeeded"))
 		                {
-		                    Store.PfValidationDictionary["x400Rewritting"] = true;
+                            store.PfValidationDictionary["x400Rewritting"] = true;
 		                }
 		                if (line.Contains("Add Item Test succeeded-4"))
 		                {
-		                    Store.PfValidationDictionary["addNewItem4"] = true;
+                            store.PfValidationDictionary["addNewItem4"] = true;
 		                }
 		                if (line.Contains("Add PDL Test succeeded"))
 		                {
-		                    Store.PfValidationDictionary["addPDL"] = true;
+                            store.PfValidationDictionary["addPDL"] = true;
 		                }
 		                if (line.Contains("Validate Add Mail Folder succeeded-1"))
 		                {
-		                    Store.PfValidationDictionary["validateAddMailFolder1"] = true;
+                            store.PfValidationDictionary["validateAddMailFolder1"] = true;
 		                }
 		                if (line.Contains("Validate Add Mail FolderTree succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateAddFolderTree"] = true;
+                            store.PfValidationDictionary["validateAddFolderTree"] = true;
 		                }
 		                if (line.Contains("Mail Enable Folder Test succeeded"))
 		                {
-		                    Store.PfValidationDictionary["mailEnable"] = true;
+                            store.PfValidationDictionary["mailEnable"] = true;
 		                }
 		                if (line.Contains("Add SendAS Permission Test succeeded"))
 		                {
-		                    Store.PfValidationDictionary["addSendAsPerms"] = true;
+                            store.PfValidationDictionary["addSendAsPerms"] = true;
 		                }
 		                if (line.Contains("Add Proxy Address Test succeeded"))
 		                {
-		                    Store.PfValidationDictionary["addProxy"] = true;
+                            store.PfValidationDictionary["addProxy"] = true;
 		                }
 		                if (line.Contains("Validate Add Mail Folder succeeded-2"))
 		                {
-		                    Store.PfValidationDictionary["validateAddMailFolder2"] = true;
+                            store.PfValidationDictionary["validateAddMailFolder2"] = true;
 		                }
 		                if (line.Contains("Validate Add Contacts Folder succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateAddContacts"] = true;
+                            store.PfValidationDictionary["validateAddContacts"] = true;
 		                }
 		                if (line.Contains("Validate Add Calendar Folder succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateCalendar"] = true;
+                            store.PfValidationDictionary["validateCalendar"] = true;
 		                }
 		                if (line.Contains("Validate Add Mail Folder succeeded-3"))
 		                {
-		                    Store.PfValidationDictionary["validateAddMailFolder3"] = true;
+                            store.PfValidationDictionary["validateAddMailFolder3"] = true;
 		                }
 		                if (line.Contains("Validate Add Item succeeded-1"))
 		                {
-		                    Store.PfValidationDictionary["validateAddItem1"] = true;
+                            store.PfValidationDictionary["validateAddItem1"] = true;
 		                }
 		                if (line.Contains("Validate Add Contact succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateAddContact"] = true;
+                            store.PfValidationDictionary["validateAddContact"] = true;
 		                }
 		                if (line.Contains("Validate Add Meeting succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateAddMeeting"] = true;
+                            store.PfValidationDictionary["validateAddMeeting"] = true;
 		                }
 		                if (line.Contains("Validate Custom Item succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateCustomItem"] = true;
+                            store.PfValidationDictionary["validateCustomItem"] = true;
 		                }
 		                if (line.Contains("Validate SMTP Transform succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateSmtp"] = true;
+                            store.PfValidationDictionary["validateSmtp"] = true;
 		                }
 		                if (line.Contains("Validate x400 Transform succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validatex400"] = true;
+                            store.PfValidationDictionary["validatex400"] = true;
 		                }
 		                if (line.Contains("Validate Add Item succeeded-2"))
 		                {
-		                    Store.PfValidationDictionary["validateAddItem2"] = true;
+                            store.PfValidationDictionary["validateAddItem2"] = true;
 		                }
 		                if (line.Contains("move Test succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateMove"] = true;
+                            store.PfValidationDictionary["validateMove"] = true;
 		                }
 		                if (line.Contains("Modify Folder Permissions Test succeeded"))
 		                {
-		                    Store.PfValidationDictionary["modifyFoldersPerms"] = true;
+                            store.PfValidationDictionary["modifyFoldersPerms"] = true;
 		                }
 		                if (line.Contains("Add Attachment Test succeeded"))
 		                {
-		                    Store.PfValidationDictionary["addAttachment"] = true;
+                            store.PfValidationDictionary["addAttachment"] = true;
 		                }
 		                if (line.Contains("Modify Item Test succeeded"))
 		                {
-		                    Store.PfValidationDictionary["modifyItem"] = true;
+                            store.PfValidationDictionary["modifyItem"] = true;
 		                }
 		                if (line.Contains("Modify Contact Item Test succeeded"))
 		                {
-		                    Store.PfValidationDictionary["modifyContact"] = true;
+                            store.PfValidationDictionary["modifyContact"] = true;
 		                }
 		                if (line.Contains("Modify Sticky Note succeeded"))
 		                {
-		                    Store.PfValidationDictionary["modifyNote"] = true;
+                            store.PfValidationDictionary["modifyNote"] = true;
 		                }
 		                if (line.Contains("Rename Folder succeeded"))
 		                {
-		                    Store.PfValidationDictionary["folderRename"] = true;
+                            store.PfValidationDictionary["folderRename"] = true;
 		                }
 		                if (line.Contains("Move Folder succeeded"))
 		                {
-		                    Store.PfValidationDictionary["folderMove"] = true;
+                            store.PfValidationDictionary["folderMove"] = true;
 		                }
 		                if (line.Contains("Delete Folder succeeded"))
 		                {
-		                    Store.PfValidationDictionary["folderDelete"] = true;
+                            store.PfValidationDictionary["folderDelete"] = true;
 		                }
 		                if (line.Contains("Move Item succeeded"))
 		                {
-		                    Store.PfValidationDictionary["moveItem"] = true;
+                            store.PfValidationDictionary["moveItem"] = true;
 		                }
 		                if (line.Contains("Delete Item succeeded"))
 		                {
-		                    Store.PfValidationDictionary["deleteItem"] = true;
+                            store.PfValidationDictionary["deleteItem"] = true;
 		                }
 		                if (line.Contains("Validate Modify Folder Permissions succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateFolderPerms"] = true;
+                            store.PfValidationDictionary["validateFolderPerms"] = true;
 		                }
 		                if (line.Contains("Validate Add Attachment succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateAttachment"] = true;
+                            store.PfValidationDictionary["validateAttachment"] = true;
 		                }
 		                if (line.Contains("Validate Modify Item Subject succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateModifyItem"] = true;
+                            store.PfValidationDictionary["validateModifyItem"] = true;
 		                }
 		                if (line.Contains("Validate Modify Item contact succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateModifyContact"] = true;
+                            store.PfValidationDictionary["validateModifyContact"] = true;
 		                }
 		                if (line.Contains("Validate Modify StickyNote succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateModifyNote"] = true;
+                            store.PfValidationDictionary["validateModifyNote"] = true;
 		                }
 		                if (line.Contains("Validate rename folder succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateRenameFolder"] = true;
+                            store.PfValidationDictionary["validateRenameFolder"] = true;
 		                }
 		                if (line.Contains("Validate move folder succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateMoveFolder"] = true;
+                            store.PfValidationDictionary["validateMoveFolder"] = true;
 		                }
 		                if (line.Contains("Validate delete folder succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateDeleteFolder"] = true;
+                            store.PfValidationDictionary["validateDeleteFolder"] = true;
 		                }
 		                if (line.Contains("Validate Move Item succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateMoveItem"] = true;
+                            store.PfValidationDictionary["validateMoveItem"] = true;
 		                }
 		                if (line.Contains("Validate Delete Item succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateDeleteItem"] = true;
+                            store.PfValidationDictionary["validateDeleteItem"] = true;
 		                }
 		                if (line.Contains("Validate Mail Enable Folder succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateMailEnable"] = true;
+                            store.PfValidationDictionary["validateMailEnable"] = true;
 		                }
 		                if (line.Contains("validate Add SendAS Permission succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateAddSendAsPerms"] = true;
+                            store.PfValidationDictionary["validateAddSendAsPerms"] = true;
 		                }
 		                if (line.Contains("Validate Add Proxy Address validation succeeded"))
 		                {
-		                    Store.PfValidationDictionary["validateProxy"] = true;
+                            store.PfValidationDictionary["validateProxy"] = true;
 		                }
 		            }
                     Log.Debug("Script stream complete");
 		            mainScript.WaitForExit(30000);
                     Log.Debug("Script exit");
 		        }
-		        foreach (var check in Store.PfValidationDictionary)
+		        foreach (var check in store.PfValidationDictionary)
 		        {
                     Log.DebugFormat("key: {0}, value: {1}", check.Key, check.Value);
 		            Assert.IsTrue(check.Value, check.Key + " check failed");

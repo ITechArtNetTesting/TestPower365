@@ -23,11 +23,11 @@ namespace Product.Tests.IntegrationTests
         [TestCategory("Integration_test")]
         public void Automation_IN_GroupsViewTest()
         {
-            string userName = RunConfigurator.GetUserLogin("client2");
-            string password = RunConfigurator.GetPassword("client2");
-            string client = RunConfigurator.GetClient("client2");
-            string project = RunConfigurator.GetProjectName("client2", "project2");
-            string adGroup2 = RunConfigurator.GetADGroupName("client2", "project2", "adgroup2");           
+            string userName = configurator.GetUserLogin("client2");
+            string password = configurator.GetPassword("client2");
+            string client = configurator.GetClient("client2");
+            string project = configurator.GetProjectName("client2", "project2");
+            string adGroup2 = configurator.GetADGroupName("client2", "project2", "adgroup2");           
 
             try
             {

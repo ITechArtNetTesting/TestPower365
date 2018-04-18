@@ -22,16 +22,16 @@ namespace Product.Tests.PowerShellTests
 		[TestCategory("Powershell")]
 		public void Automation_PS_MO_CompareTest()
 		{
-		    string userName = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user");
-		    string password = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//password");
-		    string client = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name");
-		    string project = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//name");
-		    string sourceMailbox = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps4']/..//source");
-		    string sourceLogin = RunConfigurator.GetTenantValue("T1->T2", "source", "psuser2");
-		    string sourcePassword = RunConfigurator.GetTenantValue("T1->T2", "source", "pspassword2");
-		    string targetLogin = RunConfigurator.GetTenantValue("T1->T2", "target", "psuser2");
-		    string targetPassword = RunConfigurator.GetTenantValue("T1->T2", "target", "pspassword2");
-            string targetMailbox = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps4']/..//target");
+		    string userName = configurator.GetValueByXpath("//metaname[text()='client2']/..//user");
+		    string password = configurator.GetValueByXpath("//metaname[text()='client2']/..//password");
+		    string client = configurator.GetValueByXpath("//metaname[text()='client2']/../name");
+		    string project = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//name");
+		    string sourceMailbox = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps4']/..//source");
+		    string sourceLogin = configurator.GetTenantValue("T1->T2", "source", "psuser2");
+		    string sourcePassword = configurator.GetTenantValue("T1->T2", "source", "pspassword2");
+		    string targetLogin = configurator.GetTenantValue("T1->T2", "target", "psuser2");
+		    string targetPassword = configurator.GetTenantValue("T1->T2", "target", "pspassword2");
+            string targetMailbox = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps4']/..//target");
 
 		    try
 		    {

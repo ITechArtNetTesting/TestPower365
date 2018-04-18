@@ -28,24 +28,24 @@ namespace Product.Tests.PowerShellTests
 		[TestCategory("Powershell")]
 		public void Automation_MO_PS_DeleteFoldersAndItemsTest()
 		{
-            string stopFolder = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//stopfolder");
-		    string sourceLogin = RunConfigurator.GetTenantValue("T1->T2", "source", "psuser");
-		    string sourcePassword = RunConfigurator.GetTenantValue("T1->T2", "source", "pspassword");
-		    string targetLogin = RunConfigurator.GetTenantValue("T1->T2", "target", "psuser");
-		    string targetPassword = RunConfigurator.GetTenantValue("T1->T2", "target", "pspassword");
-		    string sourceMailbox = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps1']/..//source");
-		    string targetMailbox = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps1']/..//target");
-		    string stopFile1 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='stopfile3']/..//path");
-		    string stopFile2 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='stopfile4']/..//path");
-            string userName = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user");
-		    string password = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//password");
-		    string client = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name");
-		    string project = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//name");
+            string stopFolder = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//stopfolder");
+		    string sourceLogin = configurator.GetTenantValue("T1->T2", "source", "psuser");
+		    string sourcePassword = configurator.GetTenantValue("T1->T2", "source", "pspassword");
+		    string targetLogin = configurator.GetTenantValue("T1->T2", "target", "psuser");
+		    string targetPassword = configurator.GetTenantValue("T1->T2", "target", "pspassword");
+		    string sourceMailbox = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps1']/..//source");
+		    string targetMailbox = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps1']/..//target");
+		    string stopFile1 = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='stopfile3']/..//path");
+		    string stopFile2 = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='stopfile4']/..//path");
+            string userName = configurator.GetValueByXpath("//metaname[text()='client2']/..//user");
+		    string password = configurator.GetValueByXpath("//metaname[text()='client2']/..//password");
+		    string client = configurator.GetValueByXpath("//metaname[text()='client2']/../name");
+		    string project = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//name");
             try
 		    {
 		        bool success = true;
 		        var launcher = new PsLauncher();
-		        RunConfigurator.CreateFlagFolder(stopFolder);
+                configurator.CreateFlagFolder(stopFolder);
 		        using (var process = launcher.LaunchPowerShellInstance("DeleteFoldersAndItems.ps1",
 		            $" -slogin {sourceLogin}" +
 		            $" -spassword {sourcePassword}" +
@@ -87,7 +87,7 @@ namespace Product.Tests.PowerShellTests
 		                    User.AtUsersForm().ConfirmSync();
 		                    User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 10000);
 		                    User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 60000);
-		                    RunConfigurator.CreateEmptyFile(stopFile1);
+                            configurator.CreateEmptyFile(stopFile1);
 		                }
 		                if (line == "Powershell will pause until Migration is complete - 2")
 		                {
@@ -108,7 +108,7 @@ namespace Product.Tests.PowerShellTests
 		                    User.AtUsersForm().ConfirmSync();
 		                    Driver.GetDriver(driver.GetDriverKey()).Navigate().Refresh();
 		                    User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 60000);
-		                    RunConfigurator.CreateEmptyFile(stopFile2);
+                            configurator.CreateEmptyFile(stopFile2);
 		                }
 		            }
 		            process.WaitForExit();

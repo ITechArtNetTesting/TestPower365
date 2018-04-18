@@ -13,7 +13,7 @@ namespace Product.Framework
 {
     public class Driver
     {
-        public static readonly string DriverPath = "resources/";
+        public static readonly string DriverPath = @"\\resources";
 
         string BaseWindow;
 
@@ -83,7 +83,7 @@ namespace Product.Framework
         }
 
         public void InitBrowser(WebBrowsers browserName)
-        {
+        {            
             switch (browserName)
             {
                 case WebBrowsers.Firefox:
@@ -96,11 +96,11 @@ namespace Product.Framework
                     break;
                 case WebBrowsers.Chrome:
                     driverKey = Guid.NewGuid();
-                    Drivers.Add(driverKey, new ChromeDriver(Path.GetFullPath(DriverPath)));
+                    Drivers.Add(driverKey, new ChromeDriver(AppDomain.CurrentDomain.BaseDirectory+DriverPath));
                     break;
                 default:
                     driverKey = Guid.NewGuid();
-                    Drivers.Add(driverKey, new ChromeDriver(Path.GetFullPath(DriverPath)));
+                    Drivers.Add(driverKey, new ChromeDriver(AppDomain.CurrentDomain.BaseDirectory + DriverPath));
                     break;
             }
         }

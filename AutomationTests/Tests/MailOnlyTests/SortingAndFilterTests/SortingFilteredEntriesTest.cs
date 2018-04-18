@@ -19,13 +19,13 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		[TestCategory("MailOnly")]
 		public void Automation_MO_SortingFilteredEntriesTest()
 		{
-		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
-		    string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");
-		    string client = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/../name");
-		    string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//name");
-		    string sourceMailbox7 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry7']/..//source");
-		    string groupMailbox7 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry7']/..//group");
-		    string profileMailbox7 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry7']/..//profile");
+		    string login = configurator.GetValueByXpath("//metaname[text()='client1']/..//user");
+		    string password = configurator.GetValueByXpath("//metaname[text()='client1']/..//password");
+		    string client = configurator.GetValueByXpath("//metaname[text()='client1']/../name");
+		    string projectName = configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//name");
+		    string sourceMailbox7 = configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry7']/..//source");
+		    string groupMailbox7 = configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry7']/..//group");
+		    string profileMailbox7 = configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry7']/..//profile");
 
 		    try
 		    {

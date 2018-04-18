@@ -17,16 +17,16 @@ namespace Product.Tests.CommonTests.SetupTests
 		public void SetupFirstUserFirstProject()
            {
                       
-            LoginAndSelectRole(RunConfigurator.GetUserLogin("client1"),
-			                   RunConfigurator.GetPassword("client1"),
-                               RunConfigurator.GetClient("client1"));
+            LoginAndSelectRole(configurator.GetUserLogin("client1"),
+                               configurator.GetPassword("client1"),
+                               configurator.GetClient("client1"));
            
-			AddMailOnlyProject(RunConfigurator.GetProjectName("client1","project1"),
-				                RunConfigurator.GetTenantValue("T1->T2", "source", "user"),
-				                RunConfigurator.GetTenantValue("T1->T2", "source", "password"),
-			                	RunConfigurator.GetTenantValue("T1->T2", "target", "user"),
-			                	RunConfigurator.GetTenantValue("T1->T2", "target", "password"),
-			                	RunConfigurator.GetFileName("client1","project1", "file1"));
+			AddMailOnlyProject(configurator.GetProjectName("client1","project1"),
+                                configurator.GetTenantValue("T1->T2", "source", "user"),
+                                configurator.GetTenantValue("T1->T2", "source", "password"),
+                                configurator.GetTenantValue("T1->T2", "target", "user"),
+                                configurator.GetTenantValue("T1->T2", "target", "password"),
+                                configurator.GetFileName("client1","project1", "file1"));
 			User.AtProjectOverviewForm().OpenUsersList();
 		}
 	}

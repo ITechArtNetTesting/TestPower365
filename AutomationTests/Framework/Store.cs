@@ -4,39 +4,39 @@ namespace Product.Framework
 {
 	public class Store
 	{
-		public static string ProjectName;
-		public static string MainHandle;
-		public static string AllUsersCount;
-		public static string ReadyUsersCount;
-		public static string ClientName;
-		public static string FirstName;
-		public static string LastName;
-		public static string Phone;
-		public static string Email;
-		public static string Address;
-		public static string City;
-		public static string State;
-		public static string Country;
-		public static string Zip;
-		public static string LinkName;
-		public static string LinkUrl;
-		public static List<string> SourceList = new List<string>();
-		public static List<string> TargetList = new List<string>();
-		public static List<string> StateList = new List<string>();
-		public static List<string> GroupList = new List<string>();
-		public static List<string> ProgressList = new List<string>();
-		public static List<string> MailboxSizeList = new List<string>();
-		public static List<string> ArchiveSizeList = new List<string>();
-		public static List<string> ProfileList = new List<string>();
-		public static bool IsComplete = false;
-		public static bool IsWaitRequired = false;
-		public static string TenantLog;
-		public static string ProbeSourceMailbox;
-		public static string ProbeTargetMailbox;
-		public static string AccessUrl;
-		public static string AccessKey;
+		public string ProjectName;
+		public string MainHandle;
+		public string AllUsersCount;
+		public string ReadyUsersCount;
+		public string ClientName;
+		public string FirstName;
+		public string LastName;
+		public string Phone;
+		public string Email;
+		public string Address;
+		public string City;
+		public string State;
+		public string Country;
+		public string Zip;
+		public string LinkName;
+		public string LinkUrl;
+		public List<string> SourceList = new List<string>();
+		public List<string> TargetList = new List<string>();
+		public List<string> StateList = new List<string>();
+		public List<string> GroupList = new List<string>();
+		public List<string> ProgressList = new List<string>();
+		public List<string> MailboxSizeList = new List<string>();
+		public List<string> ArchiveSizeList = new List<string>();
+		public List<string> ProfileList = new List<string>();
+		public bool IsComplete = false;
+		public bool IsWaitRequired = false;
+		public string TenantLog;
+		public string ProbeSourceMailbox;
+		public string ProbeTargetMailbox;
+		public string AccessUrl;
+		public string AccessKey;
 
-		public static Dictionary<string, bool> PfValidationDictionary = new Dictionary<string, bool>
+		public Dictionary<string, bool> PfValidationDictionary = new Dictionary<string, bool>
 		{
 			{ "folderExistance", false },
 			{ "itemExistance", false },

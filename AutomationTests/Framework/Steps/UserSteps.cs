@@ -12,10 +12,13 @@ namespace Product.Framework.Steps
 {
 	public class UserSteps : BaseEntity
 	{
-        private Guid driverId;
+        RunConfigurator configurator;
+        Store store;
 
-        public UserSteps(Guid driverId)
+        public UserSteps(Guid driverId, RunConfigurator configurator,Store store)
         {
+            this.store = store;
+            this.configurator = configurator;
             this.driverId = driverId;
         }
 
@@ -26,7 +29,7 @@ namespace Product.Framework.Steps
 
 		public RegistrationForm AtRegistrationForm()
 		{
-			return new RegistrationForm(driverId);
+			return new RegistrationForm(driverId,store);
 		}
 
 		public ChooseYourProjectTypeForm AtChooseYourProjectTypeForm()
@@ -71,7 +74,7 @@ namespace Product.Framework.Steps
 
 		public SetProjectNameForm AtSetProjectNameForm()
 		{
-			return new SetProjectNameForm(driverId);
+			return new SetProjectNameForm(driverId,store);
 		}
 
 		public PublicFolderSourceFilePathForm AtPublicFolderSourceFilePathForm()
@@ -141,12 +144,12 @@ namespace Product.Framework.Steps
 
 		public AddTenantsForm AtAddTenantsForm()
 		{
-			return new AddTenantsForm(driverId);
+			return new AddTenantsForm(driverId,store);
 		}
 
 		public UploadFilesForm AtUploadFilesForm()
 		{
-			return new UploadFilesForm(driverId);
+			return new UploadFilesForm(driverId,configurator);
 		}
 
 		public SyncAddressBooksForm AtSyncAddressBooksForm()
@@ -168,7 +171,7 @@ namespace Product.Framework.Steps
 
 		public DirectorySyncSettingsForm AtDirectorySyncSettingsForm()
 		{
-			return new DirectorySyncSettingsForm(driverId);
+			return new DirectorySyncSettingsForm(driverId,store);
 		}
 
 	    public DownloadDirSyncForm AtDownloadDirSyncForm()
@@ -333,7 +336,7 @@ namespace Product.Framework.Steps
 
 		public ProjectDetailsForm AtProjectDetailsForm()
 		{
-			return new ProjectDetailsForm(driverId);
+			return new ProjectDetailsForm(driverId,configurator,store);
 		}
 
 		public CmtLoginForm AtCmtLoginForm()
@@ -348,12 +351,12 @@ namespace Product.Framework.Steps
 
 		public ProjectOverviewForm AtProjectOverviewForm()
 		{
-			return new ProjectOverviewForm(driverId);
+			return new ProjectOverviewForm(driverId,store);
 		}
 
 		public UsersForm AtUsersForm()
 		{
-			return new UsersForm(driverId);
+			return new UsersForm(driverId,store);
 		}
 
 		public TenantsConfigurationForm AtTenantsConfigurationForm()

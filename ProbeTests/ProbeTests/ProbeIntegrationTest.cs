@@ -16,10 +16,10 @@ namespace ProbeTests.ProbeTests
 
 		public ProbeIntegrationTest() : base(ProbeType.Integration)
 		{
-            clientName  = RunConfigurator.GetValueByXpath("//IntegrationProbe/@client");
-            projectName = RunConfigurator.GetValueByXpath("//IntegrationProbe/@project");
-            adGroupName = RunConfigurator.GetValueByXpath("//IntegrationProbe/@adgroup");
-            tenants = RunConfigurator.GetValueByXpath("//IntegrationProbe/@tenants");
+            clientName  = configurator.GetValueByXpath("//IntegrationProbe/@client");
+            projectName = configurator.GetValueByXpath("//IntegrationProbe/@project");
+            adGroupName = configurator.GetValueByXpath("//IntegrationProbe/@adgroup");
+            tenants = configurator.GetValueByXpath("//IntegrationProbe/@tenants");
 		}
 
 		[DllImport("kernel32.dll", SetLastError = true)]
@@ -28,26 +28,26 @@ namespace ProbeTests.ProbeTests
 		{
 			try
 			{
-                var sourceLocalLogin = RunConfigurator.GetTenantValue(tenants, "source", "aduser");
-                var sourceLocalPassword = RunConfigurator.GetTenantValue(tenants, "source", "adpassword");
-                var localExchangePowerShellUri = RunConfigurator.GetTenantValue(tenants, "source", "uri");
+                var sourceLocalLogin = configurator.GetTenantValue(tenants, "source", "aduser");
+                var sourceLocalPassword = configurator.GetTenantValue(tenants, "source", "adpassword");
+                var localExchangePowerShellUri = configurator.GetTenantValue(tenants, "source", "uri");
                 
                 var sourceAzureAdSyncLogin = sourceLocalLogin;
                 var sourceAzureAdSyncPassword = sourceLocalPassword;
-                var sourceAzureAdSyncServer = RunConfigurator.GetTenantValue(tenants, "source", "azureAdSyncServer");
+                var sourceAzureAdSyncServer = configurator.GetTenantValue(tenants, "source", "azureAdSyncServer");
                 
-                var sourceCloudLogin = RunConfigurator.GetTenantValue(tenants, "source", "user");
-                var sourceCloudPassword = RunConfigurator.GetTenantValue(tenants, "source", "password");
+                var sourceCloudLogin = configurator.GetTenantValue(tenants, "source", "user");
+                var sourceCloudPassword = configurator.GetTenantValue(tenants, "source", "password");
 
-                var testMailboxPassword = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//dirsync//password");
-                var testMailboxUpnSuffix = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//dirsync//forest");
-                var testMailboxDestinationOU = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//dirsync//ou");
-                var testMailboxNamePrefix = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project3']/..//metaname[text()='entry1']/..//probeprefix");
+                var testMailboxPassword = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//dirsync//password");
+                var testMailboxUpnSuffix = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//dirsync//forest");
+                var testMailboxDestinationOU = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//dirsync//ou");
+                var testMailboxNamePrefix = configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project3']/..//metaname[text()='entry1']/..//probeprefix");
 
-                var p365DiscoveryGroup = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='{adGroupName}']/..//name");
+                var p365DiscoveryGroup = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='{adGroupName}']/..//name");
 
-                var msolUri = RunConfigurator.GetValue("o365url");
-                var msolConnectParams = RunConfigurator.GetValue("msolconnectargs");
+                var msolUri = configurator.GetValue("o365url");
+                var msolConnectParams = configurator.GetValue("msolconnectargs");
 
                 using (var process = new PsLauncher().LaunchPowerShellInstance("Integration_Probe.ps1",
                         $" -localLogin {sourceLocalLogin}" +
@@ -78,7 +78,7 @@ namespace ProbeTests.ProbeTests
                         Log.Info(line);
                         if (line.Contains("UserPrincipalName"))
                         {
-                            Store.ProbeSourceMailbox = line.Substring(line.LastIndexOf(':') + 1, line.LastIndexOf('@') - line.LastIndexOf(':') - 1).Trim();
+                            store.ProbeSourceMailbox = line.Substring(line.LastIndexOf(':') + 1, line.LastIndexOf('@') - line.LastIndexOf(':') - 1).Trim();
                             break;
                         }
                     }
@@ -95,8 +95,8 @@ namespace ProbeTests.ProbeTests
 			}
 			try
 			{
-                LogIn(RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//user"),
-                        RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//password"));
+                LogIn(configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//user"),
+                        configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//password"));
 			}
 			catch (Exception e)
 			{
@@ -105,7 +105,7 @@ namespace ProbeTests.ProbeTests
 			}
 			try
 			{
-                SelectProject(RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//name"));
+                SelectProject(configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//name"));
 			}
 			catch (Exception e)
 			{
@@ -116,7 +116,7 @@ namespace ProbeTests.ProbeTests
 			{
 				User.AtProjectOverviewForm().EditTenants();
 				User.AtTenantsConfigurationForm().OpenDiscoveryTab();
-                User.AtTenantsConfigurationForm().RunDiscovery(RunConfigurator.GetTenantValue(tenants, "source", "name"));
+                User.AtTenantsConfigurationForm().RunDiscovery(configurator.GetTenantValue(tenants, "source", "name"));
 			}
 			catch (Exception e)
 			{
@@ -126,7 +126,7 @@ namespace ProbeTests.ProbeTests
 			try
 			{
 				User.AtTenantsConfigurationForm().GoToDashboard();
-				User.AtProjectOverviewForm().WaitTillDiscoveryIsComplete(30, RunConfigurator.GetTenantValue(tenants, "source", "name"));
+				User.AtProjectOverviewForm().WaitTillDiscoveryIsComplete(30, configurator.GetTenantValue(tenants, "source", "name"));
 			}
 			catch (Exception e)
 			{
@@ -144,15 +144,15 @@ namespace ProbeTests.ProbeTests
 			}
 			try
 			{
-				User.AtUsersForm().PerformSearch(Store.ProbeSourceMailbox);
+				User.AtUsersForm().PerformSearch(store.ProbeSourceMailbox);
 			}
 			catch (Exception e)
 			{
 				InsertDataToSql(DateTime.UtcNow, "Search error");
 				throw e;
 			}
-			string sourceMailbox = Store.ProbeSourceMailbox.Trim() +
-								   RunConfigurator.GetValueByXpath(
+			string sourceMailbox = store.ProbeSourceMailbox.Trim() +
+                                   configurator.GetValueByXpath(
                                        $"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//source");
 			try
 			{
@@ -234,9 +234,9 @@ namespace ProbeTests.ProbeTests
                 {
                     try
                     {
-                        var targetAzureAdSyncLogin = RunConfigurator.GetTenantValue(tenants, "target", "aduser");
-                        var targetAzureAdSyncPassword = RunConfigurator.GetTenantValue(tenants, "target", "adpassword");
-                        var targetAzureAdSyncServer = RunConfigurator.GetTenantValue(tenants, "target", "azureAdSyncServer");
+                        var targetAzureAdSyncLogin = configurator.GetTenantValue(tenants, "target", "aduser");
+                        var targetAzureAdSyncPassword = configurator.GetTenantValue(tenants, "target", "adpassword");
+                        var targetAzureAdSyncServer = configurator.GetTenantValue(tenants, "target", "azureAdSyncServer");
 
                         using (var process = new PsLauncher().LaunchPowerShellInstance("ADSync.ps1",
                                     $" -login {targetAzureAdSyncLogin}" +

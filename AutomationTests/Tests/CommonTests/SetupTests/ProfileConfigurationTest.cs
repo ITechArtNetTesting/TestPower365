@@ -22,13 +22,13 @@ namespace Product.Tests.CommonTests.SetupTests
         [TestCategory("Setup")]
         public void ConfigureProfileTest()
         {
-            string userName = RunConfigurator.GetUserLogin("client2");
-            string password = RunConfigurator.GetPassword("client2");
+            string userName = configurator.GetUserLogin("client2");
+            string password = configurator.GetPassword("client2");
                                
-            string client = RunConfigurator.GetClient("client2"); 
-            string project = RunConfigurator.GetProjectName("client2","project2"); 
-            string sourceMailbox14 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry14']/..//source");
-            string sourceMailbox15 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry15']/..//source");
+            string client = configurator.GetClient("client2"); 
+            string project = configurator.GetProjectName("client2","project2"); 
+            string sourceMailbox14 = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry14']/..//source");
+            string sourceMailbox15 = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry15']/..//source");
             LoginAndSelectRole(userName, password, client);
             SelectProject(project);
             User.AtProjectOverviewForm().OpenMainMenu();

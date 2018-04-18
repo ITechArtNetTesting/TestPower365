@@ -9,12 +9,14 @@ namespace Product.Framework.Forms.NewProjectWizardForms
 	{        
         private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'First, we have to add your tenants')]");
 
+        Store store;
 		private readonly Button addTenantButton ;
 		private readonly Label tenantLabel ;
 		private readonly Button yesButton ;
 		private readonly Button noButton ;
-		public AddTenantsForm(Guid driverId) : base(TitleLocator, "Add tenants form",driverId)
+		public AddTenantsForm(Guid driverId,Store store) : base(TitleLocator, "Add tenants form",driverId)
 		{
+            this.store = store;
             this.driverId = driverId;
             addTenantButton = new Button(By.XPath("//span[contains(text(), 'Add tenant')]"),"Add tenant button",driverId);
             tenantLabel = new Label(By.XPath("//span[contains(@data-bind, 'tenantName')]"), "Tenant label",driverId);
@@ -26,7 +28,7 @@ namespace Product.Framework.Forms.NewProjectWizardForms
 		{
 			Log.Info("Switching to new window");
             //Store.MainHandle = Browser.GetDriver().CurrentWindowHandle;
-            Store.MainHandle = Driver.GetDriver(driverId).CurrentWindowHandle;
+            store.MainHandle = Driver.GetDriver(driverId).CurrentWindowHandle;
             //var finder = new PopupWindowFinder(Browser.GetDriver());
             var finder = new PopupWindowFinder(Driver.GetDriver(driverId));
             addTenantButton.WaitForElementPresent();

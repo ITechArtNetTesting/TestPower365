@@ -21,14 +21,14 @@ namespace Product.Tests.PowerShellTests
 		[TestMethod]
 		public void PS_MD_StartDeltaDiscoveryTest()
 		{
-		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user");
-		    string password = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//password");
-		    string client = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name");
-		    string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//name");
-		    string sourceTenant = RunConfigurator.GetTenantValue("T1->T2", "source", "name");
-            string sourceAdminLogin = RunConfigurator.GetTenantValue("T1->T2", "source", "user");
-		    string sourceAdminPassword = RunConfigurator.GetTenantValue("T1->T2", "source", "password");
-		    string sourceMailbox1 =RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entry1']/..//source");
+		    string login = configurator.GetValueByXpath("//metaname[text()='client2']/..//user");
+		    string password = configurator.GetValueByXpath("//metaname[text()='client2']/..//password");
+		    string client = configurator.GetValueByXpath("//metaname[text()='client2']/../name");
+		    string projectName = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//name");
+		    string sourceTenant = configurator.GetTenantValue("T1->T2", "source", "name");
+            string sourceAdminLogin = configurator.GetTenantValue("T1->T2", "source", "user");
+		    string sourceAdminPassword = configurator.GetTenantValue("T1->T2", "source", "password");
+		    string sourceMailbox1 = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entry1']/..//source");
 
 		    try
 		    {

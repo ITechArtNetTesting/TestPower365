@@ -10,8 +10,16 @@ using System.Threading.Tasks;
 namespace Product.Framework
 {
 	public class PsLauncher : BaseEntity
-	{       
-		[DllImport("kernel32.dll", SetLastError = true)]
+	{
+        Store store = new Store();
+
+        public PsLauncher()
+        {
+            configurator = new RunConfigurator(store);
+        }
+
+        RunConfigurator configurator;
+        [DllImport("kernel32.dll", SetLastError = true)]
 		public static extern bool Wow64DisableWow64FsRedirection(ref IntPtr ptr);
 	    [Flags]
 	    public enum ThreadAccess : int
@@ -39,15 +47,15 @@ namespace Product.Framework
 	    private Process mainProcess;
 
         public Process LaunchPowerShellInstance(string scriptName, string parameters)
-		{
-			ProcessStartInfo processInfo;
+		{            
+            ProcessStartInfo processInfo;
 			Process process;
 			//Disabling architechture redirecting
 			var ptr = new IntPtr();
 			var isWow64FsRedirectionDisabled = Wow64DisableWow64FsRedirection(ref ptr);
 			Debug.WriteLine("Is Wow64Fs Redirection disabled:\t" + isWow64FsRedirectionDisabled);
-			var path = Path.GetFullPath(RunConfigurator.ResourcesPath + scriptName);
-			processInfo = RunConfigurator.GetValue("arc") == "x86"
+			var path = Path.GetFullPath(configurator.ResourcesPath + scriptName);
+			processInfo = configurator.GetValue("arc") == "x86"
 				? new ProcessStartInfo(@"C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe",
 					@"-NoProfile -ExecutionPolicy unrestricted -File """ + path + @"""" +parameters)
 				: new ProcessStartInfo(@"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe",
@@ -67,7 +75,7 @@ namespace Product.Framework
 			var ptr = new IntPtr();
 			var isWow64FsRedirectionDisabled = Wow64DisableWow64FsRedirection(ref ptr);
 			Debug.WriteLine("Is Wow64Fs Redirection disabled:\t" + isWow64FsRedirectionDisabled);
-			var path = Path.GetFullPath(RunConfigurator.ResourcesPath + scriptName);
+			var path = Path.GetFullPath(configurator.ResourcesPath + scriptName);
 			processInfo = arcType == "x86"
 				? new ProcessStartInfo(@"C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe",
 					@"-NoProfile -ExecutionPolicy unrestricted -File """ + path + @"""" + parameters)
@@ -88,7 +96,7 @@ namespace Product.Framework
 			var ptr = new IntPtr();
 			var isWow64FsRedirectionDisabled = Wow64DisableWow64FsRedirection(ref ptr);
 			Debug.WriteLine("Is Wow64Fs Redirection disabled:\t" + isWow64FsRedirectionDisabled);
-			var path = Path.GetFullPath(RunConfigurator.ResourcesPath + scriptName);
+			var path = Path.GetFullPath(configurator.ResourcesPath + scriptName);
 			processInfo = arcType == "x86"
 				? new ProcessStartInfo(@"C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe",
 					@"-NoProfile -ExecutionPolicy unrestricted -File """ + path + @"""" + parameters)

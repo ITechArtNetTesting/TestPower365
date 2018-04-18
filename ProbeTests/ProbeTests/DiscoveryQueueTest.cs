@@ -13,16 +13,19 @@ namespace ProbeTests.ProbeTests
 {
     class DiscoveryQueueTest : IProbeTest
     {
+        Store store = new Store();
+        RunConfigurator configurator ;
         private string connectionString;
         private int threshold;
         private string instanceName;
         private ILog Log;
-
+       
         public DiscoveryQueueTest()
         {
-            RunConfigurator.RunPath = "resources/probeRun.xml";
+            configurator = new RunConfigurator(store);
+            configurator.RunPath = "resources/probeRun.xml";
             //connectionString = RunConfigurator.GetValueByXpath("//DiscoveryQueueProbe/@connectionString").DecryptChk();
-            threshold = int.Parse(RunConfigurator.GetValueByXpath("//DiscoveryQueueProbe/@threshold"));
+            threshold = int.Parse(configurator.GetValueByXpath("//DiscoveryQueueProbe/@threshold"));
             instanceName = ConfigurationManager.AppSettings.Get("Instance");
             XmlConfigurator.Configure();
             Log = LogManager.GetLogger(typeof(DiscoveryQueueTest));

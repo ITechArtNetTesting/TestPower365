@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Product.Tests.MailOnlyTests.MigrationTests
-{
+{   
     [TestClass]
     public class TC22938_UI_Verify_Migration_Job_Progress_Bar_will_be_updated_correctly_while_job_is_running: LoginAndConfigureTest
     {
@@ -21,11 +21,11 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
         [TestCategory("MailOnly")]
         public void VerifyMigrationJobProgressBarWillBeUpdatedCorrectlyWhileJobIsRunning()
         {
-            string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
-            string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");
-            string client = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/../name");
-            string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//name");
-            string sourceMailbox3 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry5']/..//source");
+            string login = configurator.GetValueByXpath("//metaname[text()='client1']/..//user");
+            string password = configurator.GetValueByXpath("//metaname[text()='client1']/..//password");
+            string client = configurator.GetValueByXpath("//metaname[text()='client1']/../name");
+            string projectName = configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//name");
+            string sourceMailbox3 = configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry5']/..//source");
 
             try
             {

@@ -42,10 +42,12 @@ namespace Product.Framework.Forms
 		private readonly Button coexSettingsButton ;
 		private readonly Button totalPublicFoldersMigrationsButton ;
 		private readonly Button migrationGroupsButton ;
-        private readonly Button totalGroupsButton ;	            
+        private readonly Button totalGroupsButton ;
+        Store store;
 
-        public ProjectOverviewForm(Guid driverId) : base(TitleLocator, "Project overview form",driverId)
+        public ProjectOverviewForm(Guid driverId,Store store) : base(TitleLocator, "Project overview form",driverId)
 		{
+            this.store = store;
             this.driverId = driverId;
             allUsersAmountButton =new Button(By.XPath("//div[contains(@class, 'ibox-content')]/a[contains(@data-bind, 'total,')]"),"All users amount button",driverId);
             allUsersCompletedButton =new Button(By.XPath("//*[contains(text(), 'users')]/ancestor::div[contains(@data-bind, 'overallStatusViewModel')]//a[contains(@data-bind, 'completedNumber')]"),"All users completed button",driverId);
@@ -245,18 +247,18 @@ namespace Product.Framework.Forms
 		public void GetUsersCount()
 		{
 			Log.Info("Storing users count");
-			Store.AllUsersCount = allUsersAmountButton.GetText().Trim();
-			Log.Info("All users count is: " + Store.AllUsersCount);
-			Store.ReadyUsersCount = readyUsersValueLabel.GetText().Trim();
-			Log.Info("Ready users count is: " + Store.ReadyUsersCount);
+			store.AllUsersCount = allUsersAmountButton.GetText().Trim();
+			Log.Info("All users count is: " + store.AllUsersCount);
+            store.ReadyUsersCount = readyUsersValueLabel.GetText().Trim();
+			Log.Info("Ready users count is: " + store.ReadyUsersCount);
 		}
 
 		public void AssertNewUsersAreAdded()
 		{
 			Log.Info("Asserting new users are added");
-			Assert.IsTrue(int.Parse(Store.AllUsersCount) < int.Parse(allUsersAmountButton.GetText().Trim()),
+			Assert.IsTrue(int.Parse(store.AllUsersCount) < int.Parse(allUsersAmountButton.GetText().Trim()),
 				"New users are not added");
-			Assert.IsTrue(int.Parse(Store.ReadyUsersCount) < int.Parse(readyUsersValueLabel.GetText().Trim()));
+			Assert.IsTrue(int.Parse(store.ReadyUsersCount) < int.Parse(readyUsersValueLabel.GetText().Trim()));
 		}
 
 		public void AssertMigrationUserCount()
@@ -268,23 +270,23 @@ namespace Product.Framework.Forms
 		public void AssertDuplicateUsersAreNotAdded()
 		{
 			Log.Info("Asserting new users are added");
-			Assert.IsTrue(int.Parse(Store.AllUsersCount) == int.Parse(allUsersAmountButton.GetText().Trim()),
+			Assert.IsTrue(int.Parse(store.AllUsersCount) == int.Parse(allUsersAmountButton.GetText().Trim()),
 				"New users are not added");
-			Assert.IsTrue(int.Parse(Store.ReadyUsersCount) == int.Parse(readyUsersValueLabel.GetText().Trim()));
+			Assert.IsTrue(int.Parse(store.ReadyUsersCount) == int.Parse(readyUsersValueLabel.GetText().Trim()));
 		}
 
 		public void AssertNewUsersAreReplaced()
 		{
 			Log.Info("Asserting new users are replaced");
-			Assert.IsTrue(int.Parse(Store.AllUsersCount) <= int.Parse(allUsersAmountButton.GetText().Trim()),
+			Assert.IsTrue(int.Parse(store.AllUsersCount) <= int.Parse(allUsersAmountButton.GetText().Trim()),
 				"New users are not added");
-			Assert.IsTrue(int.Parse(Store.ReadyUsersCount) <= int.Parse(readyUsersValueLabel.GetText().Trim()));
+			Assert.IsTrue(int.Parse(store.ReadyUsersCount) <= int.Parse(readyUsersValueLabel.GetText().Trim()));
 		}
 
 		public void AssertReadyUserEqualToAll()
 		{
 			Log.Info("Asserting All users count == Ready Users count");
-			Assert.IsTrue(Store.ReadyUsersCount == Store.AllUsersCount, "All users count is not equal to ready users count");
+			Assert.IsTrue(store.ReadyUsersCount == store.AllUsersCount, "All users count is not equal to ready users count");
 		}
 
 		public void OpenProjectDetails()
@@ -318,7 +320,7 @@ namespace Product.Framework.Forms
 		public void AssertDiscoveredUserCount(string count)
 		{
 			Log.Info("Asserting user count is valid");
-			Assert.IsTrue(Store.AllUsersCount.Trim() == count.Trim(), "All users count is invalid");
+			Assert.IsTrue(store.AllUsersCount.Trim() == count.Trim(), "All users count is invalid");
 		}
 
 		#region [Settings popup]

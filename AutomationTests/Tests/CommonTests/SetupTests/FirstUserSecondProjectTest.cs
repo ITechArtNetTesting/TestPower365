@@ -16,55 +16,55 @@ namespace Product.Tests.CommonTests.SetupTests
 		[TestCategory("Setup")]
 		public void SetupFirstUserSecondProject()
 		{
-            LoginAndSelectRole(RunConfigurator.GetUserLogin("client1"),
-                                RunConfigurator.GetPassword("client1"),
-                                RunConfigurator.GetClient("client1"));
+            LoginAndSelectRole(configurator.GetUserLogin("client1"),
+                                configurator.GetPassword("client1"),
+                                configurator.GetClient("client1"));
           
-            AddMailOnlyProject(RunConfigurator.GetProjectName("client1", "project2"),
-                RunConfigurator.GetTenantValue("T3->T4", "source", "user"),
-		        RunConfigurator.GetTenantValue("T3->T4", "source", "password"),
-		        RunConfigurator.GetTenantValue("T3->T4", "target", "user"),
-		        RunConfigurator.GetTenantValue("T3->T4", "target", "password"),
-                RunConfigurator.GetFileName("client1", "project2", "file1"));
+            AddMailOnlyProject(configurator.GetProjectName("client1", "project2"),
+                configurator.GetTenantValue("T3->T4", "source", "user"),
+                configurator.GetTenantValue("T3->T4", "source", "password"),
+                configurator.GetTenantValue("T3->T4", "target", "user"),
+                configurator.GetTenantValue("T3->T4", "target", "password"),
+                configurator.GetFileName("client1", "project2", "file1"));
             User.AtProjectOverviewForm().OpenUsersList();
         }
 
 	    public void SetupTest()
 	    {
-            LoginAndSelectRole(RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user"),
-            RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password"),
-            RunConfigurator.GetValueByXpath("//metaname[text()='client1']/../name"));
+            LoginAndSelectRole(configurator.GetValueByXpath("//metaname[text()='client1']/..//user"),
+            configurator.GetValueByXpath("//metaname[text()='client1']/..//password"),
+            configurator.GetValueByXpath("//metaname[text()='client1']/../name"));
             User.AtTenantRestructuringForm().AddProjectClick();
             User.AtChooseYourProjectTypeForm().ChooseMailOnly();
             User.AtChooseYourProjectTypeForm().GoNext();
-            User.AtSetProjectNameForm().SetName(RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//name"));
+            User.AtSetProjectNameForm().SetName(configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//name"));
             User.AtSetProjectNameForm().GoNext();
             User.AtSetProjectDescriptionForm().SetDescription(StringRandomazer.MakeRandomString(20));
             User.AtSetProjectDescriptionForm().GoNext();
 
             User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
-            Office365TenantAuthorization(RunConfigurator.GetTenantValue("T3->T4", "source", "user"), RunConfigurator.GetTenantValue("T3->T4", "source", "password"));
+            Office365TenantAuthorization(configurator.GetTenantValue("T3->T4", "source", "user"), configurator.GetTenantValue("T3->T4", "source", "password"));
             
-            Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(Store.MainHandle);
+            Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(store.MainHandle);
             User.AtAddTenantsForm().WaitForTenantAdded(1);
 
             User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
-            Office365TenantAuthorization(RunConfigurator.GetTenantValue("T3->T4", "target", "user"), RunConfigurator.GetTenantValue("T3->T4", "target", "password"));
+            Office365TenantAuthorization(configurator.GetTenantValue("T3->T4", "target", "user"), configurator.GetTenantValue("T3->T4", "target", "password"));
 
-            Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(Store.MainHandle);
+            Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(store.MainHandle);
             User.AtAddTenantsForm().WaitForTenantAdded(2);
 
             User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
-            Office365TenantAuthorization(RunConfigurator.GetTenantValue("T1->T2", "target", "user"), RunConfigurator.GetTenantValue("T1->T2", "target", "password"));
+            Office365TenantAuthorization(configurator.GetTenantValue("T1->T2", "target", "user"), configurator.GetTenantValue("T1->T2", "target", "password"));
             
-            Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(Store.MainHandle);
+            Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(store.MainHandle);
             User.AtAddTenantsForm().WaitForTenantAdded(3);
 
             User.AtAddTenantsForm().GoNext();
             User.AtUploadFilesForm().DownloadSample();
-            RunConfigurator.CheckUserMatchFileIsDownloaded();
-            User.AtUploadFilesForm().SelectFile(RunConfigurator.GetFileName("client1", "project2", "file1"));
-            User.AtUploadFilesForm().SelectFile(RunConfigurator.GetFileName("client1", "project2", "file1"));
+            configurator.CheckUserMatchFileIsDownloaded();
+            User.AtUploadFilesForm().SelectFile(configurator.GetFileName("client1", "project2", "file1"));
+            User.AtUploadFilesForm().SelectFile(configurator.GetFileName("client1", "project2", "file1"));
             User.AtUploadFilesForm().WaitUntillFileUploaded();
             User.AtUploadFilesForm().GoNext();
             User.AtUploadedUsersForm().GoNext();
@@ -73,7 +73,7 @@ namespace Product.Tests.CommonTests.SetupTests
             User.AtEnablePublicFoldersForm().GoBack();
             User.AtUploadedUsersForm().GoBack();
             User.AtUploadFilesForm().GoBack();
-            User.AtAddTenantsForm().RemoveTenant(RunConfigurator.GetTenantValue("T1->T2", "target", "name"));
+            User.AtAddTenantsForm().RemoveTenant(configurator.GetTenantValue("T1->T2", "target", "name"));
             User.AtAddTenantsForm().GoNext();
             User.AtKeepUsersForm().SelectKeepExisting();
             User.AtKeepUsersForm().GoNext();

@@ -12,17 +12,23 @@ namespace Product.Framework
     /// </summary>
     public class RunConfigurator : BaseEntity
     {
-        private static readonly XmlDocument xmlDoc = new XmlDocument(); // Create an XML document object
-        public static string RunPath;
-        public static string DownloadPath;
-        public static string ResourcesPath;
+        Store store;
+        public RunConfigurator(Store store)
+        {
+            this.store = store;
+        }
+
+        private readonly XmlDocument xmlDoc = new XmlDocument(); // Create an XML document object
+        public string RunPath;
+        public string DownloadPath;
+        public string ResourcesPath;
         
         /// <summary>
         ///     Gets the value.
         /// </summary>
         /// <param name="tag">The tag.</param>
         /// <returns>String.</returns>
-        public static string GetValue(string tag)
+        public string GetValue(string tag)
 		{
            
            xmlDoc.Load(RunPath); // Load the XML document from the specified file
@@ -30,116 +36,116 @@ namespace Product.Framework
 			return browser[0].InnerText;
 		}
 
-		public static string GetValueByXpath(string path)
+		public string GetValueByXpath(string path)
 		{
 			xmlDoc.Load(RunPath);
 			return xmlDoc.SelectSingleNode(path).InnerText;
 		}
 
-		public static string GetTenantValue(string metaname, string tenant, string value)
+		public string GetTenantValue(string metaname, string tenant, string value)
 		{
 			xmlDoc.Load(RunPath);
 			string tenantName= xmlDoc.SelectSingleNode($"//tenantmigration[@metaname='{metaname}']").Attributes[$"{tenant}"].Value;
 			return xmlDoc.SelectSingleNode($"//tenant//name[text()='{tenantName}']/..//{value}").InnerText;
 		}
 
-        public static string GetUserLogin(string client)
+        public string GetUserLogin(string client)
         {
             xmlDoc.Load(RunPath);
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//user").InnerText; ;
         }
 
-        public static string GetPassword(string client)
+        public string GetPassword(string client)
         {
              return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//password").InnerText;
         }
 
-        public static string GetClient(string client)
+        public string GetClient(string client)
         {
             xmlDoc.Load(RunPath);
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/../name").InnerText;
         }
 
-        public static string GetRole(string client)
+        public string GetRole(string client)
         {
             xmlDoc.Load(RunPath);
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/../name").InnerText;
         }
 
-        public static string GetProjectName(string client, string project )
+        public string GetProjectName(string client, string project )
         {
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//name").InnerText;
         }
 
-        public static string GetFileName(string client, string project, string file)
+        public string GetFileName(string client, string project, string file)
         {
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{file}']/..//filename").InnerText;
         }
 
-        public static string GetADGroupName(string client, string project, string group)
+        public string GetADGroupName(string client, string project, string group)
         {
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{group}']/../name").InnerText;
         }
 
-        public static string GetMail(string client, string project, string group)
+        public string GetMail(string client, string project, string group)
         {
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{group}']/..//mail").InnerText;
         }
 
-        public static string GetGroupMember(string client, string project, string group, string member)
+        public string GetGroupMember(string client, string project, string group, string member)
         {
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{group}']/..//{member}").InnerText;
         }
 
-        public static string GetSourceMailbox(string client, string project, string entry)
+        public string GetSourceMailbox(string client, string project, string entry)
         {
             xmlDoc.Load(RunPath);
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{entry}']/..//source").InnerText;
         }
 
-        public static string GetTargetMailbox(string client, string project, string entry)
+        public string GetTargetMailbox(string client, string project, string entry)
         {
             xmlDoc.Load(RunPath);
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{entry}']/..//target").InnerText;
         }
 
-        public static string GetTargetSmtpMailbox(string client, string project, string entry)
+        public string GetTargetSmtpMailbox(string client, string project, string entry)
         {
             xmlDoc.Load(RunPath);
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{entry}']/..//targetsmtp").InnerText;
         }
 
-        public static string GetTargetX500Mailbox(string client, string project, string entry)
+        public string GetTargetX500Mailbox(string client, string project, string entry)
         {
             xmlDoc.Load(RunPath);
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{entry}']/..//targetx500").InnerText;
         }
 
-        public static string GetGroupFirstMember(string client, string project, string group)
+        public string GetGroupFirstMember(string client, string project, string group)
         {
             xmlDoc.Load(RunPath);
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{group}']/..//member1").InnerText;
         }
 
-        public static string GetGroupOwner(string client, string project, string group)
+        public string GetGroupOwner(string client, string project, string group)
         {
             xmlDoc.Load(RunPath);
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{group}']/..//owner").InnerText;
         }
 
-        public static string GetGroupMail(string client, string project, string group)
+        public string GetGroupMail(string client, string project, string group)
         {
             xmlDoc.Load(RunPath);
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{group}']/..//mail").InnerText;
         }
 
-        public static string GetSourceSmtpMailbox(string client, string project, string entry)
+        public string GetSourceSmtpMailbox(string client, string project, string entry)
         {
             xmlDoc.Load(RunPath);
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{entry}']/..//smtp").InnerText;
         }
 
-        public static string GetUpnMailbox(string client, string project, string entry)
+        public string GetUpnMailbox(string client, string project, string entry)
         {
             xmlDoc.Load(RunPath);
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{entry}']/..//upn").InnerText;
@@ -152,7 +158,7 @@ namespace Product.Framework
         /// </summary>
         /// <param name="tag">The tag.</param>
         /// <param name="value">The value.</param>
-        public static void SetValue(string tag, string value)
+        public void SetValue(string tag, string value)
 		{
 			xmlDoc.Load(RunPath); // Load the XML document from the specified file
 			var element = xmlDoc.GetElementsByTagName(tag);
@@ -160,12 +166,12 @@ namespace Product.Framework
 			xmlDoc.Save(RunPath);
 		}
 
-		public static bool IsCmtAccount(string login)
+		public bool IsCmtAccount(string login)
 		{
 			return login.EndsWith("cmtsandbox.com");
 		}
 
-		public static void CheckUserMigrationFileIsDownloaded()
+		public void CheckUserMigrationFileIsDownloaded()
 		{
 			for (var i = 0; i < 30; i++)
 			{
@@ -179,7 +185,7 @@ namespace Product.Framework
 			File.Delete(DownloadPath+"user-migration-template.csv");
 		}
 
-		public static void CheckLogsFileIsDownloaded()
+		public void CheckLogsFileIsDownloaded()
 		{
 			for (var i = 0; i < 30; i++)
 			{
@@ -193,7 +199,7 @@ namespace Product.Framework
 			ClearDownloads();
 		}
 
-	    public static void CheckRollbackLogsFileIsDownloaded()
+	    public void CheckRollbackLogsFileIsDownloaded()
 	    {
 	        for (var i = 0; i < 30; i++)
 	        {
@@ -207,7 +213,7 @@ namespace Product.Framework
 	        ClearDownloads();
 	    }
 
-        public static void CheckDiscoveryFileIsDownloaded()
+        public void CheckDiscoveryFileIsDownloaded()
 		{
 			for (var i = 0; i < 30; i++)
 			{
@@ -218,10 +224,10 @@ namespace Product.Framework
 				Thread.Sleep(1000);
 			}
 			Assert.IsTrue(Directory.EnumerateFiles(DownloadPath, "Tenant*.csv").Any(), "File is not downloaded");
-			Store.TenantLog = Directory.EnumerateFiles(DownloadPath, "Tenant*.csv").First();
+            store.TenantLog = Directory.EnumerateFiles(DownloadPath, "Tenant*.csv").First();
 		}
 
-		public static bool AssertLineExistsInCsv(string file, string line)
+		public bool AssertLineExistsInCsv(string file, string line)
 		{
 			bool result = false;
 			var reader = new StreamReader(File.OpenRead(file));
@@ -238,7 +244,7 @@ namespace Product.Framework
 			return result;
 		}
 
-		public static bool AssertLineExistsInCsv(string file, string line, int count)
+		public bool AssertLineExistsInCsv(string file, string line, int count)
 		{
 			var reader = new StreamReader(File.OpenRead(file));
 			int counter = 0;
@@ -254,7 +260,7 @@ namespace Product.Framework
 			return counter >= count;
 		}
 
-		public static void CheckUserMatchFileIsDownloaded()
+		public void CheckUserMatchFileIsDownloaded()
 		{
 			for (var i = 0; i < 30; i++)
 			{
@@ -268,7 +274,7 @@ namespace Product.Framework
 			File.Delete(DownloadPath+"user-match-template.csv");
 		}
 
-		public static void CheckUsersExportFileIsDownloaded()
+		public void CheckUsersExportFileIsDownloaded()
 		{
 			for (var i = 0; i < 30; i++)
 			{
@@ -282,7 +288,7 @@ namespace Product.Framework
 			File.Delete(DownloadPath+"users.csv");
 		}
 
-		public static void ClearDownloads()
+		public void ClearDownloads()
 		{
 			try
 			{
@@ -299,12 +305,12 @@ namespace Product.Framework
 		
 		}
 
-		public static int GetCSVlinesCount(string path)
+		public int GetCSVlinesCount(string path)
 		{
 			return File.ReadAllLines(path).Length-1;
 		}
 
-		public static void CheckProvisioningLogsFileIsDownloadedAndNotEmpty()
+		public void CheckProvisioningLogsFileIsDownloadedAndNotEmpty()
 		{
 			for (var i = 0; i < 30; i++)
 			{
@@ -320,7 +326,7 @@ namespace Product.Framework
 			file.Delete();
 		}
 
-		public static void CreateFlagFolder(string path)
+		public void CreateFlagFolder(string path)
 		{
 			if (Directory.Exists(path))
 			{
@@ -339,13 +345,13 @@ namespace Product.Framework
 			}
 		}
 
-		public static void CreateEmptyFile(string path)
+		public void CreateEmptyFile(string path)
 		{
 			File.Create(path).Dispose();
 		}
 
 
-        public static string GetConnectionString()
+        public string GetConnectionString()
         {
             xmlDoc.Load(RunPath);
             String initialCatalog = xmlDoc.SelectSingleNode("//database//initialCatalog").InnerText;
@@ -355,7 +361,7 @@ namespace Product.Framework
             
         }
 
-        public static string GetConnectionStringDBClients()
+        public string GetConnectionStringDBClients()
         {
             xmlDoc.Load(RunPath);
             String initialCatalog = xmlDoc.SelectSingleNode("//database//initialClientsCatalog").InnerText;

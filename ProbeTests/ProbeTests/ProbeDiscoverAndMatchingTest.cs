@@ -32,10 +32,10 @@ namespace ProbeTests.ProbeTests
 
         public ProbeDiscoverAndMatchingTest() : base(ProbeType.Discovery)
         {
-            clientName = RunConfigurator.GetValueByXpath("//DiscoveryProbe/@client");
-            projectName = RunConfigurator.GetValueByXpath("//DiscoveryProbe/@project");
-            adGroupName = RunConfigurator.GetValueByXpath("//DiscoveryProbe/@adgroup");
-            tenants = RunConfigurator.GetValueByXpath("//DiscoveryProbe/@tenants");
+            clientName = configurator.GetValueByXpath("//DiscoveryProbe/@client");
+            projectName = configurator.GetValueByXpath("//DiscoveryProbe/@project");
+            adGroupName = configurator.GetValueByXpath("//DiscoveryProbe/@adgroup");
+            tenants = configurator.GetValueByXpath("//DiscoveryProbe/@tenants");
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -44,39 +44,39 @@ namespace ProbeTests.ProbeTests
         {
             try
             {
-                var sourceLocalLogin = RunConfigurator.GetTenantValue(tenants, "source", "aduser");
-                var sourceLocalPassword = RunConfigurator.GetTenantValue(tenants, "source", "adpassword");
-                var sourceLocalExchangePowerShellUri = RunConfigurator.GetTenantValue(tenants, "source", "uri");
+                var sourceLocalLogin = configurator.GetTenantValue(tenants, "source", "aduser");
+                var sourceLocalPassword = configurator.GetTenantValue(tenants, "source", "adpassword");
+                var sourceLocalExchangePowerShellUri = configurator.GetTenantValue(tenants, "source", "uri");
 
                 var sourceAzureAdSyncLogin = sourceLocalLogin;
                 var sourceAzureAdSyncPassword = sourceLocalPassword;
-                var sourceAzureAdSyncServer = RunConfigurator.GetTenantValue(tenants, "source", "azureAdSyncServer");
+                var sourceAzureAdSyncServer = configurator.GetTenantValue(tenants, "source", "azureAdSyncServer");
 
-                var sourceCloudLogin = RunConfigurator.GetTenantValue(tenants, "source", "user");
-                var sourceCloudPassword = RunConfigurator.GetTenantValue(tenants, "source", "password");
+                var sourceCloudLogin = configurator.GetTenantValue(tenants, "source", "user");
+                var sourceCloudPassword = configurator.GetTenantValue(tenants, "source", "password");
                 
-                var targetLocalLogin = RunConfigurator.GetTenantValue(tenants, "target", "aduser");
-                var targetLocalPassword = RunConfigurator.GetTenantValue(tenants, "target", "adpassword");
-                var targetLocalExchangePowerShellUri = RunConfigurator.GetTenantValue(tenants, "target", "uri");
+                var targetLocalLogin = configurator.GetTenantValue(tenants, "target", "aduser");
+                var targetLocalPassword = configurator.GetTenantValue(tenants, "target", "adpassword");
+                var targetLocalExchangePowerShellUri = configurator.GetTenantValue(tenants, "target", "uri");
 
                 var targetAzureAdSyncLogin = targetLocalLogin;
                 var targetAzureAdSyncPassword = targetLocalPassword;
-                var targetAzureAdSyncServer = RunConfigurator.GetTenantValue(tenants, "target", "azureAdSyncServer");
+                var targetAzureAdSyncServer = configurator.GetTenantValue(tenants, "target", "azureAdSyncServer");
 
-                var targetCloudLogin = RunConfigurator.GetTenantValue(tenants, "target", "user");
-                var targetCloudPassword = RunConfigurator.GetTenantValue(tenants, "target", "password");
+                var targetCloudLogin = configurator.GetTenantValue(tenants, "target", "user");
+                var targetCloudPassword = configurator.GetTenantValue(tenants, "target", "password");
                 
-                var testMailboxNamePrefix = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//probeprefix");
-                var testMailboxDestinationOU = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//dirsync//ou");
+                var testMailboxNamePrefix = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//probeprefix");
+                var testMailboxDestinationOU = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//dirsync//ou");
 
-                var testMailboxSourceUpnSuffix = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//source");
-                var testMailboxTargetUpnSuffix = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//target");
-                var testMailboxPassword = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//dirsync//password");
+                var testMailboxSourceUpnSuffix = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//source");
+                var testMailboxTargetUpnSuffix = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//target");
+                var testMailboxPassword = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//dirsync//password");
 
-                var p365DiscoveryGroup = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='{adGroupName}']/..//name");
+                var p365DiscoveryGroup = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='{adGroupName}']/..//name");
 
-                var msolUri = RunConfigurator.GetValue("o365url");
-                var msolConnectParams = RunConfigurator.GetValue("msolconnectargs");
+                var msolUri = configurator.GetValue("o365url");
+                var msolConnectParams = configurator.GetValue("msolconnectargs");
 
                 using (var process = new PsLauncher().LaunchPowerShellInstance("NewProbeUser.ps1",
                     $" -sourceLocalLogin {sourceLocalLogin}" +
@@ -109,13 +109,13 @@ namespace ProbeTests.ProbeTests
                     {
                         var line = process.StandardOutput.ReadLine();
                         Log.Info(line);
-                        if (line.Contains("UserPrincipalName") && String.IsNullOrWhiteSpace(Store.ProbeSourceMailbox))
+                        if (line.Contains("UserPrincipalName") && String.IsNullOrWhiteSpace(store.ProbeSourceMailbox))
                         {
-                            Store.ProbeSourceMailbox = line.Substring(line.LastIndexOf(':') + 1, line.LastIndexOf('@') - line.LastIndexOf(':') - 1).Trim();
+                            store.ProbeSourceMailbox = line.Substring(line.LastIndexOf(':') + 1, line.LastIndexOf('@') - line.LastIndexOf(':') - 1).Trim();
                         }
-                        else if (line.Contains("UserPrincipalName") && String.IsNullOrWhiteSpace(Store.ProbeTargetMailbox))
+                        else if (line.Contains("UserPrincipalName") && String.IsNullOrWhiteSpace(store.ProbeTargetMailbox))
                         {
-                            Store.ProbeTargetMailbox = line.Substring(line.LastIndexOf(':') + 1, line.LastIndexOf('@') - line.LastIndexOf(':') - 1).Trim();
+                            store.ProbeTargetMailbox = line.Substring(line.LastIndexOf(':') + 1, line.LastIndexOf('@') - line.LastIndexOf(':') - 1).Trim();
                         }
                     }
 
@@ -124,7 +124,7 @@ namespace ProbeTests.ProbeTests
                     if (process.ExitCode != 0)
                         throw new Exception(string.Format("PowerShell script returned exit code: {0}", process.ExitCode));
 
-                    if (string.IsNullOrEmpty(Store.ProbeSourceMailbox) || string.IsNullOrEmpty(Store.ProbeTargetMailbox))
+                    if (string.IsNullOrEmpty(store.ProbeSourceMailbox) || string.IsNullOrEmpty(store.ProbeTargetMailbox))
                     {
                         throw new Exception("Could not create source or target user");
                     }
@@ -137,8 +137,8 @@ namespace ProbeTests.ProbeTests
             }
             try
             {
-                LogIn(RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//user"),
-                RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//password"));
+                LogIn(configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//user"),
+                configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//password"));
             }
             catch (Exception e)
             {
@@ -147,7 +147,7 @@ namespace ProbeTests.ProbeTests
             }
             try
             {
-                SelectProject(RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//name"));
+                SelectProject(configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//name"));
             }
             catch (Exception e)
             {
@@ -167,8 +167,8 @@ namespace ProbeTests.ProbeTests
             try
             {
                 User.AtTenantsConfigurationForm().OpenDiscoveryTab();
-                User.AtTenantsConfigurationForm().RunDiscovery(RunConfigurator.GetTenantValue(tenants, "source", "name"));
-                User.AtTenantsConfigurationForm().RunDiscovery(RunConfigurator.GetTenantValue(tenants, "target", "name"));
+                User.AtTenantsConfigurationForm().RunDiscovery(configurator.GetTenantValue(tenants, "source", "name"));
+                User.AtTenantsConfigurationForm().RunDiscovery(configurator.GetTenantValue(tenants, "target", "name"));
             }
             catch (Exception e)
             {
@@ -178,8 +178,8 @@ namespace ProbeTests.ProbeTests
             try
             {
                 User.AtTenantsConfigurationForm().GoToDashboard();
-                User.AtProjectOverviewForm().WaitTillDiscoveryIsComplete(30, RunConfigurator.GetTenantValue(tenants, "source", "name"));
-                User.AtProjectOverviewForm().WaitTillDiscoveryIsComplete(30, RunConfigurator.GetTenantValue(tenants, "target", "name"));
+                User.AtProjectOverviewForm().WaitTillDiscoveryIsComplete(30, configurator.GetTenantValue(tenants, "source", "name"));
+                User.AtProjectOverviewForm().WaitTillDiscoveryIsComplete(30, configurator.GetTenantValue(tenants, "target", "name"));
             }
             catch (Exception e)
             {
@@ -189,9 +189,9 @@ namespace ProbeTests.ProbeTests
             try
             {
                 User.AtProjectOverviewForm().OpenUsersList();
-                User.AtUsersForm().PerformSearch(Store.ProbeSourceMailbox);
+                User.AtUsersForm().PerformSearch(store.ProbeSourceMailbox);
                 int counter = 0;
-                var sourceUpn = string.Format("{0}@{1}", Store.ProbeSourceMailbox, RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//metaname[text()='entry1']/..//source"));
+                var sourceUpn = string.Format("{0}@{1}", store.ProbeSourceMailbox, configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//metaname[text()='entry1']/..//source"));
                 while (!User.AtUsersForm().IsLineExist(sourceUpn) && counter<35)
                 {
                     Log.Info("Source mailbox is not displayed");
@@ -209,7 +209,7 @@ namespace ProbeTests.ProbeTests
             try
             {
                 int counter = 0;
-                var targetUpn = string.Format("{0}@{1}", Store.ProbeTargetMailbox, RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//metaname[text()='entry1']/..//target"));
+                var targetUpn = string.Format("{0}@{1}", store.ProbeTargetMailbox, configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//metaname[text()='entry1']/..//target"));
                 while (!User.AtUsersForm().IsLineExist(targetUpn) && counter<35)
                 {
                     Log.Info("Target mailbox is not displayed");
@@ -253,7 +253,7 @@ namespace ProbeTests.ProbeTests
                     }
 	                if (sourceUser == null)
                     {
-                        foreach (List<User> probeUsers in graphSource.FindUsersStartsWith("DisplayName", Store.ProbeSourceMailbox, token))
+                        foreach (List<User> probeUsers in graphSource.FindUsersStartsWith("DisplayName", store.ProbeSourceMailbox, token))
                         {
                             sourceUser = probeUsers.FirstOrDefault();
                             break;
@@ -284,7 +284,7 @@ namespace ProbeTests.ProbeTests
 
                     if (!foundTarget)
                     {
-                        foreach (List<User> probeUsers in graphTarget.FindUsersStartsWith("DisplayName", Store.ProbeTargetMailbox, token))
+                        foreach (List<User> probeUsers in graphTarget.FindUsersStartsWith("DisplayName", store.ProbeTargetMailbox, token))
                         {
                             foundTarget = true;
                             break;

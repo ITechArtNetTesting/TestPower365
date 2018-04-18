@@ -14,26 +14,26 @@ namespace ProbeTests.ProbeTests
 
         public CDSC2CTest() : base(ProbeType.CDSC2C)
         {
-            clientName = RunConfigurator.GetValueByXpath("//CDSC2C/@client");
-            tenants = RunConfigurator.GetValueByXpath("//CDSC2C/@tenants");
-            projectName = RunConfigurator.GetValueByXpath("//CDSC2C/@project");
-            msolUri = RunConfigurator.GetValueByXpath("//CDSC2C/@msolUri");
+            clientName = configurator.GetValueByXpath("//CDSC2C/@client");
+            tenants = configurator.GetValueByXpath("//CDSC2C/@tenants");
+            projectName = configurator.GetValueByXpath("//CDSC2C/@project");
+            msolUri = configurator.GetValueByXpath("//CDSC2C/@msolUri");
         }
 
         public override void Run()
         {
             Log.Info("=-=-=-=-=-=-=-=-=");
-            var sourceCloudLogin = RunConfigurator.GetTenantValue(tenants, "source", "user");
-            var sourceCloudPassword = RunConfigurator.GetTenantValue(tenants, "source", "password");
-            var sourceObjectUPNSuffix = RunConfigurator.GetTenantValue(tenants, "source", "domain");
+            var sourceCloudLogin = configurator.GetTenantValue(tenants, "source", "user");
+            var sourceCloudPassword = configurator.GetTenantValue(tenants, "source", "password");
+            var sourceObjectUPNSuffix = configurator.GetTenantValue(tenants, "source", "domain");
 
-            var targetCloudLogin = RunConfigurator.GetTenantValue(tenants, "target", "user");
-            var targetCloudPassword = RunConfigurator.GetTenantValue(tenants, "target", "password");
-            var targetObjectUPNSuffix = RunConfigurator.GetTenantValue(tenants, "target", "domain");
+            var targetCloudLogin = configurator.GetTenantValue(tenants, "target", "user");
+            var targetCloudPassword = configurator.GetTenantValue(tenants, "target", "password");
+            var targetObjectUPNSuffix = configurator.GetTenantValue(tenants, "target", "domain");
 
-            var testObjectNamePrefix = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//objectprefix");
-            var testDiscoveryGroup = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//discoverygroup");
-            var testObjectPassword = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//password");
+            var testObjectNamePrefix = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//objectprefix");
+            var testDiscoveryGroup = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//discoverygroup");
+            var testObjectPassword = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//password");
 
             try
             {

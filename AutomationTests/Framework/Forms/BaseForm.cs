@@ -12,10 +12,11 @@ namespace Product.Framework.Forms
 	/// </summary>
 	/// <seealso cref="BaseEntity" />
 	public class BaseForm : BaseEntity
-	{        
-       
+	{
+        Store store = new Store();
+        RunConfigurator configurator;
         //NOTE: CHECK 1.10 version
-		private readonly Button allProjectsButton ;
+        private readonly Button allProjectsButton ;
 
 		private readonly Button favoritesButton ;
 
@@ -44,6 +45,7 @@ namespace Product.Framework.Forms
 		/// <param name="name">The name.</param>
 		protected BaseForm(By locator, string name, Guid driverId)
 		{
+            configurator = new RunConfigurator(store);
             this.driverId = driverId;
 			this.locator = locator;
 			this.name = name;
@@ -74,7 +76,7 @@ namespace Product.Framework.Forms
 	    public void GoToClientRegistration()
 	    {
             Log.Info("Navigating to client registration");
-            Driver.GetDriver(driverId).Navigate().GoToUrl(RunConfigurator.GetValue("baseurl")+ "Account/Register");
+            Driver.GetDriver(driverId).Navigate().GoToUrl(configurator.GetValue("baseurl")+ "Account/Register");
 	    }
 
 	    /// <summary>
@@ -119,7 +121,7 @@ namespace Product.Framework.Forms
 		/// <returns>System.String.</returns>
 		public void GoToMainPage()
 		{
-			Driver.GetDriver(driverId).Navigate().GoToUrl(RunConfigurator.GetValue("baseurl"));
+			Driver.GetDriver(driverId).Navigate().GoToUrl(configurator.GetValue("baseurl"));
 		}
 
 		/// <summary>
@@ -142,7 +144,7 @@ namespace Product.Framework.Forms
 
 	    public void SwitchToMainWindow()
 		{
-			Driver.GetDriver(driverId).SwitchTo().Window(Store.MainHandle);
+			Driver.GetDriver(driverId).SwitchTo().Window(store.MainHandle);
 		}
 
 		public void OpenMainMenu()
@@ -352,7 +354,7 @@ namespace Product.Framework.Forms
 		{
 			Log.Info("Setting link name to: " + name);
 			favoriteNameTextBox.ClearSetText(name);
-			Store.LinkName = name;
+            store.LinkName = name;
 		}
 
 		public void SaveLinkChanges()
@@ -432,7 +434,7 @@ namespace Product.Framework.Forms
 						link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")));
 					link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")).Clear();
 					link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")).SendKeys(url);
-					Store.LinkUrl = url;
+                    store.LinkUrl = url;
 				}
 			}
 		}
@@ -456,7 +458,7 @@ namespace Product.Framework.Forms
 						link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")));
 					link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).Clear();
 					link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).SendKeys(newName);
-					Store.LinkName = newName;
+                    store.LinkName = newName;
 				}
 			}
 		}

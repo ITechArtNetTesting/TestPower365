@@ -17,11 +17,11 @@ namespace Product.Tests.MailWithDiscoveryTests.MigrationTests
 		[TestCategory("MailWithDiscovery")]
 		public void Automation_MD_DiscoveryProcessTest()
 		{
-		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user");
-		    string password = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//password");
-		    string client = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name");
-		    string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//name");
-		    string userAmount = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='adgroup1']/../amount");
+		    string login = configurator.GetValueByXpath("//metaname[text()='client2']/..//user");
+		    string password = configurator.GetValueByXpath("//metaname[text()='client2']/..//password");
+		    string client = configurator.GetValueByXpath("//metaname[text()='client2']/../name");
+		    string projectName = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//name");
+		    string userAmount = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='adgroup1']/../amount");
 
 		    try
 		    {

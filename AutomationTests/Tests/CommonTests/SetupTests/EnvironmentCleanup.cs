@@ -15,33 +15,33 @@ namespace Product.Tests.CommonTests.SetupTests
         [TestCategory("Setup")]
         public void CleanupEnvironment()
         {
-            var clientName = RunConfigurator.GetClient("client2");
-            var projectName = RunConfigurator.GetProjectName("client2", "project2");
+            var clientName = configurator.GetClient("client2");
+            var projectName = configurator.GetProjectName("client2", "project2");
             var tenants = "T5->T6";
 
-            var sourceLocalLogin = RunConfigurator.GetTenantValue(tenants, "source", "aduser");
-            var sourceLocalPassword = RunConfigurator.GetTenantValue(tenants, "source", "adpassword");
-            var sourceLocalExchangePowerShellUri = RunConfigurator.GetTenantValue(tenants, "source", "uri");
+            var sourceLocalLogin = configurator.GetTenantValue(tenants, "source", "aduser");
+            var sourceLocalPassword = configurator.GetTenantValue(tenants, "source", "adpassword");
+            var sourceLocalExchangePowerShellUri = configurator.GetTenantValue(tenants, "source", "uri");
 
             var sourceAzureAdSyncLogin = sourceLocalLogin;
             var sourceAzureAdSyncPassword = sourceLocalPassword;
-            var sourceAzureAdSyncServer = RunConfigurator.GetTenantValue(tenants, "source", "azureAdSyncServer");
+            var sourceAzureAdSyncServer = configurator.GetTenantValue(tenants, "source", "azureAdSyncServer");
 
-            var targetLocalLogin = RunConfigurator.GetTenantValue(tenants, "target", "aduser");
-            var targetLocalPassword = RunConfigurator.GetTenantValue(tenants, "target", "adpassword");
-            var targetLocalExchangePowerShellUri = RunConfigurator.GetTenantValue(tenants, "target", "uri");
+            var targetLocalLogin = configurator.GetTenantValue(tenants, "target", "aduser");
+            var targetLocalPassword = configurator.GetTenantValue(tenants, "target", "adpassword");
+            var targetLocalExchangePowerShellUri = configurator.GetTenantValue(tenants, "target", "uri");
 
             var targetAzureAdSyncLogin = targetLocalLogin;
             var targetAzureAdSyncPassword = targetLocalPassword;
-            var targetAzureAdSyncServer = RunConfigurator.GetTenantValue(tenants, "target", "azureAdSyncServer");
+            var targetAzureAdSyncServer = configurator.GetTenantValue(tenants, "target", "azureAdSyncServer");
 
 
-            var testGroupName = RunConfigurator.GetValueByXpath($"//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='groupreset']/..//name");
-            var testGroupOwner = RunConfigurator.GetValueByXpath($"//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='groupreset']/..//owner");
-            var testGroupMember = RunConfigurator.GetValueByXpath($"//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='groupreset']/..//member1");
+            var testGroupName = configurator.GetValueByXpath($"//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='groupreset']/..//name");
+            var testGroupOwner = configurator.GetValueByXpath($"//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='groupreset']/..//owner");
+            var testGroupMember = configurator.GetValueByXpath($"//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='groupreset']/..//member1");
 
-            var testDistributionGroupPrefix = RunConfigurator.GetValueByXpath($"//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='groupreset']/..//prefix");
-            var testMailboxNamePrefixArray = RunConfigurator.GetValueByXpath($"//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='mailboxreset']/..//prefixArray");
+            var testDistributionGroupPrefix = configurator.GetValueByXpath($"//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='groupreset']/..//prefix");
+            var testMailboxNamePrefixArray = configurator.GetValueByXpath($"//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='mailboxreset']/..//prefixArray");
 
             var syncDelaySec = Environment.GetEnvironmentVariable("AzureADSyncDelaySec") ?? "1";
 
@@ -100,7 +100,7 @@ namespace Product.Tests.CommonTests.SetupTests
         public override void SetUp()
         {
             RunOnce();
-            RunConfigurator.RunPath = "resources/run.xml";
+            configurator.RunPath = "resources/run.xml";
         }
     }
 

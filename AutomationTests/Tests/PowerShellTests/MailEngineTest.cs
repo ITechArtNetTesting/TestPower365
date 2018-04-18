@@ -90,27 +90,27 @@ namespace Product.Tests.PowerShellTests
             _powerShell = PowerShell.Create();
             _powerShell.Runspace = _runspace;
 
-            _client = RunConfigurator.GetValueByXpath($"//metaname[text()='client2']/..//name");
-            _username = RunConfigurator.GetValueByXpath($"//metaname[text()='client2']/..//user");
-            _password = RunConfigurator.GetValueByXpath($"//metaname[text()='client2']/..//password");
-            _project = RunConfigurator.GetValueByXpath($"//metaname[text()='client2']/..//metaname[text()='project1']/..//name");
+            _client = configurator.GetValueByXpath($"//metaname[text()='client2']/..//name");
+            _username = configurator.GetValueByXpath($"//metaname[text()='client2']/..//user");
+            _password = configurator.GetValueByXpath($"//metaname[text()='client2']/..//password");
+            _project = configurator.GetValueByXpath($"//metaname[text()='client2']/..//metaname[text()='project1']/..//name");
 
             var tenants = "T1->T2";
 
-            _sourceAdminUser = RunConfigurator.GetTenantValue(tenants, "source", "psuser");
-            _sourceAdminPassword = RunConfigurator.GetTenantValue(tenants, "source", "pspassword");
+            _sourceAdminUser = configurator.GetTenantValue(tenants, "source", "psuser");
+            _sourceAdminPassword = configurator.GetTenantValue(tenants, "source", "pspassword");
 
-            _targetAdminUser = RunConfigurator.GetTenantValue(tenants, "target", "psuser");
-            _targetAdminPassword = RunConfigurator.GetTenantValue(tenants, "target", "pspassword");
+            _targetAdminUser = configurator.GetTenantValue(tenants, "target", "psuser");
+            _targetAdminPassword = configurator.GetTenantValue(tenants, "target", "pspassword");
             
-            _sourceMailbox = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entry3']/..//source");
-            _targetMailbox = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entry3']/..//target");
+            _sourceMailbox = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entry3']/..//source");
+            _targetMailbox = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entry3']/..//target");
 
-            _sourceMailboxExtra1 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps1']/..//source");
-            _targetMailboxExtra1 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps1']/..//target");
+            _sourceMailboxExtra1 = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps1']/..//source");
+            _targetMailboxExtra1 = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps1']/..//target");
 
-            _sourceMailboxExtra2 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps3']/..//source");
-            _targetMailboxExtra2 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps3']/..//target");
+            _sourceMailboxExtra2 = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps3']/..//source");
+            _targetMailboxExtra2 = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps3']/..//target");
             
             _url = "https://outlook.office365.com/EWS/Exchange.asmx";
 

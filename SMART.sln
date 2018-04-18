@@ -1,14 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomationTests", "AutomationTests\AutomationTests.csproj", "{F38B1EE7-460B-472A-B0A5-D283AB749376}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0D7F215F-49B7-4CE8-91D9-C2F3EEA87202}"
-	ProjectSection(SolutionItems) = preProject
-		Settings.testsettings = Settings.testsettings
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbeTests", "ProbeTests\ProbeTests.csproj", "{45CF71DE-AE8B-401B-BE37-A39705C5517A}"
 EndProject

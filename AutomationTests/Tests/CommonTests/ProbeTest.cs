@@ -18,8 +18,8 @@ namespace Product.Tests.CommonTests
 		public ProbeTest(string probeType)
 		{
 			RunOnce();
-			RunConfigurator.RunPath = "resources/probeRun.xml";
-			_connectionString = $"Server={RunConfigurator.GetValueByXpath("//sql//server")};Database={RunConfigurator.GetValueByXpath("//sql//db")};User Id={RunConfigurator.GetValueByXpath("//sql//user")};Password={RunConfigurator.GetValueByXpath("//sql//password")};";
+            configurator.RunPath = "resources/probeRun.xml";
+			_connectionString = $"Server={configurator.GetValueByXpath("//sql//server")};Database={configurator.GetValueByXpath("//sql//db")};User Id={configurator.GetValueByXpath("//sql//user")};Password={configurator.GetValueByXpath("//sql//password")};";
 			_probeType = probeType;
 			InitialStoring(_probeType);
 			CleanUp();

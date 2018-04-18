@@ -13,17 +13,17 @@ namespace ProbeTests.ProbeTests
 
         public ProbeMigrationTest() : base(ProbeType.Migration)
         {
-            clientName = RunConfigurator.GetValueByXpath("//MigrationProbe/@client");
-            projectName = RunConfigurator.GetValueByXpath("//MigrationProbe/@project");
+            clientName = configurator.GetValueByXpath("//MigrationProbe/@client");
+            projectName = configurator.GetValueByXpath("//MigrationProbe/@project");
         }
 
         public override void Run()
         {
-            var username = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//user");
-            var password = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//password");
-            var project = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//name");
+            var username = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//user");
+            var password = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//password");
+            var project = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//name");
 
-            var syncUsername = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//source");
+            var syncUsername = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//source");
 
             try
             {
@@ -70,7 +70,7 @@ namespace ProbeTests.ProbeTests
                 User.AtUsersForm().SortStartedJobs();
                 User.AtUsersForm().WaitForJobSortedByTime();
                 User.AtUsersForm().DownloadLogs();
-                RunConfigurator.CheckLogsFileIsDownloaded();
+                configurator.CheckLogsFileIsDownloaded();
             }
             catch (Exception e)
             {

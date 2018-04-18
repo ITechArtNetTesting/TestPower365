@@ -10,7 +10,9 @@ namespace Product.Framework.Forms
 {
 	public class ProjectDetailsForm : BaseForm
 	{
-		private static readonly By TitleLocator =
+        RunConfigurator configurator;
+
+        private static readonly By TitleLocator =
 			By.XPath("//*[@id='breadcrumbsContainer']//strong[contains(text(), 'Setup')]");
 
 		private readonly TextBox activeDirectoryTextBox ;
@@ -110,10 +112,13 @@ namespace Product.Framework.Forms
 		private readonly Label wereUploadedLabel ;
 
 		private readonly Label whichDomainLabel ;
-        
 
-        public ProjectDetailsForm(Guid driverId) : base(TitleLocator, "Project details form",driverId)
+        Store store;
+
+        public ProjectDetailsForm(Guid driverId,RunConfigurator configurator,Store store) : base(TitleLocator, "Project details form",driverId)
 		{
+            this.store = store;
+            this.configurator = configurator;
             this.driverId = driverId;
             activeDirectoryTextBox =new TextBox(By.XPath("//div[@aria-expanded='true']//input[contains(@class, 'k-input')]"), "Active directory textvox",driverId);
             addGroupButton = new Button(By.Id("addGroupsBtn"), "Add group button",driverId);
@@ -170,7 +175,7 @@ namespace Product.Framework.Forms
 		{
 			Log.Info($"Setting {name} project name");
 			projectNameTextBox.ClearSetText(name);
-			Store.ProjectName = name;
+			store.ProjectName = name;
 		}
 
 		public void ActivateNextButton()
@@ -336,7 +341,7 @@ namespace Product.Framework.Forms
 		{
 			Log.Info("Switching to new window");
             //Store.MainHandle = Browser.GetDriver().CurrentWindowHandle;
-            Store.MainHandle = Driver.GetDriver(driverId).CurrentWindowHandle;
+            store.MainHandle = Driver.GetDriver(driverId).CurrentWindowHandle;
             //var finder = new PopupWindowFinder(Browser.GetDriver());
             var finder = new PopupWindowFinder(Driver.GetDriver(driverId));
             addTenantButton.WaitForElementPresent();
@@ -415,7 +420,7 @@ namespace Product.Framework.Forms
 				Log.Info("Modal dialog is not ready");
 				uploadFilesButton.Click();
 			}
-			chooseFilesInput.GetElement().SendKeys(Path.GetFullPath(RunConfigurator.ResourcesPath + fileName));
+			chooseFilesInput.GetElement().SendKeys(Path.GetFullPath(configurator.ResourcesPath + fileName));
 		}
 
 		public void WaitTillFileIsUploaded()
@@ -478,19 +483,19 @@ namespace Product.Framework.Forms
 
 		public void AddTwoTenants()
 		{
-			var tenantSteps = new AddTenantsSteps(driverId);
+			var tenantSteps = new AddTenantsSteps(driverId,configurator,store);
 			tenantSteps.PerformTwoTenantsAdding();
 		}
 
 		public void AddTenant(string tenant, string password)
 		{
-			var tenantSteps = new AddTenantsSteps(driverId);
+			var tenantSteps = new AddTenantsSteps(driverId,configurator,store);
 			tenantSteps.PerformOneTenantAdding(tenant, password);
 		}
 
 		public void AddTwoTenants(string sourceTenant, string sourcePassword, string targetTenant, string targetPassword)
 		{
-			var tenantSteps = new AddTenantsSteps(driverId);
+			var tenantSteps = new AddTenantsSteps(driverId,configurator,store);
 			tenantSteps.PerformTwoTenantsAdding(sourceTenant, sourcePassword, targetTenant, targetPassword);
 		}
 

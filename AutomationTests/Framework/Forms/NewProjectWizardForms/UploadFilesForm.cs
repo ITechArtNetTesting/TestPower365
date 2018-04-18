@@ -12,9 +12,11 @@ namespace Product.Framework.Forms.NewProjectWizardForms
 		private readonly Button downloadSampleButton ;
 		private readonly Button selectFileInputButton ;
 		private readonly Label uploadedFileLabel ;
+        RunConfigurator configurator;
 
-		public UploadFilesForm(Guid driverId) : base(TitleLocator, "Upload your files form",driverId)
+        public UploadFilesForm(Guid driverId,RunConfigurator configurator) : base(TitleLocator, "Upload your files form",driverId)
 		{
+            this.configurator = configurator;
             this.driverId = driverId;
             downloadSampleButton =new Button(By.XPath("//a[contains(@href, 'DownloadUserMatchTemplate')]"), "Download sample button",driverId);
             selectFileInputButton = new Button(By.XPath("//input[@type='file']"), "Select file input",driverId);
@@ -30,7 +32,7 @@ namespace Product.Framework.Forms.NewProjectWizardForms
 		public void SelectFile(string fileName)
 		{
 			Log.Info("Selecting file");
-			selectFileInputButton.GetElement().SendKeys(Path.GetFullPath(RunConfigurator.ResourcesPath + fileName));
+			selectFileInputButton.GetElement().SendKeys(Path.GetFullPath(configurator.ResourcesPath + fileName));
 		}
 
 		public void DownloadSample()

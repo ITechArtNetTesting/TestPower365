@@ -66,14 +66,14 @@ namespace Product.Tests.CommonTests
 
             Office365TenantAuthorization(sourceTenant, sourcePassword);
             
-            Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(Store.MainHandle);
+            Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(1);
 
             User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
 
             Office365TenantAuthorization(targetTenant, targetPassword);
 
-            Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(Store.MainHandle);
+            Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(2);
 			User.AtAddTenantsForm().GoNext();
 			User.AtUploadFilesForm().SelectFile(fileName);

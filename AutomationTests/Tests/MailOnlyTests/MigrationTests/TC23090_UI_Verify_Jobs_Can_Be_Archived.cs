@@ -18,11 +18,11 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
         [TestCategory("MailOnly")]
         public void VerifyJobsCanBeArchived()
         {
-            string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
-            string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");
-            string client = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/../name");
-            string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//name");
-            string sourceMailbox9 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry9']/..//source");
+            string login = configurator.GetValueByXpath("//metaname[text()='client1']/..//user");
+            string password = configurator.GetValueByXpath("//metaname[text()='client1']/..//password");
+            string client = configurator.GetValueByXpath("//metaname[text()='client1']/../name");
+            string projectName = configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//name");
+            string sourceMailbox9 = configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry9']/..//source");
 
             try
             {

@@ -17,11 +17,11 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
 		[TestCategory("MailOnly")]
 		public void Automation_MO_MailMigrationTest()
 		{
-		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
-		    string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");
-		    string client = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/../name");
-		    string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//name");
-		    string sourceMailbox3 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry3']/..//source");
+		    string login = configurator.GetValueByXpath("//metaname[text()='client1']/..//user");
+		    string password = configurator.GetValueByXpath("//metaname[text()='client1']/..//password");
+		    string client = configurator.GetValueByXpath("//metaname[text()='client1']/../name");
+		    string projectName = configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//name");
+		    string sourceMailbox3 = configurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry3']/..//source");
 
 		    try
 		    {
@@ -38,7 +38,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
 		        User.AtUsersForm().AssertDetailsStopButtonIsEnabled();
 		        User.AtUsersForm().WaitForSyncedState();
 		        User.AtUsersForm().DownloadLogs();
-		        RunConfigurator.CheckLogsFileIsDownloaded();
+                configurator.CheckLogsFileIsDownloaded();
 		        User.AtUsersForm().AssertDetailsSyncButtonIsEnabled();
 		        User.AtUsersForm().CompleteSync();
 		        User.AtUsersForm().ConfirmComplete();

@@ -14,41 +14,41 @@ namespace ProbeTests.ProbeTests
 
         public CDSP2PTest() : base(ProbeType.CDSP2P)
         {
-            clientName = RunConfigurator.GetValueByXpath("//CDSP2P/@client");
-            tenants = RunConfigurator.GetValueByXpath("//CDSP2P/@tenants");
-            projectName = RunConfigurator.GetValueByXpath("//CDSP2P/@project");
+            clientName = configurator.GetValueByXpath("//CDSP2P/@client");
+            tenants = configurator.GetValueByXpath("//CDSP2P/@tenants");
+            projectName = configurator.GetValueByXpath("//CDSP2P/@project");
         }
 
         public override void Run()
         {
-            var sourceLocalLogin = RunConfigurator.GetTenantValue(tenants, "source", "aduser");
-            var sourceLocalPassword = RunConfigurator.GetTenantValue(tenants, "source", "adpassword");
-            var sourceLocalExchangePowerShellUri = RunConfigurator.GetTenantValue(tenants, "source", "uri");
+            var sourceLocalLogin = configurator.GetTenantValue(tenants, "source", "aduser");
+            var sourceLocalPassword = configurator.GetTenantValue(tenants, "source", "adpassword");
+            var sourceLocalExchangePowerShellUri = configurator.GetTenantValue(tenants, "source", "uri");
 
             var sourceAzureAdSyncLogin = sourceLocalLogin;
             var sourceAzureAdSyncPassword = sourceLocalPassword;
-            var sourceAzureAdSyncServer = RunConfigurator.GetTenantValue(tenants, "source", "azureAdSyncServer");
+            var sourceAzureAdSyncServer = configurator.GetTenantValue(tenants, "source", "azureAdSyncServer");
 
-            var sourceCloudLogin = RunConfigurator.GetTenantValue(tenants, "source", "user");
-            var sourceCloudPassword = RunConfigurator.GetTenantValue(tenants, "source", "password");
+            var sourceCloudLogin = configurator.GetTenantValue(tenants, "source", "user");
+            var sourceCloudPassword = configurator.GetTenantValue(tenants, "source", "password");
 
-            var targetLocalLogin = RunConfigurator.GetTenantValue(tenants, "target", "aduser");
-            var targetLocalPassword = RunConfigurator.GetTenantValue(tenants, "target", "adpassword");
-            var targetLocalExchangePowerShellUri = RunConfigurator.GetTenantValue(tenants, "target", "uri");
+            var targetLocalLogin = configurator.GetTenantValue(tenants, "target", "aduser");
+            var targetLocalPassword = configurator.GetTenantValue(tenants, "target", "adpassword");
+            var targetLocalExchangePowerShellUri = configurator.GetTenantValue(tenants, "target", "uri");
 
             var targetAzureAdSyncLogin = targetLocalLogin;
             var targetAzureAdSyncPassword = targetLocalPassword;
-            var targetAzureAdSyncServer = RunConfigurator.GetTenantValue(tenants, "target", "azureAdSyncServer");
+            var targetAzureAdSyncServer = configurator.GetTenantValue(tenants, "target", "azureAdSyncServer");
 
-            var targetCloudLogin = RunConfigurator.GetTenantValue(tenants, "target", "user");
-            var targetCloudPassword = RunConfigurator.GetTenantValue(tenants, "target", "password");
+            var targetCloudLogin = configurator.GetTenantValue(tenants, "target", "user");
+            var targetCloudPassword = configurator.GetTenantValue(tenants, "target", "password");
 
-            var testObjectNamePrefix = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//objectprefix");
-            var testObjectOU = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//ou");
+            var testObjectNamePrefix = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//objectprefix");
+            var testObjectOU = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//ou");
 
 
-            var testObjectUPNSuffix = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//source");
-            var testObjectPassword = RunConfigurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//password");
+            var testObjectUPNSuffix = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//source");
+            var testObjectPassword = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//password");
             try
             {
                 using (var process = new PsLauncher().LaunchPowerShellInstance("CreateAndVerify.ps1",

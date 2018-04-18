@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 namespace Product.Tests.CommonTests.SetupTests
 {
     [TestClass]
-    public class DatabaseCleanup 
+    public class DatabaseCleanup:BaseTest
     {
         CleanUpStep cleanUpStep;
         
         public DatabaseCleanup()
         {
             cleanUpStep = new CleanUpStep();
-            RunConfigurator.RunPath = "resources/run.xml";
+            configurator.RunPath = "resources/run.xml";
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
         }
 
@@ -27,7 +27,7 @@ namespace Product.Tests.CommonTests.SetupTests
         public void CleaningUp()
         {
             cleanUpStep = new CleanUpStep();
-            cleanUpStep.CleanUpProjectAndTenant(RunConfigurator.GetClient("client1"));
+            cleanUpStep.CleanUpProjectAndTenant(configurator.GetClient("client1"));
           //  cleanUpStep.CleanUpProjectAndTenant(RunConfigurator.GetClient("client2"));
         }
 

@@ -25,11 +25,11 @@ namespace Product.Tests.CommonTests.SetupTests
 		[TestCategory("Setup")]
 		public void SetupSecondUserSecondProject()
 		{
-            LoginAndSelectRole(RunConfigurator.GetUserLogin("client2"),
-                               RunConfigurator.GetPassword("client2"),
-                               RunConfigurator.GetClient("client2"));
+            LoginAndSelectRole(configurator.GetUserLogin("client2"),
+                               configurator.GetPassword("client2"),
+                               configurator.GetClient("client2"));
 
-            var projectName = RunConfigurator.GetProjectName("client2", "project2");
+            var projectName = configurator.GetProjectName("client2", "project2");
 
             User.AtTenantRestructuringForm().AddProjectClick();
 			User.AtChooseYourProjectTypeForm().ChooseIntegration();
@@ -40,36 +40,36 @@ namespace Product.Tests.CommonTests.SetupTests
 			User.AtSetProjectDescriptionForm().GoNext();
 			User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
 
-            Office365TenantAuthorization(RunConfigurator.GetTenantValue("T5->T6", "source", "user"), RunConfigurator.GetTenantValue("T5->T6", "source", "password"));
+            Office365TenantAuthorization(configurator.GetTenantValue("T5->T6", "source", "user"), configurator.GetTenantValue("T5->T6", "source", "password"));
             
-			Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(Store.MainHandle);
+			Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(1);
 
             User.AtAddTenantsForm().OpenOffice365LoginFormPopup();
-            Office365TenantAuthorization(RunConfigurator.GetTenantValue("T5->T6", "target", "user"), RunConfigurator.GetTenantValue("T5->T6", "target", "password"));
+            Office365TenantAuthorization(configurator.GetTenantValue("T5->T6", "target", "user"), configurator.GetTenantValue("T5->T6", "target", "password"));
 
-			Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(Store.MainHandle);
+			Driver.GetDriver(driver.GetDriverKey()).SwitchTo().Window(store.MainHandle);
 			User.AtAddTenantsForm().WaitForTenantAdded(2);
 			User.AtAddTenantsForm().GoNext();
-			User.AtSelectSourceTenantForm().SelectTenant(RunConfigurator.GetTenantValue("T5->T6", "source", "name"));
+			User.AtSelectSourceTenantForm().SelectTenant(configurator.GetTenantValue("T5->T6", "source", "name"));
 			User.AtSelectSourceTenantForm().GoNext();
-			User.AtSelectTargetTenantForm().SelectTenant(RunConfigurator.GetTenantValue("T5->T6", "target", "name"));
+			User.AtSelectTargetTenantForm().SelectTenant(configurator.GetTenantValue("T5->T6", "target", "name"));
 			User.AtSelectTargetTenantForm().GoNext();
 			User.AtReviewTenantPairsForm().GoNext();
-			User.AtSelectSourceDomainForm().SelectDomain(RunConfigurator.GetTenantValue("T5->T6", "source", "domain"));
+			User.AtSelectSourceDomainForm().SelectDomain(configurator.GetTenantValue("T5->T6", "source", "domain"));
 			User.AtSelectSourceDomainForm().GoNext();
-			User.AtSelectTargetDomainForm().SelectDomain(RunConfigurator.GetTenantValue("T5->T6", "target", "domain"));
+			User.AtSelectTargetDomainForm().SelectDomain(configurator.GetTenantValue("T5->T6", "target", "domain"));
 			User.AtSelectTargetDomainForm().GoNext();
 			User.AtReviewDomainsPairsForm().AddAnotherPair();
-			User.AtSelectSourceDomainForm().SelectDomain(RunConfigurator.GetTenantValue("T5->T6", "source", "additionaldomain"));
+			User.AtSelectSourceDomainForm().SelectDomain(configurator.GetTenantValue("T5->T6", "source", "additionaldomain"));
 			User.AtSelectSourceDomainForm().GoNext();
-			User.AtSelectTargetDomainForm().SelectDomain(RunConfigurator.GetTenantValue("T5->T6", "target", "additionaldomain"));
+			User.AtSelectTargetDomainForm().SelectDomain(configurator.GetTenantValue("T5->T6", "target", "additionaldomain"));
 			User.AtSelectTargetDomainForm().GoNext();
 			User.AtReviewDomainsPairsForm().GoNext();
 			User.AtMigrationTypeForm().SelectGroupsOption();
 			User.AtMigrationTypeForm().GoNext();
-            User.AtSelectMigrationGroupForm().SetGroup(RunConfigurator.GetADGroupName ("client2", "project2", "adgroup1"));
-            User.AtSelectMigrationGroupForm().SelectGroup(RunConfigurator.GetADGroupName("client2", "project2", "adgroup1"));
+            User.AtSelectMigrationGroupForm().SetGroup(configurator.GetADGroupName ("client2", "project2", "adgroup1"));
+            User.AtSelectMigrationGroupForm().SelectGroup(configurator.GetADGroupName("client2", "project2", "adgroup1"));
 
 			User.AtSelectMigrationGroupForm().GoNext();
 			User.AtReviewGroupsForm().GoNext();
@@ -78,7 +78,7 @@ namespace Product.Tests.CommonTests.SetupTests
 			User.AtCreateUsersForm().GoNext();
 			User.AtMigrateDistributionGroupsForm().SelectUploadList();
 			User.AtMigrateDistributionGroupsForm().GoNext();
-            User.AtUploadDistributionListForm().SelectFile(RunConfigurator.GetFileName("client2","project2","file1")); 
+            User.AtUploadDistributionListForm().SelectFile(configurator.GetFileName("client2","project2","file1")); 
 			User.AtUploadDistributionListForm().GoNext();
 			User.AtHowToMatchGroupsForm().GoNext();
 			User.AtCreateDistributionGroupsForm().SelectCreateGroups();
@@ -100,19 +100,19 @@ namespace Product.Tests.CommonTests.SetupTests
 			User.AtShareCalendarForm().GoNext();
 			User.AtWhichUsersShareCalendarForm().SelectByAd();
 			User.AtWhichUsersShareCalendarForm().GoNext();
-            User.AtCalendarActiveDirectoryGroupForm().SetGroup(RunConfigurator.GetADGroupName("client2", "project2", "adgroup1"));
-            User.AtCalendarActiveDirectoryGroupForm().SelectGroup(RunConfigurator.GetADGroupName("client2", "project2", "adgroup1"));
+            User.AtCalendarActiveDirectoryGroupForm().SetGroup(configurator.GetADGroupName("client2", "project2", "adgroup1"));
+            User.AtCalendarActiveDirectoryGroupForm().SelectGroup(configurator.GetADGroupName("client2", "project2", "adgroup1"));
              
 			User.AtCalendarActiveDirectoryGroupForm().GoNext();
 			User.AtEnablePublicFoldersForm().SetYes();
 			User.AtEnablePublicFoldersForm().GoNext();
             User.AtPublicFolderListForm().SelectNo();
             User.AtPublicFolderListForm().GoNext();
-            User.AtTenantPareForm().SelectPare(RunConfigurator.GetTenantValue("T5->T6", "source", "name"));
+            User.AtTenantPareForm().SelectPare(configurator.GetTenantValue("T5->T6", "source", "name"));
 		    User.AtTenantPareForm().GoNext();
-            User.AtPublicFolderSourceFilePathForm().SetFilePath(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry4']/..//source"));
+            User.AtPublicFolderSourceFilePathForm().SetFilePath(configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry4']/..//source"));
 		    User.AtPublicFolderSourceFilePathForm().GoNext();
-            User.AtPublicFolderTargetFilePathForm().SetFilePath(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry4']/..//target"));
+            User.AtPublicFolderTargetFilePathForm().SetFilePath(configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry4']/..//target"));
 		    User.AtPublicFolderTargetFilePathForm().GoNext();
             User.AtPublicFolderSyncLevelForm().SelectAllSubFolders();
 		    User.AtPublicFolderSyncLevelForm().GoNext();
@@ -128,8 +128,8 @@ namespace Product.Tests.CommonTests.SetupTests
 			User.AtDirectorySyncSettingsForm().StoreAccessKey();
 			User.AtDirectorySyncSettingsForm().StoreAccessUrl();
 			User.AtDirectorySyncSettingsForm().GoNext();
-			User.AtEnterPasswordForm().SetPassword(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='password1']/../value"));
-			User.AtEnterPasswordForm().SetConfirmPassword(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='password1']/../value"));
+			User.AtEnterPasswordForm().SetPassword(configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='password1']/../value"));
+			User.AtEnterPasswordForm().SetConfirmPassword(configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='password1']/../value"));
 			User.AtEnterPasswordForm().GoNext();
 			User.AtEmailRewritingForm().GoNext();
 			User.AtConfigureEmailRewrittingForm().SelectNo();
@@ -138,12 +138,12 @@ namespace Product.Tests.CommonTests.SetupTests
 			User.AtGoodToGoForm().GoNext();
 			User.AtProjectOverviewForm().OpenUsersList();
 
-            var appKey = RunConfigurator.GetValueByXpath($"//metaname[text()='client2']/..//metaname[text()='project2']/..//dirSyncAppKey");
+            var appKey = configurator.GetValueByXpath($"//metaname[text()='client2']/..//metaname[text()='project2']/..//dirSyncAppKey");
 
             Assert.IsFalse(string.IsNullOrWhiteSpace(appKey));
             Assert.IsFalse(string.IsNullOrWhiteSpace(projectName));
 
-            SQLQuery dbUpdate = new SQLQuery(RunConfigurator.GetConnectionString());
+            SQLQuery dbUpdate = new SQLQuery(configurator.GetConnectionString());
           //  dbUpdate.SetDirSyncAppKeyByProjectName(projectName, appKey);
         }
 	}

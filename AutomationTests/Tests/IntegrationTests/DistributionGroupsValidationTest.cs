@@ -19,28 +19,28 @@ namespace Product.Tests.IntegrationTests
         [TestCategory("Integration_test")]
         public void Automation_IN_PS_DistributionGroupsValidationTest()
         {
-            string userName = RunConfigurator.GetUserLogin("client2");
-            string password = RunConfigurator.GetPassword("client2");
-            string client = RunConfigurator.GetClient("client2");
-            string project = RunConfigurator.GetProjectName("client2", "project2");              
-            string sourceTenantName = RunConfigurator.GetTenantValue("T5->T6", "source", "name");
-            string targetTenantName = RunConfigurator.GetTenantValue("T5->T6", "target", "name");
-            string group1Name = RunConfigurator.GetADGroupName("client2", "project2", "group1");
-            string group2Name = RunConfigurator.GetADGroupName("client2", "project2", "group2");
-            string group3Name = RunConfigurator.GetADGroupName("client2", "project2", "group3");
-            string group4Name = RunConfigurator.GetADGroupName("client2", "project2", "group4");
-            string group5Name = RunConfigurator.GetADGroupName("client2", "project2", "group5");
-            string group6Name = RunConfigurator.GetADGroupName("client2", "project2", "group6");
-            string targetCloudLogin = RunConfigurator.GetTenantValue("T5->T6", "target", "user");
-            string targetCloudPassword = RunConfigurator.GetTenantValue("T5->T6", "target", "password");
-            string group2Mail = RunConfigurator.GetMail("client2", "project2", "group2");
-            string group1Member1 = RunConfigurator.GetGroupMember("client2", "project2", "group1", "member1");              
-            string group1Owner = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='group1']/..//owner");
-            string group3Member1 = RunConfigurator.GetGroupMember("client2", "project2", "group3", "member1");           
-            string group3Owner = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='group3']/..//owner");
-            string targetOnPremLogin = RunConfigurator.GetTenantValue("T5->T6", "target", "aduser");
-            string targetOnPremPassword = RunConfigurator.GetTenantValue("T5->T6", "target", "adpassword");
-            string targetOnPremUri = RunConfigurator.GetTenantValue("T5->T6", "target", "uri");
+            string userName = configurator.GetUserLogin("client2");
+            string password = configurator.GetPassword("client2");
+            string client = configurator.GetClient("client2");
+            string project = configurator.GetProjectName("client2", "project2");              
+            string sourceTenantName = configurator.GetTenantValue("T5->T6", "source", "name");
+            string targetTenantName = configurator.GetTenantValue("T5->T6", "target", "name");
+            string group1Name = configurator.GetADGroupName("client2", "project2", "group1");
+            string group2Name = configurator.GetADGroupName("client2", "project2", "group2");
+            string group3Name = configurator.GetADGroupName("client2", "project2", "group3");
+            string group4Name = configurator.GetADGroupName("client2", "project2", "group4");
+            string group5Name = configurator.GetADGroupName("client2", "project2", "group5");
+            string group6Name = configurator.GetADGroupName("client2", "project2", "group6");
+            string targetCloudLogin = configurator.GetTenantValue("T5->T6", "target", "user");
+            string targetCloudPassword = configurator.GetTenantValue("T5->T6", "target", "password");
+            string group2Mail = configurator.GetMail("client2", "project2", "group2");
+            string group1Member1 = configurator.GetGroupMember("client2", "project2", "group1", "member1");              
+            string group1Owner = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='group1']/..//owner");
+            string group3Member1 = configurator.GetGroupMember("client2", "project2", "group3", "member1");           
+            string group3Owner = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='group3']/..//owner");
+            string targetOnPremLogin = configurator.GetTenantValue("T5->T6", "target", "aduser");
+            string targetOnPremPassword = configurator.GetTenantValue("T5->T6", "target", "adpassword");
+            string targetOnPremUri = configurator.GetTenantValue("T5->T6", "target", "uri");
 
             try
             {

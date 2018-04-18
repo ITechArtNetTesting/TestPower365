@@ -25,10 +25,10 @@ namespace Product.Tests.PowerShellTests
 		[TestCategory("Powershell")]
 		public void Automation_PS_MO_PermissionsPrepareTest()
 		{           
-		    string sourceMailbox = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps4']/..//target");
-		    string sourceLogin = RunConfigurator.GetTenantValue("T1->T2", "target", "user");
-		    string sourcePassword = RunConfigurator.GetTenantValue("T1->T2", "target", "password");
-            string permSourceMailbox = RunConfigurator.GetTenantValue("T1->T2", "target", "psuser2"); ;
+		    string sourceMailbox = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps4']/..//target");
+		    string sourceLogin = configurator.GetTenantValue("T1->T2", "target", "user");
+		    string sourcePassword = configurator.GetTenantValue("T1->T2", "target", "password");
+            string permSourceMailbox = configurator.GetTenantValue("T1->T2", "target", "psuser2"); ;
 
             List<string> trustees = new List<string>();
             trustees.Add(permSourceMailbox);

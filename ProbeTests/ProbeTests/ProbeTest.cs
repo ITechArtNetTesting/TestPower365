@@ -22,7 +22,7 @@ namespace ProbeTests.ProbeTests
         public ProbeTest(ProbeType probeType)
         {
             RunOnce();
-            RunConfigurator.RunPath = "resources/probeRun.QA.xml";
+            configurator.RunPath = "resources/probeRun.QA.xml";
             _probeType = probeType;
             _instance = ConfigurationManager.AppSettings.Get(INSTANCE_CONFIG_KEY);
             InitialStoring(_probeType);

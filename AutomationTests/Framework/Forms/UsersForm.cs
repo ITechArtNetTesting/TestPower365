@@ -15,7 +15,11 @@ namespace Product.Framework.Forms
 {
 	public class UsersForm : BaseForm
 	{
-		private static readonly By TitleLocator =
+        RunConfigurator configurator;
+
+        Store store;
+
+        private static readonly By TitleLocator =
 			By.XPath("//div[@id='users']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]");
 
 		private readonly Button actionsDropdownButton ;
@@ -107,9 +111,11 @@ namespace Product.Framework.Forms
         protected string ProfileLabelLocator = "//div[contains(@class, 'modal in')]//tr[.//*[contains(text(), '{0}')]]//label";
         protected string ProfileRadioLocator = "//div[contains(@class, 'modal in')]//tr[.//*[contains(text(), 'Defa')]]//input";        
 
-        public UsersForm(Guid driverId) : base(TitleLocator, "Users list form",driverId)
-		{
+        public UsersForm(Guid driverId,Store store) : base(TitleLocator, "Users list form",driverId)
+		{           
+            this.store = store;
             this.driverId = driverId;
+            configurator = new RunConfigurator(store);
             actionsDropdownButton =new Button(By.XPath("//div[@id='users']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"),"Actions dropdown",driverId);
             backToDashboardButton = new Button(By.XPath("//button[contains(@data-bind, 'goToDashboard')]"), "Back to dashboard button",driverId);
             chooseFilesInput =new TextBox(By.XPath("//div[contains(@class, 'modal in')]//input[@type='file']"), "Choose files input",driverId);
@@ -915,7 +921,7 @@ namespace Product.Framework.Forms
 				Log.Info("Modal dialog is not ready");
 				importButton.Click();
 			}
-			chooseFilesInput.GetElement().SendKeys(Path.GetFullPath(RunConfigurator.ResourcesPath+ fileName));
+			chooseFilesInput.GetElement().SendKeys(Path.GetFullPath(configurator.ResourcesPath+ fileName));
 		}
 
 		public void WaitTillSelectedFilesAppear()
@@ -1021,11 +1027,11 @@ namespace Product.Framework.Forms
             var sortedList = new List<string>();
 			if (sortedAscSourceButton.IsPresent())
 			{
-				sortedList = Store.SourceList.OrderBy(i => i).ToList();
+				sortedList = store.SourceList.OrderBy(i => i).ToList();
 			}
 			else
 			{
-				sortedList = Store.SourceList.OrderByDescending(i => i).ToList();
+				sortedList = store.SourceList.OrderByDescending(i => i).ToList();
 			}
 			for (var i = 0; i < existingList.Count; i++)
 			{
@@ -1052,11 +1058,11 @@ namespace Product.Framework.Forms
             var sortedList = new List<string>();
 			if (sortedAscTargetButton.IsPresent())
 			{
-				sortedList = Store.TargetList.OrderBy(i => i).ToList();
+				sortedList = store.TargetList.OrderBy(i => i).ToList();
 			}
 			else
 			{
-				sortedList = Store.TargetList.OrderByDescending(i => i).ToList();
+				sortedList = store.TargetList.OrderByDescending(i => i).ToList();
 			}
 			for (var i = 0; i < existingList.Count; i++)
 			{
@@ -1083,11 +1089,11 @@ namespace Product.Framework.Forms
             var sortedList = new List<string>();
 			if (sortedAscGroupButton.IsPresent())
 			{
-				sortedList = Store.GroupList.OrderBy(i => i).ToList();
+				sortedList = store.GroupList.OrderBy(i => i).ToList();
 			}
 			else
 			{
-				sortedList = Store.GroupList.OrderByDescending(i => i).ToList();
+				sortedList = store.GroupList.OrderByDescending(i => i).ToList();
 			}
 			for (var i = 0; i < existingList.Count; i++)
 			{
@@ -1114,11 +1120,11 @@ namespace Product.Framework.Forms
             var sortedList = new List<string>();
 			if (sortedAscProfileButton.IsPresent())
 			{
-				sortedList = Store.ProfileList.OrderBy(i => i).ToList();
+				sortedList = store.ProfileList.OrderBy(i => i).ToList();
 			}
 			else
 			{
-				sortedList = Store.ProfileList.OrderByDescending(i => i).ToList();
+				sortedList = store.ProfileList.OrderByDescending(i => i).ToList();
 			}
 			for (var i = 0; i < existingList.Count; i++)
 			{
@@ -1129,7 +1135,7 @@ namespace Product.Framework.Forms
 		public void AssertGroupIsFilteredFor(string group)
 		{
 			Log.Info("Asserting group is filtered for: " + group);
-			foreach (var groupEntry in Store.GroupList)
+			foreach (var groupEntry in store.GroupList)
 			{
 				Assert.IsTrue(string.Equals(groupEntry.Trim(), @group.Trim(), StringComparison.CurrentCultureIgnoreCase),
 					"Group is not filtered properly");
@@ -1139,7 +1145,7 @@ namespace Product.Framework.Forms
 		public void AssertProfileIsFilteredFor(string profile)
 		{
 			Log.Info("Asserting profile is filtered for: " + profile);
-			foreach (var profileEntry in Store.ProfileList)
+			foreach (var profileEntry in store.ProfileList)
 			{
 				Assert.IsTrue(string.Equals(profileEntry.Trim(), @profile.Trim(), StringComparison.CurrentCultureIgnoreCase),
 					"Profile is not filtered properly");
@@ -1165,11 +1171,11 @@ namespace Product.Framework.Forms
             var sortedList = new List<string>();
 			if (sortedAscStateButton.IsPresent())
 			{
-				sortedList = Store.StateList.OrderBy(i => i).ToList();
+				sortedList = store.StateList.OrderBy(i => i).ToList();
 			}
 			else
 			{
-				sortedList = Store.StateList.OrderByDescending(i => i).ToList();
+				sortedList = store.StateList.OrderByDescending(i => i).ToList();
 			}
 			for (var i = 0; i < existingList.Count; i++)
 			{
@@ -1180,7 +1186,7 @@ namespace Product.Framework.Forms
 		public void AssertStateIsFilteredFor(string state)
 		{
 			Log.Info("Asserting state is filtered for: " + state);
-			foreach (var stateEntry in Store.StateList)
+			foreach (var stateEntry in store.StateList)
 			{
 				Assert.IsTrue(stateEntry.Trim().ToLower() == state.Trim().ToLower(), "State is not filtered properly");
 			}
@@ -1205,11 +1211,11 @@ namespace Product.Framework.Forms
             var sortedList = new List<string>();
 			if (sortedAscMailboxSizeButton.IsPresent())
 			{
-				sortedList = Store.MailboxSizeList.OrderBy(i => i).ToList();
+				sortedList = store.MailboxSizeList.OrderBy(i => i).ToList();
 			}
 			else
 			{
-				sortedList = Store.MailboxSizeList.OrderByDescending(i => i).ToList();
+				sortedList = store.MailboxSizeList.OrderByDescending(i => i).ToList();
 			}
 			for (var i = 0; i < existingList.Count; i++)
 			{
@@ -1236,11 +1242,11 @@ namespace Product.Framework.Forms
             var sortedList = new List<string>();
 			if (sortedAscArchiveSizeButton.IsPresent())
 			{
-				sortedList = Store.MailboxSizeList.OrderBy(i => i).ToList();
+				sortedList = store.MailboxSizeList.OrderBy(i => i).ToList();
 			}
 			else
 			{
-				sortedList = Store.MailboxSizeList.OrderByDescending(i => i).ToList();
+				sortedList = store.MailboxSizeList.OrderByDescending(i => i).ToList();
 			}
 			for (var i = 0; i < existingList.Count; i++)
 			{
@@ -1250,14 +1256,14 @@ namespace Product.Framework.Forms
 
 		public void StoreEntriesData()
 		{
-			Store.SourceList.Clear();
-			Store.TargetList.Clear();
-			Store.StateList.Clear();
-			Store.ProgressList.Clear();
-			Store.GroupList.Clear();
-			Store.MailboxSizeList.Clear();
-			Store.ArchiveSizeList.Clear();
-			Store.ProfileList.Clear();
+            store.SourceList.Clear();
+            store.TargetList.Clear();
+            store.StateList.Clear();
+            store.ProgressList.Clear();
+            store.GroupList.Clear();
+            store.MailboxSizeList.Clear();
+            store.ArchiveSizeList.Clear();
+            store.ProfileList.Clear();
             //BaseElement.WaitForElementIsClickable(
             //	By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr"));
             new Element(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr"), "", driverId).WaitForElementPresent();
@@ -1267,34 +1273,34 @@ namespace Product.Framework.Forms
                 .FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr"));
             foreach (var element in elements)
 			{
-				Store.SourceList.Add(
+                store.SourceList.Add(
 					element.FindElement(
 						By.XPath(
 							".//td[count(//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//thead/tr/th//*[text()[contains(.,'Source')]]/ancestor::th/preceding::th)+1]//*[normalize-space(text())]"))
 						.Text);
-				Store.TargetList.Add(
+                store.TargetList.Add(
 					element.FindElement(
 						By.XPath(
 							".//td[count(//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//thead/tr/th//*[text()[contains(.,'Target')]]/ancestor::th/preceding::th)+1]//*[normalize-space(text())]"))
 						.Text);
-				Store.StateList.Add(
+                store.StateList.Add(
 					element.FindElement(
 						By.XPath(
 							".//td[count(//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//thead/tr/th//*[text()[contains(.,'Status')]]/ancestor::th/preceding::th)+1]//*[normalize-space(text())]"))
 						.Text);
-				Store.GroupList.Add(
+                store.GroupList.Add(
 					element.FindElement(
 						By.XPath(
 							".//td[count(//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//thead/tr/th//*[text()[contains(.,'Wave')]]/ancestor::th/preceding::th)+1]//*[normalize-space(text())]"))
 						.Text);
-				Store.ProfileList.Add(
+                store.ProfileList.Add(
 					element.FindElement(
 						By.XPath(
 							".//td[count(//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//thead/tr/th//*[text()[contains(.,'Profile')]]/ancestor::th/preceding::th)+1]//*[normalize-space(text())]"))
 						.Text);
 				try
 				{
-					Store.MailboxSizeList.Add(
+                    store.MailboxSizeList.Add(
 						element.FindElement(
 								By.XPath(
 									".//td[count(//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//thead/tr/th//*[text()[contains(.,'Size')]]/ancestor::th/preceding::th)]//*[normalize-space(text())]"))
@@ -1306,7 +1312,7 @@ namespace Product.Framework.Forms
 				}
 				try
 				{
-					Store.ArchiveSizeList.Add(
+                    store.ArchiveSizeList.Add(
 						element.FindElement(
 								By.XPath(
 									".//td[count(//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//thead/tr/th//*[text()[contains(.,'Size')]]/ancestor::th/preceding::th)+1]//*[normalize-space(text())]"))
@@ -1432,7 +1438,7 @@ namespace Product.Framework.Forms
 		{
 			StoreEntriesData();
 			var result = true;
-			foreach (var size in Store.MailboxSizeList)
+			foreach (var size in store.MailboxSizeList)
 			{
 				if (!size.Trim().ToLower().Contains("b"))
 				{
@@ -1446,7 +1452,7 @@ namespace Product.Framework.Forms
 		{
 			StoreEntriesData();
 			var result = true;
-			foreach (var size in Store.ArchiveSizeList)
+			foreach (var size in store.ArchiveSizeList)
 			{
 				if (!size.Trim().ToLower().Contains("b"))
 				{

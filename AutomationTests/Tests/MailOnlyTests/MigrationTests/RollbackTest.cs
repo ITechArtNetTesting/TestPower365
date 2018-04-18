@@ -22,23 +22,23 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
         [TestCategory("MailOnly")]
         public void Automation_MO_RollbackTest()
         {
-            string login = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user");
-            string password = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//password");
-            string client = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name");
-            string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//name");
-            string sourceMailbox = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps4']/..//source");
-            string targetMailbox = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps4']/..//target");
-            string sourceLogin = RunConfigurator.GetTenantValue("T1->T2", "source", "psuser2");
-            string sourcePassword = RunConfigurator.GetTenantValue("T1->T2", "source", "pspassword2");
-            string targetLogin = RunConfigurator.GetTenantValue("T1->T2", "target", "psuser2");
-            string targetPassword = RunConfigurator.GetTenantValue("T1->T2", "target", "pspassword2");
-            string stopFile1 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='stopfile9']/..//path");
-            string stopFile2 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='stopfile7']/..//path");
-            string stopFile3 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='stopfile10']/..//path");
-            string stopFile4 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='stopfile8']/..//path");
-            string permSourceMailbox = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entry2']/..//source");
-            string permTargetMailbox = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entry2']/..//target");
-            string stopFolder = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//stopfolder");
+            string login = configurator.GetValueByXpath("//metaname[text()='client2']/..//user");
+            string password = configurator.GetValueByXpath("//metaname[text()='client2']/..//password");
+            string client = configurator.GetValueByXpath("//metaname[text()='client2']/../name");
+            string projectName = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//name");
+            string sourceMailbox = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps4']/..//source");
+            string targetMailbox = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps4']/..//target");
+            string sourceLogin = configurator.GetTenantValue("T1->T2", "source", "psuser2");
+            string sourcePassword = configurator.GetTenantValue("T1->T2", "source", "pspassword2");
+            string targetLogin = configurator.GetTenantValue("T1->T2", "target", "psuser2");
+            string targetPassword = configurator.GetTenantValue("T1->T2", "target", "pspassword2");
+            string stopFile1 = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='stopfile9']/..//path");
+            string stopFile2 = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='stopfile7']/..//path");
+            string stopFile3 = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='stopfile10']/..//path");
+            string stopFile4 = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='stopfile8']/..//path");
+            string permSourceMailbox = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entry2']/..//source");
+            string permTargetMailbox = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entry2']/..//target");
+            string stopFolder = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//stopfolder");
 
             try
             {
@@ -60,7 +60,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
 
                 bool success = true;
                 var launcher = new PsLauncher();
-                RunConfigurator.CreateFlagFolder(stopFolder);
+                configurator.CreateFlagFolder(stopFolder);
                 using (var process = launcher.LaunchPowerShellInstance("Rollback1.ps1", $" -slogin {sourceLogin}" +
                                                                                                $" -spassword {sourcePassword}" +
                                                                                                $" -tlogin {targetLogin}" +
@@ -107,7 +107,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
                             User.AtUsersForm().ConfirmSync();
                             User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 10000);
                             User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 60000);
-                            RunConfigurator.CreateEmptyFile(stopFile1);
+                            configurator.CreateEmptyFile(stopFile1);
                         }
                         if (line == "Powershell will pause until Migration is complete - 2")
                         {
@@ -122,8 +122,8 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
                             User.AtUsersForm().OpenDetailsByLocator(sourceMailbox);
                             User.AtUsersForm().DownloadRollbackLogs();
                             User.AtUsersForm().CloseUserDetails();
-                            RunConfigurator.CheckRollbackLogsFileIsDownloaded();
-                            RunConfigurator.CreateEmptyFile(stopFile2);
+                            configurator.CheckRollbackLogsFileIsDownloaded();
+                            configurator.CreateEmptyFile(stopFile2);
                         }
 
                         if (line == "Powershell will pause until Migration is complete - 3")
@@ -145,7 +145,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
                             User.AtUsersForm().ConfirmSync();
                             User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 10000);
                             User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 60000);
-                            RunConfigurator.CreateEmptyFile(stopFile3);
+                            configurator.CreateEmptyFile(stopFile3);
                         }
 
                         if (line == "Powershell will pause until Migration is complete - 4")
@@ -158,7 +158,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
                             User.AtUsersForm().Rollback();
                             User.AtUsersForm().WaitForState(sourceMailbox, State.RollbackInProgress, 10000);
                             User.AtUsersForm().WaitForState(sourceMailbox, State.RollbackCompleted, 60000);
-                            RunConfigurator.CreateEmptyFile(stopFile4);
+                            configurator.CreateEmptyFile(stopFile4);
                         }
 
                     }
