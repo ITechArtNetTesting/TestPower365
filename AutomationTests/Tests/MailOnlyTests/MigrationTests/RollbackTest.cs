@@ -43,7 +43,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
             try
             {
                 using (
-                    var sourcePreparation = new PsLauncher().LaunchPowerShellInstance("Cleanup_Rollback.ps1", $" -slogin {sourceLogin}" +
+                    var sourcePreparation = new PsLauncher(store).LaunchPowerShellInstance("Cleanup_Rollback.ps1", $" -slogin {sourceLogin}" +
                                                                                                               $" -spassword {sourcePassword}" +
                                                                                                               $" -tlogin {targetLogin}" +
                                                                                                               $" -tpassword {targetPassword}" +
@@ -59,7 +59,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
                 }
 
                 bool success = true;
-                var launcher = new PsLauncher();
+                var launcher = new PsLauncher(store);
                 configurator.CreateFlagFolder(stopFolder);
                 using (var process = launcher.LaunchPowerShellInstance("Rollback1.ps1", $" -slogin {sourceLogin}" +
                                                                                                $" -spassword {sourcePassword}" +

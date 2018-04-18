@@ -48,7 +48,7 @@ namespace Product.Tests.PublicFoldersTests
 		public void PSwaits()
 		{
 			LoginAndSelectRole(configurator.GetValueByXpath("//metaname[text()='client1']/..//user"), configurator.GetValueByXpath("//metaname[text()='client1']/..//password"), configurator.GetValueByXpath("//metaname[text()='client1']/../name"));
-            var launcher = new PsLauncher();
+            var launcher = new PsLauncher(store);
 			var testProc = launcher.TestLaunchPowerShellInstance("TestScript.ps1", String.Empty, "x64");
 			while (!testProc.StandardOutput.EndOfStream)
 			{

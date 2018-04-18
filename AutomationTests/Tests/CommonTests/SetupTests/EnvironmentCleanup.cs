@@ -45,7 +45,7 @@ namespace Product.Tests.CommonTests.SetupTests
 
             var syncDelaySec = Environment.GetEnvironmentVariable("AzureADSyncDelaySec") ?? "1";
 
-            using (var process = new PsLauncher().LaunchPowerShellInstance("resources\\IntegrationGroups-Cleanup.ps1",
+            using (var process = new PsLauncher(store).LaunchPowerShellInstance("resources\\IntegrationGroups-Cleanup.ps1",
                 $" -sourceLocalLogin {sourceLocalLogin}" +
                 $" -sourceLocalPassword {sourceLocalPassword}" +
                 $" -sourceLocalExchangePowerShellUri {sourceLocalExchangePowerShellUri}" +

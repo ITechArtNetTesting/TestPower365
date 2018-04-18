@@ -11,10 +11,11 @@ namespace Product.Framework
 {
 	public class PsLauncher : BaseEntity
 	{
-        Store store = new Store();
+        Store store ;
 
-        public PsLauncher()
+        public PsLauncher(Store store)
         {
+            this.store = store;
             configurator = new RunConfigurator(store);
         }
 

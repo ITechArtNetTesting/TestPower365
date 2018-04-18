@@ -182,7 +182,7 @@ namespace Product.Tests.IntegrationTests
                 bool tc32394 = false;
                 bool tc32203 = false;
                 using (
-                    var validationProcess = new PsLauncher().LaunchPowerShellInstance("Integration-Cutover.ps1",
+                    var validationProcess = new PsLauncher(store).LaunchPowerShellInstance("Integration-Cutover.ps1",
                         $" -tlogin {targetLogin}" +
                         $" -tpassword {targetPassword}" +
                         $" -slogin {sourceLogin}" +

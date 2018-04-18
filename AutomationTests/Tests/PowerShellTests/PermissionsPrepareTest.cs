@@ -34,7 +34,7 @@ namespace Product.Tests.PowerShellTests
             trustees.Add(permSourceMailbox);
             var trusteeString = string.Join(",", trustees);
             
-            using (var process = new PsLauncher().LaunchPowerShellInstance("AddPermission.ps1",
+            using (var process = new PsLauncher(store).LaunchPowerShellInstance("AddPermission.ps1",
                                 $" -login {sourceLogin}" +
                                 $" -password {sourcePassword}" +
                                 $" -mailbox {sourceMailbox}" +

@@ -32,7 +32,7 @@ namespace Product.Tests.PowerShellTests
 
 		    try
 		    {
-		        using (var process = new PsLauncher().LaunchPowerShellInstance("DeltaDiscoveryModify.ps1",
+		        using (var process = new PsLauncher(store).LaunchPowerShellInstance("DeltaDiscoveryModify.ps1",
 		            $" -slogin {sourceAdminLogin}" +
 		            $" -spassword {sourceAdminPassword}" +
 		            $" -mailbox {sourceMailbox1}",

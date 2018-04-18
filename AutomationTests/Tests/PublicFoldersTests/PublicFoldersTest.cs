@@ -34,7 +34,7 @@ namespace Product.Tests.PublicFoldersTests
 		        {
                     Log.Debug("Starting SourcePrepScript.ps1");
 		            using (
-		                var sourcePreparation = new PsLauncher().LaunchPowerShellInstance("PF/SourcePrepScript.ps1",
+		                var sourcePreparation = new PsLauncher(store).LaunchPowerShellInstance("PF/SourcePrepScript.ps1",
 		                    $" -slogin {configurator.GetTenantValue("T5->T6", "source", "user")} -spassword {configurator.GetTenantValue("T5->T6", "source", "password")}", "x64")
 		            )
 		            {
@@ -62,7 +62,7 @@ namespace Product.Tests.PublicFoldersTests
 		        while (!result && counter < 3)
 		        {
                     Log.Debug("Starting TargetPrepScript.ps1");
-                    using (var targetPreparation = new PsLauncher().LaunchPowerShellInstance("PF/TargetPrepScript.ps1", $" -slogin {configurator.GetTenantValue("T5->T6", "target", "user")} -spassword {configurator.GetTenantValue("T5->T6", "target", "password")}", "x64"))
+                    using (var targetPreparation = new PsLauncher(store).LaunchPowerShellInstance("PF/TargetPrepScript.ps1", $" -slogin {configurator.GetTenantValue("T5->T6", "target", "user")} -spassword {configurator.GetTenantValue("T5->T6", "target", "password")}", "x64"))
 		            {
                         Log.Debug("Script has started.");
                         while (!targetPreparation.StandardOutput.EndOfStream)
@@ -127,7 +127,7 @@ namespace Product.Tests.PublicFoldersTests
 		        User.AtPublicFolderMigrationViewForm().CloseUserDetails();
 
                 Log.Debug("Starting PfAutomationScript.ps1");
-		        using (var mainScript = new PsLauncher().LaunchPowerShellInstance("PF/PfAutomationScript.ps1", $" -sourceUserName {configurator.GetTenantValue("T5->T6", "source", "user")}" +
+		        using (var mainScript = new PsLauncher(store).LaunchPowerShellInstance("PF/PfAutomationScript.ps1", $" -sourceUserName {configurator.GetTenantValue("T5->T6", "source", "user")}" +
 		                                                                                                       $" -sourcepasswd {configurator.GetTenantValue("T5->T6", "source", "password")}" +
 		                                                                                                       $" -TargetUserName {configurator.GetTenantValue("T5->T6", "target", "user")}" +
 		                                                                                                       $" -Targetpasswd {configurator.GetTenantValue("T5->T6", "target", "password")}" +

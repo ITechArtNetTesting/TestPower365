@@ -44,7 +44,7 @@ namespace Product.Tests.PowerShellTests
             try
 		    {
 		        bool success = true;
-		        var launcher = new PsLauncher();
+		        var launcher = new PsLauncher(store);
                 configurator.CreateFlagFolder(stopFolder);
 		        using (var process = launcher.LaunchPowerShellInstance("DeleteFoldersAndItems.ps1",
 		            $" -slogin {sourceLogin}" +

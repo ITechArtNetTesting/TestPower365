@@ -59,7 +59,7 @@ namespace Product.Tests.PowerShellTests
 		        User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 10000);
 		        User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 
 		            60000);
-		        using (var process = new PsLauncher().LaunchPowerShellInstance("Compare.ps1",
+		        using (var process = new PsLauncher(store).LaunchPowerShellInstance("Compare.ps1",
 		            $" -slogin {sourceLogin}" +
 		            $" -spassword {sourcePassword}" +
 		            $" -tlogin {targetLogin}" +

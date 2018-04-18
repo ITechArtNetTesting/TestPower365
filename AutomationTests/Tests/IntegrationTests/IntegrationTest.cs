@@ -136,7 +136,7 @@ namespace Product.Tests.IntegrationTests
                 bool tc32623 = false;
                 bool tc32624 = false;
                 using (
-                    var process = new PsLauncher().LaunchPowerShellInstance("IntegrationUsers-Prepare.ps1",
+                    var process = new PsLauncher(store).LaunchPowerShellInstance("IntegrationUsers-Prepare.ps1",
                         $" -slogin {targetLogin}" +
                         $" -spassword {targetPassword}" +
                         $" -mailbox {targetEntry.Substring(0, targetEntry.LastIndexOf("@", StringComparison.Ordinal))}" +

@@ -24,7 +24,7 @@ namespace Product.Tests.PowerShellTests
 		public void Automation_PS_MO_AddTest()
 		{
 			var success = true;
-            var launcher = new PsLauncher();
+            var launcher = new PsLauncher(store);
 		    string stopFolder = configurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//stopfolder");
 		    string sourceLogin = configurator.GetTenantValue("T1->T2", "source", "psuser");
 		    string sourcePassword = configurator.GetTenantValue("T1->T2", "source", "pspassword");

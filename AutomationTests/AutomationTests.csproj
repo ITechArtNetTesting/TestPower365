@@ -624,7 +624,6 @@
     <Content Include="resources\test.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="TestSettings1.testsettings" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -90,7 +90,7 @@ namespace Product.Tests.IntegrationTests
                 bool tc31808 = false;
                 bool tc32281 = false;
                 using (
-                    var process = new PsLauncher().LaunchPowerShellInstance("IntegrationGroups-Sync.ps1",
+                    var process = new PsLauncher(store).LaunchPowerShellInstance("IntegrationGroups-Sync.ps1",
                         $" -slogin {targetCloudLogin}" +
                         $" -spassword {targetCloudPassword}" +
                         $" -SourceGrp1 {group1Name}" +

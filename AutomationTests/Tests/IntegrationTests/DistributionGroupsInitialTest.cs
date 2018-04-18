@@ -74,7 +74,7 @@ namespace Product.Tests.IntegrationTests
 		        User.AtGroupsMigrationForm().WaitForState(group5Name, State.Complete, 60000);
 		        User.AtGroupsMigrationForm().WaitForState(group6Name, State.Complete, 60000);
 		        using (
-		            var deltaProcess = new PsLauncher().LaunchPowerShellInstance("IntegrationGroups-Delta.ps1",
+		            var deltaProcess = new PsLauncher(store).LaunchPowerShellInstance("IntegrationGroups-Delta.ps1",
 		                $" -slogin {sourceLogin}" +
 		                $" -spassword {sourcePassword}" +
 		                $" -SourceGrp3 {group3Name}" +
