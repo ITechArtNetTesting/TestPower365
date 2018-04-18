@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 namespace Product.Tests.CommonTests.SetupTests
 {
     [TestClass]
-    public class DatabaseCleanup
+    public class DatabaseCleanup 
     {
         CleanUpStep cleanUpStep;
-
+        
         public DatabaseCleanup()
         {
             cleanUpStep = new CleanUpStep();
@@ -24,11 +24,11 @@ namespace Product.Tests.CommonTests.SetupTests
 
         [TestMethod]
         [TestCategory("Setup")]
-        public void СleaningUp()
+        public void CleaningUp()
         {
             cleanUpStep = new CleanUpStep();
-            cleanUpStep.CleanUpProjectAndTenant(RunConfigurator.GetRole("client1"));
-            cleanUpStep.CleanUpProjectAndTenant(RunConfigurator.GetRole("client2"));
+            cleanUpStep.CleanUpProjectAndTenant(RunConfigurator.GetClient("client1"));
+          //  cleanUpStep.CleanUpProjectAndTenant(RunConfigurator.GetClient("client2"));
         }
 
     }

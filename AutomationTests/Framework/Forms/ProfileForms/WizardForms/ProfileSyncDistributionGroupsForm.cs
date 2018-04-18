@@ -12,7 +12,7 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
 {
     public class ProfileSyncDistributionGroupsForm : BaseWizardStepForm
     {
-        // private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'How would you like to sync distribution groups')]");
+       
         private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='HowWouldYouLikeToSyncDistributionGroups']");
 
         public ProfileSyncDistributionGroupsForm() : base(TitleLocator, "Sync distribution grops form")

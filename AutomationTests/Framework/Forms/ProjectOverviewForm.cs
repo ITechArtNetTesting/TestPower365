@@ -109,6 +109,7 @@ namespace Product.Framework.Forms
 		{
 			Log.Info("Opening users list");
 			allUsersAmountButton.Click();
+            WaitForAjaxLoad();
 		}
 
 		public void EditTenants()
@@ -172,15 +173,15 @@ namespace Product.Framework.Forms
 		public void WaitTillDiscoveryIsComplete(int timeout)
 		{
 			Log.Info("Waiting till discovery is completed");
-			var counter = 0;
-			while (!discoveryCompleteStateLabel.IsPresent(2) && counter < timeout)
-			{
-				Thread.Sleep(60000);
-				Refresh();
-				Assert.IsTrue(!discoveryCompleteWithErrorsLabel.IsPresent());
-				counter++;
-			}
-			discoveryCompleteStateLabel.WaitForSeveralElementsPresent(2);
+			var counter = 0;           
+         while (!discoveryCompleteStateLabel.IsPresent(2) && counter < timeout)
+            {
+                Thread.Sleep(60000);
+                Refresh();
+                Assert.IsTrue(!discoveryCompleteWithErrorsLabel.IsPresent());
+                counter++;
+            }
+            discoveryCompleteStateLabel.WaitForSeveralElementsPresent(2);
 		}
 		public void WaitTillDiscoveryIsComplete(int timeout, string tenant)
 		{
@@ -217,9 +218,10 @@ namespace Product.Framework.Forms
 
 		private void Refresh()
 		{
-			Thread.Sleep(22000);
+			//Thread.Sleep(22000);
 			Browser.GetDriver().Navigate().Refresh();
-			Thread.Sleep(8000);
+            WaitForAjaxLoad();
+			//Thread.Sleep(8000);
 		}
 
 		public void OpenAllCompletedUsers()

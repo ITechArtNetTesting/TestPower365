@@ -234,7 +234,7 @@ if ($ResultCode -eq 0)
         Else
 
         {
-            <#$ResultCode = 1#>
+            $ResultCode = 1
             Write-Error "Mailbox location set incorrectly"
             $ResultText = 'Mailbox location set incorrectly'
              Write-Host($ResultText)
@@ -286,7 +286,7 @@ if ($ResultCode -eq 0)
         Else
 
         {
-            <#$ResultCode = 1#>
+            $ResultCode = 1
             Write-Error "Mailbox addressbook is not hidden."
             $ResultText = 'Mailbox addressbook is not hidden.'
              Write-Host($ResultText)
@@ -335,7 +335,7 @@ if ($ResultCode -eq 0)
         Else
 
         {
-            <#$ResultCode = 1#>
+            $ResultCode = 1
             Write-Error "Mailbox forwarding rule is not set."
             $ResultText = 'Mailbox forwarding rule is not set.'
              Write-Host($ResultText)
@@ -755,7 +755,7 @@ if ($ResultCode -eq 0)
         Else
 
         {
-            <#$ResultCode = 1#>
+            $ResultCode = 1
             Write-Error "Target mailbox did not created with archive"
             $ResultText = 'Target mailbox did not created with archive'
             Write-Host($ResultText)
