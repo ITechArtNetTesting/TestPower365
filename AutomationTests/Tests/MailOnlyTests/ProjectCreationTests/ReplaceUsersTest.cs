@@ -35,7 +35,7 @@ namespace Product.Tests.MailOnlyTests.ProjectCreationTests
 		        User.AtProjectOverviewForm().AssertNewUsersAreReplaced();
 		        User.AtProjectOverviewForm().GetUsersCount();
             }
-		    catch (Exception e)
+		    catch (Exception)
 		    {
 		        LogHtml(Driver.GetDriver(driver.GetDriverKey()).PageSource);
                 throw;
