@@ -29,7 +29,9 @@ namespace Product.Framework.Elements
 		/// <param name="text">The text.</param>
 		public void ClearSetText(string text)
 		{
-			WaitForElementPresent();
+            WaitForDOM();
+            WaitForAjaxLoad();
+            WaitForElementPresent();
 			WaitForElementIsVisible();
 			bool ready = false;
 			int counter = 0;
@@ -51,7 +53,7 @@ namespace Product.Framework.Elements
 					}
 				}
 			}
-			GetElement().Clear();
+            GetElement().Clear();
 			GetElement().SendKeys(text);
 			Log.Info($"{GetName()} :: type text '{text}'");
 		}
@@ -61,8 +63,7 @@ namespace Product.Framework.Elements
 		/// </summary>
 		public void PressEnter()
 		{
-			WaitForElementPresent();
-			WaitForElementIsVisible();
+		    WaitForElementIsVisible();
 			GetElement().SendKeys(Keys.Enter);
 			Log.Info($"{GetName()} :: Press Enter'");
 		}

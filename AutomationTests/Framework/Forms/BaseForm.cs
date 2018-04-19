@@ -2,6 +2,7 @@
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using Product.Framework.Elements;
 
 namespace Product.Framework.Forms
@@ -136,8 +137,10 @@ namespace Product.Framework.Forms
 		public void OpenMainMenu()
 		{
 			Log.Info("Opening main menu");
-            menuButton.WaitForElementPresent();
+            WaitForDOM();
+            WaitForAjaxLoad();          
             menuButton.Click();
+         
 		}
 
 		public void OpenTenantRestructuring()
@@ -164,7 +167,7 @@ namespace Product.Framework.Forms
 				favoritesButton.Click();
 			}
 
-			Thread.Sleep(2000);
+			//Thread.Sleep(2000);
 		}
 
 		/// <summary>
@@ -241,11 +244,57 @@ namespace Product.Framework.Forms
 			}
 		}
 
-		#endregion
+        #endregion
 
-		#region [Favorites]
+        public void WaitForAjaxLoad()
+        {
+            if (jQueryExists())
+            {
+                var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromMinutes(1));
+                wait.PollingInterval = TimeSpan.FromMilliseconds(100);
+                wait.Until(wd => (bool)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0"));
+            }
+        }
+        static bool jQueryExists()
+        {
+            try
+            {
+                (Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0");
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public void WaitForDOM()
+        {
+            var wait = new WebDriverWait(Browser.GetDriver(),
+                TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
+            try
+            {
+                wait.Until(waiting =>
+                {
+                    try
+                    {
+                        return
+                            ((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript("return document.readyState")
+                                .Equals("complete");
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
+                });
+            }
+            catch (TimeoutException)
+            {
+            }
+        }
 
-		private readonly Button addLinkButton =
+        #region [Favorites]
+
+        private readonly Button addLinkButton =
 			new Button(By.XPath("//div[contains(@class, 'popover-content')]//i[contains(@class, 'fa-plus')]/.."),
 				"Add link button");
 
@@ -401,7 +450,7 @@ namespace Product.Framework.Forms
 			}
 		}
 
-		public void AssertLinkIsReordered(string name, string url)
+        		public void AssertLinkIsReordered(string name, string url)
 		{
 			Log.Info($"Asserting link {name} is reorderd to {url}");
 			var links =

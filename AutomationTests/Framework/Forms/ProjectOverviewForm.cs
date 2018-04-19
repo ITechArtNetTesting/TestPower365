@@ -47,8 +47,8 @@ namespace Product.Framework.Forms
 
 		private readonly Label finalizingValueLabel =
 			new Label(
-//				By.XPath("//div[contains(@class, 'ibox-content')]/a[contains(@data-bind, 'completedNumber')]"),
-				By.XPath("//div[@class='ibox'][1]/div[@class='ibox-content']//a[contains(@data-bind, 'completedNumber')][text()[contains(.,'2')]]"),
+				By.XPath("//div[contains(@class, 'ibox-content')]/a[contains(@data-bind, 'completedNumber')]"),
+				//By.XPath("//div[@class='ibox'][1]/div[@class='ibox-content']//a[contains(@data-bind, 'completedNumber')][text()[contains(.,'2')]]"),
                 "Finalizing users value label");
 		
 		private readonly Label migrationGroupLabel = new Label(By.XPath("//div[contains(@class, 'ibox-title')]//*[contains(text(), 'Migration waves for users')]"),
@@ -109,6 +109,7 @@ namespace Product.Framework.Forms
 		{
 			Log.Info("Opening users list");
 			allUsersAmountButton.Click();
+            WaitForAjaxLoad();
 		}
 
 		public void EditTenants()
@@ -172,15 +173,15 @@ namespace Product.Framework.Forms
 		public void WaitTillDiscoveryIsComplete(int timeout)
 		{
 			Log.Info("Waiting till discovery is completed");
-			var counter = 0;
-			while (!discoveryCompleteStateLabel.IsPresent(2) && counter < timeout)
-			{
-				Thread.Sleep(60000);
-				Refresh();
-				Assert.IsTrue(!discoveryCompleteWithErrorsLabel.IsPresent());
-				counter++;
-			}
-			discoveryCompleteStateLabel.WaitForSeveralElementsPresent(2);
+			var counter = 0;           
+         while (!discoveryCompleteStateLabel.IsPresent(2) && counter < timeout)
+            {
+                Thread.Sleep(60000);
+                Refresh();
+                Assert.IsTrue(!discoveryCompleteWithErrorsLabel.IsPresent());
+                counter++;
+            }
+            discoveryCompleteStateLabel.WaitForSeveralElementsPresent(2);
 		}
 		public void WaitTillDiscoveryIsComplete(int timeout, string tenant)
 		{
@@ -217,9 +218,10 @@ namespace Product.Framework.Forms
 
 		private void Refresh()
 		{
-			Thread.Sleep(22000);
+			//Thread.Sleep(22000);
 			Browser.GetDriver().Navigate().Refresh();
-			Thread.Sleep(8000);
+            WaitForAjaxLoad();
+			//Thread.Sleep(8000);
 		}
 
 		public void OpenAllCompletedUsers()
@@ -291,7 +293,14 @@ namespace Product.Framework.Forms
 			editProjectButton.Click();
 		}
 
-		public void AssertFinalizingCount(int count)
+        public void AssertFinalizingCountGreaterThan(int count)
+        {
+            Log.Info("Asserting Finalized user amount is greater than: " + count);
+            Label completedUsersLabel = new Label(By.XPath($"//div[@class='ibox'][1]/div[@class='ibox-content']//a[contains(@data-bind, 'completedNumber')][text()[. > {count}]]"), "Finalized users label");
+            completedUsersLabel.WaitForElementIsVisible();
+        }
+
+        public void AssertFinalizingCount(int count)
 		{
 			Log.Info("Asserting Finalized user amount is equal to: " + count);
 			var counter = 0;

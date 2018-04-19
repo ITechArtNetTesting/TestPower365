@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
-using T365.Database;
 
 namespace Product.Tests.CommonTests.SetupTests
 {
@@ -19,7 +18,7 @@ namespace Product.Tests.CommonTests.SetupTests
                       
             LoginAndSelectRole(RunConfigurator.GetUserLogin("client1"),
 			                   RunConfigurator.GetPassword("client1"),
-                               RunConfigurator.GetRole("client1"));
+                               RunConfigurator.GetClient("client1"));
            
 			AddMailOnlyProject(RunConfigurator.GetProjectName("client1","project1"),
 				                RunConfigurator.GetTenantValue("T1->T2", "source", "user"),
