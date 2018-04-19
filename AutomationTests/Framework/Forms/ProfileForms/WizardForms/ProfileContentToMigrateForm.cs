@@ -13,8 +13,7 @@ namespace Product.Framework.Forms.ProfileForms.WizardForms
 {
     public class ProfileContentToMigrateForm : BaseWizardStepForm
     {
-       // private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'What type of mailbox content would you like to migrate')]");
-        private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='DoYouWantToCopyLitigationHoldSettingsAndData']");
+              private static readonly By TitleLocator = By.XPath("//*/span[@data-translation='DoYouWantToCopyLitigationHoldSettingsAndData']");
 
         public ProfileContentToMigrateForm() : base(TitleLocator, "Content to migrate form")
         {
