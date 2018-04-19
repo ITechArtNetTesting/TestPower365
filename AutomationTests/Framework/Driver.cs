@@ -38,44 +38,27 @@ namespace Product.Framework
 
         public IWebDriver GetDriver()
         {
-            if (Drivers[driverKey] == null)
-            {
-                throw new NullReferenceException("The WebDriver browser instance was not initialized. You should first call the method InitBrowser or create class by constructor.");
-            }
+            CheckDriver(driverKey);
             return Drivers[driverKey];
         }
 
         public static IWebDriver GetDriver(Guid key)
         {
-            if (Drivers[key] == null)
-            {
-                throw new NullReferenceException("The WebDriver browser instance was not initialized. You should first call the method InitBrowser or create class by constructor.");
-            }
+            CheckDriver(key);
             return Drivers[key];
         }
 
         public void SetDriver(IWebDriver driver)
         {
-            if (Drivers[driverKey] == null)
-            {
-                throw new NullReferenceException("The WebDriver browser instance was not initialized. You should first call the method InitBrowser or create class by constructor.");
-            }
+            CheckDriver(driverKey);
             Drivers[driverKey] = driver;
         }
 
         public void SetDriver(IWebDriver driver, Guid key)
         {
-            if (Drivers[key] == null)
-            {
-                throw new NullReferenceException("The WebDriver browser instance was not initialized. You should first call the method InitBrowser or create class by constructor.");
-            }
+            CheckDriver(key);
             Drivers[key] = driver;
         }
-
-        //private void LoadApplication()
-        //{
-        //    GetDriver.Url = FrameworkConstants.StartPage;
-        //}
 
         public void GoToUrl(string url)
         {
@@ -83,7 +66,7 @@ namespace Product.Framework
         }
 
         public void InitBrowser(WebBrowsers browserName)
-        {            
+        {
             switch (browserName)
             {
                 case WebBrowsers.Firefox:
@@ -96,7 +79,7 @@ namespace Product.Framework
                     break;
                 case WebBrowsers.Chrome:
                     driverKey = Guid.NewGuid();
-                    Drivers.Add(driverKey, new ChromeDriver(AppDomain.CurrentDomain.BaseDirectory+DriverPath));
+                    Drivers.Add(driverKey, new ChromeDriver(AppDomain.CurrentDomain.BaseDirectory + DriverPath));
                     break;
                 default:
                     driverKey = Guid.NewGuid();
@@ -161,6 +144,13 @@ namespace Product.Framework
                 screenshotPath = Directory.GetCurrentDirectory() + "\\screenshots\\" + DateTime.Now.Date.ToString().Replace('/', '.').Replace(' ', '_').Replace(':', '_') + "-_after_" + methodName + "_at_" + pageName + ".png";
             }
             ((ITakesScreenshot)GetDriver()).GetScreenshot().SaveAsFile(screenshotPath, ScreenshotImageFormat.Png);
+        }
+        private static void CheckDriver(Guid Key)
+        {
+            if (Drivers[Key] == null)
+            {
+                throw new NullReferenceException("The WebDriver browser instance was not initialized. You should first call the method InitBrowser or create class by constructor.");
+            }
         }
     }
     public enum WebBrowsers

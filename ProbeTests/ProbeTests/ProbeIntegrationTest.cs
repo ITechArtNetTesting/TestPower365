@@ -49,7 +49,7 @@ namespace ProbeTests.ProbeTests
                 var msolUri = configurator.GetValue("o365url");
                 var msolConnectParams = configurator.GetValue("msolconnectargs");
 
-                using (var process = new PsLauncher().LaunchPowerShellInstance("Integration_Probe.ps1",
+                using (var process = new PsLauncher(store).LaunchPowerShellInstance("Integration_Probe.ps1",
                         $" -localLogin {sourceLocalLogin}" +
                         $" -localPassword {sourceLocalPassword}" +
                         $" -localExchangePowerShellUri {localExchangePowerShellUri}" +
@@ -238,7 +238,7 @@ namespace ProbeTests.ProbeTests
                         var targetAzureAdSyncPassword = configurator.GetTenantValue(tenants, "target", "adpassword");
                         var targetAzureAdSyncServer = configurator.GetTenantValue(tenants, "target", "azureAdSyncServer");
 
-                        using (var process = new PsLauncher().LaunchPowerShellInstance("ADSync.ps1",
+                        using (var process = new PsLauncher(store).LaunchPowerShellInstance("ADSync.ps1",
                                     $" -login {targetAzureAdSyncLogin}" +
                                     $" -password {targetAzureAdSyncPassword}" +
                                     $" -server {targetAzureAdSyncServer}",
