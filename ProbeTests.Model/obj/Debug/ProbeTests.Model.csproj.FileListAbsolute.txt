@@ -89,3 +89,13 @@ C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests.Model\bin\Debug\Entit
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests.Model\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests.Model\bin\Debug\EntityFramework.xml
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests.Model\bin\Debug\EntityFramework.SqlServer.xml
+D:\Project\P356\ProbeTests.Model\bin\Debug\ProbeTests.Model.dll.config
+D:\Project\P356\ProbeTests.Model\bin\Debug\ProbeTests.Model.dll
+D:\Project\P356\ProbeTests.Model\bin\Debug\ProbeTests.Model.pdb
+D:\Project\P356\ProbeTests.Model\bin\Debug\EntityFramework.dll
+D:\Project\P356\ProbeTests.Model\bin\Debug\EntityFramework.SqlServer.dll
+D:\Project\P356\ProbeTests.Model\bin\Debug\EntityFramework.xml
+D:\Project\P356\ProbeTests.Model\bin\Debug\EntityFramework.SqlServer.xml
+D:\Project\P356\ProbeTests.Model\obj\Debug\ProbeTests.Model.csprojResolveAssemblyReference.cache
+D:\Project\P356\ProbeTests.Model\obj\Debug\ProbeTests.Model.dll
+D:\Project\P356\ProbeTests.Model\obj\Debug\ProbeTests.Model.pdb
