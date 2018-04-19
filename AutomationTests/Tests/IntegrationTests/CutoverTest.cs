@@ -17,22 +17,23 @@ namespace Product.Tests.IntegrationTests
         }
 
         [TestMethod]
+        [TestCategory("Integration_test")]
         public void Automation_IN_PS_CutoverTest()
         {
             string userName = RunConfigurator.GetUserLogin("client2");
             string password = RunConfigurator.GetPassword("client2");
-            string client = RunConfigurator.GetRole("client2");
-            string project = RunConfigurator.GetProjectName("client2","project2");
-            string sourceMailbox13 = RunConfigurator.GetSourceMailbox("client2","project2","entry13");
-            string sourceMailbox14 = RunConfigurator.GetSourceMailbox("client2","project2","entry14");
-            string sourceMailbox15 = RunConfigurator.GetSourceMailbox("client2","project2","entry15");
+            string client = RunConfigurator.GetClient("client2");
+            string project = RunConfigurator.GetProjectName("client2", "project2");
+            string sourceMailbox13 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry13");
+            string sourceMailbox14 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry14");
+            string sourceMailbox15 = RunConfigurator.GetSourceMailbox("client2", "project2", "entry15");
             string targetLogin = RunConfigurator.GetTenantValue("T5->T6", "target", "user");
             string targetPassword = RunConfigurator.GetTenantValue("T5->T6", "target", "password");
             string sourceLogin = RunConfigurator.GetTenantValue("T5->T6", "source", "user");
             string sourcePassword = RunConfigurator.GetTenantValue("T5->T6", "source", "password");
-            string targetMailbox13 = RunConfigurator.GetTargetMailbox("client2","project2","entry13");
-            string targetMailbox13Smtp = RunConfigurator.GetTargetSmtpMailbox("client2","project2","entry13");
-            string targetMailbox13X500 = RunConfigurator.GetTargetX500Mailbox("client2","project2","entry13");
+            string targetMailbox13 = RunConfigurator.GetTargetMailbox("client2", "project2", "entry13");
+            string targetMailbox13Smtp = RunConfigurator.GetTargetSmtpMailbox("client2", "project2", "entry13");
+            string targetMailbox13X500 = RunConfigurator.GetTargetX500Mailbox("client2", "project2", "entry13");
             string targetOnPremLogin = RunConfigurator.GetTenantValue("T5->T6", "target", "aduser");
             string targetOnPremPassword = RunConfigurator.GetTenantValue("T5->T6", "target", "adpassword");
             string targetOnPremUri = RunConfigurator.GetTenantValue("T5->T6", "target", "uri");
@@ -99,13 +100,13 @@ namespace Product.Tests.IntegrationTests
 
                 //NOTE: Wait for entry13 is synced
                 User.AtUsersForm().PerformSearch(sourceMailbox13);
-                User.AtUsersForm().WaitForState(sourceMailbox13, State.Synced, 60000);
+                User.AtUsersForm().WaitForState(sourceMailbox13, State.Synced, 1200000, 30);
                 //NOTE: Wait for entry14 is synced
                 User.AtUsersForm().PerformSearch(sourceMailbox14);
-                User.AtUsersForm().WaitForState(sourceMailbox14, State.Synced, 60000);
+                User.AtUsersForm().WaitForState(sourceMailbox14, State.Synced, 12000000, 30);
                 //NOTE: Wait for entry15 is synced
                 User.AtUsersForm().PerformSearch(sourceMailbox15);
-                User.AtUsersForm().WaitForState(sourceMailbox15, State.Synced, 60000);
+                User.AtUsersForm().WaitForState(sourceMailbox15, State.Synced, 12000000, 30);
                 //NOTE: Cutover entry15
                 User.AtUsersForm().SelectEntryBylocator(sourceMailbox15);
                 User.AtUsersForm().SelectAction(ActionType.Cutover);
@@ -122,7 +123,7 @@ namespace Product.Tests.IntegrationTests
                     User.AtUsersForm().Apply();
                 }
                 User.AtUsersForm().ConfirmCutover();
-                User.AtUsersForm().WaitForState(sourceMailbox15, State.Finalizing, 30000);
+                User.AtUsersForm().WaitForState(sourceMailbox15, State.Finalizing, 30000, 10);
                 //NOTE: Cutover entry14
                 User.AtUsersForm().PerformSearch(sourceMailbox14);
                 User.AtUsersForm().SelectEntryBylocator(sourceMailbox14);
@@ -140,7 +141,7 @@ namespace Product.Tests.IntegrationTests
                     User.AtUsersForm().Apply();
                 }
                 User.AtUsersForm().ConfirmCutover();
-                User.AtUsersForm().WaitForState(sourceMailbox14, State.Finalizing, 30000);
+                User.AtUsersForm().WaitForState(sourceMailbox14, State.Finalizing, 30000, 10);
                 //NOTE: Cutover entry13
                 User.AtUsersForm().PerformSearch(sourceMailbox13);
                 User.AtUsersForm().SelectEntryBylocator(sourceMailbox13);
@@ -163,13 +164,14 @@ namespace Product.Tests.IntegrationTests
                 User.AtUsersForm().CloseUserDetails();
 
                 //NOTE: Wait till entry13 cutover completes
-                User.AtUsersForm().WaitForState(sourceMailbox13, State.Complete, 60000);
+                User.AtUsersForm().WaitForState(sourceMailbox13, State.Complete, 1200000, 60);
                 //NOTE: Wait till entry14 cutover completes
                 User.AtUsersForm().PerformSearch(sourceMailbox14);
-                User.AtUsersForm().WaitForState(sourceMailbox14, State.Complete, 60000);
+                User.AtUsersForm().WaitForState(sourceMailbox14, State.Complete, 1200000, 60);
                 //NOTE: Wait till entry15 cutover completes
                 User.AtUsersForm().PerformSearch(sourceMailbox15);
-                User.AtUsersForm().WaitForState(sourceMailbox15, State.Complete, 60000);
+                User.AtUsersForm().WaitForState(sourceMailbox15, State.Complete, 1200000, 60);
+
                 Thread.Sleep(2700000);
                 //NOTE: Run PS script
                 bool tc32208 = false;

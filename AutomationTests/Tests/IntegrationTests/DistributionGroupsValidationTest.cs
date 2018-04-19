@@ -16,27 +16,28 @@ namespace Product.Tests.IntegrationTests
             _testContext = testContext;
         }
         [TestMethod]
+        [TestCategory("Integration_test")]
         public void Automation_IN_PS_DistributionGroupsValidationTest()
         {
             string userName = RunConfigurator.GetUserLogin("client2");
             string password = RunConfigurator.GetPassword("client2");
-            string client = RunConfigurator.GetRole("client2");
-            string project = RunConfigurator.GetProjectName("client2","project2");
+            string client = RunConfigurator.GetClient("client2");
+            string project = RunConfigurator.GetProjectName("client2", "project2");              
             string sourceTenantName = RunConfigurator.GetTenantValue("T5->T6", "source", "name");
             string targetTenantName = RunConfigurator.GetTenantValue("T5->T6", "target", "name");
-            string group1Name = RunConfigurator.GetGroupName("client2", "project2", "group1");
-            string group2Name = RunConfigurator.GetGroupName("client2", "project2", "group2");
-            string group3Name = RunConfigurator.GetGroupName("client2", "project2", "group3");
-            string group4Name = RunConfigurator.GetGroupName("client2", "project2", "group4");
-            string group5Name = RunConfigurator.GetGroupName("client2", "project2", "group5");
-            string group6Name = RunConfigurator.GetGroupName("client2", "project2", "group6");
+            string group1Name = RunConfigurator.GetADGroupName("client2", "project2", "group1");
+            string group2Name = RunConfigurator.GetADGroupName("client2", "project2", "group2");
+            string group3Name = RunConfigurator.GetADGroupName("client2", "project2", "group3");
+            string group4Name = RunConfigurator.GetADGroupName("client2", "project2", "group4");
+            string group5Name = RunConfigurator.GetADGroupName("client2", "project2", "group5");
+            string group6Name = RunConfigurator.GetADGroupName("client2", "project2", "group6");
             string targetCloudLogin = RunConfigurator.GetTenantValue("T5->T6", "target", "user");
             string targetCloudPassword = RunConfigurator.GetTenantValue("T5->T6", "target", "password");
-            string group2Mail = RunConfigurator.GetGroupMail("client2","project2","group2");
-            string group1Member1 = RunConfigurator.GetGroupFirstMember("client2","project2","group1");
-            string group1Owner = RunConfigurator.GetGroupOwner("client2","project2","group1");
-            string group3Member1 = RunConfigurator.GetGroupFirstMember("client2","project2","group3");
-            string group3Owner = RunConfigurator.GetGroupOwner("client2","project2","group3");
+            string group2Mail = RunConfigurator.GetMail("client2", "project2", "group2");
+            string group1Member1 = RunConfigurator.GetGroupMember("client2", "project2", "group1", "member1");              
+            string group1Owner = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='group1']/..//owner");
+            string group3Member1 = RunConfigurator.GetGroupMember("client2", "project2", "group3", "member1");           
+            string group3Owner = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='group3']/..//owner");
             string targetOnPremLogin = RunConfigurator.GetTenantValue("T5->T6", "target", "aduser");
             string targetOnPremPassword = RunConfigurator.GetTenantValue("T5->T6", "target", "adpassword");
             string targetOnPremUri = RunConfigurator.GetTenantValue("T5->T6", "target", "uri");
@@ -54,7 +55,6 @@ namespace Product.Tests.IntegrationTests
                 User.AtProjectOverviewForm().WaitTillDiscoveryIsComplete(30, sourceTenantName);
                 User.AtProjectOverviewForm().WaitTillDiscoveryIsComplete(30, targetTenantName);
                 User.AtProjectOverviewForm().OpenMigrationGroups();
-                Thread.Sleep(180000);
                 //NOTE: Second sync
                 User.AtGroupsMigrationForm().SyncUserByLocator(group1Name);
                 User.AtGroupsMigrationForm().ConfirmSync();
@@ -70,16 +70,16 @@ namespace Product.Tests.IntegrationTests
                 User.AtGroupsMigrationForm().SyncUserByLocator(group5Name);
                 User.AtGroupsMigrationForm().ConfirmSync();
                 User.AtGroupsMigrationForm().WaitForState(group5Name, State.Syncing, 10000);
-                User.AtGroupsMigrationForm().SyncUserByLocator(group6Name);
+                User.AtGroupsMigrationForm().SyncUserByLocator(group6Name); 
                 User.AtGroupsMigrationForm().ConfirmSync();
                 User.AtGroupsMigrationForm().WaitForState(group6Name, State.Syncing, 10000);
-                User.AtGroupsMigrationForm().WaitForState(group1Name, State.Complete, 60000);
-                User.AtGroupsMigrationForm().WaitForState(group2Name, State.Complete, 60000);
-                User.AtGroupsMigrationForm().WaitForState(group3Name, State.Complete, 60000);
-                User.AtGroupsMigrationForm().WaitForState(group4Name, State.Complete, 60000);
-                User.AtGroupsMigrationForm().WaitForState(group5Name, State.Complete, 60000);
-                User.AtGroupsMigrationForm().WaitForState(group6Name, State.Complete, 60000);
-                Thread.Sleep(2400000);
+                User.AtGroupsMigrationForm().WaitForState(group1Name, State.Complete, 600000, 10);
+                User.AtGroupsMigrationForm().WaitForState(group2Name, State.Complete, 600000, 10);
+                User.AtGroupsMigrationForm().WaitForState(group3Name, State.Complete, 600000, 10);
+                User.AtGroupsMigrationForm().WaitForState(group4Name, State.Complete, 600000, 10);
+                User.AtGroupsMigrationForm().WaitForState(group5Name, State.Complete, 600000, 10);
+                User.AtGroupsMigrationForm().WaitForState(group6Name, State.Complete, 600000, 10);
+                Thread.Sleep(2700000);
                 bool tc31803 = false;
                 bool tc32395 = false;
                 bool tc31805 = false;
