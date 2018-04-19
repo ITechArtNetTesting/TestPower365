@@ -78,7 +78,7 @@ namespace ProbeTests.ProbeTests
                 var msolUri = configurator.GetValue("o365url");
                 var msolConnectParams = configurator.GetValue("msolconnectargs");
 
-                using (var process = new PsLauncher().LaunchPowerShellInstance("NewProbeUser.ps1",
+                using (var process = new PsLauncher(store).LaunchPowerShellInstance("NewProbeUser.ps1",
                     $" -sourceLocalLogin {sourceLocalLogin}" +
                     $" -sourceLocalPassword {sourceLocalPassword}" +
                     $" -sourceLocalExchangePowerShellUri {sourceLocalExchangePowerShellUri}" +

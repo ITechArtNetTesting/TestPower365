@@ -51,7 +51,7 @@ namespace ProbeTests.ProbeTests
             var testObjectPassword = configurator.GetValueByXpath($"//metaname[text()='{clientName}']/..//metaname[text()='{projectName}']/..//metaname[text()='entry1']/..//password");
             try
             {
-                using (var process = new PsLauncher().LaunchPowerShellInstance("CreateAndVerify.ps1",
+                using (var process = new PsLauncher(store).LaunchPowerShellInstance("CreateAndVerify.ps1",
                     $" -sourceLocalLogin {sourceLocalLogin}" +
                     $" -sourceLocalPassword {sourceLocalPassword}" +
                     $" -sourceLocalExchangePowerShellUri {sourceLocalExchangePowerShellUri}" +

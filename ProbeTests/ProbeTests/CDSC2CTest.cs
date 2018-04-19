@@ -50,7 +50,7 @@ namespace ProbeTests.ProbeTests
                 //  -simulationMode
 
                 string msolConnectParams = "";
-                using (var process = new PsLauncher().LaunchPowerShellInstance("resources\\CreateAndVerifyC2C.ps1",
+                using (var process = new PsLauncher(store).LaunchPowerShellInstance("resources\\CreateAndVerifyC2C.ps1",
                     $" -sourceCloudLogin \"{sourceCloudLogin}\"" +
                     $" -sourceCloudPassword \"{sourceCloudPassword}\"" +
                     $" -sourceObjectUPNSuffix \"{sourceObjectUPNSuffix}\"" +
