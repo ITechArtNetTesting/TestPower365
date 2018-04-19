@@ -30,14 +30,16 @@ namespace Product.Tests.MailOnlyTests.ActionButtonsTests
 		        LoginAndSelectRole(login, password, client);
 		        SelectProject(projectName);
 		        User.AtProjectOverviewForm().OpenUsersList();
-		        User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
+                
+                User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
 		        User.AtUsersForm().SelectAction(ActionType.Sync);
 		        User.AtUsersForm().AssertApplyIsEnabled();
 		        User.AtUsersForm().Apply();
 		        User.AtUsersForm().ConfirmSync();
-		        User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 10000);
-		        User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 60000);
-		        User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
+		        User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 500000);
+                User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 600000, 30);
+                        
+                User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
 		        User.AtUsersForm().SelectAction(ActionType.Sync);
 		        User.AtUsersForm().AssertApplyIsEnabled();
 		        User.AtUsersForm().SelectAction(ActionType.Complete);

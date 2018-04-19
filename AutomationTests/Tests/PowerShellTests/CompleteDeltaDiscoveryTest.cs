@@ -34,7 +34,7 @@ namespace Product.Tests.PowerShellTests
 		        RunConfigurator.CheckDiscoveryFileIsDownloaded();
 		        Assert.IsTrue(RunConfigurator.AssertLineExistsInCsv(Store.TenantLog, $"Updated mailbox properties for {sourceMailbox1}"), "Line does not exist in log");
             }
-		    catch (Exception e)
+		    catch (Exception)
 		    {
 		        LogHtml(Browser.GetDriver().PageSource);
                 throw;
