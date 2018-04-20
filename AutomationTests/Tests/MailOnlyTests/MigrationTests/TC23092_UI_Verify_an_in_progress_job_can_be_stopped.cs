@@ -2,10 +2,6 @@
 using Product.Framework;
 using Product.Tests.CommonTests;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Product.Tests.MailOnlyTests.MigrationTests
 {

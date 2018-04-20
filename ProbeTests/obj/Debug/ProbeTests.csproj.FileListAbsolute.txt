@@ -576,7 +576,6 @@ C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\WebDriver.d
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\System.Management.Automation.dll
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\WebDriver.Support.dll
-C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\T365.Database.dll
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\AutomationTests.pdb
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\AutomationTests.dll.config
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\GraphHelper.pdb
@@ -598,7 +597,6 @@ C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\Newtonsoft.
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\System.Spatial.xml
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\WebDriver.xml
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\WebDriver.Support.xml
-C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\T365.Database.pdb
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\de\Microsoft.Data.Edm.resources.dll
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\es\Microsoft.Data.Edm.resources.dll
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\fr\Microsoft.Data.Edm.resources.dll

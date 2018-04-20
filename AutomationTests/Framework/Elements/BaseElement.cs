@@ -9,8 +9,8 @@ namespace Product.Framework.Elements
 {
 	public abstract class BaseElement : BaseEntity
 	{
-		private readonly RemoteWebElement element;
-		private readonly By locator;
+        private readonly RemoteWebElement element;
+        private readonly By locator;
 		private readonly string name;
 
 		protected BaseElement(By locator, string name)
