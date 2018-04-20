@@ -157,6 +157,7 @@
     <Compile Include="Framework\Forms\NewProjectWizardForms\IntegrationForms\WhichUsersShareCalendarForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\KeepUsersForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\SetProjectNameForm.cs" />
+    <Compile Include="Framework\Forms\NewProjectWizardForms\SyncNowForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\SyncScheduleForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\UploadedUsersForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\UploadFilesForm.cs" />

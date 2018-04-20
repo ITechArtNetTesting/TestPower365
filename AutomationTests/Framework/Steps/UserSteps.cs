@@ -16,6 +16,11 @@ namespace Product.Framework.Steps
 			return new MainForm();
 		}
 
+        public SyncNowForm AtSyncNowForm()
+        {
+            return new SyncNowForm();
+        }
+
 		public RegistrationForm AtRegistrationForm()
 		{
 			return new RegistrationForm();

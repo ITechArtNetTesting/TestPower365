@@ -26,8 +26,12 @@ namespace Product.Tests.MailWithDiscoveryTests.MigrationTests
             {
                 LoginAndSelectRole(login, password, client);
                 SelectProject(projectName);
-                //User.AtProjectOverviewForm().ClickSyncNow();
-                //User.AtProjectOverviewForm().ClickScheduleSync();
+                User.AtProjectOverviewForm().ClickSyncNow();
+                User.AtSyncNowForm().ClickBackButton();
+                User.AtProjectOverviewForm().AssertUserAtCurrentPage();
+                User.AtProjectOverviewForm().ClickScheduleSync();
+                User.AtSyncScheduleForm().ClickBackButton();
+                User.AtProjectOverviewForm().AssertUserAtCurrentPage();
             }
             catch (Exception ex)
             {

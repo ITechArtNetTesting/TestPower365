@@ -36,7 +36,13 @@ namespace Product.Framework.Forms
 			new Label(By.XPath("//i[contains(@data-bind, 'discoveryState')][contains(@class, 'icon-success')][contains(@class, 'fa-check-circle')]"),
 				"Discovery Complete label");
 
-		private readonly Label discoveryCompleteWithErrorsLabel =
+        public void AssertUserAtCurrentPage()
+        {
+            Assert.IsTrue(Browser.GetDriver().FindElement(TitleLocator).Displayed);
+            Assert.IsTrue(Browser.GetDriver().FindElement(TitleLocator).Enabled);
+        }
+
+        private readonly Label discoveryCompleteWithErrorsLabel =
 			new Label(By.XPath("//i[contains(@data-bind, 'discoveryState')]/ancestor::tr//*[text()='Complete With Errors']"),
 				"Complete with errors label");
 
