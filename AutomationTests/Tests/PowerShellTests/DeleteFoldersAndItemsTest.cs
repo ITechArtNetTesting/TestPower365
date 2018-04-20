@@ -86,7 +86,7 @@ namespace Product.Tests.PowerShellTests
 		                    }
 		                    User.AtUsersForm().ConfirmSync();
 		                    User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 10000);
-		                    User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 60000);
+		                    User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 600000, 30);
 		                    RunConfigurator.CreateEmptyFile(stopFile1);
 		                }
 		                if (line == "Powershell will pause until Migration is complete - 2")
@@ -107,7 +107,7 @@ namespace Product.Tests.PowerShellTests
 		                    }
 		                    User.AtUsersForm().ConfirmSync();
 		                    Browser.GetDriver().Navigate().Refresh();
-		                    User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 60000);
+		                    User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 600000, 30);
 		                    RunConfigurator.CreateEmptyFile(stopFile2);
 		                }
 		            }

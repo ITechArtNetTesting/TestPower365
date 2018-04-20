@@ -47,8 +47,8 @@ namespace Product.Framework.Forms
 
 		private readonly Label finalizingValueLabel =
 			new Label(
-//				By.XPath("//div[contains(@class, 'ibox-content')]/a[contains(@data-bind, 'completedNumber')]"),
-				By.XPath("//div[@class='ibox'][1]/div[@class='ibox-content']//a[contains(@data-bind, 'completedNumber')][text()[contains(.,'2')]]"),
+				By.XPath("//div[contains(@class, 'ibox-content')]/a[contains(@data-bind, 'completedNumber')]"),
+				//By.XPath("//div[@class='ibox'][1]/div[@class='ibox-content']//a[contains(@data-bind, 'completedNumber')][text()[contains(.,'2')]]"),
                 "Finalizing users value label");
 		
 		private readonly Label migrationGroupLabel = new Label(By.XPath("//div[contains(@class, 'ibox-title')]//*[contains(text(), 'Migration waves for users')]"),
@@ -293,7 +293,14 @@ namespace Product.Framework.Forms
 			editProjectButton.Click();
 		}
 
-		public void AssertFinalizingCount(int count)
+        public void AssertFinalizingCountGreaterThan(int count)
+        {
+            Log.Info("Asserting Finalized user amount is greater than: " + count);
+            Label completedUsersLabel = new Label(By.XPath($"//div[@class='ibox'][1]/div[@class='ibox-content']//a[contains(@data-bind, 'completedNumber')][text()[. > {count}]]"), "Finalized users label");
+            completedUsersLabel.WaitForElementIsVisible();
+        }
+
+        public void AssertFinalizingCount(int count)
 		{
 			Log.Info("Asserting Finalized user amount is equal to: " + count);
 			var counter = 0;

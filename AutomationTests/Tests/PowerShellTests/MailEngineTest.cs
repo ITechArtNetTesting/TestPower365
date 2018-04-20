@@ -453,7 +453,7 @@ namespace Product.Tests.PowerShellTests
             User.AtUsersForm().ConfirmSync();
             User.AtUsersForm().AssertUserHaveSyncingState(user);
 
-            User.AtUsersForm().WaitForState(user, State.Synced, 30000);
+            User.AtUsersForm().WaitForState(user, State.Synced, 1200000, 60);
         }
 
         private void PerformSyncWithRollback(string user)
@@ -465,7 +465,7 @@ namespace Product.Tests.PowerShellTests
             User.AtUsersForm().ConfirmRollback(false);
             User.AtUsersForm().AssertUserHasState(user, "Rollback In Progress");
 
-            User.AtUsersForm().WaitForState(user, State.RollbackCompleted, 30000);
+            User.AtUsersForm().WaitForState(user, State.RollbackCompleted, 2400000, 600);
         }
 
         private TestResults GetTestResults(string testId)

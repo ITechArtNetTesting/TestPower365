@@ -11,7 +11,16 @@
 	Connect-MsolService -Credential $Creds
 	
 Write-Host "Get-PublicFolder"
-Get-PublicFolder -Recurse -Identity "\AutomationTests" | Disable-MailPublicFolder -Confirm:$false
+$publicFolders = Get-PublicFolder -Recurse -Identity "\AutomationTests" 
+
+Write-Host "publicFolders"
+
+$publicFolders
+
+#Write-Host "Disable-MailPublicFolder"
+
+#$publicFolders | Disable-MailPublicFolder -Confirm:$false
+
 Write-Host "Remove-PublicFolder"
 Remove-PublicFolder \AutomationTests -Recurse -Confirm:$false
 Write-Host "New-PublicFolder"

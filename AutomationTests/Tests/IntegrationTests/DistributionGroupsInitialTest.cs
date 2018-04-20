@@ -67,13 +67,13 @@ namespace Product.Tests.IntegrationTests
 		        User.AtGroupsMigrationForm().SyncUserByLocator(group6Name);
 		        User.AtGroupsMigrationForm().ConfirmSync();
 		        User.AtGroupsMigrationForm().WaitForState(group6Name, State.Syncing, 10000);
-		        User.AtGroupsMigrationForm().WaitForState(group1Name, State.Complete, 60000);
-		        User.AtGroupsMigrationForm().WaitForState(group2Name, State.Complete, 60000);
-		        User.AtGroupsMigrationForm().WaitForState(group3Name, State.Complete, 60000);
-		        User.AtGroupsMigrationForm().WaitForState(group4Name, State.Complete, 60000);
-		        User.AtGroupsMigrationForm().WaitForState(group5Name, State.Complete, 60000);
-		        User.AtGroupsMigrationForm().WaitForState(group6Name, State.Complete, 60000);
-		        using (
+		        User.AtGroupsMigrationForm().WaitForState(group1Name, State.Complete, 600000, 10);
+		        User.AtGroupsMigrationForm().WaitForState(group2Name, State.Complete, 600000, 10);
+		        User.AtGroupsMigrationForm().WaitForState(group3Name, State.Complete, 600000, 10);
+                User.AtGroupsMigrationForm().WaitForState(group4Name, State.Complete, 600000, 10);
+                User.AtGroupsMigrationForm().WaitForState(group5Name, State.Complete, 600000, 10);
+                User.AtGroupsMigrationForm().WaitForState(group6Name, State.Complete, 600000, 10);
+                using (
 		            var deltaProcess = new PsLauncher().LaunchPowerShellInstance("IntegrationGroups-Delta.ps1",
 		                $" -slogin {sourceLogin}" +
 		                $" -spassword {sourcePassword}" +

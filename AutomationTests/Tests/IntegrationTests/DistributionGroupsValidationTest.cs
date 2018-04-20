@@ -73,12 +73,12 @@ namespace Product.Tests.IntegrationTests
                 User.AtGroupsMigrationForm().SyncUserByLocator(group6Name); 
                 User.AtGroupsMigrationForm().ConfirmSync();
                 User.AtGroupsMigrationForm().WaitForState(group6Name, State.Syncing, 10000);
-                User.AtGroupsMigrationForm().WaitForState(group1Name, State.Complete, 60000);
-                User.AtGroupsMigrationForm().WaitForState(group2Name, State.Complete, 60000);
-                User.AtGroupsMigrationForm().WaitForState(group3Name, State.Complete, 60000);
-                User.AtGroupsMigrationForm().WaitForState(group4Name, State.Complete, 60000);
-                User.AtGroupsMigrationForm().WaitForState(group5Name, State.Complete, 60000);
-                User.AtGroupsMigrationForm().WaitForState(group6Name, State.Complete, 60000);
+                User.AtGroupsMigrationForm().WaitForState(group1Name, State.Complete, 600000, 10);
+                User.AtGroupsMigrationForm().WaitForState(group2Name, State.Complete, 600000, 10);
+                User.AtGroupsMigrationForm().WaitForState(group3Name, State.Complete, 600000, 10);
+                User.AtGroupsMigrationForm().WaitForState(group4Name, State.Complete, 600000, 10);
+                User.AtGroupsMigrationForm().WaitForState(group5Name, State.Complete, 600000, 10);
+                User.AtGroupsMigrationForm().WaitForState(group6Name, State.Complete, 600000, 10);
                 Thread.Sleep(2700000);
                 bool tc31803 = false;
                 bool tc32395 = false;

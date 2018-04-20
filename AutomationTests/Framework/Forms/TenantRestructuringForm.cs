@@ -75,7 +75,7 @@ namespace Product.Framework.Forms
 	        {
 	            logoButton.Click();
             }
-	        catch (Exception e)
+	        catch (Exception)
 	        {
 	            logoButton = new Button(By.XPath("//ul[contains(@class, 'topnav-menu')]"), "Logo button");
 	            logoButton.Click();

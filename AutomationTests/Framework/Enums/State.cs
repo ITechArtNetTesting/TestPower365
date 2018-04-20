@@ -33,10 +33,10 @@ namespace Product.Framework.Enums
         Provisioning,
         [Description("1 sync(s) complete")]
         Synced1,
-        [Description("3 sync(s) complete")]
-        Synced3,
-        [Description("5 sync(s) complete")]
-        Synced4
+        [Description("2 sync(s) complete")]
+        Synced2,
+        [Description("Sync Error")]
+        SyncError      
 
     }
 }

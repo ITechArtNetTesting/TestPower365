@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
-using T365.Database;
+using Product.Utilities;
 
 namespace Product.Tests.CommonTests.SetupTests
 {
@@ -143,8 +135,11 @@ namespace Product.Tests.CommonTests.SetupTests
             Assert.IsFalse(string.IsNullOrWhiteSpace(appKey));
             Assert.IsFalse(string.IsNullOrWhiteSpace(projectName));
 
-            SQLQuery dbUpdate = new SQLQuery(RunConfigurator.GetConnectionString());
-          //  dbUpdate.SetDirSyncAppKeyByProjectName(projectName, appKey);
+            using (var dbT2T = new SqlClient(RunConfigurator.GetConnectionString()))
+            {
+                var results = dbT2T.ExecuteNonQuery(string.Format("UPDATE Project SET DirSyncAppKey = '{1}' WHERE ProjectName = '{0}'", projectName, appKey));
+                Log.InfoFormat("Updated DirSyncAppKey for {0} projects", results);
+            }
         }
 	}
 }

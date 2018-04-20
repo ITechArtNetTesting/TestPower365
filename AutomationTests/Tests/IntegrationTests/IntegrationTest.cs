@@ -42,6 +42,12 @@ namespace Product.Tests.IntegrationTests
             User.AtUsersForm().WaitForState(mailbox, state, timeout, pollIntervalSec);
         }
 
+        public void WaitForAnyState(string mailbox, State[] states, int timeout = 5000, int pollIntervalSec = 0)
+        {
+            User.AtUsersForm().PerformSearch(mailbox);
+            User.AtUsersForm().WaitForAnyState(mailbox, states, timeout, pollIntervalSec);
+        }
+
 		[TestMethod] 
 		public void Automation_IN_PS_PrepareTest()
 		{
@@ -110,17 +116,17 @@ namespace Product.Tests.IntegrationTests
                 PerformActionAndWaitForState(sourceMailbox14, ActionType.Sync, State.Provisioning, 20000, 5);
                 PerformActionAndWaitForState(sourceMailbox15, ActionType.Sync, State.Provisioning, 20000, 5);
 
-                WaitForState(sourceMailbox1, State.Synced, 1200000, 60);
-                WaitForState(sourceMailbox2, State.Synced, 1200000, 60);
-                WaitForState(sourceMailbox3, State.Synced, 1200000, 60);
-                WaitForState(sourceMailbox6, State.Synced, 1200000, 60);
-                WaitForState(sourceMailbox8, State.Synced, 1200000, 60);
-                WaitForState(sourceMailbox9, State.Synced, 1200000, 60);
-                WaitForState(sourceMailbox11Upn, State.Synced, 1200000, 60);
-                WaitForState(sourceMailbox12, State.Synced, 1200000, 60);
-                WaitForState(sourceMailbox13, State.Synced, 1200000, 60);
-                WaitForState(sourceMailbox14, State.Synced, 1200000, 60);
-                WaitForState(sourceMailbox15, State.Synced, 1200000, 60);
+                WaitForAnyState(sourceMailbox1, new[] { State.Synced, State.SyncError }, 1200000, 60);
+                WaitForAnyState(sourceMailbox2, new[] { State.Synced, State.SyncError }, 1200000, 60);
+                WaitForAnyState(sourceMailbox3, new[] { State.Synced, State.SyncError }, 1200000, 60);
+                WaitForAnyState(sourceMailbox6, new[] { State.Synced, State.SyncError }, 1200000, 60);
+                WaitForAnyState(sourceMailbox8, new[] { State.Synced, State.SyncError }, 1200000, 60);
+                WaitForAnyState(sourceMailbox9, new[] { State.Synced, State.SyncError }, 1200000, 60);
+                WaitForAnyState(sourceMailbox11Upn, new[] { State.Synced, State.SyncError }, 1200000, 60);
+                WaitForAnyState(sourceMailbox12, new[] { State.Synced, State.SyncError }, 1200000, 60);
+                WaitForAnyState(sourceMailbox13, new[] { State.Synced, State.SyncError }, 1200000, 60);
+                WaitForAnyState(sourceMailbox14, new[] { State.Synced, State.SyncError }, 1200000, 60);
+                WaitForAnyState(sourceMailbox15, new[] { State.Synced, State.SyncError }, 1200000, 60);
 
 
                 bool tc32195Group = false;

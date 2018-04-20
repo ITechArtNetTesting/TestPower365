@@ -100,13 +100,13 @@ namespace Product.Tests.IntegrationTests
 
                 //NOTE: Wait for entry13 is synced
                 User.AtUsersForm().PerformSearch(sourceMailbox13);
-                User.AtUsersForm().WaitForState(sourceMailbox13, State.Synced, 60000);
+                User.AtUsersForm().WaitForState(sourceMailbox13, State.Synced, 1200000, 30);
                 //NOTE: Wait for entry14 is synced
                 User.AtUsersForm().PerformSearch(sourceMailbox14);
-                User.AtUsersForm().WaitForState(sourceMailbox14, State.Synced, 60000);
+                User.AtUsersForm().WaitForState(sourceMailbox14, State.Synced, 12000000, 30);
                 //NOTE: Wait for entry15 is synced
                 User.AtUsersForm().PerformSearch(sourceMailbox15);
-                User.AtUsersForm().WaitForState(sourceMailbox15, State.Synced, 60000);
+                User.AtUsersForm().WaitForState(sourceMailbox15, State.Synced, 12000000, 30);
                 //NOTE: Cutover entry15
                 User.AtUsersForm().SelectEntryBylocator(sourceMailbox15);
                 User.AtUsersForm().SelectAction(ActionType.Cutover);
@@ -123,7 +123,7 @@ namespace Product.Tests.IntegrationTests
                     User.AtUsersForm().Apply();
                 }
                 User.AtUsersForm().ConfirmCutover();
-                User.AtUsersForm().WaitForState(sourceMailbox15, State.Finalizing, 30000);
+                User.AtUsersForm().WaitForState(sourceMailbox15, State.Finalizing, 30000, 10);
                 //NOTE: Cutover entry14
                 User.AtUsersForm().PerformSearch(sourceMailbox14);
                 User.AtUsersForm().SelectEntryBylocator(sourceMailbox14);
@@ -141,7 +141,7 @@ namespace Product.Tests.IntegrationTests
                     User.AtUsersForm().Apply();
                 }
                 User.AtUsersForm().ConfirmCutover();
-                User.AtUsersForm().WaitForState(sourceMailbox14, State.Finalizing, 30000);
+                User.AtUsersForm().WaitForState(sourceMailbox14, State.Finalizing, 30000, 10);
                 //NOTE: Cutover entry13
                 User.AtUsersForm().PerformSearch(sourceMailbox13);
                 User.AtUsersForm().SelectEntryBylocator(sourceMailbox13);
@@ -164,13 +164,13 @@ namespace Product.Tests.IntegrationTests
                 User.AtUsersForm().CloseUserDetails();
 
                 //NOTE: Wait till entry13 cutover completes
-                User.AtUsersForm().WaitForState(sourceMailbox13, State.Complete, 60000);
+                User.AtUsersForm().WaitForState(sourceMailbox13, State.Complete, 1200000, 60);
                 //NOTE: Wait till entry14 cutover completes
                 User.AtUsersForm().PerformSearch(sourceMailbox14);
-                User.AtUsersForm().WaitForState(sourceMailbox14, State.Complete, 60000);
+                User.AtUsersForm().WaitForState(sourceMailbox14, State.Complete, 1200000, 60);
                 //NOTE: Wait till entry15 cutover completes
                 User.AtUsersForm().PerformSearch(sourceMailbox15);
-                User.AtUsersForm().WaitForState(sourceMailbox15, State.Complete, 60000);
+                User.AtUsersForm().WaitForState(sourceMailbox15, State.Complete, 1200000, 60);
 
                 Thread.Sleep(2700000);
                 //NOTE: Run PS script

@@ -501,14 +501,16 @@ namespace Product.Framework.Forms
 			}
 		}
         //@@@ Needs overhaul
-
-        private readonly string _rowInputAncestor = "/ancestor::tr//input";
+        
         private readonly string _rowTextAncestorFormat = "/ancestor::tr//*[contains(text(), '{0}')]";
         private readonly string _lowerCaseTextLocatorFormat = "//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{0}')]]";
 
         public void WaitForState(string entry, State state, int timeout = 5000, int pollIntervalSec = 0)
         {
             var value = state.GetValue();
+            if (state.GetValue().ToLower() == "synced")
+                value = "complete";
+
             var rowEntryLocator = string.Format(_lowerCaseTextLocatorFormat, entry.ToLowerInvariant());
             var rowTextAncestorLocator = string.Format(_rowTextAncestorFormat, value);
             var rowEntryTextLocator = string.Format("{0}{1}", rowEntryLocator, rowTextAncestorLocator);
@@ -518,8 +520,27 @@ namespace Product.Framework.Forms
                 throw new Exception(string.Format("Entry of '{0}' with state '{1}' was not found.", entry, value));
         }
 
+        public void WaitForAnyState(string entry, State[] states, int timeout = 5000, int pollIntervalSec = 0)
+        {
+            var bys = new List<By>();
+            foreach (var state in states)
+            {
+                var value = state.GetValue();
+                if (state.GetValue().ToLower() == "synced")
+                    value = "complete";
+                var rowEntryLocator = string.Format(_lowerCaseTextLocatorFormat, entry.ToLowerInvariant());
+                var rowTextAncestorLocator = string.Format(_rowTextAncestorFormat, value);
+                var rowEntryTextLocator = string.Format("{0}{1}", rowEntryLocator, rowTextAncestorLocator);
 
-		public void WaitForState2(string locator, State state, int timeout)
+                var rowEntryTextValue = By.XPath(rowEntryTextLocator);
+                bys.Add(rowEntryTextValue);
+            }
+            
+            if(!IsAnyElementExists(bys.ToArray(), timeout / 1000, pollIntervalSec))
+                throw new Exception(string.Format("Entry of '{0}' with any state '{1}' was not found.", entry, string.Join(", ", states)));
+        }
+
+        public void WaitForState2(string locator, State state, int timeout)
 		{
 			Log.Info($"Waiting for line with {locator} locator in {state.GetValue()} state");
                      
@@ -1185,7 +1206,7 @@ namespace Product.Framework.Forms
 									".//td[count(//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//thead/tr/th//*[text()[contains(.,'Size')]]/ancestor::th/preceding::th)+1]//*[normalize-space(text())]"))
 							.Text);
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					Log.Info("Empty size");
 				}
@@ -1543,7 +1564,7 @@ namespace Product.Framework.Forms
 	        {
 	            new Label(By.XPath($"//*[contains(text(), '{localDate}')]"), "").WaitForElementPresent(10000);
             }
-	        catch (Exception e)
+	        catch (Exception)
 	        {
 	            SortStartedJobs();
 	            new Label(By.XPath($"//*[contains(text(), '{localDate}')]"), "").WaitForElementPresent(10000);
@@ -1649,7 +1670,7 @@ namespace Product.Framework.Forms
 		    {
 		        logsButton.Click();
             }
-		    catch (Exception e)
+		    catch (Exception)
 		    {
 		       Log.Info("First click failed");
 		       logsButton =
@@ -1666,7 +1687,7 @@ namespace Product.Framework.Forms
 	        {
 	            rollbackLogsButton.Click();
 	        }
-	        catch (Exception e)
+	        catch (Exception)
 	        {
 	            Log.Info("First click failed");
 	            rollbackLogsButton = new Button(By.XPath("//div[contains(@class, 'modal in')]//a[contains(@href, 'ExportRollbackJobLogs')]"), "Rollback logs button");

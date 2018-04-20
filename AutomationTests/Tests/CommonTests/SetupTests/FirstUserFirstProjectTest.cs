@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
-using T365.Database;
 
 namespace Product.Tests.CommonTests.SetupTests
 {

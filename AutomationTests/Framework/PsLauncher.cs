@@ -41,7 +41,6 @@ namespace Product.Framework
         public Process LaunchPowerShellInstance(string scriptName, string parameters)
 		{
 			ProcessStartInfo processInfo;
-			Process process;
 			//Disabling architechture redirecting
 			var ptr = new IntPtr();
 			var isWow64FsRedirectionDisabled = Wow64DisableWow64FsRedirection(ref ptr);
@@ -62,7 +61,6 @@ namespace Product.Framework
 		public Process LaunchPowerShellInstance(string scriptName, string parameters, string arcType)
 		{
 			ProcessStartInfo processInfo;
-			Process process;
 			//Disabling architechture redirecting
 			var ptr = new IntPtr();
 			var isWow64FsRedirectionDisabled = Wow64DisableWow64FsRedirection(ref ptr);

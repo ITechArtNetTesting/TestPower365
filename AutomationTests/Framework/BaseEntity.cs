@@ -3,6 +3,7 @@ using log4net;
 using log4net.Config;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using System.Linq;
 
 namespace Product.Framework
 {
@@ -61,19 +62,41 @@ namespace Product.Framework
 
         protected IWebElement FindVisibleElement(By by, int timeoutInSeconds = 5, int pollIntervalSec = 0)
         {
-            return EvaluateElement(by, ExpectedConditions.ElementIsVisible(by), timeoutInSeconds, pollIntervalSec);
+            return EvaluateElement(ExpectedConditions.ElementIsVisible(by), timeoutInSeconds, pollIntervalSec);
         }
 
         protected IWebElement FindClickableElement(By by, int timeoutInSeconds = 5, int pollIntervalSec = 0)
         {
-            return EvaluateElement(by, ExpectedConditions.ElementToBeClickable(by), timeoutInSeconds, pollIntervalSec);
+            return EvaluateElement(ExpectedConditions.ElementToBeClickable(by), timeoutInSeconds, pollIntervalSec);
         }
 
         protected bool IsElementTextPresentInValue(By by, string value, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
             try
             {
-                return EvaluateElement(by, ExpectedConditions.TextToBePresentInElementValue(by, value), timeoutInSec, pollIntervalSec);
+                return EvaluateElement(ExpectedConditions.TextToBePresentInElementValue(by, value), timeoutInSec, pollIntervalSec);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        protected bool IsAnyElementExists(By[] bys, int timeoutInSec = 5, int pollIntervalSec = 0)
+        {
+            try
+            {
+                return EvaluateElement((driver) => {
+                    try
+                    {
+                        return bys.Any(b => ExpectedConditions.ElementExists(b) != null);
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
+                }, 
+                timeoutInSec, pollIntervalSec);
             }
             catch (Exception)
             {
@@ -85,7 +108,7 @@ namespace Product.Framework
         {
             try
             {
-                return EvaluateElement(by, ExpectedConditions.ElementExists(by), timeoutInSec, pollIntervalSec) != null;
+                return EvaluateElement(ExpectedConditions.ElementExists(by), timeoutInSec, pollIntervalSec) != null;
             }
             catch (Exception)
             {
@@ -97,7 +120,7 @@ namespace Product.Framework
         {
             try
             {
-                return EvaluateElement(by, ExpectedConditions.ElementIsVisible(by), timeoutInSec, pollIntervalSec) != null;
+                return EvaluateElement(ExpectedConditions.ElementIsVisible(by), timeoutInSec, pollIntervalSec) != null;
             }
             catch (Exception)
             {
@@ -109,7 +132,7 @@ namespace Product.Framework
         {
             try
             {
-                return EvaluateElement(by, ExpectedConditions.ElementToBeClickable(by), timeoutInSec, pollIntervalSec) != null;
+                return EvaluateElement(ExpectedConditions.ElementToBeClickable(by), timeoutInSec, pollIntervalSec) != null;
             }
             catch (Exception)
             {
@@ -121,7 +144,7 @@ namespace Product.Framework
         {
             try
             {
-                return EvaluateElement(by, ExpectedConditions.ElementSelectionStateToBe(by, selected), timeoutInSeconds, pollIntervalSec);
+                return EvaluateElement(ExpectedConditions.ElementSelectionStateToBe(by, selected), timeoutInSeconds, pollIntervalSec);
             }
             catch (Exception)
             {
@@ -129,7 +152,7 @@ namespace Product.Framework
             }
         }
 
-        protected T EvaluateElement<T>(By by, Func<IWebDriver, T> condition, int timeoutInSec = 5, int pollIntervalSec = 0)
+        protected T EvaluateElement<T>(Func<IWebDriver, T> condition, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
             if (timeoutInSec > 0 || pollIntervalSec > 0)
             {
@@ -154,7 +177,7 @@ namespace Product.Framework
             }
             return condition(Browser.GetDriver());
         }
-
+        
         protected T EvaluateScript<T>(string script, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
             if (timeoutInSec > 0 || pollIntervalSec > 0)

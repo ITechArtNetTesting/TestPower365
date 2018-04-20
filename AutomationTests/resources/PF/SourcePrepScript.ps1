@@ -13,7 +13,15 @@
 
 Write-Host "Get-PublicFolder"
 
-Get-PublicFolder -Recurse -Identity "\AutomationTests" | Disable-MailPublicFolder -Confirm:$false
+$publicFolders = Get-PublicFolder -Recurse -Identity "\AutomationTests" 
+
+Write-Host "publicFolders"
+
+$publicFolders
+
+#Write-Host "Disable-MailPublicFolder"
+
+#$publicFolders | Disable-MailPublicFolder -Confirm:$false
 Write-Host "Remove-PublicFolder"
 Remove-PublicFolder \AutomationTests -Recurse -Confirm:$false
 Write-Host "New-PublicFolder"
@@ -25,14 +33,14 @@ New-PublicFolder Test1 -Path \AutomationTests
 
 Start-Sleep -Seconds 10
 Write-Host "If Get-PublicFolder"
- If (Get-PublicFolder -Identity "\AutomationTests")
-                        {
-                         Write-Host ("Public Folder successfully created")
-                        }
-                        Else
-                        {
-                                        Write-Error 'Mailbox not found'                                        
-                        }
+If (Get-PublicFolder -Identity "\AutomationTests")
+{
+    Write-Host ("Public Folder successfully created")
+}
+Else
+{
+	Write-Error 'Mailbox not found'                                        
+}
 
 #Add-PublicFolderClientPermission -Identity \AutomationTests\Test1 -AccessRights 'Owner' -User $userName
 Write-Host "Remove-PSSession"

@@ -57,8 +57,7 @@ namespace Product.Tests.PowerShellTests
 		        }
 		        User.AtUsersForm().ConfirmSync();
 		        User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 10000);
-		        User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 
-		            60000);
+		        User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 600000, 30);
 		        using (var process = new PsLauncher().LaunchPowerShellInstance("Compare.ps1",
 		            $" -slogin {sourceLogin}" +
 		            $" -spassword {sourcePassword}" +
@@ -97,7 +96,7 @@ namespace Product.Tests.PowerShellTests
 		            Log.Fatal("Source Target Item existance test failed as expected");
 		        }
             }
-		    catch (Exception e)
+		    catch (Exception)
 		    {
 		        LogHtml(Browser.GetDriver().PageSource);
                 throw;

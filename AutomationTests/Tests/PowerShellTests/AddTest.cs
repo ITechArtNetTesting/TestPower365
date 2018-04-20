@@ -79,8 +79,8 @@ namespace Product.Tests.PowerShellTests
 		                        User.AtUsersForm().Apply();
 		                    }
 		                    User.AtUsersForm().ConfirmSync();
-		                    User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 10000);
-		                    User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 60000);
+		                    User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 20000);
+		                    User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 600000, 30);
 		                    RunConfigurator.CreateEmptyFile(stopFile1);
 		                }
 		            }
