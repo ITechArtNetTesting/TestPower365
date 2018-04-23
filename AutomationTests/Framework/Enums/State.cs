@@ -28,6 +28,15 @@ namespace Product.Framework.Enums
         [Description("Rollback In Progress")]
         RollbackInProgress,
         [Description("Rollback Complete")]
-        RollbackCompleted
+        RollbackCompleted,
+        [Description("Provisioning")]
+        Provisioning,
+        [Description("1 sync(s) complete")]
+        Synced1,
+        [Description("2 sync(s) complete")]
+        Synced2,
+        [Description("Sync Error")]
+        SyncError      
+
     }
 }
