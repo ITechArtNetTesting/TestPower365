@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -29,13 +30,19 @@ namespace Product.Framework.Forms
 			new Label(
 				By.XPath(
                     "//div[@class='page-content']/div[@class='ibox'][2]/div[@class='ibox-content']/div[@class='row']/div[@class='col-md-3 col-sm-6 col-xs-6'][1]/h3[@class='blue-text']/font/font[text()='Connected']"),
-                "Connection status label");
+                "Connection status label");       
 
-		private readonly Label discoveryCompleteStateLabel =
+        private readonly Label discoveryCompleteStateLabel =
 			new Label(By.XPath("//i[contains(@data-bind, 'discoveryState')][contains(@class, 'icon-success')][contains(@class, 'fa-check-circle')]"),
 				"Discovery Complete label");
 
-		private readonly Label discoveryCompleteWithErrorsLabel =
+        public void AssertUserAtCurrentPage()
+        {
+            Assert.IsTrue(Browser.GetDriver().FindElement(TitleLocator).Displayed);
+            Assert.IsTrue(Browser.GetDriver().FindElement(TitleLocator).Enabled);
+        }
+
+        private readonly Label discoveryCompleteWithErrorsLabel =
 			new Label(By.XPath("//i[contains(@data-bind, 'discoveryState')]/ancestor::tr//*[text()='Complete With Errors']"),
 				"Complete with errors label");
 
@@ -75,16 +82,38 @@ namespace Product.Framework.Forms
 		private readonly Button totalPublicFoldersMigrationsButton = new Button(By.XPath("//*[contains(text(), 'Public folders')]/ancestor::div[contains(@class, 'ibox')]//div[contains(@class, 'ibox-content')]//a[contains(@data-bind, 'totalLink')]"), "Total migrations button");
 		private readonly Button migrationGroupsButton = new Button(By.XPath("//a[contains(@data-bind, 'distGroupsLink')]"), "Migration groups button");
         private readonly Button totalGroupsButton = new Button(By.XPath("//div[contains(@class, 'ibox-content')]//a[contains(@data-bind, 'allGroupsLink')]"), "Total groups button");
+        private Label TenantConnectionLabel = new Label(By.XPath("//div[@class='ibox'][2]//thead//*[text()='Connection']"), "Connection label");
+        private Label TenantDiscoveryLabel = new Label(By.XPath("//div[@class='ibox'][2]//thead//*[text()='Discovery']"), "Discovery label");
 	    protected Label descriptionLabel => new Label(By.XPath("//*[contains(@data-bind, 'projectDescription')]"), "Description Label");
+        private Button SyncNow = new Button(By.XPath("//a[@role='button']//span[text()='Sync now']"), "Sync now button");
+        private Button ScheduleSync = new Button(By.XPath("//a[@role='button']//span[text()='Schedule Sync(s)']"), "Schedule Sync(s) button");
+
         public ProjectOverviewForm() : base(TitleLocator, "Project overview form")
 		{
             descriptionLabel.WaitForElementPresent();
 		}
 
-		public void OpenCoexSettings()
+        public void AssertPageHasTenantStatusSection()
+        {
+            TenantConnectionLabel.IsDisplayed();
+            TenantConnectionLabel.IsPresent();
+            TenantDiscoveryLabel.IsDisplayed();
+            TenantDiscoveryLabel.IsPresent();
+        }
+        public void ClickScheduleSync()
+        {
+            ScheduleSync.Click();
+        }
+
+        public void ClickSyncNow()
+        {
+            SyncNow.Click();
+        }
+
+        public void OpenCoexSettings()
 		{
 			Log.Info("Opening COEX settings");
-			coexSettingsButton.Click();
+			coexSettingsButton.Click();            
 		}
 
 	    public void OpenTotalGroups()
