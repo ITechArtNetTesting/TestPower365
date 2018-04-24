@@ -17,8 +17,8 @@ namespace Product.Tests.MailWithDiscoveryTests.MigrationTests
         [TestCategory("Migration")]
         public void VerifyUserCanGetBackToProjectDashboardFromSyncNowAndScheduleSyncsWizards()
         {
-            string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
-            string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");
+            string login = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user");
+            string password = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//password");
             string client = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name");
             string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//name");
 

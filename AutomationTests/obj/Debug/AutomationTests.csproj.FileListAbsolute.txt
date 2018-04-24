@@ -536,3 +536,6 @@ C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\T2TMig
 C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\ThoughtWorks.Selenium.Core.xml
 C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\WebDriver.xml
 C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\WebDriver.Support.xml
+C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\log4net.dll
+C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\Selenium.WebDriverBackedSelenium.dll
+C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\bin\Debug\WebDriver.Support.dll
