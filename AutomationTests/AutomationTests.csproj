@@ -246,6 +246,7 @@
     <Compile Include="Tests\MailOnlyTests\SortingAndFilterTests\SortingFilteredEntriesTest.cs" />
     <Compile Include="Tests\MailOnlyTests\SortingAndFilterTests\SortingTest.cs" />
     <Compile Include="Tests\MailOnlyTests\TenantConfigurationTests\TenantConfigurationTest.cs" />
+    <Compile Include="Tests\MailOnlyTests\UsersActionsTests\TC23096_Verify_only_users_in_Synced_state_can_be_cutover_or_completed.cs" />
     <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\DiscoveryTest.cs" />
     <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\TC22982_UI_Verify_after_the_Mail_Migration_Job_completed_for_Mail_with_Discovery_Project_the_UI_should_allow_user_to_select_Complite_Job_Option.cs" />
     <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\TC25771_UI_Verify_Project_Landing_Page_has_Tenant_Status_section.cs" />

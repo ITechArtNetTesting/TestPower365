@@ -42,8 +42,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
 		        User.AtUsersForm().AssertDetailsSyncButtonIsEnabled();
 		        User.AtUsersForm().CompleteSync();
 		        User.AtUsersForm().ConfirmComplete();
-		        User.AtUsersForm().VerifyStateIS("Complete");
-		        User.AtUsersForm().CloseUserDetails();
+		        User.AtUsersForm().VerifyStateIS("Complete");		        
             }
 		    catch (Exception e)
 		    {
