@@ -37,7 +37,7 @@ namespace Product.Framework.Elements
 		{
 			WaitForElementPresent();
 			return (RemoteWebElement)Browser.GetDriver().FindElement(locator);
-		}
+		}        
 
 		protected string GetName()
 		{
@@ -49,6 +49,18 @@ namespace Product.Framework.Elements
 			return locator;
 		}
 
+        public bool IsElementPresent()
+        {
+            try
+            {
+                Browser.GetDriver().FindElement(locator);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
 
         /// <summary>
         ///     Clicks this instance.

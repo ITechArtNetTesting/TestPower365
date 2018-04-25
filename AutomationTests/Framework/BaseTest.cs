@@ -50,9 +50,10 @@ namespace Product.Framework
 			RunConfigurator.ClearDownloads();
 			User = new UserSteps();
 			_baseUrl = RunConfigurator.GetValue("baseurl");
-			GetResolution();
+			GetResolution();            
 			Browser.GetInstance(RunConfigurator.DownloadPath);
-			Browser.GetDriver().Manage().Window.Maximize();
+            Browser.GetDriver().Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(5);
+            Browser.GetDriver().Manage().Window.Maximize();
 			Browser.GetDriver().Navigate().GoToUrl(_baseUrl);
 		}
 

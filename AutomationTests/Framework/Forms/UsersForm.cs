@@ -8,6 +8,8 @@ using System.Management.Automation.Internal;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using Product.Framework.Elements;
 using Product.Framework.Enums;
 
@@ -42,16 +44,49 @@ namespace Product.Framework.Forms
 				By.XPath("//div[@id='confirmationDialog'][contains(@class, 'modal in')]//*[contains(text(), 'Yes')]"),
 				"Confirm button");
 
-		private readonly Button disabledApplyActionButton =
+        private readonly Button CompleteDetailsButton = new Button(By.XPath("//button[text()='Complete']"), "Complite button on details form");
+
+        private readonly Button CutoverDetailsButton = new Button(By.XPath("//button[text()='Cutover']"), "Cutover button on details form");
+
+        public void AssertCutoverCompliteDetailsIsDisabled()
+        {
+            Assert.IsTrue(!CompleteDetailsButton.IsElementPresent());
+            Assert.IsTrue(!CutoverDetailsButton.IsElementPresent());
+        }
+        
+
+        public void CheckApplyButtonIsDisabled()
+        {
+            WaitForAjaxLoad();
+            Assert.IsFalse(enabledApplyActionButton.IsElementPresent());
+        }
+
+        private readonly IList<IWebElement> UserStatuses = Browser.GetDriver().FindElements(By.XPath("//div[@id='users']//tr//td[4]//span"));
+       
+        private readonly Button disabledApplyActionButton =
 			new Button(By.XPath("//button[contains(@data-bind, 'applyAction')][@disabled='']"), "Disabled apply button");
 
 		private Button enabledApplyActionButton =
 			new Button(By.XPath("//button[contains(@data-bind, 'applyAction')][not(@disabled='')]"), "Enabled apply button");
+       
 
-		private readonly Button enabledArchiveButton =
+        public void CheckApplyButtonIsEnabled()
+        {
+            WaitForAjaxLoad();
+            Assert.IsTrue(enabledApplyActionButton.IsElementPresent());
+        }
+
+        private readonly Button enabledArchiveButton =
 			new Button(By.XPath("//button[contains(text(), 'Archive')][not(@disabled='')]"), "Enabled archive button");
 
-		private readonly Button enabledEditButton =
+        internal void AssertCutoverCompliteDetailsIsEnabled()
+        {
+            WaitForAjaxLoad();
+            Assert.IsTrue(CompleteDetailsButton.IsElementPresent());
+            Assert.IsTrue(CutoverDetailsButton.IsElementPresent());
+        }
+
+        private readonly Button enabledEditButton =
 			new Button(By.XPath("//button[contains(text(), 'Edit')][not(@disabled='')]"), "Enabled edit button");
 
 		private readonly Button enabledExportButton =
@@ -217,7 +252,28 @@ namespace Product.Framework.Forms
 		    descriptionLabel.WaitForElementPresent();
         }
 
-		public void PerformSearch(string search)
+        public void SelectFirstNotSyncedUser(ref int SelectedUser)
+        {
+            WaitForAjaxLoad();
+            if (SelectedUser == -1)
+            {
+                for (int i = 0; i < UserStatuses.Count; i++)
+                {
+                    if (UserStatuses[i].Text.Contains("Matched"))
+                    {
+                        SelectedUser = i;
+                        UserStatuses[SelectedUser].Click();
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                UserStatuses[SelectedUser].Click();
+            }
+        }
+        
+        public void PerformSearch(string search)
 		{
 			Log.Info("Searching: " + search);
 			ScrollToTop();
@@ -441,6 +497,12 @@ namespace Product.Framework.Forms
 			ScrollToElement(detailsButton.GetElement());
 			detailsButton.DoubleClick();
 		}
+
+        public void OpenDetailsOfSelectedUser(int SelectedUser)
+        {
+            Actions action = new Actions(Browser.GetDriver());
+            action.DoubleClick(UserStatuses[SelectedUser]).Build().Perform();
+        }
 
         public void DetailsRefresh()
         {
