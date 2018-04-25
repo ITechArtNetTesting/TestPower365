@@ -38,8 +38,7 @@ namespace Product.Framework.Forms
 
         public void AssertUserAtCurrentPage()
         {
-            Assert.IsTrue(Browser.GetDriver().FindElement(TitleLocator).Displayed);
-            Assert.IsTrue(Browser.GetDriver().FindElement(TitleLocator).Enabled);
+            Assert.IsTrue(Browser.GetDriver().FindElement(TitleLocator).Displayed);           
         }
 
         private readonly Label discoveryCompleteWithErrorsLabel =
@@ -87,6 +86,7 @@ namespace Product.Framework.Forms
 	    protected Label descriptionLabel => new Label(By.XPath("//*[contains(@data-bind, 'projectDescription')]"), "Description Label");
         private Button SyncNow = new Button(By.XPath("//a[@role='button']//span[text()='Sync now']"), "Sync now button");
         private Button ScheduleSync = new Button(By.XPath("//a[@role='button']//span[text()='Schedule Sync(s)']"), "Schedule Sync(s) button");
+        private Button EditDiscoveryOverview = new Button(By.XPath("//*[contains(text(), 'DISCOVERY')]/ancestor::div[contains(@class, 'ibox-title')]//a"), "Edit discovery overview button");
 
         public ProjectOverviewForm() : base(TitleLocator, "Project overview form")
 		{
@@ -95,10 +95,7 @@ namespace Product.Framework.Forms
 
         public void AssertPageHasTenantStatusSection()
         {
-            TenantConnectionLabel.IsDisplayed();
-            TenantConnectionLabel.IsPresent();
-            TenantDiscoveryLabel.IsDisplayed();
-            TenantDiscoveryLabel.IsPresent();
+            Assert.IsTrue(TenantConnectionLabel.IsDisplayed() && TenantDiscoveryLabel.IsDisplayed());            
         }
         public void ClickScheduleSync()
         {
@@ -179,6 +176,11 @@ namespace Product.Framework.Forms
 			Log.Info("Asserting Tenants exist");
 			tenantsLabel.WaitForElementPresent();
 		}
+
+        public void OpenDiscoveryOverview()
+        {
+            EditDiscoveryOverview.Click();
+        }
 
 		public void AssertConnectionsStatusesExist(int count)
 		{
