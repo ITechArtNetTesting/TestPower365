@@ -450,7 +450,7 @@ namespace Product.Tests.PowerShellTests
             User.AtProjectOverviewForm().OpenUsersList();
 
             User.AtUsersForm().SyncUserByLocator(user);
-            User.AtUsersForm().ConfirmSync();
+            User.AtUsersForm().Confirm();
             User.AtUsersForm().AssertUserHaveSyncingState(user);
 
             User.AtUsersForm().WaitForState(user, State.Synced, 1200000, 60);

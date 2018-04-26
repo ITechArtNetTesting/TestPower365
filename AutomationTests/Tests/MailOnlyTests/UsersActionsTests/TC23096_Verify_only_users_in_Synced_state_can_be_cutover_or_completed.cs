@@ -12,6 +12,7 @@ namespace Product.Tests.MailOnlyTests.UsersActionsTests
     [TestClass]
     public class TC23096_Verify_only_users_in_Synced_state_can_be_cutover_or_completed: LoginAndConfigureTest
     {
+        int SelectedUser = -1;
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
         {
@@ -25,8 +26,7 @@ namespace Product.Tests.MailOnlyTests.UsersActionsTests
             string sourceMailbox3 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entry1']/..//source");
 
             try
-            {
-                int SelectedUser=-1;
+            {                
                 LoginAndSelectRole(RunConfigurator.GetUserLogin("client1"),
                                 RunConfigurator.GetPassword("client1"),
                                 RunConfigurator.GetClient("client1"));
@@ -43,7 +43,7 @@ namespace Product.Tests.MailOnlyTests.UsersActionsTests
                 User.AtUsersForm().CheckApplyButtonIsDisabled();
                 User.AtUsersForm().SelectAction(Framework.Enums.ActionType.Sync);
                 User.AtUsersForm().Apply();
-                User.AtUsersForm().ConfirmSync();
+                User.AtUsersForm().Confirm();
                 User.AtUsersForm().OpenDetailsOfSelectedUser(SelectedUser);
                 User.AtUsersForm().WaitForJobIsCreated();
                 User.AtUsersForm().AssertDetailsStopButtonIsEnabled();

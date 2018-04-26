@@ -59,7 +59,7 @@ namespace Product.Tests.IntegrationTests
                     User.AtUsersForm().SelectAction(ActionType.Sync);
                     User.AtUsersForm().Apply();
                 }
-                User.AtUsersForm().ConfirmSync();
+                User.AtUsersForm().Confirm();
                 User.AtUsersForm().WaitForState(sourceMailbox13, State.Syncing, 30000);
                 //NOTE: Sync entry14
                 User.AtUsersForm().PerformSearch(sourceMailbox14);
@@ -77,7 +77,7 @@ namespace Product.Tests.IntegrationTests
                     User.AtUsersForm().SelectAction(ActionType.Sync);
                     User.AtUsersForm().Apply();
                 }
-                User.AtUsersForm().ConfirmSync();
+                User.AtUsersForm().Confirm();
                 User.AtUsersForm().WaitForState(sourceMailbox14, State.Syncing, 30000);
                 //NOTE: Sync entry15
                 User.AtUsersForm().PerformSearch(sourceMailbox15);
@@ -95,7 +95,7 @@ namespace Product.Tests.IntegrationTests
                     User.AtUsersForm().SelectAction(ActionType.Sync);
                     User.AtUsersForm().Apply();
                 }
-                User.AtUsersForm().ConfirmSync();
+                User.AtUsersForm().Confirm();
                 User.AtUsersForm().WaitForState(sourceMailbox15, State.Syncing, 30000);
 
                 //NOTE: Wait for entry13 is synced

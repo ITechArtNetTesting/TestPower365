@@ -30,7 +30,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
 		        User.AtProjectOverviewForm().GetUsersCount();
 		        User.AtProjectOverviewForm().OpenUsersList();
 		        User.AtUsersForm().SyncUserByLocator(sourceMailbox3);
-		        User.AtUsersForm().ConfirmSync();
+		        User.AtUsersForm().Confirm();
 		        User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox3);
 		        User.AtUsersForm().OpenDetailsByLocator(sourceMailbox3);
 		        User.AtUsersForm().VerifyStateIS("Syncing");

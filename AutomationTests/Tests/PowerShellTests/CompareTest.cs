@@ -55,7 +55,7 @@ namespace Product.Tests.PowerShellTests
 		            User.AtUsersForm().SelectAction(ActionType.Sync);
 		            User.AtUsersForm().Apply();
 		        }
-		        User.AtUsersForm().ConfirmSync();
+		        User.AtUsersForm().Confirm();
 		        User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 10000);
 		        User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 600000, 30);
 		        using (var process = new PsLauncher().LaunchPowerShellInstance("Compare.ps1",

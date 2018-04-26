@@ -17,6 +17,8 @@ namespace Product.Framework.Forms
 {
 	public class UsersForm : BaseForm
 	{
+        private readonly Button detailsSync = new Button(By.XPath("//button//font[contains(text(),'Sync')]"), "Sync button on details popup");
+
 		private static readonly By TitleLocator =
 			By.XPath("//div[@id='users']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]");
 
@@ -29,13 +31,68 @@ namespace Product.Framework.Forms
 		private readonly Button backToDashboardButton = new Button(
 			By.XPath("//button[contains(@data-bind, 'goToDashboard')]"), "Back to dashboard button");
 
-		private readonly TextBox chooseFilesInput =
-			new TextBox(By.XPath("//div[contains(@class, 'modal in')]//input[@type='file']"), "Choose files input");
+        private readonly TextBox chooseFilesInput =
+            new TextBox(By.XPath("//div[contains(@class, 'modal in')]//input[@type='file']"), "Choose files input");
 
-		private readonly Button closeFilterButton =
+        internal void ClickSyncOnDetailsPopup()
+        {
+            detailsSync.Click();
+        }
+
+        private readonly Button closeFilterButton =
 			new Button(By.XPath("//div[@class='panel-footer']//button[text()='Close']"), "Close filter button");
 
-		private readonly Button closeModalWindowButton =
+        public void SyncSelectedUser()
+        {
+            WaitForAjaxLoad();
+            SelectAction(ActionType.Sync);
+            Apply();
+            Confirm();
+        }
+
+        public void VerifyStopButtonIsAvailiable()
+        {
+            WaitForAjaxLoad();
+            SelectAction(ActionType.Stop);
+            CheckApplyButtonIsEnabled();
+        }
+
+        public void AssertMigrationJobWasStopped(int SelectedUser)
+        {
+            WaitForAjaxLoad();           
+            Assert.IsTrue(Browser.GetDriver().FindElements(By.XPath("//div[@id='users']//tr//td[4]//span"))[SelectedUser].Text.Contains("Stopping"));
+        }
+
+        public void StopSyncingSelectedUser()
+        {
+            WaitForAjaxLoad();
+            SelectAction(ActionType.Stop);
+            enabledApplyActionButton.Click();
+            Confirm();
+        }
+
+        public void SelectFirstSyncingFreeUser(ref int SelectedUser)
+        {
+            WaitForAjaxLoad();
+            if (SelectedUser == -1)
+            {
+                for (int i = 0; i < UserStatuses.Count; i++)
+                {
+                    if (UserStatuses[i].Text.Contains("Syncing") && RunConfigurator.IsUserFree(ListOfSources[i].Text))
+                    {
+                        SelectedUser = i;
+                        UserStatuses[SelectedUser].Click();
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Browser.GetDriver().FindElements(By.XPath("//div[@id='users']//div[@class='table-responsive table-frame m-t-sm']//tr//td[2]//span"))[SelectedUser].Click();
+            }
+        }
+
+        private readonly Button closeModalWindowButton =
 			new Button(By.XPath("//div[contains(@class, 'modal fade in')]//div[@class='modal-footer']//button[text()='Close']"),
 				"Close modal window button");
 
@@ -53,7 +110,8 @@ namespace Product.Framework.Forms
             Assert.IsTrue(!CompleteDetailsButton.IsElementPresent());
             Assert.IsTrue(!CutoverDetailsButton.IsElementPresent());
         }
-        
+
+        IList<IWebElement> ListOfSources = Browser.GetDriver().FindElements(By.XPath("//div[@id='users']//div[@class='table-responsive table-frame m-t-sm']//tr//td[2]//span"));
 
         public void CheckApplyButtonIsDisabled()
         {
@@ -272,7 +330,28 @@ namespace Product.Framework.Forms
                 UserStatuses[SelectedUser].Click();
             }
         }
-        
+
+        public void SelectFirstNotSyncedFreeUser(ref int SelectedUser)
+        {
+            WaitForAjaxLoad();
+            if (SelectedUser == -1)
+            {
+                for (int i = 0; i < UserStatuses.Count; i++)
+                {
+                    if (UserStatuses[i].Text.Contains("Matched")&&RunConfigurator.IsUserFree(ListOfSources[i].Text))
+                    {
+                        SelectedUser = i;
+                        UserStatuses[SelectedUser].Click();
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                ListOfSources[SelectedUser].Click();
+            }
+        }
+
         public void PerformSearch(string search)
 		{
 			Log.Info("Searching: " + search);
@@ -663,7 +742,7 @@ namespace Product.Framework.Forms
 			enabledExportButton.Click();
 		}
 
-		public void ConfirmSync()
+		public void Confirm()
 		{
 			Log.Info("Confirming sync");
 		    try

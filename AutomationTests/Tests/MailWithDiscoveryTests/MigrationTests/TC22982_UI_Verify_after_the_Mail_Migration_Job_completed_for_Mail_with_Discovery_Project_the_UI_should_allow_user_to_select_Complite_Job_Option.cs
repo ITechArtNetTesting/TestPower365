@@ -29,7 +29,7 @@ namespace Product.Tests.MailWithDiscoveryTests.MigrationTests
                 SelectProject(projectName);
                 User.AtProjectOverviewForm().OpenUsersList();
                 User.AtUsersForm().SyncUserByLocator(sourceMailbox3);
-                User.AtUsersForm().ConfirmSync();
+                User.AtUsersForm().Confirm();
                 User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox3);
                 User.AtUsersForm().OpenDetailsByLocator(sourceMailbox3);
                 User.AtUsersForm().VerifyStateIS("Syncing");

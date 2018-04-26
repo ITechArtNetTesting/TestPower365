@@ -109,7 +109,7 @@ namespace Product.Tests.PublicFoldersTests
 		                "//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry4']/..//source"));
 		        }
 
-		        User.AtPublicFolderMigrationViewForm().ConfirmSync();
+		        User.AtPublicFolderMigrationViewForm().Confirm();
 		        User.AtPublicFolderMigrationViewForm().AssertUserHaveSyncingState(RunConfigurator.GetValueByXpath(
 		            "//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry4']/..//source"));
 		        User.AtPublicFolderMigrationViewForm().OpenDetailsByLocator(RunConfigurator.GetValueByXpath(
@@ -153,7 +153,7 @@ namespace Product.Tests.PublicFoldersTests
 		                    User.AtPublicFolderMigrationViewForm().OpenDetailsByLocator(RunConfigurator.GetValueByXpath(
 		                        "//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry4']/..//source"));
 		                    User.AtPublicFolderMigrationViewForm().SyncFromDetails();
-		                    User.AtPublicFolderMigrationViewForm().ConfirmSync();
+		                    User.AtPublicFolderMigrationViewForm().Confirm();
 		                    User.AtPublicFolderMigrationViewForm().AssertDetailsSyncButtonIsDisabled();
 		                    User.AtPublicFolderMigrationViewForm().AssertDetailsStopButtonIsEnabled();
 		                    User.AtPublicFolderMigrationViewForm().WaitForProvisioningJobAppear(2);
@@ -176,7 +176,7 @@ namespace Product.Tests.PublicFoldersTests
 		                        User.AtPublicFolderMigrationViewForm().RefreshData();
 		                        User.AtPublicFolderMigrationViewForm().SyncFromDetails();
 		                    }
-		                    User.AtPublicFolderMigrationViewForm().ConfirmSync();
+		                    User.AtPublicFolderMigrationViewForm().Confirm();
 		                    User.AtPublicFolderMigrationViewForm().WaitForProvisioningJobAppear(3);
 		                    User.AtPublicFolderMigrationViewForm().WaitForProvisioningJobDone();
 		                    User.AtPublicFolderMigrationViewForm().WaitForContentCopyJobAppear(3);

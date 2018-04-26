@@ -40,7 +40,7 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		        User.AtUsersForm().AssertTargetSorted();
               
                 User.AtUsersForm().SyncUserByLocator(sourceMailbox4);
-		        User.AtUsersForm().ConfirmSync();
+		        User.AtUsersForm().Confirm();
 		        User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox4);
 		        User.AtUsersForm().StoreEntriesData();
 		        User.AtUsersForm().SortStatus();

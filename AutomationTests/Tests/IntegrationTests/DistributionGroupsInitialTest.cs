@@ -50,22 +50,22 @@ namespace Product.Tests.IntegrationTests
                     User.AtProjectOverviewForm().OpenMigrationGroups();
                 }
                 User.AtGroupsMigrationForm().SyncUserByLocator(group1Name);
-		        User.AtGroupsMigrationForm().ConfirmSync();
+		        User.AtGroupsMigrationForm().Confirm();
 		        User.AtGroupsMigrationForm().WaitForState(group1Name, State.Syncing, 10000);
 
 		        User.AtGroupsMigrationForm().SyncUserByLocator(group2Name);
-		        User.AtGroupsMigrationForm().ConfirmSync();
+		        User.AtGroupsMigrationForm().Confirm();
 		        User.AtGroupsMigrationForm().WaitForState(group2Name, State.Syncing, 10000);
 		        User.AtGroupsMigrationForm().SyncUserByLocator(group3Name);
-		        User.AtGroupsMigrationForm().ConfirmSync();
+		        User.AtGroupsMigrationForm().Confirm();
 		        User.AtGroupsMigrationForm().WaitForState(group3Name, State.Syncing, 10000);
 		        User.AtGroupsMigrationForm().SyncUserByLocator(group4Name);
-		        User.AtGroupsMigrationForm().ConfirmSync();
+		        User.AtGroupsMigrationForm().Confirm();
 		        User.AtGroupsMigrationForm().SyncUserByLocator(group5Name);
-		        User.AtGroupsMigrationForm().ConfirmSync();
+		        User.AtGroupsMigrationForm().Confirm();
 		        User.AtGroupsMigrationForm().WaitForState(group5Name, State.Syncing, 10000);
 		        User.AtGroupsMigrationForm().SyncUserByLocator(group6Name);
-		        User.AtGroupsMigrationForm().ConfirmSync();
+		        User.AtGroupsMigrationForm().Confirm();
 		        User.AtGroupsMigrationForm().WaitForState(group6Name, State.Syncing, 10000);
 		        User.AtGroupsMigrationForm().WaitForState(group1Name, State.Complete, 600000, 10);
 		        User.AtGroupsMigrationForm().WaitForState(group2Name, State.Complete, 600000, 10);
