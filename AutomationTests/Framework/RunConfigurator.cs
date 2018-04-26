@@ -68,7 +68,20 @@ namespace Product.Framework
 
         public static string GetProjectName(string client, string project )
         {
-            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//name").InnerText;
+            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//name").InnerText;            
+        }
+
+        public static bool IsUserFree(string Source)
+        {
+            bool result = true;
+            foreach (XmlElement entry in xmlDoc.SelectNodes($"//client//project//entry/source"))
+            {
+                if (Source == entry.InnerText)
+                {
+                    result = false;
+                }
+            }
+            return result;
         }
 
         public static string GetFileName(string client, string project, string file)

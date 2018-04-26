@@ -104,7 +104,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
                                 User.AtUsersForm().SelectAction(ActionType.Sync);
                                 User.AtUsersForm().Apply();
                             }
-                            User.AtUsersForm().ConfirmSync();
+                            User.AtUsersForm().Confirm();
                             User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 10000);
                             User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 1900000, 30);
                             RunConfigurator.CreateEmptyFile(stopFile1);
@@ -142,7 +142,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
                                 User.AtUsersForm().SelectAction(ActionType.Sync);
                                 User.AtUsersForm().Apply();
                             }
-                            User.AtUsersForm().ConfirmSync();
+                            User.AtUsersForm().Confirm();
                             User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 10000,30);
                             User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 1200000, 30);
                             RunConfigurator.CreateEmptyFile(stopFile3);

@@ -33,7 +33,7 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		        SelectProject(projectName);
 		        User.AtProjectOverviewForm().OpenUsersList();
                 User.AtUsersForm().SyncUserByLocator(sourceMailbox6);
-                User.AtUsersForm().ConfirmSync();
+                User.AtUsersForm().Confirm();
                 User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox6);
                 User.AtUsersForm().SwitchFilter(FilterState.Open);
 		        User.AtUsersForm().SetMatched();

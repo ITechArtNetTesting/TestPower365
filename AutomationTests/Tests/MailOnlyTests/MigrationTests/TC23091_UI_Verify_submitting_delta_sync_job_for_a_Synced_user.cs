@@ -29,7 +29,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
                 SelectProject(projectName);                
                 User.AtProjectOverviewForm().OpenUsersList();
                 User.AtUsersForm().SyncUserByLocator(sourceMailbox3);
-                User.AtUsersForm().ConfirmSync();
+                User.AtUsersForm().Confirm();
                 User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox3);
                 User.AtUsersForm().OpenDetailsByLocator(sourceMailbox3);
                 User.AtUsersForm().VerifyStateIS("Syncing");
@@ -39,7 +39,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
                 User.AtUsersForm().AssertDetailsSyncButtonIsEnabled();
                 User.AtUsersForm().CloseUserDetails();
                 User.AtUsersForm().SyncUserByLocator(sourceMailbox3);
-                User.AtUsersForm().ConfirmSync();
+                User.AtUsersForm().Confirm();
                 User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox3);
                 User.AtUsersForm().OpenDetailsByLocator(sourceMailbox3);
                 User.AtUsersForm().VerifyStateIS("Syncing");
