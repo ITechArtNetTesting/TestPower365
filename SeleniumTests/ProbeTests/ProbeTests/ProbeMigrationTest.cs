@@ -45,8 +45,8 @@ namespace ProbeTests.ProbeTests
                 throw e;
             }
             try
-            {
-                User.AtUsersForm().SyncUserByLocator(syncUsername);
+            {            
+                User.AtUsersForm().PerfomeActionForUser(syncUsername, Product.Framework.Enums.ActionType.Sync);
                 User.AtUsersForm().ConfirmSync();
                 User.AtUsersForm().AssertUserHaveSyncingState(syncUsername);
             }

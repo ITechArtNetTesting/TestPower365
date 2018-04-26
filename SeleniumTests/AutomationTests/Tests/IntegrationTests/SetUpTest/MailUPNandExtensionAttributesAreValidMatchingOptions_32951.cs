@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace Product.Tests.IntegrationTests.SetUpTest
 {
-    class MailUPNandExtensionAttributesAreValidMatchingOptions_TC32951 : LoginAndConfigureTest
+    [TestClass]
+    public class MailUPNandExtensionAttributesAreValidMatchingOptions_TC32951 : LoginAndConfigureTest
     {
 
         private string login;
@@ -30,13 +31,12 @@ namespace Product.Tests.IntegrationTests.SetUpTest
         {
             login = RunConfigurator.GetUserLogin("client2");
             password = RunConfigurator.GetPassword("client2");
-            client = RunConfigurator.GetClient("client2");
-            project = RunConfigurator.GetProjectName("client2", "project3");
-           
+            client = RunConfigurator.GetClient("client2");          
         }
 
         [TestMethod]
         [TestCategory("Integration")]
+        [TestCategory("SetUpProject")]
         public void MailUPNandExtensionAttributesAreValidMatchingOptions_32951()
         {
             LoginAndSelectRole(login, password, client);

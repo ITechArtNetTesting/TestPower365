@@ -48,7 +48,7 @@ namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
 
         public void CheckAttributes()
         {
-            Assert.IsFalse(InvalidAtrsExist());
+            Assert.IsFalse(InvalidAtrsExist(), "There are not all of the following items in drop-down: UserPrincipalName, Mail, ExtensionAttribute ");
         }
     }
 }

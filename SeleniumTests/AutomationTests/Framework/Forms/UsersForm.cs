@@ -207,6 +207,10 @@ namespace Product.Framework.Forms
         protected string ProfileModifyLocator = "//div[contains(@class, 'modal in')]//tr[.//*[contains(text(), '{0}')]]//*[contains(text(), 'Modify')]";
         protected string ProfileLabelLocator = "//div[contains(@class, 'modal in')]//tr[.//*[contains(text(), '{0}')]]//label";
         protected string ProfileRadioLocator = "//div[contains(@class, 'modal in')]//tr[.//*[contains(text(), 'Defa')]]//input";
+        private readonly Button CompleteDetailsButton = new Button(By.XPath("//button[text()='Complete']"), "Complite button on details form");
+        private readonly Button CutoverDetailsButton = new Button(By.XPath("//button[text()='Cutover']"), "Cutover button on details form");
+
+
         public UsersForm() : base(TitleLocator, "Users list form")
 		{
             descriptionLabel.WaitForElementPresent();
@@ -217,7 +221,44 @@ namespace Product.Framework.Forms
 		    descriptionLabel.WaitForElementPresent();
         }
 
-		public void PerformSearch(string search)
+        public void AssertCutoverCompliteDetailsIsDisabled()
+        {
+            Assert.IsTrue(!CompleteDetailsButton.IsPresent(), "Complete button is present");
+            Assert.IsTrue(!CutoverDetailsButton.IsPresent(), "Complete button is present");
+        }
+
+        public void CheckActionIsDisabled(ActionType type)
+        {
+            SelectAction(type);
+            CheckApplyButtonIsDisabled();
+        }
+
+        public void CheckApplyButtonIsDisabled()
+        {
+            WaitForAjaxLoad();
+            Assert.IsFalse(enabledApplyActionButton.IsPresent(),"Appply button is enable");
+        }
+
+        public void AssertCutoverCompliteDetailsIsEnabled()
+        {
+            WaitForAjaxLoad();
+            Assert.IsTrue(CompleteDetailsButton.IsPresent(), "Complete button is not present");
+            Assert.IsTrue(CutoverDetailsButton.IsPresent(), "Cutover button is not present");
+        }
+
+        public void CheckActionIsEnabled(ActionType type)
+        {
+            SelectAction(type);
+            CheckApplyButtonIsEnabled();
+        }
+
+        public void CheckApplyButtonIsEnabled()
+        {
+            WaitForAjaxLoad();
+            Assert.IsTrue(enabledApplyActionButton.IsPresent(), "Appply button is not enable");
+        }
+
+        public void PerformSearch(string search)
 		{
 			Log.Info("Searching: " + search);
 			ScrollToTop();
@@ -757,35 +798,46 @@ namespace Product.Framework.Forms
 			lineLabel.WaitForElementDisappear();
 		}
 
-		public void SyncUserByLocator(string locator)
-		{
-			ScrollToTop();
-			Log.Info("Syncing user by locator: " + locator);
-            WaitForAjaxLoad();
-			SelectEntryBylocator(locator);
-			SelectAction(ActionType.Sync);
-			Apply();
-		}
+		//public void SyncUserByLocator(string locator)
+		//{
+		//	ScrollToTop();
+		//	Log.Info("Syncing user by locator: " + locator);
+  //          WaitForAjaxLoad();
+		//	SelectEntryBylocator(locator);
+		//	SelectAction(ActionType.Sync);
+		//	Apply();
+		//}
 
-        public void CompleteUserByLocator(string locator)
+        //public void CompleteUserByLocator(string locator)
+        //{
+        //    ScrollToTop();
+        //    Log.Info("Complete user by locator: " + locator);
+        //    WaitForAjaxLoad();
+        //    SelectEntryBylocator(locator);
+        //    SelectAction(ActionType.Complete);
+        //    Apply();
+        //}
+
+        //public void RollbackUserByLocator(string locator)
+        //{
+        //    ScrollToTop();
+        //    Log.Info("Syncing user by locator: " + locator);
+        //    WaitForAjaxLoad();
+        //    SelectEntryBylocator(locator);
+        //    SelectAction(ActionType.Rollback);
+        //    Apply();
+        //}
+
+        public void PerfomeActionForUser(string locator, ActionType  type)
         {
             ScrollToTop();
-            Log.Info("Complete user by locator: " + locator);
+            Log.Info(type +" user by locator: " + locator);
             WaitForAjaxLoad();
             SelectEntryBylocator(locator);
-            SelectAction(ActionType.Complete);
+            SelectAction(type);
             Apply();
         }
 
-        public void RollbackUserByLocator(string locator)
-        {
-            ScrollToTop();
-            Log.Info("Syncing user by locator: " + locator);
-            WaitForAjaxLoad();
-            SelectEntryBylocator(locator);
-            SelectAction(ActionType.Rollback);
-            Apply();
-        }
 
         public void AssertUserHaveSyncingState(string locator)
 		{
@@ -1712,7 +1764,7 @@ namespace Product.Framework.Forms
 			refreshButton.Click();
 		}
 
-        public void WaitForState_DetailWindow(string entry, State state, int timeout = 5000, int pollIntervalSec = 0)
+        public void WaitForState_DetailPage(string entry, State state, int timeout = 5000, int pollIntervalSec = 0)
         {
             var _migrationStateTextLocatorFormat = "//*[contains(@data-bind, 'migrationState')][contains(text(), '{0}')]";
             var value = state.GetValue();

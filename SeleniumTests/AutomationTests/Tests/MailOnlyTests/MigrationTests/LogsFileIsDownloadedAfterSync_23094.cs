@@ -44,10 +44,10 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
                 SelectProject(project);
                 User.AtProjectOverviewForm().GetUsersCount();
                 User.AtProjectOverviewForm().OpenUsersList();
-                User.AtUsersForm().SyncUserByLocator(sourceMailbox9);
+                User.AtUsersForm().PerfomeActionForUser(sourceMailbox9, Framework.Enums.ActionType.Sync);
                 User.AtUsersForm().ConfirmSync();
                 User.AtUsersForm().OpenDetailsByLocator(sourceMailbox9);
-                User.AtUsersForm().WaitForState_DetailWindow(sourceMailbox9, State.Synced, 900000, 10);
+                User.AtUsersForm().WaitForState_DetailPage(sourceMailbox9, State.Synced, 900000, 10);
                 User.AtUsersForm().DownloadLogs();
                 RunConfigurator.CheckLogsFileIsDownloaded();
                

@@ -29,8 +29,8 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
 		        SelectProject(projectName);
 		        User.AtProjectOverviewForm().GetUsersCount();
 		        User.AtProjectOverviewForm().OpenUsersList();
-		        User.AtUsersForm().SyncUserByLocator(sourceMailbox3);
-		        User.AtUsersForm().ConfirmSync();
+                User.AtUsersForm().PerfomeActionForUser(sourceMailbox3, Framework.Enums.ActionType.Sync);
+                User.AtUsersForm().ConfirmSync();
 		        User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox3);
 		        User.AtUsersForm().OpenDetailsByLocator(sourceMailbox3);
 		        User.AtUsersForm().VerifyStateIS("Syncing");

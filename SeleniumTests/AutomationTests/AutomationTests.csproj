@@ -243,6 +243,7 @@
     <Compile Include="Tests\MailOnlyTests\SortingAndFilterTests\SortingFilteredEntriesTest.cs" />
     <Compile Include="Tests\MailOnlyTests\SortingAndFilterTests\SortingTest.cs" />
     <Compile Include="Tests\MailOnlyTests\TenantConfigurationTests\TenantConfigurationTest.cs" />
+    <Compile Include="Tests\MailOnlyTests\ActionButtonsTests\CutoverAndCompletedButtonsTest_TC23096.cs" />
     <Compile Include="Tests\MailWithDiscoveryTests\LandingPageTests\GetBackToProjectDashboardFromSyncPages_37789.cs" />
     <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\MailMigrationJobShouldCompletedInUserMigrationView_25824.cs" />
     <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\MailMigrationJobShouldCompleted_22982.cs" />
@@ -636,9 +637,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
-    <None Include="Ordered.orderedtest" />
+    <None Include="Ordered.orderedtest">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="OrderedPowershell.orderedtest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="OrderedIntegration.orderedtest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -646,6 +650,7 @@
     </None>
     <None Include="ProjectSetup.orderedtest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
     <None Include="resources\AddPermission.ps1">
@@ -1022,6 +1027,7 @@
   <ItemGroup>
     <Folder Include="lib\" />
     <Folder Include="resources\MailEngine\internal\functions\" />
+    <Folder Include="Tests\MailWithDiscoveryTests\ActionButtonsTests\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

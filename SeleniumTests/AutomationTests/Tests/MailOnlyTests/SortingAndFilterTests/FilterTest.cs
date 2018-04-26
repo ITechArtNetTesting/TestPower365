@@ -32,7 +32,7 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		        LoginAndSelectRole(login, password, client);
 		        SelectProject(projectName);
 		        User.AtProjectOverviewForm().OpenUsersList();
-                User.AtUsersForm().SyncUserByLocator(sourceMailbox6);
+                User.AtUsersForm().PerfomeActionForUser(sourceMailbox6, Framework.Enums.ActionType.Sync);
                 User.AtUsersForm().ConfirmSync();
                 User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox6);
                 User.AtUsersForm().SwitchFilter(FilterState.Open);

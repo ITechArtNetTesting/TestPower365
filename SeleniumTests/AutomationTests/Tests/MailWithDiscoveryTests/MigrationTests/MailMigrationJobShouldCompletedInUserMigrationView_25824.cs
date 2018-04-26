@@ -43,15 +43,16 @@ namespace Product.Tests.MailWithDiscoveryTests.MigrationTests
             LoginAndSelectRole(login, password, client);
             SelectProject(projectName);
             User.AtProjectOverviewForm().OpenUsersList();
-           
+
             //Syncing
-            User.AtUsersForm().SyncUserByLocator(sourceMailbox6);
+            User.AtUsersForm().PerfomeActionForUser(sourceMailbox6, Framework.Enums.ActionType.Sync);
             User.AtUsersForm().ConfirmSync();
              User.AtUsersForm().WaitForState(sourceMailbox6, State.Syncing, 600000, 10);
             //Verify Synced
             User.AtUsersForm().WaitForState(sourceMailbox6, State.Synced, 600000, 10);
             //Complete
-            User.AtUsersForm().CompleteUserByLocator(sourceMailbox6);
+          
+            User.AtUsersForm().PerfomeActionForUser(sourceMailbox6, ActionType.Complete);
             User.AtUsersForm().ConfirmComplete();
             //Verify Complete
             User.AtUsersForm().WaitForState(sourceMailbox6, State.Complete, 600000, 10);

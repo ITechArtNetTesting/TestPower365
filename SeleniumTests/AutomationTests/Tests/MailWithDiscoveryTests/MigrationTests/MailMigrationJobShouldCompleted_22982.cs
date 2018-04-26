@@ -48,14 +48,14 @@ namespace Product.Tests.MailWithDiscoveryTests.MigrationTests
             User.AtUsersForm().SyncFromDetails();
             User.AtUsersForm().ConfirmSync();
             //Verify Syncing         
-            User.AtUsersForm().WaitForState_DetailWindow(sourceMailbox5, State.Syncing, 600000, 10);
+            User.AtUsersForm().WaitForState_DetailPage(sourceMailbox5, State.Syncing, 600000, 10);
             //Synced
-            User.AtUsersForm().WaitForState_DetailWindow(sourceMailbox5, State.Synced, 600000, 10);
+            User.AtUsersForm().WaitForState_DetailPage(sourceMailbox5, State.Synced, 600000, 10);
             //Run Complete
             User.AtUsersForm().CompleteSync();
             User.AtUsersForm().ConfirmComplete();
             //Verify Complete
-            User.AtUsersForm().WaitForState_DetailWindow(sourceMailbox5, State.Complete, 600000, 10);         
+            User.AtUsersForm().WaitForState_DetailPage(sourceMailbox5, State.Complete, 600000, 10);         
 
         }
 

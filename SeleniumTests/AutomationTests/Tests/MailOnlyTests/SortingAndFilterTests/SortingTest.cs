@@ -2,6 +2,7 @@
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
+using Product.Framework.Enums;
 using Product.Tests.CommonTests;
 
 namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
@@ -39,7 +40,7 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		        User.AtUsersForm().SortTarget();
 		        User.AtUsersForm().AssertTargetSorted();
               
-                User.AtUsersForm().SyncUserByLocator(sourceMailbox4);
+                User.AtUsersForm().PerfomeActionForUser(sourceMailbox4, ActionType.Sync);
 		        User.AtUsersForm().ConfirmSync();
 		        User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox4);
 		        User.AtUsersForm().StoreEntriesData();
