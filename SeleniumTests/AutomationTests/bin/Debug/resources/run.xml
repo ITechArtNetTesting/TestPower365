@@ -123,8 +123,8 @@
 					<usermigration>
 						<entry>
 							<metaname>entry5</metaname>
-							<source>C7O365SML23@btcorp7.onmicrosoft.com</source>
-							<target>C7O365SML23@btcorp9.onmicrosoft.com</target>
+							<source>C3O365ShareMBX5@btcorp3.onmicrosoft.com</source>
+							<target>C3O365ShareMBX5@btcorp11.onmicrosoft.com</target>
 							<group>Wave1</group>
 							<profile>Profile 1</profile>
 						</entry>
@@ -345,10 +345,8 @@
 					    <metaname>entry15</metaname>
 					    <source>P365AutoRemoteRoom2@corp31.cmtsandbox.com</source>
 					    <target>P365AutoRemoteRoom2@corp32.cmtsandbox.com</target>
-					  </entry>
-           
-            
-					<entry>
+					  </entry>         
+             <entry>
 							<metaname>entry34</metaname>
 							<source>P365Filter4@corp31.cmtsandbox.com</source>
 							<target>P365Filter4@corp32.cmtsandbox.com</target>

@@ -1716,6 +1716,7 @@ namespace Product.Framework.Forms
         {
             var _migrationStateTextLocatorFormat = "//*[contains(@data-bind, 'migrationState')][contains(text(), '{0}')]";
             var value = state.GetValue();
+
             if (state.GetValue().ToLower() == "synced")
                 value = "complete";
 
@@ -1723,7 +1724,7 @@ namespace Product.Framework.Forms
             var stateLocator = By.XPath(rowEntryTextValue);
             var refreshElementTextValue = refreshButton.GetLocator();
 
-            if (!IsElementExists_withRefreshElement(stateLocator, refreshElementTextValue, timeout / 1000, pollIntervalSec))
+            if (!IsElementExists(stateLocator, ( ) => ClickElementBy(refreshElementTextValue), timeout / 1000, pollIntervalSec))
                 throw new Exception(string.Format("Entry of '{0}' with state '{1}' was not found.", entry, value));
         }
 

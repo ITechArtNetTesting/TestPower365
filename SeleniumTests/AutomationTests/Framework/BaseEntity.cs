@@ -116,11 +116,11 @@ namespace Product.Framework
             }
         }
 
-        protected bool IsElementExists_withRefreshElement(By by, By by_refreshElement, int timeoutInSec = 5, int pollIntervalSec = 0)
+        protected bool IsElementExists(By by, Action refreshAction, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
             try
             {
-               return EvaluateElementWithRefreshElement(ExpectedConditions.ElementExists(by), by_refreshElement, timeoutInSec, pollIntervalSec) != null;
+               return EvaluateElement(ExpectedConditions.ElementExists(by), refreshAction, timeoutInSec, pollIntervalSec) != null;
             }
             catch (Exception)
             {
@@ -207,7 +207,7 @@ namespace Product.Framework
             return (T)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript(script);
         }
 
-        protected T EvaluateElementWithRefreshElement<T>(Func<IWebDriver, T> condition, By by_refreshElement, int timeoutInSec = 5, int pollIntervalSec = 0)
+        protected T EvaluateElement<T>(Func<IWebDriver, T> condition, Action refreshAction, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
             if (timeoutInSec > 0 || pollIntervalSec > 0)
             {
@@ -218,7 +218,7 @@ namespace Product.Framework
                     wait.PollingInterval = TimeSpan.FromSeconds(pollIntervalSec);
                     return wait.Until((webDriver) =>
                     {
-                        ClickElementBy(by_refreshElement);
+                        refreshAction();
 
                         if (!IsDocumentReady())
                             throw new Exception("Page failed to reach ready state in time.");
@@ -232,16 +232,7 @@ namespace Product.Framework
             }
             return condition(Browser.GetDriver());
         }
-
-        public void RefreshData()
-        {
-   //         private readonly Button refreshButton =
-			//new Button(By.XPath("//div[contains(@class, 'modal in')]//button[contains(@data-bind, 'refresh')]"), "Refresh button");
-
-            Log.Info("Refreshing data");
-            //refreshButton.Click();
-        }
-
+             
 
         protected bool IsAjaxActive(int timeoutInSec = 10)
         {

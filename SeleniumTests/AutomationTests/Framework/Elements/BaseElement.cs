@@ -53,32 +53,6 @@ namespace Product.Framework.Elements
         /// <summary>
         ///     Clicks this instance.
         /// </summary>
-        //public void Click()
-        //{
-        //	WaitForElementPresent();
-        //	WaitForElementIsVisible();
-        //	bool ready = false;
-        //	int counter = 0;
-        //	while (!ready && counter<20)
-        //	{
-        //		try
-        //		{
-        //			GetElement().Click();
-        //			ready = true;
-        //			Log.Info(String.Format("{0} :: click", GetName()));
-        //		}
-        //		catch (Exception e)
-        //		{
-        //			Log.Info("Element is not ready: "+GetName());
-        //			counter++;
-        //			if (counter==20)
-        //			{
-        //				throw e;
-        //			}
-        //		}
-        //	}
-        //}
-
         public void Click()
         {
             WaitForElementIsVisible();
@@ -86,7 +60,7 @@ namespace Product.Framework.Elements
             fluentWait.Timeout = TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout()));
             fluentWait.PollingInterval = TimeSpan.FromMilliseconds(250);
             fluentWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-               fluentWait.Until(x =>
+            fluentWait.Until(x =>
             {
                 try
                 {
@@ -153,6 +127,7 @@ namespace Product.Framework.Elements
             }
             catch (NoSuchElementException) { return false; } 
         }
+
         /// <summary>
         ///     Gets the point.
         /// </summary>

@@ -34,32 +34,28 @@ namespace Product.Tests.MailWithDiscoveryTests.MigrationTests
             client = RunConfigurator.GetClient("client2");
             projectName = RunConfigurator.GetProjectName("client2", "project1");
             sourceMailbox5 = RunConfigurator.GetSourceMailbox("client2","project1","entry5");
-
         }
 
         [TestMethod]
-        [TestCategory("MailWithDiscovery")]
+        [TestCategory("MailWithDiscovery")] 
         public void MigrationJobShouldCompleted_inDetailView_22982()
         {
             LoginAndSelectRole(login, password, client);
             SelectProject(projectName);
             User.AtProjectOverviewForm().OpenUsersList();
             User.AtUsersForm().OpenDetailsByLocator(sourceMailbox5);
-            //Syncing
+            //Run Syncing
             User.AtUsersForm().SyncFromDetails();
             User.AtUsersForm().ConfirmSync();
-            //Verify Syncing
-           
+            //Verify Syncing         
             User.AtUsersForm().WaitForState_DetailWindow(sourceMailbox5, State.Syncing, 600000, 10);
             //Synced
             User.AtUsersForm().WaitForState_DetailWindow(sourceMailbox5, State.Synced, 600000, 10);
-            //Complete
+            //Run Complete
             User.AtUsersForm().CompleteSync();
             User.AtUsersForm().ConfirmComplete();
             //Verify Complete
-            User.AtUsersForm().WaitForState_DetailWindow(sourceMailbox5, State.Complete, 600000, 10);
-          
-            
+            User.AtUsersForm().WaitForState_DetailWindow(sourceMailbox5, State.Complete, 600000, 10);         
 
         }
 
