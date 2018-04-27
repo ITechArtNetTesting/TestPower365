@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
@@ -37,7 +39,12 @@ namespace Product.Framework.Elements
 		{
 			WaitForElementPresent();
 			return (RemoteWebElement)Browser.GetDriver().FindElement(locator);
-		}        
+		}
+
+        public IList<IWebElement> GetElements()
+        {
+            return Browser.GetDriver().FindElements(locator);         
+        }
 
 		protected string GetName()
 		{

@@ -17,7 +17,7 @@ namespace Product.Framework.Forms
 {
 	public class UsersForm : BaseForm
 	{
-        private readonly Button detailsSync = new Button(By.XPath("//button//font[contains(text(),'Sync')]"), "Sync button on details popup");
+        private readonly Button detailsSync = new Button(By.XPath("//button[text()='Sync']"), "Sync button on details popup");
 
 		private static readonly By TitleLocator =
 			By.XPath("//div[@id='users']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]");
@@ -38,9 +38,18 @@ namespace Product.Framework.Forms
         {
             detailsSync.Click();
         }
+      
 
         private readonly Button closeFilterButton =
 			new Button(By.XPath("//div[@class='panel-footer']//button[text()='Close']"), "Close filter button");
+
+        public void VerifyTheMailMigrationJobHasStoped(string sourceMailbox)
+        {
+            Browser.GetDriver().Navigate().Refresh();
+            WaitForAjaxLoad();            
+            Assert.IsTrue(Browser.GetDriver().FindElement(By.XPath($"//div[@id='users']//tr//td[4]//span[ancestor::tr/td/span[contains(text(),'{sourceMailbox}')]]")).Text.ToLower().Contains("stopping")|| Browser.GetDriver().FindElement(By.XPath($"//div[@id='users']//tr//td[4]//span[ancestor::tr/td/span[contains(text(),'{sourceMailbox}')]]")).Text.ToLower().Contains("complete"));            
+        }
+      
 
         public void SyncSelectedUser()
         {
@@ -50,6 +59,12 @@ namespace Product.Framework.Forms
             Confirm();
         }
 
+        public void VerifySubmittingForMigration(string sourceMailbox)
+        {
+            WaitForAjaxLoad();
+            Assert.IsTrue(Browser.GetDriver().FindElement(By.XPath($"//div[@id='users']//tr//td[4]//span[ancestor::tr/td/span[contains(text(),'{sourceMailbox}')]]")).Text.ToLower().Contains("syncing"));
+        }
+
         public void VerifyStopButtonIsAvailiable()
         {
             WaitForAjaxLoad();
@@ -57,10 +72,10 @@ namespace Product.Framework.Forms
             CheckApplyButtonIsEnabled();
         }
 
-        public void AssertMigrationJobWasStopped(int SelectedUser)
+        public void AssertMigrationJobWasStopped(string sourceMailbox)
         {
             WaitForAjaxLoad();           
-            Assert.IsTrue(Browser.GetDriver().FindElements(By.XPath("//div[@id='users']//tr//td[4]//span"))[SelectedUser].Text.Contains("Stopping"));
+            Assert.IsTrue(Browser.GetDriver().FindElement(By.XPath($"//div[@id='users']//tr//td[4]//span[ancestor::tr/td/span[contains(text(),'{sourceMailbox}')]]")).Text.Contains("Stopping"));
         }
 
         public void StopSyncingSelectedUser()
@@ -69,19 +84,19 @@ namespace Product.Framework.Forms
             SelectAction(ActionType.Stop);
             enabledApplyActionButton.Click();
             Confirm();
-        }
+        }        
 
         public void SelectFirstSyncingFreeUser(ref int SelectedUser)
         {
             WaitForAjaxLoad();
             if (SelectedUser == -1)
             {
-                for (int i = 0; i < UserStatuses.Count; i++)
+                for (int i = 0; i < UserStatuses.GetElements().Count; i++)
                 {
-                    if (UserStatuses[i].Text.Contains("Syncing") && RunConfigurator.IsUserFree(ListOfSources[i].Text))
+                    if (UserStatuses.GetElements()[i].Text.Contains("Syncing") && RunConfigurator.IsUserFree(ListOfSources.GetElements()[i].Text))
                     {
                         SelectedUser = i;
-                        UserStatuses[SelectedUser].Click();
+                        UserStatuses.GetElements()[SelectedUser].Click();
                         break;
                     }
                 }
@@ -111,7 +126,7 @@ namespace Product.Framework.Forms
             Assert.IsTrue(!CutoverDetailsButton.IsElementPresent());
         }
 
-        IList<IWebElement> ListOfSources = Browser.GetDriver().FindElements(By.XPath("//div[@id='users']//div[@class='table-responsive table-frame m-t-sm']//tr//td[2]//span"));
+        Element ListOfSources = new Element(By.XPath("//div[@id='users']//div[@class='table-responsive table-frame m-t-sm']//tr//td[2]//span"),"List of sources");
 
         public void CheckApplyButtonIsDisabled()
         {
@@ -119,7 +134,7 @@ namespace Product.Framework.Forms
             Assert.IsFalse(enabledApplyActionButton.IsElementPresent());
         }
 
-        private readonly IList<IWebElement> UserStatuses = Browser.GetDriver().FindElements(By.XPath("//div[@id='users']//tr//td[4]//span"));
+        private readonly Element UserStatuses = new Element(By.XPath("//div[@id='users']//tr//td[4]//span"), "Users statuses");
        
         private readonly Button disabledApplyActionButton =
 			new Button(By.XPath("//button[contains(@data-bind, 'applyAction')][@disabled='']"), "Disabled apply button");
@@ -310,46 +325,68 @@ namespace Product.Framework.Forms
 		    descriptionLabel.WaitForElementPresent();
         }
 
+        public void VerifyForMatchedUsersSyncActionIsAvailable()
+        {
+            WaitForAjaxLoad();
+
+            for (int i = 0; i < UserStatuses.GetElements().Count; i++)
+            {
+                if (UserStatuses.GetElements()[i].Text.Contains("Matched"))
+                {                    
+                    UserStatuses.GetElements()[i].Click();
+                    SelectAction(ActionType.Sync);
+                    CheckApplyButtonIsEnabled();
+                    UserStatuses.GetElements()[i].Click();
+                }
+            }
+        }
+
         public void SelectFirstNotSyncedUser(ref int SelectedUser)
         {
+            bool UserWasSelected = false;
             WaitForAjaxLoad();
             if (SelectedUser == -1)
             {
-                for (int i = 0; i < UserStatuses.Count; i++)
+                for (int i = 0; i < UserStatuses.GetElements().Count; i++)
                 {
-                    if (UserStatuses[i].Text.Contains("Matched"))
+                    if (UserStatuses.GetElements()[i].Text.Contains("Matched"))
                     {
                         SelectedUser = i;
-                        UserStatuses[SelectedUser].Click();
+                        UserStatuses.GetElements()[SelectedUser].Click();
+                        UserWasSelected = true;
                         break;
                     }
                 }
             }
             else
             {
-                UserStatuses[SelectedUser].Click();
+                UserStatuses.GetElements()[SelectedUser].Click();
             }
+            Assert.IsTrue(UserWasSelected, "There is no user that has mathed status");
         }
 
         public void SelectFirstNotSyncedFreeUser(ref int SelectedUser)
         {
+            bool UserWasSelected = false;
             WaitForAjaxLoad();
             if (SelectedUser == -1)
             {
-                for (int i = 0; i < UserStatuses.Count; i++)
+                for (int i = 0; i < UserStatuses.GetElements().Count; i++)
                 {
-                    if (UserStatuses[i].Text.Contains("Matched")&&RunConfigurator.IsUserFree(ListOfSources[i].Text))
+                    if (UserStatuses.GetElements()[i].Text.Contains("Matched")&&RunConfigurator.IsUserFree(ListOfSources.GetElements()[i].Text))
                     {
                         SelectedUser = i;
-                        UserStatuses[SelectedUser].Click();
+                        UserStatuses.GetElements()[SelectedUser].Click();
+                        UserWasSelected = true;
                         break;
                     }
                 }
             }
             else
             {
-                ListOfSources[SelectedUser].Click();
+                ListOfSources.GetElements()[SelectedUser].Click();
             }
+            Assert.IsTrue(UserWasSelected, "There is no user that has mathed status and dosent using in run.xml, try to use SelectFirstNotSyncedUser method");
         }
 
         public void PerformSearch(string search)
@@ -580,7 +617,7 @@ namespace Product.Framework.Forms
         public void OpenDetailsOfSelectedUser(int SelectedUser)
         {
             Actions action = new Actions(Browser.GetDriver());
-            action.DoubleClick(UserStatuses[SelectedUser]).Build().Perform();
+            action.DoubleClick(UserStatuses.GetElements()[SelectedUser]).Build().Perform();
         }
 
         public void DetailsRefresh()
@@ -1870,9 +1907,9 @@ namespace Product.Framework.Forms
 			var stateLabel = new Label(By.XPath($"//*[contains(@data-bind, 'migrationState')][contains(text(), '{state}')]"),
 				"State label");
 			var counter = 0;
-			while (!stateLabel.IsPresent() && counter < 10)
+			while (!stateLabel.IsPresent() && counter < 60)
 			{
-				Thread.Sleep(30000);
+				Thread.Sleep(5000);
 				RefreshData();
 				counter++;
 			}

@@ -185,6 +185,26 @@
               <source>C7O365SML21@btcorp7.onmicrosoft.com</source>
               <target>C7O365SML21@btcorp9.onmicrosoft.com</target>
             </entry>
+            <entry>
+              <metaname>TC25824Entry</metaname>
+              <source>C7O365SML22@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML22@btcorp9.onmicrosoft.com</target>
+            </entry>
+            <entry>
+              <metaname>TC25830Entry</metaname>
+              <source>C7O365SML23@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML23@btcorp9.onmicrosoft.com</target>
+            </entry>
+            <entry>
+              <metaname>TC25825Entry</metaname>
+              <source>C7O365SML24@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML24@btcorp9.onmicrosoft.com</target>
+            </entry>
+            <entry>
+              <metaname>TC25829Entry</metaname>
+              <source>C7O365SML25@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML25@btcorp9.onmicrosoft.com</target>
+            </entry>
           </usermigration>
           <adgroups>
             <adgroup>
