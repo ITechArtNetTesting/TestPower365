@@ -222,6 +222,7 @@
     <Compile Include="Tests\IntegrationTests\CutoverTest.cs" />
     <Compile Include="Tests\IntegrationTests\DistributionGroupsInitialTest.cs" />
     <Compile Include="Tests\IntegrationTests\DistributionGroupsValidationTest.cs" />
+    <Compile Include="Tests\IntegrationTests\GroupsTests\TC31793_Verify_only_universal_distribution_groups_will_be_shown_in_the_UI_for_group_sync_and_security_group_will_be_shown_in_the_UI_but_it_can_not_be_synced.cs" />
     <Compile Include="Tests\IntegrationTests\GroupsViewTest.cs" />
     <Compile Include="Tests\IntegrationTests\TC32951_IntegrationPro_Verify_only_Mail_UPN_and_ExtensionAttributes_will_be_valid_matching_options_for_users_during_Project_Wizard.cs" />
     <Compile Include="Tests\MailOnlyTests\ActionButtonsTests\StoppingStateButtonsTest.cs" />
