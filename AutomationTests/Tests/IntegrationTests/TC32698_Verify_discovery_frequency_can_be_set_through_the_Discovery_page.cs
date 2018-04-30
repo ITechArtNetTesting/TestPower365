@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Product.Tests.MailWithDiscoveryTests.MigrationTests
+namespace Product.Tests.IntegrationTests
 {
     [TestClass]
-    public class TC32698_Verify_discovery_frequency_can_be_set_through_the_Discovery_page: LoginAndConfigureTest
+    public class TC32698_Verify_discovery_frequency_can_be_set_through_the_Discovery_page : LoginAndConfigureTest
     {
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
@@ -21,9 +21,8 @@ namespace Product.Tests.MailWithDiscoveryTests.MigrationTests
         [TestCategory("Migration")]
         public void VerifyDiscoveryFrequencyCanBeSetThroughTheDiscoveryPage()
         {
-            throw new NotImplementedException("need SQL query");
-            string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
-            string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");
+            string login = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user");
+            string password = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//password");
             string client = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name");
             string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//name");
 
@@ -32,8 +31,11 @@ namespace Product.Tests.MailWithDiscoveryTests.MigrationTests
                 LoginAndSelectRole(login, password, client);
                 SelectProject(projectName);
                 User.AtProjectOverviewForm().OpenDiscoveryOverview();
-
-              
+                User.AtDiscoveryOverviewForm().VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(client);
+                User.AtDiscoveryOverviewForm().ChangeDiscoveryFrequencyHours(1);
+                User.AtDiscoveryOverviewForm().VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(client);
+                User.AtDiscoveryOverviewForm().ChangeDiscoveryFrequencyHours(24);
+                User.AtDiscoveryOverviewForm().VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(client);
             }
             catch (Exception ex)
             {

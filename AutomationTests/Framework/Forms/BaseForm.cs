@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using Product.Framework.Elements;
+using Product.SQL;
 
 namespace Product.Framework.Forms
 {
@@ -13,6 +14,8 @@ namespace Product.Framework.Forms
 	/// <seealso cref="BaseEntity" />
 	public class BaseForm : BaseEntity
 	{
+        protected SQLExecuter queryExecuter = new SQLExecuter(); 
+
         //NOTE: CHECK 1.10 version
 		private readonly Button allProjectsButton = new Button(By.XPath("//*[@id='actionbar']//a[contains(@href, 'Project/List')]"),
 			"All projects button");

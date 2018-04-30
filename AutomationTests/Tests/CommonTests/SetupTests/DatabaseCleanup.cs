@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
 using Product.Framework.Steps;
-using Product.Utilities;
+using Product.SQL;
 using System;
 using System.IO;
 

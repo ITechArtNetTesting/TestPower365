@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Product.Utilities
+namespace Product.SQL
 {
     public class SqlClient: IDisposable
     {

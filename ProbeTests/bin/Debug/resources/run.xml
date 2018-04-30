@@ -525,10 +525,11 @@
   <!--ClientRegistration-->
   <!--database connection string.Initial Catalog = databasename -->
   <database>
-    <initialCatalog>sqlt2t01-qa</initialCatalog>
+    <server>bt-qa-sql.database.windows.net</server>
+    <initialCatalog>sqlt2t01-QA</initialCatalog>
     <userID>btcloudsqladmin</userID>
     <password>NSHEtMDq0Q9zGJZfpFVemOr.</password>
-    <initialClientsCatalog>sqlclients-qa</initialClientsCatalog>
+    <initialClientsCatalog>sqlclients-QA</initialClientsCatalog>
   </database>
   <client.usermail>BT-Automation-QA1@btpower365dev.onmicrosoft.com</client.usermail>
   <client.password>BinTree123</client.password>

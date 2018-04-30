@@ -16,6 +16,11 @@ namespace Product.Framework.Steps
 			return new MainForm();
 		}
 
+        public DiscoveryOverviewForm AtDiscoveryOverviewForm()
+        {
+            return new DiscoveryOverviewForm();
+        }
+
         public SyncNowForm AtSyncNowForm()
         {
             return new SyncNowForm();

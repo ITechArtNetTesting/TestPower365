@@ -208,6 +208,7 @@
     <Compile Include="Framework\StringRandomazer.cs" />
     <Compile Include="IProbeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQL\SQLExecuter.cs" />
     <Compile Include="Tests\CommonTests\LoginAndConfigureTest.cs" />
     <Compile Include="Tests\CommonTests\ProbeTest.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\DatabaseCleanup.cs" />
@@ -224,6 +225,7 @@
     <Compile Include="Tests\IntegrationTests\DistributionGroupsValidationTest.cs" />
     <Compile Include="Tests\IntegrationTests\GroupsTests\TC31793_Verify_only_universal_distribution_groups_will_be_shown_in_the_UI_for_group_sync_and_security_group_will_be_shown_in_the_UI_but_it_can_not_be_synced.cs" />
     <Compile Include="Tests\IntegrationTests\GroupsViewTest.cs" />
+    <Compile Include="Tests\IntegrationTests\TC32698_Verify_discovery_frequency_can_be_set_through_the_Discovery_page.cs" />
     <Compile Include="Tests\IntegrationTests\TC32951_IntegrationPro_Verify_only_Mail_UPN_and_ExtensionAttributes_will_be_valid_matching_options_for_users_during_Project_Wizard.cs" />
     <Compile Include="Tests\MailOnlyTests\ActionButtonsTests\StoppingStateButtonsTest.cs" />
     <Compile Include="Tests\MailOnlyTests\ActionButtonsTests\SyncingButtonsTest.cs" />
@@ -255,7 +257,6 @@
     <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\DiscoveryTest.cs" />
     <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\TC22982_UI_Verify_after_the_Mail_Migration_Job_completed_for_Mail_with_Discovery_Project_the_UI_should_allow_user_to_select_Complite_Job_Option.cs" />
     <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\TC25771_UI_Verify_Project_Landing_Page_has_Tenant_Status_section.cs" />
-    <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\TC32698_Verify_discovery_frequency_can_be_set_through_the_Discovery_page.cs" />
     <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\TC37789_Verify_user_can_get_back_to_Project_Dashboard_from_SyncNow_and_Schedule_Syncs_Wizards.cs" />
     <Compile Include="Tests\PowerShellTests\AddressTransformTest.cs" />
     <Compile Include="Tests\PowerShellTests\AddTest.cs" />
@@ -269,7 +270,7 @@
     <Compile Include="Tests\PowerShellTests\StartDeltaDiscoveryTest.cs" />
     <Compile Include="Tests\PublicFoldersTests\DemoTest.cs" />
     <Compile Include="Tests\PublicFoldersTests\PublicFoldersTest.cs" />
-    <Compile Include="Utilities\SqlClient.cs" />
+    <Compile Include="SQL\SqlClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\chromedriver.exe">
