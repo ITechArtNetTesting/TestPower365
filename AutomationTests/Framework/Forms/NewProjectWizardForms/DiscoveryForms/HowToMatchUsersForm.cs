@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using Product.Framework.Elements;
+using System;
 using System.Collections.Generic;
 
 namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
@@ -10,10 +11,14 @@ namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
         string[] ValidAttributes = { "UserPrincipalName", "Mail", "ExtensionAttribute" };
         private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'How would you like to match')]");
 
-        IList<IWebElement> DropDownsAttributes = Browser.GetDriver().FindElements(By.XPath("//div[@class='dropdown inline m-t-sm']//li//a"));
+        Element sourceDropDownsAttributes = new Element(By.XPath("//div[contains(@class,'dropdown inline')]//a[contains(@data-bind,'source')]"), "Source attributes");
 
-        IList<IWebElement> DropDownButtons = Browser.GetDriver().FindElements(By.XPath("//div[@class='dropdown inline m-t-sm']//button"));
+        Element targetDropDownsAttributes = new Element(By.XPath("//div[contains(@class,'dropdown inline')]//a[contains(@data-bind,'target')]"), "Target attributes"); 
+        
 
+        Button sourceDropDownButton = new Button(By.XPath("//button[child::span[contains(@data-bind,'source')]]"), "Source dropdown button");
+
+        Button targetDropDownButton = new Button(By.XPath("//button[child::span[contains(@data-bind,'target')]]"), "Target dropdown button");
 
         public HowToMatchUsersForm() : base(TitleLocator, "How to match users form")
         {
@@ -21,35 +26,57 @@ namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
 
         public HowToMatchUsersForm(By _TitleLocator, string name) : base(_TitleLocator, name)
         {
-        }
+        }       
 
-        bool InvalidAtrsExist()
+        bool InvalidAtrsExistInSourceDropDown()
         {
             bool result = false;
-            for (int i = 1; i <= DropDownButtons.Count; i++)
+            sourceDropDownButton.Click();
+            foreach (IWebElement dropDown in sourceDropDownsAttributes.GetElements())
             {
-                DropDownButtons[i - 1].Click();
-                for (int z = ((DropDownsAttributes.Count / 2 * i) - ((DropDownsAttributes.Count / 2) - 1)) - 1; z < (DropDownsAttributes.Count / 2 * i); z++)
-                {
-                    bool AtributeIsValide = false;
-                    foreach (var validatr in ValidAttributes)
-                    {
-                        if (DropDownsAttributes[z].Text.Contains(validatr))
-                        {
-                            AtributeIsValide = true;
-                        }
-                    }
-                    if (!AtributeIsValide)
-                    {
-                        result = true;
-                    }
+                if (!ArrayContains(ValidAttributes, dropDown.Text))
+                {                    
+                    result= true;
+                    break;
                 }
             }
             return result;
         }
+
+        bool InvalidAtrsExistInTargetDropDown()
+        {
+            bool result = false;
+            targetDropDownButton.Click();
+            foreach (IWebElement dropDown in targetDropDownsAttributes.GetElements())
+            {
+                if (!ArrayContains(ValidAttributes,dropDown.Text))
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        bool ArrayContains(string[] array, string value)
+        {
+            bool result = false;
+
+            foreach (string ele in array)
+            {
+                if (value.Contains(ele))
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
         public void CheckAttributes()
         {
-            Assert.IsFalse(InvalidAtrsExist());
+            Assert.IsFalse(InvalidAtrsExistInTargetDropDown());
+            Assert.IsFalse(InvalidAtrsExistInSourceDropDown());
         }
     }
 }
