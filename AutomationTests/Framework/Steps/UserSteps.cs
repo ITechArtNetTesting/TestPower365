@@ -16,6 +16,16 @@ namespace Product.Framework.Steps
 			return new MainForm();
 		}
 
+        public DiscoveryOverviewForm AtDiscoveryOverviewForm()
+        {
+            return new DiscoveryOverviewForm();
+        }
+
+        public SyncNowForm AtSyncNowForm()
+        {
+            return new SyncNowForm();
+        }
+
 		public RegistrationForm AtRegistrationForm()
 		{
 			return new RegistrationForm();
@@ -400,8 +410,7 @@ namespace Product.Framework.Steps
         public ProfileHandleBadItemsForm AtProfileHandleBadItemsForm => new ProfileHandleBadItemsForm();
         public ProfileHandleFoldersForm AtProfileHandleFoldersForm => new ProfileHandleFoldersForm();
         public ProfileToLicenseMailboxesForm AtProfileToLicenseMailboxesForm => new ProfileToLicenseMailboxesForm();
-        public SyncNowForm AtSyncNowForm => new SyncNowForm();
-
+      
 
 
     }

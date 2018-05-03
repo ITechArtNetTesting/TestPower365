@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
-using Product.Utilities;
+using Product.SQL;
 
 namespace Product.Tests.CommonTests.SetupTests
 {

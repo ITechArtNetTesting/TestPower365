@@ -185,6 +185,26 @@
               <source>C7O365SML21@btcorp7.onmicrosoft.com</source>
               <target>C7O365SML21@btcorp9.onmicrosoft.com</target>
             </entry>
+            <entry>
+              <metaname>TC25824Entry</metaname>
+              <source>C7O365SML22@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML22@btcorp9.onmicrosoft.com</target>
+            </entry>
+            <entry>
+              <metaname>TC25830Entry</metaname>
+              <source>C7O365SML23@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML23@btcorp9.onmicrosoft.com</target>
+            </entry>
+            <entry>
+              <metaname>TC25825Entry</metaname>
+              <source>C7O365SML24@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML24@btcorp9.onmicrosoft.com</target>
+            </entry>
+            <entry>
+              <metaname>TC25829Entry</metaname>
+              <source>C7O365SML25@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML25@btcorp9.onmicrosoft.com</target>
+            </entry>
           </usermigration>
           <adgroups>
             <adgroup>
@@ -505,10 +525,11 @@
   <!--ClientRegistration-->
   <!--database connection string.Initial Catalog = databasename -->
   <database>
-    <initialCatalog>sqlt2t01-qa</initialCatalog>
+    <server>bt-qa-sql.database.windows.net</server>
+    <initialCatalog>sqlt2t01-QA</initialCatalog>
     <userID>btcloudsqladmin</userID>
     <password>NSHEtMDq0Q9zGJZfpFVemOr.</password>
-    <initialClientsCatalog>sqlclients-qa</initialClientsCatalog>
+    <initialClientsCatalog>sqlclients-QA</initialClientsCatalog>
   </database>
   <client.usermail>BT-Automation-QA1@btpower365dev.onmicrosoft.com</client.usermail>
   <client.password>BinTree123</client.password>

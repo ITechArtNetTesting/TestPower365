@@ -21,8 +21,8 @@ namespace Product.Tests.IntegrationTests
         [TestCategory("Integration")]
         public void IntegrationProVerifyOnlyMailUPNAndExtensionAttributesWillBeValidMatchingOptionsForUsersDuringProjectWizard()
         {
-            string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
-            string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");
+            string login = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user");
+            string password = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//password");
             string client = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name");          
 
             try

@@ -1,4 +1,8 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.PageObjects;
+using Product.Framework.Elements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,31 +11,39 @@ using System.Threading.Tasks;
 
 namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
 {
-    class DiscoveryOverviewForm:BaseForm
-    {
-        private static readonly By TitleLocator = By.XPath("//span[contains(text(),'Integration')]");
+    public class DiscoveryOverviewForm:BaseForm
+    {        
+        private static readonly By TitleLocator = By.XPath("//*");
 
-        IList<IWebElement> tenants = Browser.GetDriver().FindElements(By.XPath("//div[@id='discovery']//tbody//tr"));
+        Element tenants = new Element(By.XPath("//div[@id='discovery']//tbody//tr"), "List of tenants");
 
-        IList<IWebElement> tenantNames= Browser.GetDriver().FindElements(By.XPath("//div[@id='discovery']//tbody//tr"));
-
-        IList<IWebElement> discoveryRunIntervals= Browser.GetDriver().FindElements(By.XPath("//span[@data-bind='text: discoveryRunInterval']"));
 
         public DiscoveryOverviewForm():base(TitleLocator,"Discovery overview")
+        {            
+        }
+
+        public void VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(string clientName)
         {
-            if (tenants.Count != discoveryRunIntervals.Count)
+            WaitForAjaxLoad();
+            var clientId= queryExecuter.SelectClientIdByName(clientName);
+
+            for (int i = 0; i < tenants.GetElements().Count; i++)
             {
-                throw new Exception();
+                var sqlFrequency = queryExecuter.SelectDiscoveryFrequencyHours(clientId, tenants.GetElements()[i].FindElement(By.XPath(".//strong")).Text);
+                var uiFrequency = Convert.ToInt32(tenants.GetElements()[i].FindElement(By.XPath(".//span[@data-bind='text: discoveryRunInterval']")).Text);
+                Assert.AreEqual(sqlFrequency, uiFrequency);
             }
         }
 
-        public void CheckTheCurrentDiscoveryFrequencyForTheTenants()
+        public void ChangeDiscoveryFrequencyHours(int number)
         {
-            for (int i = 0; i < discoveryRunIntervals.Count; i++)
+            for (int i = 0; i < tenants.GetElements().Count; i++)
             {
-
+                new Actions(Browser.GetDriver()).MoveToElement(tenants.GetElements()[i]).Build().Perform();
+                tenants.GetElements()[i].FindElement(By.XPath(".//input")).Clear();
+                tenants.GetElements()[i].FindElement(By.XPath(".//input")).SendKeys(Convert.ToString(number));
             }
+            Browser.GetDriver().Navigate().Refresh();
         }
-
     }
 }
