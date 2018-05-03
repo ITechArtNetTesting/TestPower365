@@ -25,6 +25,7 @@ namespace Product.Tests.CommonTests.Menu_Tests
             client = RunConfigurator.GetClient("client2");
             project = RunConfigurator.GetProjectName("client2", "project2");
 
+
         }
 
         [TestMethod]
@@ -41,7 +42,7 @@ namespace Product.Tests.CommonTests.Menu_Tests
 
         [TestMethod]
         [TestCategory("Menu")]
-        public void Menu_IntegrationProject_31679_part2_correctLinkForEachMenuItems()
+        public void Menu_IntegrationProject_53237_correctLinkForEachMenuItems()
         {
 
             LoginAndSelectRole(userName, password, client);

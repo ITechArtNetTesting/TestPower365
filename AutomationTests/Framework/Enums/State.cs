@@ -35,8 +35,12 @@ namespace Product.Framework.Enums
         Synced1,
         [Description("2 sync(s) complete")]
         Synced2,
+        [Description("Matched")]
+        Matched,
+        [Description("Stopped")]
+        Stopped,
         [Description("Sync Error")]
-        SyncError      
+        SyncError
 
     }
 }

@@ -208,7 +208,7 @@ try
 		}
 	}
 
-	$distGroups = Get-DistributionGroup "$testGroupNamePrefix*" -ErrorAction SilentlyContinue
+	$distGroups = Get-DistributionGroup "$testDistributionGroupPrefix*" -ErrorAction SilentlyContinue
 	
 	if(!$simulationMode)
 	{
