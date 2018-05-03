@@ -85,7 +85,27 @@ namespace Product.Framework.Forms
             enabledApplyActionButton.Click();
             Confirm();
         }        
-      
+
+        public void SelectFirstSyncingFreeUser(ref int SelectedUser)
+        {
+            WaitForAjaxLoad();
+            if (SelectedUser == -1)
+            {
+                for (int i = 0; i < UserStatuses.GetElements().Count; i++)
+                {
+                    if (UserStatuses.GetElements()[i].Text.Contains("Syncing") && RunConfigurator.IsUserFree(ListOfSources.GetElements()[i].Text))
+                    {
+                        SelectedUser = i;
+                        UserStatuses.GetElements()[SelectedUser].Click();
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Browser.GetDriver().FindElements(By.XPath("//div[@id='users']//div[@class='table-responsive table-frame m-t-sm']//tr//td[2]//span"))[SelectedUser].Click();
+            }
+        }
 
         private readonly Button closeModalWindowButton =
 			new Button(By.XPath("//div[contains(@class, 'modal fade in')]//div[@class='modal-footer']//button[text()='Close']"),
@@ -312,7 +332,7 @@ namespace Product.Framework.Forms
             for (int i = 0; i < UserStatuses.GetElements().Count; i++)
             {
                 if (UserStatuses.GetElements()[i].Text.Contains("Matched"))
-                {
+                {                    
                     UserStatuses.GetElements()[i].Click();
                     SelectAction(ActionType.Sync);
                     CheckApplyButtonIsEnabled();

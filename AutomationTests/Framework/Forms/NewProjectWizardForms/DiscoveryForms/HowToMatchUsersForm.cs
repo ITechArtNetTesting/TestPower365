@@ -11,9 +11,9 @@ namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
         string[] ValidAttributes = { "UserPrincipalName", "Mail", "ExtensionAttribute" };
         private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'How would you like to match')]");
 
-        ComboBox sourceDropDownsAttributes = new ComboBox(By.XPath("//div[contains(@class,'dropdown inline')]//a[contains(@data-bind,'source')]"), "Source attributes");
+        Element sourceDropDownsAttributes = new Element(By.XPath("//div[contains(@class,'dropdown inline')]//a[contains(@data-bind,'source')]"), "Source attributes");
 
-        ComboBox targetDropDownsAttributes = new ComboBox(By.XPath("//div[contains(@class,'dropdown inline')]//a[contains(@data-bind,'target')]"), "Target attributes"); 
+        Element targetDropDownsAttributes = new Element(By.XPath("//div[contains(@class,'dropdown inline')]//a[contains(@data-bind,'target')]"), "Target attributes"); 
         
 
         Button sourceDropDownButton = new Button(By.XPath("//button[child::span[contains(@data-bind,'source')]]"), "Source dropdown button");
@@ -32,7 +32,7 @@ namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
         {
             bool result = false;
             sourceDropDownButton.Click();
-            foreach (IWebElement dropDown in sourceDropDownsAttributes.GetOptions())
+            foreach (IWebElement dropDown in sourceDropDownsAttributes.GetElements())
             {
                 if (!ArrayContains(ValidAttributes, dropDown.Text))
                 {                    
@@ -47,7 +47,7 @@ namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
         {
             bool result = false;
             targetDropDownButton.Click();
-            foreach (IWebElement dropDown in targetDropDownsAttributes.GetOptions())
+            foreach (IWebElement dropDown in targetDropDownsAttributes.GetElements())
             {
                 if (!ArrayContains(ValidAttributes,dropDown.Text))
                 {
