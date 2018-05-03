@@ -43,10 +43,10 @@ namespace Product.Framework.Elements
 
         public IList<IWebElement> GetElements()
         {
-            return Browser.GetDriver().FindElements(locator);         
+            return Browser.GetDriver().FindElements(locator);
         }
 
-		protected string GetName()
+        protected string GetName()
 		{
 			return name;
 		}
