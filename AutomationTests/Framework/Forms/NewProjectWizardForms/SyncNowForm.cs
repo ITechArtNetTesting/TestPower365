@@ -18,7 +18,11 @@ namespace Product.Framework.Forms.NewProjectWizardForms
         {
 
         }
-             
+
+        public void ClickBackButton()
+        {
+            back.Click();
+        }
 
     }
 }

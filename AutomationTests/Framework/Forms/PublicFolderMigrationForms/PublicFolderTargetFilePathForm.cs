@@ -10,7 +10,7 @@ namespace Product.Framework.Forms.PublicFolderMigrationForms
 {
 	public class PublicFolderTargetFilePathForm : BasePublicFolderWizardForm
 	{
-		private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'What target folder path do you want to migrate to')]");
+		private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//span[contains(text(), 'What target folder path do you want to migrate to')]");
 
 		public PublicFolderTargetFilePathForm() : base(TitleLocator, "Target file path form")
 		{

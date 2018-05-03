@@ -7,24 +7,26 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Product.Framework
 {
-	/// <summary>
-	///     Class RunConfigurator.
-	/// </summary>
-	public class RunConfigurator : BaseEntity
-	{
-		private static readonly XmlDocument xmlDoc = new XmlDocument(); // Create an XML document object
-		public static string RunPath;
-		public static string DownloadPath;
-		public static string ResourcesPath;
-		/// <summary>
-		///     Gets the value.
-		/// </summary>
-		/// <param name="tag">The tag.</param>
-		/// <returns>String.</returns>
-		public static string GetValue(string tag)
+    /// <summary>
+    ///     Class RunConfigurator.
+    /// </summary>
+    public class RunConfigurator : BaseEntity
+    {
+        private static readonly XmlDocument xmlDoc = new XmlDocument(); // Create an XML document object
+        public static string RunPath;
+        public static string DownloadPath;
+        public static string ResourcesPath;
+        
+        /// <summary>
+        ///     Gets the value.
+        /// </summary>
+        /// <param name="tag">The tag.</param>
+        /// <returns>String.</returns>
+        public static string GetValue(string tag)
 		{
-			xmlDoc.Load(RunPath); // Load the XML document from the specified file
-			var browser = xmlDoc.GetElementsByTagName(tag);
+           
+           xmlDoc.Load(RunPath); // Load the XML document from the specified file
+           var browser = xmlDoc.GetElementsByTagName(tag);
 			return browser[0].InnerText;
 		}
 
@@ -66,7 +68,20 @@ namespace Product.Framework
 
         public static string GetProjectName(string client, string project )
         {
-            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//name").InnerText;
+            return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//name").InnerText;            
+        }
+
+        public static bool IsUserFree(string Source)
+        {
+            bool result = true;
+            foreach (XmlElement entry in xmlDoc.SelectNodes($"//client//project//entry/source"))
+            {
+                if (Source == entry.InnerText)
+                {
+                    result = false;
+                }
+            }
+            return result;
         }
 
         public static string GetFileName(string client, string project, string file)
