@@ -32,7 +32,7 @@ function Invoke-Test22504{
 		$Data.OrginalId = $EntryIdVal
         $HexMessageId = ([System.BitConverter]::ToString($EntryIdVal).Replace("-",""))
 		Write-host "Part 1 - Task Created"
-		Copy-T2TMailboxItem -SourceMailbox $Script:SourceMailbox -SourceCredentials $Script:SourcePSCreds -TargetMailbox $Script:TargetMailbox -TargetCredentials $Script:TargetPSCreds -mappingfile ($script:ModuleRoot + '\engine\mapping.csv') -ProcessingPath c:\temp -SkipFolderRetentionTags -CopyDumpster:$true -Delta:$true -MessageId $HexMessageId -FolderPath '\Tasks' -SourceOnPremise $Script:SourceOnPrem -TargetOnPremise $Script:TargetOnPrem -SourceAutoDiscoverOverRide $Script:SourceAutoDiscoverOverRide -TargetAutoDiscoverOverRide $Script:TargetAutoDiscoverOverRide
+		Copy-T2TMailboxItem -SourceMailbox $Script:SourceMailbox -SourceCredentials $Script:SourcePSCreds -TargetMailbox $Script:TargetMailbox -TargetCredentials $Script:TargetPSCreds -mappingfile ($script:ModuleRoot + '\engine\mapping.csv') -ProcessingPath c:\temp -SkipFolderRetentionTags -CopyDumpster:$true -Delta:$true -MessageId $HexMessageId -FolderPath '\Tasks'
 		$TargetMessage = Invoke-P365FindTask -TargetMailbox -MessageId $EntryIdVal 
 		#Move Contact to New folder
 		$NewFolder = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  

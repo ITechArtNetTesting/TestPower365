@@ -43,29 +43,136 @@ namespace Product.Tests.IntegrationTests
                 LoginAndSelectRole(userName, password, client);
                 SelectProject(project);
                 User.AtProjectOverviewForm().OpenUsersList();
-
-                PerformActionAndWaitForState(sourceMailbox13, ActionType.Sync, State.Syncing, 60000, 10);
-                PerformActionAndWaitForState(sourceMailbox14, ActionType.Sync, State.Syncing, 60000, 10);
-                PerformActionAndWaitForState(sourceMailbox15, ActionType.Sync, State.Syncing, 60000, 10);
-
-                WaitForState(sourceMailbox13, State.Synced, 2400000, 60);
-                WaitForState(sourceMailbox14, State.Synced, 2400000, 60);
-                WaitForState(sourceMailbox15, State.Synced, 2400000, 60);
-
-                PerformActionAndWaitForState(sourceMailbox13, ActionType.Cutover, State.Finalizing, 60000, 10);
-                PerformActionAndWaitForState(sourceMailbox14, ActionType.Cutover, State.Finalizing, 60000, 10);
-                PerformActionAndWaitForState(sourceMailbox15, ActionType.Cutover, State.Finalizing, 60000, 10);
-
+                //NOTE: Sync entry13
                 User.AtUsersForm().PerformSearch(sourceMailbox13);
+                User.AtUsersForm().SelectEntryBylocator(sourceMailbox13);
+                User.AtUsersForm().SelectAction(ActionType.Sync);
+                try
+                {
+                    User.AtUsersForm().Apply();
+                }
+                catch (Exception)
+                {
+                    Log.Info("Apply button is not enabled");
+                    Browser.GetDriver().Navigate().Refresh();
+                    User.AtUsersForm().SelectEntryBylocator(sourceMailbox13);
+                    User.AtUsersForm().SelectAction(ActionType.Sync);
+                    User.AtUsersForm().Apply();
+                }
+                User.AtUsersForm().Confirm();
+                User.AtUsersForm().WaitForState(sourceMailbox13, State.Syncing, 30000);
+                //NOTE: Sync entry14
+                User.AtUsersForm().PerformSearch(sourceMailbox14);
+                User.AtUsersForm().SelectEntryBylocator(sourceMailbox14);
+                User.AtUsersForm().SelectAction(ActionType.Sync);
+                try
+                {
+                    User.AtUsersForm().Apply();
+                }
+                catch (Exception)
+                {
+                    Log.Info("Apply button is not enabled");
+                    Browser.GetDriver().Navigate().Refresh();
+                    User.AtUsersForm().SelectEntryBylocator(sourceMailbox14);
+                    User.AtUsersForm().SelectAction(ActionType.Sync);
+                    User.AtUsersForm().Apply();
+                }
+                User.AtUsersForm().Confirm();
+                User.AtUsersForm().WaitForState(sourceMailbox14, State.Syncing, 30000);
+                //NOTE: Sync entry15
+                User.AtUsersForm().PerformSearch(sourceMailbox15);
+                User.AtUsersForm().SelectEntryBylocator(sourceMailbox15);
+                User.AtUsersForm().SelectAction(ActionType.Sync);
+                try
+                {
+                    User.AtUsersForm().Apply();
+                }
+                catch (Exception)
+                {
+                    Log.Info("Apply button is not enabled");
+                    Browser.GetDriver().Navigate().Refresh();
+                    User.AtUsersForm().SelectEntryBylocator(sourceMailbox15);
+                    User.AtUsersForm().SelectAction(ActionType.Sync);
+                    User.AtUsersForm().Apply();
+                }
+                User.AtUsersForm().Confirm();
+                User.AtUsersForm().WaitForState(sourceMailbox15, State.Syncing, 30000);
+
+                //NOTE: Wait for entry13 is synced
+                User.AtUsersForm().PerformSearch(sourceMailbox13);
+                User.AtUsersForm().WaitForState(sourceMailbox13, State.Synced, 1200000, 30);
+                //NOTE: Wait for entry14 is synced
+                User.AtUsersForm().PerformSearch(sourceMailbox14);
+                User.AtUsersForm().WaitForState(sourceMailbox14, State.Synced, 12000000, 30);
+                //NOTE: Wait for entry15 is synced
+                User.AtUsersForm().PerformSearch(sourceMailbox15);
+                User.AtUsersForm().WaitForState(sourceMailbox15, State.Synced, 12000000, 30);
+                //NOTE: Cutover entry15
+                User.AtUsersForm().SelectEntryBylocator(sourceMailbox15);
+                User.AtUsersForm().SelectAction(ActionType.Cutover);
+                try
+                {
+                    User.AtUsersForm().Apply();
+                }
+                catch (Exception)
+                {
+                    Log.Info("Apply button is not enabled");
+                    Browser.GetDriver().Navigate().Refresh();
+                    User.AtUsersForm().SelectEntryBylocator(sourceMailbox15);
+                    User.AtUsersForm().SelectAction(ActionType.Cutover);
+                    User.AtUsersForm().Apply();
+                }
+                User.AtUsersForm().ConfirmCutover();
+                User.AtUsersForm().WaitForState(sourceMailbox15, State.Finalizing, 30000, 10);
+                //NOTE: Cutover entry14
+                User.AtUsersForm().PerformSearch(sourceMailbox14);
+                User.AtUsersForm().SelectEntryBylocator(sourceMailbox14);
+                User.AtUsersForm().SelectAction(ActionType.Cutover);
+                try
+                {
+                    User.AtUsersForm().Apply();
+                }
+                catch (Exception)
+                {
+                    Log.Info("Apply button is not enabled");
+                    Browser.GetDriver().Navigate().Refresh();
+                    User.AtUsersForm().SelectEntryBylocator(sourceMailbox14);
+                    User.AtUsersForm().SelectAction(ActionType.Cutover);
+                    User.AtUsersForm().Apply();
+                }
+                User.AtUsersForm().ConfirmCutover();
+                User.AtUsersForm().WaitForState(sourceMailbox14, State.Finalizing, 30000, 10);
+                //NOTE: Cutover entry13
+                User.AtUsersForm().PerformSearch(sourceMailbox13);
+                User.AtUsersForm().SelectEntryBylocator(sourceMailbox13);
+                User.AtUsersForm().SelectAction(ActionType.Cutover);
+                try
+                {
+                    User.AtUsersForm().Apply();
+                }
+                catch (Exception)
+                {
+                    Log.Info("Apply button is not enabled");
+                    Browser.GetDriver().Navigate().Refresh();
+                    User.AtUsersForm().SelectEntryBylocator(sourceMailbox13);
+                    User.AtUsersForm().SelectAction(ActionType.Cutover);
+                    User.AtUsersForm().Apply();
+                }
+                User.AtUsersForm().ConfirmCutover();
                 User.AtUsersForm().OpenDetailsByLocator(sourceMailbox13);
-                User.AtUsersForm().WaitForSyncJobAppear(3);
+                User.AtUsersForm().WaitForSyncJobAppear(2);
                 User.AtUsersForm().CloseUserDetails();
 
-                WaitForState(sourceMailbox13, State.Complete, 3600000, 60);
-                WaitForState(sourceMailbox14, State.Complete, 3600000, 60);
-                WaitForState(sourceMailbox15, State.Complete, 3600000, 60);
+                //NOTE: Wait till entry13 cutover completes
+                User.AtUsersForm().WaitForState(sourceMailbox13, State.Complete, 1200000, 60);
+                //NOTE: Wait till entry14 cutover completes
+                User.AtUsersForm().PerformSearch(sourceMailbox14);
+                User.AtUsersForm().WaitForState(sourceMailbox14, State.Complete, 1200000, 60);
+                //NOTE: Wait till entry15 cutover completes
+                User.AtUsersForm().PerformSearch(sourceMailbox15);
+                User.AtUsersForm().WaitForState(sourceMailbox15, State.Complete, 1200000, 60);
 
-                Thread.Sleep(45 * 60 * 1000);
+                Thread.Sleep(2700000);
                 //NOTE: Run PS script
                 bool tc32208 = false;
                 bool tc28545 = false;
@@ -74,7 +181,6 @@ namespace Product.Tests.IntegrationTests
                 bool tc27859 = false;
                 bool tc32394 = false;
                 bool tc32203 = false;
-
                 using (
                     var validationProcess = new PsLauncher().LaunchPowerShellInstance("Integration-Cutover.ps1",
                         $" -tlogin {targetLogin}" +
@@ -95,7 +201,7 @@ namespace Product.Tests.IntegrationTests
                     while (!validationProcess.StandardOutput.EndOfStream)
                     {
                         var line = validationProcess.StandardOutput.ReadLine();
-                        Log.Debug(line);
+                        Log.Info(line);
                         if (line.Contains("TC32208 Passed"))
                         {
                             tc32208 = true;
@@ -128,13 +234,16 @@ namespace Product.Tests.IntegrationTests
                     validationProcess.WaitForExit(600000);
                 }
 
-                var success = tc32208 & tc28545 & tc27857 & tc27856 & tc27859 & tc32394 & tc32203;
-
-                Assert.IsTrue(success, "Not all tests were successful.");
+                Assert.IsTrue(tc32208, "Test failed");
+                Assert.IsTrue(tc28545, "Test failed");
+                Assert.IsTrue(tc27857, "Test failed");
+                Assert.IsTrue(tc27856, "Test failed");
+                Assert.IsTrue(tc27859, "Test failed");
+                Assert.IsTrue(tc32394, "Test failed");
+                Assert.IsTrue(tc32203, "Test failed");
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Log.Error("Failed to run CutoverTest.", e);
                 LogHtml(Browser.GetDriver().PageSource);
                 throw;
             }

@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
-using Product.Framework.Enums;
 using Product.Tests.CommonTests;
 
 namespace Product.Tests.MailOnlyTests.MigrationTests
@@ -30,19 +29,20 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
 		        SelectProject(projectName);
 		        User.AtProjectOverviewForm().GetUsersCount();
 		        User.AtProjectOverviewForm().OpenUsersList();
-                User.AtUsersForm().PerfomActionForUser(sourceMailbox3, ActionType.Sync);
-                User.AtUsersForm().ConfirmSync();
+		        User.AtUsersForm().SyncUserByLocator(sourceMailbox3);
+		        User.AtUsersForm().Confirm();
 		        User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox3);
 		        User.AtUsersForm().OpenDetailsByLocator(sourceMailbox3);
 		        User.AtUsersForm().VerifyStateIS("Syncing");
 		        User.AtUsersForm().WaitForJobIsCreated();
 		        User.AtUsersForm().AssertDetailsStopButtonIsEnabled();
-		        User.AtUsersForm().WaitForSyncedState();		        
+		        User.AtUsersForm().WaitForSyncedState();
+		        User.AtUsersForm().DownloadLogs();
+		        RunConfigurator.CheckLogsFileIsDownloaded();
 		        User.AtUsersForm().AssertDetailsSyncButtonIsEnabled();
 		        User.AtUsersForm().CompleteSync();
 		        User.AtUsersForm().ConfirmComplete();
-		        User.AtUsersForm().VerifyStateIS("Complete");
-		        User.AtUsersForm().CloseUserDetails();
+		        User.AtUsersForm().VerifyStateIS("Complete");		        
             }
 		    catch (Exception e)
 		    {

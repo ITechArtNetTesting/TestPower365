@@ -42,6 +42,7 @@
     <Reference Include="log4net">
       <HintPath>$(SolutionDir)packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Exchange.WebServices, Version=15.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="Selenium.WebDriverBackedSelenium, Version=3.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>$(SolutionDir)packages\Selenium.WebDriverBackedSelenium.3.4.0\lib\net40\Selenium.WebDriverBackedSelenium.dll</HintPath>
@@ -108,6 +109,7 @@
     <Compile Include="Framework\Enums\EnumExtensions.cs" />
     <Compile Include="Framework\Enums\FilterState.cs" />
     <Compile Include="Framework\Enums\State.cs" />
+    <Compile Include="Framework\ExcelReader.cs" />
     <Compile Include="Framework\Forms\AdminsForms\LicensingForm.cs" />
     <Compile Include="Framework\Forms\AnyForm.cs" />
     <Compile Include="Framework\Forms\BaseForm.cs" />
@@ -115,7 +117,6 @@
     <Compile Include="Framework\Forms\CoexSettingsForm.cs" />
     <Compile Include="Framework\Forms\GroupsMigrationForm.cs" />
     <Compile Include="Framework\Forms\MainForm.cs" />
-    <Compile Include="Framework\Forms\Menu\UsersMenuForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\AddTenantsForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\AlmostDoneForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\BaseWizardStepForm.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Framework\Forms\NewProjectWizardForms\DiscoveryForms\DefineMigrationWavesForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\DiscoveryForms\DiscoveryIsCompleteForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\DiscoveryForms\DiscoveryIsInProgressForm.cs" />
+    <Compile Include="Framework\Forms\NewProjectWizardForms\DiscoveryForms\DiscoveryOverviewForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\DiscoveryForms\DiscoveryProgressForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\DiscoveryForms\GoodToGoForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\DiscoveryForms\HowToMatchUsersForm.cs" />
@@ -200,21 +202,19 @@
     <Compile Include="Framework\Forms\UsersForm.cs" />
     <Compile Include="Framework\PsLauncher.cs" />
     <Compile Include="Framework\RunConfigurator.cs" />
-    <Compile Include="Framework\StaticData\MenuArray.cs" />
     <Compile Include="Framework\Steps\AddTenantsSteps.cs" />
     <Compile Include="Framework\Steps\UserSteps.cs" />
     <Compile Include="Framework\Store.cs" />
     <Compile Include="Framework\StringRandomazer.cs" />
     <Compile Include="IProbeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQL\SQLExecuter.cs" />
     <Compile Include="Tests\CommonTests\LoginAndConfigureTest.cs" />
-    <Compile Include="Tests\CommonTests\Menu Tests\Menu_IntegrationProject_31679.cs" />
     <Compile Include="Tests\CommonTests\ProbeTest.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\DatabaseCleanup.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\EnvironmentCleanup.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\FirstUserFirstProjectTest.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\FirstUserSecondProjectTest.cs" />
-    <Compile Include="Tests\CommonTests\SetupTests\FirstUserThirdProject.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\ProfileConfigurationTest.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\SecondUserFirstTest.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\SetProjectDescriptionForm.cs" />
@@ -223,18 +223,22 @@
     <Compile Include="Tests\IntegrationTests\CutoverTest.cs" />
     <Compile Include="Tests\IntegrationTests\DistributionGroupsInitialTest.cs" />
     <Compile Include="Tests\IntegrationTests\DistributionGroupsValidationTest.cs" />
+    <Compile Include="Tests\IntegrationTests\GroupsTests\TC31793_Verify_only_universal_distribution_groups_will_be_shown_in_the_UI_for_group_sync_and_security_group_will_be_shown_in_the_UI_but_it_can_not_be_synced.cs" />
     <Compile Include="Tests\IntegrationTests\GroupsViewTest.cs" />
-    <Compile Include="Tests\IntegrationTests\SetUpTest\MailUPNandExtensionAttributesAreValidMatchingOptions_32951.cs" />
-    <Compile Include="Tests\CommonTests\ActionButtonsTests\StoppingStateButtonsTest.cs" />
+    <Compile Include="Tests\IntegrationTests\TC32698_Verify_discovery_frequency_can_be_set_through_the_Discovery_page.cs" />
+    <Compile Include="Tests\IntegrationTests\TC32951_IntegrationPro_Verify_only_Mail_UPN_and_ExtensionAttributes_will_be_valid_matching_options_for_users_during_Project_Wizard.cs" />
+    <Compile Include="Tests\MailOnlyTests\ActionButtonsTests\StoppingStateButtonsTest.cs" />
     <Compile Include="Tests\MailOnlyTests\ActionButtonsTests\SyncingButtonsTest.cs" />
     <Compile Include="Tests\MailOnlyTests\ActionButtonsTests\UserMigrationButtonsTest.cs" />
     <Compile Include="Tests\MailOnlyTests\ImportAndExportTests\ExportTest.cs" />
-    <Compile Include="Tests\MailOnlyTests\ImportAndExportTests\FixUserActionToApplyMigrationWave_33619.cs" />
     <Compile Include="Tests\MailOnlyTests\ImportAndExportTests\ImportTest.cs" />
     <Compile Include="Tests\MailOnlyTests\LandingPageTests\ContentExistsTest.cs" />
-    <Compile Include="Tests\MailOnlyTests\MigrationTests\LogsFileIsDownloadedAfterSync_23094.cs" />
     <Compile Include="Tests\MailOnlyTests\MigrationTests\MailMigrationTest.cs" />
     <Compile Include="Tests\MailOnlyTests\MigrationTests\RollbackTest.cs" />
+    <Compile Include="Tests\MailOnlyTests\MigrationTests\TC22938_UI_Verify_Migration_Job_Progress_Bar_will_be_updated_correctly_while_job_is_running.cs" />
+    <Compile Include="Tests\MailOnlyTests\MigrationTests\TC23090_UI_Verify_Jobs_Can_Be_Archived.cs" />
+    <Compile Include="Tests\MailOnlyTests\MigrationTests\TC23091_UI_Verify_submitting_delta_sync_job_for_a_Synced_user.cs" />
+    <Compile Include="Tests\MailOnlyTests\MigrationTests\TC23092_UI_Verify_an_in_progress_job_can_be_stopped.cs" />
     <Compile Include="Tests\MailOnlyTests\MigrationTests\UserMigrationTest.cs" />
     <Compile Include="Tests\MailOnlyTests\ProjectCreationTests\ReplaceUsersTest.cs" />
     <Compile Include="Tests\MailOnlyTests\SortingAndFilterTests\ArchiveTest.cs" />
@@ -245,13 +249,15 @@
     <Compile Include="Tests\MailOnlyTests\SortingAndFilterTests\SortingFilteredEntriesTest.cs" />
     <Compile Include="Tests\MailOnlyTests\SortingAndFilterTests\SortingTest.cs" />
     <Compile Include="Tests\MailOnlyTests\TenantConfigurationTests\TenantConfigurationTest.cs" />
-    <Compile Include="Tests\MailOnlyTests\ActionButtonsTests\CutoverAndCompletedButtonsTest_TC23096.cs" />
-    <Compile Include="Tests\CommonTests\ActionButtonsTests\StoppingStateButtonsTest_InTheUserDetailView.cs" />
-    <Compile Include="Tests\CommonTests\LandingPageTests\GetBackToProjectDashboardFromSyncPages_37789.cs" />
-    <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\MailMigrationJobShouldCompletedInUserMigrationView_25824.cs" />
-    <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\MailMigrationJobShouldCompleted_22982.cs" />
-    <Compile Include="Tests\CommonTests\LandingPageTests\ProjectLandingPageShouldHasTenantSection_25771.cs" />
+    <Compile Include="Tests\MailOnlyTests\UsersActionsTests\TC23096_Verify_only_users_in_Synced_state_can_be_cutover_or_completed.cs" />
+    <Compile Include="Tests\MailWithDiscoveryTests\ActionButtonsTests\TC25824_Verify_Sync_Action_is_available_in_the_User_Migration_View.cs" />
+    <Compile Include="Tests\MailWithDiscoveryTests\ActionButtonsTests\TC25825_Verify_Stop_Action_is_avaliable_in_the_User_Migration_View_In_Progress.cs" />
+    <Compile Include="Tests\MailWithDiscoveryTests\ActionButtonsTests\TC25829_Verify_Sync_Action_Button_is_avaliable_in_the_User_Detail_Screen.cs" />
+    <Compile Include="Tests\MailWithDiscoveryTests\ActionButtonsTests\TC25830_Verify_Stop_Action_is_available_in_the_User_Detail_Screen.cs" />
     <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\DiscoveryTest.cs" />
+    <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\TC22982_UI_Verify_after_the_Mail_Migration_Job_completed_for_Mail_with_Discovery_Project_the_UI_should_allow_user_to_select_Complite_Job_Option.cs" />
+    <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\TC25771_UI_Verify_Project_Landing_Page_has_Tenant_Status_section.cs" />
+    <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\TC37789_Verify_user_can_get_back_to_Project_Dashboard_from_SyncNow_and_Schedule_Syncs_Wizards.cs" />
     <Compile Include="Tests\PowerShellTests\AddressTransformTest.cs" />
     <Compile Include="Tests\PowerShellTests\AddTest.cs" />
     <Compile Include="Tests\PowerShellTests\MailEngineTest.cs" />
@@ -264,7 +270,7 @@
     <Compile Include="Tests\PowerShellTests\StartDeltaDiscoveryTest.cs" />
     <Compile Include="Tests\PublicFoldersTests\DemoTest.cs" />
     <Compile Include="Tests\PublicFoldersTests\PublicFoldersTest.cs" />
-    <Compile Include="Utilities\SqlClient.cs" />
+    <Compile Include="SQL\SqlClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\chromedriver.exe">
@@ -640,12 +646,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
-    <None Include="Ordered.orderedtest">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="Ordered.orderedtest" />
     <None Include="OrderedPowershell.orderedtest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </None>
     <None Include="OrderedIntegration.orderedtest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -653,7 +656,6 @@
     </None>
     <None Include="ProjectSetup.orderedtest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
     <None Include="resources\AddPermission.ps1">
@@ -965,12 +967,6 @@
     <None Include="resources\MailEngine\Power365-Test.psm1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="resources\MailOnlyCSVC3toC11ShMBX-TC33619_part2.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\MailOnlyCSVC3toC11ShMBX-TC33619_part1.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="resources\MailOnlyCSVC3toC11ShMBX-Automation.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -1036,8 +1032,35 @@
   <ItemGroup>
     <Folder Include="lib\" />
     <Folder Include="resources\MailEngine\internal\functions\" />
-    <Folder Include="Tests\MailWithDiscoveryTests\ActionButtonsTests\" />
-    <Folder Include="Tests\MailWithDiscoveryTests\LandingPageTests\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

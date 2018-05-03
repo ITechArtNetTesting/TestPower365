@@ -31,7 +31,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
             string sourceLogin = RunConfigurator.GetTenantValue("T1->T2", "source", "psuser2");
             string sourcePassword = RunConfigurator.GetTenantValue("T1->T2", "source", "pspassword2");
             string targetLogin = RunConfigurator.GetTenantValue("T1->T2", "target", "psuser2");
-            string targetPassword = RunConfigurator.GetTenantValue("T1->T2", "target", "pspassword2");
+            string targetPassword = RunConfigurator.GetTenantValue("T1->T2", "target", "pspassword2"); 
             string stopFile1 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='stopfile9']/..//path");
             string stopFile2 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='stopfile7']/..//path");
             string stopFile3 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='stopfile10']/..//path");
@@ -104,7 +104,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
                                 User.AtUsersForm().SelectAction(ActionType.Sync);
                                 User.AtUsersForm().Apply();
                             }
-                            User.AtUsersForm().ConfirmSync();
+                            User.AtUsersForm().Confirm();
                             User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 10000);
                             User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 1900000, 30);
                             RunConfigurator.CreateEmptyFile(stopFile1);
@@ -142,7 +142,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
                                 User.AtUsersForm().SelectAction(ActionType.Sync);
                                 User.AtUsersForm().Apply();
                             }
-                            User.AtUsersForm().ConfirmSync();
+                            User.AtUsersForm().Confirm();
                             User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 10000,30);
                             User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 1200000, 30);
                             RunConfigurator.CreateEmptyFile(stopFile3);

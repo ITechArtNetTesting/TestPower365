@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using Product.Framework;
-using Product.Framework.Enums;
 
 namespace Product.Tests.CommonTests
 {
@@ -12,7 +11,6 @@ namespace Product.Tests.CommonTests
 		{
             LogIn(login, password);
             //NOTE: Temp solution to avoid 1 symbol in role textbox
-                    
             User.AtTenantRestructuringForm().OpenMainMenu();
 			User.AtTenantRestructuringForm().AtMainMenu().SelectRole(role);
             User.AtTenantRestructuringForm().GoToProjects();
@@ -142,39 +140,5 @@ namespace Product.Tests.CommonTests
 			User.AtSyncScheduleForm().GoNext();
 			User.AtAlmostDoneForm().GoNext();
 		}
-
-        public void PerformAction(string mailbox, ActionType action)
-        {
-            Log.Debug(string.Format("PerformAction: '{0}' action '{1}'", mailbox, action));
-
-            if (action == ActionType.Rollback)
-                throw new NotImplementedException("Rollback requires special confirmation");
-
-            User.AtUsersForm().PerformSearch(mailbox);
-            User.AtUsersForm().SelectEntryBylocator(mailbox);
-            User.AtUsersForm().SelectAction(action);
-            User.AtUsersForm().Apply();
-            User.AtUsersForm().ConfirmAction();
-        }
-
-        public void PerformActionAndWaitForState(string mailbox, ActionType action, State state, int timeout = 5000, int pollIntervalSec = 0)
-        {
-            PerformAction(mailbox, action);
-            WaitForState(mailbox, state, timeout, pollIntervalSec);
-        }
-
-        public void WaitForState(string mailbox, State state, int timeout = 5000, int pollIntervalSec = 0)
-        {
-            Log.Debug(string.Format("WaitForState: '{0}' waiting for state '{1}' [Timeout]: '{2}' [pollInterval] = '{3}'", mailbox, state, timeout, pollIntervalSec));
-            User.AtUsersForm().PerformSearch(mailbox);
-            User.AtUsersForm().WaitForState(mailbox, state, timeout, pollIntervalSec);
-        }
-
-        public void WaitForAnyState(string mailbox, State[] states, int timeout = 5000, int pollIntervalSec = 0)
-        {
-            Log.Debug(string.Format("WaitForAnyState: '{0}' waiting for any state '{1}' [Timeout]: '{2}' [pollInterval] = '{3}'", mailbox, string.Join(", ", states), timeout, pollIntervalSec));
-            User.AtUsersForm().PerformSearch(mailbox);
-            User.AtUsersForm().WaitForAnyState(mailbox, states, timeout, pollIntervalSec);
-        }
-    }
+	}
 }

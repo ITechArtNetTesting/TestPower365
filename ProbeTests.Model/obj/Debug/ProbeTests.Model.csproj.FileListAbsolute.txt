@@ -78,3 +78,14 @@ D:\Project\BTCloud\SeleniumTests\ProbeTests.Model\obj\Debug\ProbeTests.Model.csp
 D:\Project\BTCloud\SeleniumTests\ProbeTests.Model\obj\Debug\ProbeTests.Model.csproj.CoreCompileInputs.cache
 D:\Project\BTCloud\SeleniumTests\ProbeTests.Model\obj\Debug\ProbeTests.Model.dll
 D:\Project\BTCloud\SeleniumTests\ProbeTests.Model\obj\Debug\ProbeTests.Model.pdb
+C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests.Model\bin\Debug\ProbeTests.Model.dll.config
+C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests.Model\bin\Debug\ProbeTests.Model.dll
+C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests.Model\bin\Debug\ProbeTests.Model.pdb
+C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests.Model\bin\Debug\EntityFramework.dll
+C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests.Model\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests.Model\bin\Debug\EntityFramework.xml
+C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests.Model\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests.Model\obj\Debug\ProbeTests.Model.csprojResolveAssemblyReference.cache
+C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests.Model\obj\Debug\ProbeTests.Model.csproj.CoreCompileInputs.cache
+C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests.Model\obj\Debug\ProbeTests.Model.dll
+C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests.Model\obj\Debug\ProbeTests.Model.pdb

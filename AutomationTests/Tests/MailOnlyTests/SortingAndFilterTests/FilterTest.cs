@@ -32,8 +32,8 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		        LoginAndSelectRole(login, password, client);
 		        SelectProject(projectName);
 		        User.AtProjectOverviewForm().OpenUsersList();
-                User.AtUsersForm().PerfomActionForUser(sourceMailbox6, ActionType.Sync);
-                User.AtUsersForm().ConfirmSync();
+                User.AtUsersForm().SyncUserByLocator(sourceMailbox6);
+                User.AtUsersForm().Confirm();
                 User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox6);
                 User.AtUsersForm().SwitchFilter(FilterState.Open);
 		        User.AtUsersForm().SetMatched();

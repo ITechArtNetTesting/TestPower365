@@ -449,8 +449,8 @@ namespace Product.Tests.PowerShellTests
             SelectProject(_project);
             User.AtProjectOverviewForm().OpenUsersList();
 
-            User.AtUsersForm().PerfomActionForUser(user, ActionType.Sync);
-            User.AtUsersForm().ConfirmSync();
+            User.AtUsersForm().SyncUserByLocator(user);
+            User.AtUsersForm().Confirm();
             User.AtUsersForm().AssertUserHaveSyncingState(user);
 
             User.AtUsersForm().WaitForState(user, State.Synced, 1200000, 60);
@@ -460,7 +460,7 @@ namespace Product.Tests.PowerShellTests
         {
             PerformSync(user);
 
-            User.AtUsersForm().PerfomActionForUser(user, ActionType.Rollback);
+            User.AtUsersForm().RollbackUserByLocator(user);
             //Do not reset permissions it will remove access for the admin user.
             User.AtUsersForm().ConfirmRollback(false);
             User.AtUsersForm().AssertUserHasState(user, "Rollback In Progress");

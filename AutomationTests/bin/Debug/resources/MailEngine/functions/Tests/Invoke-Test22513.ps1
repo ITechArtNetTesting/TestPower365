@@ -39,7 +39,7 @@ function Invoke-Test22513{
 		$Data.OrginalId = $EntryIdVal
         $HexMessageId = ([System.BitConverter]::ToString($EntryIdVal).Replace("-",""))
 		Write-host "Part 1 - Journal Item Created"
-		Copy-T2TMailboxItem -SourceMailbox $Script:SourceMailbox -SourceCredentials $Script:SourcePSCreds -TargetMailbox $Script:TargetMailbox -TargetCredentials $Script:TargetPSCreds -mappingfile ($script:ModuleRoot + '\engine\mapping.csv') -ProcessingPath c:\temp -SkipFolderRetentionTags -CopyDumpster:$true -Delta:$true -MessageId $HexMessageId -FolderPath '\Journal' -SourceOnPremise $Script:SourceOnPrem -TargetOnPremise $Script:TargetOnPrem -SourceAutoDiscoverOverRide $Script:SourceAutoDiscoverOverRide -TargetAutoDiscoverOverRide $Script:TargetAutoDiscoverOverRide
+		Copy-T2TMailboxItem -SourceMailbox $Script:SourceMailbox -SourceCredentials $Script:SourcePSCreds -TargetMailbox $Script:TargetMailbox -TargetCredentials $Script:TargetPSCreds -mappingfile ($script:ModuleRoot + '\engine\mapping.csv') -ProcessingPath c:\temp -SkipFolderRetentionTags -CopyDumpster:$true -Delta:$true -MessageId $HexMessageId -FolderPath '\Journal'
 		$TargetMessage = Invoke-P365FindMessage -TargetMailbox -MessageId $EntryIdVal 
 		#Move EmailMessage to New folder
 		$NewFolder = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  

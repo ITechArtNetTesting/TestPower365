@@ -3,8 +3,7 @@ function Get-P365PublicFolderFromPath {
         [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
         [Parameter(Position = 2, Mandatory = $false)] [switch]$Archive,
-        [Parameter(Position = 0, Mandatory = $true)] [string]$FolderPath,
-        [Parameter(Position = 0, Mandatory = $false)] [switch]$RootFolder
+        [Parameter(Position = 0, Mandatory = $true)] [string]$FolderPath
 		  )
     process {
         if ($TargetMailbox.IsPresent) {
@@ -23,45 +22,20 @@ function Get-P365PublicFolderFromPath {
         $AutoDiscoverService.EnableScpLookup = $false;
         $AutoDiscoverService.RedirectionUrlValidationCallback = {$true};
         $AutoDiscoverService.PreAuthenticate = $true;
-        $AutoDiscoverService.KeepAlive = $false;    
-        $ByPass = ""
-        if($TargetMailbox.IsPresent){
-            if(![String]::IsNullOrEmpty($Script:TargetAutoDiscoverOverRide)){
-                $uri=[system.URI] ($Script:TargetAutoDiscoverOverRide + "/autodiscover.svc")
-                $AutoDiscoverService.Url =$uri
-            } 
-        }
-        else{
-            if(![String]::IsNullOrEmpty($Script:SourceAutoDiscoverOverRide)){
-                $uri=[system.URI] ($Script:SourceAutoDiscoverOverRide + "/autodiscover.svc")
-                $AutoDiscoverService.Url =$uri
-            } 
-        }  
+        $AutoDiscoverService.KeepAlive = $false;      
         $gsp = $AutoDiscoverService.GetUserSettings($MailboxName, [Microsoft.Exchange.WebServices.Autodiscover.UserSettingName]::PublicFolderInformation);
         $PublicFolderInformation = $null
         if ($gsp.Settings.TryGetValue([Microsoft.Exchange.WebServices.Autodiscover.UserSettingName]::PublicFolderInformation, [ref] $PublicFolderInformation)) {
             write-host ("Public Folder Routing Information Header : " + $PublicFolderInformation)  
-            if($service.HttpHeaders.ContainsKey("X-AnchorMailbox")){
-                $service.HttpHeaders["X-AnchorMailbox"] = $PublicFolderInformation
-            }
-            else{
-                $service.HttpHeaders.Add("X-AnchorMailbox", $PublicFolderInformation)     
-            }                 
+            $service.HttpHeaders.Add("X-AnchorMailbox", $PublicFolderInformation)           
 					
         } 
         ## Find and Bind to Folder based on Path  
         #Define the path to search should be seperated with \  
         #Bind to the MSGFolder Root  
-        if($RootFolder.IsPresent){
-            $fldFolderId = New-Object Microsoft.Exchange.WebServices.Data.FolderId([Microsoft.Exchange.WebServices.Data.WellKnownFolderName]::PublicFoldersRoot,$service)
-            $Folder = [Microsoft.Exchange.WebServices.Data.Folder]::Bind($service, $fldFolderId)
-        }
-        else{
-            $fldId = Get-P365PublicFolderIdFromPath -FolderPath $FolderPath -SmtpAddress $MailboxName -service $service -TargetMailbox:$TargetMailbox.IsPresent
-            $fldFolderId = New-Object Microsoft.Exchange.WebServices.Data.FolderId($fldId)
-            $Folder = [Microsoft.Exchange.WebServices.Data.Folder]::Bind($service, $fldFolderId)
-        }
-
+        $fldId = Get-P365PublicFolderIdFromPath -FolderPath $FolderPath -SmtpAddress $MailboxName -service $service -TargetMailbox:$TargetMailbox.IsPresent
+        $fldFolderId = New-Object Microsoft.Exchange.WebServices.Data.FolderId($fldId)
+        $Folder = [Microsoft.Exchange.WebServices.Data.Folder]::Bind($service, $fldFolderId)
         return $Folder
     }
 }
