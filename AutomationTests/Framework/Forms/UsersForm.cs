@@ -8,8 +8,6 @@ using System.Management.Automation.Internal;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
 using Product.Framework.Elements;
 using Product.Framework.Enums;
 
@@ -17,8 +15,6 @@ namespace Product.Framework.Forms
 {
 	public class UsersForm : BaseForm
 	{
-        private readonly Button detailsSync = new Button(By.XPath("//button[text()='Sync']"), "Sync button on details popup");
-
 		private static readonly By TitleLocator =
 			By.XPath("//div[@id='users']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]");
 
@@ -31,83 +27,13 @@ namespace Product.Framework.Forms
 		private readonly Button backToDashboardButton = new Button(
 			By.XPath("//button[contains(@data-bind, 'goToDashboard')]"), "Back to dashboard button");
 
-        private readonly TextBox chooseFilesInput =
-            new TextBox(By.XPath("//div[contains(@class, 'modal in')]//input[@type='file']"), "Choose files input");
+		private readonly TextBox chooseFilesInput =
+			new TextBox(By.XPath("//div[contains(@class, 'modal in')]//input[@type='file']"), "Choose files input");
 
-        internal void ClickSyncOnDetailsPopup()
-        {
-            detailsSync.Click();
-        }
-      
-
-        private readonly Button closeFilterButton =
+		private readonly Button closeFilterButton =
 			new Button(By.XPath("//div[@class='panel-footer']//button[text()='Close']"), "Close filter button");
 
-        public void VerifyTheMailMigrationJobHasStoped(string sourceMailbox)
-        {
-            Browser.GetDriver().Navigate().Refresh();
-            WaitForAjaxLoad();            
-            Assert.IsTrue(Browser.GetDriver().FindElement(By.XPath($"//div[@id='users']//tr//td[4]//span[ancestor::tr/td/span[contains(text(),'{sourceMailbox}')]]")).Text.ToLower().Contains("stopping")|| Browser.GetDriver().FindElement(By.XPath($"//div[@id='users']//tr//td[4]//span[ancestor::tr/td/span[contains(text(),'{sourceMailbox}')]]")).Text.ToLower().Contains("complete"));            
-        }
-      
-
-        public void SyncSelectedUser()
-        {
-            WaitForAjaxLoad();
-            SelectAction(ActionType.Sync);
-            Apply();
-            Confirm();
-        }
-
-        public void VerifySubmittingForMigration(string sourceMailbox)
-        {
-            WaitForAjaxLoad();
-            Assert.IsTrue(Browser.GetDriver().FindElement(By.XPath($"//div[@id='users']//tr//td[4]//span[ancestor::tr/td/span[contains(text(),'{sourceMailbox}')]]")).Text.ToLower().Contains("syncing"));
-        }
-
-        public void VerifyStopButtonIsAvailiable()
-        {
-            WaitForAjaxLoad();
-            SelectAction(ActionType.Stop);
-            CheckApplyButtonIsEnabled();
-        }
-
-        public void AssertMigrationJobWasStopped(string sourceMailbox)
-        {
-            WaitForAjaxLoad();           
-            Assert.IsTrue(Browser.GetDriver().FindElement(By.XPath($"//div[@id='users']//tr//td[4]//span[ancestor::tr/td/span[contains(text(),'{sourceMailbox}')]]")).Text.Contains("Stopping"));
-        }
-
-        public void StopSyncingSelectedUser()
-        {
-            WaitForAjaxLoad();
-            SelectAction(ActionType.Stop);
-            enabledApplyActionButton.Click();
-            Confirm();
-        }        
-
-        public void SelectFirstSyncingFreeUser(ref int SelectedUser)
-        {
-            WaitForAjaxLoad();
-            if (SelectedUser == -1)
-            {
-                for (int i = 0; i < UserStatuses.GetElements().Count; i++)
-                {
-                    if (UserStatuses.GetElements()[i].Text.Contains("Syncing") && RunConfigurator.IsUserFree(ListOfSources.GetElements()[i].Text))
-                    {
-                        SelectedUser = i;
-                        UserStatuses.GetElements()[SelectedUser].Click();
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                Browser.GetDriver().FindElements(By.XPath("//div[@id='users']//div[@class='table-responsive table-frame m-t-sm']//tr//td[2]//span"))[SelectedUser].Click();
-            }
-        }
-
-        private readonly Button closeModalWindowButton =
+		private readonly Button closeModalWindowButton =
 			new Button(By.XPath("//div[contains(@class, 'modal fade in')]//div[@class='modal-footer']//button[text()='Close']"),
 				"Close modal window button");
 
@@ -116,50 +42,17 @@ namespace Product.Framework.Forms
 				By.XPath("//div[@id='confirmationDialog'][contains(@class, 'modal in')]//*[contains(text(), 'Yes')]"),
 				"Confirm button");
 
-        private readonly Button CompleteDetailsButton = new Button(By.XPath("//button[text()='Complete']"), "Complite button on details form");
-
-        private readonly Button CutoverDetailsButton = new Button(By.XPath("//button[text()='Cutover']"), "Cutover button on details form");
-
-        public void AssertCutoverCompliteDetailsIsDisabled()
-        {
-            Assert.IsTrue(!CompleteDetailsButton.IsElementPresent());
-            Assert.IsTrue(!CutoverDetailsButton.IsElementPresent());
-        }
-
-        Element ListOfSources = new Element(By.XPath("//div[@id='users']//div[@class='table-responsive table-frame m-t-sm']//tr//td[2]//span"),"List of sources");
-
-        public void CheckApplyButtonIsDisabled()
-        {
-            WaitForAjaxLoad();
-            Assert.IsFalse(enabledApplyActionButton.IsElementPresent());
-        }
-
-        private readonly Element UserStatuses = new Element(By.XPath("//div[@id='users']//tr//td[4]//span"), "Users statuses");
-       
-        private readonly Button disabledApplyActionButton =
+		private readonly Button disabledApplyActionButton =
 			new Button(By.XPath("//button[contains(@data-bind, 'applyAction')][@disabled='']"), "Disabled apply button");
+           
 
-		private Button enabledApplyActionButton =
+        private Button enabledApplyActionButton =
 			new Button(By.XPath("//button[contains(@data-bind, 'applyAction')][not(@disabled='')]"), "Enabled apply button");
-       
 
-        public void CheckApplyButtonIsEnabled()
-        {
-            WaitForAjaxLoad();
-            Assert.IsTrue(enabledApplyActionButton.IsElementPresent());
-        }
-
-        private readonly Button enabledArchiveButton =
+		private readonly Button enabledArchiveButton =
 			new Button(By.XPath("//button[contains(text(), 'Archive')][not(@disabled='')]"), "Enabled archive button");
 
-        internal void AssertCutoverCompliteDetailsIsEnabled()
-        {
-            WaitForAjaxLoad();
-            Assert.IsTrue(CompleteDetailsButton.IsElementPresent());
-            Assert.IsTrue(CutoverDetailsButton.IsElementPresent());
-        }
-
-        private readonly Button enabledEditButton =
+		private readonly Button enabledEditButton =
 			new Button(By.XPath("//button[contains(text(), 'Edit')][not(@disabled='')]"), "Enabled edit button");
 
 		private readonly Button enabledExportButton =
@@ -185,8 +78,9 @@ namespace Product.Framework.Forms
 
 		private readonly Button importButton = new Button(By.XPath("//a[contains(@data-bind, 'uploadUser')]"), "Import button");
 
-		private readonly Label importedLabel = new Label(By.XPath("//h3[contains(text(), 'successfully imported')]"),
-			"Imported label");
+		private readonly Label importedLabel = new Label(By.XPath("//h3[contains(text(), 'successfully imported')]"),         
+
+            "Imported label");
 
 		private readonly Button okButton =
 			new Button(
@@ -315,9 +209,14 @@ namespace Product.Framework.Forms
         protected string ProfileModifyLocator = "//div[contains(@class, 'modal in')]//tr[.//*[contains(text(), '{0}')]]//*[contains(text(), 'Modify')]";
         protected string ProfileLabelLocator = "//div[contains(@class, 'modal in')]//tr[.//*[contains(text(), '{0}')]]//label";
         protected string ProfileRadioLocator = "//div[contains(@class, 'modal in')]//tr[.//*[contains(text(), 'Defa')]]//input";
+        private readonly Button CompleteDetailsButton = new Button(By.XPath("//button[text()='Complete']"), "Complite button on details form");
+        private readonly Button CutoverDetailsButton = new Button(By.XPath("//button[text()='Cutover']"), "Cutover button on details form");
+        private readonly Label ImportCompleteLabel = new Label(By.XPath("//span[@data-translation='UploadWasASuccessExclamationPoint']"), "Label Upload Was A Success");
+
         public UsersForm() : base(TitleLocator, "Users list form")
 		{
             descriptionLabel.WaitForElementPresent();
+
 		}
 
 		public UsersForm(By locator, string name) : base(locator, name)
@@ -325,68 +224,57 @@ namespace Product.Framework.Forms
 		    descriptionLabel.WaitForElementPresent();
         }
 
-        public void VerifyForMatchedUsersSyncActionIsAvailable()
+        public void СloseSuccessfulImportWindow()
+        {
+            Button closeButton =
+                new Button(By.XPath("//div[@class='modal-body']//*[contains(text(), 'Finish')]"),
+                    "Close modal successful window button");
+            closeButton.Click();
+        }              
+
+        public void AssertMigrationJobWasStopped(int SelectedUser)
         {
             WaitForAjaxLoad();
-
-            for (int i = 0; i < UserStatuses.GetElements().Count; i++)
-            {
-                if (UserStatuses.GetElements()[i].Text.Contains("Matched"))
-                {                    
-                    UserStatuses.GetElements()[i].Click();
-                    SelectAction(ActionType.Sync);
-                    CheckApplyButtonIsEnabled();
-                    UserStatuses.GetElements()[i].Click();
-                }
-            }
+            Assert.IsTrue(Browser.GetDriver().FindElements(By.XPath("//div[@id='users']//tr//td[4]//span"))[SelectedUser].Text.Contains("Stopping"));
         }
 
-        public void SelectFirstNotSyncedUser(ref int SelectedUser)
+
+        public void AssertCutoverCompliteDetailsIsDisabled()
         {
-            bool UserWasSelected = false;
-            WaitForAjaxLoad();
-            if (SelectedUser == -1)
-            {
-                for (int i = 0; i < UserStatuses.GetElements().Count; i++)
-                {
-                    if (UserStatuses.GetElements()[i].Text.Contains("Matched"))
-                    {
-                        SelectedUser = i;
-                        UserStatuses.GetElements()[SelectedUser].Click();
-                        UserWasSelected = true;
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                UserStatuses.GetElements()[SelectedUser].Click();
-            }
-            Assert.IsTrue(UserWasSelected, "There is no user that has mathed status");
+            Assert.IsTrue(!CompleteDetailsButton.IsPresent(), "Complete button is present");
+            Assert.IsTrue(!CutoverDetailsButton.IsPresent(), "Complete button is present");
         }
 
-        public void SelectFirstNotSyncedFreeUser(ref int SelectedUser)
+        public void CheckActionIsDisabled(ActionType type)
         {
-            bool UserWasSelected = false;
+            SelectAction(type);
+            CheckApplyButtonIsDisabled();
+        }
+
+        public void CheckApplyButtonIsDisabled()
+        {
             WaitForAjaxLoad();
-            if (SelectedUser == -1)
-            {
-                for (int i = 0; i < UserStatuses.GetElements().Count; i++)
-                {
-                    if (UserStatuses.GetElements()[i].Text.Contains("Matched")&&RunConfigurator.IsUserFree(ListOfSources.GetElements()[i].Text))
-                    {
-                        SelectedUser = i;
-                        UserStatuses.GetElements()[SelectedUser].Click();
-                        UserWasSelected = true;
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                ListOfSources.GetElements()[SelectedUser].Click();
-            }
-            Assert.IsTrue(UserWasSelected, "There is no user that has mathed status and dosent using in run.xml, try to use SelectFirstNotSyncedUser method");
+            Assert.IsFalse(enabledApplyActionButton.IsPresent(),"Appply button is enable");
+        }
+
+        public void AssertCutoverCompliteDetailsIsEnabled()
+        {
+            WaitForAjaxLoad();
+            Assert.IsTrue(CompleteDetailsButton.IsPresent(), "Complete button is not present");
+            Assert.IsTrue(CutoverDetailsButton.IsPresent(), "Cutover button is not present");
+        }
+
+        public void CheckActionIsEnabled(ActionType type)
+        {
+            WaitForAjaxLoad();
+            SelectAction(type);
+            CheckApplyButtonIsEnabled();
+        }
+
+        public void CheckApplyButtonIsEnabled()
+        {
+            WaitForAjaxLoad();
+            Assert.IsTrue(enabledApplyActionButton.IsPresent(), "Appply button is not enable");
         }
 
         public void PerformSearch(string search)
@@ -520,10 +408,17 @@ namespace Product.Framework.Forms
 
 		public void AssertImportFailed()
 		{
-			Log.Info("Asserting import failed");
-			fixErrorsButton.WaitForElementPresent();
+			Log.Info("Asserting import failed");           
+            fixErrorsButton.WaitForElementPresent();
 		}
 
+        public void AssertImportSuccessful()
+        {
+            Log.Info("Asserting import failed");
+            ImportCompleteLabel.WaitForElementIsVisible();          
+            Assert.IsFalse(fixErrorsButton.IsElementVisible(), "Asserting import failed");
+        }
+       
 		public void Archive()
 		{
 			Log.Info("Archiving entry");
@@ -614,12 +509,6 @@ namespace Product.Framework.Forms
 			detailsButton.DoubleClick();
 		}
 
-        public void OpenDetailsOfSelectedUser(int SelectedUser)
-        {
-            Actions action = new Actions(Browser.GetDriver());
-            action.DoubleClick(UserStatuses.GetElements()[SelectedUser]).Build().Perform();
-        }
-
         public void DetailsRefresh()
         {
             userDetailsRefreshButton.WaitForElementPresent();
@@ -682,7 +571,6 @@ namespace Product.Framework.Forms
         
         private readonly string _rowTextAncestorFormat = "/ancestor::tr//*[contains(text(), '{0}')]";
         private readonly string _lowerCaseTextLocatorFormat = "//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{0}')]]";
-
         public void WaitForState(string entry, State state, int timeout = 5000, int pollIntervalSec = 0)
         {
             var value = state.GetValue();
@@ -779,7 +667,7 @@ namespace Product.Framework.Forms
 			enabledExportButton.Click();
 		}
 
-		public void Confirm()
+		public void ConfirmSync()
 		{
 			Log.Info("Confirming sync");
 		    try
@@ -936,25 +824,17 @@ namespace Product.Framework.Forms
 			lineLabel.WaitForElementDisappear();
 		}
 
-		public void SyncUserByLocator(string locator)
-		{
-			ScrollToTop();
-			Log.Info("Syncing user by locator: " + locator);
-            WaitForAjaxLoad();
-			SelectEntryBylocator(locator);
-			SelectAction(ActionType.Sync);
-			Apply();
-		}
 
-        public void RollbackUserByLocator(string locator)
+        public void PerfomActionForUser(string locator, ActionType  type)
         {
             ScrollToTop();
-            Log.Info("Syncing user by locator: " + locator);
+            Log.Info(type +" user by locator: " + locator);
             WaitForAjaxLoad();
             SelectEntryBylocator(locator);
-            SelectAction(ActionType.Rollback);
+            SelectAction(type);
             Apply();
         }
+
 
         public void AssertUserHaveSyncingState(string locator)
 		{
@@ -1716,7 +1596,12 @@ namespace Product.Framework.Forms
 				By.XPath("//div[contains(@class, 'modal in')]//*[contains(@data-bind, 'sync')]"),
 				"Enabled details sync button");
 
-		private readonly Button disabledCutoverButton =
+        private readonly Button prepareDetailsButton =
+            new Button(
+                By.XPath("//div[contains(@class, 'modal in')]//button[contains(., 'Prepare')]"),
+                "Enabled details Prepare button");
+
+        private readonly Button disabledCutoverButton =
 			new Button(By.XPath("//div[contains(@class, 'modal in')]//button//i[contains(@class, 'fa-mail-forward')]"),
 				"Cutover button");
 
@@ -1726,7 +1611,9 @@ namespace Product.Framework.Forms
 
         private readonly Button startedSortButton = new Button(By.XPath("//*[contains(text(), 'Started')]"), "Started sort button");
 
-		public void CloseUserDetails()
+        private readonly Label migrationStateLabel = new Label(By.XPath("//*[contains(@data-bind, 'migrationState')]"),"State");
+
+        public void CloseUserDetails()
 		{
 			Log.Info("Closing user details");
 			closeUserDetailsButton.Click();
@@ -1761,34 +1648,13 @@ namespace Product.Framework.Forms
 			Log.Info("Completing job");
 			completeButton.Click();
 		}
-
-        public void AssertProgressAndState()
-        {
-            Log.Info("Checking progress");
-            string LastProgressColor = Browser.GetDriver().FindElements(By.XPath("//*/td/div[@class='progress']/div")).LastOrDefault().GetCssValue("background-color");
-            string LastJobState = Browser.GetDriver().FindElements(By.XPath("//*/div[@class='modal-content']//*/div[@class='table-responsive table-frame m-t-sm']//*/tbody/tr/td[2]/span")).LastOrDefault().Text;
-            Assert.AreEqual(LastProgressColor == "rgba(37, 107, 147, 1)", LastJobState == "Synced");
-        }
-        public void AssertDetailsStopButtonIsEnabled()
+		public void AssertDetailsStopButtonIsEnabled()
 		{
-			Log.Info("Asserting stop button is enabled");
-			enabledDetailsStopButton.WaitForElementPresent();
+			Log.Info("Asserting stop button is enabled");  
+           Assert.IsTrue(enabledDetailsStopButton.WaitForElementPresent(), "Asserting stop button is not enabled");
 		}
-        public void StopSyncing()
-        {
-            Log.Info("Stoping syncing");
-            enabledDetailsStopButton.Click();
-        }
 
-        public void AssertSyncingWasStoped()
-        {
-            Log.Info("Checking last syncing was stoped");
-            IList<IWebElement> Jobs = Browser.GetDriver().FindElements(By.XPath("//*/div[@class='modal-content']//*/div[@class='table-responsive table-frame m-t-sm']//*/tbody/tr/td[2]/span"));
-            string LastJobState = Jobs[Jobs.Count - 1].Text;
-            Assert.AreEqual("Stopped", LastJobState);
-        }
-
-        public void AssertDetailsSyncButtonIsEnabled()
+		public void AssertDetailsSyncButtonIsEnabled()
 		{
 			Log.Info("Asserting details sync button is enabled");
 			enabledDetailsSyncButton.WaitForElementPresent();
@@ -1796,22 +1662,44 @@ namespace Product.Framework.Forms
 		public void AssertDetailsSyncButtonIsDisabled()
 		{
 			Log.Info("Asserting details sync button is disabled");
-			enabledDetailsSyncButton.WaitForElementDisappear();
+			Assert.IsTrue(enabledDetailsSyncButton.WaitForElementDisappear(), "Asserting details sync button is visible");
 		}
 
 		public void SyncFromDetails()
 		{
 			Log.Info("Syncing");
+            WaitForAjaxLoad();
 			enabledDetailsSyncButton.Click();
 		}
 
-		public void AssertCutoverButton()
+        public void StopFromDetails()
+        {
+            Log.Info("Stoping");
+            WaitForAjaxLoad();
+            enabledDetailsStopButton.Click();
+        }
+
+        public void PrepareFromDetails()
+        {
+            Log.Info("Syncing");
+            WaitForAjaxLoad();
+            prepareDetailsButton.Click();
+        }
+
+        public void AssertCutoverButton()
 		{
 			Log.Info("Asserting Cutover button");
 			disabledCutoverButton.WaitForElementPresent();
 		}
 
-		public void WaitForJobIsCreated()
+        public string GetStateFromDetails()
+        {
+          Log.Info("Get mail state");         
+          return  migrationStateLabel.GetText();
+        }
+              
+
+        public void WaitForJobIsCreated()
 		{
 			Log.Info("Waiting for job is created");
 			var jobLabel = new Label(By.XPath("//tr[contains(*, 'Sync')]"), "Job label");
@@ -1901,15 +1789,50 @@ namespace Product.Framework.Forms
 			refreshButton.Click();
 		}
 
-		public void VerifyStateIS(string state)
+        public void WaitForState_DetailPage(string entry, State state,  int timeout = 5000, int pollIntervalSec = 0)
+        {
+            var _migrationStateTextLocatorFormat = "//*[contains(@data-bind, 'migrationState')][contains(text(), '{0}')]";
+            var value = state.GetValue();
+
+            if (state.GetValue().ToLower() == "synced")
+                value = "complete";           
+
+            var rowEntryTextValue = string.Format(_migrationStateTextLocatorFormat, value);
+            var stateLocator = By.XPath(rowEntryTextValue);
+            var refreshElementTextValue = refreshButton.GetLocator();
+
+            if (!IsElementExists(stateLocator, ( ) => ClickElementBy(refreshElementTextValue), timeout / 1000, pollIntervalSec))
+                throw new Exception(string.Format("Entry of '{0}' with state '{1}' was not found.", entry, value));
+        }
+
+        public void WaitForJobIsCreated(String entry, State state, int timeout = 5000, int pollIntervalSec = 0)
+        {
+            Log.Info("Waiting for job is created");
+            var jobLabel ="//td[contains(*, '{0}')]";
+            var value = state.GetValue();
+          
+            var rowEntryTextValue = string.Format(jobLabel, value);
+            var stateLocator = By.XPath(rowEntryTextValue);
+            var refreshElementTextValue = refreshButton.GetLocator();
+
+            if (!IsElementExists(stateLocator, () => ClickElementBy(refreshElementTextValue), timeout / 1000, pollIntervalSec))
+                throw new Exception(string.Format("Entry of '{0}' with state '{1}' was not found.", entry, value));
+        }
+
+
+      
+
+        public void VerifyStateIS(string state)
 		{
-			Log.Info("Verifying state is: " + state);
+           
+            Log.Info("Verifying state is: " + state);
 			var stateLabel = new Label(By.XPath($"//*[contains(@data-bind, 'migrationState')][contains(text(), '{state}')]"),
 				"State label");
 			var counter = 0;
-			while (!stateLabel.IsPresent() && counter < 60)
+
+			while (!stateLabel.IsPresent() && counter < 10)
 			{
-				Thread.Sleep(5000);
+				Thread.Sleep(30000);
 				RefreshData();
 				counter++;
 			}

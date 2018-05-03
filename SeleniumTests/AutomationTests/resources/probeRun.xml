@@ -1,0 +1,137 @@
+<xml>
+	<!-- App settings -->
+	<baseurl>https://bt-qa-pa-web-ui.azurewebsites.net/</baseurl>
+	<Timeout>60</Timeout>
+	<browser>chrome</browser>
+	<arc>x64</arc>
+	<!-- SQL settings -->
+	<sql>
+		<server>W12-C29-SQL\SQLEXPRESS</server>
+		<db>Power365_Probe</db>
+		<user>SA</user>
+		<password>Password1</password>
+	</sql>
+	<!-- Test data -->
+	<clients>
+		<client>
+			<metaname>client1</metaname>
+			<name>BT-Monitor</name>
+			<user>BT-ProbeMonitorUser01@btpower365dev.onmicrosoft.com</user>
+			<password>BinTree123</password>
+			<projects>
+				<project>
+					<metaname>project1</metaname>
+					<name>BT-Monitor-Project1</name>
+					<tenantmigrations>
+						<tenantmigration metaname="T1->T2" source="BT Corp7" target="BTCorp9" />
+					</tenantmigrations>
+					<usermigration>
+						<entry>
+							<metaname>entry1</metaname>
+							<source>MailProbe1@btcorp7.onmicrosoft.com</source>
+							<target>MailProbe1@btcorp9.onmicrosoft.com</target>
+							<group>Wave1</group>
+							<profile>Profile 1</profile>
+						</entry>
+					</usermigration>
+					<file>
+						<metaname>file1</metaname>
+						<filename>Probe_migration.csv</filename>
+					</file>
+				</project>
+				<project>
+					<metaname>project2</metaname>
+					<name>BT-Monitor-Project2</name>
+					<tenantmigrations>
+						<tenantmigration metaname="T5->T6" source="BTCloud1" target="BTCloud3" />
+					</tenantmigrations>
+					<adgroups>
+						<adgroup>
+							<metaname>adgroup1</metaname>
+							<name>BTMonitor-1</name>
+							<amount>1</amount>
+						</adgroup>
+					</adgroups>
+					<usermigration>
+						<entry>
+							<metaname>entry1</metaname>
+							<source>@BTCloud1.Power365.Cloud</source>
+							<target>@BTCloud3.Power365.Cloud</target>
+							<group>Wave1</group>
+							<profile>Profile 1</profile>
+						</entry>
+					</usermigration>
+				</project>
+				<project>
+					<metaname>project3</metaname>
+					<name>BT-Monitor-Project3</name>
+					<tenantmigrations>
+						<tenantmigration metaname="T1->T2" source="BT Corp7" target="BTCorp9" />
+					</tenantmigrations>
+					<dirsync>
+						<password>Password1</password>
+						<forest>corp7.cmtsandbox.com</forest>
+						<ou>P365Probe</ou>
+					</dirsync>
+					<adgroups>
+						<adgroup>
+							<metaname>adgroup1</metaname>
+							<name>P365ProbeGrp</name>
+							<amount></amount>
+						</adgroup>
+					</adgroups>
+					<usermigration>
+						<entry>
+							<metaname>entry1</metaname>
+							<source>@corp7.cmtsandbox.com</source>
+							<target>@corp9.cmtsandbox.com</target>
+							<group></group>
+							<profile></profile>
+						</entry>
+					</usermigration>
+				</project>
+			</projects>
+		</client>
+	</clients>
+
+	<tenants>
+		<tenant metaname="T1">
+			<name>BT Corp7</name>
+			<user>C7O365Admin@btcorp7.onmicrosoft.com</user>
+			<password>BinTree123</password>
+			<domain>btcorp7.onmicrosoft.com</domain>
+			<aduser>corp7\administrator</aduser>
+			<adpassword>BinTree123</adpassword>
+		</tenant>
+		<tenant metaname="T2">
+			<name>BTCorp9</name>
+			<user>corp9O365admin@btcorp9.onmicrosoft.com</user>
+			<password>BinTree123</password>
+			<domain>btcorp9.onmicrosoft.com</domain>
+		</tenant>
+		<tenant metaname="T3">
+			<name>BTCorp3</name>
+			<user>E2E.Admin@btcorp3.onmicrosoft.com</user>
+			<password>Password3</password>
+			<domain>btcorp3.onmicrosoft.com</domain>
+		</tenant>
+		<tenant metaname="T4">
+			<name>BTCorp11</name>
+			<user>C11O365Admin@btcorp11.onmicrosoft.com</user>
+			<password>BinTree123</password>
+			<domain>btcorp11.onmicrosoft.com</domain>
+		</tenant>
+		<tenant metaname="T5">
+			<name>BTCloud1</name>
+			<user>BTCloud1Admin@MOD273231.onmicrosoft.com</user>
+			<password>pass@word1</password>
+			<domain>BTCloud1.Power365.Cloud</domain>
+		</tenant>
+		<tenant metaname="T6">
+			<name>BTCloud3</name>
+			<user>BTCloud3Admin@MOD111986.onmicrosoft.com</user>
+			<password>pass@word1</password>
+			<domain>BTCloud3.Power365.Cloud</domain>
+		</tenant>
+	</tenants>
+</xml>

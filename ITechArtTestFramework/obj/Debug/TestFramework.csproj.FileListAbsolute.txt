@@ -1,0 +1,16 @@
+D:\TFSKinopoisk\Kinopoisk.TestFramework\bin\Debug\NUnit3.TestAdapter.dll
+D:\TFSKinopoisk\Kinopoisk.TestFramework\bin\Debug\NUnit3.TestAdapter.pdb
+D:\TFSKinopoisk\Kinopoisk.TestFramework\bin\Debug\nunit.engine.dll
+D:\TFSKinopoisk\Kinopoisk.TestFramework\bin\Debug\nunit.engine.api.dll
+D:\TFSKinopoisk\Kinopoisk.TestFramework\bin\Debug\Mono.Cecil.dll
+D:\TFSKinopoisk\Kinopoisk.TestFramework\bin\Debug\TestFramework.dll
+D:\TFSKinopoisk\Kinopoisk.TestFramework\bin\Debug\TestFramework.pdb
+D:\TFSKinopoisk\Kinopoisk.TestFramework\bin\Debug\nunit.framework.dll
+D:\TFSKinopoisk\Kinopoisk.TestFramework\bin\Debug\WebDriver.dll
+D:\TFSKinopoisk\Kinopoisk.TestFramework\bin\Debug\WebDriver.Support.dll
+D:\TFSKinopoisk\Kinopoisk.TestFramework\bin\Debug\nunit.framework.xml
+D:\TFSKinopoisk\Kinopoisk.TestFramework\bin\Debug\WebDriver.xml
+D:\TFSKinopoisk\Kinopoisk.TestFramework\bin\Debug\WebDriver.Support.xml
+D:\TFSKinopoisk\Kinopoisk.TestFramework\obj\Debug\TestFramework.csproj.CoreCompileInputs.cache
+D:\TFSKinopoisk\Kinopoisk.TestFramework\obj\Debug\TestFramework.dll
+D:\TFSKinopoisk\Kinopoisk.TestFramework\obj\Debug\TestFramework.pdb

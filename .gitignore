@@ -1,0 +1,10 @@
+AutomationTests/resources/run.xml
+T365.Database/obj/Debug/T365.Database.csproj.CoreCompileInputs.cache
+ProbeTests/obj/Debug/ProbeTests.csproj.CoreCompileInputs.cache
+ProbeTests.Model/obj/Debug/ProbeTests.Model.csproj.CoreCompileInputs.cache
+GraphTest/obj/Debug/GraphTest.csproj.CoreCompileInputs.cache
+GraphHelper/obj/Debug/GraphHelper.csproj.CoreCompileInputs.cache
+AutomationTests/obj/Debug/AutomationTests.csproj.CoreCompileInputs.cache
+.vs/SMART/v15/.suo
+AutomationTests/obj/Debug/AutomationTests.csproj.ResolveComReference.cache
+.vs/SMART/v15/Server/sqlite3/storage.ide

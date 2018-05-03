@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OrderedTest name="orderedintegration" storage="orderedintegration.orderedtest" id="60281141-21ca-4f77-9ff8-4da8cf60b9c6" continueAfterFailure="true" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestLinks>
+    <TestLink id="66f278f3-be83-0130-c717-a47e70d15af5" name="Automation_IN_PS_DistributionGroupsInitialTest" storage="bin\debug\automationtests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="4f797567-ceb8-144d-ae36-fd8373e293e2" name="Automation_IN_PS_PrepareTest" storage="bin\debug\automationtests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="269316e8-cb0c-6309-0c00-af13f251d093" name="Automation_IN_PublicFoldersTest" storage="bin\debug\automationtests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="d9d889db-d40b-08ba-f3ae-a8acfbb496bb" name="Automation_IN_PS_DistributionGroupsValidationTest" storage="bin\debug\automationtests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="d81308f5-9eda-d7fb-0fbd-f0976b6e3070" name="Automation_IN_PS_CutoverTest" storage="bin\debug\automationtests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="83a9b56b-9931-572c-520a-6fb7bbad27e0" name="Automation_IN_GroupsViewTest" storage="bin\debug\automationtests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestLinks>
+</OrderedTest>
