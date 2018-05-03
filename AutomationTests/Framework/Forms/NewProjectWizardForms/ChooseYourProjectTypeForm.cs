@@ -8,14 +8,13 @@ namespace Product.Framework.Forms.NewProjectWizardForms
 	{
 		private static readonly By TitleLocator = By.XPath("//div[contains(@class, 'wizard-body')]//*[contains(text(), 'Choose your project type')]");
 
-		private readonly Button mailOnlyButton = new Button(By.XPath("//label[contains(@for, 'mailOnlyRadio')]"),"Mail only button");
-        
-        private readonly Button mailWithDiscoveryButton =
-			new Button(By.XPath("//label[contains(@for, 'mailWithDiscoveryRadio')]"), "Mail with discovery button");
+		private readonly Button mailOnlyButton = new Button(By.XPath("//label[contains(@for, 'mailOnlyRadio')]"),
+			"Mail only button");
 
-        private readonly Button integrationButton = new Button(By.XPath("//label[contains(@for, 'integrationRadio')]"),
-     "Integration button");
-        
+		private readonly Button mailWithDiscoveryButton =
+			new Button(By.XPath("//label[contains(@for, 'mailWithDiscoveryRadio')]"), "Mail with discovery button");
+		private readonly Button integrationButton = new Button(By.XPath("//label[contains(@for, 'integrationRadio')]"),
+			"Integration button");
 		public ChooseYourProjectTypeForm() : base(TitleLocator, "Choose your project type form")
 		{
 		}

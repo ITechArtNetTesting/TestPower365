@@ -9,8 +9,8 @@ namespace Product.Framework.Elements
 {
 	public abstract class BaseElement : BaseEntity
 	{
-        private readonly RemoteWebElement element;
-        private readonly By locator;
+		private readonly RemoteWebElement element;
+		private readonly By locator;
 		private readonly string name;
 
 		protected BaseElement(By locator, string name)
@@ -37,7 +37,7 @@ namespace Product.Framework.Elements
 		{
 			WaitForElementPresent();
 			return (RemoteWebElement)Browser.GetDriver().FindElement(locator);
-		}        
+		}
 
 		protected string GetName()
 		{
@@ -49,48 +49,10 @@ namespace Product.Framework.Elements
 			return locator;
 		}
 
-        public bool IsElementPresent()
-        {
-            try
-            {
-                Browser.GetDriver().FindElement(locator);
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
-        }
 
         /// <summary>
         ///     Clicks this instance.
         /// </summary>
-        //public void Click()
-        //{
-        //	WaitForElementPresent();
-        //	WaitForElementIsVisible();
-        //	bool ready = false;
-        //	int counter = 0;
-        //	while (!ready && counter<20)
-        //	{
-        //		try
-        //		{
-        //			GetElement().Click();
-        //			ready = true;
-        //			Log.Info(String.Format("{0} :: click", GetName()));
-        //		}
-        //		catch (Exception e)
-        //		{
-        //			Log.Info("Element is not ready: "+GetName());
-        //			counter++;
-        //			if (counter==20)
-        //			{
-        //				throw e;
-        //			}
-        //		}
-        //	}
-        //}
-
         public void Click()
         {
             WaitForElementIsVisible();
@@ -98,7 +60,7 @@ namespace Product.Framework.Elements
             fluentWait.Timeout = TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout()));
             fluentWait.PollingInterval = TimeSpan.FromMilliseconds(250);
             fluentWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-               fluentWait.Until(x =>
+            fluentWait.Until(x =>
             {
                 try
                 {
@@ -156,11 +118,21 @@ namespace Product.Framework.Elements
 			return GetElement().Displayed;
 		}
 
-		/// <summary>
-		///     Gets the point.
-		/// </summary>
-		/// <returns>Point</returns>
-		public Point GetPoint()
+        public bool IsElementVisible()
+        {
+            try
+            {
+                var iv = Browser.GetDriver().FindElement(locator).Displayed;
+                if (iv == true) { return true; } else { return false; }
+            }
+            catch (NoSuchElementException) { return false; }
+        }        
+
+        /// <summary>
+        ///     Gets the point.
+        /// </summary>
+        /// <returns>Point</returns>
+        public Point GetPoint()
 		{
 			return GetElement().Location;
 		}
@@ -188,6 +160,7 @@ namespace Product.Framework.Elements
 			}
             return result;
 		}
+
 		public void WaitForSeveralElementsPresent(int count)
 		{
 			var wait = new WebDriverWait(Browser.GetDriver(),
@@ -298,19 +271,32 @@ namespace Product.Framework.Elements
         /// <summary>
         ///     Waits for element is visible.
         /// </summary>
-        public void WaitForElementIsVisible()
+        public bool WaitForElementIsVisible()
 		{
-			var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(50));
+           
+            var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(50));
             wait.Timeout = TimeSpan.FromMinutes(1);
-            wait.IgnoreExceptionTypes(typeof(NotFoundException));
+            wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
 
-            wait.Until(ExpectedConditions.ElementIsVisible(locator));
-		}
+            try
+            {
+                wait.Until(ExpectedConditions.ElementIsVisible(locator));
+                return true;
+            }
 
-		/// <summary>
-		///     Waits for element is clickable.
-		/// </summary>
-		public void WaitForElementIsClickable()
+            catch (TimeoutException)
+            {
+                Log.Fatal($"Element with locator: '{locator}' does not visible!");
+                return false;
+            }
+
+
+        }
+
+        /// <summary>
+        ///     Waits for element is clickable.
+        /// </summary>
+        public void WaitForElementIsClickable()
 		{
             var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(50));
             wait.Timeout = TimeSpan.FromMinutes(1);
@@ -332,7 +318,7 @@ namespace Product.Framework.Elements
 		/// <summary>
 		///     Waits for element disappear.
 		/// </summary>
-		public void WaitForElementDisappear()
+		public bool WaitForElementDisappear()
 		{
 			var wait = new WebDriverWait(Browser.GetDriver(),
 				TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
@@ -340,15 +326,18 @@ namespace Product.Framework.Elements
 			{
 				wait.Until(waiting =>
 				{
-					var webElements = Browser.GetDriver().FindElements(locator);
+					var webElements = Browser.GetDriver().FindElements(locator); /// check: Disappear - isDisplayed()= false ? 
 					return webElements.Count == 0;
 				});
 			}
 			catch (TimeoutException)
-			{
-				Log.Fatal($"Element with locator: '{locator}' still exists!");
-			}
+			{                
+                Log.Fatal($"Element with locator: '{locator}' still exists!");
+                return false;
+            }
+            return true;
 		}
+
 		public void WaitForElementDisappear(int timeout)
 		{
 			var wait = new WebDriverWait(Browser.GetDriver(),

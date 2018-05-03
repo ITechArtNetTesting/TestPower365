@@ -116,6 +116,18 @@ namespace Product.Framework
             }
         }
 
+        protected bool IsElementExists(By by, Action refreshAction, int timeoutInSec = 5, int pollIntervalSec = 0)
+        {
+            try
+            {
+               return EvaluateElement(ExpectedConditions.ElementExists(by), refreshAction, timeoutInSec, pollIntervalSec) != null;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         protected bool IsElementVisible(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
             try
@@ -177,7 +189,7 @@ namespace Product.Framework
             }
             return condition(Browser.GetDriver());
         }
-        
+                       
         protected T EvaluateScript<T>(string script, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
             if (timeoutInSec > 0 || pollIntervalSec > 0)
@@ -194,6 +206,33 @@ namespace Product.Framework
             }
             return (T)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript(script);
         }
+
+        protected T EvaluateElement<T>(Func<IWebDriver, T> condition, Action refreshAction, int timeoutInSec = 5, int pollIntervalSec = 0)
+        {
+            if (timeoutInSec > 0 || pollIntervalSec > 0)
+            {
+                var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(timeoutInSec));
+                wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+                if (pollIntervalSec > 0)
+                {
+                    wait.PollingInterval = TimeSpan.FromSeconds(pollIntervalSec);
+                    return wait.Until((webDriver) =>
+                    {
+                        refreshAction();
+
+                        if (!IsDocumentReady())
+                            throw new Exception("Page failed to reach ready state in time.");
+                        if (!IsAjaxActive())
+                            throw new Exception("AJAX failed to completed in time.");
+
+                        return condition(webDriver);
+                    });
+                }
+                return wait.Until(condition);
+            }
+            return condition(Browser.GetDriver());
+        }
+             
 
         protected bool IsAjaxActive(int timeoutInSec = 10)
         {
@@ -218,5 +257,16 @@ namespace Product.Framework
                 return false;
             }
         }
+
+        public void WaitForAjaxLoad()
+        {
+            if (IsAjaxActive())
+            {
+                var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromMinutes(1));
+                wait.PollingInterval = TimeSpan.FromMilliseconds(100);
+                wait.Until(wd => (bool)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0"));
+            }
+        }
     }
+
 }

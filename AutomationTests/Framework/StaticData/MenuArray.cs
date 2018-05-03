@@ -21,21 +21,7 @@ namespace Product.Framework.StaticData
             IntegrationProjectMenu.Add("Discovery", "tenantsManagementContainer");
             IntegrationProjectMenu.Add("Address Book", "tenantsManagementContainer");
             IntegrationProjectMenu.Add("Calendar Availability", "tenantsManagementContainer");
-        }
-        //public static string[] IntegrationProjectMenu =
-        //{
-      
-
-
-         //   "Users",
-         //"Distribution Groups",
-         //"Public folders",
-         //"Tenants",
-         //"Directory sync",
-         //"Discovery",
-         //"Address Book",
-         //"Calendar Availability"
-
+        }        
     };
 
     }

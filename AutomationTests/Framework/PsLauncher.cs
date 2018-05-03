@@ -54,7 +54,8 @@ namespace Product.Framework
 			processInfo.CreateNoWindow = true;
 			processInfo.UseShellExecute = false;
 			processInfo.RedirectStandardOutput = true;
-		    mainProcess = Process.Start(processInfo);
+            processInfo.RedirectStandardError = true;
+            mainProcess = Process.Start(processInfo);
 		    return mainProcess;
         }
 

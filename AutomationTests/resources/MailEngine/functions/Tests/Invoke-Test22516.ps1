@@ -41,7 +41,7 @@ function Invoke-Test22516{
 		$HexMessageId = ([System.BitConverter]::ToString($EntryIdVal).Replace("-",""))
 		$tfile = New-P365TranslationFile -SourceAddress $SourceAddress -TargetAddress $TargetAddress
 		Write-host "Part 1 - Message Created"
-		Copy-T2TMailboxItem -SourceMailbox $Script:SourceMailbox -SourceCredentials $Script:SourcePSCreds -TargetMailbox $Script:TargetMailbox -TargetCredentials $Script:TargetPSCreds -mappingfile $tfile -ProcessingPath c:\temp -SkipFolderRetentionTags -CopyDumpster:$true -Delta:$true -MessageId $HexMessageId -FolderPath '\Calendar'
+		Copy-T2TMailboxItem -SourceMailbox $Script:SourceMailbox -SourceCredentials $Script:SourcePSCreds -TargetMailbox $Script:TargetMailbox -TargetCredentials $Script:TargetPSCreds -mappingfile $tfile -ProcessingPath c:\temp -SkipFolderRetentionTags -CopyDumpster:$true -Delta:$true -MessageId $HexMessageId -FolderPath '\Calendar' -SourceOnPremise $Script:SourceOnPrem -TargetOnPremise $Script:TargetOnPrem -SourceAutoDiscoverOverRide $Script:SourceAutoDiscoverOverRide -TargetAutoDiscoverOverRide $Script:TargetAutoDiscoverOverRide
 		$TargetMessage = Invoke-P365FindAppointment -TargetMailbox -MessageId $EntryIdVal
 		$TestResults = "" | Select TestCase,Description,TestLastRun,TestResult,Data,ValidationLastRun,ValidationResult,OverAllResult
 		$TestResults.TestCase = "22516"
