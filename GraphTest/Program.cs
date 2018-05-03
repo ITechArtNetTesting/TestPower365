@@ -12,6 +12,8 @@ namespace Console
     {
         static void Main()
         {
+
+
             CancellationToken token = CancellationToken.None;
 
             GraphAuth graphAuth = new GraphAuth("btcloud1");
