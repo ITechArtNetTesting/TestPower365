@@ -378,3 +378,8 @@ D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\MailEngine\inter
 D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\MailEngine.orderedtest
 D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\MailOnlyCSVC3toC11ShMBX-TC33619_part2.csv
 D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\MailOnlyCSVC3toC11ShMBX-TC33619_part1.csv
+d:\Project\P356\ProbeTests\obj\Debug\ProbeTests.csprojResolveAssemblyReference.cache
+d:\Project\P356\ProbeTests\obj\Debug\ProbeTests.exe.config
+d:\Project\P356\ProbeTests\obj\Debug\ProbeTests.csproj.CoreCompileInputs.cache
+d:\Project\P356\ProbeTests\obj\Debug\ProbeTests.exe
+d:\Project\P356\ProbeTests\obj\Debug\ProbeTests.pdb
