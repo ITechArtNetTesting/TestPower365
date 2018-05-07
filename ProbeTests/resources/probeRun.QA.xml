@@ -11,9 +11,11 @@
   <DiscoveryProbe   client="client1" project="project2" adgroup="adgroup1" tenants="T5->T6" />
   <IntegrationProbe client="client1" project="project3" adgroup="adgroup1" tenants="T1->T2" />
   <ArsProbe         tenantA="T7" tenantB="T8" />
+
   <CDSP2P           client="cdsclient1" project="cdsp2p" tenants="T5->T6" />
   <CDSP2C           tenants="T5->T6" />
-  <CDSC2C           client="cdsclient2" project="cdsc2c" tenants="T9->T10" msolUri="https://ps.outlook.com/powershell"/>
+  <CDSC2C           client="cdsclient2" project="cdsc2c" tenants="T9->T10"/>
+
   <DiscoveryQueueProbe connectionString="" threshold="1000" />
 
   <!-- Test data -->
@@ -115,11 +117,14 @@
       <metaname>cdsclient1</metaname>
       <projects>
         <project>
+          <tenantmigrations>
+            <tenantmigration metaname="T5->T6" source="BTCloud1" target="BTCloud3" />
+          </tenantmigrations>
           <metaname>cdsp2p</metaname>
           <migration>
             <entry>
               <metaname>entry1</metaname>
-              <objectprefix>cds_probe</objectprefix>
+              <objectprefix>QAcds_probe</objectprefix>
               <source>corp29.cmtsandbox.com</source>
               <target>corp30.cmtsandbox.com</target>
               <password>Password1</password>
@@ -131,17 +136,16 @@
     </client>
     <client>
       <metaname>cdsclient2</metaname>
-      <tenantmigrations>
-        <tenantmigration metaname="T9->T10" source="BTCloud39" target="BTCloud40" />
-      </tenantmigrations>
       <projects>
         <project>
+          <tenantmigrations>
+            <tenantmigration metaname="T9->T10" source="BTCloud39" target="BTCloud40" />
+          </tenantmigrations>
           <metaname>cdsc2c</metaname>
-          <!--<name>CDS-Cloud2Cloud-Project1</name>-->
           <migration>
             <entry>
               <metaname>entry1</metaname>
-              <objectprefix>cds_c2c</objectprefix>
+              <objectprefix>QAcds_c2c</objectprefix>
               <discoverygroup>CDSProbeDiscovery</discoverygroup>
               <source>btcorp39.onmicrosoft.com</source>
               <target>btcorp40.onmicrosoft.com</target>

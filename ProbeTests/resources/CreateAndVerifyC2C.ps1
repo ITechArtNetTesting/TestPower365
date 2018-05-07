@@ -90,6 +90,9 @@ try
   Write-Host ("Connecting to Source O365 Tenant")
   $sourceCloudSession = New-PSSession -ErrorAction Stop -ConfigurationName Microsoft.Exchange -ConnectionUri $msolUri -Credential $sourceCloudCreds -Authentication Basic -AllowRedirection
   Import-PSSession $sourceCloudSession
+  Import-Module msonline
+  $connectMsolCommand = 'Connect-MsolService -ErrorAction Stop -Credential $sourceCloudCreds ' + $msolConnectParams
+  Invoke-Expression $connectMsolCommand
 
   Write-Host ("Getting existing source users...")
   $mailUsers = Get-MailUser -ANR “$testObjectNamePrefix”
@@ -135,10 +138,10 @@ try
     Add-DistributionGroupMember -Identity $objectNameGroup -Member $objectNameUser
 
     Write-Host ("Adding new group to group filter: CDSProbeDiscovery(member:$($objectNameGroup))")
-    Add-DistributionGroupMember -Identity CDSProbeDiscovery -Member $objectNameGroup
+    Add-DistributionGroupMember -Identity $testDiscoveryGroup -Member $objectNameGroup
 
     Write-Host ("Adding new user to group filter: CDSProbeDiscovery(member:$($objectNameUser))")
-    Add-DistributionGroupMember -Identity CDSProbeDiscovery -Member $objectNameUser
+    Add-DistributionGroupMember -Identity $testDiscoveryGroup -Member $objectNameUser
   }
   else
   {
@@ -154,6 +157,9 @@ try
   Write-Host ("Connecting to Target O365 Tenant")
   $targetCloudSession = New-PSSession -ErrorAction Stop -ConfigurationName Microsoft.Exchange -ConnectionUri $msolUri -Credential $targetCloudCreds -Authentication Basic -AllowRedirection
   Import-PSSession $targetCloudSession
+  Import-Module msonline
+  $connectMsolCommand = 'Connect-MsolService -ErrorAction Stop -Credential $targetCloudCreds ' + $msolConnectParams
+  Invoke-Expression $connectMsolCommand
 
   $targetMailUser = $null
   $count = 0

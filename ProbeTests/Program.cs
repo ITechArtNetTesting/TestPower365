@@ -30,7 +30,7 @@ namespace ProbeTests
                 }
                 else if (args[0] == "ars")
                 {
-                    //probeTest = new ArsProbeTest();
+                    probeTest = new ArsProbeTest();
                 }
                 else if (args[0] == "cdsp2p")
                 {

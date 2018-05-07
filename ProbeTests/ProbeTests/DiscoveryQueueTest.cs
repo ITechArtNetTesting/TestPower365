@@ -5,7 +5,7 @@ using Microsoft.WindowsAzure.Storage.Queue;
 using ProbeTests.Model;
 using Product.Framework;
 using System.Data.SqlClient;
-//using BTCloud.Lib;
+using BTCloud.Lib;
 using log4net;
 using log4net.Config;
 
@@ -21,7 +21,7 @@ namespace ProbeTests.ProbeTests
         public DiscoveryQueueTest()
         {
             RunConfigurator.RunPath = "resources/probeRun.xml";
-            //connectionString = RunConfigurator.GetValueByXpath("//DiscoveryQueueProbe/@connectionString").DecryptChk();
+            connectionString = RunConfigurator.GetValueByXpath("//DiscoveryQueueProbe/@connectionString").DecryptChk();
             threshold = int.Parse(RunConfigurator.GetValueByXpath("//DiscoveryQueueProbe/@threshold"));
             instanceName = ConfigurationManager.AppSettings.Get("Instance");
             XmlConfigurator.Configure();

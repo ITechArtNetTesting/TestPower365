@@ -28,6 +28,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ProbeTests.Database", "..\D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T365.Database", "T365.Database\T365.Database.csproj", "{06091402-4BB2-44D5-B443-32AAB04713C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbeMonitor.Model", "ProbeMonitor\src\ProbeMonitor.Model\ProbeMonitor.Model.csproj", "{B9F235DB-A7A3-4B36-9AB4-850B76374CAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -119,6 +121,14 @@ Global
 		{06091402-4BB2-44D5-B443-32AAB04713C5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{06091402-4BB2-44D5-B443-32AAB04713C5}.Release|x64.ActiveCfg = Release|Any CPU
 		{06091402-4BB2-44D5-B443-32AAB04713C5}.Release|x64.Build.0 = Release|Any CPU
+		{B9F235DB-A7A3-4B36-9AB4-850B76374CAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9F235DB-A7A3-4B36-9AB4-850B76374CAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9F235DB-A7A3-4B36-9AB4-850B76374CAC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B9F235DB-A7A3-4B36-9AB4-850B76374CAC}.Debug|x64.Build.0 = Debug|Any CPU
+		{B9F235DB-A7A3-4B36-9AB4-850B76374CAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9F235DB-A7A3-4B36-9AB4-850B76374CAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9F235DB-A7A3-4B36-9AB4-850B76374CAC}.Release|x64.ActiveCfg = Release|Any CPU
+		{B9F235DB-A7A3-4B36-9AB4-850B76374CAC}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

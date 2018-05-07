@@ -1,5 +1,4 @@
 <xml>
-
   <baseurl>https://power365.binarytree.com/</baseurl>
   <o365url>https://ps.outlook.com/powershell</o365url>
   <msolconnectargs></msolconnectargs>
@@ -11,6 +10,11 @@
   <DiscoveryProbe   client="client1" project="project2" adgroup="adgroup1" tenants="T5->T6" />
   <IntegrationProbe client="client1" project="project3" adgroup="adgroup1" tenants="T1->T2" />
   <ArsProbe         tenantA="T7" tenantB="T8" />
+  
+  <CDSP2P           client="cdsclient1" project="cdsp2p" tenants="T5->T6" />
+  <CDSP2C           tenants="T5->T6" />
+  <CDSC2C           client="cdsclient2" project="cdsc2c" tenants="T9->T10"/>
+  
   <DiscoveryQueueProbe connectionString="" threshold="1000" />
   
   <!-- Test data -->
@@ -100,6 +104,48 @@
         </project>
       </projects>
     </client>
+    <client>
+      <metaname>cdsclient1</metaname>
+      <projects>
+        <project>
+          <tenantmigrations>
+            <tenantmigration metaname="T5->T6" source="BTCloud1" target="BTCloud3" />
+          </tenantmigrations>
+          <metaname>cdsp2p</metaname>
+          <migration>
+            <entry>
+              <metaname>entry1</metaname>
+              <objectprefix>PDcds_probe</objectprefix>
+              <source>corp29.cmtsandbox.com</source>
+              <target>corp30.cmtsandbox.com</target>
+              <password>Password1</password>
+              <ou>CDSProbe</ou>
+            </entry>
+          </migration>
+        </project>
+      </projects>
+    </client>
+    <client>
+      <metaname>cdsclient2</metaname>
+      <projects>
+        <project>
+          <tenantmigrations>
+            <tenantmigration metaname="T9->T10" source="BTCloud39" target="BTCloud40" />
+          </tenantmigrations>
+          <metaname>cdsc2c</metaname>
+          <migration>
+            <entry>
+              <metaname>entry1</metaname>
+              <objectprefix>PDcds_c2c</objectprefix>
+              <discoverygroup>CDSProbeDiscovery</discoverygroup>
+              <source>btcorp39.onmicrosoft.com</source>
+              <target>btcorp40.onmicrosoft.com</target>
+              <password>Password1</password>
+            </entry>
+          </migration>
+        </project>
+      </projects>
+    </client>
   </clients>
 
   <tenants>
@@ -169,6 +215,20 @@
       <uid>32b85833-84c3-490d-b5bd-1d598f175ea3</uid>
       <name>BTCorp40</name>
       <user>BTARSAdmin@Corp40.cmtsandbox.com</user>
+      <password>BinTree123</password>
+      <domain>btcorp40.onmicrosoft.com</domain>
+    </tenant>
+    <tenant metaname="T9">
+      <uid></uid>
+      <name>BTCloud39</name>
+      <user>admin@btcorp39.onmicrosoft.com</user>
+      <password>BinTree123</password>
+      <domain>btcorp39.onmicrosoft.com</domain>
+    </tenant>
+    <tenant metaname="T10">
+      <uid></uid>
+      <name>BTCloud40</name>
+      <user>admin@btcorp40.onmicrosoft.com</user>
       <password>BinTree123</password>
       <domain>btcorp40.onmicrosoft.com</domain>
     </tenant>
