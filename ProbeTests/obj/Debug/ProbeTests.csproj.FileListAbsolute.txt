@@ -796,3 +796,7 @@ D:\Project\P356\ProbeTests\obj\Debug\ProbeTests.csprojResolveAssemblyReference.c
 D:\Project\P356\ProbeTests\obj\Debug\ProbeTests.csproj.CoreCompileInputs.cache
 D:\Project\P356\ProbeTests\obj\Debug\ProbeTests.exe
 D:\Project\P356\ProbeTests\obj\Debug\ProbeTests.pdb
+D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.csprojResolveAssemblyReference.cache
+D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.csproj.CoreCompileInputs.cache
+D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.exe
+D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.pdb
