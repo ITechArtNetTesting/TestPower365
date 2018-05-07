@@ -32,7 +32,7 @@ namespace Product.Framework.Forms
         private readonly Label distribution = new Label(By.XPath("//label[contains(text(),'Distribution')]"), "Distribution label");
 
                 
-        public new void SyncUserByLocator(string locator)
+        public void SyncUserByLocator(string locator)
         {
             WaitForAjaxLoad();
             ScrollToTop();
