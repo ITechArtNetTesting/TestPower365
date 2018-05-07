@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Product.SQL
+namespace Product.Utilities
 {
     public class SQLExecuter
     {

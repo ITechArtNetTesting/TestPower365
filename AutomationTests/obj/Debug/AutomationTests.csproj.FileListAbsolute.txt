@@ -269,7 +269,7 @@ D:\Project\BTCloud\SeleniumTests\AutomationTests\bin\Debug\MailEngine.orderedtes
 D:\Project\BTCloud\SeleniumTests\AutomationTests\obj\Debug\AutomationTests.csprojResolveAssemblyReference.cache
 D:\Project\BTCloud\SeleniumTests\AutomationTests\bin\Debug\resources\MailOnlyCSVC3toC11ShMBX-TC33619_part2.csv
 D:\Project\BTCloud\SeleniumTests\AutomationTests\bin\Debug\resources\MailOnlyCSVC3toC11ShMBX-TC33619_part1.csv
-D:\Project\P356\AutomationTests\obj\Debug\AutomationTests.csprojResolveAssemblyReference.cache
-D:\Project\P356\AutomationTests\obj\Debug\AutomationTests.csproj.CoreCompileInputs.cache
-D:\Project\P356\AutomationTests\obj\Debug\AutomationTests.dll
-D:\Project\P356\AutomationTests\obj\Debug\AutomationTests.pdb
+C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\obj\Debug\AutomationTests.csprojResolveAssemblyReference.cache
+C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\obj\Debug\AutomationTests.csproj.CoreCompileInputs.cache
+C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\obj\Debug\AutomationTests.dll
+C:\Users\valery.piniazik\Documents\TestPower365\AutomationTests\obj\Debug\AutomationTests.pdb

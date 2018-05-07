@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Product.Framework
 {
     public interface IProbeTest
-    {
+    {   
         void SetUp();
         void Run();
         void TearDown();

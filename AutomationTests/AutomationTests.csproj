@@ -124,6 +124,7 @@
     <Compile Include="Framework\Forms\NewProjectWizardForms\DiscoveryForms\DefineMigrationWavesForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\DiscoveryForms\DiscoveryIsCompleteForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\DiscoveryForms\DiscoveryIsInProgressForm.cs" />
+    <Compile Include="Framework\Forms\NewProjectWizardForms\DiscoveryForms\DiscoveryOverviewForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\DiscoveryForms\DiscoveryProgressForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\DiscoveryForms\GoodToGoForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\DiscoveryForms\HowToMatchUsersForm.cs" />
@@ -265,6 +266,7 @@
     <Compile Include="Tests\PublicFoldersTests\DemoTest.cs" />
     <Compile Include="Tests\PublicFoldersTests\PublicFoldersTest.cs" />
     <Compile Include="Utilities\SqlClient.cs" />
+    <Compile Include="Utilities\SQLExecuter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\chromedriver.exe">
