@@ -58,30 +58,30 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
             {
                 User.AtUsersForm().PrepareFromDetails();
                 User.AtUsersForm().ConfirmAction();
-                User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Preparing, 900000, 3);
-                User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Prepared, 900000, 5);
+                User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Preparing, 900000, 10);
+                User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Prepared, 900000, 30);
             }
             User.AtUsersForm().SyncFromDetails();
             User.AtUsersForm().ConfirmAction();
-            User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Syncing, 900000, 3);
+            User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Syncing, 900000, 10);
             //Verify Action button since Syncing
             User.AtUsersForm().AssertDetailsStopButtonIsEnabled();
             User.AtUsersForm().AssertDetailsSyncButtonIsDisabled();
             //Stopping
             User.AtUsersForm().StopFromDetails();
             User.AtUsersForm().ConfirmAction();
-            User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Stopping, 900000, 5);
+            User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Stopping, 900000, 30);
             //Verify
-            User.AtUsersForm().WaitForJobIsCreated(mailbox, State.Stopped, 600000, 5);
+            User.AtUsersForm().WaitForJobIsCreated(mailbox, State.Stopped, 600000, 30);
             
             if (isIntegrate)
             {
                 //verify Integration project
-                User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Prepared, 600000, 5);
+                User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Prepared, 600000, 30);
             }
             else {
                 //verify MailOnly and Mail With Discovery project
-                User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Matched, 600000, 5);
+                User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Matched, 600000, 30);
             }
 
 

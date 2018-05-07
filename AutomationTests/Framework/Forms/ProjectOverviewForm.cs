@@ -242,10 +242,8 @@ namespace Product.Framework.Forms
 
 		private void Refresh()
 		{
-			//Thread.Sleep(22000);
 			Browser.GetDriver().Navigate().Refresh();
-            WaitForAjaxLoad();
-			//Thread.Sleep(8000);
+            WaitForAjaxLoad();			
 		}
 
 		public void OpenAllCompletedUsers()

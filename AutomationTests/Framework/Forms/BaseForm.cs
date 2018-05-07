@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using Product.Framework.Elements;
-using Product.Utilities;
+using Product.Framework.StaticData;
 
 namespace Product.Framework.Forms
 {
@@ -14,8 +15,6 @@ namespace Product.Framework.Forms
 	/// <seealso cref="BaseEntity" />
 	public class BaseForm : BaseEntity
 	{
-        protected SQLExecuter queryExecuter = new SQLExecuter(); 
-
         //NOTE: CHECK 1.10 version
 		private readonly Button allProjectsButton = new Button(By.XPath("//*[@id='actionbar']//a[contains(@href, 'Project/List')]"),
 			"All projects button");
@@ -54,17 +53,19 @@ namespace Product.Framework.Forms
 		{
 			this.locator = locator;
 			this.name = name;
-			AssertIsPresent();
-		}
+         //   AssertIsPresent();
+            ElementIsPresent(locator, "Form " + name);
+
+        }
 
 		/// <summary>
 		///     Asserts the is present.
 		/// </summary>
-		private void AssertIsPresent()
-		{
-			BaseElement.WaitForElementPresent(locator, "Form " + name);
-			Log.Info($"Form '{name}' is ready:");
-		}
+		//private void AssertIsPresent()
+		//{
+		//	BaseElement.WaitForElementPresent(locator, "Form " + name);
+		//	Log.Info($"Form '{name}' is ready:");
+		//}
 
 	    public void GoToClientRegistration()
 	    {
@@ -182,94 +183,133 @@ namespace Product.Framework.Forms
 			return new MainMenu();
 		}
 
-		#region[Menu]
+        #region[Menu]
 
-		public class MainMenu
-		{
-			private readonly Button allProjectsButton =
-				new Button(By.XPath("//ul[@id='actionbar']//a[contains(text(), 'All Projects')]"), "All projects button");
-			private readonly Button licensingButton = new Button(By.XPath("//a[contains(@href, 'Licensing')]"), "Licensing button");
-		    private readonly Button languageListButton = new Button(By.Id("language-list"), "Language list button");
-		    private readonly Label expandedDropdownLabel = new Label(By.XPath("//button[contains(@class, 'dropdown-toggle') and contains(@aria-expanded, 'true')]"), "Expanded dropdown");
-		    private const string LanguageLocator = "//div[contains(@id, 'language-list')]//a[contains(text(), '{0}')]";
-		    private const string ClientLocator = "//div[contains(@class, 'open')]//a[contains(text(), '{0}')]";
+        public class MainMenu:BaseEntity
+        {
+            private readonly Button menuButton = new Button(By.Id("hamburger"), "Main menu button");
+            private readonly Button allProjectsButton =
+                new Button(By.XPath("//ul[@id='actionbar']//a[contains(text(), 'All Projects')]"), "All projects button");
+            private readonly Button licensingButton = new Button(By.XPath("//a[contains(@href, 'Licensing')]"), "Licensing button");
+            private readonly Button languageListButton = new Button(By.Id("language-list"), "Language list button");
+            private readonly Label expandedDropdownLabel = new Label(By.XPath("//button[contains(@class, 'dropdown-toggle') and contains(@aria-expanded, 'true')]"), "Expanded dropdown");
+            private const string LanguageLocator = "//div[contains(@id, 'language-list')]//a[contains(text(), '{0}')]";
+            private const string ClientLocator = "//div[contains(@class, 'open')]//a[contains(text(), '{0}')]";
             private const string CurrentLanguageLocator = "//*[contains(@data-bind, 'selectedLanguage') and contains(text(), '{0}')]";
             private readonly Button clientDropdownButton = new Button(By.XPath("//li[.//input[contains(@id, 'set-client-url')]]//button[contains(@class, 'dropdown')]"), "Client dropdown button");
             private Button profilesButton => new Button(By.XPath("//div[@id='actionbar' and not(contains(@class, 'hidden'))]//*[contains(@class, 'menulink')]//*[contains(text(), 'Migration Profiles')]"), "Profiles button");
-            public void OpenLicensing()
-			{
-				Log.Info("Opening licensing");
-				licensingButton.Click();
-			}
+            private const string menuItems = "//*[contains(@class, 'menulink')]//*[contains(text(), '{0}')]";
+            private readonly Button menuElement = new Button(By.Id("actionbar"), "Main menu container");
 
-		    public void OpenProfiles()
-		    {
+            private Button usersButton => new Button(By.XPath("//*[contains(@class, 'menulink')]//*[contains(text(), 'Users')]"), "Users");
+            private Button distributionGroupsButton => new Button(By.XPath("//*[contains(@class, 'menulink')]//*[contains(text(), 'Distribution Groups')]"), "Distribution Groups");
+            private Button publicFoldersUsersButton => new Button(By.XPath("//*[contains(@class, 'menulink')]//*[contains(text(), 'Public folders')]"), "Public folders");
+            private Button tenantsButton => new Button(By.XPath("//*[contains(@class, 'menulink')]//*[contains(text(), 'Tenants')]"), "Tenants");
+            private Button directorySyncButton => new Button(By.XPath("//*[contains(@class, 'menulink')]//*[contains(text(), 'Directory sync')]"), "Directory sync");
+            private Button discoveryButton => new Button(By.XPath("//*[contains(@class, 'menulink')]//*[contains(text(), 'Discovery')]"), "Discovery");
+            private Button addressBookButton => new Button(By.XPath("//*[contains(@class, 'menulink')]//*[contains(text(), 'Address Book')]"), "Address Book");
+            private Button calendarAvailabilityButton => new Button(By.XPath("//*[contains(@class, 'menulink')]//*[contains(text(), 'Calendar Availability')]"), "Calendar Availability");
+
+
+            public void OpenLicensing()
+            {
+                Log.Info("Opening licensing");
+                licensingButton.Click();
+            }
+
+            public void OpenProfiles()
+            {
                 Log.Info("Opening profiles");
                 profilesButton.Click();
-		    }
+            }
 
-		    public void SelectRole(string role)
-			{
-				Log.Info("Selecting role: " + role);
-			    clientDropdownButton.Click();
-			    try
-			     {
-                   expandedDropdownLabel.WaitForElementPresent(7000);
-			     }
-			    catch (Exception)
-			     {
-			       clientDropdownButton.Click();
-                 }
-			     new Button(By.XPath(String.Format(ClientLocator, role)), role + " button").Click();
-			}
-
-		    public void SelectLanguage(string language)
-		    {
-		        if (!new Label(By.XPath(String.Format(CurrentLanguageLocator, language)), "Current language locator").IsPresent())
-		        {
-		            languageListButton.Click();
-		            try
-		            {
-		                expandedDropdownLabel.WaitForElementPresent(7000);
-		            }
-		            catch (Exception)
-		            {
-		                languageListButton.Click();
-		            }
-		            new Button(By.XPath(String.Format(LanguageLocator, language)), language + " language").Click();
+            public void SelectRole(string role)
+            {
+                Log.Info("Selecting role: " + role);
+                clientDropdownButton.Click();
+                try
+                {
+                    expandedDropdownLabel.WaitForElementPresent(7000);
                 }
-		    }
+                catch (Exception)
+                {
+                    clientDropdownButton.Click();
+                }
+                new Button(By.XPath(String.Format(ClientLocator, role)), role + " button").Click();
+            }
 
-		    public void GoToAllProjects()
-			{
-				Log.Info("Going to all projects");
-				allProjectsButton.Click();
-			}
-		}
+            public void SelectLanguage(string language)
+            {
+                if (!new Label(By.XPath(String.Format(CurrentLanguageLocator, language)), "Current language locator").IsPresent())
+                {
+                    languageListButton.Click();
+                    try
+                    {
+                        expandedDropdownLabel.WaitForElementPresent(7000);
+                    }
+                    catch (Exception)
+                    {
+                        languageListButton.Click();
+                    }
+                    new Button(By.XPath(String.Format(LanguageLocator, language)), language + " language").Click();
+                }
+            }
+
+            public void GoToAllProjects()
+            {
+                Log.Info("Going to all projects");
+                allProjectsButton.Click();
+            }
+
+            public void AssertMenuForIntegrationProject()
+            {
+
+                String failMenu = "The folowing menu items are absent:";
+                bool result = true;
+                //Verify correct menu items
+                foreach (string menuName in MenuArray.IntegrationProjectMenu.Keys)
+                {
+                    var menuItemsVisible = new Button(By.XPath(String.Format(menuItems, menuName)), menuName).IsElementVisible();
+                    if (!menuItemsVisible)
+                    {
+                        result = false;
+                        failMenu = failMenu + " " + menuName;
+                    };
+                }
+                Assert.IsTrue(result, failMenu);
+            }
+
+            public void AssertMenuLinkForIntegrationProject()
+            {
+                String failMenu = "The folowing menu items has broken link:";
+                bool result = true;
+
+                foreach (DictionaryEntry menu in MenuArray.IntegrationProjectMenu)
+                {
+                    //Click on each menu items
+                    var menuItemsClick = new Button(By.XPath(String.Format(menuItems, (string)menu.Key)), (string)menu.Key);
+                    menuItemsClick.Click();
+                    WaitForAjaxLoad();
+
+                    //Verify Page Container is Displayed
+                    bool pageElementvisible = Browser.GetDriver().FindElement(By.Id((string)menu.Value)).Displayed;
+                    if (!pageElementvisible)
+                    {
+                        result = false;
+                        failMenu = failMenu + " " + (string)menu.Key;
+                    };
+                    if (!menuElement.IsElementVisible()) { menuButton.Click(); }
+                    WaitForAjaxLoad();
+                    AssertMenuForIntegrationProject();
+                }
+                Assert.IsTrue(result, failMenu);
+
+            }
+
+        }
 
         #endregion
 
-        public void WaitForAjaxLoad()
-        {
-            if (jQueryExists())
-            {
-                var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromMinutes(1));
-                wait.PollingInterval = TimeSpan.FromMilliseconds(100);
-                wait.Until(wd => (bool)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0"));
-            }
-        }
-        static bool jQueryExists()
-        {
-            try
-            {
-                (Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0");
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
         public void WaitForDOM()
         {
             var wait = new WebDriverWait(Browser.GetDriver(),
@@ -373,105 +413,105 @@ namespace Product.Framework.Forms
 
 		#region [Edit Links dialog]
 
-		private readonly Button closeEditLinksDialogButton =
-			new Button(By.XPath("//div[contains(@class, 'modal in')]//button[contains(text(), 'Close')]"),
-				"Close edit links dialog");
+		//private readonly Button closeEditLinksDialogButton =
+		//	new Button(By.XPath("//div[contains(@class, 'modal in')]//button[contains(text(), 'Close')]"),
+		//		"Close edit links dialog");
 
-		public void CloseEditLinksDialog()
-		{
-			Log.Info("Closing edit links dialog");
-			closeEditLinksDialogButton.Click();
-			addLinkButton.WaitForElementDisappear();
-		}
+		//public void CloseEditLinksDialog()
+		//{
+		//	Log.Info("Closing edit links dialog");
+		//	closeEditLinksDialogButton.Click();
+		//	addLinkButton.WaitForElementDisappear();
+		//}
 
-		public void RemoveLink(string linkName)
-		{
-			Log.Info("Removing link: " + linkName);
-			var links =
-				Browser.GetDriver()
-					.FindElements(
-						By.XPath(
-							"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));
-			foreach (var link in links)
-			{
-				if (
-					link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).GetAttribute("value").Trim().ToLower() ==
-					linkName.Trim().ToLower())
-				{
-					var je = (IJavaScriptExecutor) Browser.GetDriver();
-					je.ExecuteScript("arguments[0].scrollIntoView(true);", link.FindElement(By.XPath(".//button")));
-					link.FindElement(By.XPath(".//button")).Click();
-				}
-			}
-		}
+		//public void RemoveLink(string linkName)
+		//{
+		//	Log.Info("Removing link: " + linkName);
+		//	var links =
+		//		Browser.GetDriver()
+		//			.FindElements(
+		//				By.XPath(
+		//					"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));
+		//	foreach (var link in links)
+		//	{
+		//		if (
+		//			link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).GetAttribute("value").Trim().ToLower() ==
+		//			linkName.Trim().ToLower())
+		//		{
+		//			var je = (IJavaScriptExecutor) Browser.GetDriver();
+		//			je.ExecuteScript("arguments[0].scrollIntoView(true);", link.FindElement(By.XPath(".//button")));
+		//			link.FindElement(By.XPath(".//button")).Click();
+		//		}
+		//	}
+		//}
 
-		public void ReorderLink(string name, string url)
-		{
-			Log.Info($"Reordering link {name} to {url} url");
-			var links =
-				Browser.GetDriver()
-					.FindElements(
-						By.XPath(
-							"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));
-			foreach (var link in links)
-			{
-				if (
-					link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).GetAttribute("value").Trim().ToLower() ==
-					name.Trim().ToLower())
-				{
-					var je = (IJavaScriptExecutor) Browser.GetDriver();
-					je.ExecuteScript("arguments[0].scrollIntoView(true);",
-						link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")));
-					link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")).Clear();
-					link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")).SendKeys(url);
-					Store.LinkUrl = url;
-				}
-			}
-		}
+		//public void ReorderLink(string name, string url)
+		//{
+		//	Log.Info($"Reordering link {name} to {url} url");
+		//	var links =
+		//		Browser.GetDriver()
+		//			.FindElements(
+		//				By.XPath(
+		//					"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));
+		//	foreach (var link in links)
+		//	{
+		//		if (
+		//			link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).GetAttribute("value").Trim().ToLower() ==
+		//			name.Trim().ToLower())
+		//		{
+		//			var je = (IJavaScriptExecutor) Browser.GetDriver();
+		//			je.ExecuteScript("arguments[0].scrollIntoView(true);",
+		//				link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")));
+		//			link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")).Clear();
+		//			link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")).SendKeys(url);
+		//			Store.LinkUrl = url;
+		//		}
+		//	}
+		//}
 
-		public void RenameLink(string oldName, string newName)
-		{
-			Log.Info($"Renaming link {oldName} to {newName}");
-			var links =
-				Browser.GetDriver()
-					.FindElements(
-						By.XPath(
-							"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));
-			foreach (var link in links)
-			{
-				if (
-					link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).GetAttribute("value").Trim().ToLower() ==
-					oldName.Trim().ToLower())
-				{
-					var je = (IJavaScriptExecutor) Browser.GetDriver();
-					je.ExecuteScript("arguments[0].scrollIntoView(true);",
-						link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")));
-					link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).Clear();
-					link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).SendKeys(newName);
-					Store.LinkName = newName;
-				}
-			}
-		}
+		//public void RenameLink(string oldName, string newName)
+		//{
+		//	Log.Info($"Renaming link {oldName} to {newName}");
+		//	var links =
+		//		Browser.GetDriver()
+		//			.FindElements(
+		//				By.XPath(
+		//					"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));
+		//	foreach (var link in links)
+		//	{
+		//		if (
+		//			link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).GetAttribute("value").Trim().ToLower() ==
+		//			oldName.Trim().ToLower())
+		//		{
+		//			var je = (IJavaScriptExecutor) Browser.GetDriver();
+		//			je.ExecuteScript("arguments[0].scrollIntoView(true);",
+		//				link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")));
+		//			link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).Clear();
+		//			link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).SendKeys(newName);
+		//			Store.LinkName = newName;
+		//		}
+		//	}
+		//}
 
-        		public void AssertLinkIsReordered(string name, string url)
-		{
-			Log.Info($"Asserting link {name} is reorderd to {url}");
-			var links =
-				Browser.GetDriver()
-					.FindElements(
-						By.XPath(
-							"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));
-			foreach (var link in links)
-			{
-				if (
-					link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).GetAttribute("value").Trim().ToLower() ==
-					name.Trim().ToLower())
-				{
-					var value = link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")).GetAttribute("value");
-					Assert.IsTrue(value.Trim().ToLower().Contains(url.Trim().ToLower()), "Url is not reordered");
-				}
-			}
-		}
+  //      		public void AssertLinkIsReordered(string name, string url)
+		//{
+		//	Log.Info($"Asserting link {name} is reorderd to {url}");
+		//	var links =
+		//		Browser.GetDriver()
+		//			.FindElements(
+		//				By.XPath(
+		//					"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));
+		//	foreach (var link in links)
+		//	{
+		//		if (
+		//			link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).GetAttribute("value").Trim().ToLower() ==
+		//			name.Trim().ToLower())
+		//		{
+		//			var value = link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")).GetAttribute("value");
+		//			Assert.IsTrue(value.Trim().ToLower().Contains(url.Trim().ToLower()), "Url is not reordered");
+		//		}
+		//	}
+		//}
 
 		#endregion
 	}

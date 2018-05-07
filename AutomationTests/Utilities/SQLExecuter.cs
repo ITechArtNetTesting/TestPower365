@@ -9,7 +9,7 @@ namespace Product.Utilities
 {
     public class SQLExecuter
     {
-        public int SelectDiscoveryFrequencyHours(int clientId,string tenantName)
+        public int SelectDiscoveryFrequencyHours(int clientId, string tenantName)
         {
             using (var sqlClient = new SqlClient(RunConfigurator.GetConnectionString()))
             {
@@ -26,3 +26,4 @@ namespace Product.Utilities
         }
     }
 }
+

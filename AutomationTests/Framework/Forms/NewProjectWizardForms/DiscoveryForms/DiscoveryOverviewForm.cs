@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using Product.Framework.Elements;
+using Product.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,37 +12,41 @@ using System.Threading.Tasks;
 
 namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
 {
-    public class DiscoveryOverviewForm:BaseForm
-    {        
+    public class DiscoveryOverviewForm : BaseForm
+    {
         private static readonly By TitleLocator = By.XPath("//*");
 
         Element tenants = new Element(By.XPath("//div[@id='discovery']//tbody//tr"), "List of tenants");
-
-
-        public DiscoveryOverviewForm():base(TitleLocator,"Discovery overview")
-        {            
+        public DiscoveryOverviewForm() : base(TitleLocator, "Discovery overview")
+        {
         }
 
         public void VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(string clientName)
         {
-            WaitForAjaxLoad();
-            var clientId= queryExecuter.SelectClientIdByName(clientName);
+            SQLExecuter queryExecuter = new SQLExecuter();
+            var clientId = queryExecuter.SelectClientIdByName(clientName);
 
-            for (int i = 0; i < tenants.GetElements().Count; i++)
+
+            WaitForAjaxLoad();
+            var tenantElements = tenants.GetElements();
+            foreach (var element in tenantElements)
             {
-                var sqlFrequency = queryExecuter.SelectDiscoveryFrequencyHours(clientId, tenants.GetElements()[i].FindElement(By.XPath(".//strong")).Text);
-                var uiFrequency = Convert.ToInt32(tenants.GetElements()[i].FindElement(By.XPath(".//span[@data-bind='text: discoveryRunInterval']")).Text);
-                Assert.AreEqual(sqlFrequency, uiFrequency);
+                string tenantName = element.FindElement(By.XPath(".//strong")).Text;
+                var sqlFrequency = queryExecuter.SelectDiscoveryFrequencyHours(clientId, tenantName);
+                var uiFrequency = Convert.ToInt32(element.FindElement(By.XPath(".//span[@data-bind='text: discoveryRunInterval']")).Text);
+                Assert.AreEqual(sqlFrequency, uiFrequency,String.Format("Tenant {0}. DiscoveryFrequencyHours does not match with UI value ", tenantName));
             }
         }
 
         public void ChangeDiscoveryFrequencyHours(int number)
         {
-            for (int i = 0; i < tenants.GetElements().Count; i++)
+            var tenantElements = tenants.GetElements();
+            foreach (var element in tenantElements)
             {
-                new Actions(Browser.GetDriver()).MoveToElement(tenants.GetElements()[i]).Build().Perform();
-                tenants.GetElements()[i].FindElement(By.XPath(".//input")).Clear();
-                tenants.GetElements()[i].FindElement(By.XPath(".//input")).SendKeys(Convert.ToString(number));
+                var tenantInput = element.FindElement(By.XPath(".//input"));
+               new Actions(Browser.GetDriver()).MoveToElement(element).Build().Perform();
+               element.FindElement(By.XPath(".//input")).Clear();
+               element.FindElement(By.XPath(".//input")).SendKeys(Convert.ToString(number));
             }
             Browser.GetDriver().Navigate().Refresh();
         }
