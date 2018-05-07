@@ -792,3 +792,7 @@ C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\resources\M
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\resources\MailEngine\Engine\zh-Hant\Microsoft.Data.Services.Client.resources.dll
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\resources\MailEngine\Engine\zh-Hant\System.Spatial.resources.dll
 C:\Users\valery.piniazik\Documents\TestPower365\ProbeTests\bin\Debug\MailEngine.orderedtest
+D:\Project\P356\ProbeTests\obj\Debug\ProbeTests.csprojResolveAssemblyReference.cache
+D:\Project\P356\ProbeTests\obj\Debug\ProbeTests.csproj.CoreCompileInputs.cache
+D:\Project\P356\ProbeTests\obj\Debug\ProbeTests.exe
+D:\Project\P356\ProbeTests\obj\Debug\ProbeTests.pdb

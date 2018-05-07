@@ -376,3 +376,8 @@ D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\MailEngine\worki
 D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\MailEngine\internal\scripts\postimport.ps1
 D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\MailEngine\internal\scripts\preimport.ps1
 D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\MailEngine.orderedtest
+d:\Project\P356\SeleniumTests\ProbeTests\obj\Debug\ProbeTests.csprojResolveAssemblyReference.cache
+d:\Project\P356\SeleniumTests\ProbeTests\obj\Debug\ProbeTests.exe.config
+d:\Project\P356\SeleniumTests\ProbeTests\obj\Debug\ProbeTests.csproj.CoreCompileInputs.cache
+d:\Project\P356\SeleniumTests\ProbeTests\obj\Debug\ProbeTests.exe
+d:\Project\P356\SeleniumTests\ProbeTests\obj\Debug\ProbeTests.pdb

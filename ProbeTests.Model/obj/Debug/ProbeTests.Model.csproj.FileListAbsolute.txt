@@ -78,3 +78,14 @@ D:\Project\BTCloud\SeleniumTests\ProbeTests.Model\obj\Debug\ProbeTests.Model.csp
 D:\Project\BTCloud\SeleniumTests\ProbeTests.Model\obj\Debug\ProbeTests.Model.csproj.CoreCompileInputs.cache
 D:\Project\BTCloud\SeleniumTests\ProbeTests.Model\obj\Debug\ProbeTests.Model.dll
 D:\Project\BTCloud\SeleniumTests\ProbeTests.Model\obj\Debug\ProbeTests.Model.pdb
+D:\Project\P356\ProbeTests.Model\bin\Debug\ProbeTests.Model.dll.config
+D:\Project\P356\ProbeTests.Model\bin\Debug\ProbeTests.Model.dll
+D:\Project\P356\ProbeTests.Model\bin\Debug\ProbeTests.Model.pdb
+D:\Project\P356\ProbeTests.Model\bin\Debug\EntityFramework.dll
+D:\Project\P356\ProbeTests.Model\bin\Debug\EntityFramework.SqlServer.dll
+D:\Project\P356\ProbeTests.Model\bin\Debug\EntityFramework.xml
+D:\Project\P356\ProbeTests.Model\bin\Debug\EntityFramework.SqlServer.xml
+D:\Project\P356\ProbeTests.Model\obj\Debug\ProbeTests.Model.csprojResolveAssemblyReference.cache
+D:\Project\P356\ProbeTests.Model\obj\Debug\ProbeTests.Model.csproj.CoreCompileInputs.cache
+D:\Project\P356\ProbeTests.Model\obj\Debug\ProbeTests.Model.dll
+D:\Project\P356\ProbeTests.Model\obj\Debug\ProbeTests.Model.pdb
