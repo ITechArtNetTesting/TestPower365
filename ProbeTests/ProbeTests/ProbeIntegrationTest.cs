@@ -164,7 +164,7 @@ namespace ProbeTests.ProbeTests
 					counter++;
 				}
 					User.AtUsersForm().VerifyLineisExist(sourceMailbox);
-					User.AtUsersForm().WaitForState(sourceMailbox, State.NoMatch, 30000);
+					User.AtUsersForm().WaitForState(sourceMailbox, State.NoMatch, 30000, 10);
 				}
 			catch (Exception e)
 			{
@@ -263,7 +263,7 @@ namespace ProbeTests.ProbeTests
                     }
                 }
 
-                User.AtUsersForm().WaitForState(sourceMailbox, State.Prepared, 90000);
+                User.AtUsersForm().WaitForState(sourceMailbox, State.Prepared, 900000, 15);
             }
 			catch (Exception e)
 			{

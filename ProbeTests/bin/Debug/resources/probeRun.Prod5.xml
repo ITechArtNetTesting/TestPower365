@@ -10,6 +10,11 @@
   <DiscoveryProbe   client="client1" project="project2" adgroup="adgroup1" tenants="T3->T4" />
   <IntegrationProbe client="client1" project="project3" adgroup="adgroup1" tenants="T1->T2" />
   <ArsProbe tenantA="T5" tenantB="T6" />
+  
+  <CDSP2P           client="cdsclient1" project="cdsp2p" tenants="T2->T3" />
+  <CDSP2C           tenants="T5->T6" />
+  <CDSC2C           client="cdsclient2" project="cdsc2c" tenants="T2->T3"/>
+  
   <DiscoveryQueueProbe connectionString="" threshold="1000" />
 
   <!-- Test data -->
@@ -99,6 +104,48 @@
         </project>
       </projects>
     </client>
+    <client>
+      <metaname>cdsclient1</metaname>
+      <projects>
+        <project>
+          <tenantmigrations>
+            <tenantmigration metaname="T2->T3" source="BLR" target="GAR" />
+          </tenantmigrations>
+          <metaname>cdsp2p</metaname>
+          <migration>
+            <entry>
+              <metaname>entry1</metaname>
+              <objectprefix>DEcds_probe</objectprefix>
+              <source>bluelagoonresorts.de</source>
+              <target>greenacresranch.de</target>
+              <password>Password1</password>
+              <ou>CDSProbe</ou>
+            </entry>
+          </migration>
+        </project>
+      </projects>
+    </client>
+    <client>
+      <metaname>cdsclient2</metaname>
+      <projects>
+        <project>
+          <tenantmigrations>
+            <tenantmigration metaname="T2->T3" source="BLR" target="GAR" />
+          </tenantmigrations>
+          <metaname>cdsc2c</metaname>
+          <migration>
+            <entry>
+              <metaname>entry1</metaname>
+              <objectprefix>DEcds_c2c</objectprefix>
+              <discoverygroup>CDSProbeDiscovery</discoverygroup>
+              <source>P365BLR.onmicrosoft.de</source>
+              <target>p365GAR.onmicrosoft.de</target>
+              <password>Password1</password>
+            </entry>
+          </migration>
+        </project>
+      </projects>
+    </client>
   </clients>
 
   <tenants>
@@ -117,7 +164,7 @@
       <name>BLR</name>
       <user>admin@p365blr.onmicrosoft.de</user>
       <password>BinTree123</password>
-      <domain>bluelagoonresourts.de</domain>
+      <domain>bluelagoonresorts.de</domain>
       <aduser>blr\btadmin</aduser>
       <adpassword>Password1</adpassword>
       <azureAdSyncServer>BLR-EX13</azureAdSyncServer>

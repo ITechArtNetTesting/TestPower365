@@ -45,9 +45,9 @@ namespace ProbeTests.ProbeTests
                 throw e;
             }
             try
-            {
-                User.AtUsersForm().SyncUserByLocator(syncUsername);
-                User.AtUsersForm().Confirm();
+            {            
+                User.AtUsersForm().PerfomActionForUser(syncUsername, ActionType.Sync);
+                User.AtUsersForm().ConfirmSync();
                 User.AtUsersForm().AssertUserHaveSyncingState(syncUsername);
             }
             catch (Exception e)
@@ -57,7 +57,7 @@ namespace ProbeTests.ProbeTests
             }
             try
             {
-                User.AtUsersForm().WaitForState(syncUsername, State.Synced, 30000);
+                User.AtUsersForm().WaitForState(syncUsername, State.Synced, 1200000, 60);
             }
             catch (Exception e)
             {

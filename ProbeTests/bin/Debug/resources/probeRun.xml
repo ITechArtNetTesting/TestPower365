@@ -1,6 +1,8 @@
 <xml>
 
   <baseurl>https://power365-qa.binarytree.com/</baseurl>
+  <o365url>https://ps.outlook.com/powershell</o365url>
+  <msolconnectargs></msolconnectargs>
   <Timeout>60</Timeout>
   <browser>chrome</browser>
   <arc>x64</arc>
@@ -9,6 +11,11 @@
   <DiscoveryProbe   client="client1" project="project2" adgroup="adgroup1" tenants="T5->T6" />
   <IntegrationProbe client="client1" project="project3" adgroup="adgroup1" tenants="T1->T2" />
   <ArsProbe         tenantA="T7" tenantB="T8" />
+
+  <CDSP2P           client="cdsclient1" project="cdsp2p" tenants="T5->T6" />
+  <CDSP2C           tenants="T5->T6" />
+  <CDSC2C           client="cdsclient2" project="cdsc2c" tenants="T9->T10"/>
+
   <DiscoveryQueueProbe connectionString="" threshold="1000" />
 
   <!-- Test data -->
@@ -60,8 +67,8 @@
             <entry>
               <metaname>entry1</metaname>
               <probeprefix>qamailprobe</probeprefix>
-              <source>@corp29.cmtsandbox.com</source>
-              <target>@corp30.cmtsandbox.com</target>
+              <source>corp29.cmtsandbox.com</source>
+              <target>corp30.cmtsandbox.com</target>
               <group>Wave1</group>
               <profile>Profile 1</profile>
             </entry>
@@ -96,6 +103,56 @@
             </entry>
           </usermigration>
         </project>
+        <project>
+          <metaname>cdsp2p</metaname>
+          <dirsync>
+            <password>Password1</password>
+            <forest>corp7.cmtsandbox.com</forest>
+            <ou>P365Probe</ou>
+          </dirsync>
+        </project>
+      </projects>
+    </client>
+    <client>
+      <metaname>cdsclient1</metaname>
+      <projects>
+        <project>
+          <tenantmigrations>
+            <tenantmigration metaname="T5->T6" source="BTCloud1" target="BTCloud3" />
+          </tenantmigrations>
+          <metaname>cdsp2p</metaname>
+          <migration>
+            <entry>
+              <metaname>entry1</metaname>
+              <objectprefix>QAcds_probe</objectprefix>
+              <source>corp29.cmtsandbox.com</source>
+              <target>corp30.cmtsandbox.com</target>
+              <password>Password1</password>
+              <ou>CDSProbe</ou>
+            </entry>
+          </migration>
+        </project>
+      </projects>
+    </client>
+    <client>
+      <metaname>cdsclient2</metaname>
+      <projects>
+        <project>
+          <tenantmigrations>
+            <tenantmigration metaname="T9->T10" source="BTCloud39" target="BTCloud40" />
+          </tenantmigrations>
+          <metaname>cdsc2c</metaname>
+          <migration>
+            <entry>
+              <metaname>entry1</metaname>
+              <objectprefix>QAcds_c2c</objectprefix>
+              <discoverygroup>CDSProbeDiscovery</discoverygroup>
+              <source>btcorp39.onmicrosoft.com</source>
+              <target>btcorp40.onmicrosoft.com</target>
+              <password>Password1</password>
+            </entry>
+          </migration>
+        </project>
       </projects>
     </client>
   </clients>
@@ -108,13 +165,17 @@
       <domain>btcorp7.onmicrosoft.com</domain>
       <aduser>corp7\administrator</aduser>
       <adpassword>BinTree123</adpassword>
-			<uri>https://10.1.137.25/PowerShell</uri>
+      <uri>https://10.1.137.25/PowerShell</uri>
+      <azureAdSyncServer>W28DS</azureAdSyncServer>
     </tenant>
     <tenant metaname="T2">
       <name>BTCorp9</name>
       <user>corp9O365admin@btcorp9.onmicrosoft.com</user>
       <password>BinTree123</password>
       <domain>btcorp9.onmicrosoft.com</domain>
+      <aduser>corp9\administrator</aduser>
+      <adpassword>BinTree123</adpassword>
+      <azureAdSyncServer>C9-W28DS</azureAdSyncServer>
     </tenant>
     <tenant metaname="T3">
       <name>BTCorp3</name>
@@ -136,6 +197,7 @@
       <uid>046b73c8-6531-443f-a66f-0064a84a2b0e</uid>
       <appid>c292b087-abe4-4aa9-b5ac-aa4ed31fe545</appid>
       <uri>https://10.1.141.20/powershell</uri>
+      <azureAdSyncServer>W12-C29-EX13</azureAdSyncServer>
       <aduser>administrator@corp29.cmtsandbox.com</aduser>
       <adpassword>Password29</adpassword>
     </tenant>
@@ -146,6 +208,7 @@
       <domain>corp30.cmtsandbox.com</domain>
       <uid>d9ef29f8-4517-4036-b7c8-4a126df22172</uid>
       <appid>5eff8276-1553-4736-91aa-87e88db9e354</appid>
+      <azureAdSyncServer>W12-C30-EX13</azureAdSyncServer>
       <uri>https://10.1.141.40/powershell</uri>
       <aduser>administrator@corp30.cmtsandbox.com</aduser>
       <adpassword>Password30</adpassword>
@@ -163,6 +226,20 @@
       <user>BinaryTreePowerShellUser.BT-QA@corp32.cmtsandbox.com</user>
       <password>P@ssw0rd</password>
       <domain>BTCorp32.onmicrosoft.com</domain>
+    </tenant>
+    <tenant metaname="T9">
+      <uid></uid>
+      <name>BTCloud39</name>
+      <user>admin@btcorp39.onmicrosoft.com</user>
+      <password>BinTree123</password>
+      <domain>btcorp39.onmicrosoft.com</domain>
+    </tenant>
+    <tenant metaname="T10">
+      <uid></uid>
+      <name>BTCloud40</name>
+      <user>admin@btcorp40.onmicrosoft.com</user>
+      <password>BinTree123</password>
+      <domain>btcorp40.onmicrosoft.com</domain>
     </tenant>
   </tenants>
 </xml>
