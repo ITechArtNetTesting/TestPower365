@@ -25,19 +25,17 @@ namespace Product.Tests.IntegrationTests.GroupsTests
             string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");
             string client = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name");
             string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//name");
+            string disrtibutionGroup = RunConfigurator.GetValueByXpath("//client[child::metaname='client2']//project[child::metaname='project2']//disrtibutiongroup[child::metaname='group1']/name");
+            string securityGroup = RunConfigurator.GetValueByXpath("//client[child::metaname='client2']//project[child::metaname='project2']//securitygroup[child::metaname='group1']/name");
             try
             {
                 LoginAndSelectRole(login, password, client);
                 SelectProject(projectName);
                 User.AtProjectOverviewForm().OpenTotalGroups();
-                User.AtGroupsMigrationForm().ClickOnFilter();
-                User.AtGroupsMigrationForm().ClickSecurityRadio();
-                User.AtGroupsMigrationForm().ClickOnFilter();
-                User.AtGroupsMigrationForm().CheckSyncIsDisabledForGroups();
-                User.AtGroupsMigrationForm().ClickOnFilter();
-                User.AtGroupsMigrationForm().ClickDistributionRadio();
-                User.AtGroupsMigrationForm().ClickOnFilter();
-                User.AtGroupsMigrationForm().CheckSyncIsEnabledForGroups();
+                User.AtGroupsMigrationForm().SearchGroup(securityGroup);             
+                User.AtGroupsMigrationForm().CheckSyncIsDisabledForGroup(securityGroup);
+                User.AtGroupsMigrationForm().SearchGroup(disrtibutionGroup);                
+                User.AtGroupsMigrationForm().CheckSyncIsEnabledForGroup(disrtibutionGroup);
             }
             catch (Exception e)
             {

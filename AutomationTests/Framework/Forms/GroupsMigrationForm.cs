@@ -19,6 +19,12 @@ namespace Product.Framework.Forms
         {
         }
 
+        Element foundGroup = new Element(By.XPath("//tr[child::td[child::div[@class='checkbox']]]//span[text()]"), "First found group");
+
+        TextBox Search = new TextBox(By.Id("searchGroups"), "Search groups textbox");
+
+        Button submitSearch = new Button(By.XPath("//button[@type='submit']"), "Submit search button");
+
         private readonly Button filter = new Button(By.XPath("//a[contains(text(),'Filter')]"), "Filter button");
 
         private readonly Button actionsDropdownButton =
@@ -41,51 +47,37 @@ namespace Product.Framework.Forms
             SelectEntryBylocator(locator);
             SelectAction(ActionType.Sync);
             Apply();
-        }
+        }   
 
-        public void ClickOnFilter()
+        public void SearchGroup(string groupName)
         {
-            filter.Click();
+            Search.ClearSetText(groupName);
+            submitSearch.Click();
+            WaitForAjaxLoad();
         }
 
-        public void ClickSecurityRadio()
-        {
-            UnCheckAllFilters();
-            security.Click();
-        }
-
-        public void ClickDistributionRadio()
-        {
-            UnCheckAllFilters();
-            distribution.Click();
-        }
-
-        public void CheckSyncIsDisabledForGroups()
+        public void CheckSyncIsEnabledForGroup(string groupName)
         {
             WaitForAjaxLoad();
-            foreach (IWebElement group in Browser.GetDriver().FindElements(By.XPath("//td[child::div[@class='checkbox']]//input")))
-            {
-                group.Click();
-                SelectAction(ActionType.Sync);
-                CheckApplyButtonIsDisabled();
-                group.Click();
-            }
+            foundGroup.Click();
+            SelectAction(ActionType.Sync);
+            CheckApplyButtonIsEnabled();
+            foundGroup.Click();
         }
 
-        public void CheckSyncIsEnabledForGroups()
+        public void CheckSyncIsDisabledForGroup(string groupName)
         {
             WaitForAjaxLoad();
-            foreach (IWebElement group in Browser.GetDriver().FindElements(By.XPath("//td[child::div[@class='checkbox']]//input")))
-            {
-                group.Click();
-                SelectAction(ActionType.Sync);
-                CheckApplyButtonIsEnabled();
-                group.Click();
-            }
+            foundGroup.Click();
+            SelectAction(ActionType.Sync);
+            CheckApplyButtonIsDisabled();
+            foundGroup.Click();
+
         }
 
         private void UnCheckAllFilters()
         {
+            WaitForAjaxLoad();
             foreach (IWebElement filter in Browser.GetDriver().FindElements(By.XPath("//div[ancestor::div[@class='filter-list']]//input")))
             {
                 if (Convert.ToBoolean(filter.GetAttribute("checked")))
