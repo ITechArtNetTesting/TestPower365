@@ -40,9 +40,7 @@ namespace Product.Tests.IntegrationTests.GroupsTests
                 User.AtGroupsMigrationForm().OpenDetailsByLocator(group);
                 User.AtGroupsMigrationForm().VerifyStateIS("Syncing");
                 User.AtGroupsMigrationForm().WaitForJobIsCreated();
-                User.AtGroupsMigrationForm().AssertDetailsStopButtonIsEnabled();
-                User.AtGroupsMigrationForm().WaitForSyncedState();
-                User.AtGroupsMigrationForm().AssertDetailsSyncButtonIsEnabled();
+                User.AtGroupsMigrationForm().WaitForState_DetailPage(group, State.Synced);               
                 User.AtGroupsMigrationForm().CloseUserDetails();
             }
             catch (Exception e)
