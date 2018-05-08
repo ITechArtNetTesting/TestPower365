@@ -23,12 +23,12 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
 		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
 		    string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");
 		    string client = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/../name");
-		    string projectName1 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//name");
+		    string projectName3= RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project3']/..//name");
 		    string projectName2 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//name");
 		    string sourceDomain1 = RunConfigurator.GetTenantValue("T1->T2", "source", "domain");
 		    string targetDomain1 = RunConfigurator.GetTenantValue("T1->T2", "target", "domain");
 		    string groupMailbox1 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry1']/..//group");
-		    string filename1 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='file1']/..//filename");
+		    string filename1 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project3']/..//metaname[text()='file1']/..//filename");
 		    string sourceDomain2 = RunConfigurator.GetTenantValue("T3->T4", "source", "domain");
 		    string targetDomain2 = RunConfigurator.GetTenantValue("T3->T4", "target", "domain");
 		    string groupMailbox5 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//group");
@@ -37,7 +37,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
 		    try
 		    {
 		        LoginAndSelectRole(login, password, client);
-		        SelectProject(projectName1);
+		        SelectProject(projectName3);
 		        User.AtProjectOverviewForm().OpenUsersList();
 		        User.AtUsersForm().VerifyLinesCountAndProperties(sourceDomain1, targetDomain1, RunConfigurator.GetCSVlinesCount(Path.GetFullPath(RunConfigurator.ResourcesPath + filename1)));
 		        User.AtUsersForm().SelectAllLines();

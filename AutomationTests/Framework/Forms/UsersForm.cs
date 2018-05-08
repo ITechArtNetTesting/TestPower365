@@ -95,7 +95,7 @@ namespace Product.Framework.Forms
 					"//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//span[text()[contains(.,'Profile')]]/..//i[contains(@class, 'fa-sort')]"),
 				"Profile filter button");
 
-		private readonly Button sampleFileButton =
+       private readonly Button sampleFileButton =
 			new Button(
 				By.XPath("//div[contains(@class, 'modal fade in')]//a[contains(@href, 'DownloadUserMigrationsForUpdateTemplate')]"),
 				"Sample file button");
@@ -244,11 +244,12 @@ namespace Product.Framework.Forms
         public void AssertCutoverCompliteDetailsIsDisabled()
         {
             Assert.IsTrue(!CompleteDetailsButton.IsPresent(), "Complete button is present");
-            Assert.IsTrue(!CutoverDetailsButton.IsPresent(), "Complete button is present");
+            Assert.IsTrue(!CutoverDetailsButton.IsPresent(), "Cutover button is present");
         }
 
         public void CheckActionIsDisabled(ActionType type)
         {
+            WaitForAjaxLoad();
             SelectAction(type);
             CheckApplyButtonIsDisabled();
         }
@@ -1248,9 +1249,23 @@ namespace Product.Framework.Forms
 			Store.ProfileList.Clear();
 			BaseElement.WaitForElementIsClickable(
 				By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr"));
-			var elements = Browser.GetDriver()
+           // ReadOnlyCollection<IWebElement> elements_page2=null;
+            var elements = Browser.GetDriver()
 				.FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr"));
-			foreach (var element in elements)
+                       //second page
+            //Button secondPage= new Button (By.XPath("//a[text()='2']"), "Second page button");
+            //if (secondPage.IsElementVisible()) {
+            //    secondPage.Click();
+            //    //var elements_page2 = Browser.GetDriver()
+            //    //                  .FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr"));           
+
+            //    elements_page1.Union(Browser.GetDriver()
+            //                     .FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")));
+            //}
+           
+            //var result_rows= elements_page1.Concat(elements_page2);
+
+            foreach (var element in elements)
 			{
 				Store.SourceList.Add(
 					element.FindElement(
@@ -1924,8 +1939,13 @@ namespace Product.Framework.Forms
 	            sureRollbackLabel.Click();
             }
         }
+        public void AssertRollBackIsDisabled()
+        {
+            Log.Info("Clicking Rollback is disabled");
+            Assert.IsFalse(rollbackButton.IsElementVisible(), "Rollback button is not disabled");
+        }
 
-	    public void Rollback()
+        public void Rollback()
 	    {
             Log.Info("Clicking Rollback");
             rollbackButton.Click();

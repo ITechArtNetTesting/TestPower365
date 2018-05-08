@@ -92,6 +92,19 @@
 							<group>Wave2</group>
 							<profile>Profile 1</profile>
 						</entry>
+            <entry>
+              <metaname>entry11</metaname>
+              <source>C7O365SML11@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML11@btcorp9.onmicrosoft.com</target>
+              <group>Wave2</group>
+              <profile>Profile 1</profile>
+            </entry>
+            <entry>
+              <metaname>entry12</metaname>
+              <source>C7O365SML12@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML12@btcorp9.onmicrosoft.com</target>              
+            </entry>
+            
 					</usermigration>
 					<file>
 						<metaname>file1</metaname>
@@ -142,7 +155,8 @@
           </tenantmigrations>
           <usermigration>
             <entry>
-              
+              <metaname>entry1</metaname>
+              <source>C3O365ShareMBX1@BTCorp3.onmicrosoft.com</source>             
             </entry>
           </usermigration>
           <file>
@@ -239,6 +253,11 @@
               <metaname>entry8</metaname>
               <source>C7O365SML27@btcorp7.onmicrosoft.com</source>
               <target>C7O365SML27@btcorp9.onmicrosoft.com</target>
+            </entry>
+            <entry>
+              <metaname>entry9</metaname>
+              <source>C7O365SML28@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML28@btcorp9.onmicrosoft.com</target>
             </entry>
           </usermigration>
 					<adgroups>
@@ -376,11 +395,7 @@
 					    <source>P365AutoRemoteRoom2@corp31.cmtsandbox.com</source>
 					    <target>P365AutoRemoteRoom2@corp32.cmtsandbox.com</target>
 					  </entry>        
-             <entry>
-              <metaname>entry16</metaname>
-              <source>P365PFAutoUser2@corp31.cmtsandbox.com</source>
-              <target>P365PFAutoUser2@corp32.cmtsandbox.com</target>
-              </entry>           
+               
              <entry>
 							<metaname>entry34</metaname>
 							<source>P365Filter4@corp31.cmtsandbox.com</source>
@@ -394,6 +409,16 @@
               <metaname>entry16</metaname>
               <source>\Automation\Tests</source>
               <target>\Automation</target>
+            </entry>
+            <entry>
+              <metaname>entry17</metaname>
+              <source>P365PFAutoUser2@corp31.cmtsandbox.com</source>
+              <target>P365PFAutoUser2@corp32.cmtsandbox.com</target>
+            </entry>
+            <entry>
+              <metaname>entry18</metaname>
+              <source>P365PFAutoUser3@corp31.cmtsandbox.com</source>
+              <target>P365PFAutoUser3@corp32.cmtsandbox.com</target>
             </entry>
             <entry>
               <metaname>mailboxreset</metaname>
