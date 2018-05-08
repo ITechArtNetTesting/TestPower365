@@ -232,19 +232,21 @@ namespace Product.Framework
             }
             return condition(Browser.GetDriver());
         }
-             
+
 
         protected bool IsAjaxActive(int timeoutInSec = 10)
         {
+            var test = EvaluateScript<bool>("return window.jQuery!=undefined");
+
             try
             {
-                return EvaluateScript<bool>("return jQuery.active == 0", timeoutInSec);
+                return EvaluateScript<bool>("return window.jQuery!=undefined", timeoutInSec);
             }
             catch (Exception)
             {
                 return false;
             }
-        }
+        }        
 
         protected bool IsDocumentReady(int timeoutInSec = 10)
         {

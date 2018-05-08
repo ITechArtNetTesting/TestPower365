@@ -30,7 +30,7 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
         public void StoppingStateButtonsTest_mailWithDiscovery_25825()
         {
             StoppingStateButtons(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client1"), RunConfigurator.GetClient("client2"),
-                                 RunConfigurator.GetProjectName("client2", "project1"), RunConfigurator.GetSourceMailbox("client2", "project1", "entry3"));
+                                 RunConfigurator.GetProjectName("client2", "project1"), RunConfigurator.GetSourceMailbox("client2", "project1", "entry4"));
 
         }
 

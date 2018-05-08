@@ -25,7 +25,7 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
         {                    
             bool isIntegrate = true;
             StoppingStateButtonsTest(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"), RunConfigurator.GetClient("client2"),
-                RunConfigurator.GetProjectName("client2", "project2"), RunConfigurator.GetSourceMailbox("client2", "project2", "entry16"), isIntegrate);
+                RunConfigurator.GetProjectName("client2", "project2"), RunConfigurator.GetSourceMailbox("client2", "project2", "entry17"), isIntegrate);
         }
 
         [TestMethod]
@@ -33,7 +33,7 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
         public void StoppingStateButtonsTest_InTheUserDetailView_MO_25829_25830()
         {                  
             StoppingStateButtonsTest(RunConfigurator.GetUserLogin("client1"), RunConfigurator.GetPassword("client1"), RunConfigurator.GetClient("client1"),
-                RunConfigurator.GetProjectName("client1", "project1"), RunConfigurator.GetSourceMailbox("client1", "project1", "entry5"));
+                RunConfigurator.GetProjectName("client1", "project1"), RunConfigurator.GetSourceMailbox("client1", "project1", "entry4"));
         }
 
         [TestMethod]
@@ -58,8 +58,8 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
             {
                 User.AtUsersForm().PrepareFromDetails();
                 User.AtUsersForm().ConfirmAction();
-                User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Preparing, 900000, 10);
-                User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Prepared, 900000, 30);
+                User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Preparing, 1200000, 10);
+                User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Prepared, 1200000, 30);
             }
             User.AtUsersForm().SyncFromDetails();
             User.AtUsersForm().ConfirmAction();

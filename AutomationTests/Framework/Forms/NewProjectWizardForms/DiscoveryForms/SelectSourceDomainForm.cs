@@ -13,7 +13,7 @@ namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
 		public void SelectDomain(string domain)
 		{
 			Log.Info("Selecting source domain");
-			var domainButton = new Button(By.XPath($"//span[text()='{domain}']"), domain + " button");
+			var domainButton = new Button(By.XPath($"//*[@class='radio']//span[contains(text(), '{domain}')]"), domain + " button");
 			domainButton.Click();
 			try
 			{

@@ -20,7 +20,7 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
         public void CutoverAndCompletedButtonsTest_MO_23096()
         {
             CutoverAndCompletedButtonsTest(RunConfigurator.GetUserLogin("client1"), RunConfigurator.GetPassword("client1"),
-                RunConfigurator.GetClient("client1"), RunConfigurator.GetProjectName("client1", "project1"), RunConfigurator.GetSourceMailbox("client1", "project1", "entry6"));
+                RunConfigurator.GetClient("client1"), RunConfigurator.GetProjectName("client1", "project1"), RunConfigurator.GetSourceMailbox("client1", "project1", "entry11"));
 
         }
 
@@ -39,7 +39,7 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
             LoginAndSelectRole(login, password, client);
             SelectProject(projectName);
             User.AtProjectOverviewForm().OpenUsersList();
-
+            User.AtUsersForm().PerformSearch(sourceMailbox);
             //Verify on Page View
             User.AtUsersForm().OpenDetailsByLocator(sourceMailbox);
             User.AtUsersForm().AssertCutoverCompliteDetailsIsDisabled();
