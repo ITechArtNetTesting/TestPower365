@@ -15,9 +15,11 @@ namespace Product.Framework.Forms
 	{
         private static readonly By TitleLocator = By.XPath("//a[contains(@data-bind, 'GroupMigrationsDialog')]");
 
-        public GroupsMigrationForm() : base(TitleLocator, "Groups migration form")
-        {
-        }
+        Label foundGroup = new Label(By.XPath("//tr[child::td[child::div[@class='checkbox']]]//span[text()]"), "First found group");
+
+        TextBox Search = new TextBox(By.Id("searchGroups"), "Search groups textbox");
+
+        Button submitSearch = new Button(By.XPath("//button[@type='submit']"), "Submit search button");
 
         private readonly Button filter = new Button(By.XPath("//a[contains(text(),'Filter')]"), "Filter button");
 
@@ -31,6 +33,9 @@ namespace Product.Framework.Forms
 
         private readonly Label distribution = new Label(By.XPath("//label[contains(text(),'Distribution')]"), "Distribution label");
 
+        public GroupsMigrationForm() : base(TitleLocator, "Groups migration form")
+        {
+        }        
                 
         public void SyncUserByLocator(string locator)
         {
@@ -41,51 +46,37 @@ namespace Product.Framework.Forms
             SelectEntryBylocator(locator);
             SelectAction(ActionType.Sync);
             Apply();
-        }
+        }   
 
-        public void ClickOnFilter()
+        public void SearchGroup(string groupName)
         {
-            filter.Click();
+            Search.ClearSetText(groupName);
+            submitSearch.Click();
+            WaitForAjaxLoad();
         }
 
-        public void ClickSecurityRadio()
-        {
-            UnCheckAllFilters();
-            security.Click();
-        }
-
-        public void ClickDistributionRadio()
-        {
-            UnCheckAllFilters();
-            distribution.Click();
-        }
-
-        public void CheckSyncIsDisabledForGroups()
+        public void CheckSyncIsEnabledForGroup(string groupName)
         {
             WaitForAjaxLoad();
-            foreach (IWebElement group in Browser.GetDriver().FindElements(By.XPath("//td[child::div[@class='checkbox']]//input")))
-            {
-                group.Click();
-                SelectAction(ActionType.Sync);
-                CheckApplyButtonIsDisabled();
-                group.Click();
-            }
+            foundGroup.Click();
+            SelectGroupAction(ActionType.Sync);
+            CheckApplyButtonIsEnabled();
+            foundGroup.Click();
         }
 
-        public void CheckSyncIsEnabledForGroups()
+        public void CheckSyncIsDisabledForGroup(string groupName)
         {
             WaitForAjaxLoad();
-            foreach (IWebElement group in Browser.GetDriver().FindElements(By.XPath("//td[child::div[@class='checkbox']]//input")))
-            {
-                group.Click();
-                SelectAction(ActionType.Sync);
-                CheckApplyButtonIsEnabled();
-                group.Click();
-            }
+            foundGroup.Click();
+            SelectGroupAction(ActionType.Sync);
+            CheckApplyButtonIsDisabled();
+            foundGroup.Click();
+
         }
 
         private void UnCheckAllFilters()
         {
+            WaitForAjaxLoad();
             foreach (IWebElement filter in Browser.GetDriver().FindElements(By.XPath("//div[ancestor::div[@class='filter-list']]//input")))
             {
                 if (Convert.ToBoolean(filter.GetAttribute("checked")))
@@ -93,13 +84,7 @@ namespace Product.Framework.Forms
                     filter.Click();
                 }
             }
-        }
-
-        public new void SelectAction(ActionType type)
-        {
-            OpenActionsDropdown();
-            ChooseAction(type.GetValue());
-        }
+        }      
 
         public new void OpenActionsDropdown()
         {

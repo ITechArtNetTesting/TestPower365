@@ -21,23 +21,21 @@ namespace Product.Tests.IntegrationTests.GroupsTests
         [TestCategory("Integration")]
         public void IntegrationProVerifyOnlyMailUPNAndExtensionAttributesWillBeValidMatchingOptionsForUsersDuringProjectWizard()
         {
-            string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
-            string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");
-            string client = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name");
-            string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//name");
+            string login = RunConfigurator.GetUserLogin("client1");
+            string password = RunConfigurator.GetPassword("client1");
+            string client = RunConfigurator.GetClient("client2");
+            string projectName = RunConfigurator.GetProjectName("client2","project2");
+            string disrtibutionGroup = RunConfigurator.GetDisrtibutionGroup("client2","project2","group1");
+            string securityGroup = RunConfigurator.GetSecurityGroup("client2","project2","group1");
             try
             {
                 LoginAndSelectRole(login, password, client);
                 SelectProject(projectName);
                 User.AtProjectOverviewForm().OpenTotalGroups();
-                User.AtGroupsMigrationForm().ClickOnFilter();
-                User.AtGroupsMigrationForm().ClickSecurityRadio();
-                User.AtGroupsMigrationForm().ClickOnFilter();
-                User.AtGroupsMigrationForm().CheckSyncIsDisabledForGroups();
-                User.AtGroupsMigrationForm().ClickOnFilter();
-                User.AtGroupsMigrationForm().ClickDistributionRadio();
-                User.AtGroupsMigrationForm().ClickOnFilter();
-                User.AtGroupsMigrationForm().CheckSyncIsEnabledForGroups();
+                User.AtGroupsMigrationForm().SearchGroup(securityGroup);             
+                User.AtGroupsMigrationForm().CheckSyncIsDisabledForGroup(securityGroup);
+                User.AtGroupsMigrationForm().SearchGroup(disrtibutionGroup);                
+                User.AtGroupsMigrationForm().CheckSyncIsEnabledForGroup(disrtibutionGroup);
             }
             catch (Exception e)
             {
