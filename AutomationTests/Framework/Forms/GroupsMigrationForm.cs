@@ -15,12 +15,14 @@ namespace Product.Framework.Forms
 	{
         private static readonly By TitleLocator = By.XPath("//a[contains(@data-bind, 'GroupMigrationsDialog')]");
 
-        public GroupsMigrationForm() : base(TitleLocator, "Groups migration form")
-        {
-        }
+        Label foundGroup = new Label(By.XPath("//tr[child::td[child::div[@class='checkbox']]]//span[text()]"), "First found group");
+
+        TextBox Search = new TextBox(By.Id("searchGroups"), "Search groups textbox");
+
+        Button submitSearch = new Button(By.XPath("//button[@type='submit']"), "Submit search button");
 
         private readonly Button filter = new Button(By.XPath("//a[contains(text(),'Filter')]"), "Filter button");
-        private readonly Button groupActionsDropdownButton = new Button(By.XPath("//div[@class='ibox m-t-lg']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"), "Actions dropdown in groups edit page");
+
         private readonly Button actionsDropdownButton =
             new Button(
                 By.XPath(
@@ -30,16 +32,12 @@ namespace Product.Framework.Forms
         private readonly Label security = new Label(By.XPath("//label[contains(text(),'Security')]"), "Security label");
 
         private readonly Label distribution = new Label(By.XPath("//label[contains(text(),'Distribution')]"), "Distribution label");
-        private readonly RadioButton groupItem = new RadioButton(By.XPath("//td[child::div[@class='checkbox']]//input"), "Group item");
 
-        Element foundGroup = new Element(By.XPath("//tr[child::td[child::div[@class='checkbox']]]//span[text()]"), "First found group");
-
-        TextBox Search = new TextBox(By.Id("searchGroups"), "Search groups textbox");
-
-        Button submitSearch = new Button(By.XPath("//button[@type='submit']"), "Submit search button");
-
-
-        public new void SyncUserByLocator(string locator)
+        public GroupsMigrationForm() : base(TitleLocator, "Groups migration form")
+        {
+        }        
+                
+        public void SyncUserByLocator(string locator)
         {
             WaitForAjaxLoad();
             ScrollToTop();
@@ -48,7 +46,7 @@ namespace Product.Framework.Forms
             SelectEntryBylocator(locator);
             SelectAction(ActionType.Sync);
             Apply();
-        }
+        }   
 
         public void SearchGroup(string groupName)
         {
@@ -57,15 +55,8 @@ namespace Product.Framework.Forms
             WaitForAjaxLoad();
         }
 
-        public void ClickOnFilter()
-        {
-            filter.Click();
-        }
-         
-
         public void CheckSyncIsEnabledForGroup(string groupName)
         {
-            Log.Info("Checking sync is enabled for group");
             WaitForAjaxLoad();
             foundGroup.Click();
             SelectGroupAction(ActionType.Sync);
@@ -75,7 +66,6 @@ namespace Product.Framework.Forms
 
         public void CheckSyncIsDisabledForGroup(string groupName)
         {
-            Log.Info("Checking sync is disabled for group");
             WaitForAjaxLoad();
             foundGroup.Click();
             SelectGroupAction(ActionType.Sync);
@@ -83,12 +73,19 @@ namespace Product.Framework.Forms
             foundGroup.Click();
 
         }
-        public void SelectGroupAction(ActionType type)
+
+        private void UnCheckAllFilters()
         {
-            OpenActionsDropdown();
-            ChooseAction(type.GetValue());
-        }
-                
+            WaitForAjaxLoad();
+            foreach (IWebElement filter in Browser.GetDriver().FindElements(By.XPath("//div[ancestor::div[@class='filter-list']]//input")))
+            {
+                if (Convert.ToBoolean(filter.GetAttribute("checked")))
+                {
+                    filter.Click();
+                }
+            }
+        }      
+
         public new void OpenActionsDropdown()
         {
             Log.Info("Opening Actions dropdown");

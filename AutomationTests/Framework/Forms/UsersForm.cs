@@ -18,7 +18,9 @@ namespace Product.Framework.Forms
 		private static readonly By TitleLocator =
 			By.XPath("//div[@id='users']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]");
 
-		private readonly Button actionsDropdownButton =
+        private readonly Button groupActionsDropdownButton = new Button(By.XPath("//div[@class='ibox m-t-lg']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"), "Actions dropdown in groups edit page");
+
+        private readonly Button actionsDropdownButton =
 			new Button(
 				By.XPath(
 					"//div[@id='users']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"),
@@ -836,6 +838,37 @@ namespace Product.Framework.Forms
             Apply();
         }
 
+        public void PerfomActionForGroup(string locator, ActionType type)
+        {
+            ScrollToTop();
+            Log.Info(type + " user by locator: " + locator);
+            WaitForAjaxLoad();
+            SelectEntryBylocator(locator);
+            SelectGroupAction(type);
+            Apply();
+        }
+
+        public void SelectGroupAction(ActionType type)
+        {
+            OpenGroupActionsDropdown();
+            ChooseAction(type.GetValue());
+        }
+
+        private void OpenGroupActionsDropdown()
+        {
+            Log.Info("Opening Actions dropdown");
+            ScrollToElement(groupActionsDropdownButton.GetElement());
+            groupActionsDropdownButton.Click();
+            try
+            {
+                expandedActionsDropdownButton.WaitForElementPresent(5000);
+            }
+            catch (Exception)
+            {
+                Log.Info("Actions dropdown is not ready");
+                groupActionsDropdownButton.Click();
+            }
+        }
 
         public void AssertUserHaveSyncingState(string locator)
 		{

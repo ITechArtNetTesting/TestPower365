@@ -424,16 +424,16 @@
               <metaname>mailboxreset</metaname>
               <prefixArray>P365AutoRemote|P365AutoSAM</prefixArray>
             </entry>
-					</usermigration>
-					<disrtibutiongroups>
-						<disrtibutiongroup>
-							<metaname>group1</metaname>
-							<name>P365AutoGroup1</name>
-							<members>
-								<owner>C31-GrpMember1</owner>
-								<member1>C31-GrpMember1</member1>
-							</members>
-						</disrtibutiongroup>
+					</usermigration>          
+          <disrtibutiongroups>
+            <disrtibutiongroup>
+              <metaname>group1</metaname>
+              <name>P365AutoGroup1</name>
+              <members>
+                <owner>C31-GrpMember1</owner>
+                <member1>C31-GrpMember1</member1>
+              </members>
+            </disrtibutiongroup>
 						<disrtibutiongroup>
 							<metaname>group2</metaname>
 							<name>P365AutoGroup2</name>
