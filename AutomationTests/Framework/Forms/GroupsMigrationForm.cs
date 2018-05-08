@@ -15,11 +15,7 @@ namespace Product.Framework.Forms
 	{
         private static readonly By TitleLocator = By.XPath("//a[contains(@data-bind, 'GroupMigrationsDialog')]");
 
-        public GroupsMigrationForm() : base(TitleLocator, "Groups migration form")
-        {
-        }
-
-        Element foundGroup = new Element(By.XPath("//tr[child::td[child::div[@class='checkbox']]]//span[text()]"), "First found group");
+        Label foundGroup = new Label(By.XPath("//tr[child::td[child::div[@class='checkbox']]]//span[text()]"), "First found group");
 
         TextBox Search = new TextBox(By.Id("searchGroups"), "Search groups textbox");
 
@@ -37,6 +33,9 @@ namespace Product.Framework.Forms
 
         private readonly Label distribution = new Label(By.XPath("//label[contains(text(),'Distribution')]"), "Distribution label");
 
+        public GroupsMigrationForm() : base(TitleLocator, "Groups migration form")
+        {
+        }        
                 
         public void SyncUserByLocator(string locator)
         {
@@ -85,13 +84,7 @@ namespace Product.Framework.Forms
                     filter.Click();
                 }
             }
-        }
-
-        public new void SelectAction(ActionType type)
-        {
-            OpenActionsDropdown();
-            ChooseAction(type.GetValue());
-        }
+        }      
 
         public new void OpenActionsDropdown()
         {

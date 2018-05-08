@@ -25,8 +25,8 @@ namespace Product.Tests.IntegrationTests.GroupsTests
             string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");
             string client = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name");
             string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//name");
-            string disrtibutionGroup = RunConfigurator.GetValueByXpath("//client[child::metaname='client2']//project[child::metaname='project2']//disrtibutiongroup[child::metaname='group1']/name");
-            string securityGroup = RunConfigurator.GetValueByXpath("//client[child::metaname='client2']//project[child::metaname='project2']//securitygroup[child::metaname='group1']/name");
+            string disrtibutionGroup = RunConfigurator.GetADGroupName("client2","project2","group1");
+            string securityGroup = RunConfigurator.GetADGroupName("client2","project2","group1");
             try
             {
                 LoginAndSelectRole(login, password, client);
