@@ -192,18 +192,18 @@ namespace Product.Framework
                        
         protected T EvaluateScript<T>(string script, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
-            if (timeoutInSec > 0 || pollIntervalSec > 0)
-            {
-                var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(timeoutInSec));
+            //if (timeoutInSec > 0 || pollIntervalSec > 0)
+            //{
+            //    var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(timeoutInSec));
 
-                if (pollIntervalSec > 0)
-                    wait.PollingInterval = TimeSpan.FromSeconds(pollIntervalSec);
+            //    if (pollIntervalSec > 0)
+            //        wait.PollingInterval = TimeSpan.FromSeconds(pollIntervalSec);
 
-                return wait.Until((webDriver) =>
-                {
-                    return (T)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript(script);
-                });
-            }
+            //    return wait.Until((webDriver) =>
+            //    {
+            //        return (T)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript(script);
+            //    });
+            //}
             return (T)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript(script);
         }
 
@@ -236,9 +236,11 @@ namespace Product.Framework
 
         protected bool IsAjaxActive(int timeoutInSec = 10)
         {
+            var test = EvaluateScript<bool>("return window.jQuery!=undefined");
+
             try
             {
-                return EvaluateScript<bool>("return jQuery.active == 0", timeoutInSec);
+                return EvaluateScript<bool>("return window.jQuery!=undefined", timeoutInSec);
             }
             catch (Exception)
             {
