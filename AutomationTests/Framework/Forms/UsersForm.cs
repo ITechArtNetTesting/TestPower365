@@ -847,7 +847,7 @@ namespace Product.Framework.Forms
             Apply();
         }
 
-        private void SelectGroupAction(ActionType type)
+        public void SelectGroupAction(ActionType type)
         {
             OpenGroupActionsDropdown();
             ChooseAction(type.GetValue());

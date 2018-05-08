@@ -59,7 +59,7 @@ namespace Product.Framework.Forms
         {
             WaitForAjaxLoad();
             foundGroup.Click();
-            SelectAction(ActionType.Sync);
+            SelectGroupAction(ActionType.Sync);
             CheckApplyButtonIsEnabled();
             foundGroup.Click();
         }
@@ -68,7 +68,7 @@ namespace Product.Framework.Forms
         {
             WaitForAjaxLoad();
             foundGroup.Click();
-            SelectAction(ActionType.Sync);
+            SelectGroupAction(ActionType.Sync);
             CheckApplyButtonIsDisabled();
             foundGroup.Click();
 

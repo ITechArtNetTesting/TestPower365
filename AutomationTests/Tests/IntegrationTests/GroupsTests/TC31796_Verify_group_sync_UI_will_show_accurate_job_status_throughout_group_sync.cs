@@ -22,11 +22,11 @@ namespace Product.Tests.IntegrationTests.GroupsTests
         [TestCategory("Integration")]
         public void VerifyGroupSyncUIWillShowAccurateJobStatusThroughoutGroupSync()
         {
-            string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
-            string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");
-            string client = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name");
-            string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//name");
-            string group = RunConfigurator.GetADGroupName("client2", "project2", "group1");
+            string login = RunConfigurator.GetUserLogin("client1");
+            string password = RunConfigurator.GetPassword("client1");
+            string client = RunConfigurator.GetClient("client2");
+            string projectName = RunConfigurator.GetProjectName("client2", "project2");
+            string group = RunConfigurator.GetDisrtibutionGroup("client2", "project2", "group1");
 
             try
             {
