@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
+using Product.Framework.Enums;
 using Product.Tests.CommonTests;
 using System;
 using System.Collections.Generic;
@@ -25,17 +26,24 @@ namespace Product.Tests.IntegrationTests.GroupsTests
             string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");
             string client = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name");
             string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//name");
-            //string group = RunConfigurator.GetValueByXpath("//client[child::metaname='client2']//project[child::metaname='project2']//disrtibutiongroup[child::metaname='group1']/name");
+            string group = RunConfigurator.GetValueByXpath("//client[child::metaname='client2']//project[child::metaname='project2']//disrtibutiongroup[child::metaname='group1']/name");
 
             try
             {
                 LoginAndSelectRole(login, password, client);
                 SelectProject(projectName);
                 User.AtProjectOverviewForm().OpenTotalGroups();
-                User.AtGroupsMigrationForm().ClickOnFilter();                
-                User.AtGroupsMigrationForm().ClickDistributionRadio();
-                User.AtGroupsMigrationForm().ClickOnFilter();
-                User.AtGroupsMigrationForm().CheckSyncIsEnabledForGroups();
+                User.AtGroupsMigrationForm().SearchGroup(group);
+                User.AtGroupsMigrationForm().PerfomActionForGroup(group, ActionType.Sync);
+                User.AtGroupsMigrationForm().ConfirmSync();
+                User.AtGroupsMigrationForm().AssertUserHaveSyncingState(group);
+                User.AtGroupsMigrationForm().OpenDetailsByLocator(group);
+                User.AtGroupsMigrationForm().VerifyStateIS("Syncing");
+                User.AtGroupsMigrationForm().WaitForJobIsCreated();
+                User.AtGroupsMigrationForm().AssertDetailsStopButtonIsEnabled();
+                User.AtGroupsMigrationForm().WaitForSyncedState();
+                User.AtGroupsMigrationForm().AssertDetailsSyncButtonIsEnabled();
+                User.AtGroupsMigrationForm().CloseUserDetails();
             }
             catch (Exception e)
             {
