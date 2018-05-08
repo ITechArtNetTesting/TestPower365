@@ -26,7 +26,7 @@ namespace Product.Tests.IntegrationTests.GroupsTests
             string password = RunConfigurator.GetPassword("client1");
             string client = RunConfigurator.GetClient("client2");
             string projectName = RunConfigurator.GetProjectName("client2", "project2");
-            string group = RunConfigurator.GetDisrtibutionGroup("client2", "project2", "group1");
+            string group = RunConfigurator.GetADGroupName("client2", "project2", "group1");
 
             try
             {

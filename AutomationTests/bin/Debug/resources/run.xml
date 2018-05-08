@@ -399,13 +399,7 @@
               <metaname>mailboxreset</metaname>
               <prefixArray>P365AutoRemote|P365AutoSAM</prefixArray>
             </entry>
-					</usermigration>
-          <securitygroups>
-            <securitygroup>
-              <metaname>group1</metaname>
-              <name>P365AutoGrp1</name>
-            </securitygroup>
-          </securitygroups>
+					</usermigration>          
           <disrtibutiongroups>
             <disrtibutiongroup>
               <metaname>group1</metaname>

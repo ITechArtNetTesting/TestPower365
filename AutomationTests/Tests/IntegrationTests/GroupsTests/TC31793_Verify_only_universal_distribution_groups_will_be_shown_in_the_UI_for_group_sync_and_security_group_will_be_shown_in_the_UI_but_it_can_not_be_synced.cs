@@ -25,8 +25,8 @@ namespace Product.Tests.IntegrationTests.GroupsTests
             string password = RunConfigurator.GetPassword("client1");
             string client = RunConfigurator.GetClient("client2");
             string projectName = RunConfigurator.GetProjectName("client2","project2");
-            string disrtibutionGroup = RunConfigurator.GetDisrtibutionGroup("client2","project2","group1");
-            string securityGroup = RunConfigurator.GetSecurityGroup("client2","project2","group1");
+            string disrtibutionGroup = RunConfigurator.GetADGroupName("client2","project2","group1");
+            string securityGroup = RunConfigurator.GetADGroupName("client2","project2","adgroup1");
             try
             {
                 LoginAndSelectRole(login, password, client);

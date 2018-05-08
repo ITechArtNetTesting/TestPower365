@@ -77,17 +77,7 @@ namespace Product.Framework
         public static string GetADGroupName(string client, string project, string group)
         {
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{group}']/../name").InnerText;
-        }
-
-        public static string GetDisrtibutionGroup(string client, string project, string group)
-        {
-            return xmlDoc.SelectSingleNode($"//client[child::metaname='{client}']//project[child::metaname='{project}']//disrtibutiongroup[child::metaname='{group}']/name").InnerText;
-        }
-
-        public static string GetSecurityGroup(string client, string project, string group)
-        {
-            return xmlDoc.SelectSingleNode($"//client[child::metaname='{client}']//project[child::metaname='{project}']//securitygroup[child::metaname='{group}']/name").InnerText;
-        }
+        }     
 
         public static string GetMail(string client, string project, string group)
         {
