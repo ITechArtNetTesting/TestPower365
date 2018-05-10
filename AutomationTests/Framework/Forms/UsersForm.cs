@@ -35,7 +35,13 @@ namespace Product.Framework.Forms
 		private readonly Button closeFilterButton =
 			new Button(By.XPath("//div[@class='panel-footer']//button[text()='Close']"), "Close filter button");
 
-		private readonly Button closeModalWindowButton =
+        public void AssertUserIsNoLongerDisplayed(string user)
+        {
+            var FoundUser = new RadioButton(By.XPath($"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{user.ToLower()}')]]/ancestor::tr//input"), "Found user");
+            Assert.IsTrue(FoundUser.IsPresent());
+        }
+
+        private readonly Button closeModalWindowButton =
 			new Button(By.XPath("//div[contains(@class, 'modal fade in')]//div[@class='modal-footer']//button[text()='Close']"),
 				"Close modal window button");
 
