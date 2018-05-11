@@ -134,6 +134,26 @@
 						<filename>MailOnlyCSVC3toC11ShMBX-Automation.csv</filename>
 					</file>
 				</project>
+        <project>
+          <metaname>project3</metaname>
+          <name>BT-AutoQA1-Project3</name>
+          <tenantmigrations>
+            <tenantmigration metaname="T3->T4" source="BTCorp3" target="BTCorp11" />
+          </tenantmigrations>
+          <usermigration>
+            <entry>
+              
+            </entry>
+          </usermigration>
+          <file>
+            <metaname>file1</metaname>
+            <filename>MailOnlyCSVC3toC11ShMBX-TC33619_part1.csv</filename>
+          </file>
+          <file>
+            <metaname>file2</metaname>
+            <filename>MailOnlyCSVC3toC11ShMBX-TC33619_part2.csv</filename>
+          </file>
+        </project>
 			</projects>
 		</client>
 		<client>
@@ -200,7 +220,27 @@
               <source>C7O365SML26@btcorp7.onmicrosoft.com</source>
               <target>C7O365SML26@btcorp9.onmicrosoft.com</target>
             </entry>
-						</usermigration>
+            <entry>
+              <metaname>entry5</metaname>
+               <source>C7O365SML23@btcorp7.onmicrosoft.com</source>
+               <target>C7O365SML23@btcorp9.onmicrosoft.com</target>          
+            </entry>
+            <entry>
+              <metaname>entry6</metaname>
+               <source>C7O365SML24@btcorp7.onmicrosoft.com</source>
+               <target>C7O365SML24@btcorp9.onmicrosoft.com</target>          
+            </entry>
+            <entry>
+              <metaname>entry7</metaname>
+              <source>C7O365SML22@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML22@btcorp9.onmicrosoft.com</target>
+            </entry>
+            <entry>
+              <metaname>entry8</metaname>
+              <source>C7O365SML27@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML27@btcorp9.onmicrosoft.com</target>
+            </entry>
+          </usermigration>
 					<adgroups>
 						<adgroup>
 							<metaname>adgroup1</metaname>
@@ -308,7 +348,7 @@
 						</entry>
 						<entry>
 							<metaname>entry10</metaname>
-							<source></source>
+							 <source>P365AutoRemoteEquip5@corp31.cmtsandbox.com</source>          
 						</entry>
 						<entry>
 							<metaname>entry11</metaname>
@@ -335,8 +375,13 @@
 					    <metaname>entry15</metaname>
 					    <source>P365AutoRemoteRoom2@corp31.cmtsandbox.com</source>
 					    <target>P365AutoRemoteRoom2@corp32.cmtsandbox.com</target>
-					  </entry>
-					<entry>
+					  </entry>        
+             <entry>
+              <metaname>entry16</metaname>
+              <source>P365PFAutoUser2@corp31.cmtsandbox.com</source>
+              <target>P365PFAutoUser2@corp32.cmtsandbox.com</target>
+              </entry>           
+             <entry>
 							<metaname>entry34</metaname>
 							<source>P365Filter4@corp31.cmtsandbox.com</source>
 							<target>P365Filter4@corp32.cmtsandbox.com</target>
@@ -346,19 +391,24 @@
 							<targetproxy>Test3332@corp32.cmtsandbox.com</targetproxy>
 						</entry>
             <entry>
+              <metaname>entry16</metaname>
+              <source>\Automation\Tests</source>
+              <target>\Automation</target>
+            </entry>
+            <entry>
               <metaname>mailboxreset</metaname>
               <prefixArray>P365AutoRemote|P365AutoSAM</prefixArray>
             </entry>
-					</usermigration>
-					<disrtibutiongroups>
-						<disrtibutiongroup>
-							<metaname>group1</metaname>
-							<name>P365AutoGroup1</name>
-							<members>
-								<owner>C31-GrpMember1</owner>
-								<member1>C31-GrpMember1</member1>
-							</members>
-						</disrtibutiongroup>
+					</usermigration>          
+          <disrtibutiongroups>
+            <disrtibutiongroup>
+              <metaname>group1</metaname>
+              <name>P365AutoGroup1</name>
+              <members>
+                <owner>C31-GrpMember1</owner>
+                <member1>C31-GrpMember1</member1>
+              </members>
+            </disrtibutiongroup>
 						<disrtibutiongroup>
 							<metaname>group2</metaname>
 							<name>P365AutoGroup2</name>

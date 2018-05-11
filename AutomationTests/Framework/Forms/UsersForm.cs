@@ -18,7 +18,9 @@ namespace Product.Framework.Forms
 		private static readonly By TitleLocator =
 			By.XPath("//div[@id='users']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]");
 
-		private readonly Button actionsDropdownButton =
+        private readonly Button groupActionsDropdownButton = new Button(By.XPath("//div[@class='ibox m-t-lg']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"), "Actions dropdown in groups edit page");
+
+        private readonly Button actionsDropdownButton =
 			new Button(
 				By.XPath(
 					"//div[@id='users']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"),
@@ -33,7 +35,13 @@ namespace Product.Framework.Forms
 		private readonly Button closeFilterButton =
 			new Button(By.XPath("//div[@class='panel-footer']//button[text()='Close']"), "Close filter button");
 
-		private readonly Button closeModalWindowButton =
+        public void AssertUserIsNoLongerDisplayed(string user)
+        {
+            var FoundUser = new RadioButton(By.XPath($"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{user.ToLower()}')]]/ancestor::tr//input"), "Found user");
+            Assert.IsTrue(FoundUser.IsPresent());
+        }
+
+        private readonly Button closeModalWindowButton =
 			new Button(By.XPath("//div[contains(@class, 'modal fade in')]//div[@class='modal-footer']//button[text()='Close']"),
 				"Close modal window button");
 
@@ -836,6 +844,37 @@ namespace Product.Framework.Forms
             Apply();
         }
 
+        public void PerfomActionForGroup(string locator, ActionType type)
+        {
+            ScrollToTop();
+            Log.Info(type + " user by locator: " + locator);
+            WaitForAjaxLoad();
+            SelectEntryBylocator(locator);
+            SelectGroupAction(type);
+            Apply();
+        }
+
+        public void SelectGroupAction(ActionType type)
+        {
+            OpenGroupActionsDropdown();
+            ChooseAction(type.GetValue());
+        }
+
+        private void OpenGroupActionsDropdown()
+        {
+            Log.Info("Opening Actions dropdown");
+            ScrollToElement(groupActionsDropdownButton.GetElement());
+            groupActionsDropdownButton.Click();
+            try
+            {
+                expandedActionsDropdownButton.WaitForElementPresent(5000);
+            }
+            catch (Exception)
+            {
+                Log.Info("Actions dropdown is not ready");
+                groupActionsDropdownButton.Click();
+            }
+        }
 
         public void AssertUserHaveSyncingState(string locator)
 		{
