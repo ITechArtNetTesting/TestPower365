@@ -92,19 +92,6 @@
 							<group>Wave2</group>
 							<profile>Profile 1</profile>
 						</entry>
-            <entry>
-              <metaname>entry11</metaname>
-              <source>C7O365SML11@btcorp7.onmicrosoft.com</source>
-              <target>C7O365SML11@btcorp9.onmicrosoft.com</target>
-              <group>Wave2</group>
-              <profile>Profile 1</profile>
-            </entry>
-            <entry>
-              <metaname>entry12</metaname>
-              <source>C7O365SML12@btcorp7.onmicrosoft.com</source>
-              <target>C7O365SML12@btcorp9.onmicrosoft.com</target>              
-            </entry>
-            
 					</usermigration>
 					<file>
 						<metaname>file1</metaname>
@@ -147,27 +134,6 @@
 						<filename>MailOnlyCSVC3toC11ShMBX-Automation.csv</filename>
 					</file>
 				</project>
-        <project>
-          <metaname>project3</metaname>
-          <name>BT-AutoQA1-Project3</name>
-          <tenantmigrations>
-            <tenantmigration metaname="T3->T4" source="BTCorp3" target="BTCorp11" />
-          </tenantmigrations>
-          <usermigration>
-            <entry>
-              <metaname>entry1</metaname>
-              <source>C3O365ShareMBX1@BTCorp3.onmicrosoft.com</source>             
-            </entry>
-          </usermigration>
-          <file>
-            <metaname>file1</metaname>
-            <filename>MailOnlyCSVC3toC11ShMBX-TC33619_part1.csv</filename>
-          </file>
-          <file>
-            <metaname>file2</metaname>
-            <filename>MailOnlyCSVC3toC11ShMBX-TC33619_part2.csv</filename>
-          </file>
-        </project>
 			</projects>
 		</client>
 		<client>
@@ -234,32 +200,7 @@
               <source>C7O365SML26@btcorp7.onmicrosoft.com</source>
               <target>C7O365SML26@btcorp9.onmicrosoft.com</target>
             </entry>
-            <entry>
-              <metaname>entry5</metaname>
-               <source>C7O365SML23@btcorp7.onmicrosoft.com</source>
-               <target>C7O365SML23@btcorp9.onmicrosoft.com</target>          
-            </entry>
-            <entry>
-              <metaname>entry6</metaname>
-               <source>C7O365SML24@btcorp7.onmicrosoft.com</source>
-               <target>C7O365SML24@btcorp9.onmicrosoft.com</target>          
-            </entry>
-            <entry>
-              <metaname>entry7</metaname>
-              <source>C7O365SML22@btcorp7.onmicrosoft.com</source>
-              <target>C7O365SML22@btcorp9.onmicrosoft.com</target>
-            </entry>
-            <entry>
-              <metaname>entry8</metaname>
-              <source>C7O365SML27@btcorp7.onmicrosoft.com</source>
-              <target>C7O365SML27@btcorp9.onmicrosoft.com</target>
-            </entry>
-            <entry>
-              <metaname>entry9</metaname>
-              <source>C7O365SML28@btcorp7.onmicrosoft.com</source>
-              <target>C7O365SML28@btcorp9.onmicrosoft.com</target>
-            </entry>
-          </usermigration>
+						</usermigration>
 					<adgroups>
 						<adgroup>
 							<metaname>adgroup1</metaname>
@@ -367,7 +308,7 @@
 						</entry>
 						<entry>
 							<metaname>entry10</metaname>
-							 <source>P365AutoRemoteEquip5@corp31.cmtsandbox.com</source>          
+							<source></source>
 						</entry>
 						<entry>
 							<metaname>entry11</metaname>
@@ -394,9 +335,8 @@
 					    <metaname>entry15</metaname>
 					    <source>P365AutoRemoteRoom2@corp31.cmtsandbox.com</source>
 					    <target>P365AutoRemoteRoom2@corp32.cmtsandbox.com</target>
-					  </entry>        
-               
-             <entry>
+					  </entry>
+					<entry>
 							<metaname>entry34</metaname>
 							<source>P365Filter4@corp31.cmtsandbox.com</source>
 							<target>P365Filter4@corp32.cmtsandbox.com</target>
@@ -405,21 +345,6 @@
 							<sourceproxy>Test3332@corp31.cmtsandbox.com</sourceproxy>
 							<targetproxy>Test3332@corp32.cmtsandbox.com</targetproxy>
 						</entry>
-            <entry>
-              <metaname>entry16</metaname>
-              <source>\Automation\Tests</source>
-              <target>\Automation</target>
-            </entry>
-            <entry>
-              <metaname>entry17</metaname>
-              <source>P365PFAutoUser2@corp31.cmtsandbox.com</source>
-              <target>P365PFAutoUser2@corp32.cmtsandbox.com</target>
-            </entry>
-            <entry>
-              <metaname>entry18</metaname>
-              <source>P365PFAutoUser3@corp31.cmtsandbox.com</source>
-              <target>P365PFAutoUser3@corp32.cmtsandbox.com</target>
-            </entry>
             <entry>
               <metaname>mailboxreset</metaname>
               <prefixArray>P365AutoRemote|P365AutoSAM</prefixArray>

@@ -1,0 +1,3 @@
+D:\Project\P356\ProbeTests\obj\Debug\ProbeTests.csprojResolveAssemblyReference.cache
+D:\Project\P356\ProbeTests\obj\Debug\ProbeTests.exe.config
+D:\Project\P356\ProbeTests\obj\Debug\ProbeTests.csproj.CoreCompileInputs.cache

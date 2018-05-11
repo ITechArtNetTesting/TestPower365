@@ -8,9 +8,16 @@
 	Import-Module msonline
 	Connect-MsolService -Credential $Creds
 	
-Write-Host "Disable-MailPublicFolder"
+Write-Host "Get-PublicFolder"
+$publicFolders = Get-PublicFolder -Recurse -Identity "\AutomationTests" 
 
-Get-PublicFolder -Recurse -Identity "\AutomationTests" | where { $_.MailEnabled -eq $true } | Disable-MailPublicFolder -Confirm:$false
+Write-Host "publicFolders"
+
+$publicFolders
+
+#Write-Host "Disable-MailPublicFolder"
+
+#$publicFolders | Disable-MailPublicFolder -Confirm:$false
 
 Write-Host "Remove-PublicFolder"
 Remove-PublicFolder \AutomationTests -Recurse -Confirm:$false

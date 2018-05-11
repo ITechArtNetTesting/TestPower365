@@ -6,12 +6,7 @@ function Connect-P365Mailboxes{
 		[Parameter(Position=3, Mandatory=$true)] [string]$TargetMailboxName,
 		[Parameter(Position=4, Mandatory=$true)] [System.Management.Automation.PSCredential]$TargetCredentials,
 		[Parameter(Position=5, Mandatory=$false)] [string]$SourceURL,
-		[Parameter(Position=6, Mandatory=$false)] [string]$TargetURL,
-		[Parameter(Position=7, Mandatory=$false)] [string]$SourceAutoDiscoverOverRide,
-		[Parameter(Position=8, Mandatory=$false)] [string]$TargetAutoDiscoverOverRide,
-		[Parameter(Position=9, Mandatory=$false)] [string]$SourcePowerShellOverRide,
-		[Parameter(Position=10, Mandatory=$false)] [string]$TargetPowerShellOverRide
-		
+		[Parameter(Position=6, Mandatory=$false)] [string]$TargetURL
     )  
  	Begin
 	 {
@@ -28,28 +23,6 @@ function Connect-P365Mailboxes{
 		Write-Host "Connect to Source and Target Mailbox"
 		$Script:TestResults = New-Object 'system.collections.generic.dictionary[[string],[psobject]]'
 		$Script:SourcePSCreds = $SourceCredentials
-		$Script:TargetPSCreds = $TargetCredentials
-		$Script:SourceOnPrem = $false
-		$Script:TargetOnPrem = $false
-		$Script:SourceAutoDiscoverOverRide = ""
-		$Script:TargetAutoDiscoverOverRide = ""
-		$Script:SourcePowerShellOverRide = ""
-		$Script:TargetPowerShellOverRide = ""
-		if(![String]::IsNullOrEmpty($SourceAutoDiscoverOverRide)){
-			$Script:SourceOnPrem = $true
-			$Script:SourceAutoDiscoverOverRide = $SourceAutoDiscoverOverRide
-		}
-		if(![String]::IsNullOrEmpty($TargetAutoDiscoverOverRide)){
-			$Script:TargetOnPrem = $true
-			$Script:TargetAutoDiscoverOverRide = $TargetAutoDiscoverOverRide
-		}
-		if(![String]::IsNullOrEmpty($SourcePowerShellOverRide)){
-			$Script:SourceOnPrem = $true
-			$Script:SourcePowerShellOverRide = $SourcePowerShellOverRide
-		}
-		if(![String]::IsNullOrEmpty($TargetPowerShellOverRide)){
-			$Script:TargetOnPrem = $true
-			$Script:TargetPowerShellOverRide = $TargetPowerShellOverRide
-		}
+    		$Script:TargetPSCreds = $TargetCredentials
 	 }
 }
