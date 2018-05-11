@@ -15,7 +15,7 @@ namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
 		public void SelectTenant(string tenant)
 		{
 			Log.Info("Selecting source tenant");
-			var tenantButton = new Button(By.XPath($"//span[contains(text(), '{tenant}')]"), tenant + " button");
+			var tenantButton = new Button(By.XPath($"//*[@class='radio']//span[contains(text(), '{tenant}')]"), tenant + " button");
 			tenantButton.Click();
 			try
 			{

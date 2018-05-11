@@ -87,14 +87,17 @@ namespace Product.Framework
             try
             {
                 return EvaluateElement((driver) => {
-                    try
+                    return bys.Any(b =>
                     {
-                        return bys.Any(b => ExpectedConditions.ElementExists(b) != null);
-                    }
-                    catch (Exception)
-                    {
-                        return false;
-                    }
+                        try
+                        {
+                            return driver.FindElement(b) != null;
+                        }
+                        catch (NoSuchElementException)
+                        {
+                            return false;
+                        }
+                    });
                 }, 
                 timeoutInSec, pollIntervalSec);
             }
@@ -175,6 +178,7 @@ namespace Product.Framework
                     wait.PollingInterval = TimeSpan.FromSeconds(pollIntervalSec);
                     return wait.Until((webDriver) =>
                     {
+                        Log.Debug("Refreshing...");
                         webDriver.Navigate().Refresh();
 
                         if (!IsDocumentReady())
@@ -218,6 +222,7 @@ namespace Product.Framework
                     wait.PollingInterval = TimeSpan.FromSeconds(pollIntervalSec);
                     return wait.Until((webDriver) =>
                     {
+                        Log.Debug("Refresh action...");
                         refreshAction();
 
                         if (!IsDocumentReady())

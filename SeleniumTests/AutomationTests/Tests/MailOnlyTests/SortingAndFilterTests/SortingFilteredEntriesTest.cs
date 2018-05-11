@@ -46,7 +46,7 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		        User.AtUsersForm().SortTarget();
 		  
 		        User.AtUsersForm().AssertTargetSorted();
-                User.AtUsersForm().PerfomeActionForUser(sourceMailbox7, Framework.Enums.ActionType.Sync);
+                User.AtUsersForm().PerfomActionForUser(sourceMailbox7, ActionType.Sync);
                 User.AtUsersForm().ConfirmSync();
                 User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox7);
 

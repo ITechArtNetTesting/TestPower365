@@ -18,30 +18,23 @@ namespace Product.Tests.MailWithDiscoveryTests.LandingPageTests
         {
             _testContext = testContext;
         }
-
-        string login ;
-        string password;
-        string client ;
-        string projectName;
-
-       [TestInitialize()]
-        public void Initialize()
-        {
-            login= RunConfigurator.GetUserLogin("client2");
-            password = RunConfigurator.GetPassword("client2");
-            client = RunConfigurator.GetClient("client2");
-            projectName = RunConfigurator.GetProjectName("client2", "project1");
-          
-        }
-
+     
+      
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
-        public void ProjectLandingPageHasTenantStatusSection_25117()
+        public void ProjectLandingPageHasTenantStatusSection_MD_25117()
         {
-                LoginAndSelectRole(login, password, client);
-                SelectProject(projectName);
-                User.AtProjectOverviewForm().AssertPageHasTenantStatusSection();     
-           
+            ProjectLandingPageHasTenantStatusSection(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"), RunConfigurator.GetClient("client2"), RunConfigurator.GetProjectName("client2", "project1"));                    
         }
+
+        
+        private void ProjectLandingPageHasTenantStatusSection(String login, String password, String client, String projectName)
+        {
+            LoginAndSelectRole(login, password, client);
+            SelectProject(projectName);
+            User.AtProjectOverviewForm().AssertPageHasTenantStatusSection();
+
+        }
+
     }
 }

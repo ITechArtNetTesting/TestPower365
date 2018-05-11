@@ -44,8 +44,9 @@ namespace Product.Framework.Forms
 
 		private readonly Button disabledApplyActionButton =
 			new Button(By.XPath("//button[contains(@data-bind, 'applyAction')][@disabled='']"), "Disabled apply button");
+           
 
-		private Button enabledApplyActionButton =
+        private Button enabledApplyActionButton =
 			new Button(By.XPath("//button[contains(@data-bind, 'applyAction')][not(@disabled='')]"), "Enabled apply button");
 
 		private readonly Button enabledArchiveButton =
@@ -77,8 +78,9 @@ namespace Product.Framework.Forms
 
 		private readonly Button importButton = new Button(By.XPath("//a[contains(@data-bind, 'uploadUser')]"), "Import button");
 
-		private readonly Label importedLabel = new Label(By.XPath("//h3[contains(text(), 'successfully imported')]"),
-			"Imported label");
+		private readonly Label importedLabel = new Label(By.XPath("//h3[contains(text(), 'successfully imported')]"),         
+
+            "Imported label");
 
 		private readonly Button okButton =
 			new Button(
@@ -91,7 +93,7 @@ namespace Product.Framework.Forms
 					"//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//span[text()[contains(.,'Profile')]]/..//i[contains(@class, 'fa-sort')]"),
 				"Profile filter button");
 
-		private readonly Button sampleFileButton =
+       private readonly Button sampleFileButton =
 			new Button(
 				By.XPath("//div[contains(@class, 'modal fade in')]//a[contains(@href, 'DownloadUserMigrationsForUpdateTemplate')]"),
 				"Sample file button");
@@ -194,6 +196,8 @@ namespace Product.Framework.Forms
 				By.XPath(
 					"//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//span[text()[contains(.,'State')]]/..//i[contains(@class, 'fa-filter')]"),
 				"State filter button");
+
+        
         private Button enabledOkProfileButton => new Button(By.XPath("//button[contains(@data-bind, 'addToMigrationProfile')][not(@disabled='')]"), "Enabled OK profile button");
 
         private Button userDetailsRefreshButton => new Button(By.XPath("//button[contains(@data-bind, 'refresh.run')][not(@disabled='')]"), "User Details Refresh button");
@@ -209,11 +213,13 @@ namespace Product.Framework.Forms
         protected string ProfileRadioLocator = "//div[contains(@class, 'modal in')]//tr[.//*[contains(text(), 'Defa')]]//input";
         private readonly Button CompleteDetailsButton = new Button(By.XPath("//button[text()='Complete']"), "Complite button on details form");
         private readonly Button CutoverDetailsButton = new Button(By.XPath("//button[text()='Cutover']"), "Cutover button on details form");
-
+        private readonly Label ImportCompleteLabel = new Label(By.XPath("//span[@data-translation='UploadWasASuccessExclamationPoint']"), "Label Upload Was A Success");
+        private readonly string ProgressBar_100 = "//tr/*[contains(*,'{0}')]//div[@class='progress']/div[contains(@style,'width: 100 %;')]";
 
         public UsersForm() : base(TitleLocator, "Users list form")
 		{
             descriptionLabel.WaitForElementPresent();
+
 		}
 
 		public UsersForm(By locator, string name) : base(locator, name)
@@ -221,14 +227,30 @@ namespace Product.Framework.Forms
 		    descriptionLabel.WaitForElementPresent();
         }
 
+        public void СloseSuccessfulImportWindow()
+        {
+            Button closeButton =
+                new Button(By.XPath("//div[@class='modal-body']//*[contains(text(), 'Finish')]"),
+                    "Close modal successful window button");
+            closeButton.Click();
+        }              
+
+        public void AssertMigrationJobWasStopped(int SelectedUser)
+        {
+            WaitForAjaxLoad();
+            Assert.IsTrue(Browser.GetDriver().FindElements(By.XPath("//div[@id='users']//tr//td[4]//span"))[SelectedUser].Text.Contains("Stopping"));
+        }
+
+
         public void AssertCutoverCompliteDetailsIsDisabled()
         {
             Assert.IsTrue(!CompleteDetailsButton.IsPresent(), "Complete button is present");
-            Assert.IsTrue(!CutoverDetailsButton.IsPresent(), "Complete button is present");
+            Assert.IsTrue(!CutoverDetailsButton.IsPresent(), "Cutover button is present");
         }
 
         public void CheckActionIsDisabled(ActionType type)
         {
+            WaitForAjaxLoad();
             SelectAction(type);
             CheckApplyButtonIsDisabled();
         }
@@ -246,17 +268,32 @@ namespace Product.Framework.Forms
             Assert.IsTrue(CutoverDetailsButton.IsPresent(), "Cutover button is not present");
         }
 
+        //modify after verify
         public void CheckActionIsEnabled(ActionType type)
         {
+            WaitForAjaxLoad();
             SelectAction(type);
             CheckApplyButtonIsEnabled();
         }
 
+        //delete after verify
         public void CheckApplyButtonIsEnabled()
         {
             WaitForAjaxLoad();
             Assert.IsTrue(enabledApplyActionButton.IsPresent(), "Appply button is not enable");
         }
+
+        public void CheckApplyButton(bool isEnabled)
+        {
+            WaitForAjaxLoad();
+            if (isEnabled)
+            {
+                Assert.IsTrue(enabledApplyActionButton.IsPresent(), "Appply button is not enable");
+            }
+            else {
+                Assert.IsFalse(enabledApplyActionButton.IsPresent(), "Appply button is enable");
+            }
+        }             
 
         public void PerformSearch(string search)
 		{
@@ -389,10 +426,17 @@ namespace Product.Framework.Forms
 
 		public void AssertImportFailed()
 		{
-			Log.Info("Asserting import failed");
-			fixErrorsButton.WaitForElementPresent();
+			Log.Info("Asserting import failed");           
+            fixErrorsButton.WaitForElementPresent();
 		}
 
+        public void AssertImportSuccessful()
+        {
+            Log.Info("Asserting import failed");
+            ImportCompleteLabel.WaitForElementIsVisible();          
+            Assert.IsFalse(fixErrorsButton.IsElementVisible(), "Asserting import failed");
+        }
+       
 		public void Archive()
 		{
 			Log.Info("Archiving entry");
@@ -541,7 +585,6 @@ namespace Product.Framework.Forms
 				entryLabel.Click();
 			}
 		}
-        //@@@ Needs overhaul
         
         private readonly string _rowTextAncestorFormat = "/ancestor::tr//*[contains(text(), '{0}')]";
         private readonly string _lowerCaseTextLocatorFormat = "//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{0}')]]";
@@ -798,37 +841,8 @@ namespace Product.Framework.Forms
 			lineLabel.WaitForElementDisappear();
 		}
 
-		//public void SyncUserByLocator(string locator)
-		//{
-		//	ScrollToTop();
-		//	Log.Info("Syncing user by locator: " + locator);
-  //          WaitForAjaxLoad();
-		//	SelectEntryBylocator(locator);
-		//	SelectAction(ActionType.Sync);
-		//	Apply();
-		//}
 
-        //public void CompleteUserByLocator(string locator)
-        //{
-        //    ScrollToTop();
-        //    Log.Info("Complete user by locator: " + locator);
-        //    WaitForAjaxLoad();
-        //    SelectEntryBylocator(locator);
-        //    SelectAction(ActionType.Complete);
-        //    Apply();
-        //}
-
-        //public void RollbackUserByLocator(string locator)
-        //{
-        //    ScrollToTop();
-        //    Log.Info("Syncing user by locator: " + locator);
-        //    WaitForAjaxLoad();
-        //    SelectEntryBylocator(locator);
-        //    SelectAction(ActionType.Rollback);
-        //    Apply();
-        //}
-
-        public void PerfomeActionForUser(string locator, ActionType  type)
+        public void PerfomActionForUser(string locator, ActionType  type)
         {
             ScrollToTop();
             Log.Info(type +" user by locator: " + locator);
@@ -1218,9 +1232,10 @@ namespace Product.Framework.Forms
 			Store.ProfileList.Clear();
 			BaseElement.WaitForElementIsClickable(
 				By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr"));
-			var elements = Browser.GetDriver()
+           
+            var elements = Browser.GetDriver()
 				.FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr"));
-			foreach (var element in elements)
+                     foreach (var element in elements)
 			{
 				Store.SourceList.Add(
 					element.FindElement(
@@ -1444,6 +1459,7 @@ namespace Product.Framework.Forms
 				Log.Info("Radiobutton is not ready");
 				itemButton.Click();
 			}
+            WaitForAjaxLoad();
 		}
 
 		public void UncheckFilterGroup(string group)
@@ -1564,10 +1580,15 @@ namespace Product.Framework.Forms
 			completeButton.Click();
 		}
 
-		#endregion
+        public void SetSynced()
+        {
+            Log.Info("Checking Synced checkbox");
+            syncedButton.Click();
+        }
+        #endregion
 
-		#region [User details]
-		private readonly Button closeUserDetailsButton =
+        #region [User details]
+        private readonly Button closeUserDetailsButton =
 			new Button(
 				By.XPath(
 					"//div[contains(@class, 'modal in')]//div[contains(@class, 'modal-lg')]//button[contains(@data-dismiss, 'modal')][contains(@class, 'btn')]"),
@@ -1599,7 +1620,12 @@ namespace Product.Framework.Forms
 				By.XPath("//div[contains(@class, 'modal in')]//*[contains(@data-bind, 'sync')]"),
 				"Enabled details sync button");
 
-		private readonly Button disabledCutoverButton =
+        private readonly Button prepareDetailsButton =
+            new Button(
+                By.XPath("//div[contains(@class, 'modal in')]//button[contains(., 'Prepare')]"),
+                "Enabled details Prepare button");
+
+        private readonly Button disabledCutoverButton =
 			new Button(By.XPath("//div[contains(@class, 'modal in')]//button//i[contains(@class, 'fa-mail-forward')]"),
 				"Cutover button");
 
@@ -1609,7 +1635,9 @@ namespace Product.Framework.Forms
 
         private readonly Button startedSortButton = new Button(By.XPath("//*[contains(text(), 'Started')]"), "Started sort button");
 
-		public void CloseUserDetails()
+        private readonly Label migrationStateLabel = new Label(By.XPath("//*[contains(@data-bind, 'migrationState')]"),"State");
+
+        public void CloseUserDetails()
 		{
 			Log.Info("Closing user details");
 			closeUserDetailsButton.Click();
@@ -1646,8 +1674,8 @@ namespace Product.Framework.Forms
 		}
 		public void AssertDetailsStopButtonIsEnabled()
 		{
-			Log.Info("Asserting stop button is enabled");
-			enabledDetailsStopButton.WaitForElementPresent();
+			Log.Info("Asserting stop button is enabled");  
+           Assert.IsTrue(enabledDetailsStopButton.WaitForElementPresent(), "Asserting stop button is not enabled");
 		}
 
 		public void AssertDetailsSyncButtonIsEnabled()
@@ -1658,7 +1686,7 @@ namespace Product.Framework.Forms
 		public void AssertDetailsSyncButtonIsDisabled()
 		{
 			Log.Info("Asserting details sync button is disabled");
-			enabledDetailsSyncButton.WaitForElementDisappear();
+			Assert.IsTrue(enabledDetailsSyncButton.WaitForElementDisappear(), "Asserting details sync button is visible");
 		}
 
 		public void SyncFromDetails()
@@ -1668,13 +1696,34 @@ namespace Product.Framework.Forms
 			enabledDetailsSyncButton.Click();
 		}
 
-		public void AssertCutoverButton()
+        public void StopFromDetails()
+        {
+            Log.Info("Stoping");
+            WaitForAjaxLoad();
+            enabledDetailsStopButton.Click();
+        }
+
+        public void PrepareFromDetails()
+        {
+            Log.Info("Syncing");
+            WaitForAjaxLoad();
+            prepareDetailsButton.Click();
+        }
+
+        public void AssertCutoverButton()
 		{
 			Log.Info("Asserting Cutover button");
 			disabledCutoverButton.WaitForElementPresent();
 		}
 
-		public void WaitForJobIsCreated()
+        public string GetStateFromDetails()
+        {
+          Log.Info("Get mail state");         
+          return  migrationStateLabel.GetText();
+        }
+              
+
+        public void WaitForJobIsCreated()
 		{
 			Log.Info("Waiting for job is created");
 			var jobLabel = new Label(By.XPath("//tr[contains(*, 'Sync')]"), "Job label");
@@ -1764,13 +1813,13 @@ namespace Product.Framework.Forms
 			refreshButton.Click();
 		}
 
-        public void WaitForState_DetailPage(string entry, State state, int timeout = 5000, int pollIntervalSec = 0)
+        public void WaitForState_DetailPage(string entry, State state,  int timeout = 5000, int pollIntervalSec = 0)
         {
             var _migrationStateTextLocatorFormat = "//*[contains(@data-bind, 'migrationState')][contains(text(), '{0}')]";
             var value = state.GetValue();
 
             if (state.GetValue().ToLower() == "synced")
-                value = "complete";
+                value = "complete";           
 
             var rowEntryTextValue = string.Format(_migrationStateTextLocatorFormat, value);
             var stateLocator = By.XPath(rowEntryTextValue);
@@ -1780,9 +1829,31 @@ namespace Product.Framework.Forms
                 throw new Exception(string.Format("Entry of '{0}' with state '{1}' was not found.", entry, value));
         }
 
+        public void WaitForJobIsCreated(String entry, State state, int timeout = 5000, int pollIntervalSec = 0)
+        {
+            Log.Info("Waiting for job is created");
+            var jobLabel ="//td[contains(*, '{0}')]";
+            var value = state.GetValue();
+          
+            var rowEntryTextValue = string.Format(jobLabel, value);
+            var stateLocator = By.XPath(rowEntryTextValue);
+            var refreshElementTextValue = refreshButton.GetLocator();
 
+            if (!IsElementExists(stateLocator, () => ClickElementBy(refreshElementTextValue), timeout / 1000, pollIntervalSec))
+                throw new Exception(string.Format("Entry of '{0}' with state '{1}' was not found.", entry, value));
+        }
 
-        public void VerifyStateIS(string state)
+        public void JobProgressBarShouldShownCorrectProgress(String state)
+        {
+            Log.Info("Verify progressBar 100 %");
+           // var value = state.GetValue();
+
+            var stateProgressBar = string.Format(ProgressBar_100, state);
+            var progressBarLabel = new Label(By.XPath(stateProgressBar), "State {state}:Progress bar 100%") ;
+            Assert.IsTrue(progressBarLabel.IsElementVisible(),"Progress bar 100% is not visible");
+        }
+
+        public bool VerifyStateIS(string state)
 		{
            
             Log.Info("Verifying state is: " + state);
@@ -1797,7 +1868,9 @@ namespace Product.Framework.Forms
 				counter++;
 			}
 			stateLabel.WaitForElementPresent();
-		}
+            return stateLabel.IsElementVisible();
+
+        }
         #endregion
 
 	    #region [Rollback modal]
@@ -1809,8 +1882,12 @@ namespace Product.Framework.Forms
         private readonly Label sureRollbackLabel = new Label(By.XPath("//label[contains(@for, 'rollbackCheckbox')]"), "Sure to rollback label");
         private readonly RadioButton sureRollbackRadioButton = new RadioButton(By.Id("rollbackCheckbox"), "Sure to rollback radiobutton");
         private readonly Button rollbackButton = new Button(By.XPath("//button[contains(@data-bind, 'rollback') and not(@disabled='')]"), "Rollback button");
+        private readonly Button rollbackButton_modalWindow = new Button(By.XPath("//*[@class='modal in']//button[not(@disabled='')]/span[text()= 'Rollback']"), "Rollback button in modal window");
+        private readonly Label rollbackWindowTitle = new Label(By.XPath("//*[@class='modal in']//span[text()= 'Perform a rollback']"), "Rollback modal window title");
+        private readonly Button rollbackCancelButton_modalWindow = new Button(By.XPath("//*[@class='modal in']//button[not(@disabled='')]/span[text()= 'Cancel']"), "Rollback Cancel button in modal window");
+        private readonly Label jobRollback = new Label(By.XPath("//tr[contains(*, 'Rollback In Progress')]"), "Job Rollback In Progress label");
 
-	    public void SetResetPermissions()
+        public void SetResetPermissions()
 	    {
 	        Log.Info("Setting reset permissions");
 	        resetPermissionsLabel.Click();
@@ -1852,12 +1929,55 @@ namespace Product.Framework.Forms
             }
         }
 
-	    public void Rollback()
+        public void AssertRollBackIsDisabled()
+        {
+            Log.Info("Clicking Rollback is disabled");
+            Assert.IsFalse(rollbackButton.IsElementVisible(), "Rollback button is not disabled");
+        }
+
+        public void Rollback()
 	    {
             Log.Info("Clicking Rollback");
             rollbackButton.Click();
 	    }
 
-	    #endregion
+        public void RollbackClick_modalWindow()
+        {
+            Log.Info("Clicking Rollback");
+            rollbackButton_modalWindow.Click();
+            WaitForAjaxLoad();
+        }
+
+        public void RollbackCancelClick_modalWindow()
+        {
+            Log.Info("Clicking Rollback");
+            rollbackCancelButton_modalWindow.Click();
+            WaitForAjaxLoad();
+        }
+        public void AssertRollbackModalWindowIsShown()
+        {
+           Assert.IsTrue(rollbackWindowTitle.IsElementVisible(), "Rollback button is not disabled");  
+        }
+        
+
+        public void AssertState(State state)
+        {
+            string stateValue = state.GetValue();
+
+            Log.Info("Assert state {state.value}");
+            
+            WaitForAjaxLoad();            
+            Assert.IsTrue(VerifyStateIS(stateValue), "State not equals {state}");
+        }
+
+        public void AssertRollBackJobNotStarted()
+        {
+            WaitForAjaxLoad();
+            Assert.IsFalse(jobRollback.IsElementVisible(),"Rollback start" );
+            AssertState(State.Synced);
+            
+            
+        }
+        #endregion
     }
 }

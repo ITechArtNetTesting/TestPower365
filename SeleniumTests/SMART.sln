@@ -26,6 +26,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTCloud.Lib", "..\Apps\BTCl
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ProbeTests.Database", "..\Databases\ProbeTests.Database\ProbeTests.Database.sqlproj", "{48F4C94B-1D29-4717-A23C-45863DD4F71C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Power365Framework", "Power365Framework\Power365Framework.csproj", "{F4A99F12-F83F-4A1A-842E-9F17A8393B37}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFramework", "NewFramework", "{DB422C43-10A6-4341-9259-F3DE0AD1A525}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Power365Framework.Test", "Power365Framework.Test\Power365Framework.Test.csproj", "{E723BB78-CC3C-4E23-9B4F-991823A17870}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Power365.Test", "Power365.Test\Power365.Test.csproj", "{C5AC6BA4-068A-45A7-981B-BF051EDF4333}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Power365DirSync.Test", "Power365DirSync.Test\Power365DirSync.Test.csproj", "{CFF97915-4E84-4D39-B91C-C0EB92C05448}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,61 +119,98 @@ Global
 		{48F4C94B-1D29-4717-A23C-45863DD4F71C}.Release|x64.ActiveCfg = Release|Any CPU
 		{48F4C94B-1D29-4717-A23C-45863DD4F71C}.Release|x64.Build.0 = Release|Any CPU
 		{48F4C94B-1D29-4717-A23C-45863DD4F71C}.Release|x64.Deploy.0 = Release|Any CPU
+		{F4A99F12-F83F-4A1A-842E-9F17A8393B37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4A99F12-F83F-4A1A-842E-9F17A8393B37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4A99F12-F83F-4A1A-842E-9F17A8393B37}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F4A99F12-F83F-4A1A-842E-9F17A8393B37}.Debug|x64.Build.0 = Debug|Any CPU
+		{F4A99F12-F83F-4A1A-842E-9F17A8393B37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4A99F12-F83F-4A1A-842E-9F17A8393B37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4A99F12-F83F-4A1A-842E-9F17A8393B37}.Release|x64.ActiveCfg = Release|Any CPU
+		{F4A99F12-F83F-4A1A-842E-9F17A8393B37}.Release|x64.Build.0 = Release|Any CPU
+		{E723BB78-CC3C-4E23-9B4F-991823A17870}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E723BB78-CC3C-4E23-9B4F-991823A17870}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E723BB78-CC3C-4E23-9B4F-991823A17870}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E723BB78-CC3C-4E23-9B4F-991823A17870}.Debug|x64.Build.0 = Debug|Any CPU
+		{E723BB78-CC3C-4E23-9B4F-991823A17870}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E723BB78-CC3C-4E23-9B4F-991823A17870}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E723BB78-CC3C-4E23-9B4F-991823A17870}.Release|x64.ActiveCfg = Release|Any CPU
+		{E723BB78-CC3C-4E23-9B4F-991823A17870}.Release|x64.Build.0 = Release|Any CPU
+		{C5AC6BA4-068A-45A7-981B-BF051EDF4333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5AC6BA4-068A-45A7-981B-BF051EDF4333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5AC6BA4-068A-45A7-981B-BF051EDF4333}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C5AC6BA4-068A-45A7-981B-BF051EDF4333}.Debug|x64.Build.0 = Debug|Any CPU
+		{C5AC6BA4-068A-45A7-981B-BF051EDF4333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5AC6BA4-068A-45A7-981B-BF051EDF4333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5AC6BA4-068A-45A7-981B-BF051EDF4333}.Release|x64.ActiveCfg = Release|Any CPU
+		{C5AC6BA4-068A-45A7-981B-BF051EDF4333}.Release|x64.Build.0 = Release|Any CPU
+		{CFF97915-4E84-4D39-B91C-C0EB92C05448}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFF97915-4E84-4D39-B91C-C0EB92C05448}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFF97915-4E84-4D39-B91C-C0EB92C05448}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CFF97915-4E84-4D39-B91C-C0EB92C05448}.Debug|x64.Build.0 = Debug|Any CPU
+		{CFF97915-4E84-4D39-B91C-C0EB92C05448}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFF97915-4E84-4D39-B91C-C0EB92C05448}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFF97915-4E84-4D39-B91C-C0EB92C05448}.Release|x64.ActiveCfg = Release|Any CPU
+		{CFF97915-4E84-4D39-B91C-C0EB92C05448}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F4A99F12-F83F-4A1A-842E-9F17A8393B37} = {DB422C43-10A6-4341-9259-F3DE0AD1A525}
+		{E723BB78-CC3C-4E23-9B4F-991823A17870} = {DB422C43-10A6-4341-9259-F3DE0AD1A525}
+		{C5AC6BA4-068A-45A7-981B-BF051EDF4333} = {DB422C43-10A6-4341-9259-F3DE0AD1A525}
+		{CFF97915-4E84-4D39-B91C-C0EB92C05448} = {DB422C43-10A6-4341-9259-F3DE0AD1A525}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {77C43FFC-5DDD-4F95-BEAF-39D1A4536339}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
+		SccNumberOfProjects = 14
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://10.1.20.20:8080/tfs/defaultcollection
+		SccTeamFoundationServer = http://tfsdata13:8080/tfs/defaultcollection
 		SccProjectUniqueName0 = ..\\Databases\\ProbeTests.Database\\ProbeTests.Database.sqlproj
 		SccProjectName0 = ../Databases/ProbeTests.Database
-		SccAuxPath0 = http://10.1.20.20:8080/tfs/defaultcollection
 		SccLocalPath0 = ..\\Databases\\ProbeTests.Database
-		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccProjectUniqueName1 = AutomationTests\\AutomationTests.csproj
 		SccProjectName1 = AutomationTests
-		SccAuxPath1 = http://10.1.20.20:8080/tfs/defaultcollection
 		SccLocalPath1 = AutomationTests
-		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccProjectUniqueName2 = ..\\Apps\\BTCloud.Web\\BTCloud.Lib\\BTCloud.Lib.csproj
 		SccProjectName2 = ../Apps/BTCloud.Web/BTCloud.Lib
-		SccAuxPath2 = http://10.1.20.20:8080/tfs/defaultcollection
 		SccLocalPath2 = ..\\Apps\\BTCloud.Web\\BTCloud.Lib
-		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccProjectUniqueName3 = ..\\Monitoring\\Monitor.Lib\\Monitor.Lib.csproj
 		SccProjectName3 = ../Monitoring/Monitor.Lib
-		SccAuxPath3 = http://10.1.20.20:8080/tfs/defaultcollection
 		SccLocalPath3 = ..\\Monitoring\\Monitor.Lib
-		SccProvider3 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccProjectUniqueName4 = ..\\Monitoring\\HealthProbe\\HealthProbe.csproj
 		SccProjectName4 = ../Monitoring/HealthProbe
-		SccAuxPath4 = http://10.1.20.20:8080/tfs/defaultcollection
 		SccLocalPath4 = ..\\Monitoring\\HealthProbe
-		SccProvider4 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccProjectUniqueName5 = GraphHelper\\GraphHelper.csproj
 		SccProjectName5 = GraphHelper
-		SccAuxPath5 = http://10.1.20.20:8080/tfs/defaultcollection
 		SccLocalPath5 = GraphHelper
-		SccProvider5 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccProjectUniqueName6 = ProbeTests.Model\\ProbeTests.Model.csproj
 		SccProjectName6 = ProbeTests.Model
-		SccAuxPath6 = http://10.1.20.20:8080/tfs/defaultcollection
 		SccLocalPath6 = ProbeTests.Model
-		SccProvider6 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccProjectUniqueName7 = ProbeTests\\ProbeTests.csproj
 		SccProjectName7 = ProbeTests
-		SccAuxPath7 = http://10.1.20.20:8080/tfs/defaultcollection
 		SccLocalPath7 = ProbeTests
-		SccProvider7 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccProjectUniqueName8 = GraphTest\\GraphTest.csproj
 		SccProjectName8 = GraphTest
-		SccAuxPath8 = http://10.1.20.20:8080/tfs/defaultcollection
 		SccLocalPath8 = GraphTest
-		SccProvider8 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName9 = Power365Framework\\Power365Framework.csproj
+		SccProjectTopLevelParentUniqueName9 = SMART.sln
+		SccProjectName9 = Power365Framework
+		SccLocalPath9 = Power365Framework
+		SccProjectUniqueName10 = Power365Framework.Test\\Power365Framework.Test.csproj
+		SccProjectTopLevelParentUniqueName10 = SMART.sln
+		SccProjectName10 = Power365Framework.Test
+		SccLocalPath10 = Power365Framework.Test
+		SccProjectUniqueName11 = Power365.Test\\Power365.Test.csproj
+		SccProjectTopLevelParentUniqueName11 = SMART.sln
+		SccProjectName11 = Power365.Test
+		SccLocalPath11 = Power365.Test
+		SccProjectUniqueName12 = Power365DirSync.Test\\Power365DirSync.Test.csproj
+		SccProjectTopLevelParentUniqueName12 = SMART.sln
+		SccProjectName12 = Power365DirSync.Test
+		SccLocalPath12 = Power365DirSync.Test
+		SccLocalPath13 = .
 	EndGlobalSection
 EndGlobal

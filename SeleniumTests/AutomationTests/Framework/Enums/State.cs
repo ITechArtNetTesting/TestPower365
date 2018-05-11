@@ -9,6 +9,8 @@ namespace Product.Framework.Enums
 {
     public enum State
     {
+        [Description("None")]
+        None,
         [Description("Syncing")]
         Syncing,
         [Description("Synced")]
@@ -35,8 +37,16 @@ namespace Product.Framework.Enums
         Synced1,
         [Description("2 sync(s) complete")]
         Synced2,
+        [Description("Matched")]
+        Matched,
+        [Description("Stopped")]
+        Stopped,
         [Description("Sync Error")]
-        SyncError
+        SyncError,
+        [Description("Ready")]
+        Ready,
+        [Description("Error")]
+        Error
 
     }
 }

@@ -45,14 +45,14 @@ namespace Product.Tests.MailWithDiscoveryTests.MigrationTests
             User.AtProjectOverviewForm().OpenUsersList();
 
             //Syncing
-            User.AtUsersForm().PerfomeActionForUser(sourceMailbox6, Framework.Enums.ActionType.Sync);
+            User.AtUsersForm().PerfomActionForUser(sourceMailbox6, ActionType.Sync);
             User.AtUsersForm().ConfirmSync();
              User.AtUsersForm().WaitForState(sourceMailbox6, State.Syncing, 600000, 10);
             //Verify Synced
             User.AtUsersForm().WaitForState(sourceMailbox6, State.Synced, 600000, 10);
             //Complete
           
-            User.AtUsersForm().PerfomeActionForUser(sourceMailbox6, ActionType.Complete);
+            User.AtUsersForm().PerfomActionForUser(sourceMailbox6, ActionType.Complete);
             User.AtUsersForm().ConfirmComplete();
             //Verify Complete
             User.AtUsersForm().WaitForState(sourceMailbox6, State.Complete, 600000, 10);

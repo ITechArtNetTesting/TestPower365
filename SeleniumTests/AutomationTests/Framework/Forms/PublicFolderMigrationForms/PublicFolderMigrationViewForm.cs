@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using Product.Framework.Elements;
+using Product.Framework.Enums;
 
 namespace Product.Framework.Forms.PublicFolderMigrationForms
 {
@@ -125,6 +126,33 @@ namespace Product.Framework.Forms.PublicFolderMigrationForms
 					locator + " syncing state");
 			syncingState.WaitForElementPresent();
 		}
+        public void WaitForSyncingState(string locator, int timeoutSec = 60, int pollIntervalSec = 5)
+        {
+            Log.Info($"Waiting for locator: {locator} contains syncing state");
+            var syncingState =
+                new Label(
+                    By.XPath(
+                        $"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]/ancestor::tr//*[text()='Syncing']"),
+                    locator + " syncing state");
+            syncingState.WaitForElementVisible(timeoutSec, pollIntervalSec);
+        }
+        
+        public State GetJobState(string locator, int timeoutSec = 30, int pollInterval = 0)
+        {
+            var statusSelector = string.Format("//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{0}')]]/ancestor::tr//td[6]/span", locator.ToLower());
+            var statusLabel = new Label(By.XPath(statusSelector), "Sync Status");
+
+            statusLabel.WaitForElementVisible(timeoutSec, pollInterval);
+
+            var statusText = statusLabel.GetText();
+
+            State stateResult = State.None;
+            if (!Enum.TryParse<State>(statusText, out stateResult))
+                throw new Exception(string.Format("Unknown State: {0}", statusText));
+
+            return stateResult;
+        }
+
 		public new void OpenDetailsByLocator(string locator)
 		{
 			Log.Info($"Opening details by locator: {locator}");

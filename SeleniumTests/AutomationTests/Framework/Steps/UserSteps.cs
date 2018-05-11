@@ -387,6 +387,10 @@ namespace Product.Framework.Steps
 	    {
             return new ProfileSyncDistributionGroupsForm();
 	    }
+        public DiscoveryOverviewForm AtDiscoveryOverviewForm()
+        {
+            return new DiscoveryOverviewForm();
+        }
 
         public ProfileContentToMigrateForm AtProfileContentToMigrateForm => new ProfileContentToMigrateForm();
         public ProfileFilterMessagesForm AtProfileFilterMessagesForm => new ProfileFilterMessagesForm();

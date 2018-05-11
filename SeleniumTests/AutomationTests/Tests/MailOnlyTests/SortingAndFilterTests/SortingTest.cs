@@ -22,16 +22,14 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
 		    string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");
 		    string client = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/../name");
-		    string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//name");
-		    string filename = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='file1']/..//filename");
-		    string sourceMailbox4 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry4']/..//source");
-
-		    try
-		    {
-		        LoginAndReloadFile(login, password, client, projectName, filename);
+		    string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project3']/..//name");
+		    string filename = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project3']/..//metaname[text()='file2']/..//filename");
+		   
+            try
+            {
+                LoginAndReloadFile(login, password, client, projectName, filename);
 		        User.AtProjectOverviewForm().OpenUsersList();
-
-              
+             
                 User.AtUsersForm().StoreEntriesData();
 		        User.AtUsersForm().SortSource();
               
@@ -39,21 +37,18 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		        User.AtUsersForm().StoreEntriesData();
 		        User.AtUsersForm().SortTarget();
 		        User.AtUsersForm().AssertTargetSorted();
-              
-                User.AtUsersForm().PerfomeActionForUser(sourceMailbox4, ActionType.Sync);
-		        User.AtUsersForm().ConfirmSync();
-		        User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox4);
-		        User.AtUsersForm().StoreEntriesData();
+                             
+                User.AtUsersForm().StoreEntriesData();
 		        User.AtUsersForm().SortStatus();
              
                 User.AtUsersForm().AssertStatusSorted();
 		        User.AtUsersForm().StoreEntriesData();
             }
-		    catch (Exception)
-		    {
-		        LogHtml(Browser.GetDriver().PageSource);
+            catch (Exception)
+            {
+                LogHtml(Browser.GetDriver().PageSource);
                 throw;
             }
-		}
+        }
 	}
 }

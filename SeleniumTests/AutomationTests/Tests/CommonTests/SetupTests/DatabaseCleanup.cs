@@ -21,7 +21,7 @@ namespace Product.Tests.CommonTests.SetupTests
         public void CleaningUp()
         {
             CleanProjectAndTenant(RunConfigurator.GetClient("client1"));
-            CleanProjectAndTenant(RunConfigurator.GetClient("client2"));
+           // CleanProjectAndTenant(RunConfigurator.GetClient("client2"));
         }
 
         private void CleanProjectAndTenant(string client)

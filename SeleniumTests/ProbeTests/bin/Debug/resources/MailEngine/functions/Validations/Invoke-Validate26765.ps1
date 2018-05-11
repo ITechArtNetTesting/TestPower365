@@ -20,7 +20,7 @@ function Invoke-Validate26765{
 			if($Folder1 -eq $null){
 				if($Folder2 -ne $null){
 					$Script:TestResults["Test26765"].ValidationResult = "Succeeded"
-					$Script:TestResults["Test26765"].OverAllResult = "Successful"
+					$Script:TestResults["Test26765"].OverAllResult = "Succeeded"  
 				}
 
 			}

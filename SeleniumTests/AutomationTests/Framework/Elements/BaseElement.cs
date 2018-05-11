@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
@@ -49,6 +50,10 @@ namespace Product.Framework.Elements
 			return locator;
 		}
 
+        public IList<IWebElement> GetElements()
+        {
+            return Browser.GetDriver().FindElements(locator);
+        }
 
         /// <summary>
         ///     Clicks this instance.
@@ -125,8 +130,8 @@ namespace Product.Framework.Elements
                 var iv = Browser.GetDriver().FindElement(locator).Displayed;
                 if (iv == true) { return true; } else { return false; }
             }
-            catch (NoSuchElementException) { return false; } 
-        }
+            catch (NoSuchElementException) { return false; }
+        }        
 
         /// <summary>
         ///     Gets the point.
@@ -136,6 +141,12 @@ namespace Product.Framework.Elements
 		{
 			return GetElement().Location;
 		}
+
+        public void WaitForElementVisible(int timeoutSec = 5, int pollIntervalSec = 0)
+        {
+            if (!IsElementVisible(locator, timeoutSec, pollIntervalSec))
+                throw new Exception("Could not find visible element.");
+        }
 
 		/// <summary>
 		///     Waits for element present.
@@ -160,6 +171,7 @@ namespace Product.Framework.Elements
 			}
             return result;
 		}
+
 		public void WaitForSeveralElementsPresent(int count)
 		{
 			var wait = new WebDriverWait(Browser.GetDriver(),
@@ -270,19 +282,32 @@ namespace Product.Framework.Elements
         /// <summary>
         ///     Waits for element is visible.
         /// </summary>
-        public void WaitForElementIsVisible()
+        public bool WaitForElementIsVisible()
 		{
-			var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(50));
+           
+            var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(50));
             wait.Timeout = TimeSpan.FromMinutes(1);
-            wait.IgnoreExceptionTypes(typeof(NotFoundException));
+            wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
 
-            wait.Until(ExpectedConditions.ElementIsVisible(locator));
-		}
+            try
+            {
+                wait.Until(ExpectedConditions.ElementIsVisible(locator));
+                return true;
+            }
 
-		/// <summary>
-		///     Waits for element is clickable.
-		/// </summary>
-		public void WaitForElementIsClickable()
+            catch (TimeoutException)
+            {
+                Log.Fatal($"Element with locator: '{locator}' does not visible!");
+                return false;
+            }
+
+
+        }
+
+        /// <summary>
+        ///     Waits for element is clickable.
+        /// </summary>
+        public void WaitForElementIsClickable()
 		{
             var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(50));
             wait.Timeout = TimeSpan.FromMinutes(1);
@@ -304,7 +329,7 @@ namespace Product.Framework.Elements
 		/// <summary>
 		///     Waits for element disappear.
 		/// </summary>
-		public void WaitForElementDisappear()
+		public bool WaitForElementDisappear()
 		{
 			var wait = new WebDriverWait(Browser.GetDriver(),
 				TimeSpan.FromMilliseconds(Convert.ToDouble(Configuration.GetTimeout())));
@@ -312,15 +337,18 @@ namespace Product.Framework.Elements
 			{
 				wait.Until(waiting =>
 				{
-					var webElements = Browser.GetDriver().FindElements(locator);
+					var webElements = Browser.GetDriver().FindElements(locator); /// check: Disappear - isDisplayed()= false ? 
 					return webElements.Count == 0;
 				});
 			}
 			catch (TimeoutException)
-			{
-				Log.Fatal($"Element with locator: '{locator}' still exists!");
-			}
+			{                
+                Log.Fatal($"Element with locator: '{locator}' still exists!");
+                return false;
+            }
+            return true;
 		}
+
 		public void WaitForElementDisappear(int timeout)
 		{
 			var wait = new WebDriverWait(Browser.GetDriver(),
@@ -381,7 +409,8 @@ namespace Product.Framework.Elements
                 return false;
             }
         }
-            public void ScrollTillVisible()
+
+        public void ScrollTillVisible()
 		{
 			((IJavaScriptExecutor)Browser.GetDriver()).ExecuteScript("arguments[0].scrollIntoView();", GetElement());
 		}

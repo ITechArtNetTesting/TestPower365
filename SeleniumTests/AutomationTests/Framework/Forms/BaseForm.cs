@@ -53,17 +53,19 @@ namespace Product.Framework.Forms
 		{
 			this.locator = locator;
 			this.name = name;
-			AssertIsPresent();
-		}
+         //   AssertIsPresent();
+            ElementIsPresent(locator, "Form " + name);
+
+        }
 
 		/// <summary>
 		///     Asserts the is present.
 		/// </summary>
-		private void AssertIsPresent()
-		{
-			BaseElement.WaitForElementPresent(locator, "Form " + name);
-			Log.Info($"Form '{name}' is ready:");
-		}
+		//private void AssertIsPresent()
+		//{
+		//	BaseElement.WaitForElementPresent(locator, "Form " + name);
+		//	Log.Info($"Form '{name}' is ready:");
+		//}
 
 	    public void GoToClientRegistration()
 	    {
@@ -411,105 +413,105 @@ namespace Product.Framework.Forms
 
 		#region [Edit Links dialog]
 
-		private readonly Button closeEditLinksDialogButton =
-			new Button(By.XPath("//div[contains(@class, 'modal in')]//button[contains(text(), 'Close')]"),
-				"Close edit links dialog");
+		//private readonly Button closeEditLinksDialogButton =
+		//	new Button(By.XPath("//div[contains(@class, 'modal in')]//button[contains(text(), 'Close')]"),
+		//		"Close edit links dialog");
 
-		public void CloseEditLinksDialog()
-		{
-			Log.Info("Closing edit links dialog");
-			closeEditLinksDialogButton.Click();
-			addLinkButton.WaitForElementDisappear();
-		}
+		//public void CloseEditLinksDialog()
+		//{
+		//	Log.Info("Closing edit links dialog");
+		//	closeEditLinksDialogButton.Click();
+		//	addLinkButton.WaitForElementDisappear();
+		//}
 
-		public void RemoveLink(string linkName)
-		{
-			Log.Info("Removing link: " + linkName);
-			var links =
-				Browser.GetDriver()
-					.FindElements(
-						By.XPath(
-							"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));
-			foreach (var link in links)
-			{
-				if (
-					link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).GetAttribute("value").Trim().ToLower() ==
-					linkName.Trim().ToLower())
-				{
-					var je = (IJavaScriptExecutor) Browser.GetDriver();
-					je.ExecuteScript("arguments[0].scrollIntoView(true);", link.FindElement(By.XPath(".//button")));
-					link.FindElement(By.XPath(".//button")).Click();
-				}
-			}
-		}
+		//public void RemoveLink(string linkName)
+		//{
+		//	Log.Info("Removing link: " + linkName);
+		//	var links =
+		//		Browser.GetDriver()
+		//			.FindElements(
+		//				By.XPath(
+		//					"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));
+		//	foreach (var link in links)
+		//	{
+		//		if (
+		//			link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).GetAttribute("value").Trim().ToLower() ==
+		//			linkName.Trim().ToLower())
+		//		{
+		//			var je = (IJavaScriptExecutor) Browser.GetDriver();
+		//			je.ExecuteScript("arguments[0].scrollIntoView(true);", link.FindElement(By.XPath(".//button")));
+		//			link.FindElement(By.XPath(".//button")).Click();
+		//		}
+		//	}
+		//}
 
-		public void ReorderLink(string name, string url)
-		{
-			Log.Info($"Reordering link {name} to {url} url");
-			var links =
-				Browser.GetDriver()
-					.FindElements(
-						By.XPath(
-							"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));
-			foreach (var link in links)
-			{
-				if (
-					link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).GetAttribute("value").Trim().ToLower() ==
-					name.Trim().ToLower())
-				{
-					var je = (IJavaScriptExecutor) Browser.GetDriver();
-					je.ExecuteScript("arguments[0].scrollIntoView(true);",
-						link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")));
-					link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")).Clear();
-					link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")).SendKeys(url);
-					Store.LinkUrl = url;
-				}
-			}
-		}
+		//public void ReorderLink(string name, string url)
+		//{
+		//	Log.Info($"Reordering link {name} to {url} url");
+		//	var links =
+		//		Browser.GetDriver()
+		//			.FindElements(
+		//				By.XPath(
+		//					"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));
+		//	foreach (var link in links)
+		//	{
+		//		if (
+		//			link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).GetAttribute("value").Trim().ToLower() ==
+		//			name.Trim().ToLower())
+		//		{
+		//			var je = (IJavaScriptExecutor) Browser.GetDriver();
+		//			je.ExecuteScript("arguments[0].scrollIntoView(true);",
+		//				link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")));
+		//			link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")).Clear();
+		//			link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")).SendKeys(url);
+		//			Store.LinkUrl = url;
+		//		}
+		//	}
+		//}
 
-		public void RenameLink(string oldName, string newName)
-		{
-			Log.Info($"Renaming link {oldName} to {newName}");
-			var links =
-				Browser.GetDriver()
-					.FindElements(
-						By.XPath(
-							"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));
-			foreach (var link in links)
-			{
-				if (
-					link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).GetAttribute("value").Trim().ToLower() ==
-					oldName.Trim().ToLower())
-				{
-					var je = (IJavaScriptExecutor) Browser.GetDriver();
-					je.ExecuteScript("arguments[0].scrollIntoView(true);",
-						link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")));
-					link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).Clear();
-					link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).SendKeys(newName);
-					Store.LinkName = newName;
-				}
-			}
-		}
+		//public void RenameLink(string oldName, string newName)
+		//{
+		//	Log.Info($"Renaming link {oldName} to {newName}");
+		//	var links =
+		//		Browser.GetDriver()
+		//			.FindElements(
+		//				By.XPath(
+		//					"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));
+		//	foreach (var link in links)
+		//	{
+		//		if (
+		//			link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).GetAttribute("value").Trim().ToLower() ==
+		//			oldName.Trim().ToLower())
+		//		{
+		//			var je = (IJavaScriptExecutor) Browser.GetDriver();
+		//			je.ExecuteScript("arguments[0].scrollIntoView(true);",
+		//				link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")));
+		//			link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).Clear();
+		//			link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).SendKeys(newName);
+		//			Store.LinkName = newName;
+		//		}
+		//	}
+		//}
 
-        		public void AssertLinkIsReordered(string name, string url)
-		{
-			Log.Info($"Asserting link {name} is reorderd to {url}");
-			var links =
-				Browser.GetDriver()
-					.FindElements(
-						By.XPath(
-							"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));
-			foreach (var link in links)
-			{
-				if (
-					link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).GetAttribute("value").Trim().ToLower() ==
-					name.Trim().ToLower())
-				{
-					var value = link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")).GetAttribute("value");
-					Assert.IsTrue(value.Trim().ToLower().Contains(url.Trim().ToLower()), "Url is not reordered");
-				}
-			}
-		}
+  //      		public void AssertLinkIsReordered(string name, string url)
+		//{
+		//	Log.Info($"Asserting link {name} is reorderd to {url}");
+		//	var links =
+		//		Browser.GetDriver()
+		//			.FindElements(
+		//				By.XPath(
+		//					"//div[contains(@class, 'modal-dialog')]//div[contains(@class, 'slimScrollDiv')]//li"));
+		//	foreach (var link in links)
+		//	{
+		//		if (
+		//			link.FindElement(By.XPath(".//input[contains(@data-bind, 'description')]")).GetAttribute("value").Trim().ToLower() ==
+		//			name.Trim().ToLower())
+		//		{
+		//			var value = link.FindElement(By.XPath(".//input[contains(@data-bind, 'url')]")).GetAttribute("value");
+		//			Assert.IsTrue(value.Trim().ToLower().Contains(url.Trim().ToLower()), "Url is not reordered");
+		//		}
+		//	}
+		//}
 
 		#endregion
 	}

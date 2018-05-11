@@ -1,0 +1,99 @@
+function Invoke-Test32366 {
+    param( 
+        [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
+        [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
+        [Parameter(Position = 4, Mandatory = $false)] [switch]$RunDelta
+    )  
+    Begin {
+        if ($TargetMailbox.IsPresent) {
+            $service = $Script:TargetService
+            $MailboxName = $Script:TargetMailbox
+        }
+        else {
+            $service = $Script:SourceService
+            $MailboxName = $Script:SourceMailbox
+        }
+		
+        $TestResults = "" | Select TestCase, Description, TestLastRun, TestResult, Data, ValidationLastRun, ValidationResult, OverAllResult
+        $TestResults.TestCase = "32366"
+        $TestResults.Description = "Public Folder StickyNote"
+        $TestResults.TestLastRun = (Get-Date)
+        $TestResults.TestResult = "Failed"
+        Import-Module ($script:ModuleRoot + '\engine\btT2TPSModule.psd1') -Force
+        ##Create Message
+        $pfRoot = Get-P365PublicFolderFromPath -FolderPath \Automation\Tests -SourceMailbox
+        #Move Contact to New folder
+        $NewFolder = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
+        $FolderName = "Test32366-" + (Get-Date).ToString("s")
+        $NewFolder.DisplayName = $FolderName
+        #Define Folder Veiw Really only want to return one object  
+        $fvFolderView = new-object Microsoft.Exchange.WebServices.Data.FolderView(1)  
+        #Define a Search folder that is going to do a search based on the DisplayName of the folder  
+        $SfSearchFilter = new-object Microsoft.Exchange.WebServices.Data.SearchFilter+IsEqualTo([Microsoft.Exchange.WebServices.Data.FolderSchema]::DisplayName, $NewFolder.DisplayName)  
+        #Do the Search  
+        $EntryIdVal = $null
+        $data = "" | Select Folder,MessageId,LogStart,LogEnd
+        
+        $findFolderResults = $pfRoot.FindFolders($SfSearchFilter, $fvFolderView)  
+        if ($findFolderResults.TotalCount -eq 0) {  
+            Write-host ("Folder Doesn't Exist") 
+            $NewFolder.Save($pfRoot.Id)  
+            $PR_ENTRYID = new-object Microsoft.Exchange.WebServices.Data.ExtendedPropertyDefinition(0x0FFF, [Microsoft.Exchange.WebServices.Data.MapiPropertyType]::Binary)  
+            $psPropertySet = new-object Microsoft.Exchange.WebServices.Data.PropertySet([Microsoft.Exchange.WebServices.Data.BasePropertySet]::FirstClassProperties)  
+            $psPropertySet.Add($PR_ENTRYID)
+            $NewFolder = [Microsoft.Exchange.WebServices.Data.Folder]::Bind($service, $NewFolder.Id, $psPropertySet)
+            $NewFolder.TryGetProperty($PR_ENTRYID, [ref]$EntryIdVal)
+            $NewFolder1 = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
+            $FolderName1 = "Test32366-" + (Get-Date).ToString("s")
+            $NewFolder1.DisplayName = $FolderName1
+            $data.Folder =  "\Automation\tests\" + $FolderName + "\" + $FolderName1
+            $NewFolder1.Save($NewFolder.Id)
+             $jnJournal = New-Object Microsoft.Exchange.WebServices.Data.EmailMessage -ArgumentList $service  
+              #Set the Subject of the Note  
+            $jnJournal.Subject = "Journal : 32362"  
+            $jnJournal.ItemClass = "IPM.Activity"  
+            #Set the Text body of the Note  
+                  
+                #Start Note specific Extended properties   
+  		    $jnJournal.Body = New-Object Microsoft.Exchange.WebServices.Data.MessageBody  
+  		    $jnJournal.Body.BodyType = [Microsoft.Exchange.WebServices.Data.BodyType]::HTML  
+		    $jnJournal.Body = "First Line `r`nNext Line"
+            #Save the Item to the Notes Folder  
+            $jnJournal.Save($NewFolder1.Id)               
+
+            $PR_ENTRYID = new-object Microsoft.Exchange.WebServices.Data.ExtendedPropertyDefinition(0x0FFF,[Microsoft.Exchange.WebServices.Data.MapiPropertyType]::Binary)  
+            $psPropertySet = new-object Microsoft.Exchange.WebServices.Data.PropertySet([Microsoft.Exchange.WebServices.Data.BasePropertySet]::FirstClassProperties)  
+            $psPropertySet.Add($PR_ENTRYID)
+            $jnJournal.Load($psPropertySet)
+            $EntryIdVal = $null		
+            [Void]$jnJournal.TryGetProperty($PR_ENTRYID,[ref]$EntryIdVal)  
+            $data.MessageId = $EntryIdVal
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+            $LogStart = New-Object Microsoft.Exchange.WebServices.Data.ExtendedPropertyDefinition([Guid]::Parse("{0006200A-0000-0000-C000-000000000046}"),0x8706, [Microsoft.Exchange.WebServices.Data.MapiPropertyType]::SystemTime);
+            $LogEnd = New-Object Microsoft.Exchange.WebServices.Data.ExtendedPropertyDefinition([Guid]::Parse("{0006200A-0000-0000-C000-000000000046}"),0x8708, [Microsoft.Exchange.WebServices.Data.MapiPropertyType]::SystemTime);
+            $data.LogStart = (Get-Date).AddDays(1)
+            $data.LogEnd = (Get-Date).AddDays(1).AddHours(1)
+            $jnJournal.SetExtendedProperty($LogStart,$data.LogStart)
+            $jnJournal.SetExtendedProperty($LogEnd,$data.LogEnd)
+            $jnJournal.Update([Microsoft.Exchange.WebServices.Data.ConflictResolutionMode]::AlwaysOverwrite)
+            $TestResults.Data = $data               
+            $TestResults.TestResult = "Succeeded"
+		
+        }
+        $Script:TestResults.OverAllResult = "InComplete"
+        if ($Script:TestResults.ContainsKey("Test32366")) {
+            $Script:TestResults["Test32366"] = $TestResults
+        }
+        else {
+            $Script:TestResults.Add("Test32366", $TestResults)
+        }
+        if ($RunDelta.IsPresent) {
+            Get-p365TestResults
+            # Write-host "Part 1 - Message Created"
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+        }
+		
+    }
+}

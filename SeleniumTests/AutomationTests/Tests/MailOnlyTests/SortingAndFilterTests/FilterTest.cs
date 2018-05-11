@@ -27,12 +27,12 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		    string groupMailbox6 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry6']/..//group");
 		    string profileMailbox6 =RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry6']/..//profile");
 
-		    try
-		    {
+		    
 		        LoginAndSelectRole(login, password, client);
 		        SelectProject(projectName);
-		        User.AtProjectOverviewForm().OpenUsersList();
-                User.AtUsersForm().PerfomeActionForUser(sourceMailbox6, Framework.Enums.ActionType.Sync);
+                User.AtProjectOverviewForm().OpenUsersList();
+
+                User.AtUsersForm().PerfomActionForUser(sourceMailbox6, ActionType.Sync);
                 User.AtUsersForm().ConfirmSync();
                 User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox6);
                 User.AtUsersForm().SwitchFilter(FilterState.Open);
@@ -57,12 +57,7 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		     
 		        User.AtUsersForm().StoreEntriesData();
 		        User.AtUsersForm().AssertProfileIsFilteredFor(profileMailbox6);
-            }
-		    catch (Exception)
-		    {
-		        LogHtml(Browser.GetDriver().PageSource);
-                throw;
-            }
+           
 		}
 	}
 }
