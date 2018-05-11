@@ -227,8 +227,8 @@
     <Compile Include="Tests\IntegrationTests\DistributionGroupsInitialTest.cs" />
     <Compile Include="Tests\IntegrationTests\DistributionGroupsValidationTest.cs" />
     <Compile Include="Tests\IntegrationTests\DistributionGroupTests\GroupsWillBeShownCorectly_TC31793.cs" />
-    <Compile Include="Tests\IntegrationTests\GroupsTests\TC31793_Verify_only_universal_distribution_groups_will_be_shown_in_the_UI_for_group_sync_and_security_group_will_be_shown_in_the_UI_but_it_can_not_be_synced.cs" />
-    <Compile Include="Tests\IntegrationTests\GroupsTests\TC31796_Verify_group_sync_UI_will_show_accurate_job_status_throughout_group_sync.cs" />
+    <Compile Include="Tests\IntegrationTests\GroupsTests\Verify_only_universal_distribution_groups_will_be_shown_in_the_UI_for_group_sync_and_security_group_will_be_shown_in_the_UI_but_it_can_not_be_synced_TC31793.cs" />
+    <Compile Include="Tests\IntegrationTests\GroupsTests\Verify_group_sync_UI_will_show_accurate_job_status_throughout_group_sync_TC31796.cs" />
     <Compile Include="Tests\IntegrationTests\GroupsViewTest.cs" />
     <Compile Include="Tests\IntegrationTests\SetUpTest\MailUPNandExtensionAttributesAreValidMatchingOptions_32951.cs" />
     <Compile Include="Tests\CommonTests\ActionButtonsTests\StoppingStateButtonsTest.cs" />
@@ -258,7 +258,7 @@
     <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\MailMigrationJobShouldCompleted_22982.cs" />
     <Compile Include="Tests\MailWithDiscoveryTests\LandingPageTests\ProjectLandingPageShouldHasTenantSection_25771.cs" />
     <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\DiscoveryTest.cs" />
-    <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\TC23090_UI_Verify_jobs_can_be_archived.cs" />
+    <Compile Include="Tests\CommonTests\Migration Tests\Verify_jobs_can_be_archived_TC23090.cs" />
     <Compile Include="Tests\PowerShellTests\AddressTransformTest.cs" />
     <Compile Include="Tests\PowerShellTests\AddTest.cs" />
     <Compile Include="Tests\PowerShellTests\MailEngineTest.cs" />

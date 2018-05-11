@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Product.Tests.IntegrationTests.GroupsTests
 {
     [TestClass]
-    public class TC31796_Verify_group_sync_UI_will_show_accurate_job_status_throughout_group_sync : LoginAndConfigureTest
+    public class Verify_group_sync_UI_will_show_accurate_job_status_throughout_group_sync_TC31796 : LoginAndConfigureTest
     {
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)

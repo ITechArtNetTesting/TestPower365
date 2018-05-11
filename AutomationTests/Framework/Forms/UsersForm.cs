@@ -37,8 +37,9 @@ namespace Product.Framework.Forms
 
         public void AssertUserIsNoLongerDisplayed(string user)
         {
+            WaitForAjaxLoad();
             var FoundUser = new RadioButton(By.XPath($"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{user.ToLower()}')]]/ancestor::tr//input"), "Found user");
-            Assert.IsTrue(FoundUser.IsPresent());
+            Assert.IsFalse(FoundUser.IsPresent());
         }
 
         private readonly Button closeModalWindowButton =

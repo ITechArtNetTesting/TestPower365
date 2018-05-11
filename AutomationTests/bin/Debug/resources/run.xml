@@ -92,6 +92,20 @@
 							<group>Wave2</group>
 							<profile>Profile 1</profile>
 						</entry>
+            <entry>
+              <metaname>entry11</metaname>
+              <source>C7O365SML10@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML10@btcorp9.onmicrosoft.com</target>
+              <group>Wave2</group>
+              <profile>Profile 1</profile>
+            </entry>
+            <entry>
+              <metaname>entry11</metaname>
+              <source>C7O365SML11@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML11@btcorp9.onmicrosoft.com</target>
+              <group>Wave2</group>
+              <profile>Profile 1</profile>
+            </entry>
 					</usermigration>
 					<file>
 						<metaname>file1</metaname>
@@ -396,6 +410,11 @@
               <target>\Automation</target>
             </entry>
             <entry>
+              <metaname>entry17</metaname>
+              <source>C31-GrpMember1@corp31.cmtsandbox.com</source>
+              <target>C31-GrpMember1@corp32.cmtsandbox.com</target>
+            </entry>
+            <entry>              
               <metaname>mailboxreset</metaname>
               <prefixArray>P365AutoRemote|P365AutoSAM</prefixArray>
             </entry>

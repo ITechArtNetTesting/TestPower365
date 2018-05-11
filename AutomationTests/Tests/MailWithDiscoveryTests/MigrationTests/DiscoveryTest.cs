@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
 using Product.Tests.CommonTests;
 
-namespace Product.Tests.MailWithDiscoveryTests.MigrationTests
+namespace Product.Tests.CommonTests.Migration_Tests
 {
 	[TestClass]
 	public class DiscoveryTest : LoginAndConfigureTest

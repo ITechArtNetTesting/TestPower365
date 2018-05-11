@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Product.Tests.IntegrationTests.GroupsTests
 {
     [TestClass]
-    public class TC31793_Verify_only_universal_distribution_groups_will_be_shown_in_the_UI_for_group_sync_and_security_group_will_be_shown_in_the_UI_but_it_can_not_be_synced : LoginAndConfigureTest
+    public class Verify_only_universal_distribution_groups_will_be_shown_in_the_UI_for_group_sync_and_security_group_will_be_shown_in_the_UI_but_it_can_not_be_synced_TC31793 : LoginAndConfigureTest
     {
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
