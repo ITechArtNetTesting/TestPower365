@@ -205,6 +205,8 @@ namespace Product.Framework.Forms
 				By.XPath(
 					"//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//span[text()[contains(.,'State')]]/..//i[contains(@class, 'fa-filter')]"),
 				"State filter button");
+
+        
         private Button enabledOkProfileButton => new Button(By.XPath("//button[contains(@data-bind, 'addToMigrationProfile')][not(@disabled='')]"), "Enabled OK profile button");
 
         private Button userDetailsRefreshButton => new Button(By.XPath("//button[contains(@data-bind, 'refresh.run')][not(@disabled='')]"), "User Details Refresh button");
@@ -221,6 +223,7 @@ namespace Product.Framework.Forms
         private readonly Button CompleteDetailsButton = new Button(By.XPath("//button[text()='Complete']"), "Complite button on details form");
         private readonly Button CutoverDetailsButton = new Button(By.XPath("//button[text()='Cutover']"), "Cutover button on details form");
         private readonly Label ImportCompleteLabel = new Label(By.XPath("//span[@data-translation='UploadWasASuccessExclamationPoint']"), "Label Upload Was A Success");
+        private readonly string ProgressBar_100 = "//tr/*[contains(*,'{0}')]//div[@class='progress']/div[contains(@style,'width: 100 %;')]";
 
         public UsersForm() : base(TitleLocator, "Users list form")
 		{
@@ -274,6 +277,7 @@ namespace Product.Framework.Forms
             Assert.IsTrue(CutoverDetailsButton.IsPresent(), "Cutover button is not present");
         }
 
+        //modify after verify
         public void CheckActionIsEnabled(ActionType type)
         {
             WaitForAjaxLoad();
@@ -281,11 +285,24 @@ namespace Product.Framework.Forms
             CheckApplyButtonIsEnabled();
         }
 
+        //delete after verify
         public void CheckApplyButtonIsEnabled()
         {
             WaitForAjaxLoad();
             Assert.IsTrue(enabledApplyActionButton.IsPresent(), "Appply button is not enable");
         }
+
+        public void CheckApplyButton(bool isEnabled)
+        {
+            WaitForAjaxLoad();
+            if (isEnabled)
+            {
+                Assert.IsTrue(enabledApplyActionButton.IsPresent(), "Appply button is not enable");
+            }
+            else {
+                Assert.IsFalse(enabledApplyActionButton.IsPresent(), "Appply button is enable");
+            }
+        }             
 
         public void PerformSearch(string search)
 		{
@@ -577,7 +594,6 @@ namespace Product.Framework.Forms
 				entryLabel.Click();
 			}
 		}
-        //@@@ Needs overhaul
         
         private readonly string _rowTextAncestorFormat = "/ancestor::tr//*[contains(text(), '{0}')]";
         private readonly string _lowerCaseTextLocatorFormat = "//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{0}')]]";
@@ -1256,23 +1272,10 @@ namespace Product.Framework.Forms
 			Store.ProfileList.Clear();
 			BaseElement.WaitForElementIsClickable(
 				By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr"));
-           // ReadOnlyCollection<IWebElement> elements_page2=null;
+           
             var elements = Browser.GetDriver()
 				.FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr"));
-                       //second page
-            //Button secondPage= new Button (By.XPath("//a[text()='2']"), "Second page button");
-            //if (secondPage.IsElementVisible()) {
-            //    secondPage.Click();
-            //    //var elements_page2 = Browser.GetDriver()
-            //    //                  .FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr"));           
-
-            //    elements_page1.Union(Browser.GetDriver()
-            //                     .FindElements(By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr")));
-            //}
-           
-            //var result_rows= elements_page1.Concat(elements_page2);
-
-            foreach (var element in elements)
+                     foreach (var element in elements)
 			{
 				Store.SourceList.Add(
 					element.FindElement(
@@ -1496,6 +1499,7 @@ namespace Product.Framework.Forms
 				Log.Info("Radiobutton is not ready");
 				itemButton.Click();
 			}
+            WaitForAjaxLoad();
 		}
 
 		public void UncheckFilterGroup(string group)
@@ -1616,10 +1620,15 @@ namespace Product.Framework.Forms
 			completeButton.Click();
 		}
 
-		#endregion
+        public void SetSynced()
+        {
+            Log.Info("Checking Synced checkbox");
+            syncedButton.Click();
+        }
+        #endregion
 
-		#region [User details]
-		private readonly Button closeUserDetailsButton =
+        #region [User details]
+        private readonly Button closeUserDetailsButton =
 			new Button(
 				By.XPath(
 					"//div[contains(@class, 'modal in')]//div[contains(@class, 'modal-lg')]//button[contains(@data-dismiss, 'modal')][contains(@class, 'btn')]"),
@@ -1874,10 +1883,17 @@ namespace Product.Framework.Forms
                 throw new Exception(string.Format("Entry of '{0}' with state '{1}' was not found.", entry, value));
         }
 
+        public void JobProgressBarShouldShownCorrectProgress(String state)
+        {
+            Log.Info("Verify progressBar 100 %");
+           // var value = state.GetValue();
 
-      
+            var stateProgressBar = string.Format(ProgressBar_100, state);
+            var progressBarLabel = new Label(By.XPath(stateProgressBar), "State {state}:Progress bar 100%") ;
+            Assert.IsTrue(progressBarLabel.IsElementVisible(),"Progress bar 100% is not visible");
+        }
 
-        public void VerifyStateIS(string state)
+        public bool VerifyStateIS(string state)
 		{
            
             Log.Info("Verifying state is: " + state);
@@ -1892,7 +1908,9 @@ namespace Product.Framework.Forms
 				counter++;
 			}
 			stateLabel.WaitForElementPresent();
-		}
+            return stateLabel.IsElementVisible();
+
+        }
         #endregion
 
 	    #region [Rollback modal]
@@ -1904,8 +1922,12 @@ namespace Product.Framework.Forms
         private readonly Label sureRollbackLabel = new Label(By.XPath("//label[contains(@for, 'rollbackCheckbox')]"), "Sure to rollback label");
         private readonly RadioButton sureRollbackRadioButton = new RadioButton(By.Id("rollbackCheckbox"), "Sure to rollback radiobutton");
         private readonly Button rollbackButton = new Button(By.XPath("//button[contains(@data-bind, 'rollback') and not(@disabled='')]"), "Rollback button");
+        private readonly Button rollbackButton_modalWindow = new Button(By.XPath("//*[@class='modal in']//button[not(@disabled='')]/span[text()= 'Rollback']"), "Rollback button in modal window");
+        private readonly Label rollbackWindowTitle = new Label(By.XPath("//*[@class='modal in']//span[text()= 'Perform a rollback']"), "Rollback modal window title");
+        private readonly Button rollbackCancelButton_modalWindow = new Button(By.XPath("//*[@class='modal in']//button[not(@disabled='')]/span[text()= 'Cancel']"), "Rollback Cancel button in modal window");
+        private readonly Label jobRollback = new Label(By.XPath("//tr[contains(*, 'Rollback In Progress')]"), "Job Rollback In Progress label");
 
-	    public void SetResetPermissions()
+        public void SetResetPermissions()
 	    {
 	        Log.Info("Setting reset permissions");
 	        resetPermissionsLabel.Click();
@@ -1946,6 +1968,7 @@ namespace Product.Framework.Forms
 	            sureRollbackLabel.Click();
             }
         }
+
         public void AssertRollBackIsDisabled()
         {
             Log.Info("Clicking Rollback is disabled");
@@ -1958,6 +1981,43 @@ namespace Product.Framework.Forms
             rollbackButton.Click();
 	    }
 
-	    #endregion
+        public void RollbackClick_modalWindow()
+        {
+            Log.Info("Clicking Rollback");
+            rollbackButton_modalWindow.Click();
+            WaitForAjaxLoad();
+        }
+
+        public void RollbackCancelClick_modalWindow()
+        {
+            Log.Info("Clicking Rollback");
+            rollbackCancelButton_modalWindow.Click();
+            WaitForAjaxLoad();
+        }
+        public void AssertRollbackModalWindowIsShown()
+        {
+           Assert.IsTrue(rollbackWindowTitle.IsElementVisible(), "Rollback button is not disabled");  
+        }
+        
+
+        public void AssertState(State state)
+        {
+            string stateValue = state.GetValue();
+
+            Log.Info("Assert state {state.value}");
+            
+            WaitForAjaxLoad();            
+            Assert.IsTrue(VerifyStateIS(stateValue), "State not equals {state}");
+        }
+
+        public void AssertRollBackJobNotStarted()
+        {
+            WaitForAjaxLoad();
+            Assert.IsFalse(jobRollback.IsElementVisible(),"Rollback start" );
+            AssertState(State.Synced);
+            
+            
+        }
+        #endregion
     }
 }

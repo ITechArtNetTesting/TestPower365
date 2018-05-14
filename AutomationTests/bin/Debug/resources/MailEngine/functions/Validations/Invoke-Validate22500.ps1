@@ -28,7 +28,7 @@ function Invoke-Validate22500{
 					if($fperm.UserId.PrimarySmtpAddress.ToLower() -eq $Script:TestResults["Test22500"].Data.TargetPermission.ToLower()){  
 						if($fperm.PermissionLevel -eq [Microsoft.Exchange.WebServices.Data.FolderPermissionLevel]::Editor){
 								$Script:TestResults["Test22500"].ValidationResult = "Succeeded"
-								$Script:TestResults["Test22500"].OverAllResult = "Successful"
+								$Script:TestResults["Test22500"].OverAllResult = "Succeeded"  
 							}
 
 						}  

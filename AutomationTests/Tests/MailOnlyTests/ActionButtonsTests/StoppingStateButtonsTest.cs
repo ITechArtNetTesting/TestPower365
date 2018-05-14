@@ -33,7 +33,7 @@ namespace Product.Tests.MailOnlyTests.ActionButtonsTests
 		        User.AtUsersForm().SelectAction(ActionType.Sync);
 		        User.AtUsersForm().AssertApplyIsEnabled();
 		        User.AtUsersForm().Apply();
-		        User.AtUsersForm().Confirm();
+		        User.AtUsersForm().ConfirmSync();
 		        User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 10000);
 		        User.AtUsersForm().SelectAction(ActionType.Sync);
 		        User.AtUsersForm().AssertApplyIsDisabled();

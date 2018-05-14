@@ -29,7 +29,7 @@ function Invoke-Validate22537{
 			}
 			if($EmailOkay){
 				$Script:TestResults["Test22537"].ValidationResult = "Succeeded"
-				$Script:TestResults["Test22537"].OverAllResult = "Successful"
+				$Script:TestResults["Test22537"].OverAllResult = "Succeeded"  
 
 			}
 			else{
