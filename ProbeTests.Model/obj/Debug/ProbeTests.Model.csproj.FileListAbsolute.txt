@@ -91,3 +91,14 @@ C:\Users\valery.piniazik\Desktop\SeleniumTests\ProbeTests.Model\bin\Debug\Entity
 C:\Users\valery.piniazik\Desktop\SeleniumTests\ProbeTests.Model\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\valery.piniazik\Desktop\SeleniumTests\ProbeTests.Model\bin\Debug\EntityFramework.xml
 C:\Users\valery.piniazik\Desktop\SeleniumTests\ProbeTests.Model\bin\Debug\EntityFramework.SqlServer.xml
+D:\Git\TestPower365\ProbeTests.Model\bin\Debug\ProbeTests.Model.dll.config
+D:\Git\TestPower365\ProbeTests.Model\bin\Debug\ProbeTests.Model.dll
+D:\Git\TestPower365\ProbeTests.Model\bin\Debug\ProbeTests.Model.pdb
+D:\Git\TestPower365\ProbeTests.Model\bin\Debug\EntityFramework.dll
+D:\Git\TestPower365\ProbeTests.Model\bin\Debug\EntityFramework.SqlServer.dll
+D:\Git\TestPower365\ProbeTests.Model\bin\Debug\EntityFramework.xml
+D:\Git\TestPower365\ProbeTests.Model\bin\Debug\EntityFramework.SqlServer.xml
+D:\Git\TestPower365\ProbeTests.Model\obj\Debug\ProbeTests.Model.csprojResolveAssemblyReference.cache
+D:\Git\TestPower365\ProbeTests.Model\obj\Debug\ProbeTests.Model.csproj.CoreCompileInputs.cache
+D:\Git\TestPower365\ProbeTests.Model\obj\Debug\ProbeTests.Model.dll
+D:\Git\TestPower365\ProbeTests.Model\obj\Debug\ProbeTests.Model.pdb
