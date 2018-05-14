@@ -22,21 +22,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
             string client = RunConfigurator.GetClient("client2");
             string projectName = RunConfigurator.GetProjectName("client2", "project2");
             string user = RunConfigurator.GetSourceMailbox("client2", "project2", "entry17");
-            try
-            {
-                LoginAndSelectRole(login, password, client);
-                SelectProject(projectName);
-                User.AtProjectOverviewForm().OpenUsersList();
-                User.AtUsersForm().PerformSearch(user);
-                User.AtUsersForm().PerfomActionForUser(user, ActionType.Archive);
-                User.AtUsersForm().ConfirmAction();
-                User.AtUsersForm().AssertUserIsNoLongerDisplayed(user);                
-            }
-            catch (Exception e)
-            {
-                LogHtml(Browser.GetDriver().PageSource);
-                throw e;
-            }
+            UIVerifyJobsCanBeArchived(login, password, client, projectName, user);
         }
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
@@ -47,21 +33,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
             string client = RunConfigurator.GetClient("client2");
             string projectName = RunConfigurator.GetProjectName("client2", "project1");
             string user = RunConfigurator.GetSourceMailbox("client2", "project1", "entry8");
-            try
-            {
-                LoginAndSelectRole(login, password, client);
-                SelectProject(projectName);
-                User.AtProjectOverviewForm().OpenUsersList();
-                User.AtUsersForm().PerformSearch(user);
-                User.AtUsersForm().PerfomActionForUser(user, ActionType.Archive);
-                User.AtUsersForm().ConfirmAction();
-                User.AtUsersForm().AssertUserIsNoLongerDisplayed(user);
-            }
-            catch (Exception e)
-            {
-                LogHtml(Browser.GetDriver().PageSource);
-                throw e;
-            }
+            UIVerifyJobsCanBeArchived(login, password, client, projectName, user);
         }
         [TestMethod]
         [TestCategory("MailOnly")]
@@ -72,6 +44,11 @@ namespace Product.Tests.CommonTests.Migration_Tests
             string client = RunConfigurator.GetClient("client1");
             string projectName = RunConfigurator.GetProjectName("client1", "project1");
             string user = RunConfigurator.GetSourceMailbox("client1", "project1", "entry11");
+            UIVerifyJobsCanBeArchived(login, password, client, projectName, user);
+        }
+
+        public void UIVerifyJobsCanBeArchived(string login,string password,string client,string projectName,string user)
+        {
             try
             {
                 LoginAndSelectRole(login, password, client);
