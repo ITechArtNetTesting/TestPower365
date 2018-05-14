@@ -108,10 +108,8 @@
               <metaname>entry13</metaname>
               <source>C7O365SML13@btcorp7.onmicrosoft.com</source>
               <target>C7O365SML13@btcorp9.onmicrosoft.com</target>
-            </entry>
-                      
-
-          </usermigration>
+            </entry>                
+         </usermigration>
 					<file>
 						<metaname>file1</metaname>
 						<filename>MailOnlyCSVC7toC9SML-Automation-part1.csv</filename>
@@ -440,6 +438,11 @@
               <target>P365PFAutoUser4@corp32.cmtsandbox.com</target>
             </entry>
             <entry>
+              <metaname>entry20</metaname>
+              <source>P365PFAutoUser5@corp31.cmtsandbox.com</source>
+              <target>P365PFAutoUser5@corp32.cmtsandbox.com</target>
+            </entry>
+            <entry>
               <metaname>mailboxreset</metaname>
               <prefixArray>P365AutoRemote|P365AutoSAM</prefixArray>
             </entry>
@@ -605,6 +608,8 @@
 			<name>BTCloud7</name>
 			<user>admin@BTCloud7.Power365.Cloud</user>
 			<password>Password31</password>
+      <pfuser>P365PFAutoUser1@corp31.cmtsandbox.com</pfuser>
+      <pfpassword>Password1</pfpassword>
 			<domain>BTCorp31.onmicrosoft.com</domain>
 			<additionaldomain>corp31.cmtsandbox.com</additionaldomain>
 			<aduser>Corp31\administrator</aduser>
@@ -616,6 +621,8 @@
 			<name>BTCloud9</name>
 			<user>admin@BTCloud9.Power365.Cloud</user>
 			<password>Password32</password>
+      <pfuser>P365PFAutoUser1@corp32.cmtsandbox.com</pfuser>
+      <pfpassword>Password1</pfpassword>
 			<aduser>Corp32\administrator</aduser>
 			<adpassword>Password32</adpassword>
 			<domain>BTCorp32.onmicrosoft.com</domain>

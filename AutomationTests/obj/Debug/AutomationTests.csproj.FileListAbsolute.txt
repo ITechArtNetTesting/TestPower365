@@ -486,3 +486,7 @@ D:\Project\BTCloud\SeleniumTests\AutomationTests\bin\Debug\resources\MailEngine\
 D:\Project\BTCloud\SeleniumTests\AutomationTests\bin\Debug\resources\MailEngine\functions\Validations\Invoke-Validate46843.ps1
 D:\Project\BTCloud\SeleniumTests\AutomationTests\bin\Debug\resources\PF\PFMailEngineCleanup.ps1
 D:\Project\BTCloud\SeleniumTests\AutomationTests\bin\Debug\resources\PF\PFPrepareFolder.ps1
+D:\Git\TestPower365\AutomationTests\obj\Debug\AutomationTests.csprojResolveAssemblyReference.cache
+D:\Git\TestPower365\AutomationTests\obj\Debug\AutomationTests.csproj.CoreCompileInputs.cache
+D:\Git\TestPower365\AutomationTests\obj\Debug\AutomationTests.dll
+D:\Git\TestPower365\AutomationTests\obj\Debug\AutomationTests.pdb

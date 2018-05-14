@@ -1169,3 +1169,4 @@ D:\Git\TestPower365\ProbeTests\bin\Debug\ko\System.Spatial.resources.dll
 D:\Git\TestPower365\ProbeTests\bin\Debug\ru\System.Spatial.resources.dll
 D:\Git\TestPower365\ProbeTests\bin\Debug\zh-Hans\System.Spatial.resources.dll
 D:\Git\TestPower365\ProbeTests\bin\Debug\zh-Hant\System.Spatial.resources.dll
+D:\Git\TestPower365\ProbeTests\bin\Debug\resources\PF\PFPrepareFolder.ps1
