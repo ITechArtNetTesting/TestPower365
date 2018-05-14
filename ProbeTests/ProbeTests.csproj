@@ -195,18 +195,6 @@
     <None Include="schedule-tasks.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Apps\BTCloud.Web\BTCloud.Lib\BTCloud.Lib.csproj">
-      <Project>{13769355-6704-46C6-A855-EBF61B828DC6}</Project>
-      <Name>BTCloud.Lib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Monitoring\HealthProbe\HealthProbe.csproj">
-      <Project>{b3c3b0d3-1e2e-495b-8a9f-3509a4a245db}</Project>
-      <Name>HealthProbe</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Monitoring\Monitor.Lib\Monitor.Lib.csproj">
-      <Project>{48d4f265-64ce-4b20-a626-88f3d88f56e0}</Project>
-      <Name>Monitor.Lib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AutomationTests\AutomationTests.csproj">
       <Project>{f38b1ee7-460b-472a-b0a5-d283ab749376}</Project>
       <Name>AutomationTests</Name>

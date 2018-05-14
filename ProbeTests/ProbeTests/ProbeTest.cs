@@ -31,45 +31,45 @@ namespace ProbeTests.ProbeTests
 
         private void InitialStoring(ProbeType probeType)
         {
-            using (var probesDB = new ProbesDb())
-            {
-                var probe = new Probe
-                {
-                    Completed = null,
-                    ProbeType = probeType,
-                    Instance = _instance.ToLower()
-                };
-                probesDB.Probes.Add(probe);
-                probesDB.SaveChanges();
-                _id = probe.ProbeId;
-            }
+            //using (var probesDB = new ProbesDb())
+            //{
+            //    var probe = new Probe
+            //    {
+            //        Completed = null,
+            //        ProbeType = probeType,
+            //        Instance = _instance.ToLower()
+            //    };
+            //    probesDB.Probes.Add(probe);
+            //    probesDB.SaveChanges();
+            //    _id = probe.ProbeId;
+            //}
         }
 
         public abstract void Run();
 
         public void InsertDataToSql(DateTime end)
         {
-            using (var probesDB = new ProbesDb())
-            {
-                var probe = probesDB.Probes.First(p => p.ProbeId == _id);
-                probe.Completed = end;
-                probe.IsSuccess = true;
-                probe.ErrorText = null;
+            //using (var probesDB = new ProbesDb())
+            //{
+            //    var probe = probesDB.Probes.First(p => p.ProbeId == _id);
+            //    probe.Completed = end;
+            //    probe.IsSuccess = true;
+            //    probe.ErrorText = null;
 
-                probesDB.SaveChanges();
-            }
+            //    probesDB.SaveChanges();
+            //}
         }
         public void InsertDataToSql(DateTime end, string error)
         {
-            using (var probesDB = new ProbesDb())
-            {
-                var probe = probesDB.Probes.First(p => p.ProbeId == _id);
-                probe.Completed = end;
-                probe.IsSuccess = false;
-                probe.ErrorText = error;
+            //using (var probesDB = new ProbesDb())
+            //{
+            //    var probe = probesDB.Probes.First(p => p.ProbeId == _id);
+            //    probe.Completed = end;
+            //    probe.IsSuccess = false;
+            //    probe.ErrorText = error;
 
-                probesDB.SaveChanges();
-            }
+            //    probesDB.SaveChanges();
+            //}
             //NOTE: DEBUG
             try
             {
@@ -84,13 +84,13 @@ namespace ProbeTests.ProbeTests
 
         public void CleanUp()
         {
-            using (var probesDB = new ProbesDb())
-            {
-                probesDB.Database.ExecuteSqlCommand(
-                    "dbo.ArchiveProbes @ProbeType, @InstanceName",
-                    new SqlParameter("@ProbeType", _probeType),
-                    new SqlParameter("@InstanceName", _instance));
-            }
+            //using (var probesDB = new ProbesDb())
+            //{
+            //    probesDB.Database.ExecuteSqlCommand(
+            //        "dbo.ArchiveProbes @ProbeType, @InstanceName",
+            //        new SqlParameter("@ProbeType", _probeType),
+            //        new SqlParameter("@InstanceName", _instance));
+            //}
         }
 
 	    public void TakeScreenshot()

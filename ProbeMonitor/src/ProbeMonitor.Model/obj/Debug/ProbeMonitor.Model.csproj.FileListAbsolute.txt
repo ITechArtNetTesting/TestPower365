@@ -1,2 +1,0 @@
-D:\Project\P356\ProbeMonitor\src\ProbeMonitor.Model\obj\Debug\ProbeMonitor.Model.csprojResolveAssemblyReference.cache
-D:\Project\P356\ProbeMonitor\src\ProbeMonitor.Model\obj\Debug\ProbeMonitor.Model.csproj.CoreCompileInputs.cache
