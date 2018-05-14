@@ -847,7 +847,7 @@ namespace Product.Framework.Forms
 					By.XPath(
 						$"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]"),
 					locator + " line");
-			lineLabel.WaitForElementDisappear();
+            Assert.IsTrue(lineLabel.WaitForElementDisappear());
 		}
 
 

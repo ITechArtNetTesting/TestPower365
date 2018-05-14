@@ -21,8 +21,8 @@ namespace Product.Tests.CommonTests.Migration_Tests
             string password = RunConfigurator.GetPassword("client2");
             string client = RunConfigurator.GetClient("client2");
             string projectName = RunConfigurator.GetProjectName("client2", "project2");
-            string user = RunConfigurator.GetSourceMailbox("client2", "project2", "entry17");
-            UIVerifyJobsCanBeArchived(login, password, client, projectName, user);
+            string entry = RunConfigurator.GetSourceMailbox("client2", "project2", "entry20");
+            UIVerifyJobsCanBeArchived(login, password, client, projectName, entry);
         }
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
@@ -32,38 +32,19 @@ namespace Product.Tests.CommonTests.Migration_Tests
             string password = RunConfigurator.GetPassword("client2");
             string client = RunConfigurator.GetClient("client2");
             string projectName = RunConfigurator.GetProjectName("client2", "project1");
-            string user = RunConfigurator.GetSourceMailbox("client2", "project1", "entry8");
-            UIVerifyJobsCanBeArchived(login, password, client, projectName, user);
-        }
-        [TestMethod]
-        [TestCategory("MailOnly")]
-        public void UIVerifyJobsCanBeArchivedForMailOnly()
-        {
-            string login = RunConfigurator.GetUserLogin("client1");
-            string password = RunConfigurator.GetPassword("client1");
-            string client = RunConfigurator.GetClient("client1");
-            string projectName = RunConfigurator.GetProjectName("client1", "project1");
-            string user = RunConfigurator.GetSourceMailbox("client1", "project1", "entry11");
-            UIVerifyJobsCanBeArchived(login, password, client, projectName, user);
+            string entry = RunConfigurator.GetSourceMailbox("client2", "project1", "entry8");
+            UIVerifyJobsCanBeArchived(login, password, client, projectName, entry);
         }
 
-        public void UIVerifyJobsCanBeArchived(string login,string password,string client,string projectName,string user)
+        public void UIVerifyJobsCanBeArchived(string login, string password, string client, string projectName, string entry)
         {
-            try
-            {
-                LoginAndSelectRole(login, password, client);
-                SelectProject(projectName);
-                User.AtProjectOverviewForm().OpenUsersList();
-                User.AtUsersForm().PerformSearch(user);
-                User.AtUsersForm().PerfomActionForUser(user, ActionType.Archive);
-                User.AtUsersForm().ConfirmAction();
-                User.AtUsersForm().AssertUserIsNoLongerDisplayed(user);
-            }
-            catch (Exception e)
-            {
-                LogHtml(Browser.GetDriver().PageSource);
-                throw e;
-            }
+            LoginAndSelectRole(login, password, client);
+            SelectProject(projectName);
+            User.AtProjectOverviewForm().OpenUsersList();
+            User.AtUsersForm().PerformSearch(entry);
+            User.AtUsersForm().PerfomActionForUser(entry, ActionType.Archive);
+            User.AtUsersForm().ConfirmAction();
+            User.AtUsersForm().VerifyLineNotExist(entry);
         }
     }
 }
