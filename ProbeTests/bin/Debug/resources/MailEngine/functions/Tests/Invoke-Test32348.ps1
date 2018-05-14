@@ -3,7 +3,8 @@ function Invoke-Test32348 {
         [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
         [Parameter(Position = 2, Mandatory = $true)] [String]$Attachment,
-        [Parameter(Position = 4, Mandatory = $false)] [switch]$RunDelta
+        [Parameter(Position = 4, Mandatory = $false)] [switch]$RunDelta,
+		[Parameter(Mandatory = $true)][String]$RootPath
     )  
     Begin {
         if ($TargetMailbox.IsPresent) {
@@ -22,7 +23,7 @@ function Invoke-Test32348 {
         $TestResults.TestResult = "Failed"
         Import-Module ($script:ModuleRoot + '\engine\btT2TPSModule.psd1') -Force
         ##Create Message
-        $pfRoot = Get-P365PublicFolderFromPath -FolderPath \Automation\Tests -SourceMailbox
+        $pfRoot = Get-P365PublicFolderFromPath -FolderPath $RootPath -SourceMailbox
         #Move Contact to New folder
         $NewFolder = new-object Microsoft.Exchange.WebServices.Data.ContactsFolder($service)  
         $FolderName = "Test32348-" + (Get-Date).ToString("s")
@@ -47,7 +48,7 @@ function Invoke-Test32348 {
             $NewFolder1 = new-object Microsoft.Exchange.WebServices.Data.ContactsFolder($service)  
             $FolderName1 = "Test32348-" + (Get-Date).ToString("s")
             $NewFolder1.DisplayName = $FolderName1
-            $data.Folder =  "\Automation\tests\" + $FolderName + "\" + $FolderName1
+            $data.Folder =  $RootPath + $FolderName + "\" + $FolderName1
             $NewFolder1.Save($NewFolder.Id)
             $Contact = New-Object Microsoft.Exchange.WebServices.Data.Contact -ArgumentList $service
             #Set the GivenName
@@ -80,8 +81,8 @@ function Invoke-Test32348 {
             $EntryIdVal = $null		
             [Void]$Contact.TryGetProperty($PR_ENTRYID,[ref]$EntryIdVal)  
             $data.MessageId = $EntryIdVal
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
-            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
 	        $data.FileName = [System.IO.Path]::GetFileName($Attachment)
             $Contact.Attachments.AddFileAttachment($Attachment)
             $Contact.Update([Microsoft.Exchange.WebServices.Data.ConflictResolutionMode]::AlwaysOverwrite)
@@ -99,8 +100,8 @@ function Invoke-Test32348 {
         if ($RunDelta.IsPresent) {
             Get-p365TestResults
             # Write-host "Part 1 - Message Created"
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
-            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
         }
 		
     }

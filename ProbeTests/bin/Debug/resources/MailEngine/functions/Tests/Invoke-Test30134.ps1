@@ -2,7 +2,8 @@ function Invoke-Test30134 {
     param( 
         [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
-        [Parameter(Position = 4, Mandatory = $false)] [switch]$RunDelta
+        [Parameter(Position = 4, Mandatory = $false)] [switch]$RunDelta,
+		[Parameter(Mandatory = $true)][String]$RootPath
     )  
     Begin {
         if ($TargetMailbox.IsPresent) {            
@@ -21,7 +22,7 @@ function Invoke-Test30134 {
         $TestResults.TestResult = "Failed"
         Import-Module ($script:ModuleRoot + '\engine\btT2TPSModule.psd1') -Force
         ##Create Message
-        $pfRoot = Get-P365PublicFolderFromPath -FolderPath \Automation\Tests -SourceMailbox
+        $pfRoot = Get-P365PublicFolderFromPath -FolderPath $RootPath -SourceMailbox
         #Move Contact to New folder
         $NewFolder = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
         $FolderName = "Test30134-" + (Get-Date).ToString("s")
@@ -99,16 +100,16 @@ function Invoke-Test30134 {
             
             $okay = $true
             $Folders = @()
-            $Folders += ("\Automation\tests\" + $FolderName + "\" + $FolderName1)
-            $Folders += ("\Automation\tests\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2)
-            $Folders += ("\Automation\tests\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2 + "\" + $FolderName3)
-            $Folders += ("\Automation\tests\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2 + "\" + $FolderName3 + "\" + $FolderName4)
-            $Folders += ("\Automation\tests\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2 + "\" + $FolderName3 + "\" + $FolderName4 + "\" + $FolderName5)
-            $Folders += ("\Automation\tests\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2 + "\" + $FolderName3 + "\" + $FolderName4 + "\" + $FolderName5 + "\" + $FolderName6)
-            $Folders += ("\Automation\tests\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2 + "\" + $FolderName3 + "\" + $FolderName4 + "\" + $FolderName5 + "\" + $FolderName6 + "\" + $FolderName7)
-            $Folders += ("\Automation\tests\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2 + "\" + $FolderName3 + "\" + $FolderName4 + "\" + $FolderName5 + "\" + $FolderName6 + "\" + $FolderName7 + "\" + $FolderName8)
-            $Folders += ("\Automation\tests\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2 + "\" + $FolderName3 + "\" + $FolderName4 + "\" + $FolderName5 + "\" + $FolderName6 + "\" + $FolderName7 + "\" + $FolderName8 + "\" + $FolderName9)
-            $Folders += ("\Automation\tests\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2 + "\" + $FolderName3 + "\" + $FolderName4 + "\" + $FolderName5 + "\" + $FolderName6 + "\" + $FolderName7 + "\" + $FolderName8 + "\" + $FolderName9 + "\" + $FolderName10)
+            $Folders += ($RootPath + "\" + $FolderName + "\" + $FolderName1)
+            $Folders += ($RootPath + "\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2)
+            $Folders += ($RootPath + "\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2 + "\" + $FolderName3)
+            $Folders += ($RootPath + "\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2 + "\" + $FolderName3 + "\" + $FolderName4)
+            $Folders += ($RootPath + "\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2 + "\" + $FolderName3 + "\" + $FolderName4 + "\" + $FolderName5)
+            $Folders += ($RootPath + "\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2 + "\" + $FolderName3 + "\" + $FolderName4 + "\" + $FolderName5 + "\" + $FolderName6)
+            $Folders += ($RootPath + "\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2 + "\" + $FolderName3 + "\" + $FolderName4 + "\" + $FolderName5 + "\" + $FolderName6 + "\" + $FolderName7)
+            $Folders += ($RootPath + "\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2 + "\" + $FolderName3 + "\" + $FolderName4 + "\" + $FolderName5 + "\" + $FolderName6 + "\" + $FolderName7 + "\" + $FolderName8)
+            $Folders += ($RootPath + "\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2 + "\" + $FolderName3 + "\" + $FolderName4 + "\" + $FolderName5 + "\" + $FolderName6 + "\" + $FolderName7 + "\" + $FolderName8 + "\" + $FolderName9)
+            $Folders += ($RootPath + "\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2 + "\" + $FolderName3 + "\" + $FolderName4 + "\" + $FolderName5 + "\" + $FolderName6 + "\" + $FolderName7 + "\" + $FolderName8 + "\" + $FolderName9 + "\" + $FolderName10)
             $TestResults.Data = $Folders
         }
         $Script:TestResults.OverAllResult = "InComplete"		
@@ -130,7 +131,7 @@ function Invoke-Test30134 {
         if ($RunDelta.IsPresent) {
             Get-p365TestResults
             # Write-host "Part 1 - Message Created"
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
         }
 		
     }

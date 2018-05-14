@@ -11,12 +11,14 @@ function Invoke-Validate30122{
 			$Script:TestResults["Test30122"].OverAllResult = "Failed"	
 			$Okay = $false
 			$Script:TestResults["Test30122"].ValidationLastRun = (Get-Date)
-			$Script:TestResults["Test30122"].Data.Folder2
+			$f2 = $Script:TestResults["Test30122"].Data.Folder2
+			Write-Host "Folder2: $f2"
 			$Folder = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath $Script:TestResults["Test30122"].Data.Folder2
 			if($Folder -ne $null){
 				$okay = $true;
 				try{
-					$Script:TestResults["Test30122"].Data.Folder1
+					$f1 = $Script:TestResults["Test30122"].Data.Folder1
+					Write-Host "Folder1: $f1"
 					$Folder2 = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath $Script:TestResults["Test30122"].Data.Folder1
 					if($Folder2 -ne $null){
 						$okay = $false

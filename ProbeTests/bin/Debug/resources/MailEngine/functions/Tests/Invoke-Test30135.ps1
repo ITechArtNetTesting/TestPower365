@@ -2,7 +2,8 @@ function Invoke-Test30135 {
     param( 
         [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
-        [Parameter(Position = 4, Mandatory = $false)] [switch]$RunDelta
+        [Parameter(Position = 4, Mandatory = $false)] [switch]$RunDelta,
+		[Parameter(Mandatory = $true)][String]$RootPath
     )  
     Begin {
         if ($TargetMailbox.IsPresent) {            
@@ -21,7 +22,7 @@ function Invoke-Test30135 {
         $TestResults.TestResult = "Failed"
         Import-Module ($script:ModuleRoot + '\engine\btT2TPSModule.psd1') -Force
         ##Create Message
-        $pfRoot = Get-P365PublicFolderFromPath -FolderPath \Automation\Tests -SourceMailbox
+        $pfRoot = Get-P365PublicFolderFromPath -FolderPath $RootPath -SourceMailbox
         #Move Contact to New folder
         $NewFolder = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
         $FolderName = "Test30135-" + (Get-Date).ToString("s")
@@ -58,8 +59,8 @@ function Invoke-Test30135 {
             
             $okay = $true
             $Folders = @()
-            $Folders += ("\Automation\tests\" + $FolderName + "\" + $FolderName1)
-            $Folders += ("\Automation\tests\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName1)
+            $Folders += ($RootPath + "\" + $FolderName + "\" + $FolderName1)
+            $Folders += ($RootPath + "\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName1)
             $TestResults.Data = $Folders
         }
         $Script:TestResults.OverAllResult = "InComplete"		
@@ -81,7 +82,7 @@ function Invoke-Test30135 {
         if ($RunDelta.IsPresent) {
             Get-p365TestResults
             # Write-host "Part 1 - Message Created"
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
         }
 		
     }

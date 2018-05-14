@@ -2,7 +2,8 @@ function Invoke-Test30142 {
     param( 
         [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
-        [Parameter(Position = 4, Mandatory = $false)] [switch]$RunDelta
+        [Parameter(Position = 4, Mandatory = $false)] [switch]$RunDelta,
+		[Parameter(Mandatory = $true)][String]$RootPath
     )  
     Begin {
         if ($TargetMailbox.IsPresent) {
@@ -23,7 +24,7 @@ function Invoke-Test30142 {
         $TestResults.TestResult = "Failed"
         Import-Module ($script:ModuleRoot + '\engine\btT2TPSModule.psd1') -Force
         ##Create Message
-        $pfRoot = Get-P365PublicFolderFromPath -FolderPath \Automation\Tests -SourceMailbox
+        $pfRoot = Get-P365PublicFolderFromPath -FolderPath $RootPath -SourceMailbox
         #Move Contact to New folder
         $NewFolder = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
         $FolderName = "Test30142-" + (Get-Date).ToString("s")
@@ -78,11 +79,11 @@ function Invoke-Test30142 {
 			
         }
         
-        $data.Folder1 = ("\Automation\Tests\" + $FolderName + "\" + $FolderName1)
-        $data.Folder2 = ("\Automation\Tests\" + $FolderName + "\" + $FolderName2)
-        $data.Folder3 = ("\Automation\Tests\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2)
-        Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
-        Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+        $data.Folder1 = ("\" + $RootPath + "\" + $FolderName + "\" + $FolderName1)
+        $data.Folder2 = ("\" + $RootPath + "\" + $FolderName + "\" + $FolderName2)
+        $data.Folder3 = ("\" + $RootPath + "\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2)
+        Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+        Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
         $NewFolder2.Move($NewFolder1.Id)
         $NewFolder3 = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
         $NewFolder3.DisplayName = $FolderName2
@@ -102,8 +103,8 @@ function Invoke-Test30142 {
         if ($RunDelta.IsPresent) {
             Get-p365TestResults
             # Write-host "Part 1 - Message Created"
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
-            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
         }
 		
     }

@@ -2,7 +2,8 @@ function Invoke-Test30511 {
     param( 
         [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
-        [Parameter(Position = 6, Mandatory = $false)][switch]$RunDelta
+        [Parameter(Position = 6, Mandatory = $false)][switch]$RunDelta,
+		[Parameter(Mandatory = $true)][String]$RootPath
     )  
     Begin {
         $Data = "" | Select OrginalId, MovedId, NewId
@@ -16,7 +17,7 @@ function Invoke-Test30511 {
         }
         Import-Module ($script:ModuleRoot + '\engine\btT2TPSModule.psd1') -Force
         ##Create Message
-        $pfRoot = Get-P365PublicFolderFromPath -FolderPath \Automation\Tests -SourceMailbox
+        $pfRoot = Get-P365PublicFolderFromPath -FolderPath $RootPath -SourceMailbox
         #Move Contact to New folder
         $NewFolder = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
         $FolderName = "Test30511-" + (Get-Date).ToString("s")
@@ -41,7 +42,7 @@ function Invoke-Test30511 {
             $psPropertySet.Add([Microsoft.Exchange.WebServices.Data.FolderSchema]::Permissions)
             $NewFolder = [Microsoft.Exchange.WebServices.Data.Folder]::Bind($service, $NewFolder.Id, $psPropertySet)
             $NewFolder.TryGetProperty($PR_ENTRYID, [ref]$EntryIdVal)
-            $data.Folder1 = ("\Automation\tests\" + $FolderName)
+            $data.Folder1 = ($RootPath + "\" + $FolderName)
             $NewFolder1 = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
             $FolderName1 = $FolderName
             $NewFolder1.DisplayName = $FolderName1
@@ -52,8 +53,8 @@ function Invoke-Test30511 {
             $NewFolder2.DisplayName = $FolderName2
             $NewFolder2.FolderClass = "IPF.Appointment"			
             $NewFolder2.Save($NewFolder1.Id)
-            $data.Folder2 = ("\Automation\tests\" + $FolderName + "\" + $FolderName1)
-            $data.Folder3 = ("\Automation\tests\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2)
+            $data.Folder2 = ($RootPath + "\" + $FolderName + "\" + $FolderName1)
+            $data.Folder3 = ($RootPath + "\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2)
             $Appointment = New-Object Microsoft.Exchange.WebServices.Data.Appointment -ArgumentList $service
             $Appointment.Subject = "Appointment test - 30511 "
             $Appointment.Body = New-Object Microsoft.Exchange.WebServices.Data.MessageBody  
@@ -70,8 +71,8 @@ function Invoke-Test30511 {
             $EntryIdVal = $null		
             [Void]$Appointment.TryGetProperty($PR_ENTRYID, [ref]$EntryIdVal)  
             $data.MessageId = $EntryIdVal    
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
-            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
             $Appointment.Subject = "Appointment Modification - 30511 "
             $Appointment.Update([Microsoft.Exchange.WebServices.Data.ConflictResolutionMode]::AlwaysOverwrite,[Microsoft.Exchange.WebServices.Data.SendInvitationsOrCancellationsMode]::SendToNone)
         }  
@@ -101,8 +102,8 @@ function Invoke-Test30511 {
         if ($RunDelta.IsPresent) {
             Get-p365TestResults
             # Write-host "Part 1 - Message Created"
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
-            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
         }
         Write-Host "Done" -ForegroundColor Green
     }
