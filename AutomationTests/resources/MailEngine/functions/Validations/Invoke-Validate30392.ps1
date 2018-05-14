@@ -13,7 +13,7 @@ function Invoke-Validate30392{
 	    		$Message =  Invoke-P365FindPublicFolderMessage -FolderPath $Script:TestResults["Test30392"].Data.Folder3 -MessageId $Script:TestResults["Test30392"].Data.MessageId -TargetMailbox
 			if($Message -eq $null){
 				$Script:TestResults["Test30392"].ValidationResult = "Succeeded"
-				$Script:TestResults["Test30392"].OverAllResult = "Successful"
+				$Script:TestResults["Test30392"].OverAllResult = "Succeeded"  
 
 			}
 			else{

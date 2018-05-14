@@ -36,7 +36,7 @@ namespace Product.Framework.Forms.PublicFolderMigrationForms
 		public void SelectPare(string tenant)
 		{
 			Log.Info("Selecting pare with: "+tenant);
-			Button tenantPareButton = new Button(By.XPath($"//*[contains(text(), '{tenant}')]"), tenant+" tenant pare");
+			Button tenantPareButton = new Button(By.XPath($"//label/*[contains(text(), '{tenant}')]"), tenant+" tenant pare");
 			tenantPareButton.Click();
 			try
 			{

@@ -35,7 +35,7 @@ function Invoke-Validate30111{
 			$session.Runspace.Dispose()
 			if($Okay){
 				$Script:TestResults["Test30111"].ValidationResult = "Succeeded"
-				$Script:TestResults["Test30111"].OverAllResult = "Successful"
+				$Script:TestResults["Test30111"].OverAllResult = "Succeeded"  
 
 			}
 			else{

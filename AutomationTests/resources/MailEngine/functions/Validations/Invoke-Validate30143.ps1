@@ -34,7 +34,7 @@ function Invoke-Validate30143{
 				$Folder2 = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath $Script:TestResults["Test30143"].Data.Folder2
 				if($folder1 -ne $null -band $folder2 -ne $null){
 					$Script:TestResults["Test30143"].ValidationResult = "Succeeded"
-					$Script:TestResults["Test30143"].OverAllResult = "Successful"
+					$Script:TestResults["Test30143"].OverAllResult = "Succeeded"  
 				}
 
 			}

@@ -16,7 +16,7 @@ function Invoke-Validate30488{
 				$Script:TestResults["Test30488"].Data.NewSubject
 				if($Message.Subject -eq $Script:TestResults["Test30488"].Data.NewSubject){
 					$Script:TestResults["Test30488"].ValidationResult = "Succeeded"
-					$Script:TestResults["Test30488"].OverAllResult = "Successful"
+					$Script:TestResults["Test30488"].OverAllResult = "Succeeded"  
 				}
 
 			}

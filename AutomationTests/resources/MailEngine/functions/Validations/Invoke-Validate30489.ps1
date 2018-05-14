@@ -14,7 +14,7 @@ function Invoke-Validate30489{
 			if($Message -ne $null){
 				if($Message.Location -eq $Script:TestResults["Test30489"].Data.Location){
 					$Script:TestResults["Test30489"].ValidationResult = "Succeeded"
-					$Script:TestResults["Test30489"].OverAllResult = "Successful"
+					$Script:TestResults["Test30489"].OverAllResult = "Succeeded"  
 				}
 
 			}

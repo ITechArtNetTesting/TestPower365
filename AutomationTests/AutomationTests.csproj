@@ -211,6 +211,7 @@
     <Compile Include="Tests\CommonTests\LandingPageTests\DiscoveryFrequencyShouldBeSetted_TC32698.cs" />
     <Compile Include="Tests\CommonTests\LoginAndConfigureTest.cs" />
     <Compile Include="Tests\CommonTests\Menu Tests\Menu_IntegrationProject_31679.cs" />
+    <Compile Include="Tests\CommonTests\Migration Tests\RollbackCanBeCanceled_TC39559.cs" />
     <Compile Include="Tests\CommonTests\Migration Tests\RollbackShouldBeCompleted_InTheUserDetailView.cs" />
     <Compile Include="Tests\CommonTests\ProbeTest.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\DatabaseCleanup.cs" />
@@ -227,9 +228,12 @@
     <Compile Include="Tests\IntegrationTests\DistributionGroupsInitialTest.cs" />
     <Compile Include="Tests\IntegrationTests\DistributionGroupsValidationTest.cs" />
     <Compile Include="Tests\IntegrationTests\DistributionGroupTests\GroupsWillBeShownCorectly_TC31793.cs" />
+    <Compile Include="Tests\IntegrationTests\DistributionGroupTests\VerifyGroupSyncWillShowAccurateJobStatus_TC31796.cs" />
     <Compile Include="Tests\IntegrationTests\GroupsViewTest.cs" />
     <Compile Include="Tests\IntegrationTests\SetUpTest\MailUPNandExtensionAttributesAreValidMatchingOptions_32951.cs" />
     <Compile Include="Tests\CommonTests\ActionButtonsTests\StoppingStateButtonsTest.cs" />
+    <Compile Include="Tests\MailEngine\MailEngineTestBase.cs" />
+    <Compile Include="Tests\MailEngine\PublicFolderTest.cs" />
     <Compile Include="Tests\MailOnlyTests\ActionButtonsTests\SyncingButtonsTest.cs" />
     <Compile Include="Tests\MailOnlyTests\ActionButtonsTests\UserMigrationButtonsTest.cs" />
     <Compile Include="Tests\MailOnlyTests\ImportAndExportTests\ExportTest.cs" />
@@ -258,7 +262,7 @@
     <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\DiscoveryTest.cs" />
     <Compile Include="Tests\PowerShellTests\AddressTransformTest.cs" />
     <Compile Include="Tests\PowerShellTests\AddTest.cs" />
-    <Compile Include="Tests\PowerShellTests\MailEngineTest.cs" />
+    <Compile Include="Tests\MailEngine\MailEngineTest.cs" />
     <Compile Include="Tests\PowerShellTests\PermissionsPrepareTest.cs" />
     <Compile Include="Tests\PowerShellTests\CompareTest.cs" />
     <Compile Include="Tests\PowerShellTests\CompleteDeltaDiscoveryTest.cs" />
@@ -640,7 +644,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="MailEngine.orderedtest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
@@ -736,13 +742,22 @@
     <None Include="resources\MailEngine\functions\Other\Get-P365FolderFromPath.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="resources\MailEngine\functions\Other\Invoke-CreateFoldersAndItems.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="resources\MailEngine\functions\Other\Invoke-P365ArchiveCopy.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\MailEngine\functions\Other\Invoke-P365ArchiveRollback.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="resources\MailEngine\functions\Other\Invoke-P365CopyPublicFolder.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="resources\MailEngine\functions\Other\Invoke-P365FillArchive.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Other\Invoke-P365FillPublicFolder.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\MailEngine\functions\Other\Invoke-P365FindAppointment.ps1">
@@ -760,6 +775,12 @@
     <None Include="resources\MailEngine\functions\Other\Invoke-P365FindMessageReply.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="resources\MailEngine\functions\Other\Invoke-P365FindPublicFolder.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Other\Invoke-P365FindPublicFolderMessage.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="resources\MailEngine\functions\Other\Invoke-P365FindTask.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -770,6 +791,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\MailEngine\functions\Other\Invoke-P365MailboxRollback.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Other\Invoke-P365SyncPublicFolder.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Other\Invoke-P365ValidateFolderItems.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\MailEngine\functions\Other\New-P365TranslationFile.ps1">
@@ -832,6 +859,309 @@
     <None Include="resources\MailEngine\functions\Tests\Invoke-Test26765.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test27842.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30070.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30072.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30075.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30076.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30077.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30078.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30079.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30080.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30091.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30095.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30096.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30097.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30098.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30099.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30110.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30111.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30112.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30119.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30122.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30134.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30135.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30142.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30143.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30146a.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30146b.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30336.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30337.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30338.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30373.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30377.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30378.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30379.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30380.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30381.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30382.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30383.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30384.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30385.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30387.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30387b.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30388.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30391.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30392.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30393.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30394.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30469.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30470.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30471.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30475.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30476.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30477.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30478.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30479.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30485.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30488.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30489.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30490.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30501.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30503.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30504.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30511.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30512.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30513.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30518.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30519.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30522.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test30822.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32077.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32267.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32268.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32282.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32341.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32342.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32343.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32344.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32345.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32346.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32347.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32348.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32349.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32350.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32351.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32362.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32363.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32364.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32366.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32369.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test32370.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test34504.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test34505.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test34507.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test34508.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test34510.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test34519.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test34520.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test34521.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test34522.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test34523.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test34524.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test36315.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="resources\MailEngine\functions\Tests\Invoke-Test37613.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -859,7 +1189,19 @@
     <None Include="resources\MailEngine\functions\Tests\Invoke-Test39551.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test39557.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="resources\MailEngine\functions\Tests\Invoke-Test39570.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test45249a.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test45249b.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Tests\Invoke-Test46843.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\MailEngine\functions\Tests\Invoke-Test48974.ps1">
@@ -919,6 +1261,303 @@
     <None Include="resources\MailEngine\functions\Validations\Invoke-Validate26765.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate27842.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30070.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30072.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30075.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30076.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30077.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30078.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30079.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30080.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30091.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30095.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30096.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30097.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30098.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30099.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30110.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30111.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30112.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30119.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30122.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30134.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30135.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30142.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30142a.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30142b.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30143.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30336.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30337.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30338.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30373.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30378.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30379.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30380.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30381.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30382.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30383.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30384.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30385.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30387.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30387b.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30388.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30391.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30392.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30393.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30394.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30469.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30470.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30471.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30475.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30476.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30477.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30478.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30479.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30485.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30488.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30489.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30490.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30501.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30503.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30504.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30511.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30512.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30513.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30518.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30519.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30522.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30822.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32077.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32267.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32268.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32341.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32342.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32343.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32344.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32345.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32346.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32347.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32348.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32349.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32350.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32351.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32362.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32363.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32364.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32366.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32369.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32370.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate34504.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate34505.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate34507.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate34508.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate34510.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate34519.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate34520.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate34521.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate34522.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate34523.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate34524.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate36315.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="resources\MailEngine\functions\Validations\Invoke-Validate37613.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -946,7 +1585,19 @@
     <None Include="resources\MailEngine\functions\Validations\Invoke-Validate39551.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate39557.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="resources\MailEngine\functions\Validations\Invoke-Validate39570..ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate45249a.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate45249b.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate46843.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\MailEngine\functions\Validations\Invoke-Validate48974.ps1">
@@ -999,6 +1650,12 @@
     </None>
     <None Include="resources\PF\PfAutomationScript.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\PF\PFPrepareFolder.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\PF\PFMailEngineCleanup.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\PF\SourcePrepScript.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

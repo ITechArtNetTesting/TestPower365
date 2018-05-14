@@ -142,6 +142,12 @@ namespace Product.Framework.Elements
 			return GetElement().Location;
 		}
 
+        public void WaitForElementVisible(int timeoutSec = 5, int pollIntervalSec = 0)
+        {
+            if (!IsElementVisible(locator, timeoutSec, pollIntervalSec))
+                throw new Exception("Could not find visible element.");
+        }
+
 		/// <summary>
 		///     Waits for element present.
 		/// </summary>
@@ -382,27 +388,27 @@ namespace Product.Framework.Elements
 				Log.Fatal($"Element with locator: '{locator}' still exists!");
 			}
 		}
-        //public void WaitForAjaxLoad()
-        //{
-        //    if (jQueryExists())
-        //    {
-        //        var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromMinutes(1));
-        //        wait.PollingInterval = TimeSpan.FromMilliseconds(100);
-        //        wait.Until(wd => (bool)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0"));
-        //    }
-        //}
-        //static bool jQueryExists()
-        //{
-        //    try
-        //    {
-        //        (Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0");
-        //        return true;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return false;
-        //    }
-        //}
+        public void WaitForAjaxLoad()
+        {
+            if (jQueryExists())
+            {
+                var wait = new WebDriverWait(Browser.GetDriver(), TimeSpan.FromMinutes(1));
+                wait.PollingInterval = TimeSpan.FromMilliseconds(100);
+                wait.Until(wd => (bool)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0"));
+            }
+        }
+        static bool jQueryExists()
+        {
+            try
+            {
+                (Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0");
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
         public void ScrollTillVisible()
 		{

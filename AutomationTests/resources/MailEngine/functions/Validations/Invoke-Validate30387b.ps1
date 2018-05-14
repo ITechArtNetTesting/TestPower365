@@ -25,7 +25,7 @@ function Invoke-Validate30387b {
                     $SourceFolder = Get-P365PublicFolderFromPath -SourceMailbox -FolderPath ($Script:TestResults["Test30387b"].Data.Folder2)
                     $Okay = Invoke-P365ValidateFolderItems -SourceFolder $SourceFolder -TargetFolder $TargetFolder
                     if($Okay){
-                        $Script:TestResults["Test30387b"].OverAllResult = "Successful"	
+                        $Script:TestResults["Test30387b"].OverAllResult = "Succeeded"  	
                         $Script:TestResults["Test30387b"].ValidationResult = "Succeeded"
                     }
 

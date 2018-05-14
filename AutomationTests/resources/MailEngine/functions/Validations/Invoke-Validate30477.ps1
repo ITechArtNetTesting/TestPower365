@@ -14,7 +14,7 @@ function Invoke-Validate30477{
 			if($Message -ne $null){
 				if($Message.PercentComplete -eq 60){				
 						$Script:TestResults["Test30477"].ValidationResult = "Succeeded"
-						$Script:TestResults["Test30477"].OverAllResult = "Successful"					
+						$Script:TestResults["Test30477"].OverAllResult = "Succeeded"  					
 				}
 
 			}

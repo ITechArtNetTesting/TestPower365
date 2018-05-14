@@ -43,7 +43,7 @@ function Set-PublicFolderContentRoutingHeader {
             $creds = New-Object System.Net.NetworkCredential($Script:TargetPSCreds.UserName.ToString(), $Script:TargetPSCreds.GetNetworkCredential().password.ToString()) 
         }
         else {
-    
+           
             $creds = New-Object System.Net.NetworkCredential($Script:SourcePSCreds.UserName.ToString(), $Script:SourcePSCreds.GetNetworkCredential().password.ToString()) 
         }
 
@@ -55,14 +55,37 @@ function Set-PublicFolderContentRoutingHeader {
         $AutoDiscoverService.RedirectionUrlValidationCallback = { $true };
         $AutoDiscoverService.PreAuthenticate = $true;
         $AutoDiscoverService.KeepAlive = $false;
-        $gsp = $AutoDiscoverService.GetUserSettings($MailboxName, [Microsoft.Exchange.WebServices.Autodiscover.UserSettingName]::AutoDiscoverSMTPAddress);
+        $ByPass = ""
+        if($TargetMailbox.IsPresent){
+            if(![String]::IsNullOrEmpty($Script:TargetAutoDiscoverOverRide)){
+                $ByPass = $Script:TargetAutoDiscoverOverRide
+            } 
+        }
+        else{
+            if(![String]::IsNullOrEmpty($Script:SourceAutoDiscoverOverRide)){
+                $ByPass = $Script:SourceAutoDiscoverOverRide
+            } 
+        }
+        if([String]::IsNullOrEmpty($ByPass)){
+            $gsp = $AutoDiscoverService.GetUserSettings($MailboxName, [Microsoft.Exchange.WebServices.Autodiscover.UserSettingName]::AutoDiscoverSMTPAddress);
+        }
+        else{
+            
+        }
+
         #Write-Host $AutoDiscoverService.url
         $auDisXML = "<Autodiscover xmlns=`"http://schemas.microsoft.com/exchange/autodiscover/outlook/requestschema/2006`"><Request>`r`n" +
         "<EMailAddress>" + $pfAddress + "</EMailAddress>`r`n" +
         "<AcceptableResponseSchema>http://schemas.microsoft.com/exchange/autodiscover/outlook/responseschema/2006a</AcceptableResponseSchema>`r`n" +
         "</Request>`r`n" +
         "</Autodiscover>`r`n";
-        $AutoDiscoverRequest = [System.Net.HttpWebRequest]::Create($AutoDiscoverService.url.ToString().replace(".svc", ".xml"));
+         if([String]::IsNullOrEmpty($ByPass)){
+             $AutoDiscoverRequest = [System.Net.HttpWebRequest]::Create($AutoDiscoverService.url.ToString().replace(".svc", ".xml"));
+         }else{
+             $AutoDiscoverRequest = [System.Net.HttpWebRequest]::Create(($ByPass + "/autodiscover.xml"));
+         }
+
+       
         $bytes = [System.Text.Encoding]::UTF8.GetBytes($auDisXML);
         $AutoDiscoverRequest.ContentLength = $bytes.Length;
         $AutoDiscoverRequest.ContentType = "text/xml";

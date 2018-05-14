@@ -28,7 +28,7 @@ function Invoke-Validate22728{
 					if($fperm.UserId.PrimarySmtpAddress.ToLower() -eq $Script:TestResults["Test22728"].Data.SecondTargetPermission.ToLower()){ 
 						if($Folder1.DisplayName -eq $Script:TestResults["Test22728"].Data.NewFolderName){
 							$Script:TestResults["Test22728"].ValidationResult = "Succeeded"
-							$Script:TestResults["Test22728"].OverAllResult = "Successful"
+							$Script:TestResults["Test22728"].OverAllResult = "Succeeded"  
 						}
 
 						}  

@@ -38,9 +38,9 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
         [TestCategory("Integration")]
         public void StoppingStateButtonsTest_Integration_25825()
         {
-            bool isIntegrate = true;
+            bool isIntegrate = true;          
             StoppingStateButtons(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client1"), RunConfigurator.GetClient("client2"),
-                                 RunConfigurator.GetProjectName("client2", "project2"), RunConfigurator.GetSourceMailbox("client2", "project2", "entry10"), isIntegrate);
+                                RunConfigurator.GetProjectName("client2", "project2"), RunConfigurator.GetSourceMailbox("client2", "project2", "entry10"), isIntegrate);//entry10
 
         }
 
@@ -50,28 +50,26 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
                 LoginAndSelectRole(login, password, client);
                 SelectProject(projectName);
                 User.AtProjectOverviewForm().OpenUsersList();
+                User.AtUsersForm().PerformSearch(sourceMailbox);
+                User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
+                //For Integration project
+                if (isIntegrate)
+                {
+                    User.AtUsersForm().SelectAction(ActionType.Prepare);
+                    User.AtUsersForm().Apply();
+                    User.AtUsersForm().ConfirmAction();
+                    WaitForState(sourceMailbox, State.Prepared, 2500000, 30);
+                    User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
+                }
 
-            //For Integration project
-            if (isIntegrate)
-            {
-                User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
-                PerformActionAndWaitForState(sourceMailbox, ActionType.Prepare, State.Preparing, 60000, 10);
-                WaitForState(sourceMailbox, State.Prepared, 2400000, 30);
-                WaitForState(sourceMailbox, State.Prepared, 2400000, 30);
-            }
-                User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
-                User.AtUsersForm().CheckActionIsEnabled(ActionType.Sync);            
+            User.AtUsersForm().CheckActionIsEnabled(ActionType.Sync);            
                 User.AtUsersForm().Apply();
                 User.AtUsersForm().ConfirmSync();
-
-                User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 900000);
-
+                User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 2500000, 10);
                 User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
                 //Verify
                 User.AtUsersForm().CheckActionIsDisabled(ActionType.Sync);
-                User.AtUsersForm().CheckActionIsEnabled(ActionType.Stop);
-                User.AtUsersForm().CheckActionIsDisabled(ActionType.Complete);
-
+                User.AtUsersForm().CheckActionIsEnabled(ActionType.Stop);            
                 User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
                 User.AtUsersForm().SelectAction(ActionType.Stop);
                 User.AtUsersForm().Apply();
@@ -81,8 +79,15 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
                 User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
                 User.AtUsersForm().CheckActionIsDisabled(ActionType.Sync);                
                 User.AtUsersForm().CheckActionIsDisabled(ActionType.Stop);
-                User.AtUsersForm().CheckActionIsDisabled(ActionType.Complete);
-         
+                if (isIntegrate)  //For Integration project
+                {
+                    User.AtUsersForm().CheckActionIsDisabled(ActionType.Cutover);
+                }
+                else  //For MailOnly and Discovery projects
+                {
+                    User.AtUsersForm().CheckActionIsDisabled(ActionType.Complete);
+                }
+
         }
    }
 }

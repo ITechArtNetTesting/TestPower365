@@ -16,7 +16,7 @@ function Invoke-Validate30501{
 				if($Message.Sensitivity.ToString() -eq "Private"){
 		
 				$Script:TestResults["Test30501"].ValidationResult = "Succeeded"
-				$Script:TestResults["Test30501"].OverAllResult = "Successful"
+				$Script:TestResults["Test30501"].OverAllResult = "Succeeded"  
 
 				}
 				else{

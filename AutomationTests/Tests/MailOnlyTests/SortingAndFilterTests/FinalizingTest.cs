@@ -33,13 +33,13 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		        User.AtUsersForm().SelectAction(ActionType.Sync);
 		        User.AtUsersForm().Apply();
 		        User.AtUsersForm().ConfirmSync();
-		        User.AtUsersForm().WaitForState(sourceMailbox5, State.Syncing, 100000);
-                User.AtUsersForm().WaitForState(sourceMailbox5, State.Synced, 600000, 5);
+		        User.AtUsersForm().WaitForState(sourceMailbox5, State.Syncing, 100000,5);
+                User.AtUsersForm().WaitForState(sourceMailbox5, State.Synced, 900000, 10);
 		        User.AtUsersForm().SelectEntryBylocator(sourceMailbox5);
 		        User.AtUsersForm().SelectAction(ActionType.Cutover);
 		        User.AtUsersForm().Apply();
 		        User.AtUsersForm().ConfirmCutover();
-		        User.AtUsersForm().WaitForState(sourceMailbox5, State.Complete, 300000, 5);
+		        User.AtUsersForm().WaitForState(sourceMailbox5, State.Complete, 900000, 10);
 		        User.AtUsersForm().OpenProjectOverview();
 		        User.AtProjectOverviewForm().AssertFinalizingCountGreaterThan(0);
 		        User.AtProjectOverviewForm().OpenFinalizingUsers();
