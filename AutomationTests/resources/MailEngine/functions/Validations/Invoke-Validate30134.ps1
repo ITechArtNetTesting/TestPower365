@@ -25,7 +25,7 @@ function Invoke-Validate30134{
 
 			if($Okay -band $Processed){
 				$Script:TestResults["Test30134"].ValidationResult = "Succeeded"
-				$Script:TestResults["Test30134"].OverAllResult = "Successful"
+				$Script:TestResults["Test30134"].OverAllResult = "Succeeded"  
 
 			}
 			else{

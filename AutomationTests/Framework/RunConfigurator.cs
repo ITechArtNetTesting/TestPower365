@@ -77,7 +77,7 @@ namespace Product.Framework
         public static string GetADGroupName(string client, string project, string group)
         {
             return xmlDoc.SelectSingleNode($"//metaname[text()='{client}']/..//metaname[text()='{project}']/..//metaname[text()='{group}']/../name").InnerText;
-        }
+        }     
 
         public static string GetMail(string client, string project, string group)
         {

@@ -15,7 +15,7 @@ function Invoke-Validate32369{
 				$Message.Load()
 				if($Message.Categories.Contains("test12345")){				
 						$Script:TestResults["Test32369"].ValidationResult = "Succeeded"
-						$Script:TestResults["Test32369"].OverAllResult = "Successful"					
+						$Script:TestResults["Test32369"].OverAllResult = "Succeeded"  					
 				}
 
 			}

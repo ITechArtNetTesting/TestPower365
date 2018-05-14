@@ -19,7 +19,7 @@ function Invoke-Validate30478{
 				if($Message.StartDate.ToString("yyyy-MM-ddTHH:mm:ss") -eq $Script:TestResults["Test30478"].Data.StartDate.ToString("yyyy-MM-ddTHH:mm:ss")){
 					if($Message.DueDate.ToString("yyyy-MM-ddTHH:mm:ss") -eq $Script:TestResults["Test30478"].Data.DueDate.ToString("yyyy-MM-ddTHH:mm:ss")){
 						$Script:TestResults["Test30478"].ValidationResult = "Succeeded"
-						$Script:TestResults["Test30478"].OverAllResult = "Successful"
+						$Script:TestResults["Test30478"].OverAllResult = "Succeeded"  
 					}
 				}
 

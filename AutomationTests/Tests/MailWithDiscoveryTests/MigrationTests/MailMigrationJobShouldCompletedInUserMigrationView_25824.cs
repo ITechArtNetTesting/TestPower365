@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Product.Tests.MailWithDiscoveryTests.MigrationTests
+namespace Product.Tests.CommonTests.Migration_Tests
 {
     [TestClass]
     public class MailMigrationJobShouldCompletedInUserMigrationView_25824 : LoginAndConfigureTest

@@ -40,7 +40,7 @@ function Invoke-Validate30098{
 					if($fperm.UserId.PrimarySmtpAddress -ne $null){  
 						write-host ($fperm.UserId.PrimarySmtpAddress)
 						if($fperm.UserId.PrimarySmtpAddress.ToLower() -eq $Script:TestResults["Test30098"].Data.SecondTargetPermission.ToLower()){
-								$Script:TestResults["Test30098"].OverAllResult = "Successful"	
+								$Script:TestResults["Test30098"].OverAllResult = "Succeeded"  	
 								$Script:TestResults["Test30098"].ValidationResult = "Succeeded"	
 						}  
 					}  

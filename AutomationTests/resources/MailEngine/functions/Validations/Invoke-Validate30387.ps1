@@ -21,7 +21,7 @@ function Invoke-Validate30387 {
             $Script:TestResults["Test30387"].OverAllResult = "Failed"	
             $Script:TestResults["Test30387"].ValidationLastRun = (Get-Date)	
             if ($Okay) {
-					$Script:TestResults["Test30387"].OverAllResult = "Successful"	
+					$Script:TestResults["Test30387"].OverAllResult = "Succeeded"  	
                     $Script:TestResults["Test30387"].ValidationResult = "Succeeded"
             }
             Write-Host "Done" -ForegroundColor Green

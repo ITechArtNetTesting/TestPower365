@@ -18,7 +18,7 @@ function Invoke-Validate30518{
 				if($Message.TimeZone.ToString() -eq "Utc"){
 		
 				$Script:TestResults["Test30518"].ValidationResult = "Succeeded"
-				$Script:TestResults["Test30518"].OverAllResult = "Successful"
+				$Script:TestResults["Test30518"].OverAllResult = "Succeeded"  
 
 				}
 				else{

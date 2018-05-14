@@ -50,16 +50,16 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
                 LoginAndSelectRole(login, password, client);
                 SelectProject(projectName);
                 User.AtProjectOverviewForm().OpenUsersList();
-
+                User.AtUsersForm().PerformSearch(sourceMailbox);
+                User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
             //For Integration project
             if (isIntegrate)
-            {
-                User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
+            {               
                 PerformActionAndWaitForState(sourceMailbox, ActionType.Prepare, State.Preparing, 60000, 10);
                 WaitForState(sourceMailbox, State.Prepared, 2400000, 30);
                 WaitForState(sourceMailbox, State.Prepared, 2400000, 30);
             }
-                User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
+               
                 User.AtUsersForm().CheckActionIsEnabled(ActionType.Sync);            
                 User.AtUsersForm().Apply();
                 User.AtUsersForm().ConfirmSync();

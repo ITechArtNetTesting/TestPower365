@@ -21,7 +21,7 @@ function Invoke-Validate27842{
 		$Script:TestResults["Test27842"].ValidationLastRun = (Get-Date)	
 		if($folder -ne $Null){
 			$TestResults.TestResult = "Succeeded"
-			$Script:TestResults["Test27842"].OverAllResult = "Successful"	
+			$Script:TestResults["Test27842"].OverAllResult = "Succeeded"  	
 			$Script:TestResults["Test27842"].ValidationResult = "Succeeded"	
 			#test permissions
 			$psPropertySet = new-object Microsoft.Exchange.WebServices.Data.PropertySet([Microsoft.Exchange.WebServices.Data.BasePropertySet]::FirstClassProperties)

@@ -61,14 +61,25 @@ namespace Product.Framework.Forms
         {
             filter.Click();
         }
-         
+
+        public void CheckSyncForGroup(string groupName, bool isEnabled= true)
+        {
+            Log.Info("Checking sync is enabled for group");
+            WaitForAjaxLoad();
+            foundGroup.Click();
+            SelectAction(ActionType.Sync);
+            CheckApplyButton(isEnabled);
+            foundGroup.Click();
+        }
+
+
 
         public void CheckSyncIsEnabledForGroup(string groupName)
         {
             Log.Info("Checking sync is enabled for group");
             WaitForAjaxLoad();
             foundGroup.Click();
-            SelectGroupAction(ActionType.Sync);
+            SelectAction(ActionType.Sync);
             CheckApplyButtonIsEnabled();
             foundGroup.Click();
         }
@@ -78,17 +89,19 @@ namespace Product.Framework.Forms
             Log.Info("Checking sync is disabled for group");
             WaitForAjaxLoad();
             foundGroup.Click();
-            SelectGroupAction(ActionType.Sync);
+            SelectAction(ActionType.Sync);
             CheckApplyButtonIsDisabled();
             foundGroup.Click();
 
         }
-        public void SelectGroupAction(ActionType type)
+        public void SelectAction(ActionType type)
         {
             OpenActionsDropdown();
             ChooseAction(type.GetValue());
         }
-                
+
+          
+
         public new void OpenActionsDropdown()
         {
             Log.Info("Opening Actions dropdown");
@@ -104,5 +117,30 @@ namespace Product.Framework.Forms
                 actionsDropdownButton.Click();
             }
         }
+
+        public void SelectGroupBylocator(string locator)
+        {
+           Log.Info("Selecting checkbox for: " + locator);
+     
+            var entryCheckboxButton =
+                new RadioButton(
+                    By.XPath(
+                        $"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]/ancestor::tr//input"),
+                    locator + " entry checkbox");
+            var entryLabel = new Button(By.XPath(
+                    $"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]"),
+                locator + " entry label");
+
+               ScrollToElement(entryLabel.GetElement());                 
+               entryLabel.Click();
+               entryCheckboxButton.WaitForSelected(5000);
+         
+        }
+
+
     }
+
+
+
+
 }
