@@ -3,6 +3,7 @@ using Product.Framework;
 using Product.Framework.Enums;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,8 +45,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
 
 
         public void RollbackTest_InTheUserDetailView(String login, String password, String client, String projectName, String sourceMailbox, bool isIntegrate = false)
-        {
-           
+        {           
             LoginAndSelectRole(login, password, client);
             SelectProject(projectName);
             User.AtProjectOverviewForm().OpenUsersList();
@@ -53,7 +53,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
             User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
             User.AtUsersForm().SelectAction(ActionType.Rollback);
             User.AtUsersForm().AssertApplyIsDisabled();
-            User.AtUsersForm().OpenDetailsByLocator(sourceMailbox);
+            User.AtUsersForm().OpenDetailsByLocator(sourceMailbox);           
             User.AtUsersForm().AssertRollBackIsDisabled();
             //prepared
             if (isIntegrate)
@@ -77,13 +77,16 @@ namespace Product.Tests.CommonTests.Migration_Tests
             User.AtUsersForm().SetDontResetPermissions();
             User.AtUsersForm().SetSureCheckbox();
             User.AtUsersForm().RollbackClick_modalWindow();
+            var startTime = DateTime.Now;
             User.AtUsersForm().WaitForState_DetailPage(sourceMailbox, State.RollbackInProgress, 600000, 30);
             User.AtUsersForm().WaitForJobIsCreated(sourceMailbox, State.RollbackInProgress, 600000, 30);
             User.AtUsersForm().WaitForState_DetailPage(sourceMailbox, State.RollbackCompleted, 2400000, 30);
             //Verify
             User.AtUsersForm().WaitForJobIsCreated(sourceMailbox, State.RollbackCompleted, 600000, 30);
             User.AtUsersForm().JobProgressBarShouldShownCorrectProgress("Rollback Complete");
+            var endTime = DateTime.Now;
             User.AtUsersForm().DownloadRollbackLogs();
+            User.AtUsersForm().CheckDetailsTime(startTime,endTime);
             User.AtUsersForm().CloseUserDetails();
             //Verify downloaded
             RunConfigurator.CheckRollbackLogsFileIsDownloaded();
