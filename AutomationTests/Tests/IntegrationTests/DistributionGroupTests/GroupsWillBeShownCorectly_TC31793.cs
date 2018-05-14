@@ -25,7 +25,7 @@ namespace Product.Tests.IntegrationTests.DistributionGroupTests
         string disrtibutionGroup;
         string securityGroup;
 
-    [TestInitialize()]
+       [TestInitialize()]
         public void Initialize()
         {
             login = RunConfigurator.GetUserLogin("client2");
@@ -46,9 +46,9 @@ namespace Product.Tests.IntegrationTests.DistributionGroupTests
             SelectProject(project);
             User.AtProjectOverviewForm().OpenTotalGroups();
             User.AtGroupsMigrationForm().SearchGroup(securityGroup);
-            User.AtGroupsMigrationForm().CheckSyncIsDisabledForGroup(securityGroup);
+            User.AtGroupsMigrationForm().CheckSyncForGroup(disrtibutionGroup, false);
             User.AtGroupsMigrationForm().SearchGroup(disrtibutionGroup);
-            User.AtGroupsMigrationForm().CheckSyncIsEnabledForGroup(disrtibutionGroup);
+            User.AtGroupsMigrationForm().CheckSyncForGroup(disrtibutionGroup, true);           
 
         }
 

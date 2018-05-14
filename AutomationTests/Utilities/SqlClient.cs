@@ -20,7 +20,7 @@ namespace Product.Utilities
             CheckConnection();
             using (SqlCommand cmd = new SqlCommand(command, _connection))
             {
-                cmd.CommandTimeout = 80;
+                cmd.CommandTimeout = 180;
                 return cmd.ExecuteNonQuery();
             }
         }

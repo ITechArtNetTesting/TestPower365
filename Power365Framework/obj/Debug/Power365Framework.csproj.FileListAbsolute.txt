@@ -10,3 +10,15 @@ D:\Project\BTCloud\SeleniumTests\Power365Framework\obj\Debug\Power365Framework.c
 D:\Project\BTCloud\SeleniumTests\Power365Framework\obj\Debug\Power365Framework.csproj.CoreCompileInputs.cache
 D:\Project\BTCloud\SeleniumTests\Power365Framework\obj\Debug\BinaryTree.Power365.AutomationFramework.dll
 D:\Project\BTCloud\SeleniumTests\Power365Framework\obj\Debug\BinaryTree.Power365.AutomationFramework.pdb
+C:\Users\valery.piniazik\Desktop\SeleniumTests\Power365Framework\bin\Debug\Resources\chromedriver.exe
+C:\Users\valery.piniazik\Desktop\SeleniumTests\Power365Framework\bin\Debug\BinaryTree.Power365.AutomationFramework.dll
+C:\Users\valery.piniazik\Desktop\SeleniumTests\Power365Framework\bin\Debug\BinaryTree.Power365.AutomationFramework.pdb
+C:\Users\valery.piniazik\Desktop\SeleniumTests\Power365Framework\bin\Debug\SeleniumExtras.WaitHelpers.dll
+C:\Users\valery.piniazik\Desktop\SeleniumTests\Power365Framework\bin\Debug\WebDriver.dll
+C:\Users\valery.piniazik\Desktop\SeleniumTests\Power365Framework\bin\Debug\WebDriver.Support.dll
+C:\Users\valery.piniazik\Desktop\SeleniumTests\Power365Framework\bin\Debug\WebDriver.xml
+C:\Users\valery.piniazik\Desktop\SeleniumTests\Power365Framework\bin\Debug\WebDriver.Support.xml
+C:\Users\valery.piniazik\Desktop\SeleniumTests\Power365Framework\obj\Debug\Power365Framework.csprojResolveAssemblyReference.cache
+C:\Users\valery.piniazik\Desktop\SeleniumTests\Power365Framework\obj\Debug\Power365Framework.csproj.CoreCompileInputs.cache
+C:\Users\valery.piniazik\Desktop\SeleniumTests\Power365Framework\obj\Debug\BinaryTree.Power365.AutomationFramework.dll
+C:\Users\valery.piniazik\Desktop\SeleniumTests\Power365Framework\obj\Debug\BinaryTree.Power365.AutomationFramework.pdb
