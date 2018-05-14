@@ -31,7 +31,7 @@ function Invoke-Validate30383{
 			}
 			if($HasNoteFailed -band $Okay){
 				$Script:TestResults["Test30383"].ValidationResult = "Succeeded"
-				$Script:TestResults["Test30383"].OverAllResult = "Successful"
+				$Script:TestResults["Test30383"].OverAllResult = "Succeeded"  
 
 			}
 			else{

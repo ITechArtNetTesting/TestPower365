@@ -54,7 +54,7 @@ function Get-P365PublicFolderIdFromPath {
                 }
             }
             else {
-                "Error Folder Not Found"
+                "Error Folder Not Found " + $FolderPath
                 $tfTargetFolder = $null
                 break
             }
@@ -71,7 +71,7 @@ function Get-P365PublicFolderIdFromPath {
             return $tfTargetFolder.Id.UniqueId.ToString()
         }
         else {
-            throw "Folder not found"
+            throw ("Folder not found : " + $FolderPath)
         }
     }
 }

@@ -29,6 +29,7 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		    {
 		        LoginAndReloadFile(login, password, client, projectName, fileName);
 		        User.AtProjectOverviewForm().OpenUsersList();
+                User.AtUsersForm().PerformSearch(sourceMailbox8);
 		        User.AtUsersForm().SelectEntryBylocator(sourceMailbox8);
 		        User.AtUsersForm().SelectAction(ActionType.Archive);
 		        User.AtUsersForm().Apply();

@@ -34,7 +34,7 @@ function Invoke-Validate30076{
 				}  
 			}
 			if($okay){
-				$Script:TestResults["Test30076"].OverAllResult = "Successful"	
+				$Script:TestResults["Test30076"].OverAllResult = "Succeeded"  	
 				$Script:TestResults["Test30076"].ValidationResult = "Succeeded"	
 				$Folder2  = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ($Script:TestResults["Test30076"].Data.Folder2)
 				$Folder2.Load($psPropertySet)

@@ -14,7 +14,7 @@ function Invoke-Validate30475{
 			if($Message -ne $null){
 				if($Message.Status -eq [Microsoft.Exchange.WebServices.Data.TaskStatus]::Completed){				
 						$Script:TestResults["Test30475"].ValidationResult = "Succeeded"
-						$Script:TestResults["Test30475"].OverAllResult = "Successful"					
+						$Script:TestResults["Test30475"].OverAllResult = "Succeeded"  					
 				}
 
 			}

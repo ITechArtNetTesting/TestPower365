@@ -34,7 +34,7 @@ function Invoke-Validate32077{
 				}  
 			}
 			if($okay){
-				$Script:TestResults["Test32077"].OverAllResult = "Successful"	
+				$Script:TestResults["Test32077"].OverAllResult = "Succeeded"  	
 				$Script:TestResults["Test32077"].ValidationResult = "Succeeded"	
 			}
 

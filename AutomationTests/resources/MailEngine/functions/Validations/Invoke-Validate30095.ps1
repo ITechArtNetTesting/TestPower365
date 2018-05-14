@@ -43,7 +43,7 @@ function Invoke-Validate30095{
 						write-host ($fperm.UserId.PrimarySmtpAddress)
 						if($fperm.UserId.PrimarySmtpAddress.ToLower() -eq $Script:TestResults["Test30095"].Data.FirstTargetPermission.ToLower()){
 							if($fperm.PermissionLevel -eq [Microsoft.Exchange.WebServices.Data.FolderPermissionLevel]::Owner){
-								$Script:TestResults["Test30095"].OverAllResult = "Successful"	
+								$Script:TestResults["Test30095"].OverAllResult = "Succeeded"  	
 								$Script:TestResults["Test30095"].ValidationResult = "Succeeded"	
 							}
 						}  

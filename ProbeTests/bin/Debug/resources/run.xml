@@ -92,7 +92,26 @@
 							<group>Wave2</group>
 							<profile>Profile 1</profile>
 						</entry>
-					</usermigration>
+            <entry>
+              <metaname>entry11</metaname>
+              <source>C7O365SML11@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML11@btcorp9.onmicrosoft.com</target>
+              <group>Wave2</group>
+              <profile>Profile 1</profile>
+            </entry>
+            <entry>
+              <metaname>entry12</metaname>
+              <source>C7O365SML12@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML12@btcorp9.onmicrosoft.com</target>              
+            </entry>
+            <entry>
+              <metaname>entry13</metaname>
+              <source>C7O365SML13@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML13@btcorp9.onmicrosoft.com</target>
+            </entry>
+                      
+
+          </usermigration>
 					<file>
 						<metaname>file1</metaname>
 						<filename>MailOnlyCSVC7toC9SML-Automation-part1.csv</filename>
@@ -142,7 +161,11 @@
           </tenantmigrations>
           <usermigration>
             <entry>
-              
+              <metaname>entry1</metaname>
+              <source>C3O365ShareMBX1@BTCorp3.onmicrosoft.com</source>
+              <target>C3O365ShareMBX1@btcorp11.onmicrosoft.com</target>
+              <group>Wave1</group>
+              <profile>Profile 1</profile>
             </entry>
           </usermigration>
           <file>
@@ -239,6 +262,16 @@
               <metaname>entry8</metaname>
               <source>C7O365SML27@btcorp7.onmicrosoft.com</source>
               <target>C7O365SML27@btcorp9.onmicrosoft.com</target>
+            </entry>
+            <entry>
+              <metaname>entry9</metaname>
+              <source>C7O365SML28@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML28@btcorp9.onmicrosoft.com</target>
+            </entry>
+            <entry>
+              <metaname>entry10</metaname>
+              <source>C7O365SML29@btcorp7.onmicrosoft.com</source>
+              <target>C7O365SML29@btcorp9.onmicrosoft.com</target>
             </entry>
           </usermigration>
 					<adgroups>
@@ -376,11 +409,7 @@
 					    <source>P365AutoRemoteRoom2@corp31.cmtsandbox.com</source>
 					    <target>P365AutoRemoteRoom2@corp32.cmtsandbox.com</target>
 					  </entry>        
-             <entry>
-              <metaname>entry16</metaname>
-              <source>P365PFAutoUser2@corp31.cmtsandbox.com</source>
-              <target>P365PFAutoUser2@corp32.cmtsandbox.com</target>
-              </entry>           
+               
              <entry>
 							<metaname>entry34</metaname>
 							<source>P365Filter4@corp31.cmtsandbox.com</source>
@@ -394,6 +423,21 @@
               <metaname>entry16</metaname>
               <source>\Automation\Tests</source>
               <target>\Automation</target>
+            </entry>
+            <entry>
+              <metaname>entry17</metaname>
+              <source>P365PFAutoUser2@corp31.cmtsandbox.com</source>
+              <target>P365PFAutoUser2@corp32.cmtsandbox.com</target>
+            </entry>
+            <entry>
+              <metaname>entry18</metaname>
+              <source>P365PFAutoUser3@corp31.cmtsandbox.com</source>
+              <target>P365PFAutoUser3@corp32.cmtsandbox.com</target>
+            </entry>
+            <entry>
+              <metaname>entry19</metaname>
+              <source>P365PFAutoUser4@corp31.cmtsandbox.com</source>
+              <target>P365PFAutoUser4@corp32.cmtsandbox.com</target>
             </entry>
             <entry>
               <metaname>mailboxreset</metaname>
@@ -449,6 +493,14 @@
 					      <owner></owner>
 					      <member1></member1>
 					    </members>
+              <disrtibutiongroup>
+                <metaname>group7</metaname>
+                <name>P365AutoGroup7</name>
+                <members>
+                  <owner></owner>
+                  <member1></member1>
+                </members>
+              </disrtibutiongroup>
 					  </disrtibutiongroup>
             <disrtibutiongroup>
               <metaname>groupreset</metaname>

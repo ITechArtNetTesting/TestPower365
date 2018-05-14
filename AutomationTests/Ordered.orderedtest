@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<OrderedTest name="ordered" storage="d:\project\btcloud\seleniumtests\automationtests\ordered.orderedtest" id="14d8777f-fb6a-4c3d-b08d-b7393d9d1b8b" continueAfterFailure="true" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+<OrderedTest name="ordered" storage="ordered.orderedtest" id="14d8777f-fb6a-4c3d-b08d-b7393d9d1b8b" continueAfterFailure="true" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
   <TestLinks>
     <TestLink id="66180ff7-9816-0e64-7843-3bf40f9e4944" name="Automation_MO_ImportTest" storage="bin\debug\automationtests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <TestLink id="4dc1a67d-6000-37b0-4c60-39e8abddeced" name="Automation_MO_TenantConfigurationTest" storage="bin\debug\automationtests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
@@ -36,5 +36,6 @@
     <TestLink id="93dfe18f-edf1-bc44-82a0-91885c3d33a3" name="ProjectLandingPageHasTenantStatusSection_MD_25117" storage="bin\debug\automationtests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
     <TestLink id="68bec5dc-187a-6a53-ade4-c0bc1903b34f" name="DiscoveryFrequencyCanBeSetted_Integration_32698" storage="bin\debug\automationtests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
     <TestLink id="d8496388-0353-c0e1-2cf8-d010f68d066c" name="Automation_MO_SortingTest" storage="bin\debug\automationtests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="6aab8700-5696-8542-90db-bf2f838dc62b" name="GroupsWillBeShownCorectly_31793" storage="bin\debug\automationtests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
   </TestLinks>
 </OrderedTest>

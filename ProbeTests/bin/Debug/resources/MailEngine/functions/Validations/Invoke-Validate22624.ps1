@@ -18,7 +18,7 @@ function Invoke-Validate22624{
 			$Script:TestResults["Test22624"].ValidationLastRun = (Get-Date)
 			if($TargetMessage -eq $null){
 				$Script:TestResults["Test22624"].ValidationResult = "Succeeded"
-				$Script:TestResults["Test22624"].OverAllResult = "Successful"
+				$Script:TestResults["Test22624"].OverAllResult = "Succeeded"  
 
 			}
 			else{

@@ -24,8 +24,7 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		    string client = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/../name");
 		    string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project3']/..//name");
 		    string filename = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project3']/..//metaname[text()='file2']/..//filename");
-		    string sourceMailbox4 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project3']/..//metaname[text()='entry1']/..//source");
-
+		   
             try
             {
                 LoginAndReloadFile(login, password, client, projectName, filename);

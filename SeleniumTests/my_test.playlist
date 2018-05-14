@@ -1,1 +1,0 @@
-<Playlist Version="1.0"><Add Test="Product.Tests.MailOnlyTests.TenantConfigurationTests.TenantConfigurationTest.Automation_MO_TenantConfigurationTest" /><Add Test="Product.Tests.MailWithDiscoveryTests.MigrationTests.DiscoveryTest.Automation_MD_DiscoveryProcessTest" /></Playlist>

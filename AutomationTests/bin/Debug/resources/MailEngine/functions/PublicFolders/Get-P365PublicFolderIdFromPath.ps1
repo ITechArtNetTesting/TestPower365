@@ -12,9 +12,9 @@ function Get-P365PublicFolderIdFromPath {
 		
         [Parameter(Position = 2, Mandatory = $true)]
         [String]
-		$SmtpAddress,
+        $SmtpAddress,
 		
-		[Parameter(Position = 3, Mandatory = $false)] [switch]$SourceMailbox,
+        [Parameter(Position = 3, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 4, Mandatory = $false)] [switch]$TargetMailbox
     )
     process {
@@ -32,7 +32,12 @@ function Get-P365PublicFolderIdFromPath {
             $HeaderAddress = new-object System.Net.Mail.MailAddress($service.HttpHeaders["X-AnchorMailbox"])
             $pfHeader = $GuidAsString + "@" + $HeaderAddress.Host
             write-host ("Root Public Folder Routing Information Header : " + $pfHeader)
-            $service.HttpHeaders.Add("X-PublicFolderMailbox", $pfHeader)
+            if($service.HttpHeaders.ContainsKey("X-PublicFolderMailbox")){
+                $service.HttpHeaders["X-PublicFolderMailbox"] = $pfHeader
+            }else{
+                $service.HttpHeaders.Add("X-PublicFolderMailbox", $pfHeader)
+            }
+            
         }
         #Split the Search path into an array  
         $fldArray = $FolderPath.Split("\")
@@ -49,7 +54,7 @@ function Get-P365PublicFolderIdFromPath {
                 }
             }
             else {
-                "Error Folder Not Found"
+                "Error Folder Not Found " + $FolderPath
                 $tfTargetFolder = $null
                 break
             }
@@ -66,7 +71,7 @@ function Get-P365PublicFolderIdFromPath {
             return $tfTargetFolder.Id.UniqueId.ToString()
         }
         else {
-            throw "Folder not found"
+            throw ("Folder not found : " + $FolderPath)
         }
     }
 }

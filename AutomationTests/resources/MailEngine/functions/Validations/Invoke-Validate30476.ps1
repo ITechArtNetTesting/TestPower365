@@ -14,7 +14,7 @@ function Invoke-Validate30476{
 			if($Message -ne $null){
 				if($Message.Importance -eq [Microsoft.Exchange.WebServices.Data.Importance]::High){				
 						$Script:TestResults["Test30476"].ValidationResult = "Succeeded"
-						$Script:TestResults["Test30476"].OverAllResult = "Successful"					
+						$Script:TestResults["Test30476"].OverAllResult = "Succeeded"  					
 				}
 
 			}
