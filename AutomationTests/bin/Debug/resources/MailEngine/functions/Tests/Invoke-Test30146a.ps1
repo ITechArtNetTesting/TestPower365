@@ -2,7 +2,8 @@ function Invoke-Test30146a {
     param( 
         [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
-        [Parameter(Position = 6, Mandatory = $false)][switch]$RunDelta
+        [Parameter(Position = 6, Mandatory = $false)][switch]$RunDelta,
+		[Parameter(Mandatory = $true)][String]$RootPath
     )  
     Begin {
         $Data = "" | Select OrginalId, MovedId, NewId
@@ -16,7 +17,7 @@ function Invoke-Test30146a {
         }
         Import-Module ($script:ModuleRoot + '\engine\btT2TPSModule.psd1') -Force
         ##Create Message
-        $pfRoot = Get-P365PublicFolderFromPath -FolderPath \Automation\Tests -SourceMailbox
+        $pfRoot = Get-P365PublicFolderFromPath -FolderPath $RootPath -SourceMailbox
         #Move Contact to New folder
         $NewFolder = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
         $FolderName = "Test30146a-" + (Get-Date).ToString("s")
@@ -41,7 +42,7 @@ function Invoke-Test30146a {
             $psPropertySet.Add([Microsoft.Exchange.WebServices.Data.FolderSchema]::Permissions)
             $NewFolder = [Microsoft.Exchange.WebServices.Data.Folder]::Bind($service, $NewFolder.Id, $psPropertySet)
             $NewFolder.TryGetProperty($PR_ENTRYID, [ref]$EntryIdVal)
-            $data.Folder1 = ("\Automation\tests\" + $FolderName)
+            $data.Folder1 = ($RootPath + "\" + $FolderName)
             $data.SourceId = $NewFolder.Id
             $data.FirstTargetPermission = $FirstTargetPermission
             $data.SecondTargetPermission = $SecondTargetPermission
@@ -50,7 +51,7 @@ function Invoke-Test30146a {
             $NewFolder1.DisplayName = $FolderName1
             $NewFolder1.FolderClass = "IPF.Note"			
             $NewFolder1.Save($NewFolder.Id)
-            $data.Folder2 = ("\Automation\tests\" + $FolderName + "\" + $FolderName1)
+            $data.Folder2 = ($RootPath + "\" + $FolderName + "\" + $FolderName1)
             #clear perms
         }  
         else {  
@@ -59,14 +60,14 @@ function Invoke-Test30146a {
         } 	
         
         # Write-host "Part 1 - Message Created"
-        Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+        Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
 
         # Invoke-P365MailboxCopy	-mappingfile $tfile	
-        $Folder = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ("\Automation\tests\" + $FolderName)
+        $Folder = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ($RootPath + "\" + $FolderName)
         $FolderName += "-Renamed"
         $NewFolder.DisplayName = $FolderName 
         $NewFolder.Update()        
-        $data.Folder1 = ("\Automation\tests\" + $FolderName)
+        $data.Folder1 = ($RootPath + "\" + $FolderName)
         $TestResults = "" | Select TestCase, Description, TestLastRun, TestResult, Data, ValidationLastRun, ValidationResult, OverAllResult
         $TestResults.TestCase = "30146a"
         $TestResults.Description = "Folder Permission"
@@ -89,7 +90,7 @@ function Invoke-Test30146a {
         if ($RunDelta.IsPresent) {
             Get-p365TestResults
             # Write-host "Part 1 - Message Created"
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
         }
         Write-Host "Done" -ForegroundColor Green
     }

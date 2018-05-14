@@ -2,7 +2,8 @@ function Invoke-Test30470 {
     param( 
         [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
-        [Parameter(Position = 6, Mandatory = $false)][switch]$RunDelta
+        [Parameter(Position = 6, Mandatory = $false)][switch]$RunDelta,
+		[Parameter(Mandatory = $true)][String]$RootPath
     )  
     Begin {
         $Data = "" | Select OrginalId, MovedId, NewId
@@ -16,7 +17,7 @@ function Invoke-Test30470 {
         }
         Import-Module ($script:ModuleRoot + '\engine\btT2TPSModule.psd1') -Force
         ##Create Message
-        $pfRoot = Get-P365PublicFolderFromPath -FolderPath \Automation\Tests -SourceMailbox
+        $pfRoot = Get-P365PublicFolderFromPath -FolderPath $RootPath -SourceMailbox
         #Move Contact to New folder
         $NewFolder = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
         $FolderName = "Test30470-" + (Get-Date).ToString("s")
@@ -42,7 +43,7 @@ function Invoke-Test30470 {
             $psPropertySet.Add([Microsoft.Exchange.WebServices.Data.FolderSchema]::Permissions)
             $NewFolder = [Microsoft.Exchange.WebServices.Data.Folder]::Bind($service, $NewFolder.Id, $psPropertySet)
             $NewFolder.TryGetProperty($PR_ENTRYID, [ref]$EntryIdVal)
-            $data.Folder1 = ("\Automation\tests\" + $FolderName)
+            $data.Folder1 = ($RootPath + "\" + $FolderName)
             $NewFolder1 = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
             $FolderName1 = $FolderName
             $NewFolder1.DisplayName = $FolderName1
@@ -54,8 +55,8 @@ function Invoke-Test30470 {
             $NewFolder2.DisplayName = $FolderName2
             $NewFolder2.FolderClass = "IPF.Note"			
             $NewFolder2.Save($NewFolder1.Id)
-            $data.Folder2 = ("\Automation\tests\" + $FolderName + "\" + $FolderName1)
-            $data.Folder3 = ("\Automation\tests\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2)
+            $data.Folder2 = ($RootPath + "\" + $FolderName + "\" + $FolderName1)
+            $data.Folder3 = ($RootPath + "\" + $FolderName + "\" + $FolderName1 + "\" + $FolderName2)
             $Email = New-Object Microsoft.Exchange.WebServices.Data.EmailMessage -ArgumentList $service
             $Email.Subject = "POST test - "
             $Email.ToRecipients.Add($Script:SourceMailbox) 
@@ -70,8 +71,8 @@ function Invoke-Test30470 {
             $EntryIdVal = $null		
             [Void]$Email.TryGetProperty($PR_ENTRYID, [ref]$EntryIdVal)  
             $data.MessageId = $EntryIdVal
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
-            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
             $Email.Delete([Microsoft.Exchange.WebServices.Data.DeleteMode]::HardDelete)
         }  
         else {  
@@ -100,8 +101,8 @@ function Invoke-Test30470 {
         if ($RunDelta.IsPresent) {
             Get-p365TestResults
             # Write-host "Part 1 - Message Created"
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
-            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
         }
         Write-Host "Done" -ForegroundColor Green
     }

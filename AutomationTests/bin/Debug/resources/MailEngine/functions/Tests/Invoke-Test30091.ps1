@@ -6,7 +6,8 @@ function Invoke-Test30091{
 		[Parameter(Position=3, Mandatory=$false)] [String]$SecondSourcePermission,
 		[Parameter(Position=4, Mandatory=$true)] [String]$FirstTargetPermission,
 		[Parameter(Position=5, Mandatory=$false)] [String]$SecondTargetPermission,
-		[Parameter(Position=6, Mandatory=$false)][switch]$RunDelta
+		[Parameter(Position=6, Mandatory=$false)][switch]$RunDelta,
+		[Parameter(Mandatory = $true)][String]$RootPath
     )  
  	Begin
 	 {
@@ -21,7 +22,7 @@ function Invoke-Test30091{
 		}
 		Import-Module ($script:ModuleRoot + '\engine\btT2TPSModule.psd1') -Force
 		##Create Message
- 		$pfRoot = Get-P365PublicFolderFromPath -FolderPath \Automation\Tests -SourceMailbox
+ 		$pfRoot = Get-P365PublicFolderFromPath -FolderPath $RootPath -SourceMailbox
 		#Move Contact to New folder
 		$NewFolder = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
 		$FolderName = "Test30091-" + (Get-Date).ToString("s")
@@ -62,7 +63,7 @@ function Invoke-Test30091{
 		$tfile = New-P365TranslationFile -SourceAddress $FirstSourcePermission -TargetAddress $FirstTargetPermission
 		New-P365TranslationFile -SourceAddress $Script:SourceMailbox -TargetAddress $Script:TargetMailbox -FileName $tfile
 		# Write-host "Part 1 - Message Created"
-		Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+		Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
 		$NewFolder1 = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
 		$FolderName1 = "Test30091-Child" + (Get-Date).ToString("s")
 		$NewFolder1.DisplayName = $FolderName1
@@ -74,9 +75,9 @@ function Invoke-Test30091{
 		$NewFolder1.Permissions.Clear()
 		$NewFolder1.Permissions.Add($newfp)  
 		$NewFolder1.Update()
-		$data.Folder2 = ("\Automation\tests\" + $FolderName + "\" + $FolderName1)
+		$data.Folder2 = ($RootPath + "\" + $FolderName + "\" + $FolderName1)
 		# Invoke-P365MailboxCopy	-mappingfile $tfile	
-		$Folder  = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ("\Automation\tests\" + $FolderName)
+		$Folder  = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ($RootPath + "\" + $FolderName)
 		$TestResults = "" | Select TestCase,Description,TestLastRun,TestResult,Data,ValidationLastRun,ValidationResult,OverAllResult
 		$TestResults.TestCase = "30091"
 		$TestResults.Description = "Folder Permission"
@@ -112,7 +113,7 @@ function Invoke-Test30091{
 			$tfile = New-P365TranslationFile -SourceAddress $FirstSourcePermission -TargetAddress $FirstTargetPermission
 			New-P365TranslationFile -SourceAddress $Script:SourceMailbox -TargetAddress $Script:TargetMailbox -FileName $tfile
 			# Write-host "Part 1 - Message Created"
-			Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+			Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
 		}
 		Write-Host "Done" -ForegroundColor Green
      }

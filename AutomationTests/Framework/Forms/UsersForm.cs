@@ -18,9 +18,7 @@ namespace Product.Framework.Forms
 		private static readonly By TitleLocator =
 			By.XPath("//div[@id='users']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]");
 
-        private readonly Button groupActionsDropdownButton = new Button(By.XPath("//div[@class='ibox m-t-lg']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"), "Actions dropdown in groups edit page");
-
-        private readonly Button actionsDropdownButton =
+		private readonly Button actionsDropdownButton =
 			new Button(
 				By.XPath(
 					"//div[@id='users']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"),
@@ -35,14 +33,7 @@ namespace Product.Framework.Forms
 		private readonly Button closeFilterButton =
 			new Button(By.XPath("//div[@class='panel-footer']//button[text()='Close']"), "Close filter button");
 
-        public void AssertUserIsNoLongerDisplayed(string user)
-        {
-            WaitForAjaxLoad();
-            var FoundUser = new RadioButton(By.XPath($"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{user.ToLower()}')]]/ancestor::tr//input"), "Found user");
-            Assert.IsFalse(FoundUser.IsPresent());
-        }
-
-        private readonly Button closeModalWindowButton =
+		private readonly Button closeModalWindowButton =
 			new Button(By.XPath("//div[contains(@class, 'modal fade in')]//div[@class='modal-footer']//button[text()='Close']"),
 				"Close modal window button");
 
@@ -204,9 +195,7 @@ namespace Product.Framework.Forms
 			new Button(
 				By.XPath(
 					"//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//span[text()[contains(.,'State')]]/..//i[contains(@class, 'fa-filter')]"),
-				"State filter button");
-
-        
+				"State filter button");    
         private Button enabledOkProfileButton => new Button(By.XPath("//button[contains(@data-bind, 'addToMigrationProfile')][not(@disabled='')]"), "Enabled OK profile button");
 
         private Button userDetailsRefreshButton => new Button(By.XPath("//button[contains(@data-bind, 'refresh.run')][not(@disabled='')]"), "User Details Refresh button");
@@ -429,7 +418,8 @@ namespace Product.Framework.Forms
 
 		public void SelectAction(ActionType type)
 		{
-			OpenActionsDropdown();
+            Log.Info($"Select action {type}");
+            OpenActionsDropdown();
 			ChooseAction(type.GetValue());
 		}
 
@@ -847,7 +837,7 @@ namespace Product.Framework.Forms
 					By.XPath(
 						$"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{locator.ToLower()}')]]"),
 					locator + " line");
-            Assert.IsTrue(lineLabel.WaitForElementDisappear());
+			lineLabel.WaitForElementDisappear();
 		}
 
 
@@ -861,37 +851,6 @@ namespace Product.Framework.Forms
             Apply();
         }
 
-        public void PerfomActionForGroup(string locator, ActionType type)
-        {
-            ScrollToTop();
-            Log.Info(type + " user by locator: " + locator);
-            WaitForAjaxLoad();
-            SelectEntryBylocator(locator);
-            SelectGroupAction(type);
-            Apply();
-        }
-
-        public void SelectGroupAction(ActionType type)
-        {
-            OpenGroupActionsDropdown();
-            ChooseAction(type.GetValue());
-        }
-
-        private void OpenGroupActionsDropdown()
-        {
-            Log.Info("Opening Actions dropdown");
-            ScrollToElement(groupActionsDropdownButton.GetElement());
-            groupActionsDropdownButton.Click();
-            try
-            {
-                expandedActionsDropdownButton.WaitForElementPresent(5000);
-            }
-            catch (Exception)
-            {
-                Log.Info("Actions dropdown is not ready");
-                groupActionsDropdownButton.Click();
-            }
-        }
 
         public void AssertUserHaveSyncingState(string locator)
 		{
@@ -1262,7 +1221,8 @@ namespace Product.Framework.Forms
 
 		public void StoreEntriesData()
 		{
-			Store.SourceList.Clear();
+            WaitForAjaxLoad();
+            Store.SourceList.Clear();
 			Store.TargetList.Clear();
 			Store.StateList.Clear();
 			Store.ProgressList.Clear();
@@ -1907,8 +1867,7 @@ namespace Product.Framework.Forms
 				RefreshData();
 				counter++;
 			}
-			stateLabel.WaitForElementPresent();
-            return stateLabel.IsElementVisible();
+			return stateLabel.WaitForElementPresent();
 
         }
         #endregion
@@ -2004,10 +1963,10 @@ namespace Product.Framework.Forms
         {
             string stateValue = state.GetValue();
 
-            Log.Info("Assert state {state.value}");
+            Log.Info($"Assert state {stateValue}");
             
             WaitForAjaxLoad();            
-            Assert.IsTrue(VerifyStateIS(stateValue), "State not equals {state}");
+            Assert.IsTrue(VerifyStateIS(stateValue), $"State not equals {state}");
         }
 
         public void AssertRollBackJobNotStarted()

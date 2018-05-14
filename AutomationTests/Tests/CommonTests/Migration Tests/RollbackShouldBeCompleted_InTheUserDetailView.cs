@@ -82,7 +82,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
             User.AtUsersForm().WaitForState_DetailPage(sourceMailbox, State.RollbackCompleted, 2400000, 30);
             //Verify
             User.AtUsersForm().WaitForJobIsCreated(sourceMailbox, State.RollbackCompleted, 600000, 30);
-          //  User.AtUsersForm().JobProgressBarShouldShownCorrectProgress("Rollback Complete");
+            User.AtUsersForm().JobProgressBarShouldShownCorrectProgress("Rollback Complete");
             User.AtUsersForm().DownloadRollbackLogs();
             User.AtUsersForm().CloseUserDetails();
             //Verify downloaded

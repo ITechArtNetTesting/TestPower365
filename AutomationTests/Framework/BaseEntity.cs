@@ -18,15 +18,24 @@ namespace Product.Framework
 		{
 			XmlConfigurator.Configure();
 			Log = LogManager.GetLogger(typeof(BaseEntity));
-		}
 
-		// Just logs current step number and name.
-		/// <summary>
-		///     Logs the step.
-		/// </summary>
-		/// <param name="step">The step.</param>
-		/// <param name="message">The message.</param>
-		public void LogStep(int step, string message)
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
+        }
+
+        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            // Log the exception, display it, etc
+            Log.Error(string.Format("UNHANDLED EXCEPTION: {0}", (e.ExceptionObject as Exception).Message), e.ExceptionObject as Exception);
+        }
+
+        // Just logs current step number and name.
+        /// <summary>
+        ///     Logs the step.
+        /// </summary>
+        /// <param name="step">The step.</param>
+        /// <param name="message">The message.</param>
+        public void LogStep(int step, string message)
 		{
 			Log.Info($"----------[ Step {step} ]: {message}");
 		}

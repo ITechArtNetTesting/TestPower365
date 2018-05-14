@@ -2,7 +2,8 @@ function Invoke-Test30387 {
     param( 
         [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
-        [Parameter(Position = 6, Mandatory = $false)][switch]$RunDelta
+        [Parameter(Position = 6, Mandatory = $false)][switch]$RunDelta,
+		[Parameter(Mandatory = $true)][String]$RootPath
     )  
     Begin {
         $Data = "" | Select OrginalId, MovedId, NewId
@@ -16,7 +17,7 @@ function Invoke-Test30387 {
         }
         Import-Module ($script:ModuleRoot + '\engine\btT2TPSModule.psd1') -Force
         ##Create Message
-        $pfRoot = Get-P365PublicFolderFromPath -FolderPath \Automation\Tests -SourceMailbox
+        $pfRoot = Get-P365PublicFolderFromPath -FolderPath $RootPath -SourceMailbox
         #Move Contact to New folder
         $NewFolder = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
         $FolderName = "Test30387-" + (Get-Date).ToString("s")
@@ -41,17 +42,17 @@ function Invoke-Test30387 {
         } 	
         
         # Write-host "Part 1 - Message Created"
-        Invoke-p365SyncPublicFolder -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
-	    Invoke-p365CopyPublicFolder -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+        Invoke-p365SyncPublicFolder -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+	    Invoke-p365CopyPublicFolder -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
         # Invoke-P365MailboxCopy	-mappingfile $tfile	
-        $Folder = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ("\Automation\tests\" + $FolderName)
+        $Folder = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ($RootPath + "\" + $FolderName)
         $TestResults = "" | Select TestCase, Description, TestLastRun, TestResult, Data, ValidationLastRun, ValidationResult, OverAllResult
         $TestResults.TestCase = "30387"
         $TestResults.Description = "Fill Data"
         $TestResults.TestLastRun = (Get-Date)		
         if ($folder -ne $Null) {
              #test permissions
-            $TestResults.Data = ("\Automation\tests\" + $FolderName) 
+            $TestResults.Data = ($RootPath + "\" + $FolderName) 
             $TestResults.TestResult = "Succeeded"
         }
         else {
@@ -68,7 +69,7 @@ function Invoke-Test30387 {
         if ($RunDelta.IsPresent) {
             Get-p365TestResults
             # Write-host "Part 1 - Message Created"
-            Invoke-p365CopyPublicFolder -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+            Invoke-p365CopyPublicFolder -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
         }
         Write-Host "Done" -ForegroundColor Green
     }

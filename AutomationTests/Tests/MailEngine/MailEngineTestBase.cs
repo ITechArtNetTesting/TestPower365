@@ -157,17 +157,16 @@ namespace Product.Tests.MailEngine
                 }
 
                 powerShell.Commands = command;
-
                 powerShell.Invoke();
             }
             catch (Exception ex)
             {
-                if (powerShell.HadErrors)
-                {
-                    var exceptions = powerShell.Streams.Error.Select(e => e.Exception).ToList();
-                    exceptions.Add(ex);
-                    throw new AggregateException(string.Format("Failed to run {0}", cmd), exceptions);
-                }
+                if (powerShell.Streams.Error == null)
+                    throw;
+
+                var exceptions = powerShell.Streams.Error.Select(e => e.Exception).ToList();
+                exceptions.Add(ex);
+                throw new AggregateException(string.Format("Failed to run {0}", cmd), exceptions);
             }
             finally
             {
@@ -199,17 +198,22 @@ namespace Product.Tests.MailEngine
 
             TestResults validateResults = null;
 
-            Invoke(powerShell, string.Format("Invoke-Validate{0}", testId));
-            validateResults = GetTestResults(powerShell, testId);
-
-            Log.Debug(validateResults);
-            
-            Assert.AreEqual("Succeeded", validateResults.ValidationResult);
-            Assert.AreEqual("Succeeded", validateResults.OverallResult);
+            try
+            {
+                Invoke(powerShell, string.Format("Invoke-Validate{0}", testId));
+            }
+            finally
+            {
+                validateResults = GetTestResults(powerShell, testId);
+                Log.Debug(validateResults);
+                Assert.AreEqual("Succeeded", validateResults.ValidationResult);
+                Assert.AreEqual("Succeeded", validateResults.OverallResult);
+            }
         }
 
         protected void LogStreams(PowerShell powerShell)
         {
+            Log.Info("LogStreams Start");
             if (powerShell.Streams == null)
                 return;
 
@@ -244,6 +248,7 @@ namespace Product.Tests.MailEngine
                     Log.Error(error?.ErrorDetails?.Message, error?.Exception);
                 }
             }
+            Log.Info("LogStreams End");
         }
     }
 }

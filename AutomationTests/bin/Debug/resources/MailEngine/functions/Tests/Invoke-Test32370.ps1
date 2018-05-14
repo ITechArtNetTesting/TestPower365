@@ -2,7 +2,8 @@ function Invoke-Test32370 {
     param( 
         [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
-        [Parameter(Position = 4, Mandatory = $false)] [switch]$RunDelta
+        [Parameter(Position = 4, Mandatory = $false)] [switch]$RunDelta,
+		[Parameter(Mandatory = $true)][String]$RootPath
     )  
     Begin {
         if ($TargetMailbox.IsPresent) {
@@ -21,7 +22,7 @@ function Invoke-Test32370 {
         $TestResults.TestResult = "Failed"
         Import-Module ($script:ModuleRoot + '\engine\btT2TPSModule.psd1') -Force
         ##Create Message
-        $pfRoot = Get-P365PublicFolderFromPath -FolderPath \Automation\Tests -SourceMailbox
+        $pfRoot = Get-P365PublicFolderFromPath -FolderPath $RootPath -SourceMailbox
         #Move Contact to New folder
         $NewFolder = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
         $FolderName = "Test32370-" + (Get-Date).ToString("s")
@@ -48,14 +49,14 @@ function Invoke-Test32370 {
             $FolderName1 = "Test32370-" + (Get-Date).ToString("s")
             $NewFolder1.DisplayName = $FolderName1
             $NewFolder1.FolderClass = "IPF.Journal"
-            $data.Folder =  "\Automation\tests\" + $FolderName + "\" + $FolderName1
+            $data.Folder =  $RootPath + $FolderName + "\" + $FolderName1
             $NewFolder1.Save($NewFolder.Id)
             $NewFolder2 = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
             $FolderName2 = "Test323702-" + (Get-Date).ToString("s")
             $NewFolder2.DisplayName = $FolderName2
             $NewFolder2.FolderClass = "IPF.Journal"
             $NewFolder2.Save($NewFolder.Id)
-            $data.Folder =  "\Automation\tests\" + $FolderName + "\" + $FolderName2
+            $data.Folder =  $RootPath + $FolderName + "\" + $FolderName2
             $jnJournal = New-Object Microsoft.Exchange.WebServices.Data.EmailMessage -ArgumentList $service  
                 #Set the Subject of the Note  
             $jnJournal.Subject = "Journal : teset"
@@ -75,8 +76,8 @@ function Invoke-Test32370 {
             $EntryIdVal = $null		
             [Void]$jnJournal.TryGetProperty($PR_ENTRYID,[ref]$EntryIdVal)  
             $data.MessageId = $EntryIdVal
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
-            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
             $NewId = $jnJournal.Move($NewFolder2.Id)
             $NewId.Load($psPropertySet)  
             [Void]$NewId.TryGetProperty($PR_ENTRYID,[ref]$EntryIdVal)
@@ -95,8 +96,8 @@ function Invoke-Test32370 {
         if ($RunDelta.IsPresent) {
             Get-p365TestResults
             # Write-host "Part 1 - Message Created"
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
-            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
         }
 		
     }

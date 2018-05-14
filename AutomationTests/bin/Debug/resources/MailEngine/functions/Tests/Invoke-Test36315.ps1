@@ -2,7 +2,8 @@ function Invoke-Test36315 {
     param( 
         [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
-        [Parameter(Position = 4, Mandatory = $false)] [switch]$RunDelta
+        [Parameter(Position = 4, Mandatory = $false)] [switch]$RunDelta,
+		[Parameter(Mandatory = $true)][String]$RootPath
     )  
     Begin {
         if ($TargetMailbox.IsPresent) {
@@ -23,7 +24,7 @@ function Invoke-Test36315 {
         $TestResults.TestResult = "Failed"
         Import-Module ($script:ModuleRoot + '\engine\btT2TPSModule.psd1') -Force
         ##Create Message
-        $pfRoot = Get-P365PublicFolderFromPath -FolderPath \Automation\Tests -SourceMailbox
+        $pfRoot = Get-P365PublicFolderFromPath -FolderPath $RootPath -SourceMailbox
         #Move Contact to New folder
         $NewFolder = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
         $FolderName = "Test30072-" + (Get-Date).ToString("s")
@@ -49,7 +50,7 @@ function Invoke-Test36315 {
 			
         }
         #Create in Target
-        $pfRoot = Get-P365PublicFolderFromPath -FolderPath \Automation\Tests -TargetMailbox
+        $pfRoot = Get-P365PublicFolderFromPath -FolderPath $RootPath -TargetMailbox
         #Move Contact to New folder
         $NewFolder = new-object Microsoft.Exchange.WebServices.Data.Folder($Script:TargetService)  
         $NewFolder.DisplayName = $FolderName
@@ -79,7 +80,7 @@ function Invoke-Test36315 {
             $al = New-Object System.Collections.ArrayList
             $plPileLine = $session.runspace.CreatePipeline();
             $rfRemove = New-Object System.Management.Automation.Runspaces.Command("Enable-MailPublicFolder");
-            $rfRemove.Parameters.Add("Identity", ("\Automation\Tests\" + $FolderName));
+            $rfRemove.Parameters.Add("Identity", ("\" + $RootPath + "\" + $FolderName));
             $rfRemove.Parameters.Add("Confirm", $false);
             $plPileLine.Commands.Add($rfRemove);
             $RsResultsresults = $plPileLine.Invoke();
@@ -88,7 +89,7 @@ function Invoke-Test36315 {
             }
             else {
                 $data = "" | Select Folder
-                $data.Folder = ("\Automation\Tests\" + $FolderName)
+                $data.Folder = ("\" + $RootPath + "\" + $FolderName)
                 $TestResults.Data = $data
                 $TestResults.TestResult = "Succeeded"
             }
@@ -109,7 +110,7 @@ function Invoke-Test36315 {
         if ($RunDelta.IsPresent) {
             Get-p365TestResults
             # Write-host "Part 1 - Message Created"
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
         }
 		
     }

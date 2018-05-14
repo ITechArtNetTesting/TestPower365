@@ -15,12 +15,16 @@ namespace Product.Tests.MailEngine
     [TestClass]
     public class PublicFolderTest: MailEngineTestBase
     {
+        private class RetryException : Exception { }
+
         private PowerShell _powerShell;
 
         private string _client;
         private string _username;
         private string _password;
         private string _project;
+
+        private string _sourceTenant;
 
         private string _sourceAdminUser;
         private string _sourceAdminPassword;
@@ -45,7 +49,7 @@ namespace Product.Tests.MailEngine
         {
             _testContext = testContext;
             InitialStateSetup();
-            CleanPublicFolders();
+            //CleanPublicFolders();
         }
 
         private static void CleanPublicFolders()
@@ -55,11 +59,11 @@ namespace Product.Tests.MailEngine
             RunConfigurator.ResourcesPath = "resources/";
 
             var tenants = "T5->T6";
-            var sourceAdminUser = RunConfigurator.GetTenantValue(tenants, "source", "user");
-            var sourceAdminPassword = RunConfigurator.GetTenantValue(tenants, "source", "password");
+            var sourceAdminUser = RunConfigurator.GetTenantValue(tenants, "source", "pfuser");
+            var sourceAdminPassword = RunConfigurator.GetTenantValue(tenants, "source", "pfpassword");
 
-            var targetAdminUser = RunConfigurator.GetTenantValue(tenants, "target", "user");
-            var targetAdminPassword = RunConfigurator.GetTenantValue(tenants, "target", "password");
+            var targetAdminUser = RunConfigurator.GetTenantValue(tenants, "target", "pfuser");
+            var targetAdminPassword = RunConfigurator.GetTenantValue(tenants, "target", "pfpassword");
             
             using (var cleanupScript = new PsLauncher().LaunchPowerShellInstance("PF/PFMailEngineCleanup.ps1",
                     $" -sourceLogin {sourceAdminUser}" +
@@ -89,9 +93,11 @@ namespace Product.Tests.MailEngine
                 Task.WaitAll(sourceStdOut, sourceStdError);
                 cleanupScript.WaitForExit(30000);
 
-                Thread.Sleep(2 * 60 * 1000); //Sleep for 2 minutes, reduce change that the folders are not in sync yet.
+                //Thread.Sleep(2 * 60 * 1000); //Sleep for 2 minutes, reduce change that the folders are not in sync yet.
             }
         }
+
+
 
         [TestInitialize]
         public void TestInit()
@@ -105,20 +111,20 @@ namespace Product.Tests.MailEngine
 
             var tenants = "T5->T6";
 
-            _sourceAdminUser = RunConfigurator.GetTenantValue(tenants, "source", "user");
-            _sourceAdminPassword = RunConfigurator.GetTenantValue(tenants, "source", "password");
+            _sourceTenant = RunConfigurator.GetTenantValue(tenants, "source", "name");
 
-            _targetAdminUser = RunConfigurator.GetTenantValue(tenants, "target", "user");
-            _targetAdminPassword = RunConfigurator.GetTenantValue(tenants, "target", "password");
+            //This user needs to be org admin in Exchange.
+            _sourceAdminUser = RunConfigurator.GetTenantValue(tenants, "source", "pfuser");
+            _sourceAdminPassword = RunConfigurator.GetTenantValue(tenants, "source", "pfpassword");
 
-            //_sourceAdminUser = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//source");
-            //_sourceAdminPassword = "Password1";
+            _targetAdminUser = RunConfigurator.GetTenantValue(tenants, "target", "pfuser");
+            _targetAdminPassword = RunConfigurator.GetTenantValue(tenants, "target", "pfpassword");
 
-            //_targetAdminUser = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//target");
-            //_targetAdminPassword = "Password1";
+            //_sourceMailbox = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//source");
+            //_targetMailbox = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//target");
 
-            _sourceMailbox = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//source");
-            _targetMailbox = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//target");
+            _sourceMailbox = _sourceAdminUser;
+            _targetMailbox = _targetAdminUser;
 
             _sourceMailboxExtra1 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry17']/..//source");
             _targetMailboxExtra1 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry17']/..//target");
@@ -128,7 +134,7 @@ namespace Product.Tests.MailEngine
 
             _sourcePublicFolder = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry16']/..//source");
 
-            _attachment = "resources/attach.jgp";
+            _attachment = "resources/attach.jpg";
 
             _url = "https://outlook.office365.com/EWS/Exchange.asmx";
 
@@ -497,6 +503,7 @@ namespace Product.Tests.MailEngine
         [TestMethod]
         [TestCategory("MailEngine")]
         [TestCategory("PublicFolder")]
+        [TestCategory("Sync")]
         public void PublicFolder_PS_Test30338()
         {
             AssertPublicFolderSyncTestPasses("30338", PerformPublicFolderSync);
@@ -506,6 +513,7 @@ namespace Product.Tests.MailEngine
         [TestMethod]
         [TestCategory("MailEngine")]
         [TestCategory("PublicFolder")]
+        [TestCategory("Sync")]
         public void PublicFolder_PS_Test30373()
         {
             AssertPublicFolderSyncTestPasses("30373", PerformPublicFolderSync);
@@ -1234,41 +1242,101 @@ namespace Product.Tests.MailEngine
             AssertPublicFolderSyncTestPasses("46843", PerformPublicFolderSync);
         }
 
-        private class RetryException : Exception
+        private void PrepareFolder(string folderPath)
         {
-        }
+            using (var prepareScript = new PsLauncher().LaunchPowerShellInstance("PF/PFPrepareFolder.ps1",
+                   $" -sourceLogin {_sourceAdminUser}" +
+                   $" -sourcePassword {_sourceAdminPassword}" +
+                   $" -targetLogin {_targetAdminUser}" +
+                   $" -targetPassword {_targetAdminPassword}" +
+                   $" -folderPath {folderPath}",
+               "x64"))
+            {
+                Task sourceStdOut = Task.Run(() =>
+                {
+                    while (!prepareScript.StandardOutput.EndOfStream)
+                    {
+                        var line = prepareScript.StandardOutput.ReadLine();
+                        Log.Debug(line);
+                    }
+                });
 
+                Task sourceStdError = Task.Run(() =>
+                {
+                    while (!prepareScript.StandardError.EndOfStream)
+                    {
+                        var line = prepareScript.StandardError.ReadLine();
+                        Log.Error(line);
+                    }
+                });
 
-        private void PerformPublicFolderSync(string folder)
-        {
+                Task.WaitAll(sourceStdOut, sourceStdError);
+                prepareScript.WaitForExit(30000);
+            }
+
+            var rootFolder = "\\Automation\\Tests";
+
             LoginAndSelectRole(_username, _password, _client);
             SelectProject(_project);
             User.AtProjectOverviewForm().OpenPublicFolders();
-            User.AtPublicFolderMigrationViewForm().SyncUserByLocator(folder);
+            User.AtPublicFolderMigrationViewForm().AddPublicFolderMigration();
+            User.AtPublicFolderListForm().SelectNo();
+            User.AtPublicFolderListForm().GoNext();
+            User.AtTenantPareForm().SelectPare(_sourceTenant);
+            User.AtTenantPareForm().GoNext();
+            User.AtPublicFolderSourceFilePathForm().SetFilePath(folderPath);
+            User.AtPublicFolderSourceFilePathForm().GoNext();
+            User.AtPublicFolderTargetFilePathForm().SetFilePath(rootFolder);
+            User.AtPublicFolderTargetFilePathForm().GoNext();
+            User.AtPublicFolderSyncLevelForm().SelectAllSubFolders();
+            User.AtPublicFolderSyncLevelForm().GoNext();
+            User.AtPublicFolderScheduleForm().SelectOnDemand();
+            User.AtPublicFolderScheduleForm().GoNext();
+            User.AtPublicFolderConflictsForm().Overwrites();
+            User.AtPublicFolderConflictsForm().GoNext();
+            User.AtPublicFolderCompleteForm().GoNext();
+        }
+
+        private void ArchivePublicFolder(string folderPath)
+        {
+            User.AtPublicFolderMigrationViewForm().PerformAction(folderPath, ActionType.Archive);
+            User.AtPublicFolderMigrationViewForm().ConfirmAction();
+        }
+
+        private void PerformPublicFolderSync(string testFolder)
+        {
+            User.AtPublicFolderMigrationViewForm().WaitForState(testFolder, State.Ready, 10 * 60 * 1000, 10);
+
+            User.AtPublicFolderMigrationViewForm().PerformAction(testFolder, ActionType.Sync);
             User.AtPublicFolderMigrationViewForm().ConfirmSync();
-            User.AtPublicFolderMigrationViewForm().WaitForSyncingState(folder);
-            User.AtPublicFolderMigrationViewForm().WaitForAnyState(folder, new[] { Framework.Enums.State.SyncError, Framework.Enums.State.Ready }, 15 * 60 * 1000, 30);
-
-            var state = User.AtPublicFolderMigrationViewForm().GetJobState(folder);
-
-            if (state == State.Error)
-            {
-                Log.Warn("Public Folder Sync Job is in an Error state, cleaning up public folders");
-                CleanPublicFolders();
-                throw new RetryException();
-            }
+            User.AtPublicFolderMigrationViewForm().WaitForSyncingState(testFolder);
+            User.AtPublicFolderMigrationViewForm().WaitForAnyState(testFolder, new[] { State.SyncError, State.Ready }, 15 * 60 * 1000, 30);
         }
         
         private void AssertPublicFolderSyncTestPasses(string testId, Action<string> userInterfaceActions, params KeyValuePair<string, object>[] parameters)
         {
+            var folderPath = string.Format("\\Automation\\Tests\\{0}", testId);
+            var folderPathParam = new KeyValuePair<string, object>("RootPath", string.Format("\\Automation\\Tests\\{0}", testId));
+
+            //create new paramerters list to append rootFolder
+            List<KeyValuePair<string, object>> paramSet = parameters != null ? parameters.ToList() : new List<KeyValuePair<string, object>>();
+            paramSet.Add(folderPathParam);
+
+            var paramArray = paramSet.ToArray();
+
+            PrepareFolder(folderPath);
+
             try
             {
-                AssertTestPasses(_powerShell, testId, _sourcePublicFolder, userInterfaceActions, parameters);
+                AssertTestPasses(_powerShell, testId, folderPath, userInterfaceActions, paramArray);
             }
             catch (RetryException)
             {
-                //Try a second time.. exception here will not be caught
-                AssertTestPasses(_powerShell, testId, _sourcePublicFolder, userInterfaceActions, parameters);
+                AssertTestPasses(_powerShell, testId, folderPath, userInterfaceActions, paramArray);
+            }
+            finally
+            {
+                ArchivePublicFolder(folderPath);
             }
         }
     }

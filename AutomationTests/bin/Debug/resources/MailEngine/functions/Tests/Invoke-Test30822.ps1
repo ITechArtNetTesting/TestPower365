@@ -4,7 +4,8 @@ function Invoke-Test30822{
 		[Parameter(Position=1, Mandatory=$false)] [switch]$TargetMailbox,
 		[Parameter(Position=2, Mandatory=$true)] [string]$SourceProxyAddress,
 		[Parameter(Position=3, Mandatory=$true)] [string]$TargetProxyAddress,
-		[Parameter(Position=4, Mandatory=$false)] [switch]$RunDelta
+		[Parameter(Position=4, Mandatory=$false)] [switch]$RunDelta,
+		[Parameter(Mandatory = $true)][String]$RootPath
     )  
  	Begin
 	 {
@@ -26,7 +27,7 @@ function Invoke-Test30822{
 		$TestResults.TestResult = "Failed"
 			       Import-Module ($script:ModuleRoot + '\engine\btT2TPSModule.psd1') -Force
         ##Create Message
-        $pfRoot = Get-P365PublicFolderFromPath -FolderPath \Automation\Tests -SourceMailbox
+        $pfRoot = Get-P365PublicFolderFromPath -FolderPath $RootPath -SourceMailbox
         #Move Contact to New folder
         $NewFolder = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
         $FolderName = "Test30072-" + (Get-Date).ToString("s")
@@ -56,7 +57,7 @@ function Invoke-Test30822{
 			$al = New-Object System.Collections.ArrayList
 			$plPileLine = $session.runspace.CreatePipeline();
 			$rfRemove = New-Object System.Management.Automation.Runspaces.Command("Enable-MailPublicFolder");
-			$rfRemove.Parameters.Add("Identity", ("\Automation\Tests\" + $FolderName));
+			$rfRemove.Parameters.Add("Identity", ("\" + $RootPath + "\" + $FolderName));
 			$rfRemove.Parameters.Add("Confirm", $false);
 			$plPileLine.Commands.Add($rfRemove);
 			$RsResultsresults = $plPileLine.Invoke();
@@ -73,7 +74,7 @@ function Invoke-Test30822{
 			$adproxy = @()
 			$adproxy += "add=`"" + $SourceProxyAddress + "`""
 			$rfRemove = New-Object System.Management.Automation.Runspaces.Command("Set-MailPublicFolder");
-			$rfRemove.Parameters.Add("Identity", ("\Automation\Tests\" + $FolderName));
+			$rfRemove.Parameters.Add("Identity", ("\" + $RootPath + "\" + $FolderName));
 			$rfRemove.Parameters.Add("Emailaddresses", @{add="$SourceProxyAddress"});
 			$plPileLine.Commands.Add($rfRemove);
 			$RsResultsresults = $plPileLine.Invoke();
@@ -83,7 +84,7 @@ function Invoke-Test30822{
 			}
 			else{
 				$data = "" | Select Folder,TargetProxyAddress
-				$data.Folder = ("\Automation\Tests\" + $FolderName)
+				$data.Folder = ("\" + $RootPath + "\" + $FolderName)
 				$data.TargetProxyAddress = $TargetProxyAddress
 				$TestResults.Data = $data
 				$TestResults.TestResult = "Succeeded"
@@ -104,7 +105,7 @@ function Invoke-Test30822{
             Get-p365TestResults
             $tfile = New-P365TranslationFile -SourceAddress $SourceProxyAddress -TargetAddress $TargetProxyAddress -NoEXAddress
                    # Write-host "Part 1 - Message Created"
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\\Automation\tests\" + $FolderName) -TargetCopyPath "\\Automation\tests"
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
         }
 		
      }
