@@ -15,6 +15,8 @@ namespace Product.Framework.Forms
 {
 	public class UsersForm : BaseForm
 	{
+        private readonly Button newMigrationWave = new Button(By.XPath("//span[contains(@data-bind,'addWave')]"), "New migration wave button");
+
         private readonly Button migrationWaves = new Button(By.XPath("//a[contains(@href,'waves')]//span"), "Migration waves button");
 
         private readonly Button groupActionsDropdownButton = new Button(By.XPath("//div[@class='ibox m-t-lg']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"), "Actions dropdown in groups edit page");
@@ -51,14 +53,14 @@ namespace Product.Framework.Forms
            
 
         private Button enabledApplyActionButton =
-			new Button(By.XPath("//button[contains(@data-bind, 'applyAction')][not(@disabled='')]"), "Enabled apply button");
+			new Button(By.XPath("//button[contains(@data-bind, 'applyAction')][not(@disabled='')]"), "Enabled apply button");       
 
-		private readonly Button enabledArchiveButton =
+        private readonly Button enabledArchiveButton =
 			new Button(By.XPath("//button[contains(text(), 'Archive')][not(@disabled='')]"), "Enabled archive button");
-
-        public void CheckMigrationWavesIsPresent()
+      
+        public void CheckMigrationWavesIsDisplayed()
         {
-            Assert.IsTrue(migrationWaves.IsPresent());
+            Assert.IsTrue(migrationWaves.IsDisplayed());
         }
 
         private readonly Button enabledEditButton =
@@ -300,7 +302,12 @@ namespace Product.Framework.Forms
             else {
                 Assert.IsFalse(enabledApplyActionButton.IsPresent(), "Appply button is enable");
             }
-        }             
+        }
+
+        public void CheckNewMigrationWaveButtonIsDisplayed()
+        {
+            Assert.IsTrue(newMigrationWave.IsDisplayed());
+        }
 
         public void PerformSearch(string search)
 		{
@@ -344,6 +351,13 @@ namespace Product.Framework.Forms
                 groupActionsDropdownButton.Click();
             }
         }
+
+        public void OpenMigrationwaves()
+        {
+            Log.Info("Opening Migration waves");
+            migrationWaves.Click();
+        }
+
 
         public void ModifyProfile(string profile)
 	    {

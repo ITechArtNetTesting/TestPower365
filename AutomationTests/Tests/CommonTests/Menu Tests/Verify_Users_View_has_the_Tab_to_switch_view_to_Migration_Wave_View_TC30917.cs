@@ -49,7 +49,9 @@ namespace Product.Tests.CommonTests.Menu_Tests
             LoginAndSelectRole(login, password, client);
             SelectProject(projectName);
             User.AtProjectOverviewForm().OpenUsersList();
-            User.AtUsersForm().CheckMigrationWavesIsPresent();
+            User.AtUsersForm().CheckMigrationWavesIsDisplayed();
+            User.AtUsersForm().OpenMigrationwaves();
+            User.AtUsersForm().CheckNewMigrationWaveButtonIsDisplayed();
         }
     }
 }
