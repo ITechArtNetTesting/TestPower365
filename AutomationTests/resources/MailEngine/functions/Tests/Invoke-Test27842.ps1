@@ -7,7 +7,8 @@ function Invoke-Test27842{
 		[Parameter(Position=4, Mandatory=$true)] [String]$FirstTargetPermission,
 		[Parameter(Position=5, Mandatory=$false)] [String]$SecondTargetPermission,
 		[Parameter(Position=6, Mandatory=$false)][switch]$RunDelta,
-		[Parameter(Mandatory = $true)][String]$RootPath
+		[Parameter(Mandatory = $true)][String]$RootPath,
+		[Parameter(Mandatory = $true)][String]$TargetRootPath
     )  
  	Begin
 	 {
@@ -63,7 +64,7 @@ function Invoke-Test27842{
 		$tfile = New-P365TranslationFile -SourceAddress $FirstSourcePermission -TargetAddress $FirstTargetPermission
 		New-P365TranslationFile -SourceAddress $Script:SourceMailbox -TargetAddress $Script:TargetMailbox -FileName $tfile
 		# Write-host "Part 1 - Message Created"
-		Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+		Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
 		$NewFolder1 = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
 		$FolderName1 = "Test27842-Child" + (Get-Date).ToString("s")
 		$NewFolder1.DisplayName = $FolderName1
@@ -75,7 +76,7 @@ function Invoke-Test27842{
 		$NewFolder1.Permissions.Clear()
 		$NewFolder1.Permissions.Add($newfp)  
 		$NewFolder1.Update()
-		$data.Folder2 = ("\" + $RootPath + "\" + $FolderName + "\" + $FolderName1)
+		$data.Folder2 = ($RootPath + "\" + $FolderName + "\" + $FolderName1)
 		# Invoke-P365MailboxCopy	-mappingfile $tfile	
 		$Folder  = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ("\" + $RootPath + "\" + $FolderName)
 		$TestResults = "" | Select TestCase,Description,TestLastRun,TestResult,Data,ValidationLastRun,ValidationResult,OverAllResult
@@ -113,7 +114,7 @@ function Invoke-Test27842{
 			$tfile = New-P365TranslationFile -SourceAddress $FirstSourcePermission -TargetAddress $FirstTargetPermission
 			New-P365TranslationFile -SourceAddress $Script:SourceMailbox -TargetAddress $Script:TargetMailbox -FileName $tfile
 			# Write-host "Part 1 - Message Created"
-			Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+			Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
 		}
 		Write-Host "Done" -ForegroundColor Green
      }

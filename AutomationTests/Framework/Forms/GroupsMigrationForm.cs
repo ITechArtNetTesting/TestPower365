@@ -100,9 +100,7 @@ namespace Product.Framework.Forms
             ChooseAction(type.GetValue());
         }
 
-          
-
-        public new void OpenActionsDropdown()
+     public new void OpenActionsDropdown()
         {
             Log.Info("Opening Actions dropdown");
             ScrollToElement(actionsDropdownButton.GetElement());

@@ -63,7 +63,7 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
             }
             User.AtUsersForm().SyncFromDetails();
             User.AtUsersForm().ConfirmAction();
-            User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Syncing, 900000, 10);
+            User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Syncing, 1200000, 10);
             //Verify Action button since Syncing
             User.AtUsersForm().AssertDetailsStopButtonIsEnabled();
             User.AtUsersForm().AssertDetailsSyncButtonIsDisabled();

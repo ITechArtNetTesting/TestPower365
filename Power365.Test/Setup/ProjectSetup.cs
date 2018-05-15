@@ -14,7 +14,6 @@ namespace BinaryTree.Power365.Test.Setup
             : base(LogManager.GetLogger(typeof(ProjectSetup))) { }
         
         [Test]
-        [Ignore("Incomplete")]
         public void EmailWithFileProjectSetup()
         {
             var settings = Automation.Settings;
@@ -32,32 +31,36 @@ namespace BinaryTree.Power365.Test.Setup
             var sourceTenant = settings.GetByReference<Tenant>(project.Source);
             var targetTenant = settings.GetByReference<Tenant>(project.Target);
            
-            var sourceCredential = sourceTenant.GetByReference<Credential>("psuser");
-            var targetCredential = targetTenant.GetByReference<Credential>("psuser");
+            var sourceCredential = sourceTenant.GetByReference<Credential>("ps1");
+            var targetCredential = targetTenant.GetByReference<Credential>("ps1");
 
             var sourceTenantUser = sourceCredential.Username;
             var sourceTenantPassword = sourceCredential.Password;
 
             var targetTenantUser = targetCredential.Username;
             var targetTenantPassword = targetCredential.Password;
-            
+
+            var userList = project.GetByReference<File>("file1");
+
+            var uploadFilePath = userList.Path;
+
             var projectListPage = Automation.Common
                 .SingIn(signInUser, signInPassword)
                 .ClientSelect(clientName)
                 .GetPage<ProjectListPage>();
 
             var editProjectPage = projectListPage.ClickNewProject();
-
+            
             var editProjectWorkflow = Automation.Browser
                 .CreateWorkflow<EmailWithFileProjectWorkflow, EditProjectPage>(editProjectPage);
             
-
             var projectDetailsPage = editProjectWorkflow
+                .ProjectType(ProjectType.EmailByFile)
                 .ProjectName(projectName)
                 .ProjectDescription(projectDescription)
                 .AddTenant(sourceTenantUser, sourceTenantPassword)
                 .AddTenant(targetTenantUser, targetTenantPassword, true)
-                //.UploadUserList("")
+                .UploadUserList(uploadFilePath)
                 .SyncSchedule(false)
                 .Submit()
                 .GetPage<ProjectDetailsPage>();

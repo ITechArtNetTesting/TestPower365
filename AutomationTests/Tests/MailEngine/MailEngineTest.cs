@@ -99,7 +99,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Sync")]
-        public void MailEngine_PS_Test22384()
+        public void Mailbox_PS_Test22384()
         {
             AssertSyncTestPasses("22384", PerformSync);
         }
@@ -108,7 +108,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Sync")]
-        public void MailEngine_PS_Test22490()
+        public void Mailbox_PS_Test22490()
         {
             AssertSyncTestPasses("22490", PerformSync);
         }
@@ -117,7 +117,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Sync")]
-        public void MailEngine_PS_Test22491()
+        public void Mailbox_PS_Test22491()
         {
             AssertSyncTestPasses("22491", PerformSync);
         }
@@ -126,7 +126,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Sync")]
-        public void MailEngine_PS_Test22497()
+        public void Mailbox_PS_Test22497()
         {
             AssertSyncTestPasses("22497", PerformSync);
         }
@@ -135,7 +135,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Sync")]
-        public void MailEngine_PS_Test22504()
+        public void Mailbox_PS_Test22504()
         {
             AssertSyncTestPasses("22504", PerformSync);
         }
@@ -144,7 +144,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Sync")]
-        public void MailEngine_PS_Test22507()
+        public void Mailbox_PS_Test22507()
         {
             AssertSyncTestPasses("22507", PerformSync);
         }
@@ -153,7 +153,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Sync")]
-        public void MailEngine_PS_Test22513()
+        public void Mailbox_PS_Test22513()
         {
             AssertSyncTestPasses("22513", PerformSync);
         }
@@ -162,7 +162,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Sync")]
-        public void MailEngine_PS_Test22623()
+        public void Mailbox_PS_Test22623()
         {
             AssertSyncTestPasses("22623", PerformSync);
         }
@@ -171,7 +171,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Sync")]
-        public void MailEngine_PS_Test22624()
+        public void Mailbox_PS_Test22624()
         {
             AssertSyncTestPasses("22624", PerformSync);
         }
@@ -180,7 +180,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Sync")]
-        public void MailEngine_PS_Test22625()
+        public void Mailbox_PS_Test22625()
         {
             AssertSyncTestPasses("22625", PerformSync);
         }
@@ -189,16 +189,31 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Sync")]
-        public void MailEngine_PS_Test26765()
+        public void Mailbox_PS_Test26765()
         {
             AssertSyncTestPasses("26765", PerformSync);
+        }
+
+
+        [TestMethod]
+        [TestCategory("MailEngine")]
+        [TestCategory("Mailbox")]
+        [TestCategory("Permissions")]
+        public void Mailbox_PS_Test34507()
+        {
+            var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
+            var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
+            var source2 = new KeyValuePair<string, object>("SecondSourcePermission", _sourceMailboxExtra2);
+            var target2 = new KeyValuePair<string, object>("SecondTargetPermission", _targetMailboxExtra2);
+
+            AssertSyncTestPasses("34507", PerformSync, source1, target1, source2, target2);
         }
 
         [TestMethod]
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Rollback")]
-        public void MailEngine_PS_Test39541()
+        public void Mailbox_PS_Test39541()
         {
             AssertSyncTestPasses("39541", PerformSyncWithRollback);
         }
@@ -207,7 +222,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Rollback")]
-        public void MailEngine_PS_Test39544()
+        public void Mailbox_PS_Test39544()
         {
             AssertSyncTestPasses("39544", PerformSyncWithRollback);
         }
@@ -216,7 +231,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Sync")]
-        public void MailEngine_PS_Test39545()
+        public void Mailbox_PS_Test39545()
         {
             AssertSyncTestPasses("39545", PerformSync);
         }
@@ -225,7 +240,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Rollback")]
-        public void MailEngine_PS_Test39550()
+        public void Mailbox_PS_Test39550()
         {
             AssertSyncTestPasses("39550", PerformSyncWithRollback);
         }
@@ -234,7 +249,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Sync")]
-        public void MailEngine_PS_Test39551()
+        public void Mailbox_PS_Test39551()
         {
             AssertSyncTestPasses("39551", PerformSync);
         }
@@ -243,7 +258,21 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Rollback")]
-        public void MailEngine_PS_Test39570()
+        public void Mailbox_PS_Test39557()
+        {
+            var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
+            var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
+            var source2 = new KeyValuePair<string, object>("SecondSourcePermission", _sourceMailboxExtra2);
+            var target2 = new KeyValuePair<string, object>("SecondTargetPermission", _targetMailboxExtra2);
+
+            AssertSyncTestPasses("39557", PerformSyncWithRollback, source1, target1, source2, target2);
+        }
+
+        [TestMethod]
+        [TestCategory("MailEngine")]
+        [TestCategory("Mailbox")]
+        [TestCategory("Rollback")]
+        public void Mailbox_PS_Test39570()
         {
             AssertSyncTestPasses("39570", PerformSyncWithRollback);
         }
@@ -252,7 +281,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Sync")]
-        public void MailEngine_PS_Test48980()
+        public void Mailbox_PS_Test48980()
         {
             AssertSyncTestPasses("48980", PerformSync);
         }
@@ -261,7 +290,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Sync")]
-        public void MailEngine_PS_Test48983()
+        public void Mailbox_PS_Test48983()
         {
             AssertSyncTestPasses("48983", PerformSync);
         }
@@ -270,7 +299,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Permissions")]
-        public void MailEngine_PS_Test22500()
+        public void Mailbox_PS_Test22500()
         {
             var source = new KeyValuePair<string, object>("SourcePermission", _sourceMailboxExtra1);
             var target = new KeyValuePair<string, object>("TargetPermission", _targetMailboxExtra1);
@@ -282,7 +311,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Permissions")]
-        public void MailEngine_PS_Test22516()
+        public void Mailbox_PS_Test22516()
         {
             var source = new KeyValuePair<string, object>("SourceAddress", _sourceMailboxExtra1);
             var target = new KeyValuePair<string, object>("TargetAddress", _targetMailboxExtra1);
@@ -294,7 +323,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Permissions")]
-        public void MailEngine_PS_Test22537()
+        public void Mailbox_PS_Test22537()
         {
             var source = new KeyValuePair<string, object>("SourceAddress", _sourceMailboxExtra1);
             var target = new KeyValuePair<string, object>("TargetAddress", _targetMailboxExtra1);
@@ -306,7 +335,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Permissions")]
-        public void MailEngine_PS_Test22546()
+        public void Mailbox_PS_Test22546()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -320,7 +349,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Permissions")]
-        public void MailEngine_PS_Test22728()
+        public void Mailbox_PS_Test22728()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -334,7 +363,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Permissions")]
-        public void MailEngine_PS_Test37613()
+        public void Mailbox_PS_Test37613()
         {
             var source = new KeyValuePair<string, object>("SourcePermission", _sourceMailboxExtra1);
             var target = new KeyValuePair<string, object>("TargetPermission", _targetMailboxExtra1);
@@ -346,7 +375,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Permissions")]
-        public void MailEngine_PS_Test37613b()
+        public void Mailbox_PS_Test37613b()
         {
             var source = new KeyValuePair<string, object>("SourcePermission", _sourceMailboxExtra1);
             var target = new KeyValuePair<string, object>("TargetPermission", _targetMailboxExtra1);
@@ -358,7 +387,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Permissions")]
-        public void MailEngine_PS_Test37613c()
+        public void Mailbox_PS_Test37613c()
         {
             var source = new KeyValuePair<string, object>("SourcePermission", _sourceMailboxExtra1);
             var target = new KeyValuePair<string, object>("TargetPermission", _targetMailboxExtra1);
@@ -370,7 +399,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Permissions")]
-        public void MailEngine_PS_Test37614()
+        public void Mailbox_PS_Test37614()
         {
             var source1 = new KeyValuePair<string, object>("SourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("TargetPermission", _targetMailboxExtra1);
@@ -384,7 +413,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Permissions")]
-        public void MailEngine_PS_Test48974()
+        public void Mailbox_PS_Test48974()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -399,7 +428,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Sync")]
-        public void MailEngine_PS_Test45249a()
+        public void Mailbox_PS_Test45249a()
         {
             AssertSyncTestPasses("45249a", PerformSync);
         }
@@ -408,7 +437,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Sync")]
-        public void MailEngine_PS_Test45249b()
+        public void Mailbox_PS_Test45249b()
         {
             AssertSyncTestPasses("45249b", PerformSync);
         }

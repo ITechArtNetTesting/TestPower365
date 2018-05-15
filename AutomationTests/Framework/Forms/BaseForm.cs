@@ -303,7 +303,23 @@ namespace Product.Framework.Forms
                     AssertMenuForIntegrationProject();
                 }
                 Assert.IsTrue(result, failMenu);
+            }
 
+            public void AssertCorrectErrorsMenuItems()
+            {
+                String menuName= "Errors";
+                WaitForAjaxLoad();
+                var menuItem = new Button(By.XPath(String.Format(menuItems, menuName)), menuName);
+                var errorContainer = new Element(By.Id("manageErrorsContainer"), "Errors page container");
+
+                //Assert menu item
+                Assert.IsTrue(menuItem.IsElementVisible(), "Manage errors menu item is not visible");
+
+                //Click on Errors menu item
+                menuItem.Click();
+                WaitForAjaxLoad();
+                //Assert correct page
+                Assert.IsTrue(errorContainer.IsElementVisible(), "Manage errors page is not visible");
             }
 
         }

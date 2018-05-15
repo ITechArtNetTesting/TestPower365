@@ -86,6 +86,15 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Resources\ImportFiles\MailOnlyCSVC7toC9SML-Automation-part1.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\ImportFiles\MailOnlyCSVC7toC9SML-Automation-part2.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\ImportFiles\MailOnlyCSVC7toC9SML.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\MailEngine\0">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -491,6 +500,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CommonTests\MigrationWaves\" />
     <Folder Include="Resources\MailEngine\internal\functions\" />
   </ItemGroup>
   <Choose>

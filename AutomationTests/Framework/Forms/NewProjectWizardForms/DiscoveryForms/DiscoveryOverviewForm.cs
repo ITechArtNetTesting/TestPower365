@@ -21,28 +21,21 @@ namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
         {
         }
 
-        public void VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(string clientName, string projectName)
+        public void VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(string clientName)
         {
             SQLExecuter queryExecuter = new SQLExecuter();
             var clientId = queryExecuter.SelectClientIdByName(clientName);
-            var tenantId = queryExecuter.SelectTenantIdByName(projectName);
 
 
             WaitForAjaxLoad();
-            for (int i = 0; i < tenants.GetElements().Count; i++)
+            var tenantElements = tenants.GetElements();
+            foreach (var element in tenantElements)
             {
-                var sqlFrequency = queryExecuter.SelectDiscoveryFrequencyHours(clientId, tenants.GetElements()[i].FindElement(By.XPath(".//strong")).Text, tenantId);
-                var uiFrequency = Convert.ToInt32(tenants.GetElements()[i].FindElement(By.XPath(".//span[@data-bind='text: discoveryRunInterval']")).Text);
-                Assert.AreEqual(sqlFrequency, uiFrequency);
+                string tenantName = element.FindElement(By.XPath(".//strong")).Text;
+                var sqlFrequency = queryExecuter.SelectDiscoveryFrequencyHours(clientId, tenantName);
+                var uiFrequency = Convert.ToInt32(element.FindElement(By.XPath(".//span[@data-bind='text: discoveryRunInterval']")).Text);
+                Assert.AreEqual(sqlFrequency, uiFrequency,String.Format("Tenant {0}. DiscoveryFrequencyHours does not match with UI value ", tenantName));
             }
-
-            //foreach (var element in tenantElements)
-            //{
-            //    string tenantName = element.FindElement(By.XPath(".//strong")).Text;
-            //    var sqlFrequency = queryExecuter.SelectDiscoveryFrequencyHours(clientId, tenantName, tenantId);
-            //    var uiFrequency = Convert.ToInt32(element.FindElement(By.XPath($"//span[@data-bind='text: discoveryRunInterval' and ancestor::tr//*[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')='{tenantName.ToLower()}']]")).Text);
-            //    Assert.AreEqual(sqlFrequency, uiFrequency,String.Format("Tenant {0}. DiscoveryFrequencyHours does not match with UI value ", tenantName));
-            //}
         }
 
         public void ChangeDiscoveryFrequencyHours(int number)
