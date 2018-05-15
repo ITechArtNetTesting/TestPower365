@@ -5,7 +5,8 @@ function Invoke-Test30119{
 		[Parameter(Position=2, Mandatory=$true)] [string]$SourceForwardingAddress,
 		[Parameter(Position=3, Mandatory=$true)] [string]$TargetForwardingAddress,
 		[Parameter(Position=4, Mandatory=$false)] [switch]$RunDelta,
-		[Parameter(Mandatory = $true)][String]$RootPath
+		[Parameter(Mandatory = $true)][String]$RootPath,
+		[Parameter(Mandatory = $true)][String]$TargetRootPath
     )  
  	Begin
 	 {
@@ -72,7 +73,7 @@ function Invoke-Test30119{
 			sleep -Seconds 10
 			$plPileLine = $session.runspace.CreatePipeline();
 			$rfRemove = New-Object System.Management.Automation.Runspaces.Command("Set-MailPublicFolder");
-			$rfRemove.Parameters.Add("Identity", ("\" + $RootPath + "\" + $FolderName));
+			$rfRemove.Parameters.Add("Identity", ($RootPath + "\" + $FolderName));
 			$rfRemove.Parameters.Add("ForwardingAddress",$SourceForwardingAddress)
 			#$rfRemove.Parameters.Add("Confirm", $false);
 			$plPileLine.Commands.Add($rfRemove);
@@ -83,7 +84,7 @@ function Invoke-Test30119{
 			}
 			else{
 				$data = "" | Select Folder,TargetForwardingAddress
-				$data.Folder = ("\" + $RootPath + "\" + $FolderName)
+				$data.Folder = ($RootPath + "\" + $FolderName)
 				$data.TargetForwardingAddress = $TargetForwardingAddress
 				$TestResults.Data = $data
 				$TestResults.TestResult = "Succeeded"
@@ -104,7 +105,7 @@ function Invoke-Test30119{
             Get-p365TestResults
             $tfile = New-P365TranslationFile -SourceAddress $SourceForwardingAddress -TargetAddress $TargetForwardingAddress -NoExAddress
                    # Write-host "Part 1 - Message Created"
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
         }
 		
      }

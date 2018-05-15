@@ -3,7 +3,8 @@ function Invoke-Test32268 {
         [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
         [Parameter(Position = 4, Mandatory = $false)] [switch]$RunDelta,
-		[Parameter(Mandatory = $true)][String]$RootPath
+		[Parameter(Mandatory = $true)][String]$RootPath,
+		[Parameter(Mandatory = $true)][String]$TargetRootPath
     )  
     Begin {
         if ($TargetMailbox.IsPresent) {
@@ -25,7 +26,7 @@ function Invoke-Test32268 {
         $pfRoot = Get-P365PublicFolderFromPath -FolderPath $RootPath -SourceMailbox
         #Move Contact to New folder
         $data = Invoke-CreateFoldersAndItems -RootFolder $pfRoot -TestNumber 32268 -RootFolderPath $RootPath
-        Invoke-p365SyncPublicFolder -SourceFolderPath ("\" + $data.Folder1) -TargetCopyPath ("\" + $RootPath)
+        Invoke-p365SyncPublicFolder -SourceFolderPath ("\" + $data.Folder1) -TargetCopyPath ("\" + $TargetRootPath)
         $tfTargetFolder = Get-P365PublicFolderFromPath -FolderPath $data.Folder3 -TargetMailbox
         $EmailMessage = New-Object Microsoft.Exchange.WebServices.Data.EmailMessage -ArgumentList $Script:TargetService
   		$EmailMessage.Subject = "Test32268 - " + (Get-Date).ToString()
@@ -65,8 +66,8 @@ function Invoke-Test32268 {
         if ($RunDelta.IsPresent) {
             Get-p365TestResults
             # Write-host "Part 1 - Message Created"
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $data.Folder1) -TargetCopyPath ("\" + $RootPath)
-            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $data.Folder1) -TargetCopyPath ("\" + $RootPath)
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $data.Folder1) -TargetCopyPath ("\" + $TargetRootPath)
+            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $data.Folder1) -TargetCopyPath ("\" + $TargetRootPath)
         }
 		
     }
