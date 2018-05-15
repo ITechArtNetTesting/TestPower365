@@ -15,13 +15,7 @@ namespace Product.Framework.Forms
 {
 	public class UsersForm : BaseForm
 	{
-        private readonly Button newMigrationWave = new Button(By.XPath("//span[contains(@data-bind,'addWave')]"), "New migration wave button");
-
-        private readonly Button migrationWaves = new Button(By.XPath("//a[contains(@href,'waves')]//span"), "Migration waves button");
-
-        private readonly Button groupActionsDropdownButton = new Button(By.XPath("//div[@class='ibox m-t-lg']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"), "Actions dropdown in groups edit page");
-
-        private static readonly By TitleLocator =
+		private static readonly By TitleLocator =
 			By.XPath("//div[@id='users']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]");
 
 		private readonly Button actionsDropdownButton =
@@ -53,17 +47,12 @@ namespace Product.Framework.Forms
            
 
         private Button enabledApplyActionButton =
-			new Button(By.XPath("//button[contains(@data-bind, 'applyAction')][not(@disabled='')]"), "Enabled apply button");       
+			new Button(By.XPath("//button[contains(@data-bind, 'applyAction')][not(@disabled='')]"), "Enabled apply button");
 
-        private readonly Button enabledArchiveButton =
+		private readonly Button enabledArchiveButton =
 			new Button(By.XPath("//button[contains(text(), 'Archive')][not(@disabled='')]"), "Enabled archive button");
-      
-        public void CheckMigrationWavesIsVisible()
-        {
-            Assert.IsTrue(migrationWaves.IsElementVisible());
-        }
 
-        private readonly Button enabledEditButton =
+		private readonly Button enabledEditButton =
 			new Button(By.XPath("//button[contains(text(), 'Edit')][not(@disabled='')]"), "Enabled edit button");
 
 		private readonly Button enabledExportButton =
@@ -223,7 +212,7 @@ namespace Product.Framework.Forms
         private readonly Button CompleteDetailsButton = new Button(By.XPath("//button[text()='Complete']"), "Complite button on details form");
         private readonly Button CutoverDetailsButton = new Button(By.XPath("//button[text()='Cutover']"), "Cutover button on details form");
         private readonly Label ImportCompleteLabel = new Label(By.XPath("//span[@data-translation='UploadWasASuccessExclamationPoint']"), "Label Upload Was A Success");
-        private readonly string ProgressBar_100 = "//tr/*[contains(*,'{0}')]//div[@class='progress']/div[contains(@style,'width: 100 %;')]";
+        private readonly string ProgressBar_100 = "//div[@class='progress' and ancestor::tr//td//span[contains(text(),'{0}')]]/div[contains(@style,'width: 100%;')]";
 
         public UsersForm() : base(TitleLocator, "Users list form")
 		{
@@ -302,12 +291,7 @@ namespace Product.Framework.Forms
             else {
                 Assert.IsFalse(enabledApplyActionButton.IsPresent(), "Appply button is enable");
             }
-        }
-
-        public void CheckNewMigrationWaveButtonIsVisible()
-        {
-            Assert.IsTrue(newMigrationWave.IsElementVisible());
-        }
+        }             
 
         public void PerformSearch(string search)
 		{
@@ -320,46 +304,7 @@ namespace Product.Framework.Forms
             Thread.Sleep(2000);//Badd fixme
 		}
 
-        public void PerfomActionForGroup(string locator, ActionType type)
-        {
-            ScrollToTop();
-            Log.Info(type + " user by locator: " + locator);
-            WaitForAjaxLoad();
-            SelectEntryBylocator(locator);
-            SelectGroupAction(type);
-            Apply();
-        }
-
-        public void SelectGroupAction(ActionType type)
-        {
-            OpenGroupActionsDropdown();
-            ChooseAction(type.GetValue());
-        }
-
-        private void OpenGroupActionsDropdown()
-        {
-            Log.Info("Opening Actions dropdown");
-            ScrollToElement(groupActionsDropdownButton.GetElement());
-            groupActionsDropdownButton.Click();
-            try
-            {
-                expandedActionsDropdownButton.WaitForElementPresent(5000);
-            }
-            catch (Exception)
-            {
-                Log.Info("Actions dropdown is not ready");
-                groupActionsDropdownButton.Click();
-            }
-        }
-
-        public void OpenMigrationwaves()
-        {
-            Log.Info("Opening Migration waves");
-            migrationWaves.Click();
-        }
-
-
-        public void ModifyProfile(string profile)
+	    public void ModifyProfile(string profile)
 	    {
             Log.Info("Mofigying profile: "+profile);
             new Button(By.XPath(String.Format(ProfileModifyLocator, profile)), "Profile modify button").Click();
@@ -1532,7 +1477,8 @@ namespace Product.Framework.Forms
 				Log.Info("Radiobutton is not ready");
 				itemButton.Click();
 			}
-		}
+            WaitForAjaxLoad();
+        }
 
 		#endregion
 
@@ -1627,7 +1573,8 @@ namespace Product.Framework.Forms
 		{
 			Log.Info("Checking Matched checkbox");
 			matchedButton.Click();
-		}
+            WaitForAjaxLoad();
+        }
 
 		public void SetComplete()
 		{
@@ -1870,13 +1817,13 @@ namespace Product.Framework.Forms
 
         public void WaitForState_DetailPage(string entry, State state,  int timeout = 5000, int pollIntervalSec = 0)
         {
-            var _migrationStateTextLocatorFormat = "//*[contains(@data-bind, 'migrationState')][contains(text(), '{0}')]";
+            var _migrationStateTextLocatorFormat = "//*[contains(@data-bind, 'migrationState')][contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{0}')]"; 
             var value = state.GetValue();
 
             if (state.GetValue().ToLower() == "synced")
                 value = "complete";           
 
-            var rowEntryTextValue = string.Format(_migrationStateTextLocatorFormat, value);
+            var rowEntryTextValue = string.Format(_migrationStateTextLocatorFormat, value.ToLower());
             var stateLocator = By.XPath(rowEntryTextValue);
             var refreshElementTextValue = refreshButton.GetLocator();
 

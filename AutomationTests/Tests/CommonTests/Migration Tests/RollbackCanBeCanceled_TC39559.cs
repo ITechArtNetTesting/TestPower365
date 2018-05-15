@@ -16,7 +16,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
         }
         [TestMethod]
         [TestCategory("Integration")]
-        public void RollbackTest_InTheUserDetailView_Integrat_39552()
+        public void RollbackTest_InTheUserDetailView_Integrat_39559()
         {
             bool isIntegrate = true;
             RollbackTest_InTheUserDetailView(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"), RunConfigurator.GetClient("client2"),
@@ -25,7 +25,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
 
         [TestMethod]
         [TestCategory("MailOnly")]
-        public void RollbackTest_InTheUserDetailView_MO_39552()
+        public void RollbackTest_InTheUserDetailView_MO_39559()
         {
             RollbackTest_InTheUserDetailView(RunConfigurator.GetUserLogin("client1"), RunConfigurator.GetPassword("client1"), RunConfigurator.GetClient("client1"),
                 RunConfigurator.GetProjectName("client1", "project1"), RunConfigurator.GetSourceMailbox("client1", "project1", "entry13"));
@@ -33,7 +33,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
 
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
-        public void RollbackTest_InTheUserDetailView_MD_39552()
+        public void RollbackTest_InTheUserDetailView_MD_39559()
         {
             RollbackTest_InTheUserDetailView(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"), RunConfigurator.GetClient("client2"),
               RunConfigurator.GetProjectName("client2", "project1"), RunConfigurator.GetSourceMailbox("client2", "project1", "entry10"));
@@ -59,7 +59,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
             }
             User.AtUsersForm().SyncFromDetails();
             User.AtUsersForm().ConfirmAction();
-            User.AtUsersForm().WaitForState_DetailPage(sourceMailbox, State.Syncing, 12000000, 10);
+            User.AtUsersForm().WaitForState_DetailPage(sourceMailbox, State.Syncing, 2400000, 10);
             User.AtUsersForm().WaitForState_DetailPage(sourceMailbox, State.Synced, 2400000, 10);
             User.AtUsersForm().Rollback();
             //Modal window       

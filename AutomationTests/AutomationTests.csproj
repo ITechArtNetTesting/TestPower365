@@ -211,10 +211,10 @@
     <Compile Include="Tests\CommonTests\LandingPageTests\DiscoveryFrequencyShouldBeSetted_TC32698.cs" />
     <Compile Include="Tests\CommonTests\LoginAndConfigureTest.cs" />
     <Compile Include="Tests\CommonTests\Menu Tests\Menu_IntegrationProject_31679.cs" />
-    <Compile Include="Tests\CommonTests\Menu Tests\Verify_Users_View_has_the_Tab_to_switch_view_to_Migration_Wave_View_TC30917.cs" />
+    <Compile Include="Tests\CommonTests\Menu Tests\Menu_ManageErrorsPage_TC34716.cs" />
     <Compile Include="Tests\CommonTests\Migration Tests\RollbackCanBeCanceled_TC39559.cs" />
     <Compile Include="Tests\CommonTests\Migration Tests\RollbackShouldBeCompleted_InTheUserDetailView.cs" />
-    <Compile Include="Tests\CommonTests\Migration Tests\Verify_jobs_can_be_archived_TC23090.cs" />
+    <Compile Include="Tests\CommonTests\Migration Tests\JobsCanBeArchived_TC23090.cs" />
     <Compile Include="Tests\CommonTests\ProbeTest.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\DatabaseCleanup.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\EnvironmentCleanup.cs" />
@@ -231,8 +231,6 @@
     <Compile Include="Tests\IntegrationTests\DistributionGroupsValidationTest.cs" />
     <Compile Include="Tests\IntegrationTests\DistributionGroupTests\GroupsWillBeShownCorectly_TC31793.cs" />
     <Compile Include="Tests\IntegrationTests\DistributionGroupTests\VerifyGroupSyncWillShowAccurateJobStatus_TC31796.cs" />
-    <Compile Include="Tests\IntegrationTests\GroupsTests\Verify_group_sync_UI_will_show_accurate_job_status_throughout_group_sync_TC31796.cs" />
-    <Compile Include="Tests\IntegrationTests\GroupsTests\Verify_only_universal_distribution_groups_will_be_shown_in_the_UI_for_group_sync_and_security_group_will_be_shown_in_the_UI_but_it_can_not_be_synced_TC31793.cs" />
     <Compile Include="Tests\IntegrationTests\GroupsViewTest.cs" />
     <Compile Include="Tests\IntegrationTests\SetUpTest\MailUPNandExtensionAttributesAreValidMatchingOptions_32951.cs" />
     <Compile Include="Tests\CommonTests\ActionButtonsTests\StoppingStateButtonsTest.cs" />
@@ -257,7 +255,7 @@
     <Compile Include="Tests\MailOnlyTests\SortingAndFilterTests\SortingFilteredEntriesTest.cs" />
     <Compile Include="Tests\MailOnlyTests\SortingAndFilterTests\SortingTest.cs" />
     <Compile Include="Tests\MailOnlyTests\TenantConfigurationTests\TenantConfigurationTest.cs" />
-    <Compile Include="Tests\CommonTests\ActionButtonsTests\CutoverAndCompletedButtonsTest_TC23096.cs" />
+    <Compile Include="Tests\CommonTests\ActionButtonsTests\CutoverAndCompletedButtonsTest_TC23096_23089.cs" />
     <Compile Include="Tests\CommonTests\ActionButtonsTests\StoppingStateButtonsTest_InTheUserDetailView.cs" />
     <Compile Include="Tests\CommonTests\LandingPageTests\GetBackToProjectDashboardFromSyncPages_37789.cs" />
     <Compile Include="Tests\MailWithDiscoveryTests\MigrationTests\MailMigrationJobShouldCompletedInUserMigrationView_25824.cs" />

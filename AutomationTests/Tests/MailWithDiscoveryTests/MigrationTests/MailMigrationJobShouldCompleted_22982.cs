@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Product.Tests.CommonTests.Migration_Tests
+namespace Product.Tests.MailWithDiscoveryTests.MigrationTests
 {
     [TestClass]
    public class MailMigrationJobShouldCompleted_22982 : LoginAndConfigureTest

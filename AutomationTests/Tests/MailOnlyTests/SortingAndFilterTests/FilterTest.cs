@@ -56,8 +56,7 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		        User.AtUsersForm().SwitchFilter(FilterState.Closed);
 		     
 		        User.AtUsersForm().StoreEntriesData();
-		        User.AtUsersForm().AssertProfileIsFilteredFor(profileMailbox6);
-           
+		        User.AtUsersForm().AssertProfileIsFilteredFor(profileMailbox6);         
 		}
 	}
 }

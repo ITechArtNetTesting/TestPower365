@@ -39,6 +39,9 @@ namespace Product.Tests.MailEngine
         private string _sourceMailboxExtra2;
         private string _targetMailboxExtra2;
 
+        private string _sourceGroup1;
+        private string _sourceGroup2;
+
         private string _sourcePublicFolder;
         private string _attachment;
 
@@ -49,55 +52,7 @@ namespace Product.Tests.MailEngine
         {
             _testContext = testContext;
             InitialStateSetup();
-            //CleanPublicFolders();
         }
-
-        private static void CleanPublicFolders()
-        {
-            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-            RunConfigurator.RunPath = "resources/run.xml";
-            RunConfigurator.ResourcesPath = "resources/";
-
-            var tenants = "T5->T6";
-            var sourceAdminUser = RunConfigurator.GetTenantValue(tenants, "source", "pfuser");
-            var sourceAdminPassword = RunConfigurator.GetTenantValue(tenants, "source", "pfpassword");
-
-            var targetAdminUser = RunConfigurator.GetTenantValue(tenants, "target", "pfuser");
-            var targetAdminPassword = RunConfigurator.GetTenantValue(tenants, "target", "pfpassword");
-            
-            using (var cleanupScript = new PsLauncher().LaunchPowerShellInstance("PF/PFMailEngineCleanup.ps1",
-                    $" -sourceLogin {sourceAdminUser}" +
-                    $" -sourcePassword {sourceAdminPassword}" +
-                    $" -targetLogin {targetAdminUser}" +
-                    $" -targetPassword {targetAdminPassword}",
-                "x64"))
-            {
-                Task sourceStdOut = Task.Run(() =>
-                {
-                    while (!cleanupScript.StandardOutput.EndOfStream)
-                    {
-                        var line = cleanupScript.StandardOutput.ReadLine();
-                        Log.Debug(line);
-                    }
-                });
-
-                Task sourceStdError = Task.Run(() =>
-                {
-                    while (!cleanupScript.StandardError.EndOfStream)
-                    {
-                        var line = cleanupScript.StandardError.ReadLine();
-                        Log.Error(line);
-                    }
-                });
-
-                Task.WaitAll(sourceStdOut, sourceStdError);
-                cleanupScript.WaitForExit(30000);
-
-                //Thread.Sleep(2 * 60 * 1000); //Sleep for 2 minutes, reduce change that the folders are not in sync yet.
-            }
-        }
-
-
 
         [TestInitialize]
         public void TestInit()
@@ -132,8 +87,10 @@ namespace Product.Tests.MailEngine
             _sourceMailboxExtra2 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry18']/..//source");
             _targetMailboxExtra2 = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry18']/..//target");
 
-            _sourcePublicFolder = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry16']/..//source");
 
+            //_sourceGroup1 = RunConfigurator.GetADGroupName("client2", "project2", "group1");
+            //_sourceGroup2 = RunConfigurator.GetADGroupName("client2", "project2", "group2");
+            
             _attachment = "resources/attach.jpg";
 
             _url = "https://outlook.office365.com/EWS/Exchange.asmx";
@@ -848,8 +805,8 @@ namespace Product.Tests.MailEngine
         [TestCategory("Provisioning")]
         public void PublicFolder_PS_Test30822()
         {
-            var source1 = new KeyValuePair<string, object>("SourceProxyAddress", _sourceMailboxExtra1);
-            var target1 = new KeyValuePair<string, object>("TargetProxyAddress", _targetMailboxExtra1);
+            var source1 = new KeyValuePair<string, object>("SourceProxyAddress", "test30822@btcorp31.onmicrosoft.com");
+            var target1 = new KeyValuePair<string, object>("TargetProxyAddress", "test30822@btcorp32.onmicrosoft.com");
 
             AssertPublicFolderSyncTestPasses("30822", PerformPublicFolderSync, source1, target1);
         }
@@ -1088,20 +1045,6 @@ namespace Product.Tests.MailEngine
         [TestCategory("MailEngine")]
         [TestCategory("PublicFolder")]
         [TestCategory("Permissions")]
-        public void PublicFolder_PS_Test34507()
-        {
-            var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
-            var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
-            var source2 = new KeyValuePair<string, object>("SecondSourcePermission", _sourceMailboxExtra2);
-            var target2 = new KeyValuePair<string, object>("SecondTargetPermission", _targetMailboxExtra2);
-
-            AssertPublicFolderSyncTestPasses("34507", PerformPublicFolderSync, source1, target1, source2, target2);
-        }
-
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("PublicFolder")]
-        [TestCategory("Permissions")]
         public void PublicFolder_PS_Test34508()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
@@ -1219,19 +1162,7 @@ namespace Product.Tests.MailEngine
             AssertPublicFolderSyncTestPasses("36315", PerformPublicFolderSync);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("PublicFolder")]
-        [TestCategory("Permissions")]
-        public void PublicFolder_PS_Test39557()
-        {
-            var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
-            var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
-            var source2 = new KeyValuePair<string, object>("SecondSourcePermission", _sourceMailboxExtra2);
-            var target2 = new KeyValuePair<string, object>("SecondTargetPermission", _targetMailboxExtra2);
 
-            AssertPublicFolderSyncTestPasses("39557", PerformPublicFolderSync, source1, target1, source2, target2);
-        }
 
         [TestMethod]
         [TestCategory("MailEngine")]
@@ -1315,28 +1246,32 @@ namespace Product.Tests.MailEngine
         
         private void AssertPublicFolderSyncTestPasses(string testId, Action<string> userInterfaceActions, params KeyValuePair<string, object>[] parameters)
         {
-            var folderPath = string.Format("\\Automation\\Tests\\{0}", testId);
-            var folderPathParam = new KeyValuePair<string, object>("RootPath", string.Format("\\Automation\\Tests\\{0}", testId));
+            var sourceFolderPath = string.Format("\\Automation\\Tests\\{0}", testId);
+            var sourceFolderPathParam = new KeyValuePair<string, object>("RootPath", sourceFolderPath);
+
+            var targetFolderPath = string.Format("\\Automation\\Tests");
+            var targetFolderPathParam = new KeyValuePair<string, object>("TargetRootPath", targetFolderPath);
 
             //create new paramerters list to append rootFolder
             List<KeyValuePair<string, object>> paramSet = parameters != null ? parameters.ToList() : new List<KeyValuePair<string, object>>();
-            paramSet.Add(folderPathParam);
+            paramSet.Add(sourceFolderPathParam);
+            paramSet.Add(targetFolderPathParam);
 
             var paramArray = paramSet.ToArray();
 
-            PrepareFolder(folderPath);
+            PrepareFolder(sourceFolderPath);
 
             try
             {
-                AssertTestPasses(_powerShell, testId, folderPath, userInterfaceActions, paramArray);
+                AssertTestPasses(_powerShell, testId, sourceFolderPath, userInterfaceActions, paramArray);
             }
             catch (RetryException)
             {
-                AssertTestPasses(_powerShell, testId, folderPath, userInterfaceActions, paramArray);
+                AssertTestPasses(_powerShell, testId, sourceFolderPath, userInterfaceActions, paramArray);
             }
             finally
             {
-                ArchivePublicFolder(folderPath);
+                ArchivePublicFolder(sourceFolderPath);
             }
         }
     }

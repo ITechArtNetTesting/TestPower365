@@ -41,11 +41,11 @@ namespace Product.Tests.CommonTests.LandingPageTests
                 SelectProject(projectName);
                 User.AtProjectOverviewForm().EditTenants();
                 User.AtTenantsConfigurationForm().OpenDiscoveryTab();
-                User.AtDiscoveryOverviewForm().VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(client, projectName);
+                User.AtDiscoveryOverviewForm().VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(client);
                 User.AtDiscoveryOverviewForm().ChangeDiscoveryFrequencyHours(1);
-                User.AtDiscoveryOverviewForm().VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(client, projectName);
+                User.AtDiscoveryOverviewForm().VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(client);
                 User.AtDiscoveryOverviewForm().ChangeDiscoveryFrequencyHours(24);
-                User.AtDiscoveryOverviewForm().VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(client, projectName);
+                User.AtDiscoveryOverviewForm().VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(client);
            
         }
 

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Product.Tests.CommonTests.LandingPageTests
+namespace Product.Tests.MailWithDiscoveryTests.LandingPageTests
 {
     [TestClass]
     public class ProjectLandingPageShouldHasTenantSection_25771 : LoginAndConfigureTest

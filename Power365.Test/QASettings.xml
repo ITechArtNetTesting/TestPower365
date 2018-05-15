@@ -11,6 +11,7 @@
       <Projects>
         <Project Reference="project1" Source="tenant1" Target="tenant2">
           <Name>BT-AutoQA1-Project1</Name>
+          <Description>Mail With File Project</Description>
           <UserMigrations>
             <UserMigration Reference="entry1">
               <Source>C7O365SML1@btcorp7.onmicrosoft.com</Source>
@@ -76,19 +77,19 @@
           <Groups />
           <Files>
             <File Reference="file1">
-              <Path>MailOnlyCSVC7toC9SML-Automation-part1.csv</Path>
+              <Path>ImportFiles\MailOnlyCSVC7toC9SML-Automation-part1.csv</Path>
             </File>
             <File Reference="file2">
-              <Path>MailOnlyCSVC7toC9SML-Automation-part2.csv</Path>
+              <Path>ImportFiles\MailOnlyCSVC7toC9SML-Automation-part2.csv</Path>
             </File>
             <File Reference="file3">
-              <Path>ThreeTenants.csv</Path>
+              <Path>ImportFiles\ThreeTenants.csv</Path>
             </File>
             <File Reference="file4">
-              <Path>MailOnlyCSVC7toC9SML.csv</Path>
+              <Path>ImportFiles\MailOnlyCSVC7toC9SML.csv</Path>
             </File>
             <File Reference="file5">
-              <Path>PowershellUsers.csv</Path>
+              <Path>ImportFiles\PowershellUsers.csv</Path>
             </File>
           </Files>
         </Project>

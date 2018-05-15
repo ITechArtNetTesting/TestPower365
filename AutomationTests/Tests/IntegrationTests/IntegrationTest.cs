@@ -51,54 +51,54 @@ namespace Product.Tests.IntegrationTests
                 SelectProject(project);
                 User.AtProjectOverviewForm().OpenUsersList();
 
-                //PerformActionAndWaitForState(sourceMailbox1, ActionType.Prepare, State.Preparing, 60000, 10);
-                //PerformActionAndWaitForState(sourceMailbox2, ActionType.Prepare, State.Preparing, 60000, 10);
-                //PerformActionAndWaitForState(sourceMailbox3, ActionType.Prepare, State.Preparing, 60000, 10);
-                //PerformActionAndWaitForState(sourceMailbox6, ActionType.Prepare, State.Preparing, 60000, 10);
-                //PerformActionAndWaitForState(sourceMailbox8, ActionType.Prepare, State.Preparing, 60000, 10);
-                //PerformActionAndWaitForState(sourceMailbox9, ActionType.Prepare, State.Preparing, 60000, 10);
-                //PerformActionAndWaitForState(sourceMailbox11Upn, ActionType.Prepare, State.Preparing, 60000, 10);
-                //PerformActionAndWaitForState(sourceMailbox12, ActionType.Prepare, State.Preparing, 60000, 10);
-                //PerformActionAndWaitForState(sourceMailbox13, ActionType.Prepare, State.Preparing, 60000, 10);
-                //PerformActionAndWaitForState(sourceMailbox14, ActionType.Prepare, State.Preparing, 60000, 10);
-                //PerformActionAndWaitForState(sourceMailbox15, ActionType.Prepare, State.Preparing, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox1, ActionType.Prepare, State.Preparing, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox2, ActionType.Prepare, State.Preparing, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox3, ActionType.Prepare, State.Preparing, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox6, ActionType.Prepare, State.Preparing, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox8, ActionType.Prepare, State.Preparing, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox9, ActionType.Prepare, State.Preparing, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox11Upn, ActionType.Prepare, State.Preparing, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox12, ActionType.Prepare, State.Preparing, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox13, ActionType.Prepare, State.Preparing, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox14, ActionType.Prepare, State.Preparing, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox15, ActionType.Prepare, State.Preparing, 60000, 10);
 
                 WaitForState(sourceMailbox1, State.Prepared, 2400000, 30);
-                //WaitForState(sourceMailbox2, State.Prepared, 2400000, 30);
-                //WaitForState(sourceMailbox3, State.Prepared, 2400000, 30);
-                //WaitForState(sourceMailbox6, State.Prepared, 2400000, 30);
-                //WaitForState(sourceMailbox8, State.Prepared, 2400000, 30);
-                //WaitForState(sourceMailbox9, State.Prepared, 2400000, 30);
-                //WaitForState(sourceMailbox11Upn, State.Prepared, 2400000, 30);
-                //WaitForState(sourceMailbox12, State.Prepared, 2400000, 30);
-                //WaitForState(sourceMailbox13, State.Prepared, 2400000, 30);
-                //WaitForState(sourceMailbox14, State.Prepared, 2400000, 30);
-                //WaitForState(sourceMailbox15, State.Prepared, 2400000, 30);
+                WaitForState(sourceMailbox2, State.Prepared, 2400000, 30);
+                WaitForState(sourceMailbox3, State.Prepared, 2400000, 30);
+                WaitForState(sourceMailbox6, State.Prepared, 2400000, 30);
+                WaitForState(sourceMailbox8, State.Prepared, 2400000, 30);
+                WaitForState(sourceMailbox9, State.Prepared, 2400000, 30);
+                WaitForState(sourceMailbox11Upn, State.Prepared, 2400000, 30);
+                WaitForState(sourceMailbox12, State.Prepared, 2400000, 30);
+                WaitForState(sourceMailbox13, State.Prepared, 2400000, 30);
+                WaitForState(sourceMailbox14, State.Prepared, 2400000, 30);
+                WaitForState(sourceMailbox15, State.Prepared, 2400000, 30);
 
                 PerformActionAndWaitForState(sourceMailbox1, ActionType.Sync, State.Provisioning, 60000, 10);
-                //PerformActionAndWaitForState(sourceMailbox2, ActionType.Sync, State.Provisioning, 60000, 10);
-                //PerformActionAndWaitForState(sourceMailbox3, ActionType.Sync, State.Provisioning, 60000, 10);
-                //PerformActionAndWaitForState(sourceMailbox6, ActionType.Sync, State.Provisioning, 60000, 10);
-                //PerformActionAndWaitForState(sourceMailbox8, ActionType.Sync, State.Provisioning, 60000, 10);//This requires azure ad sync
-                //PerformActionAndWaitForState(sourceMailbox9, ActionType.Sync, State.Provisioning, 60000, 10);
-                //PerformActionAndWaitForState(sourceMailbox11Upn, ActionType.Sync, State.Provisioning, 60000, 10);
-                //PerformActionAndWaitForState(sourceMailbox12, ActionType.Sync, State.Provisioning, 60000, 10);
-                //PerformActionAndWaitForState(sourceMailbox13, ActionType.Sync, State.Provisioning, 60000, 10);
-                //PerformActionAndWaitForState(sourceMailbox14, ActionType.Sync, State.Provisioning, 60000, 10);
-                //PerformActionAndWaitForState(sourceMailbox15, ActionType.Sync, State.Provisioning, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox2, ActionType.Sync, State.Provisioning, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox3, ActionType.Sync, State.Provisioning, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox6, ActionType.Sync, State.Provisioning, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox8, ActionType.Sync, State.Provisioning, 60000, 10);//This requires azure ad sync
+                PerformActionAndWaitForState(sourceMailbox9, ActionType.Sync, State.Provisioning, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox11Upn, ActionType.Sync, State.Provisioning, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox12, ActionType.Sync, State.Provisioning, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox13, ActionType.Sync, State.Provisioning, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox14, ActionType.Sync, State.Provisioning, 60000, 10);
+                PerformActionAndWaitForState(sourceMailbox15, ActionType.Sync, State.Provisioning, 60000, 10);
 
-                //@@@ These are broken
-                WaitForAnyState(sourceMailbox1, new[] { State.Synced, State.SyncError }, 2400000, 60);
-                //WaitForAnyState(sourceMailbox2, new[] { State.Synced, State.SyncError }, 2400000, 60);
-                //WaitForAnyState(sourceMailbox3, new[] { State.Synced, State.SyncError }, 2400000, 60);
-                //WaitForAnyState(sourceMailbox6, new[] { State.Synced, State.SyncError }, 2400000, 60);
-                //WaitForAnyState(sourceMailbox8, new[] { State.Synced, State.SyncError }, 2400000, 60);
-                //WaitForAnyState(sourceMailbox9, new[] { State.Synced, State.SyncError }, 2400000, 60);
-                //WaitForAnyState(sourceMailbox11Upn, new[] { State.Synced, State.SyncError }, 2400000, 60);
-                //WaitForAnyState(sourceMailbox12, new[] { State.Synced, State.SyncError }, 2400000, 60);
-                //WaitForAnyState(sourceMailbox13, new[] { State.Synced, State.SyncError }, 2400000, 60);
-                //WaitForAnyState(sourceMailbox14, new[] { State.Synced, State.SyncError }, 2400000, 60);
-                //WaitForAnyState(sourceMailbox15, new[] { State.Synced, State.SyncError }, 2400000, 60);
+                //@@@ These are broken 
+                WaitForAnyState(sourceMailbox1, new[] { State.Synced, State.SyncError }, 2600000, 60);
+                WaitForAnyState(sourceMailbox2, new[] { State.Synced, State.SyncError }, 2600000, 60);
+                WaitForAnyState(sourceMailbox3, new[] { State.Synced, State.SyncError }, 2600000, 60);
+                WaitForAnyState(sourceMailbox6, new[] { State.Synced, State.SyncError }, 2600000, 60);
+                WaitForAnyState(sourceMailbox8, new[] { State.Synced, State.SyncError }, 2600000, 60);
+                WaitForAnyState(sourceMailbox9, new[] { State.Synced, State.SyncError }, 2600000, 60);
+                WaitForAnyState(sourceMailbox11Upn, new[] { State.Synced, State.SyncError }, 2600000, 60);
+                WaitForAnyState(sourceMailbox12, new[] { State.Synced, State.SyncError }, 2600000, 60);
+                WaitForAnyState(sourceMailbox13, new[] { State.Synced, State.SyncError }, 2600000, 60);
+                WaitForAnyState(sourceMailbox14, new[] { State.Synced, State.SyncError }, 2600000, 60);
+                WaitForAnyState(sourceMailbox15, new[] { State.Synced, State.SyncError }, 2600000, 60);
 
                 Thread.Sleep(60 * 60 * 1000);//Sleep for an hour because the cloud is slow and early evaluations cause problems.
 
