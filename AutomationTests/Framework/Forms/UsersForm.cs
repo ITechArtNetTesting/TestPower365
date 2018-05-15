@@ -15,7 +15,13 @@ namespace Product.Framework.Forms
 {
 	public class UsersForm : BaseForm
 	{
-		private static readonly By TitleLocator =
+        private readonly Button groupActionsDropdownButton = new Button(By.XPath("//div[@class='ibox m-t-lg']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"), "Actions dropdown in groups edit page");
+
+        private readonly Button newMigrationWave = new Button(By.XPath("//span[contains(@data-bind,'addWave')]"), "New migration wave button");
+
+        private readonly Button migrationWaves = new Button(By.XPath("//a[contains(@href,'waves')]//span"), "Migration waves button");
+
+        private static readonly By TitleLocator =
 			By.XPath("//div[@id='users']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]");
 
 		private readonly Button actionsDropdownButton =
@@ -1006,7 +1012,55 @@ namespace Product.Framework.Forms
 					.Count == count, "Invalid count of lines");
 		}
 
-		public void VerifyLinesCount(int count)
+        public void CheckMigrationWavesIsVisible()
+        {
+            Assert.IsTrue(migrationWaves.IsElementVisible());
+        }
+
+        public void OpenMigrationwaves()
+        {
+            Log.Info("Opening Migration waves");
+            migrationWaves.Click();
+        }
+
+        public void CheckNewMigrationWaveButtonIsVisible()
+        {
+            Assert.IsTrue(newMigrationWave.IsElementVisible());
+        }
+
+        public void PerfomActionForGroup(string locator, ActionType type)
+        {
+            ScrollToTop();
+            Log.Info(type + " user by locator: " + locator);
+            WaitForAjaxLoad();
+            SelectEntryBylocator(locator);
+            SelectGroupAction(type);
+            Apply();
+        }
+
+        public void SelectGroupAction(ActionType type)
+        {
+            OpenGroupActionsDropdown();
+            ChooseAction(type.GetValue());
+        }
+
+        private void OpenGroupActionsDropdown()
+        {
+            Log.Info("Opening Actions dropdown");
+            ScrollToElement(groupActionsDropdownButton.GetElement());
+            groupActionsDropdownButton.Click();
+            try
+            {
+                expandedActionsDropdownButton.WaitForElementPresent(5000);
+            }
+            catch (Exception)
+            {
+                Log.Info("Actions dropdown is not ready");
+                groupActionsDropdownButton.Click();
+            }
+        }
+
+        public void VerifyLinesCount(int count)
 		{
 			Log.Info("Verifying lines count is equal to: " + count);
 			var locator = By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr");

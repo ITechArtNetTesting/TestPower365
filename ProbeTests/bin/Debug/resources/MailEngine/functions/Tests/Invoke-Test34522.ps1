@@ -7,7 +7,8 @@ function Invoke-Test34522 {
         [Parameter(Position = 4, Mandatory = $true)] [String]$FirstTargetPermission,
         [Parameter(Position = 5, Mandatory = $true)] [String]$SecondTargetPermission,
         [Parameter(Position = 6, Mandatory = $false)][switch]$RunDelta,
-		[Parameter(Mandatory = $true)][String]$RootPath
+		[Parameter(Mandatory = $true)][String]$RootPath,
+		[Parameter(Mandatory = $true)][String]$TargetRootPath
     )  
     Begin {
         $Data = "" | Select OrginalId, MovedId, NewId
@@ -49,7 +50,7 @@ function Invoke-Test34522 {
             $psPropertySet.Add([Microsoft.Exchange.WebServices.Data.FolderSchema]::Permissions)
             $NewFolder = [Microsoft.Exchange.WebServices.Data.Folder]::Bind($service, $NewFolder.Id, $psPropertySet)
             $NewFolder.TryGetProperty($PR_ENTRYID, [ref]$EntryIdVal)
-            $data.Folder1 = ("\" + $RootPath + "\" + $FolderName)
+            $data.Folder1 = ($RootPath + "\" + $FolderName)
             $data.SourceId = $NewFolder.Id
             $data.FirstTargetPermission = $FirstTargetPermission
             $data.SecondTargetPermission = $SecondTargetPermission
@@ -64,7 +65,7 @@ function Invoke-Test34522 {
             $NewFolder1.Permissions.Clear()
             $NewFolder1.Permissions.Add($newfp)   	    
             $NewFolder1.Update()
-            $data.Folder2 = ("\" + $RootPath + "\" + $FolderName + "\" + $FolderName1)
+            $data.Folder2 = ($RootPath + "\" + $FolderName + "\" + $FolderName1)
             $NewFolder1.Load($psPropertySet)
             $PermissiontoAdd = [Microsoft.Exchange.WebServices.Data.FolderPermissionLevel]::Owner  
             $newfp = new-object Microsoft.Exchange.WebServices.Data.FolderPermission($SecondSourcePermission, $PermissiontoAdd)  
@@ -85,7 +86,7 @@ function Invoke-Test34522 {
        # New-P365TranslationFile -SourceAddress $SecondSourcePermission -TargetAddress $SecondTargetPermission -FileName $tfile
         
         # Write-host "Part 1 - Message Created"
-       # Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+       # Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
 
         # Invoke-P365MailboxCopy	-mappingfile $tfile	
        # $Folder = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ("\" + $RootPath + "\" + $FolderName)
@@ -113,7 +114,7 @@ function Invoke-Test34522 {
             $tfile = New-P365TranslationFile -SourceAddress $FirstSourcePermission -TargetAddress $FirstTargetPermission
             New-P365TranslationFile -SourceAddress $SecondSourcePermission -TargetAddress $SecondTargetPermission -FileName $tfile
             # Write-host "Part 1 - Message Created"
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
         }
         Write-Host "Done" -ForegroundColor Green
     }
