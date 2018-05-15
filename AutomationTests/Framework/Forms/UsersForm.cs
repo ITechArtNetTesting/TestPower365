@@ -58,9 +58,9 @@ namespace Product.Framework.Forms
         private readonly Button enabledArchiveButton =
 			new Button(By.XPath("//button[contains(text(), 'Archive')][not(@disabled='')]"), "Enabled archive button");
       
-        public void CheckMigrationWavesIsDisplayed()
+        public void CheckMigrationWavesIsVisible()
         {
-            Assert.IsTrue(migrationWaves.IsDisplayed());
+            Assert.IsTrue(migrationWaves.IsElementVisible());
         }
 
         private readonly Button enabledEditButton =
@@ -304,9 +304,9 @@ namespace Product.Framework.Forms
             }
         }
 
-        public void CheckNewMigrationWaveButtonIsDisplayed()
+        public void CheckNewMigrationWaveButtonIsVisible()
         {
-            Assert.IsTrue(newMigrationWave.IsDisplayed());
+            Assert.IsTrue(newMigrationWave.IsElementVisible());
         }
 
         public void PerformSearch(string search)
