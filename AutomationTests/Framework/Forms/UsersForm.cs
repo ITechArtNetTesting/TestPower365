@@ -15,6 +15,8 @@ namespace Product.Framework.Forms
 {
 	public class UsersForm : BaseForm
 	{
+        private readonly Button migrationWaves = new Button(By.XPath("//a[contains(@href,'waves')]//span"), "Migration waves button");
+
         private readonly Button groupActionsDropdownButton = new Button(By.XPath("//div[@class='ibox m-t-lg']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"), "Actions dropdown in groups edit page");
 
         private static readonly By TitleLocator =
@@ -54,7 +56,12 @@ namespace Product.Framework.Forms
 		private readonly Button enabledArchiveButton =
 			new Button(By.XPath("//button[contains(text(), 'Archive')][not(@disabled='')]"), "Enabled archive button");
 
-		private readonly Button enabledEditButton =
+        public void CheckMigrationWavesIsPresent()
+        {
+            Assert.IsTrue(migrationWaves.IsPresent());
+        }
+
+        private readonly Button enabledEditButton =
 			new Button(By.XPath("//button[contains(text(), 'Edit')][not(@disabled='')]"), "Enabled edit button");
 
 		private readonly Button enabledExportButton =

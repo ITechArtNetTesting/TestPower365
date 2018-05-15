@@ -211,6 +211,7 @@
     <Compile Include="Tests\CommonTests\LandingPageTests\DiscoveryFrequencyShouldBeSetted_TC32698.cs" />
     <Compile Include="Tests\CommonTests\LoginAndConfigureTest.cs" />
     <Compile Include="Tests\CommonTests\Menu Tests\Menu_IntegrationProject_31679.cs" />
+    <Compile Include="Tests\CommonTests\Menu Tests\Verify_Users_View_has_the_Tab_to_switch_view_to_Migration_Wave_View_TC30917.cs" />
     <Compile Include="Tests\CommonTests\Migration Tests\RollbackCanBeCanceled_TC39559.cs" />
     <Compile Include="Tests\CommonTests\Migration Tests\RollbackShouldBeCompleted_InTheUserDetailView.cs" />
     <Compile Include="Tests\CommonTests\Migration Tests\Verify_jobs_can_be_archived_TC23090.cs" />
