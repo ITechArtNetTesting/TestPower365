@@ -55,12 +55,12 @@ namespace BinaryTree.Power365.Test.Setup
                 .CreateWorkflow<EmailWithFileProjectWorkflow, EditProjectPage>(editProjectPage);
             
             var projectDetailsPage = editProjectWorkflow
-                .ProjectType(ProjectType.EmailByFile)
+                //.ProjectType(ProjectType.EmailByFile)
                 .ProjectName(projectName)
                 .ProjectDescription(projectDescription)
                 .AddTenant(sourceTenantUser, sourceTenantPassword)
                 .AddTenant(targetTenantUser, targetTenantPassword, true)
-                .UploadUserList(uploadFilePath)
+                //.UploadUserList(uploadFilePath)
                 .SyncSchedule(false)
                 .Submit()
                 .GetPage<ProjectDetailsPage>();

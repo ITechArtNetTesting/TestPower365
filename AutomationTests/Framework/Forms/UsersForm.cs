@@ -15,6 +15,10 @@ namespace Product.Framework.Forms
 {
 	public class UsersForm : BaseForm
 	{
+        private readonly Label startTimeOfLastRollback = new Label(By.XPath("//div[@class='modal-body']//div[@class='table-responsive table-frame m-t-sm']//tbody//td[ancestor::tr//span[contains(text(),'Rollback')]][4]//span[last()]"), "Start time of last job");
+
+        private readonly Label endTimeOfLastRollback = new Label(By.XPath("//div[@class='modal-body']//div[@class='table-responsive table-frame m-t-sm']//tbody//td[ancestor::tr//span[contains(text(),'Rollback')]][5]//span[last()]"), "Start time of last job");
+
         private readonly Button groupActionsDropdownButton = new Button(By.XPath("//div[@class='ibox m-t-lg']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"), "Actions dropdown in groups edit page");
 
         private readonly Button newMigrationWave = new Button(By.XPath("//span[contains(@data-bind,'addWave')]"), "New migration wave button");
@@ -531,6 +535,26 @@ namespace Product.Framework.Forms
 			ScrollToElement(detailsButton.GetElement());
 			detailsButton.DoubleClick();
 		}
+
+        public void CheckDetailsTime(DateTime startTime,DateTime endTime)
+        {           
+            DateTime UIStartTime = DateTime.Parse(startTimeOfLastRollback.GetText());
+            DateTime UIEndTime = DateTime.Parse(endTimeOfLastRollback.GetText());
+            Assert.IsTrue(timesApproximatelyEqual(startTime, UIStartTime));
+            Assert.IsTrue(timesApproximatelyEqual(endTime, UIEndTime));
+        }
+
+        private bool timesApproximatelyEqual(DateTime firstTime, DateTime secondTime)
+        {
+            bool result = true;
+            result = firstTime.Month == secondTime.Month;
+            result = firstTime.Day == secondTime.Day;
+            result = firstTime.Year == secondTime.Year;
+            result = firstTime.Hour == secondTime.Hour;
+            result = (Math.Abs(secondTime.Minute - firstTime.Minute)) <= 5;
+            return result;
+            
+        }
 
         public void DetailsRefresh()
         {
@@ -1875,13 +1899,13 @@ namespace Product.Framework.Forms
             var value = state.GetValue();
 
             if (state.GetValue().ToLower() == "synced")
-                value = "complete";           
+                value = "complete";
 
             var rowEntryTextValue = string.Format(_migrationStateTextLocatorFormat, value.ToLower());
             var stateLocator = By.XPath(rowEntryTextValue);
             var refreshElementTextValue = refreshButton.GetLocator();
 
-            if (!IsElementExists(stateLocator, ( ) => ClickElementBy(refreshElementTextValue), timeout / 1000, pollIntervalSec))
+            if (!IsElementExists(stateLocator, () => ClickElementBy(refreshElementTextValue), timeout / 1000, pollIntervalSec))
                 throw new Exception(string.Format("Entry of '{0}' with state '{1}' was not found.", entry, value));
         }
 

@@ -216,6 +216,7 @@
     <Compile Include="Tests\CommonTests\Migration Tests\RollbackCanBeCanceled_TC39559.cs" />
     <Compile Include="Tests\CommonTests\Migration Tests\RollbackShouldBeCompleted_InTheUserDetailView.cs" />
     <Compile Include="Tests\CommonTests\Migration Tests\JobsCanBeArchived_TC23090.cs" />
+    <Compile Include="Tests\CommonTests\Migration Tests\VerifySubmittingDeltaSyncJobForASyncedUser_TC23091.cs" />
     <Compile Include="Tests\CommonTests\Migration Tests\Verify_jobs_can_be_archived_TC23090.cs" />
     <Compile Include="Tests\CommonTests\ProbeTest.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\DatabaseCleanup.cs" />
