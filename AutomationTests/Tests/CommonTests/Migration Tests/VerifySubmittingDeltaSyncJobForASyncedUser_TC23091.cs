@@ -64,7 +64,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
             User.AtUsersForm().ConfirmAction();
             User.AtUsersForm().WaitForState_DetailPage(entry, State.Syncing, 2700000, 10);
             User.AtUsersForm().WaitForState_DetailPage(entry, State.Synced, 2700000, 10);
-            User.AtUsersForm().WaitForState_DetailPage(entry, State.Complete, 2700000, 10);
+            User.AtUsersForm().WaitForState_DetailPage(entry, State.Synced2, 2700000, 10);
             User.AtUsersForm().CloseUserDetails();
         }
     }
