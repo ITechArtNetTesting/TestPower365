@@ -441,6 +441,16 @@ namespace Product.Tests.PowerShellTests
         {
             AssertSyncTestPasses("45249b", PerformSync);
         }
+        
+        [TestMethod]
+        [TestCategory("MailEngine")]
+        [TestCategory("Mailbox")]
+        [TestCategory("Sync")]
+        public void PublicFolder_PS_Test46843()
+        {
+            AssertSyncTestPasses("46843", PerformSync);
+        }
+
 
         private void PerformSync(string user)
         {

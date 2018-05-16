@@ -48,7 +48,7 @@ function Invoke-Test32351 {
             $NewFolder1 = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
             $FolderName1 = "Test32351-" + (Get-Date).ToString("s")
             $NewFolder1.DisplayName = $FolderName1
-            $data.Folder =  $RootPath + $FolderName + "\" + $FolderName1
+            $data.Folder =  $RootPath + "\" + $FolderName + "\" + $FolderName1
             $NewFolder1.Save($NewFolder.Id)
             $Post = New-Object Microsoft.Exchange.WebServices.Data.PostItem -ArgumentList $service
             $Post.Subject = "POST test - 32351" 

@@ -20,6 +20,7 @@ namespace Product.Tests.CommonTests.LandingPageTests
 
         [TestMethod]
         [TestCategory("Integration")]
+        [TestCategory("UI")]
         public void DiscoveryFrequencyCanBeSetted_Integration_32698()
         {
             VerifyDiscoveryFrequencyCanBeSetThroughTheDiscoveryPage(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"),
@@ -28,6 +29,7 @@ namespace Product.Tests.CommonTests.LandingPageTests
 
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
+        [TestCategory("UI")]
         public void DiscoveryFrequencyCanBeSetted_MD_32698()
         {
             VerifyDiscoveryFrequencyCanBeSetThroughTheDiscoveryPage(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"),

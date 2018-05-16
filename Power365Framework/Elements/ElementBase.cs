@@ -39,7 +39,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
 
             return new DisposablePopupPage<T>(currentWindowHandle, WebDriver);
         }
-
+        
         protected void ClickElementBy(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
             var clickableElement = FindClickableElement(by, timeoutInSec, pollIntervalSec);
@@ -51,6 +51,11 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         {
             ClickElementBy(by, timeoutInSec, pollIntervalSec);
             return (T)Activator.CreateInstance(typeof(T), WebDriver);
+        }
+        
+        protected IWebElement FindExistingElement(By by, int timeoutInSeconds = 5, int pollIntervalSec = 0)
+        {
+            return EvaluateElement(by, ExpectedConditions.ElementExists(by), timeoutInSeconds, pollIntervalSec);
         }
 
         protected IWebElement FindVisibleElement(By by, int timeoutInSeconds = 5, int pollIntervalSec = 0)
@@ -122,8 +127,13 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
                 return false;
             }
         }
-        
+
         protected T EvaluateElement<T>(By by, Func<IWebDriver, T> condition, int timeoutInSec = 5, int pollIntervalSec = 0)
+        {
+            return EvaluateElement(by, condition, () => WebDriver.Navigate().Refresh(), timeoutInSec, pollIntervalSec);
+        }
+
+        protected T EvaluateElement<T>(By by, Func<IWebDriver, T> condition, Action refreshAction, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
             if (timeoutInSec > 0 || pollIntervalSec > 0)
             {
@@ -134,7 +144,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
                     wait.PollingInterval = TimeSpan.FromSeconds(pollIntervalSec);
                     return wait.Until((webDriver) =>
                     {
-                        webDriver.Navigate().Refresh();
+                        refreshAction();
 
                         if (!IsDocumentReady())
                             throw new Exception("Page failed to reach ready state in time.");
@@ -144,8 +154,16 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
                         return condition(webDriver);
                     });
                 }
+
+                if (!IsDocumentReady())
+                    throw new Exception("Page failed to reach ready state in time.");
+
                 return wait.Until(condition);
             }
+
+            if (!IsDocumentReady())
+                throw new Exception("Page failed to reach ready state in time.");
+
             return condition(WebDriver);
         }
 
@@ -188,6 +206,14 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             {
                 return false;
             }
+        }
+
+        private void WaitForLoadComplete()
+        {
+            if (!IsDocumentReady())
+                throw new Exception("Page failed to reach ready state in time.");
+            if (!IsAjaxActive())
+                throw new Exception("AJAX failed to completed in time.");
         }
     }
 }

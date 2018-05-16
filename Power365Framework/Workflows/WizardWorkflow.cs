@@ -21,5 +21,10 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
             var backButtonElement = FindClickableElement(_backButton);
             backButtonElement.Click();
         }
+
+        protected void ValidateStepBy(By by, int timeoutInSeconds = 5, int pollIntervalSec = 0)
+        {
+            var validationElement = FindVisibleElement(by, timeoutInSeconds, pollIntervalSec);
+        }
     }
 }

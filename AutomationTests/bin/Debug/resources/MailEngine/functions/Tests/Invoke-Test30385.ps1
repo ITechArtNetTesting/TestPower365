@@ -50,7 +50,7 @@ function Invoke-Test30385 {
             $FolderName1 = "Test30385-" + (Get-Date).ToString("s")
             $NewFolder1.DisplayName = $FolderName1
             $NewFolder1.FolderClass = "IPF.StickyNote"
-            $data.Folder =  $RootPath + $FolderName + "\" + $FolderName1
+            $data.Folder =  $RootPath + "\" + $FolderName + "\" + $FolderName1
             $NewFolder1.Save($NewFolder.Id)
             for($Im=0;$Im -lt 10;$Im++){
                 $snStickyNote = New-Object Microsoft.Exchange.WebServices.Data.EmailMessage -ArgumentList $service  

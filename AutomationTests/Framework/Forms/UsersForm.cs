@@ -15,16 +15,14 @@ namespace Product.Framework.Forms
 {
 	public class UsersForm : BaseForm
 	{
-        private readonly Button groupActionsDropdownButton = new Button(By.XPath("//div[@class='ibox m-t-lg']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"), "Actions dropdown in groups edit page");
-
-        private readonly Button newMigrationWave = new Button(By.XPath("//span[contains(@data-bind,'addWave')]"), "New migration wave button");
-
-        private readonly Button migrationWaves = new Button(By.XPath("//a[contains(@href,'waves')]//span"), "Migration waves button");
-
         private static readonly By TitleLocator =
 			By.XPath("//div[@id='users']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]");
 
-		private readonly Button actionsDropdownButton =
+        private readonly Label startTimeOfLastRollback = new Label(By.XPath("//div[@class='modal-body']//div[@class='table-responsive table-frame m-t-sm']//tbody//td[ancestor::tr//span[contains(text(),'Rollback')]][4]//span[last()]"), "Start time of last job");
+
+        private readonly Label endTimeOfLastRollback = new Label(By.XPath("//div[@class='modal-body']//div[@class='table-responsive table-frame m-t-sm']//tbody//td[ancestor::tr//span[contains(text(),'Rollback')]][5]//span[last()]"), "Start time of last job");
+
+        private readonly Button actionsDropdownButton =
 			new Button(
 				By.XPath(
 					"//div[@id='users']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"),
@@ -54,8 +52,9 @@ namespace Product.Framework.Forms
 
         private Button enabledApplyActionButton =
 			new Button(By.XPath("//button[contains(@data-bind, 'applyAction')][not(@disabled='')]"), "Enabled apply button");
+          
 
-		private readonly Button enabledArchiveButton =
+        private readonly Button enabledArchiveButton =
 			new Button(By.XPath("//button[contains(text(), 'Archive')][not(@disabled='')]"), "Enabled archive button");
 
 		private readonly Button enabledEditButton =
@@ -107,7 +106,10 @@ namespace Product.Framework.Forms
 		private readonly TextBox searchTextBox = new TextBox(By.XPath("//div[contains(@class, 'search-group')]//input"),
 			"Search textbox");
 
-		private readonly Button selectAllButton =
+        private readonly TextBox removeSearchUsersTextBox = new TextBox(By.XPath("//button/*[contains(@class, 'fa-remove')]"), "Search users");
+
+
+        private readonly Button selectAllButton =
 			new Button(By.XPath("//th//input[contains(@data-bind, 'allSelectedChecked')]"), "Select all checkbox");
 
 		private readonly Label selectedFilesLabel = new Label(By.XPath("//h3[contains(text(), 'Selected Files')]"),
@@ -219,6 +221,11 @@ namespace Product.Framework.Forms
         private readonly Button CutoverDetailsButton = new Button(By.XPath("//button[text()='Cutover']"), "Cutover button on details form");
         private readonly Label ImportCompleteLabel = new Label(By.XPath("//span[@data-translation='UploadWasASuccessExclamationPoint']"), "Label Upload Was A Success");
         private readonly string ProgressBar_100 = "//div[@class='progress' and ancestor::tr//td//span[contains(text(),'{0}')]]/div[contains(@style,'width: 100%;')]";
+        private readonly Button groupActionsDropdownButton = new Button(By.XPath("//div[@class='ibox m-t-lg']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]"), "Actions dropdown in groups edit page");
+
+        private readonly Button newMigrationWave = new Button(By.XPath("//span[contains(@data-bind,'addWave')]"), "New migration wave button");
+
+        private readonly Button migrationWaves = new Button(By.XPath("//a[contains(@href,'waves')]//span"), "Migration waves button");
 
         public UsersForm() : base(TitleLocator, "Users list form")
 		{
@@ -347,7 +354,14 @@ namespace Product.Framework.Forms
 
 		}
 
-	    public void ClickProfileOk()
+        public void DeleteUserSearch()
+        {
+            Log.Info("Delete search fields");
+            removeSearchUsersTextBox.Click();
+
+        }
+
+        public void ClickProfileOk()
 	    {
             Log.Info("Clicling Profile OK button");
             enabledOkProfileButton.Click();
@@ -511,6 +525,22 @@ namespace Product.Framework.Forms
 			sortStatusButton.Click();
             WaitForAjaxLoad();
 		}
+
+        public void CheckMigrationWavesIsVisible()
+        {
+            Assert.IsTrue(migrationWaves.IsElementVisible(), "Migration Waves Tab is not visible");
+        }
+
+        public void OpenMigrationwaves()
+        {
+            Log.Info("Opening Migration waves");
+            migrationWaves.Click();
+        }
+
+        public void CheckNewMigrationWaveButtonIsVisible()
+        {
+            Assert.IsTrue(newMigrationWave.IsElementVisible(), "Migration Waves Tab does not have content");
+        }
 
         public bool IsElementPresent(string name, string locator)
         {
@@ -1012,55 +1042,7 @@ namespace Product.Framework.Forms
 					.Count == count, "Invalid count of lines");
 		}
 
-        public void CheckMigrationWavesIsVisible()
-        {
-            Assert.IsTrue(migrationWaves.IsElementVisible());
-        }
-
-        public void OpenMigrationwaves()
-        {
-            Log.Info("Opening Migration waves");
-            migrationWaves.Click();
-        }
-
-        public void CheckNewMigrationWaveButtonIsVisible()
-        {
-            Assert.IsTrue(newMigrationWave.IsElementVisible());
-        }
-
-        public void PerfomActionForGroup(string locator, ActionType type)
-        {
-            ScrollToTop();
-            Log.Info(type + " user by locator: " + locator);
-            WaitForAjaxLoad();
-            SelectEntryBylocator(locator);
-            SelectGroupAction(type);
-            Apply();
-        }
-
-        public void SelectGroupAction(ActionType type)
-        {
-            OpenGroupActionsDropdown();
-            ChooseAction(type.GetValue());
-        }
-
-        private void OpenGroupActionsDropdown()
-        {
-            Log.Info("Opening Actions dropdown");
-            ScrollToElement(groupActionsDropdownButton.GetElement());
-            groupActionsDropdownButton.Click();
-            try
-            {
-                expandedActionsDropdownButton.WaitForElementPresent(5000);
-            }
-            catch (Exception)
-            {
-                Log.Info("Actions dropdown is not ready");
-                groupActionsDropdownButton.Click();
-            }
-        }
-
-        public void VerifyLinesCount(int count)
+		public void VerifyLinesCount(int count)
 		{
 			Log.Info("Verifying lines count is equal to: " + count);
 			var locator = By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]//tbody//td/ancestor::tr");
@@ -1777,8 +1759,26 @@ namespace Product.Framework.Forms
           Log.Info("Get mail state");         
           return  migrationStateLabel.GetText();
         }
-              
 
+        public void CheckDetailsTime(DateTime startTime, DateTime endTime)
+        {
+            DateTime UIStartTime = DateTime.Parse(startTimeOfLastRollback.GetText());
+            DateTime UIEndTime = DateTime.Parse(endTimeOfLastRollback.GetText());
+            Assert.IsTrue(timesApproximatelyEqual(startTime, UIStartTime));
+            Assert.IsTrue(timesApproximatelyEqual(endTime, UIEndTime));
+        }
+
+        private bool timesApproximatelyEqual(DateTime firstTime, DateTime secondTime)
+        {
+            bool result = true;
+            result = firstTime.Month == secondTime.Month;
+            result = firstTime.Day == secondTime.Day;
+            result = firstTime.Year == secondTime.Year;
+            result = firstTime.Hour == secondTime.Hour;
+            result = (Math.Abs(secondTime.Minute - firstTime.Minute)) <= 5;
+            return result;
+
+        }
         public void WaitForJobIsCreated()
 		{
 			Log.Info("Waiting for job is created");

@@ -1161,18 +1161,7 @@ namespace Product.Tests.MailEngine
         {
             AssertPublicFolderSyncTestPasses("36315", PerformPublicFolderSync);
         }
-
-
-
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("PublicFolder")]
-        [TestCategory("Sync")]
-        public void PublicFolder_PS_Test46843()
-        {
-            AssertPublicFolderSyncTestPasses("46843", PerformPublicFolderSync);
-        }
-
+        
         private void PrepareFolder(string folderPath)
         {
             using (var prepareScript = new PsLauncher().LaunchPowerShellInstance("PF/PFPrepareFolder.ps1",
@@ -1241,7 +1230,7 @@ namespace Product.Tests.MailEngine
             User.AtPublicFolderMigrationViewForm().PerformAction(testFolder, ActionType.Sync);
             User.AtPublicFolderMigrationViewForm().ConfirmSync();
             User.AtPublicFolderMigrationViewForm().WaitForSyncingState(testFolder);
-            User.AtPublicFolderMigrationViewForm().WaitForAnyState(testFolder, new[] { State.SyncError, State.Ready }, 15 * 60 * 1000, 30);
+            User.AtPublicFolderMigrationViewForm().WaitForAnyState(testFolder, new[] { State.Error, State.Ready }, 15 * 60 * 1000, 30);
         }
         
         private void AssertPublicFolderSyncTestPasses(string testId, Action<string> userInterfaceActions, params KeyValuePair<string, object>[] parameters)

@@ -17,7 +17,8 @@ namespace Product.Tests.MailOnlyTests.ProjectCreationTests
 
         [TestMethod]
 		[TestCategory("MailOnly")]
-		public void Automation_MO_ReplaceUsersTest()
+        [TestCategory("UI")]
+        public void Automation_MO_ReplaceUsersTest()
 		{
 		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
 		    string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");

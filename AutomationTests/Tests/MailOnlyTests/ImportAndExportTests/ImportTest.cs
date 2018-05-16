@@ -16,7 +16,8 @@ namespace Product.Tests.MailOnlyTests.ImportAndExportTests
 		}
         [TestMethod]
 		[TestCategory("MailOnly")]
-		public void Automation_MO_ImportTest()
+        [TestCategory("UI")]
+        public void Automation_MO_ImportTest()
 		{
 		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
 		    string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");

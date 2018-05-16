@@ -25,7 +25,7 @@ namespace Product.Tests.IntegrationTests.DistributionGroupTests
         string disrtibutionGroup;
         string securityGroup;
 
-       [TestInitialize()]
+       [TestInitialize]
         public void Initialize()
         {
             login = RunConfigurator.GetUserLogin("client2");
@@ -39,6 +39,7 @@ namespace Product.Tests.IntegrationTests.DistributionGroupTests
 
         [TestMethod]
         [TestCategory("Integration")]
+        [TestCategory("UI")]
         public void GroupsWillBeShownCorectly_31793()
         {
 

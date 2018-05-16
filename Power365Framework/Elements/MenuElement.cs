@@ -41,7 +41,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
 
         public void OpenMenu()
         {
-            if (!IsElementVisible(_locator))
+            if (IsElementVisible(_locator))
                 ClickElementBy(_locator);
             if (!IsElementVisible(_clientsComboBox))
                 throw new Exception("Could not Open Menu");
@@ -49,7 +49,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
 
         public ProjectListPage SelectClient(string clientName)
         {
-            if(!IsElementVisible(_clientsComboBox))
+            if(!IsElementVisible(_clientsComboBox, 1))
                 OpenMenu();
 
             ClickElementBy(_clientsComboBox);

@@ -19,7 +19,8 @@ namespace Product.Tests.CommonTests.Migration_Tests
         }
         [TestMethod]
         [TestCategory("Integration")]
-        public void RollbackTest_InTheUserDetailView_Integrat_39552_39571_39558_39554_39553()
+        [TestCategory("UI")]
+        public void RollbackTest_InTheUserDetailView_Integrat_39552_39571_39558_39554_39553_39567()
         {
             bool isIntegrate = true;
             RollbackTest_InTheUserDetailView(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"), RunConfigurator.GetClient("client2"),
@@ -28,7 +29,8 @@ namespace Product.Tests.CommonTests.Migration_Tests
 
         [TestMethod]
         [TestCategory("MailOnly")]
-        public void RollbackTest_InTheUserDetailView_MO_39552_39571_39558_39554_39553()
+        [TestCategory("UI")]
+        public void RollbackTest_InTheUserDetailView_MO_39552_39571_39558_39554_39553_39567()
         {
             RollbackTest_InTheUserDetailView(RunConfigurator.GetUserLogin("client1"), RunConfigurator.GetPassword("client1"), RunConfigurator.GetClient("client1"),
                 RunConfigurator.GetProjectName("client1", "project1"), RunConfigurator.GetSourceMailbox("client1", "project1", "entry12"));
@@ -36,7 +38,8 @@ namespace Product.Tests.CommonTests.Migration_Tests
 
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
-        public void RollbackTest_InTheUserDetailView_MD_39552_39571_39558_39554_39553()
+        [TestCategory("UI")]
+        public void RollbackTest_InTheUserDetailView_MD_39552_39571_39558_39554_39553_39567()
         {
             RollbackTest_InTheUserDetailView(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"), RunConfigurator.GetClient("client2"),
               RunConfigurator.GetProjectName("client2", "project1"), RunConfigurator.GetSourceMailbox("client2", "project1", "entry9"));
@@ -77,13 +80,16 @@ namespace Product.Tests.CommonTests.Migration_Tests
             User.AtUsersForm().SetDontResetPermissions();
             User.AtUsersForm().SetSureCheckbox();
             User.AtUsersForm().RollbackClick_modalWindow();
+            var startTime = DateTime.Now;
             User.AtUsersForm().WaitForState_DetailPage(sourceMailbox, State.RollbackInProgress, 600000, 30);
             User.AtUsersForm().WaitForJobIsCreated(sourceMailbox, State.RollbackInProgress, 600000, 30);
             User.AtUsersForm().WaitForState_DetailPage(sourceMailbox, State.RollbackCompleted, 2400000, 30);
             //Verify
             User.AtUsersForm().WaitForJobIsCreated(sourceMailbox, State.RollbackCompleted, 600000, 30);
             User.AtUsersForm().JobProgressBarShouldShownCorrectProgress("Rollback Complete");
+            var endTime = DateTime.Now;
             User.AtUsersForm().DownloadRollbackLogs();
+            User.AtUsersForm().CheckDetailsTime(startTime, endTime);
             User.AtUsersForm().CloseUserDetails();
             //Verify downloaded
             RunConfigurator.CheckRollbackLogsFileIsDownloaded();

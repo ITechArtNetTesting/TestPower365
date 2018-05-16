@@ -16,7 +16,8 @@ namespace Product.Tests.MailOnlyTests.ActionButtonsTests
 		}
         [TestMethod]
 		[TestCategory("MailOnly")]
-		public void Automation_MO_UserMigrationButtonsTest()
+        [TestCategory("UI")]
+        public void Automation_MO_UserMigrationButtonsTest()
 		{
 		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
 		    string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");

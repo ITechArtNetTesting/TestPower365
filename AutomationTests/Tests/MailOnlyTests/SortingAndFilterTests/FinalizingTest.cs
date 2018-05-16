@@ -16,7 +16,8 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		}
 		[TestMethod]
         [TestCategory("MailOnly")]
-		public void Automation_MO_FinalizingTest()
+        [TestCategory("UI")]
+        public void Automation_MO_FinalizingTest()
 		{
 		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
 		    string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");

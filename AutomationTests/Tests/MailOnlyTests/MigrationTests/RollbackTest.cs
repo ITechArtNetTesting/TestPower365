@@ -20,6 +20,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
         }
         [TestMethod]
         [TestCategory("MailOnly")]
+        [TestCategory("UI")]
         public void Automation_MO_RollbackTest()
         {
             string login = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user");

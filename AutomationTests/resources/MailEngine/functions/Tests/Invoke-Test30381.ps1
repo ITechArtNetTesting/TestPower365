@@ -49,7 +49,7 @@ function Invoke-Test30381 {
             $NewFolder1 = new-object Microsoft.Exchange.WebServices.Data.CalendarFolder($service)  
             $FolderName1 = "Test30381-" + (Get-Date).ToString("s")
             $NewFolder1.DisplayName = $FolderName1            
-            $data.Folder =  $RootPath + $FolderName + "\" + $FolderName1
+            $data.Folder =  $RootPath + "\" + $FolderName + "\" + $FolderName1
             $NewFolder1.Save($NewFolder.Id)
             for($Im=0;$Im -lt 10;$Im++){
                 $Appointment = New-Object Microsoft.Exchange.WebServices.Data.Appointment -ArgumentList $service

@@ -3,6 +3,7 @@ using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Extensions;
 using BinaryTree.Power365.AutomationFramework.Pages;
 using OpenQA.Selenium;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 namespace BinaryTree.Power365.AutomationFramework.Pages
@@ -39,14 +40,18 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private readonly string _confirmationDialogButtonFormat = "//div[@id='confirmationDialog'][contains(@class, 'modal in')]//*[contains(text(), '{0}')]";
 
         private readonly string _actionDropdownSelectionFormat = "//button[contains(@aria-expanded, 'true')]/ancestor::div[contains(@class, 'dropdown')]//ul[contains(@class, 'dropdown-menu')]//li[contains(@data-toggle, 'tooltip')]//*[contains(text(), '{0}')]";
-        
+
+        private readonly By _newMigrationWaveButton = By.XPath("//span[contains(@data-bind,'addWave')]");
+
+        private readonly By _migrationWaveTab = By.XPath("//a[contains(@href,'waves')]//span");
+
         public ManageUsersPage(IWebDriver webDriver)
             : base(_locator, webDriver) { }
 
         public void PerformAction(ActionType action)
         {
             ClickElementBy(_actionsDropdown);
-            
+
             if (!IsElementVisible(_actionsDropdownExpanded))
                 throw new Exception("Could not find expanded Actions dropdown.");
 
@@ -67,7 +72,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
 
         public void ConfirmRollback(bool resetPermissions = true)
         {
-            if(resetPermissions)
+            if (resetPermissions)
             {
                 ClickElementBy(_rollbackResetPermissionsLabelYes);
 
@@ -81,7 +86,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
                 if (!IsElementSelectedState(_rollbackResetPermissionsRadioNo, true))
                     throw new Exception("Rollback Reset Permission Radio Button is not Selected and should be.");
             }
-            
+
             ClickElementBy(_rollbackSureCheckbox);
 
             if (!IsElementSelectedState(_rollbackSureCheckbox, true))
@@ -94,5 +99,25 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         {
             return Users.RowHasValue(user, state.GetDisplay(), timeoutInSec, pollIntervalSec);
         }
+
+        public void OpenMigrationWaves()
+        {
+            ClickElementBy(_migrationWaveTab,5);
+        }
+        
+        #region Assertion
+
+        public void CheckMigrationWavesTabOpen()
+        {
+            Assert.IsTrue(IsElementVisible(_newMigrationWaveButton, 5), "Migration Waves Tab was not opened");
+        }
+        public void CheckMigrationWavesLinkIsVisible()
+        {
+            Assert.IsTrue(IsElementVisible(_migrationWaveTab), "Migration Waves Tab is not visible");
+        }
+
+        #endregion
+
     }
 }
+

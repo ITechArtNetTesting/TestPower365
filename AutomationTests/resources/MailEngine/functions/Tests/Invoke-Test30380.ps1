@@ -50,7 +50,7 @@ function Invoke-Test30380 {
             $FolderName1 = "Test30380-" + (Get-Date).ToString("s")
             $NewFolder1.DisplayName = $FolderName1
             $NewFolder1.FolderClass = "IPF.Task"
-            $data.Folder =  $RootPath + $FolderName + "\" + $FolderName1
+            $data.Folder =  $RootPath + "\" + $FolderName + "\" + $FolderName1
             $NewFolder1.Save($NewFolder.Id)
             for($Im=0;$Im -lt 10;$Im++){
                 $Task = New-Object Microsoft.Exchange.WebServices.Data.Task -ArgumentList $service

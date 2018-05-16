@@ -21,6 +21,7 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
 
         [TestMethod]
         [TestCategory("Integration")]
+        [TestCategory("UI")]
         public void StoppingStateButtonsTest_InTheUserDetailView_Integrat_25829_25830()
         {                    
             bool isIntegrate = true;
@@ -30,6 +31,7 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
 
         [TestMethod]
         [TestCategory("MailOnly")]
+        [TestCategory("UI")]
         public void StoppingStateButtonsTest_InTheUserDetailView_MO_25829_25830()
         {                  
             StoppingStateButtonsTest(RunConfigurator.GetUserLogin("client1"), RunConfigurator.GetPassword("client1"), RunConfigurator.GetClient("client1"),
@@ -38,6 +40,7 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
 
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
+        [TestCategory("UI")]
         public void StoppingStateButtonsTest_InTheUserDetailView_MD_25829_25830()
         {
               StoppingStateButtonsTest(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"), RunConfigurator.GetClient("client2"),
@@ -63,7 +66,7 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
             }
             User.AtUsersForm().SyncFromDetails();
             User.AtUsersForm().ConfirmAction();
-            User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Syncing, 1200000, 10);
+            User.AtUsersForm().WaitForState_DetailPage(mailbox, State.Syncing, 2000000, 10);
             //Verify Action button since Syncing
             User.AtUsersForm().AssertDetailsStopButtonIsEnabled();
             User.AtUsersForm().AssertDetailsSyncButtonIsDisabled();

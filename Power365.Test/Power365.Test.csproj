@@ -73,6 +73,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CommonTests\MigrationWaves\MigrationWave_Sync_TC30919.cs" />
+    <Compile Include="CommonTests\MigrationWaves\UsersViewHasTheTabToSwitchToMigrationWaveView_TC30917.cs" />
     <Compile Include="Services\MailEngineService.cs" />
     <Compile Include="MailEngine\AddTest.cs" />
     <Compile Include="MailEngine\MailEngineTest.cs" />
@@ -500,7 +502,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CommonTests\MigrationWaves\" />
     <Folder Include="Resources\MailEngine\internal\functions\" />
   </ItemGroup>
   <Choose>

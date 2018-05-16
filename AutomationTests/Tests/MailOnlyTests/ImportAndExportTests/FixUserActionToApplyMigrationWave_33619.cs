@@ -39,6 +39,7 @@ namespace Product.Tests.MailOnlyTests.ImportAndExportTests
         [TestMethod]
         [TestCategory("MailOnly")]
         [TestCategory("Import")]
+        [TestCategory("UI")]
         public void FixUserActionToApplyMigrationWave_33619()
         {
             

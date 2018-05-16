@@ -3,6 +3,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BinaryTree.Power365.AutomationFramework.Enums
 {
+    public enum ProjectType: ushort
+    {
+        None,
+        Integration,
+        EmailWithDiscovery,
+        EmailFromFile,
+        EmailFromFileOnPrem
+    }
+
     public enum StateType: byte
     {
         [Display(Name = "Syncing")]

@@ -37,6 +37,7 @@ namespace Product.Tests.IntegrationTests.SetUpTest
         [TestMethod]
         [TestCategory("Integration")]
         [TestCategory("SetUpProject")]
+        [TestCategory("UI")]
         public void MailUPNandExtensionAttributesAreValidMatchingOptions_32951()
         {
             LoginAndSelectRole(login, password, client);

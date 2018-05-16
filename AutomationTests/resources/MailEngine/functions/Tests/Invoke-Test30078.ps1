@@ -79,7 +79,7 @@ function Invoke-Test30078 {
         Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
 
         # Invoke-P365MailboxCopy	-mappingfile $tfile	
-        $Folder = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ("\" + $RootPath + "\" + $FolderName)
+        $Folder = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ($RootPath + "\" + $FolderName)
         $NewFolder1.Load($psPropertySet)
         $PermissiontoAdd = [Microsoft.Exchange.WebServices.Data.FolderPermissionLevel]::Owner  
         $newfp = new-object Microsoft.Exchange.WebServices.Data.FolderPermission($SecondSourcePermission, $PermissiontoAdd)  

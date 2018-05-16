@@ -17,7 +17,8 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		}
 		[TestMethod]
 		[TestCategory("MailOnly")]
-		public void Automation_MO_FilterTest()
+        [TestCategory("UI")]
+        public void Automation_MO_FilterTest()
 		{
 		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
 		    string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");
@@ -31,10 +32,11 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		        LoginAndSelectRole(login, password, client);
 		        SelectProject(projectName);
                 User.AtProjectOverviewForm().OpenUsersList();
-
+                User.AtUsersForm().PerformSearch(sourceMailbox6);
                 User.AtUsersForm().PerfomActionForUser(sourceMailbox6, ActionType.Sync);
                 User.AtUsersForm().ConfirmSync();
                 User.AtUsersForm().AssertUserHaveSyncingState(sourceMailbox6);
+                User.AtUsersForm().DeleteUserSearch();
                 User.AtUsersForm().SwitchFilter(FilterState.Open);
 		        User.AtUsersForm().SetMatched();
 		        User.AtUsersForm().SwitchFilter(FilterState.Closed);

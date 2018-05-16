@@ -38,6 +38,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
 
         [TestMethod]
         [TestCategory("MailOnly")]
+        [TestCategory("UI")]
         public void LogsFileIsDownloadedAfterSync_23094()
         {
                 LoginAndSelectRole(userName, password, client);
