@@ -238,8 +238,13 @@ namespace Product.Framework
                             throw new Exception("Page failed to reach ready state in time.");
                         if (!IsAjaxActive())
                             throw new Exception("AJAX failed to completed in time.");
-
-                        return condition(webDriver);
+                        try
+                        {
+                            return condition(webDriver);
+                        }
+                        catch (NoSuchElementException) { return (T)Convert.ChangeType(null, typeof(T)); }
+                        catch (WebDriverTimeoutException) { return (T)Convert.ChangeType(null, typeof(T)); }
+                        catch (TimeoutException) { return (T)Convert.ChangeType(null, typeof(T)); }
                     });
                 }
                 return wait.Until(condition);
