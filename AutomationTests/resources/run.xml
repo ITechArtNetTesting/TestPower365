@@ -145,6 +145,11 @@
 							<group>Wave1</group>
 							<profile>Profile 1</profile>
 						</entry>
+            <entry>
+              <metaname>entry6</metaname>
+              <source>C3O365ShareMBX2@BTCorp3.onmicrosoft.com</source>
+              <target>C3O365ShareMBX2@BTCorp11.onmicrosoft.com</target>            
+            </entry>
 					</usermigration>
 					<file>
 						<metaname>file1</metaname>
@@ -270,6 +275,11 @@
               <metaname>entry10</metaname>
               <source>C7O365SML29@btcorp7.onmicrosoft.com</source>
               <target>C7O365SML29@btcorp9.onmicrosoft.com</target>
+            </entry>
+            <entry>
+              <metaname>entry11</metaname>
+              <source>C7-Automation4@btcorp7.onmicrosoft.com</source>
+              <target>C7-Automation4@btcorp9.onmicrosoft.com</target>
             </entry>
           </usermigration>
 					<adgroups>
@@ -441,6 +451,11 @@
               <metaname>entry20</metaname>
               <source>P365PFAutoUser5@corp31.cmtsandbox.com</source>
               <target>P365PFAutoUser5@corp32.cmtsandbox.com</target>
+            </entry>
+            <entry>
+              <metaname>entry21</metaname>
+              <source>P365AutoRemoteShare4@CORP31.CMTSANDBOX.COM</source>
+              <target>P365AutoRemoteShare4@corp32.cmtsandbox.com</target>
             </entry>
             <entry>
               <metaname>mailboxreset</metaname>

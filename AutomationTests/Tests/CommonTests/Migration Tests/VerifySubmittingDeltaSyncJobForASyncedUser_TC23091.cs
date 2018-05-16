@@ -1,11 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Product.Framework;
 using Product.Framework.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Product.Tests.CommonTests.Migration_Tests
 {
@@ -25,8 +20,8 @@ namespace Product.Tests.CommonTests.Migration_Tests
             string login = RunConfigurator.GetUserLogin("client1");
             string password = RunConfigurator.GetPassword("client1");
             string client = RunConfigurator.GetClient("client1");
-            string projectName = RunConfigurator.GetProjectName("client1", "project1");
-            string entry = RunConfigurator.GetSourceMailbox("client2", "project2", "entry20");
+            string projectName = RunConfigurator.GetProjectName("client1", "project2");
+            string entry = RunConfigurator.GetSourceMailbox("client1", "project2", "entry6");
             VerifySubmittingDeltaSyncJobForASyncedUser(login, password, client, projectName, entry);
         }
 
@@ -38,7 +33,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
             string password = RunConfigurator.GetPassword("client2");
             string client = RunConfigurator.GetClient("client2");
             string projectName = RunConfigurator.GetProjectName("client2", "project1");
-            string entry = RunConfigurator.GetSourceMailbox("client2", "project2", "entry20");
+            string entry = RunConfigurator.GetSourceMailbox("client2", "project1", "entry11");
             VerifySubmittingDeltaSyncJobForASyncedUser(login, password, client, projectName, entry);
         }
 
@@ -50,7 +45,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
             string password = RunConfigurator.GetPassword("client2");
             string client = RunConfigurator.GetClient("client2");
             string projectName = RunConfigurator.GetProjectName("client2", "project2");
-            string entry = RunConfigurator.GetSourceMailbox("client2", "project2", "entry20");
+            string entry = RunConfigurator.GetSourceMailbox("client2", "project2", "entry21");
             VerifySubmittingDeltaSyncJobForASyncedUser(login,password,client,projectName,entry);
         }
 

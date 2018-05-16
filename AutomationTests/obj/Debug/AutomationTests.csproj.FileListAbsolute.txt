@@ -486,7 +486,6 @@ D:\Project\BTCloud\SeleniumTests\AutomationTests\bin\Debug\resources\MailEngine\
 D:\Project\BTCloud\SeleniumTests\AutomationTests\bin\Debug\resources\PF\PFMailEngineCleanup.ps1
 D:\Project\BTCloud\SeleniumTests\AutomationTests\bin\Debug\resources\PF\PFPrepareFolder.ps1
 D:\Project\BTCloud\SeleniumTests\AutomationTests\obj\Debug\AutomationTests.csprojResolveAssemblyReference.cache
-D:\Git\TestPower365\AutomationTests\obj\Debug\AutomationTests.csprojResolveAssemblyReference.cache
 D:\Git\TestPower365\AutomationTests\obj\Debug\AutomationTests.csproj.CoreCompileInputs.cache
 D:\Git\TestPower365\AutomationTests\obj\Debug\AutomationTests.dll
 D:\Git\TestPower365\AutomationTests\obj\Debug\AutomationTests.pdb
@@ -974,3 +973,4 @@ D:\Git\TestPower365\AutomationTests\bin\Debug\T2TMigrationTestUtil.pdb
 D:\Git\TestPower365\AutomationTests\bin\Debug\ThoughtWorks.Selenium.Core.xml
 D:\Git\TestPower365\AutomationTests\bin\Debug\WebDriver.xml
 D:\Git\TestPower365\AutomationTests\bin\Debug\WebDriver.Support.xml
+D:\Git\TestPower365\AutomationTests\obj\Debug\AutomationTests.csprojResolveAssemblyReference.cache
