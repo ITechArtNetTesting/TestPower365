@@ -102,6 +102,10 @@
               <Group>Wave1</Group>
               <Profile>Profile 1</Profile>
             </UserMigration>
+            <UserMigration Reference="entry6">                            
+              <Source>C3O365ShareMBX2@BTCorp3.onmicrosoft.com</Source>
+              <Target>C3O365ShareMBX2@BTCorp11.onmicrosoft.com</Target>
+            </UserMigration>
           </UserMigrations>
           <Groups />
           <Files>

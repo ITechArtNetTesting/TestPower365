@@ -25,6 +25,11 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         //@@@ REQ:ID
         private readonly By _actionsDropdown = By.XPath("//div[@id='users']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]");
         private readonly By _actionsDropdownExpanded = By.XPath("//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')][contains(@aria-expanded, 'true')]");
+        private readonly By _searchInput = By.XPath("//div[contains(@class, 'search-group')]//input");
+        private readonly By _searchButton = By.XPath("//i[contains(@class,'search')]");
+        private readonly By _detailsSyncButton = By.XPath("//div[contains(@class, 'modal in')]//*[contains(@data-bind, 'sync')]");
+        private readonly By _closeDetailsWindowButton = By.XPath("//div[contains(@class, 'modal in')]//div[contains(@class, 'modal-lg')]//button[contains(@data-dismiss, 'modal')][contains(@class, 'btn')]");
+        private readonly By _refreshDetailsWindowButton = By.XPath("//button[contains(@data-bind, 'refresh.run')][not(@disabled='')]");
 
         private readonly By _rollbackResetPermissionsLabelYes = By.XPath("//label[contains(@for, 'resetPermissions')]");
         private readonly By _rollbackResetPermissionsLabelNo = By.XPath("//label[contains(@for, 'dontResetPermissions')]");
@@ -50,7 +55,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
 
         public void PerformAction(ActionType action)
         {
-            ClickElementBy(_actionsDropdown);
+            ClickElementBy(_actionsDropdown);            
 
             if (!IsElementVisible(_actionsDropdownExpanded))
                 throw new Exception("Could not find expanded Actions dropdown.");
@@ -68,6 +73,27 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         {
             var confirmDialogButton = By.XPath(string.Format(_confirmationDialogButtonFormat, isYes ? "Yes" : "No"));
             ClickElementBy(confirmDialogButton);
+        }
+
+        public void PerformSearch(string searchWord)
+        {
+            SendKeysToElementBy(_searchInput, searchWord);
+            ClickElementBy(_searchButton);
+        }
+
+        public void OpenDetailsOf(string entry)
+        {
+            DoubleClickElementBy(By.XPath($"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{entry.ToLower()}')]]"));
+        }
+
+        public void CloseDetailsWindow()
+        {
+            ClickElementBy(_closeDetailsWindowButton);
+        }
+
+        public void PerformSyncFromDetails()
+        {
+            ClickElementBy(_detailsSyncButton);
         }
 
         public void ConfirmRollback(bool resetPermissions = true)
@@ -98,6 +124,21 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         public bool IsUserState(string user, StateType state, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
             return Users.RowHasValue(user, state.GetDisplay(), timeoutInSec, pollIntervalSec);
+        }
+
+        public void WaitForState_DetailPage(string entry, StateType state, int timeout = 5000, int pollIntervalSec = 0)
+        {
+            var _migrationStateTextLocatorFormat = "//*[contains(@data-bind, 'migrationState')][contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{0}')]";
+            var value = state.GetDescription();
+
+            if (state.GetDescription().ToLower() == "synced")
+                value = "complete";
+
+            var rowEntryTextValue = string.Format(_migrationStateTextLocatorFormat, value.ToLower());
+            var stateLocator = By.XPath(rowEntryTextValue);
+
+            EvaluateElement(stateLocator,, () => ClickElementBy(By.XPath("")));
+              
         }
 
         public void OpenMigrationWaves()

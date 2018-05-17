@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using UI = OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
+using OpenQA.Selenium.Interactions;
 
 namespace BinaryTree.Power365.AutomationFramework.Elements
 {
@@ -43,7 +44,19 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         protected void ClickElementBy(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
             var clickableElement = FindClickableElement(by, timeoutInSec, pollIntervalSec);
-            clickableElement.Click();
+            clickableElement.Click();           
+        }
+
+        protected void SendKeysToElementBy(By by,string key, int timeoutInSec = 5, int pollIntervalSec = 0)
+        {
+            var clickableElement = FindClickableElement(by, timeoutInSec, pollIntervalSec);
+            clickableElement.SendKeys(key);
+        }
+
+        protected void DoubleClickElementBy(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
+        {
+            var clickableElement = FindClickableElement(by, timeoutInSec, pollIntervalSec);
+            new Actions(WebDriver).DoubleClick(clickableElement).Build().Perform();
         }
 
         protected T ClickElementBy<T>(By by, int timeoutInSec = 5, int pollIntervalSec = 0)

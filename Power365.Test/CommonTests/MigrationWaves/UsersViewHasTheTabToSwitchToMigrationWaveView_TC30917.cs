@@ -15,7 +15,7 @@ namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
     public class UsersViewHasTheTabToSwitchToMigrationWaveView_TC30917 : TestBase
     {
         public UsersViewHasTheTabToSwitchToMigrationWaveView_TC30917()
-                  : base(LogManager.GetLogger(typeof(MigrationWave_Sync_TC30919))) { }
+                  : base(LogManager.GetLogger(typeof(UsersViewHasTheTabToSwitchToMigrationWaveView_TC30917))) { }
 
         private string _client;
         private string _username;
