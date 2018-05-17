@@ -56,16 +56,13 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration_Tests
             _manageUsersPage.OpenDetailsOf(entry);
             _manageUsersPage.PerformSyncFromDetails();
             _manageUsersPage.ConfirmAction();
-            _manageUsersPage.CloseDetailsWindow();
-            _manageUsersPage.IsUserState(entry, StateType.Syncing, 2700000, 5);
-            _manageUsersPage.IsUserState(entry, StateType.Synced, 2700000, 5);
-            _manageUsersPage.OpenDetailsOf(entry);
+            _manageUsersPage.WaitForState_DetailPage(entry, StateType.Syncing, 2700000, 5);
+            _manageUsersPage.WaitForState_DetailPage(entry, StateType.Synced, 2700000, 5);           
             _manageUsersPage.PerformSyncFromDetails();
             _manageUsersPage.ConfirmAction();
+            _manageUsersPage.WaitForState_DetailPage(entry, StateType.Syncing, 2700000, 5);
+            _manageUsersPage.WaitForState_DetailPage(entry, StateType.Synced, 2700000, 5);
             _manageUsersPage.CloseDetailsWindow();
-            _manageUsersPage.IsUserState(entry, StateType.Syncing, 2700000, 5);
-            _manageUsersPage.IsUserState(entry, StateType.Synced, 2700000, 5);
-
         }
     }
 }

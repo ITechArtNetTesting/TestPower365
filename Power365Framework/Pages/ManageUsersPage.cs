@@ -5,6 +5,7 @@ using BinaryTree.Power365.AutomationFramework.Pages;
 using OpenQA.Selenium;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using OpenQA.Selenium.Support.UI;
 
 namespace BinaryTree.Power365.AutomationFramework.Pages
 {
@@ -30,6 +31,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private readonly By _detailsSyncButton = By.XPath("//div[contains(@class, 'modal in')]//*[contains(@data-bind, 'sync')]");
         private readonly By _closeDetailsWindowButton = By.XPath("//div[contains(@class, 'modal in')]//div[contains(@class, 'modal-lg')]//button[contains(@data-dismiss, 'modal')][contains(@class, 'btn')]");
         private readonly By _refreshDetailsWindowButton = By.XPath("//button[contains(@data-bind, 'refresh.run')][not(@disabled='')]");
+        private readonly By _detailsState = By.XPath("//span[contains(@data-bind,'State')]");
 
         private readonly By _rollbackResetPermissionsLabelYes = By.XPath("//label[contains(@for, 'resetPermissions')]");
         private readonly By _rollbackResetPermissionsLabelNo = By.XPath("//label[contains(@for, 'dontResetPermissions')]");
@@ -126,18 +128,18 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             return Users.RowHasValue(user, state.GetDisplay(), timeoutInSec, pollIntervalSec);
         }
 
-        public void WaitForState_DetailPage(string entry, StateType state, int timeout = 5000, int pollIntervalSec = 0)
-        {
-            var _migrationStateTextLocatorFormat = "//*[contains(@data-bind, 'migrationState')][contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{0}')]";
+        public bool WaitForState_DetailPage(string entry, StateType state, int timeout = 5000, int pollIntervalSec = 0)
+        {            
             var value = state.GetDescription();
-
             if (state.GetDescription().ToLower() == "synced")
-                value = "complete";
+                value = "complete";            
 
-            var rowEntryTextValue = string.Format(_migrationStateTextLocatorFormat, value.ToLower());
-            var stateLocator = By.XPath(rowEntryTextValue);
+            Func<IWebDriver, bool> waitState = new Func<IWebDriver, bool>((IWebDriver ele) =>
+            {
+                return ele.FindElement(_detailsState).Text.ToLower().Contains(value.ToLower()); 
+            });
 
-            EvaluateElement(stateLocator,, () => ClickElementBy(By.XPath("")));
+            return EvaluateElement(_detailsState, waitState, () => ClickElementBy(_refreshDetailsWindowButton),timeout,pollIntervalSec);
               
         }
 

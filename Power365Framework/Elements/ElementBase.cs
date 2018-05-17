@@ -146,7 +146,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             return EvaluateElement(by, condition, () => WebDriver.Navigate().Refresh(), timeoutInSec, pollIntervalSec);
         }
 
-        protected T EvaluateElement<T>(By by, Func<IWebDriver, T> condition, Action refreshAction, int timeoutInSec = 5, int pollIntervalSec = 0)
+        protected T EvaluateElement<T>(By by,Func<IWebDriver, T> condition, Action refreshAction, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
             if (timeoutInSec > 0 || pollIntervalSec > 0)
             {
@@ -163,8 +163,8 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
                             throw new Exception("Page failed to reach ready state in time.");
                         if (!IsAjaxActive())
                             throw new Exception("AJAX failed to completed in time.");
-
-                        return condition(webDriver);
+                        
+                            return condition(webDriver);                        
                     });
                 }
 
