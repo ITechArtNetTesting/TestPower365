@@ -22,6 +22,7 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration_Tests
         private string _password;
         private string _entry;
         private ManageUsersPage _manageUsersPage;
+        private UsersDetailsPage _usersDetailsPage;
 
         [TestMethod]
         [TestCategory("MailOnly")]
@@ -93,16 +94,16 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration_Tests
                                        .UsersEdit()
                                        .GetPage<ManageUsersPage>();
             _manageUsersPage.PerformSearch(entry);
-            _manageUsersPage.OpenDetailsOf(entry);
-            _manageUsersPage.PerformSyncFromDetails();
+            _usersDetailsPage= _manageUsersPage.OpenDetailsOf(entry);
+            _usersDetailsPage.PerformSyncFromDetails();            
             _manageUsersPage.ConfirmAction();
-            _manageUsersPage.WaitForState_DetailPage(entry, StateType.Syncing, 2700000, 5);
-            _manageUsersPage.WaitForState_DetailPage(entry, StateType.Synced, 2700000, 5);           
-            _manageUsersPage.PerformSyncFromDetails();
+            _usersDetailsPage.WaitForState_DetailPage(entry, StateType.Syncing, 2700000, 5);
+            _usersDetailsPage.WaitForState_DetailPage(entry, StateType.Synced, 2700000, 5);
+            _usersDetailsPage.PerformSyncFromDetails();
             _manageUsersPage.ConfirmAction();
-            _manageUsersPage.WaitForState_DetailPage(entry, StateType.Syncing, 2700000, 5);
-            _manageUsersPage.WaitForState_DetailPage(entry, StateType.Synced, 2700000, 5);
-            _manageUsersPage.CloseDetailsWindow();
+            _usersDetailsPage.WaitForState_DetailPage(entry, StateType.Syncing, 2700000, 5);
+            _usersDetailsPage.WaitForState_DetailPage(entry, StateType.Synced, 2700000, 5);
+            _usersDetailsPage.CloseDetailsWindow();
         }
     }
 }
