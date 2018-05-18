@@ -41,6 +41,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private readonly By _applyActionButtonDisabled = By.XPath("//button[contains(@data-bind, 'applyAction')][@disabled='']");
 
         private readonly string _confirmationDialogButtonFormat = "//div[@id='confirmationDialog'][contains(@class, 'modal in')]//*[contains(text(), '{0}')]";
+        private readonly string _userXpath = "//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{0}')]]";
 
         private readonly string _actionDropdownSelectionFormat = "//button[contains(@aria-expanded, 'true')]/ancestor::div[contains(@class, 'dropdown')]//ul[contains(@class, 'dropdown-menu')]//li[contains(@data-toggle, 'tooltip')]//*[contains(text(), '{0}')]";
 
@@ -81,7 +82,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
 
         public UserDetailsPage OpenDetailsOf(string entry)
         {
-            By user = By.XPath($"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{entry.ToLower()}')]]");
+            By user = By.XPath(string.Format(_userXpath,entry.ToLower()));
             DoubleClickElementBy(user);
             return new UserDetailsPage(WebDriver);
         }       

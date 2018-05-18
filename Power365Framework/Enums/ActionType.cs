@@ -43,7 +43,11 @@ namespace BinaryTree.Power365.AutomationFramework.Enums
         RollbackInProgress,
         [Display(Name = "Rollback Complete")]
         [Description("Rollback Complete")]
-        RollbackCompleted
+        RollbackCompleted,
+        [Description("1 sync(s) complete")]
+        Synced1,
+        [Description("2 sync(s) complete")]
+        Synced2
     }
 
     public enum ActionType : byte
