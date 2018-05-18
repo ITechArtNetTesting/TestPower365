@@ -180,6 +180,52 @@
           </Groups>
           <Files />
         </Project>
+        <Project Reference="project2" Source="tenant5" Target="tenant6">
+          <Name>BT-AutoQA2-Project2</Name>
+          <UserMigrations>
+            <UserMigration Reference="entry1">
+              <Source>P365AutoRemoteMBX1@corp31.cmtsandbox.com</Source>
+              <Target>P365AutoRemoteMBX1@corp32.cmtsandbox.com</Target>
+            </UserMigration>
+            <UserMigration Reference="entry2">
+              <Source>P365AutoRemoteRoom1@corp31.cmtsandbox.com</Source>
+              <Target>P365AutoRemoteRoom1@corp32.cmtsandbox.com</Target>
+            </UserMigration>
+            <UserMigration Reference="entry3">
+              <Source>P365AutoRemoteShare1@corp31.cmtsandbox.com</Source>
+              <Target>P365AutoRemoteShare1@corp32.cmtsandbox.com</Target>
+            </UserMigration>
+            <UserMigration Reference="entry4">
+              <Source>\AutomationTests\Test1</Source>
+              <Target>\AutomationTests</Target>
+            </UserMigration>
+            <UserMigration Reference="entry5">
+              <Source>P365PFAutoUser1@corp31.cmtsandbox.com</Source>
+              <Target>P365PFAutoUser1@corp32.cmtsandbox.com</Target>
+            </UserMigration>
+            <UserMigration Reference="entry6">
+              <Source>P365AutoRemoteMBX2@corp31.cmtsandbox.com</Source>
+            </UserMigration>
+            <UserMigration Reference="entry7">
+              <Source></Source>
+            </UserMigration>
+            <UserMigration Reference="entry8">
+              <Source>P365AutoRemoteMBX4@corp31.cmtsandbox.com</Source>
+            </UserMigration>
+            <UserMigration Reference="entry9">
+              <Source>P365AutoRemoteEquip1@corp31.cmtsandbox.com</Source>
+            </UserMigration>
+          </UserMigrations>
+          <Groups>
+            <Group Reference="adgroup1">
+              <Name>P365AutoGrp1</Name>
+            </Group>
+          </Groups>
+          <Group Reference="adgroup2">
+            <Name>C31-CloudSecGroup</Name>
+          </Group>
+          <Files />
+        </Project>
       </Projects>
     </Client>
     <Client Reference="support1">
