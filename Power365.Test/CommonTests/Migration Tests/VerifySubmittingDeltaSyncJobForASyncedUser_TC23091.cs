@@ -42,7 +42,47 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration_Tests
                 _project,
                 _entry
                 );
-        }        
+        }
+
+        [TestMethod]
+        [TestCategory("MailWithDiscovery")]
+        public void VerifySubmittingDeltaSyncJobForASyncedUserFor_MD_23091()
+        {
+            var client = Automation.Settings.GetByReference<Client>("client2");
+
+            _client = client.Name;
+            _username = client.Administrator.Username;
+            _password = client.Administrator.Password;
+            _project = client.GetByReference<Project>("project1").Name;
+            _entry = (client.GetByReference<Project>("project1").UserMigrations.Single(a => a.Reference == "entry5")).Source;
+            VerifySubmittingDeltaSyncJobForASyncedUser(
+                _username,
+                _password,
+                _client,
+                _project,
+                _entry
+                );
+        }
+
+        [TestMethod]
+        [TestCategory("Integration")]
+        public void VerifySubmittingDeltaSyncJobForASyncedUserFor_Integration_23091()
+        {
+            var client = Automation.Settings.GetByReference<Client>("client2");
+
+            _client = client.Name;
+            _username = client.Administrator.Username;
+            _password = client.Administrator.Password;
+            _project = client.GetByReference<Project>("project2").Name;
+            _entry = (client.GetByReference<Project>("project2").UserMigrations.Single(a => a.Reference == "entry10")).Source;
+            VerifySubmittingDeltaSyncJobForASyncedUser(
+                _username,
+                _password,
+                _client,
+                _project,
+                _entry
+                );
+        }
 
         private void VerifySubmittingDeltaSyncJobForASyncedUser(string login, string password, string client, string projectName, string entry)
         {
