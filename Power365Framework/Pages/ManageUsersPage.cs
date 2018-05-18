@@ -79,10 +79,11 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             ClickElementBy(_searchButton);
         }
 
-        public UsersDetailsPage OpenDetailsOf(string entry)
+        public UserDetailsPage OpenDetailsOf(string entry)
         {
-            DoubleClickElementBy(By.XPath($"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{entry.ToLower()}')]]"));
-            return new UsersDetailsPage(WebDriver);
+            By user = By.XPath($"//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{entry.ToLower()}')]]");
+            DoubleClickElementBy(user);
+            return new UserDetailsPage(WebDriver);
         }       
 
         public void ConfirmRollback(bool resetPermissions = true)

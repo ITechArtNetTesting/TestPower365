@@ -9,13 +9,13 @@ using OpenQA.Selenium;
 
 namespace BinaryTree.Power365.AutomationFramework.Pages
 {
-    public class UsersDetailsPage : PageBase
+    public class UserDetailsPage : PageBase
     {
         private static readonly By _locator = By.XPath("//div[@class='modal in']/*[@class='modal-dialog modal-lg']");
 
-        public UsersDetailsPage(IWebDriver webDriver) : base(_locator, webDriver){}
+        public UserDetailsPage(IWebDriver webDriver) : base(_locator, webDriver){}
 
-        private readonly By _detailsSyncButton = By.XPath("//div[contains(@class, 'modal in')]//*[contains(@data-bind, 'sync')]");
+        private readonly string detailsActions = "//div[contains(@class, 'modal in')]//*[contains(@data-bind, '{0}')]";
         private readonly By _closeDetailsWindowButton = By.XPath("//div[contains(@class, 'modal in')]//div[contains(@class, 'modal-lg')]//button[contains(@data-dismiss, 'modal')][contains(@class, 'btn')]");
         private readonly By _refreshDetailsWindowButton = By.XPath("//button[contains(@data-bind, 'refresh.run')][not(@disabled='')]");
         private readonly By _detailsState = By.XPath("//span[contains(@data-bind,'State')]");
@@ -25,9 +25,10 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             ClickElementBy(_closeDetailsWindowButton);
         }
 
-        public void PerformSyncFromDetails()
+        public void PerformFromDetails(ActionType state)
         {
-            ClickElementBy(_detailsSyncButton);
+            By action = By.XPath(string.Format(detailsActions, state.GetDescription().ToLower()));
+            ClickElementBy(action);
         }
 
         public bool WaitForState_DetailPage(string entry, StateType state, int timeout = 5000, int pollIntervalSec = 0)

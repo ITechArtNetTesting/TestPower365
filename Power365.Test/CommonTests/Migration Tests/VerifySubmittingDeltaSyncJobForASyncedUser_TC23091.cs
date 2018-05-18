@@ -18,29 +18,22 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration_Tests
 
         private string _client;
         private string _username;
-        private string _project;
+        private string _projectName;
         private string _password;
         private string _entry;
         private ManageUsersPage _manageUsersPage;
-        private UsersDetailsPage _usersDetailsPage;
+        private UserDetailsPage _usersDetailsPage;
 
         [TestMethod]
         [TestCategory("MailOnly")]
         public void VerifySubmittingDeltaSyncJobForASyncedUserFor_MO_23091()
-        {            
-            var client= Automation.Settings.GetByReference<Client>("client1");            
-
-            _client = client.Name;
-            _username = client.Administrator.Username;
-            _password = client.Administrator.Password;
-            _project = client.GetByReference<Project>("project2").Name;
-            _entry = (client.GetByReference<Project>("project2").UserMigrations.Single(a=>a.Reference=="entry6")).Source;
-
+        {                        
+            SetTestCaseParams("client1", "project2", "entry6");
             VerifySubmittingDeltaSyncJobForASyncedUser(
                 _username,
                 _password,
                 _client,
-                _project,
+                _projectName,
                 _entry
                 );
         }
@@ -48,19 +41,13 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration_Tests
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
         public void VerifySubmittingDeltaSyncJobForASyncedUserFor_MD_23091()
-        {
-            var client = Automation.Settings.GetByReference<Client>("client2");
-
-            _client = client.Name;
-            _username = client.Administrator.Username;
-            _password = client.Administrator.Password;
-            _project = client.GetByReference<Project>("project1").Name;
-            _entry = (client.GetByReference<Project>("project1").UserMigrations.Single(a => a.Reference == "entry5")).Source;
+        {            
+            SetTestCaseParams("client2,", "project1", "entry5");
             VerifySubmittingDeltaSyncJobForASyncedUser(
                 _username,
                 _password,
                 _client,
-                _project,
+                _projectName,
                 _entry
                 );
         }
@@ -68,21 +55,26 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration_Tests
         [TestMethod]
         [TestCategory("Integration")]
         public void VerifySubmittingDeltaSyncJobForASyncedUserFor_Integration_23091()
-        {
-            var client = Automation.Settings.GetByReference<Client>("client2");
-
-            _client = client.Name;
-            _username = client.Administrator.Username;
-            _password = client.Administrator.Password;
-            _project = client.GetByReference<Project>("project2").Name;
-            _entry = (client.GetByReference<Project>("project2").UserMigrations.Single(a => a.Reference == "entry10")).Source;
+        {            
+            SetTestCaseParams("client2", "project2", "entry10");
             VerifySubmittingDeltaSyncJobForASyncedUser(
                 _username,
                 _password,
                 _client,
-                _project,
+                _projectName,
                 _entry
                 );
+        }
+
+        private void SetTestCaseParams(string clientName,string projectName,string entry)
+        {
+            var client = Automation.Settings.GetByReference<Client>(clientName);
+            var _project = client.GetByReference<Project>(projectName);
+            _client = client.Name;
+            _username = client.Administrator.Username;
+            _password = client.Administrator.Password;
+            _projectName = _project.Name;
+            _entry = _project.UserMigrations.Single(a => a.Reference == entry).Source;
         }
 
         private void VerifySubmittingDeltaSyncJobForASyncedUser(string login, string password, string client, string projectName, string entry)
@@ -95,11 +87,11 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration_Tests
                                        .GetPage<ManageUsersPage>();
             _manageUsersPage.PerformSearch(entry);
             _usersDetailsPage= _manageUsersPage.OpenDetailsOf(entry);
-            _usersDetailsPage.PerformSyncFromDetails();            
+            _usersDetailsPage.PerformFromDetails(ActionType.Sync);            
             _manageUsersPage.ConfirmAction();
             _usersDetailsPage.WaitForState_DetailPage(entry, StateType.Syncing, 2700000, 5);
             _usersDetailsPage.WaitForState_DetailPage(entry, StateType.Synced, 2700000, 5);
-            _usersDetailsPage.PerformSyncFromDetails();
+            _usersDetailsPage.PerformFromDetails(ActionType.Sync);
             _manageUsersPage.ConfirmAction();
             _usersDetailsPage.WaitForState_DetailPage(entry, StateType.Syncing, 2700000, 5);
             _usersDetailsPage.WaitForState_DetailPage(entry, StateType.Synced, 2700000, 5);

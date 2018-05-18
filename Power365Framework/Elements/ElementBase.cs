@@ -49,8 +49,8 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
 
         protected void SendKeysToElementBy(By by,string key, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
-            var enabledElement = FindEnabledElement(by, timeoutInSec, pollIntervalSec);
-            enabledElement.SendKeys(key);
+            var element = FindExistingElement(by, timeoutInSec, pollIntervalSec);            
+            element.SendKeys(key);            
         }
 
         protected void DoubleClickElementBy(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
@@ -79,24 +79,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         protected IWebElement FindClickableElement(By by, int timeoutInSeconds = 5, int pollIntervalSec = 0)
         {
             return EvaluateElement(by, ExpectedConditions.ElementToBeClickable(by), timeoutInSeconds, pollIntervalSec);
-        }
-
-        protected IWebElement FindEnabledElement(By by, int timeoutInSeconds = 5, int pollIntervalSec = 0)
-        {
-            Func<IWebDriver, IWebElement> waitForReturningEnabledElement = new Func<IWebDriver, IWebElement>((IWebDriver driver) =>
-            {
-                var element = driver.FindElement(by);
-                if (element.Enabled)
-                {
-                    return element;
-                }
-                else
-                {
-                    return null;
-                }
-            });
-            return EvaluateElement(by, waitForReturningEnabledElement, timeoutInSeconds, pollIntervalSec);
-        }
+        }        
 
         protected bool IsElementTextPresentInValue(By by, string value, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
