@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using UI = OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
+using System.Linq;
 
 namespace BinaryTree.Power365.AutomationFramework.Elements
 {
@@ -53,11 +54,11 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             return (T)Activator.CreateInstance(typeof(T), WebDriver);
         }
 
-        protected T ClickElementByOpensNewWindwo<T>(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
+        protected T ClickElementThatOpensLastWindowBy<T>(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
             where T : PageBase
         {
             ClickElementBy(by, timeoutInSec, pollIntervalSec);
-            WebDriver.SwitchTo().Window(WebDriver.WindowHandles[WebDriver.WindowHandles.Count - 1]);
+            WebDriver.SwitchTo().Window(WebDriver.WindowHandles.Last());
             return (T)Activator.CreateInstance(typeof(T), WebDriver);
         }
 

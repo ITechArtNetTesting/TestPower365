@@ -11,6 +11,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
     public class MenuElement : ElementBase
     {
         private static readonly By _locator = By.Id("hamburger");
+        private By helpButton= By.XPath("//li//span[contains(@data-translation,'Help')]");
 
         private By _clientsComboBox = By.ClassName("dropdown");
 
@@ -95,11 +96,8 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
 
         public HelpPage ClickHelp()
         {
-            if (!IsElementVisible(_clientsComboBox, 1))
-                OpenMenu();
-
-            var helpButton = By.XPath("//li//span[contains(@data-translation,'Help')]");           
-            return ClickElementByOpensNewWindwo<HelpPage>(helpButton);
+            OpenMenu();
+            return ClickElementThatOpensLastWindowBy<HelpPage>(helpButton);
         }
 
         public HomePage ClickSignOut()

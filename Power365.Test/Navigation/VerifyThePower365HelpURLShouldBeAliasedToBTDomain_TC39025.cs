@@ -40,8 +40,8 @@ namespace BinaryTree.Power365.Test.Navigation
             _basePage = Automation.Common
                 .SingIn(_username, _password)
                 .GetPage<PageBase>();
-            _helpPage=_basePage.Menu.ClickHelp();
-            _helpPage.CheckDomain(CorrectDomain);
+            _helpPage=_basePage.Menu.ClickHelp();            
+            Assert.IsTrue(_helpPage.GatDomain().Contains(CorrectDomain));
         }
     }
 }

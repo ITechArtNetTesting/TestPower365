@@ -14,9 +14,9 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         {           
         }
 
-        public void CheckDomain(string domain)
+        public string GatDomain()
         {
-            Assert.IsTrue(WebDriver.Url.Contains(domain));
+            return WebDriver.Url;
         }
     }
 }
