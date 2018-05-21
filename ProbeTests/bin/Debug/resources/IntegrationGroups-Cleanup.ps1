@@ -184,6 +184,16 @@ try
 		Write-Host ("SIMULATION: Setting Distribution Group Owner")
 	}
 
+	if(!$simulationMode)
+	{
+		Write-Host ("Removing Organization Relationship")
+		Remove-OrganizationRelationship "BinaryTree-*" -Confirm:$false -ErrorAction SilentlyContinue
+	}
+	else
+	{
+		Write-Host ("SIMULATION: Removing Organization Relationship")
+	}
+
 	Write-Host("Removing PSSession sourceLocalSession")
     Remove-PSSession $sourceLocalSession
     $sourceLocalSession = $null
@@ -219,6 +229,16 @@ try
     {
         Write-Host ("SIMULATION: Removing Distribution Groups")
     }
+
+	if(!$simulationMode)
+	{
+		Write-Host ("Removing Organization Relationship")
+		Remove-OrganizationRelationship "BinaryTree-*" -Confirm:$false -ErrorAction SilentlyContinue
+	}
+	else
+	{
+		Write-Host ("SIMULATION: Removing Organization Relationship")
+	}
 
 	Write-Host("Removing PSSession targetLocalSession")
     Remove-PSSession $targetLocalSession

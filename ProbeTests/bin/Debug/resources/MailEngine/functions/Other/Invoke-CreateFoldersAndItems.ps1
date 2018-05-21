@@ -7,7 +7,7 @@ function Invoke-CreateFoldersAndItems{
  	Begin
 	{
          ##Create Message
-
+		Write-Host "CreateFoldersAndItems"
         #Move Contact to New folder
         $NewFolder = new-object Microsoft.Exchange.WebServices.Data.Folder($RootFolder.service)  
         $FolderName = "Test" + $TestNumber + "-" + (Get-Date).ToString("s")

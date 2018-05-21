@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using UI = OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
+using OpenQA.Selenium.Interactions;
 
 namespace BinaryTree.Power365.AutomationFramework.Elements
 {
@@ -43,7 +44,22 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         protected void ClickElementBy(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
             var clickableElement = FindClickableElement(by, timeoutInSec, pollIntervalSec);
-            clickableElement.Click();
+            clickableElement.Click();           
+        }
+
+        protected void SendKeysToElementBy(By by,string key, int timeoutInSec = 5, int pollIntervalSec = 0)
+        {
+            var element = FindVisibleElement(by, timeoutInSec, pollIntervalSec);
+            if (element.Enabled)
+                element.SendKeys(key);
+            else
+                throw new ElementNotInteractableException();
+        }
+
+        protected void DoubleClickElementBy(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
+        {
+            var clickableElement = FindClickableElement(by, timeoutInSec, pollIntervalSec);
+            new Actions(WebDriver).DoubleClick(clickableElement).Build().Perform();
         }
 
         protected T ClickElementBy<T>(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
@@ -66,7 +82,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         protected IWebElement FindClickableElement(By by, int timeoutInSeconds = 5, int pollIntervalSec = 0)
         {
             return EvaluateElement(by, ExpectedConditions.ElementToBeClickable(by), timeoutInSeconds, pollIntervalSec);
-        }
+        }        
 
         protected bool IsElementTextPresentInValue(By by, string value, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
@@ -133,7 +149,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             return EvaluateElement(by, condition, () => WebDriver.Navigate().Refresh(), timeoutInSec, pollIntervalSec);
         }
 
-        protected T EvaluateElement<T>(By by, Func<IWebDriver, T> condition, Action refreshAction, int timeoutInSec = 5, int pollIntervalSec = 0)
+        protected T EvaluateElement<T>(By by,Func<IWebDriver, T> condition, Action refreshAction, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
             if (timeoutInSec > 0 || pollIntervalSec > 0)
             {
@@ -150,8 +166,8 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
                             throw new Exception("Page failed to reach ready state in time.");
                         if (!IsAjaxActive())
                             throw new Exception("AJAX failed to completed in time.");
-
-                        return condition(webDriver);
+                        
+                            return condition(webDriver);                        
                     });
                 }
 

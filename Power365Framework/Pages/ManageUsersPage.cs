@@ -5,6 +5,7 @@ using BinaryTree.Power365.AutomationFramework.Pages;
 using OpenQA.Selenium;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using OpenQA.Selenium.Support.UI;
 
 namespace BinaryTree.Power365.AutomationFramework.Pages
 {
@@ -25,6 +26,8 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         //@@@ REQ:ID
         private readonly By _actionsDropdown = By.XPath("//div[@id='users']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]");
         private readonly By _actionsDropdownExpanded = By.XPath("//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')][contains(@aria-expanded, 'true')]");
+        private readonly By _searchInput = By.XPath("//div[contains(@class, 'search-group')]//input");
+        private readonly By _searchButton = By.XPath("//i[contains(@class,'search')]");        
 
         private readonly By _rollbackResetPermissionsLabelYes = By.XPath("//label[contains(@for, 'resetPermissions')]");
         private readonly By _rollbackResetPermissionsLabelNo = By.XPath("//label[contains(@for, 'dontResetPermissions')]");
@@ -38,6 +41,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private readonly By _applyActionButtonDisabled = By.XPath("//button[contains(@data-bind, 'applyAction')][@disabled='']");
 
         private readonly string _confirmationDialogButtonFormat = "//div[@id='confirmationDialog'][contains(@class, 'modal in')]//*[contains(text(), '{0}')]";
+        private readonly string _userXpath = "//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{0}')]]";
 
         private readonly string _actionDropdownSelectionFormat = "//button[contains(@aria-expanded, 'true')]/ancestor::div[contains(@class, 'dropdown')]//ul[contains(@class, 'dropdown-menu')]//li[contains(@data-toggle, 'tooltip')]//*[contains(text(), '{0}')]";
 
@@ -51,7 +55,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
 
         public void PerformAction(ActionType action)
         {
-            ClickElementBy(_actionsDropdown);
+            ClickElementBy(_actionsDropdown);            
 
             if (!IsElementVisible(_actionsDropdownExpanded))
                 throw new Exception("Could not find expanded Actions dropdown.");
@@ -70,6 +74,19 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             var confirmDialogButton = By.XPath(string.Format(_confirmationDialogButtonFormat, isYes ? "Yes" : "No"));
             ClickElementBy(confirmDialogButton);
         }
+
+        public void PerformSearch(string searchWord)
+        {
+            SendKeysToElementBy(_searchInput, searchWord);
+            ClickElementBy(_searchButton);
+        }
+
+        public UserDetailsPage OpenDetailsOf(string entry)
+        {
+            By user = By.XPath(string.Format(_userXpath,entry.ToLower()));
+            DoubleClickElementBy(user);
+            return new UserDetailsPage(WebDriver);
+        }       
 
         public void ConfirmRollback(bool resetPermissions = true)
         {
@@ -99,7 +116,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         public bool IsUserState(string user, StateType state, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
             return Users.RowHasValue(user, state.GetDisplay(), timeoutInSec, pollIntervalSec);
-        }
+        }        
 
         public void OpenMigrationWavesTab()
         {

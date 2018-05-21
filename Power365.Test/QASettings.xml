@@ -102,6 +102,10 @@
               <Group>Wave1</Group>
               <Profile>Profile 1</Profile>
             </UserMigration>
+            <UserMigration Reference="entry6">                            
+              <Source>C3O365ShareMBX2@BTCorp3.onmicrosoft.com</Source>
+              <Target>C3O365ShareMBX2@BTCorp11.onmicrosoft.com</Target>
+            </UserMigration>
           </UserMigrations>
           <Groups />
           <Files>
@@ -168,6 +172,10 @@
               <Source>C7O365SML26@btcorp7.onmicrosoft.com</Source>
               <Target>C7O365SML26@btcorp9.onmicrosoft.com</Target>
             </UserMigration>
+            <UserMigration Reference="entry5">
+              <Source>C7-Automation4@btcorp7.onmicrosoft.com</Source>
+              <Target>C7-Automation4@btcorp9.onmicrosoft.com</Target>
+            </UserMigration>
           </UserMigrations>
           <Groups>
             <Group Reference="adgroup1">
@@ -210,6 +218,10 @@
             </UserMigration>
             <UserMigration Reference="entry9">
               <Source>P365AutoRemoteEquip1@corp31.cmtsandbox.com</Source>
+            </UserMigration>
+            <UserMigration Reference="entry10">
+              <Source>P365AutoRemoteShare4@CORP31.CMTSANDBOX.COM</Source>
+              <Target>P365AutoRemoteShare4@corp32.cmtsandbox.com</Target>
             </UserMigration>
           </UserMigrations>
           <Groups>
