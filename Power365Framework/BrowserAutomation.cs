@@ -74,5 +74,10 @@ namespace BinaryTree.Power365.AutomationFramework
                     return new ChromeDriver(Path.GetFullPath(chromeDriverDirectory), chromeOptions);
             }
         }
+
+        public object CreateWorkflow<T1, T2>(object editProjectPage)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

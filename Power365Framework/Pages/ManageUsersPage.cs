@@ -44,6 +44,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private readonly By _newMigrationWaveButton = By.XPath("//span[contains(@data-bind,'addWave')]");
 
         private readonly By _migrationWaveTab = By.XPath("//a[contains(@href,'waves')]//span");
+        private readonly By _usersTab = By.XPath("//a[contains(@href,'users')]//span");
 
         public ManageUsersPage(IWebDriver webDriver)
             : base(_locator, webDriver) { }
@@ -100,23 +101,30 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             return Users.RowHasValue(user, state.GetDisplay(), timeoutInSec, pollIntervalSec);
         }
 
-        public void OpenMigrationWaves()
+        public void OpenMigrationWavesTab()
         {
             ClickElementBy(_migrationWaveTab,5);
         }
-        
-        #region Assertion
 
-        public void CheckMigrationWavesTabOpen()
+        public void OpenUsersTab()
         {
-            Assert.IsTrue(IsElementVisible(_newMigrationWaveButton, 5), "Migration Waves Tab was not opened");
-        }
-        public void CheckMigrationWavesLinkIsVisible()
-        {
-            Assert.IsTrue(IsElementVisible(_migrationWaveTab), "Migration Waves Tab is not visible");
+            ClickElementBy(_usersTab, 5);
         }
 
-        #endregion
+        public EditProjectPage ClickNewMigrationWave()
+        {
+            return ClickElementBy<EditProjectPage>(_newMigrationWaveButton, 5);
+        }
+               
+        public bool IsMigrationWavesTabOpen()
+        {
+            return IsElementVisible(_newMigrationWaveButton, 5);
+        }
+        public bool MigrationWavesLinkIsVisible()
+        {
+            return IsElementVisible(_migrationWaveTab);
+        }
+
 
     }
 }
