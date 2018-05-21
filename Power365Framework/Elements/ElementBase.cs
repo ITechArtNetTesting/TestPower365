@@ -49,8 +49,11 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
 
         protected void SendKeysToElementBy(By by,string key, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
-            var element = FindExistingElement(by, timeoutInSec, pollIntervalSec);            
-            element.SendKeys(key);            
+            var element = FindVisibleElement(by, timeoutInSec, pollIntervalSec);
+            if (element.Enabled)
+                element.SendKeys(key);
+            else
+                throw new ElementNotInteractableException();
         }
 
         protected void DoubleClickElementBy(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
