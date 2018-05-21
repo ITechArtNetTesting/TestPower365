@@ -109,10 +109,11 @@ namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
                                         .UsersEdit() 
                                         .GetPage<ManageUsersPage>();
 
-            _manageUsersPage.CheckMigrationWavesLinkIsVisible();
-            _manageUsersPage.OpenMigrationWaves();
-            _manageUsersPage.CheckMigrationWavesTabOpen();
-           
+            
+            Assert.IsTrue(_manageUsersPage.MigrationWavesLinkIsVisible(), "Migration Waves Tab is not visible");
+            _manageUsersPage.OpenMigrationWavesTab();
+            Assert.IsTrue(_manageUsersPage.IsMigrationWavesTabOpen(), "Migration Waves Tab was not opened");
+         
         }
     }
 

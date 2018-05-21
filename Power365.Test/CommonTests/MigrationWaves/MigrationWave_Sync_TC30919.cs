@@ -1,5 +1,6 @@
 ﻿using BinaryTree.Power365.AutomationFramework;
 using BinaryTree.Power365.AutomationFramework.Pages;
+using BinaryTree.Power365.AutomationFramework.Workflows;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -56,10 +57,35 @@ namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
                                         .ClientSelect(_client)
                                         .ProjectSelect(_project)
                                         .UsersEdit()
-                                        //.UsersPerformAction(user, ActionType.Sync)
-                                        //.UsersValidateState(user, StateType.Syncing)
-                                        //.UsersValidateState(user, StateType.Synced)
                                         .GetPage<ManageUsersPage>();
+
+            _manageUsersPage.OpenMigrationWavesTab();
+           var editProjectPage = _manageUsersPage.ClickNewMigrationWave();
+
+
+           var editProjectWorkflow = Automation.Browser
+                .CreateWorkflow<IntegrationProjectWorkflow, EditProjectPage>(editProjectPage);
+
+            editProjectWorkflow.AddMigrationWave("TC_30919", true)
+                .SelectTenantMachGroup(true)
+                .AddADGroup("P365AutoGrp1", true)
+                .GetPage<ManageUsersPage>();
+
+            _manageUsersPage.OpenUsersTab();
+
+
+            var projectDetailsPage = editProjectWorkflow
+               
+                    .ProjectType(ProjectType.EmailByFile)
+                     .ProjectName(projectName)
+            //            .ProjectDescription(projectDescription)
+            //            .AddTenant(sourceTenantUser, sourceTenantPassword)
+            //            .AddTenant(targetTenantUser, targetTenantPassword, true)
+            //            .UploadUserList(uploadFilePath)
+            //            .SyncSchedule(false)
+            //            .Submit()
+                       .GetPage<ProjectDetailsPage>();
+
         }
 
     }

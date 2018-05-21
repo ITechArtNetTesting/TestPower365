@@ -91,9 +91,29 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
             return GetWorkflow();
         }
 
+       
         public T SelectMigrationWave(string migrationWave, bool isFinished = false)
         {
             EditProjectPage.SelectMigrationWave(migrationWave);
+
+            if (isFinished)
+                ClickNext();
+
+            return GetWorkflow();
+        }
+
+        public T SelectTenantMachGroup(bool isFinished = false)
+        {
+            EditProjectPage.SelectTenantMatchGroup();
+
+            if (isFinished)
+                ClickNext();
+
+            return GetWorkflow();
+        }
+        public T AddADGroup(string groupName, bool isFinished = false)
+        {
+            EditProjectPage.AddADGroupName(groupName);
 
             if (isFinished)
                 ClickNext();
