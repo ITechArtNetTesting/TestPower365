@@ -27,43 +27,22 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration_Tests
         [TestMethod]
         [TestCategory("MailOnly")]
         public void VerifySubmittingDeltaSyncJobForASyncedUserFor_MO_23091()
-        {                        
-            SetTestCaseParams("client1", "project2", "entry6");
-            VerifySubmittingDeltaSyncJobForASyncedUser(
-                _username,
-                _password,
-                _client,
-                _projectName,
-                _entry
-                );
+        {                                    
+            VerifySubmittingDeltaSyncJobForASyncedUser("client1", "project2", "entry6");
         }
 
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
         public void VerifySubmittingDeltaSyncJobForASyncedUserFor_MD_23091()
-        {            
-            SetTestCaseParams("client2", "project1", "entry5");
-            VerifySubmittingDeltaSyncJobForASyncedUser(
-                _username,
-                _password,
-                _client,
-                _projectName,
-                _entry
-                );
+        {                        
+            VerifySubmittingDeltaSyncJobForASyncedUser("client2", "project1", "entry5");
         }
 
         [TestMethod]
         [TestCategory("Integration")]
         public void VerifySubmittingDeltaSyncJobForASyncedUserFor_Integration_23091()
-        {            
-            SetTestCaseParams("client2", "project2", "entry10");
-            VerifySubmittingDeltaSyncJobForASyncedUser(
-                _username,
-                _password,
-                _client,
-                _projectName,
-                _entry
-                );
+        {                        
+            VerifySubmittingDeltaSyncJobForASyncedUser("client2", "project2", "entry10");
         }
 
         private void SetTestCaseParams(string clientName,string projectName,string entry)
@@ -77,24 +56,25 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration_Tests
             _entry = _project.UserMigrations.Single(a => a.Reference == entry).Source;
         }
 
-        private void VerifySubmittingDeltaSyncJobForASyncedUser(string login, string password, string client, string projectName, string entry)
+        private void VerifySubmittingDeltaSyncJobForASyncedUser(string client, string project, string entry)
         {
+            SetTestCaseParams(client,project,entry);
             _manageUsersPage = Automation.Common
-                                       .SingIn(login, password)
-                                       .ClientSelect(client)
-                                       .ProjectSelect(projectName)
+                                       .SingIn(_username, _password)
+                                       .ClientSelect(_client)
+                                       .ProjectSelect(_projectName)
                                        .UsersEdit()
                                        .GetPage<ManageUsersPage>();
-            _manageUsersPage.PerformSearch(entry);
-            _usersDetailsPage= _manageUsersPage.OpenDetailsOf(entry);
+            _manageUsersPage.PerformSearch(_entry);
+            _usersDetailsPage= _manageUsersPage.OpenDetailsOf(_entry);
             _usersDetailsPage.PerformAction(ActionType.Sync);
             _usersDetailsPage.ConfirmAction();
-            _usersDetailsPage.WaitForState_DetailPage(entry, StateType.Syncing, 2700000, 5);
-            _usersDetailsPage.WaitForState_DetailPage(entry, StateType.Synced1, 2700000, 5);
+            _usersDetailsPage.WaitForState_DetailPage(_entry, StateType.Syncing, 2700000, 5);
+            _usersDetailsPage.WaitForState_DetailPage(_entry, StateType.Synced1, 2700000, 5);
             _usersDetailsPage.PerformAction(ActionType.Sync);
             _usersDetailsPage.ConfirmAction();
-            _usersDetailsPage.WaitForState_DetailPage(entry, StateType.Syncing, 2700000, 5);
-            _usersDetailsPage.WaitForState_DetailPage(entry, StateType.Synced2, 2700000, 5);
+            _usersDetailsPage.WaitForState_DetailPage(_entry, StateType.Syncing, 2700000, 5);
+            _usersDetailsPage.WaitForState_DetailPage(_entry, StateType.Synced2, 2700000, 5);
             _usersDetailsPage.CloseDetailsWindow();
         }
     }
