@@ -44,6 +44,13 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
             return this;
         }
 
+        public CommonWorkflow TenantsEdit()
+        {
+            var projectDetailsPage = GetCurrentPage<ProjectDetailsPage>();
+            CurrentPage = projectDetailsPage.ClickUsersEdit();
+            return this;
+        }
+
         public CommonWorkflow UsersPerformAction(string user, ActionType action, bool isYes = true)
         {
             if (action == ActionType.Rollback)

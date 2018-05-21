@@ -48,7 +48,7 @@ function Invoke-Test32366 {
             $NewFolder1 = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
             $FolderName1 = "Test32366-" + (Get-Date).ToString("s")
             $NewFolder1.DisplayName = $FolderName1
-            $data.Folder =  $RootPath + $FolderName + "\" + $FolderName1
+            $data.Folder =  $RootPath + "\" + $FolderName + "\" + $FolderName1
             $NewFolder1.Save($NewFolder.Id)
              $jnJournal = New-Object Microsoft.Exchange.WebServices.Data.EmailMessage -ArgumentList $service  
               #Set the Subject of the Note  

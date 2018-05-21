@@ -141,3 +141,7 @@ D:\Project\BTCloud\SeleniumTests\Power365.Test\obj\Debug\Power365.Test.csprojRes
 D:\Project\BTCloud\SeleniumTests\Power365.Test\bin\Debug\Resources\ImportFiles\MailOnlyCSVC7toC9SML-Automation-part1.csv
 D:\Project\BTCloud\SeleniumTests\Power365.Test\bin\Debug\Resources\ImportFiles\MailOnlyCSVC7toC9SML-Automation-part2.csv
 D:\Project\BTCloud\SeleniumTests\Power365.Test\bin\Debug\Resources\ImportFiles\MailOnlyCSVC7toC9SML.csv
+D:\Git\TestPower365\Power365.Test\obj\Debug\Power365.Test.csprojResolveAssemblyReference.cache
+D:\Git\TestPower365\Power365.Test\obj\Debug\Power365.Test.csproj.CoreCompileInputs.cache
+D:\Git\TestPower365\Power365.Test\obj\Debug\BinaryTree.Power365.Test.dll
+D:\Git\TestPower365\Power365.Test\obj\Debug\BinaryTree.Power365.Test.pdb

@@ -77,7 +77,7 @@ namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
             var projectDetailsPage = editProjectWorkflow
                
                     .ProjectType(ProjectType.EmailByFile)
-                     .ProjectName(projectName)
+                     //.ProjectName(projectName)
             //            .ProjectDescription(projectDescription)
             //            .AddTenant(sourceTenantUser, sourceTenantPassword)
             //            .AddTenant(targetTenantUser, targetTenantPassword, true)

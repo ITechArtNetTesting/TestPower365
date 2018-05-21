@@ -26,7 +26,10 @@ function Invoke-Test32268 {
         $pfRoot = Get-P365PublicFolderFromPath -FolderPath $RootPath -SourceMailbox
         #Move Contact to New folder
         $data = Invoke-CreateFoldersAndItems -RootFolder $pfRoot -TestNumber 32268 -RootFolderPath $RootPath
-        Invoke-p365SyncPublicFolder -SourceFolderPath ("\" + $data.Folder1) -TargetCopyPath ("\" + $TargetRootPath)
+
+		$data | fl
+
+        Invoke-p365SyncPublicFolder -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
         $tfTargetFolder = Get-P365PublicFolderFromPath -FolderPath $data.Folder3 -TargetMailbox
         $EmailMessage = New-Object Microsoft.Exchange.WebServices.Data.EmailMessage -ArgumentList $Script:TargetService
   		$EmailMessage.Subject = "Test32268 - " + (Get-Date).ToString()
