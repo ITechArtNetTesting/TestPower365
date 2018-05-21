@@ -49,10 +49,18 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         protected T ClickElementBy<T>(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
             where T : PageBase
         {
-            ClickElementBy(by, timeoutInSec, pollIntervalSec);
+            ClickElementBy(by, timeoutInSec, pollIntervalSec);            
             return (T)Activator.CreateInstance(typeof(T), WebDriver);
         }
-        
+
+        protected T ClickElementByOpensNewWindwo<T>(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
+            where T : PageBase
+        {
+            ClickElementBy(by, timeoutInSec, pollIntervalSec);
+            WebDriver.SwitchTo().Window(WebDriver.WindowHandles[WebDriver.WindowHandles.Count - 1]);
+            return (T)Activator.CreateInstance(typeof(T), WebDriver);
+        }
+
         protected IWebElement FindExistingElement(By by, int timeoutInSeconds = 5, int pollIntervalSec = 0)
         {
             return EvaluateElement(by, ExpectedConditions.ElementExists(by), timeoutInSeconds, pollIntervalSec);
