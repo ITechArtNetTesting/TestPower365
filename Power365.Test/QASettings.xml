@@ -286,7 +286,7 @@
     </Client>
   </Clients>
   <Tenants>
-    <Tenant Reference="tenant1">
+    <Tenant Reference="tenant1" Name="BT Corp7">      
       <Credentials>
         <Credential Reference="cloud">
           <Username>C7O365Admin@btcorp7.onmicrosoft.com</Username>
@@ -307,7 +307,7 @@
       </Credentials>
       <PrimaryDomain>btcorp7.onmicrosoft.com</PrimaryDomain>
     </Tenant>
-    <Tenant Reference="tenant2">
+    <Tenant Reference="tenant2" Name="BTCorp9">
       <Credentials>
         <Credential Reference="cloud">
           <Username>corp9O365admin@btcorp9.onmicrosoft.com</Username>

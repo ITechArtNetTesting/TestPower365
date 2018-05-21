@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using UI = OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
+using OpenQA.Selenium.Interactions;
 
 namespace BinaryTree.Power365.AutomationFramework.Elements
 {
@@ -51,6 +52,12 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         {
             ClickElementBy(by, timeoutInSec, pollIntervalSec);
             return (T)Activator.CreateInstance(typeof(T), WebDriver);
+        }
+
+        protected void HowerElement(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
+        {
+            var element = FindExistingElement(by, 20, 1);
+            new Actions(WebDriver).MoveToElement(element).Build().Perform();
         }
         
         protected IWebElement FindExistingElement(By by, int timeoutInSeconds = 5, int pollIntervalSec = 0)
