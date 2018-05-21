@@ -14,8 +14,7 @@ namespace BinaryTree.Power365.Test.Navigation
     [TestClass]
     public class VerifyThePower365HelpURLShouldBeAliasedToBTDomain_TC39025 : TestBase
     {
-        private string CorrectDomain = "https://help.binarytree.com/p365help/";
-
+        private string CorrectDomain;
         private string _client;
         private string _username;
         private string _password;
@@ -36,6 +35,7 @@ namespace BinaryTree.Power365.Test.Navigation
         [TestMethod]
         public void VerifyThePower365HelpURLShouldBeAliasedToBTDomain()
         {
+            CorrectDomain = Automation.Settings.CorrectHelpURL;
             SetTestCaseParams("client1");
             _basePage = Automation.Common
                 .SingIn(_username, _password)

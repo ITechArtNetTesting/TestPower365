@@ -348,6 +348,7 @@
     </Tenant>
   </Tenants>
   <BaseUrl>https://bt-qa-pa-web-ui.azurewebsites.net/</BaseUrl>
+  <CorrectHelpURL>https://help.binarytree.com/p365help/</CorrectHelpURL>
   <DownloadsPath>downloads</DownloadsPath>
   <ChromeDriverPath>resources</ChromeDriverPath>
   <O365PowerShellUrl>https://ps.outlook.com/powershell</O365PowerShellUrl>
