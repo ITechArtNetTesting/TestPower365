@@ -98,9 +98,9 @@ namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
             _manageUsersPage.SwichToMigrationWavesTab();
             _manageUsersPage.Waves.ClickRowByValue("TC_30919");
 
-            _manageUsersPage = Automation.Common
-                .WavesPerformAction("TC_30919",)
-                .GetPage<ManageUsersPage>();
+            //_manageUsersPage = Automation.Common
+            //    .WavesPerformAction("TC_30919",)
+            //    .GetPage<ManageUsersPage>();
 
 
             //var projectDetailsPage = editProjectWorkflow

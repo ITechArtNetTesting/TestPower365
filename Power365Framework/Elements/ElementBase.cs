@@ -69,6 +69,12 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
 
         }
 
+        protected void HowerElement(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
+        {
+            var element = FindExistingElement(by, 20, 1);
+            new Actions(WebDriver).MoveToElement(element).Build().Perform();
+        }
+
         protected IWebElement FindExistingElement(By by, int timeoutInSeconds = 5, int pollIntervalSec = 0)
         {
             return EvaluateElement(by, ExpectedConditions.ElementExists(by), timeoutInSeconds, pollIntervalSec);

@@ -1170,3 +1170,7 @@ D:\Git\TestPower365\ProbeTests\bin\Debug\ru\System.Spatial.resources.dll
 D:\Git\TestPower365\ProbeTests\bin\Debug\zh-Hans\System.Spatial.resources.dll
 D:\Git\TestPower365\ProbeTests\bin\Debug\zh-Hant\System.Spatial.resources.dll
 D:\Git\TestPower365\ProbeTests\bin\Debug\resources\PF\PFPrepareFolder.ps1
+D:\Git\TestPower365\ProbeTests\bin\Debug\resources\MailEngine\functions\Validations\Invoke-Validate32282.ps1
+D:\Git\TestPower365\ProbeTests\bin\Debug\resources\TestResultsPublisher.ps1
+D:\Git\TestPower365\ProbeTests\bin\Debug\resources\BuildStatusRelay.ps1
+D:\Git\TestPower365\ProbeTests\bin\Debug\resources\TestRunner.ps1

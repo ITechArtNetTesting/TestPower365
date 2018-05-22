@@ -37,7 +37,14 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
             return this;
         }
 
-        public CommonWorkflow UsersEdit()
+        public CommonWorkflow TenantsEdit()
+        {
+            var projectDetailsPage = GetCurrentPage<ProjectDetailsPage>();
+            CurrentPage = projectDetailsPage.ClickTenantsEdit();
+            return this;
+        }
+
+            public CommonWorkflow UsersEdit()
         {
             var projectDetailsPage = GetCurrentPage<ProjectDetailsPage>();
             CurrentPage = projectDetailsPage.ClickUsersEdit();
