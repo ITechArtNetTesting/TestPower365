@@ -48,14 +48,7 @@ namespace BinaryTree.Power365.Test.CommonTests
         public void VerifyLogsButtonOnTheTenantManagementWillDownloadTenantDiscoveryLog_MD_25773()
         {
             VerifyLogsButtonOnTheTenantManagementWillDownloadTenantDiscoveryLog("client2","project1");
-        }
-
-        [TestMethod]
-        [TestCategory("MailOnly")]
-        public void VerifyLogsButtonOnTheTenantManagementWillDownloadTenantDiscoveryLog_MO_25773()
-        {
-            VerifyLogsButtonOnTheTenantManagementWillDownloadTenantDiscoveryLog("client1", "project1");
-        }
+        }     
 
         [TestMethod]
         [TestCategory("Integration")]

@@ -346,6 +346,8 @@
       </Credentials>
       <PrimaryDomain>BTCorp11.onmicrosoft.com</PrimaryDomain>
     </Tenant>
+    <Tenant Reference="tenant5" Name="BTCloud7">      
+    </Tenant>
   </Tenants>
   <BaseUrl>https://bt-qa-pa-web-ui.azurewebsites.net/</BaseUrl>
   <DownloadsPath>downloads</DownloadsPath>
