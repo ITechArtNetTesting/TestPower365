@@ -34,62 +34,36 @@ namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
             _client = client.Name;
             _username = client.Administrator.Username;
             _password = client.Administrator.Password;
-            _project = project.Name;
-
-            //_sourceAdminUser = sourcePowershellUser.Username;
-            //_sourceAdminPassword = sourcePowershellUser.Password;
-
-            //_targetAdminUser = targetPowershellUser.Username;
-            //_targetAdminPassword = targetPowershellUser.Password;
-
-            //_sourceMailbox = userMigration1.Source;
-            //_targetMailbox = userMigration1.Target;
+            _project = project.Name;         
         }
+         
 
 
         [TestMethod]
         [TestCategory("MailOnly")]
         public void UsersViewHasTheTabToSwitchToMigrationWaveView_MO_30917()
         {
-            var client = Automation.Settings.GetByReference<Client>("client1");
-            var project = client.GetByReference<Project>("project1");
-            var username = client.Administrator.Username;
-            var password = client.Administrator.Password;
-
-            _client = client.Name;
-            _username = client.Administrator.Username;
-            _password = client.Administrator.Password;
-            _project = project.Name;
-
-      
-            UsersViewHasTheTabToSwitchToMigrationWaveView(_username, _password, _client, _project);
+            CallTest("client1", "project1");
         }
 
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
         public void UsersViewHasTheTabToSwitchToMigrationWaveView_MD_30917()
         {           
-            var client = Automation.Settings.GetByReference<Client>("client2");
-            var project = client.GetByReference<Project>("project1");
-            var username = client.Administrator.Username;
-            var password = client.Administrator.Password;
-
-            _client = client.Name;
-            _username = client.Administrator.Username;
-            _password = client.Administrator.Password;
-            _project = project.Name;
-
-
-            UsersViewHasTheTabToSwitchToMigrationWaveView(_username, _password, _client, _project);
+            CallTest("client2", "project1");
         }
 
         [TestMethod]
         [TestCategory("Integration")]
         public void UsersViewHasTheTabToSwitchToMigrationWaveView_Integration_30917()
+        {                 
+            CallTest("client2", "project2");
+        }
+
+        private void CallTest(string init_client, string init_project)
         {
-          
-            var client = Automation.Settings.GetByReference<Client>("client2");
-            var project = client.GetByReference<Project>("project2");
+            var client = Automation.Settings.GetByReference<Client>(init_client);
+            var project = client.GetByReference<Project>(init_project);
             var username = client.Administrator.Username;
             var password = client.Administrator.Password;
 
@@ -98,7 +72,9 @@ namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
             _password = client.Administrator.Password;
             _project = project.Name;
             UsersViewHasTheTabToSwitchToMigrationWaveView(_username, _password, _client, _project);
+
         }
+
 
         private void UsersViewHasTheTabToSwitchToMigrationWaveView(string username, string password, string client, string project)
         {
@@ -108,12 +84,16 @@ namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
                                         .ProjectSelect(project)
                                         .UsersEdit() 
                                         .GetPage<ManageUsersPage>();
-
-            
-            Assert.IsTrue(_manageUsersPage.MigrationWavesLinkIsVisible(), "Migration Waves Tab is not visible");
-            _manageUsersPage.OpenMigrationWavesTab();
-            Assert.IsTrue(_manageUsersPage.IsMigrationWavesTabOpen(), "Migration Waves Tab was not opened");
+           
          
+            //Verify migration Waves Tab is visible
+            Assert.IsTrue(_manageUsersPage.MigrationWaveTabIsVisible(), "Migration Waves Tab is not visible");
+            _manageUsersPage.SwichToMigrationWavesTab();
+
+            //Verify migration Waves Tab were opened
+            Assert.IsTrue(_manageUsersPage.CheckMigrationWavesTabOpen(), "Migration Waves Tab was not opened");
+            
+           
         }
     }
 

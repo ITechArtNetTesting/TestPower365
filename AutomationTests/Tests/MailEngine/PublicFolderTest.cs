@@ -477,19 +477,21 @@ namespace Product.Tests.MailEngine
         }
 
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("PublicFolder")]
-        [TestCategory("Permissions")]
-        public void PublicFolder_PS_Test30377()
-        {
-            var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
-            var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
-            var source2 = new KeyValuePair<string, object>("SecondSourcePermission", _sourceMailboxExtra2);
-            var target2 = new KeyValuePair<string, object>("SecondTargetPermission", _targetMailboxExtra2);
+        //There is no test case for this???
+        //[Ignore]
+        //[TestMethod]
+        //[TestCategory("MailEngine")]
+        //[TestCategory("PublicFolder")]
+        //[TestCategory("Permissions")]
+        //public void PublicFolder_PS_Test30377()
+        //{
+        //    var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
+        //    var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
+        //    var source2 = new KeyValuePair<string, object>("SecondSourcePermission", _sourceMailboxExtra2);
+        //    var target2 = new KeyValuePair<string, object>("SecondTargetPermission", _targetMailboxExtra2);
 
-            AssertPublicFolderSyncTestPasses("30377", PerformPublicFolderSync, source1, target1, source2, target2);
-        }
+        //    AssertPublicFolderSyncTestPasses("30377", PerformPublicFolderSync, source1, target1, source2, target2);
+        //}
 
         [TestMethod]
         [TestCategory("MailEngine")]
@@ -1256,7 +1258,12 @@ namespace Product.Tests.MailEngine
             }
             catch (RetryException)
             {
+                Log.Warn("Retry exception received, retrying...");
                 AssertTestPasses(_powerShell, testId, sourceFolderPath, userInterfaceActions, paramArray);
+            }
+            catch(Exception e)
+            {
+                Log.Error("Failed to Assert Test Passes", e);
             }
             finally
             {

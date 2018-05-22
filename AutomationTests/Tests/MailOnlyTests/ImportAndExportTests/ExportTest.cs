@@ -28,9 +28,9 @@ namespace Product.Tests.MailOnlyTests.ImportAndExportTests
 		    string groupMailbox3 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry3']/..//group");
 		    string sourceMailbox3 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//metaname[text()='entry3']/..//source");
 
-		    try
-		    {
-		        LoginAndSelectRole(login, password, client);
+            try
+            {
+                LoginAndSelectRole(login, password, client);
 		        SelectProject(projectName);
 		        User.AtProjectOverviewForm().OpenUsersList();
 		        User.AtUsersForm().SelectEntryBylocator(sourceMailbox1);
@@ -40,12 +40,7 @@ namespace Product.Tests.MailOnlyTests.ImportAndExportTests
 		        User.AtUsersForm().SelectEntryBylocator(sourceMailbox2);
 		        User.AtUsersForm().ExportUsers();
 		        RunConfigurator.CheckUsersExportFileIsDownloaded();
-		        User.AtUsersForm().SelectEntryBylocator(sourceMailbox2);
-		        User.AtUsersForm().OpenGroupFilter();
-		        User.AtUsersForm().SelectFilterGroup(groupMailbox3);
-		      
-		        User.AtUsersForm().CloseModalWindow();
-		        User.AtUsersForm().SelectEntryBylocator(sourceMailbox3);
+		        User.AtUsersForm().SelectEntryBylocator(sourceMailbox2);		  
 		        User.AtUsersForm().ExportUsers();
 		        RunConfigurator.CheckUsersExportFileIsDownloaded();
 		        User.AtUsersForm().PerformSearch(sourceMailbox1);
@@ -54,11 +49,11 @@ namespace Product.Tests.MailOnlyTests.ImportAndExportTests
 		        User.AtUsersForm().ExportUsers();
 		        RunConfigurator.CheckUsersExportFileIsDownloaded();
             }
-		    catch (Exception e)
-		    {
-		        LogHtml(Browser.GetDriver().PageSource);
+            catch (Exception e)
+            {
+                LogHtml(Browser.GetDriver().PageSource);
                 throw e;
             }
-		}
+        }
 	}
 }

@@ -38,7 +38,7 @@ function Invoke-Test30078 {
         $findFolderResults = $pfRoot.FindFolders($SfSearchFilter, $fvFolderView)  
         if ($findFolderResults.TotalCount -eq 0) {  
             Write-host ("Folder Doesn't Exist") 
-            $PermissiontoAdd = [Microsoft.Exchange.WebServices.Data.FolderPermissionLevel]::Reviewer  
+            $PermissiontoAdd = [Microsoft.Exchange.WebServices.Data.FolderPermissionLevel]::Owner  
             $newfp = new-object Microsoft.Exchange.WebServices.Data.FolderPermission($Script:SourceMailbox, $PermissiontoAdd)  
             $NewFolder.Permissions.Add($newfp)  
             $NewFolder.Save($pfRoot.Id)  

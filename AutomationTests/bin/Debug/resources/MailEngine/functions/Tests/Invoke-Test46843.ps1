@@ -2,9 +2,7 @@ function Invoke-Test46843 {
     param( 
         [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
-        [Parameter(Position = 6, Mandatory = $false)][switch]$RunDelta,
-		[Parameter(Mandatory = $true)][String]$RootPath,
-		[Parameter(Mandatory = $true)][String]$TargetRootPath
+        [Parameter(Position = 6, Mandatory = $false)][switch]$RunDelta
     )  
     Begin {
         $Data = "" | Select OrginalId, MovedId, NewId

@@ -24,18 +24,11 @@ namespace Product.Tests.MailOnlyTests.LandingPageTests
 		    string client = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/../name");
 		    string projectName = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project1']/..//name");
 
-		    try
-		    {
 		        LoginAndSelectRole(login, password, client);
 		        SelectProject(projectName);
 		        User.AtProjectOverviewForm().AssertAllContentBlocksArePresent();
 		        User.AtProjectOverviewForm().AssertConnectionsStatusesExist(1);
-            }
-		    catch (Exception e)
-		    {
-		        LogHtml(Browser.GetDriver().PageSource);
-                throw e;
-            }
+            
 		}
 	}
 }

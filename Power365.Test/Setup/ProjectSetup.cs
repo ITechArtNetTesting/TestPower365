@@ -53,7 +53,7 @@ namespace BinaryTree.Power365.Test.Setup
             
             var editProjectWorkflow = Automation.Browser
                 .CreateWorkflow<EmailWithFileProjectWorkflow, EditProjectPage>(editProjectPage);
-            
+
             var projectDetailsPage = editProjectWorkflow
                 .ProjectType(ProjectType.EmailByFile)
                 .ProjectName(projectName)

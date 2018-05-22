@@ -34,7 +34,7 @@ function Invoke-Validate37613c{
 			$session.Runspace.Dispose()
 			if($PermissionOkay){
 				$Script:TestResults["Test37613c"].ValidationResult = "Succeeded"
-				$Script:TestResults["Test37613c"].OverAllResult = "Successful"
+				$Script:TestResults["Test37613c"].OverAllResult = "Succeeded"  
 
 			}
 			else{

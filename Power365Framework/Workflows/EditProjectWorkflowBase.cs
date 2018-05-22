@@ -81,6 +81,16 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
             return GetWorkflow();
         }
 
+       public T MigrationWave(string migrationWave, bool isFinished = false)
+        {
+            EditProjectPage.SetMigrationWaveName(migrationWave);
+
+            if (isFinished)
+                ClickNext();
+
+            return GetWorkflow();
+        }
+
         public T AddMigrationWave(string migrationWave, bool isFinished = false)
         {
             EditProjectPage.AddMigrationWave(migrationWave);
@@ -91,7 +101,7 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
             return GetWorkflow();
         }
 
-       
+
         public T SelectMigrationWave(string migrationWave, bool isFinished = false)
         {
             EditProjectPage.SelectMigrationWave(migrationWave);
@@ -111,6 +121,7 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
 
             return GetWorkflow();
         }
+
         public T AddADGroup(string groupName, bool isFinished = false)
         {
             EditProjectPage.AddADGroupName(groupName);

@@ -422,8 +422,7 @@ namespace Product.Tests.PowerShellTests
 
             AssertSyncTestPasses("48974", PerformSync, source1, target1, source2, target2);
         }
-
-        //New
+        
         [TestMethod]
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
