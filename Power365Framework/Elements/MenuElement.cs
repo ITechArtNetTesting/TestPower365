@@ -12,6 +12,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
     {
         private static readonly By _locator = By.Id("hamburger");
         private By helpButton= By.XPath("//li//span[contains(@data-translation,'Help')]");
+        private By errorButton= By.XPath("//li//span[contains(text(),'Errors')]");
 
         private By _clientsComboBox = By.ClassName("dropdown");
 
@@ -50,7 +51,8 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
 
         public ErrorsPage ClickErrors()
         {
-            throw new NotImplementedException();
+            OpenMenu();
+            return ClickElementBy<ErrorsPage>(errorButton);            
         }
 
         public ProjectListPage SelectClient(string clientName)

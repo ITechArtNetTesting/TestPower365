@@ -20,7 +20,7 @@ namespace BinaryTree.Power365.Test.CommonTests
         private string _password;
         private string _projectName;
 
-        private ErrorsPage errorsPage;
+        private ErrorsPage atErrorsPage;        
 
         private void SetTestCaseParams(string clientName, string projectName)
         {
@@ -35,13 +35,37 @@ namespace BinaryTree.Power365.Test.CommonTests
         private void VerifyTheTabsOnTheManageErrorsPage(string client, string project)
         {
             SetTestCaseParams(client,project);
-            //errorsPage=Automation.Common
-            //    .SingIn(_username,_password)
-            //    .ClientSelect(_client)
-            //    .ProjectSelect(_projectName)
-            //    .GetPage<ProjectListPage>()
-            //    .Menu
-            //    .ClickErrors()
+            atErrorsPage = Automation.Common
+                .SingIn(_username, _password)
+                .ClientSelect(_client)
+                .ProjectSelect(_projectName)
+                .GetPage<ProjectDetailsPage>()
+                .Menu
+                .ClickErrors();                
+        }
+
+        [TestMethod]
+        [TestCategory("MailOnly")]
+        public void VerifyTheTabsOnTheManageErrorsPage_MO_34718()
+        {
+            VerifyTheTabsOnTheManageErrorsPage("client1", "project1");
+            Assert.IsTrue(atErrorsPage.UsersTenantsAreDisplayed());
+        }
+
+        [TestMethod]
+        [TestCategory("MailWithDiscovery")]
+        public void VerifyTheTabsOnTheManageErrorsPage_MD_34718()
+        {
+            VerifyTheTabsOnTheManageErrorsPage("client2", "project1");
+            Assert.IsTrue(atErrorsPage.UsersTenantsAreDisplayed());
+        }
+
+        [TestMethod]
+        [TestCategory("Integration")]
+        public void VerifyTheTabsOnTheManageErrorsPage_Integration_34718()
+        {
+            VerifyTheTabsOnTheManageErrorsPage("client2", "project2");
+            Assert.IsTrue(atErrorsPage.UsersGrpoupsTenantsAreDisplayed());
         }
     }
 }
