@@ -1354,6 +1354,7 @@
     <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30373.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30377.ps1" />
     <None Include="resources\MailEngine\functions\Validations\Invoke-Validate30378.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1469,6 +1470,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32267.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32282.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\MailEngine\functions\Validations\Invoke-Validate32268.ps1">
@@ -1686,6 +1690,15 @@
     </None>
     <None Include="resources\Rollback1.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\TestResultsPublisher.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\BuildStatusRelay.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\TestRunner.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\TestScript.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

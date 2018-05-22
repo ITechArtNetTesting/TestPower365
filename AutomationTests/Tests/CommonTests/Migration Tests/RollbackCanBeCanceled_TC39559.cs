@@ -62,7 +62,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
             }
             User.AtUsersForm().SyncFromDetails();
             User.AtUsersForm().ConfirmAction();
-            User.AtUsersForm().WaitForState_DetailPage(sourceMailbox, State.Syncing, 2400000, 10);
+            User.AtUsersForm().WaitForState_DetailPage(sourceMailbox, State.Syncing, 3000000, 10);
             User.AtUsersForm().WaitForState_DetailPage(sourceMailbox, State.Synced, 2400000, 10);
             User.AtUsersForm().Rollback();
             //Modal window       

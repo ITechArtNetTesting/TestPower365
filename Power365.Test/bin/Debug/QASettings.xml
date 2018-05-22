@@ -73,6 +73,13 @@
               <Group>Wave2</Group>
               <Profile>Profile 1</Profile>
             </UserMigration>
+            <UserMigration Reference="entry11">
+              <Source>C7O365SML14@btcorp7.onmicrosoft.com</Source>
+              <Target>C7O365SML14@btcorp9.onmicrosoft.com</Target>
+              <Group>Wave2</Group>
+              <Profile>Profile 1</Profile>
+            </UserMigration>     
+
           </UserMigrations>
           <Groups />
           <Files>
@@ -151,7 +158,7 @@
               <Target>c7-automation4@btcorp9.onmicrosoft.com</Target>
               <Group>Wave1</Group>
               <Profile>Profile 1</Profile>
-            </UserMigration>
+            </UserMigration>       
             <UserMigration Reference="entry1">
               <Source>C7O365SML20@btcorp7.onmicrosoft.com</Source>
               <Target>C7O365SML20@btcorp9.onmicrosoft.com</Target>
@@ -167,7 +174,14 @@
             <UserMigration Reference="entry4">
               <Source>C7O365SML26@btcorp7.onmicrosoft.com</Source>
               <Target>C7O365SML26@btcorp9.onmicrosoft.com</Target>
+            </UserMigration>           
+            
+             <UserMigration Reference="entry5">
+              <Source>C7O365SML26@btcorp7.onmicrosoft.com</Source>
+              <Target>C7O365SML26@btcorp9.onmicrosoft.com</Target>
             </UserMigration>
+            
+            
           </UserMigrations>
           <Groups>
             <Group Reference="adgroup1">
@@ -176,9 +190,23 @@
           </Groups>
           <Files />
         </Project>
-        <Project Reference="project2" Source="tenant5" Target="tenant6">
+            <Project Reference="project2" Source="tenant5" Target="tenant6">
           <Name>BT-AutoQA2-Project2</Name>
           <UserMigrations>
+            <UserMigration Reference="pfuser1">
+              <Source>P365PFAutoUser1@corp31.cmtsandbox.com</Source>
+              <Target>P365PFAutoUser1@corp32.cmtsandbox.com</Target>
+            </UserMigration>
+
+            <UserMigration Reference="pfuser2">
+              <Source>P365PFAutoUser2@corp31.cmtsandbox.com</Source>
+              <Target>P365PFAutoUser2@corp32.cmtsandbox.com</Target>
+            </UserMigration>
+
+            <UserMigration Reference="pfuser3">
+              <Source>P365PFAutoUser3@corp31.cmtsandbox.com</Source>
+              <Target>P365PFAutoUser4@corp32.cmtsandbox.com</Target>
+            </UserMigration>
             <UserMigration Reference="entry1">
               <Source>P365AutoRemoteMBX1@corp31.cmtsandbox.com</Source>
               <Target>P365AutoRemoteMBX1@corp32.cmtsandbox.com</Target>
@@ -211,6 +239,9 @@
             <UserMigration Reference="entry9">
               <Source>P365AutoRemoteEquip1@corp31.cmtsandbox.com</Source>
             </UserMigration>
+            <UserMigration Reference="entry10">
+              <Source>P365AutoRemoteMBX11@corp31.cmtsandbox.com</Source>
+            </UserMigration>           
           </UserMigrations>
           <Groups>
             <Group Reference="adgroup1">
@@ -281,12 +312,12 @@
               <Target>C7O365SML26@btcorp9.onmicrosoft.com</Target>
             </UserMigration>
           </UserMigrations>
-        </Project>
+        </Project>    
       </Projects>
     </Client>
   </Clients>
   <Tenants>
-    <Tenant Reference="tenant1">
+    <Tenant Reference="tenant1" Name="BT Corp7">
       <Credentials>
         <Credential Reference="cloud">
           <Username>C7O365Admin@btcorp7.onmicrosoft.com</Username>
@@ -346,9 +377,44 @@
       </Credentials>
       <PrimaryDomain>BTCorp11.onmicrosoft.com</PrimaryDomain>
     </Tenant>
+   <Tenant Reference="tenant5" Name="BTCloud7">
+      <Credentails>
+        <Credential Reference="cloud">
+          <Username>admin@BTCloud7.Power365.Cloud</Username>
+          <Password>Password31</Password>
+        </Credential>
+        <Credential Reference="local">
+          <Username>Corp31\administrator</Username>
+          <Password>Password31</Password>
+        </Credential>
+        <Credential Reference="pf1">
+          <Username>P365PFAutoUser1@corp31.cmtsandbox.com</Username>
+          <Password>Password1</Password>
+        </Credential>
+      </Credentails>
+      <PrimaryDomain>BTCorp31.onmicrosoft.com</PrimaryDomain>
+      <SecondaryDomain>corp31.cmtsandbox.com</SecondaryDomain>
+    </Tenant>
+    <Tenant Reference="tenant6">
+      <Credentails>
+        <Credential Reference="cloud">
+          <Username>admin@BTCloud9.Power365.Cloud</Username>
+          <Password>Password32</Password>
+        </Credential>
+        <Credential Reference="local">
+          <Username>Corp32\administrator</Username>
+          <Password>Password32</Password>
+        </Credential>
+        <Credential Reference="pf1">
+          <Username>P365PFAutoUser1@corp32.cmtsandbox.com</Username>
+          <Password>Password1</Password>
+        </Credential>
+      </Credentails>
+      <PrimaryDomain>BTCorp32.onmicrosoft.com</PrimaryDomain>
+      <SecondaryDomain>corp32.cmtsandbox.com</SecondaryDomain>
+    </Tenant>
   </Tenants>
   <BaseUrl>https://bt-qa-pa-web-ui.azurewebsites.net/</BaseUrl>
-  <CorrectHelpURL>https://help.binarytree.com/p365help/</CorrectHelpURL>
   <DownloadsPath>downloads</DownloadsPath>
   <ChromeDriverPath>resources</ChromeDriverPath>
   <O365PowerShellUrl>https://ps.outlook.com/powershell</O365PowerShellUrl>

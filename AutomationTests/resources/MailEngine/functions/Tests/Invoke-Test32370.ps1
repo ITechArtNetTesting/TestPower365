@@ -60,7 +60,7 @@ function Invoke-Test32370 {
             $data.Folder =  $RootPath + "\" + $FolderName + "\" + $FolderName2
             $jnJournal = New-Object Microsoft.Exchange.WebServices.Data.EmailMessage -ArgumentList $service  
                 #Set the Subject of the Note  
-            $jnJournal.Subject = "Journal : teset"
+            $jnJournal.Subject = "Journal : test"
              $jnJournal.ItemClass = "IPM.Activity"  
             #Set the Text body of the Note  
               
@@ -83,6 +83,8 @@ function Invoke-Test32370 {
             $NewId.Load($psPropertySet)  
             [Void]$NewId.TryGetProperty($PR_ENTRYID,[ref]$EntryIdVal)
             $data.MessageId = $EntryIdVal
+			$data.MessageSubject = $jnJournal.Subject
+
             $TestResults.Data = $data               
             $TestResults.TestResult = "Succeeded"
 		

@@ -716,7 +716,10 @@ namespace Product.Framework.Forms
 		{
 			Log.Info("Exporting");
 			ScrollToTheBottom();
-			enabledExportButton.Click();
+            WaitForAjaxLoad();         
+            SelectAction(ActionType.Export);
+            Apply();
+            ConfirmAction();
 		}
 
 		public void ConfirmSync()
@@ -2018,6 +2021,8 @@ namespace Product.Framework.Forms
         public void AssertState(State state)
         {
             string stateValue = state.GetValue();
+            if (state.GetValue().ToLower() == "synced")
+                stateValue = "complete";
 
             Log.Info($"Assert state {stateValue}");
             

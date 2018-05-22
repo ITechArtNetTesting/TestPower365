@@ -38,7 +38,7 @@ function Invoke-Test30099 {
         $findFolderResults = $pfRoot.FindFolders($SfSearchFilter, $fvFolderView)  
         if ($findFolderResults.TotalCount -eq 0) {  
             Write-host ("Folder Doesn't Exist") 
-            $PermissiontoAdd = [Microsoft.Exchange.WebServices.Data.FolderPermissionLevel]::Reviewer  
+            $PermissiontoAdd = [Microsoft.Exchange.WebServices.Data.FolderPermissionLevel]::Owner  
             $newfp = new-object Microsoft.Exchange.WebServices.Data.FolderPermission($Script:SourceMailbox, $PermissiontoAdd)  
             $NewFolder.Permissions.Add($newfp)  
             $NewFolder.Save($pfRoot.Id)  
@@ -79,7 +79,7 @@ function Invoke-Test30099 {
         Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
 
         # Invoke-P365MailboxCopy	-mappingfile $tfile	
-        $Folder = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ("\" + $RootPath + "\" + $FolderName)
+        $Folder = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ($RootPath + "\" + $FolderName)
         $NewFolder1.Load($psPropertySet)
         $PermissiontoAdd = [Microsoft.Exchange.WebServices.Data.FolderPermissionLevel]::None
         $newfp = new-object Microsoft.Exchange.WebServices.Data.FolderPermission 

@@ -40,3 +40,6 @@ D:\Git\TestPower365\Power365DirSync.Test\obj\Debug\Power365DirSync.Test.csprojRe
 D:\Git\TestPower365\Power365DirSync.Test\obj\Debug\Power365DirSync.Test.csproj.CoreCompileInputs.cache
 D:\Git\TestPower365\Power365DirSync.Test\obj\Debug\BinaryTree.Power365DirSync.Test.dll
 D:\Git\TestPower365\Power365DirSync.Test\obj\Debug\BinaryTree.Power365DirSync.Test.pdb
+D:\Git\TestPower365\Power365DirSync.Test\bin\Debug\nunit.framework.dll
+D:\Git\TestPower365\Power365DirSync.Test\bin\Debug\System.ValueTuple.dll
+D:\Git\TestPower365\Power365DirSync.Test\bin\Debug\TechTalk.SpecFlow.dll

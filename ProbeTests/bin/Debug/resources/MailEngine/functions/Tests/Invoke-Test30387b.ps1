@@ -51,7 +51,7 @@ function Invoke-Test30387b {
         Invoke-p365SyncPublicFolder -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
 	    Invoke-p365CopyPublicFolder -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
         # Invoke-P365MailboxCopy	-mappingfile $tfile	
-        $Folder = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ("\" + $RootPath + "\" + $FolderName)
+        $Folder = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ($RootPath + "\" + $FolderName)
         $TestResults = "" | Select TestCase, Description, TestLastRun, TestResult, Data, ValidationLastRun, ValidationResult, OverAllResult
         $TestResults.TestCase = "30387b"
         $TestResults.Description = "Fill Data"

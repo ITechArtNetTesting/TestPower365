@@ -97,6 +97,7 @@ namespace BinaryTree.Power365.Test.MailEngine
                 Automation.Common
                         .SingIn(_signInUser, _signInPassword)
                         .ClientSelect(_clientName)
+                        .ProjectSelect(_projectName)
                         .UsersEdit()
                         .UsersPerformAction(_sourceMailbox, ActionType.Sync)
                         .UsersValidateState(_sourceMailbox, StateType.Syncing)

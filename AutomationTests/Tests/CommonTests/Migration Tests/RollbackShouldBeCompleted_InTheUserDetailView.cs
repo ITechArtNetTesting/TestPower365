@@ -24,7 +24,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
         {
             bool isIntegrate = true;
             RollbackTest_InTheUserDetailView(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"), RunConfigurator.GetClient("client2"),
-                RunConfigurator.GetProjectName("client2", "project2"), RunConfigurator.GetSourceMailbox("client2", "project2", "entry18"), isIntegrate);
+                RunConfigurator.GetProjectName("client2", "project2"), RunConfigurator.GetSourceMailbox("client2", "project2", "entry21"), isIntegrate);
         }
 
         [TestMethod]
@@ -69,7 +69,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
             }
             User.AtUsersForm().SyncFromDetails();
             User.AtUsersForm().ConfirmAction();
-            User.AtUsersForm().WaitForState_DetailPage(sourceMailbox, State.Syncing, 2700000, 10);
+            User.AtUsersForm().WaitForState_DetailPage(sourceMailbox, State.Syncing, 3000000, 10);
             //Verify Action button since Syncing
             User.AtUsersForm().AssertRollBackIsDisabled();
             //Rollback

@@ -9,6 +9,8 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
 
         //@@@ REQ:ID
         private readonly By _usersEditLink = By.XPath("//div[contains(@data-bind, 'overallStatusViewModel')]//a[contains(@data-bind, 'totalLink')]//span");
+        private readonly By _publicFoldersEditLink = By.XPath("//*[contains(text(), 'Public folders')]/ancestor::div[contains(@class, 'ibox')]//div[contains(@class, 'ibox-content')]//a[contains(@data-bind, 'totalLink')]");
+        private readonly By _tenantsEditLink = By.XPath("//div[contains(@class, 'ibox-title')]//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'tenant')]]//ancestor::div[contains(@class, 'ibox-title')]//a");
 
         public ProjectDetailsPage(IWebDriver webDriver)
             : base(_locator, webDriver) { }
@@ -17,5 +19,15 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         {
             return ClickElementBy<ManageUsersPage>(_usersEditLink);
         }
-    }
+
+        public ManagePublicFoldersPage ClickPublicFoldersEdit()
+        {
+            return ClickElementBy<ManagePublicFoldersPage>(_publicFoldersEditLink);
+        }
+
+        public EditTenantsPage ClickTenantsEdit()
+        {
+            return ClickElementBy<EditTenantsPage>(_tenantsEditLink);
+        }
+}
 }

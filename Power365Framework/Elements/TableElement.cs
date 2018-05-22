@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using BinaryTree.Power365.AutomationFramework.Pages;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,31 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             if (!IsElementSelectedState(rowCheckbox, true))
                 throw new Exception("Failed to select row.");
         }
+
+        public PageBase DoubleClickRowByValue(string value, PageBase page)
+        {
+            if (value == null)
+                throw new ArgumentNullException("value");
+
+            var rowEntryLocator = string.Format(LowerCaseTextLocatorFormat, value.ToLowerInvariant());
+            var rowEntryInputAncestorLocator = string.Format("{0}{1}", rowEntryLocator, _rowInputAncestor);
+
+            var rowEntry = By.XPath(rowEntryLocator);
+           return DoubleClickElementBy<PageBase>(rowEntry);            
+        }
+
+        public By GetRowLocatorByValue(string value)
+        {
+            if (value == null)
+                throw new ArgumentNullException("value");
+
+            var rowEntryLocator = string.Format(LowerCaseTextLocatorFormat, value.ToLowerInvariant());
+            var rowEntryInputAncestorLocator = string.Format("{0}{1}", rowEntryLocator, _rowInputAncestor);
+
+            var rowEntry = By.XPath(rowEntryLocator);
+            return rowEntry;
+        }
+
 
         public bool RowHasValue(string entry, string value, int timeoutInSec = 5, int pollIntervalSec = 0)
         {

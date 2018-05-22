@@ -12,7 +12,7 @@ D:\Project\BTCloud\SeleniumTests\Power365Framework.Test\bin\Debug\WebDriver.Supp
 D:\Project\BTCloud\SeleniumTests\Power365Framework.Test\obj\Debug\Power365Framework.Test.csproj.CoreCompileInputs.cache
 D:\Project\BTCloud\SeleniumTests\Power365Framework.Test\obj\Debug\Power365Framework.Test.dll
 D:\Project\BTCloud\SeleniumTests\Power365Framework.Test\obj\Debug\Power365Framework.Test.pdb
-D:\Project\BTCloud\SeleniumTests\Power365Framework.Test\obj\Debug\Power365Framework.Test.csprojResolveAssemblyReference.cache
+d:\Project\BTCloud\SeleniumTests\Power365Framework.Test\obj\Debug\Power365Framework.Test.csprojResolveAssemblyReference.cache
 D:\Git\TestPower365\Power365Framework.Test\bin\Debug\Resources\chromedriver.exe
 D:\Git\TestPower365\Power365Framework.Test\bin\Debug\Power365Framework.Test.dll
 D:\Git\TestPower365\Power365Framework.Test\bin\Debug\Power365Framework.Test.pdb

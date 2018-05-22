@@ -49,7 +49,7 @@ function Invoke-Test32363 {
             $NewFolder1 = new-object Microsoft.Exchange.WebServices.Data.ContactsFolder($service)  
             $FolderName1 = "Test32363-" + (Get-Date).ToString("s")
             $NewFolder1.DisplayName = $FolderName1
-            $data.Folder = $RootPath + $FolderName + "\" + $FolderName1
+            $data.Folder = $RootPath + "\" + $FolderName + "\" + $FolderName1
             $NewFolder1.Save($NewFolder.Id)
 
              $jnJournal = New-Object Microsoft.Exchange.WebServices.Data.EmailMessage -ArgumentList $service  

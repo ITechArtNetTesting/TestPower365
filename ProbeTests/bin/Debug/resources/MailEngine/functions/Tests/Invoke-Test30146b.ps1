@@ -64,7 +64,7 @@ function Invoke-Test30146b {
         Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
 
         # Invoke-P365MailboxCopy	-mappingfile $tfile	
-        $Folder = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ("\" + $RootPath + "\" + $FolderName)
+        $Folder = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ($RootPath + "\" + $FolderName)
         $Folder.DisplayName = $FolderName + "-Renamed"
         $Folder.Update()        
         $data.Folder1 = ($RootPath + "\" + $FolderName)

@@ -26,6 +26,8 @@ namespace Product.Framework.Enums
         [Description("Add To Profile")]
         AddToProfile,
         [Description("Rollback")]
-        Rollback
+        Rollback,
+        [Description("Export")]
+        Export
     }
 }

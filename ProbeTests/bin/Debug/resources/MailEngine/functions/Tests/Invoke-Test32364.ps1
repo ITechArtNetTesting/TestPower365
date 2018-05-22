@@ -18,7 +18,7 @@ function Invoke-Test32364 {
 		
         $TestResults = "" | Select TestCase, Description, TestLastRun, TestResult, Data, ValidationLastRun, ValidationResult, OverAllResult
         $TestResults.TestCase = "32364"
-        $TestResults.Description = "Public Folder StickyNote"
+        $TestResults.Description = "Public Folder Journal Entry"
         $TestResults.TestLastRun = (Get-Date)
         $TestResults.TestResult = "Failed"
         Import-Module ($script:ModuleRoot + '\engine\btT2TPSModule.psd1') -Force
@@ -48,7 +48,7 @@ function Invoke-Test32364 {
             $NewFolder1 = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
             $FolderName1 = "Test32364-" + (Get-Date).ToString("s")
             $NewFolder1.DisplayName = $FolderName1
-            $data.Folder =  $RootPath + $FolderName + "\" + $FolderName1
+            $data.Folder =  $RootPath + "\" + $FolderName + "\" + $FolderName1
             $NewFolder1.Save($NewFolder.Id)
              $jnJournal = New-Object Microsoft.Exchange.WebServices.Data.EmailMessage -ArgumentList $service  
               #Set the Subject of the Note  
