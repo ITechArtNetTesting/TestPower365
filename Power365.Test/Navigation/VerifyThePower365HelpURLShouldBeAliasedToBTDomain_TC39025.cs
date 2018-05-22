@@ -32,11 +32,16 @@ namespace BinaryTree.Power365.Test.Navigation
             _password = client.Administrator.Password;
         }
 
-        [TestMethod]
-        public void VerifyThePower365HelpURLShouldBeAliasedToBTDomain()
+        [TestInitialize]
+        public void InitializeTest()
         {
             CorrectDomain = Automation.Settings.CorrectHelpURL;
             SetTestCaseParams("client1");
+        }
+
+        [TestMethod]
+        public void VerifyThePower365HelpURLShouldBeAliasedToBTDomain()
+        {           
             _basePage = Automation.Common
                 .SingIn(_username, _password)
                 .GetPage<PageBase>();
