@@ -47,6 +47,11 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
                 throw new Exception("Could not Open Menu");
         }
 
+        public ErrorsPage ClickErrors()
+        {
+            throw new NotImplementedException();
+        }
+
         public ProjectListPage SelectClient(string clientName)
         {
             if(!IsElementVisible(_clientsComboBox, 1))
