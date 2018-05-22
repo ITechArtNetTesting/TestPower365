@@ -80,6 +80,7 @@
     <Compile Include="CommonTests\VerifyLogsButtonOnTheTenantManagementWillDownloadTenantDiscoveryLog_TC25773.cs" />
     <Compile Include="MailEngine\MailEngineTestBase.cs" />
     <Compile Include="MailEngine\PublicFolderTest.cs" />
+    <Compile Include="Navigation\VerifyThePower365HelpURLShouldBeAliasedToBTDomain_TC39025.cs" />
     <Compile Include="SampleTest.cs" />
     <Compile Include="Services\MailEngineService.cs" />
     <Compile Include="MailEngine\AddTest.cs" />

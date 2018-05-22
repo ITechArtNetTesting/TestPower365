@@ -328,6 +328,7 @@ namespace BinaryTree.Power365.AutomationFramework
         public int TimeoutSec { get; set; }
         public string Browser { get; set; }
         public string Bitness { get; set; }
+        public string CorrectHelpURL { get; set; }
 
         public Settings()
         {
