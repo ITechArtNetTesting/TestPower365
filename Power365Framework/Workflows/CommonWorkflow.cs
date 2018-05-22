@@ -43,18 +43,13 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
             CurrentPage = projectDetailsPage.ClickUsersEdit();
             return this;
         }
-
-        public CommonWorkflow TenantsEdit()
-        {
-            var projectDetailsPage = GetCurrentPage<ProjectDetailsPage>();
-            CurrentPage = projectDetailsPage.ClickTenantsEdit();
-            return this;
-        }
-
+        
         public CommonWorkflow UsersPerformAction(string user, ActionType action, bool isYes = true)
         {
             if (action == ActionType.Rollback)
                 throw new Exception("User method UsersPerformRollback.");
+            if (action == ActionType.AddToWave)
+                throw new Exception("User method UsersPerformAddToWave.");
 
             var manageUsersPage = GetCurrentPage<ManageUsersPage>();
             manageUsersPage.Users.ClickRowByValue(user);
@@ -63,12 +58,42 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
             return this;
         }
 
+        public CommonWorkflow WavesPerformAction(string wave, ActionType action, bool isYes = true)
+        {
+            if (action == ActionType.Rollback)
+                throw new Exception("User method UsersPerformRollback.");
+            if (action == ActionType.AddToWave)
+                throw new Exception("User method UsersPerformAddToWave.");
+
+            var manageUsersPage = GetCurrentPage<ManageUsersPage>();
+            manageUsersPage.Waves.ClickRowByValue(wave);
+            manageUsersPage.PerformAction(action);
+            manageUsersPage.ConfirmAction(isYes);
+            return this;
+        }
+        public CommonWorkflow UsersFindAndPerformAction(string user, ActionType action, bool isYes = true)
+        {
+            var manageUsersPage = GetCurrentPage<ManageUsersPage>();
+            manageUsersPage.PerformSearch(user);
+            return UsersPerformAction( user, action, isYes );
+        }
+
         public CommonWorkflow UsersPerformRollback(string user, bool resetPermissions = true)
         {
             var manageUsersPage = GetCurrentPage<ManageUsersPage>();
             manageUsersPage.Users.ClickRowByValue(user);
             manageUsersPage.PerformAction(ActionType.Rollback);
             manageUsersPage.ConfirmRollback(resetPermissions);
+            return this;
+        }
+
+        public CommonWorkflow UsersPerformAddToWave(string user, string waveName )
+        {
+            var manageUsersPage = GetCurrentPage<ManageUsersPage>();
+            manageUsersPage.PerformSearch(user);
+            manageUsersPage.Users.ClickRowByValue(user);
+            manageUsersPage.PerformAction(ActionType.AddToWave);
+            manageUsersPage.SelectWave(waveName);         
             return this;
         }
 
@@ -106,6 +131,20 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
             return this;
         }
 
- 
+        public CommonWorkflow PublicFoldersEdit()
+        {
+            var projectDetailsPage = GetCurrentPage<ProjectDetailsPage>();
+            CurrentPage = projectDetailsPage.ClickPublicFoldersEdit();
+            return this;
+        }
+
+        public CommonWorkflow PublicFoldersPerformAction(string folder, ActionType action, bool isYes = true)
+        {
+            var managePublicfoldersPage = GetCurrentPage<ManagePublicFoldersPage>();
+            managePublicfoldersPage.PublicFolders.ClickRowByValue(folder);
+            managePublicfoldersPage.PerformAction(action);
+            managePublicfoldersPage.ConfirmAction(isYes);
+            return this;
+        }
     }
 }

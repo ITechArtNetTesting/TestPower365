@@ -6,9 +6,7 @@ function Invoke-Test34507 {
         [Parameter(Position = 3, Mandatory = $false)] [String]$SecondSourcePermission,
         [Parameter(Position = 4, Mandatory = $true)] [String]$FirstTargetPermission,
         [Parameter(Position = 5, Mandatory = $false)] [String]$SecondTargetPermission,
-        [Parameter(Position = 6, Mandatory = $false)][switch]$RunDelta,
-		[Parameter(Mandatory = $true)][String]$RootPath,
-		[Parameter(Mandatory = $true)][String]$TargetRootPath
+        [Parameter(Position = 6, Mandatory = $false)][switch]$RunDelta
     )  
     Begin {
         $Data = "" | Select OrginalId, MovedId, NewId

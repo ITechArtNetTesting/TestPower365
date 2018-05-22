@@ -14,8 +14,9 @@ function Invoke-Validate30518{
 			if($Message -ne $null){	
 				$Message.Load()
 				$Message.TimeZone
-				$Message.TimeZone.ToString()
-				if($Message.TimeZone.ToString() -eq "Utc"){
+				$tzone = $Message.TimeZone.ToString()
+				Write-Host "TimeZone: $tzone"
+				if($tzone -eq "(UTC) Coordinated Universal Time"){
 		
 				$Script:TestResults["Test30518"].ValidationResult = "Succeeded"
 				$Script:TestResults["Test30518"].OverAllResult = "Succeeded"  

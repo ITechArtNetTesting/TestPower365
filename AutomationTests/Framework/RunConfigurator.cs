@@ -270,14 +270,15 @@ namespace Product.Framework
 		{
 			for (var i = 0; i < 30; i++)
 			{
-				if (File.Exists(DownloadPath+"users.csv"))
-				{
+                if (Directory.EnumerateFiles(DownloadPath, "user-migrations*.csv").Any())
+                 {
 					break;
 				}
 				Thread.Sleep(1000);
 			}
-			Assert.IsTrue(File.Exists(DownloadPath+"users.csv"), "File is not downloaded");
-			File.Delete(DownloadPath+"users.csv");
+            Assert.IsTrue(Directory.EnumerateFiles(DownloadPath, "user-migrations*.csv").Any(), "File is not downloaded");
+            FileInfo file = new FileInfo(Directory.EnumerateFiles(DownloadPath, "user-migrations*.csv").First());           
+            file.Delete();
 		}
 
 		public static void ClearDownloads()

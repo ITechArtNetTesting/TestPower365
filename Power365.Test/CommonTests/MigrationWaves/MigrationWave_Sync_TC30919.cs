@@ -1,4 +1,5 @@
 ﻿using BinaryTree.Power365.AutomationFramework;
+using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Pages;
 using BinaryTree.Power365.AutomationFramework.Workflows;
 using log4net;
@@ -17,6 +18,7 @@ namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
         private string _username;
         private string _project;
         private string _password;
+        private string _userMigration;
         private ManageUsersPage _manageUsersPage;
 
        [TestInitialize]
@@ -30,14 +32,14 @@ namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
             var sourceTenant = Automation.Settings.GetByReference<Tenant>(project.Source);
             var targetTenant = Automation.Settings.GetByReference<Tenant>(project.Target);
 
-            //var userMigration1 = project.GetByReference<UserMigration>("entry3");
+            var userMigration = project.GetByReference<UserMigration>("entry10").Source;
             //var userMigration2 = project.GetByReference<UserMigration>("entryps1");
 
             _client = client.Name;
             _username = client.Administrator.Username;
             _password = client.Administrator.Password;
             _project = project.Name;
-
+            _userMigration = userMigration;
             //_sourceAdminUser = sourcePowershellUser.Username;
             //_sourceAdminPassword = sourcePowershellUser.Password;
 
@@ -57,34 +59,62 @@ namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
                                         .ClientSelect(_client)
                                         .ProjectSelect(_project)
                                         .UsersEdit()
+                                        //.UsersPerformAction(user, ActionType.Sync)
+                                        //.UsersValidateState(user, StateType.Syncing)
+                                        //.UsersValidateState(user, StateType.Synced)
                                         .GetPage<ManageUsersPage>();
+           
+            _manageUsersPage.SwichToMigrationWavesTab();
+           
+           
 
-            _manageUsersPage.OpenMigrationWavesTab();
-           var editProjectPage = _manageUsersPage.ClickNewMigrationWave();
+            var editProjectPage = _manageUsersPage.clickNewWaveButton();
 
 
-           var editProjectWorkflow = Automation.Browser
-                .CreateWorkflow<IntegrationProjectWorkflow, EditProjectPage>(editProjectPage);
+            var editProjectWorkflow = Automation.Browser
+                 .CreateWorkflow<IntegrationProjectWorkflow, EditProjectPage>(editProjectPage);
 
-            editProjectWorkflow.AddMigrationWave("TC_30919", true)
+            var projectDetailsPage = editProjectWorkflow.AddMigrationWave("TC_30919", true)
                 .SelectTenantMachGroup(true)
                 .AddADGroup("P365AutoGrp1", true)
                 .GetPage<ManageUsersPage>();
 
-            _manageUsersPage.OpenUsersTab();
+            _manageUsersPage.SwichToUsersTab();
+            _manageUsersPage = Automation.Common
+                .UsersFindAndPerformAction(_userMigration,ActionType.AddToWave)
+                .GetPage<ManageUsersPage>();
+           
+
+            //_manageUsersPage.UsersPerformAction(_userMigration, ActionType.Sync);
+            //UsersValidateState(user, StateType.Syncing)
+            //          .UsersValidateState(user, StateType.Synced)
+            //          .GetPage<ManageUsersPage>();
+
+            _manageUsersPage.SwichToMigrationWavesTab();
+            _manageUsersPage = Automation.Common
+                .UsersPerformAddToWave(_userMigration, "TC_30919")
+                .GetPage<ManageUsersPage>();
+
+            _manageUsersPage.SwichToMigrationWavesTab();
+            _manageUsersPage.Waves.ClickRowByValue("TC_30919");
+
+            _manageUsersPage = Automation.Common
+                .WavesPerformAction("TC_30919",)
+                .GetPage<ManageUsersPage>();
 
 
-            var projectDetailsPage = editProjectWorkflow
-               
-                    .ProjectType(ProjectType.EmailByFile)
-                     //.ProjectName(projectName)
-            //            .ProjectDescription(projectDescription)
-            //            .AddTenant(sourceTenantUser, sourceTenantPassword)
-            //            .AddTenant(targetTenantUser, targetTenantPassword, true)
-            //            .UploadUserList(uploadFilePath)
-            //            .SyncSchedule(false)
-            //            .Submit()
-                       .GetPage<ProjectDetailsPage>();
+            //var projectDetailsPage = editProjectWorkflow
+            //    .ProjectType(ProjectType.Integration)
+            //    .AddMigrationWave
+            //    .ProjectDescription(projectDescription)
+            //    .AddTenant(sourceTenantUser, sourceTenantPassword)
+            //    .AddTenant(targetTenantUser, targetTenantPassword, true)
+            //    .UploadUserList(uploadFilePath)
+            //    .SyncSchedule(false)
+            //    .Submit()
+            //    .GetPage<ProjectDetailsPage>();
+
+
 
         }
 

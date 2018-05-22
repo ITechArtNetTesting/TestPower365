@@ -44,8 +44,8 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
                 LoginAndSelectRole(userName, password, client);
                 SelectProject(project);
                 User.AtProjectOverviewForm().OpenUsersList();
-            User.AtUsersForm().PerformSearch(sourceMailbox9);
-            User.AtUsersForm().PerfomActionForUser(sourceMailbox9, Framework.Enums.ActionType.Sync);
+                User.AtUsersForm().PerformSearch(sourceMailbox9);
+                 User.AtUsersForm().PerfomActionForUser(sourceMailbox9, Framework.Enums.ActionType.Sync);
                 User.AtUsersForm().ConfirmSync();
                 User.AtUsersForm().OpenDetailsByLocator(sourceMailbox9);
                 User.AtUsersForm().WaitForState_DetailPage(sourceMailbox9, State.Synced, 900000, 10);

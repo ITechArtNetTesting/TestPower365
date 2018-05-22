@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using UI = OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
+using System.Collections.Generic;
 using OpenQA.Selenium.Interactions;
 
 namespace BinaryTree.Power365.AutomationFramework.Elements
@@ -40,7 +41,12 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
 
             return new DisposablePopupPage<T>(currentWindowHandle, WebDriver);
         }
-        
+
+        //protected IWebElement GetElementBy(By by)
+        //{
+        //   return WebDriver.FindElement(by);          
+        //}
+
         protected void ClickElementBy(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
             var clickableElement = FindClickableElement(by, timeoutInSec, pollIntervalSec);
@@ -54,17 +60,20 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             return (T)Activator.CreateInstance(typeof(T), WebDriver);
         }
 
-        protected void HowerElement(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
+        protected T DoubleClickElementBy<T>(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
+             where T : PageBase
         {
-            var element = FindExistingElement(by, 20, 1);
-            new Actions(WebDriver).MoveToElement(element).Build().Perform();
+            var clickableElement = FindClickableElement(by, timeoutInSec, pollIntervalSec);
+            new Actions(WebDriver).DoubleClick(clickableElement).Build().Perform();
+            return (T)Activator.CreateInstance(typeof(T), WebDriver);
+
         }
-        
+
         protected IWebElement FindExistingElement(By by, int timeoutInSeconds = 5, int pollIntervalSec = 0)
         {
             return EvaluateElement(by, ExpectedConditions.ElementExists(by), timeoutInSeconds, pollIntervalSec);
         }
-
+        
         protected IWebElement FindVisibleElement(By by, int timeoutInSeconds = 5, int pollIntervalSec = 0)
         {
             return EvaluateElement(by, ExpectedConditions.ElementIsVisible(by), timeoutInSeconds, pollIntervalSec);

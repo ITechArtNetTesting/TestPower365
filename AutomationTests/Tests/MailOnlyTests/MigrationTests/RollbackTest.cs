@@ -19,7 +19,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
             _testContext = testContext;
         }
         [TestMethod]
-        [TestCategory("MailOnly")]
+        [TestCategory("MailWithDiscovery")]
         [TestCategory("UI")]
         public void Automation_MO_RollbackTest()
         {
