@@ -8,16 +8,12 @@ function Invoke-Validate32370{
 		
 		if($Script:TestResults.ContainsKey("Test32370")){
 			$Script:TestResults["Test32370"].ValidationResult = "Failed"	
-			$Script:TestResults["Test32370"].OverAllResult = "Failed"	
-			$Script:TestResults["Test32370"].Data.Folder3
+			$Script:TestResults["Test32370"].OverAllResult = "Failed"
 	    	$Message =  Invoke-P365FindPublicFolderMessage -FolderPath $Script:TestResults["Test32370"].Data.Folder -MessageId $Script:TestResults["Test32370"].Data.MessageId -TargetMailbox
-			if($Message -ne $null){
-				$Message.Load()
-				if($Message.Categories.Contains("test12345")){				
-						$Script:TestResults["Test32370"].ValidationResult = "Succeeded"
-						$Script:TestResults["Test32370"].OverAllResult = "Succeeded"  					
-				}
 
+			if($Message -ne $null){
+				$Script:TestResults["Test32370"].ValidationResult = "Succeeded"
+				$Script:TestResults["Test32370"].OverAllResult = "Succeeded"
 			}
 			else{
 				$Script:TestResults["Test32370"].ValidationResult = "Failed"	

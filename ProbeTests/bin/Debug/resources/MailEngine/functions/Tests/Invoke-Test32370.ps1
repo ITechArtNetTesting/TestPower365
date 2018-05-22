@@ -50,17 +50,17 @@ function Invoke-Test32370 {
             $FolderName1 = "Test32370-" + (Get-Date).ToString("s")
             $NewFolder1.DisplayName = $FolderName1
             $NewFolder1.FolderClass = "IPF.Journal"
-            $data.Folder =  $RootPath + $FolderName + "\" + $FolderName1
+            $data.Folder =  $RootPath + "\" + $FolderName + "\" + $FolderName1
             $NewFolder1.Save($NewFolder.Id)
             $NewFolder2 = new-object Microsoft.Exchange.WebServices.Data.Folder($service)  
             $FolderName2 = "Test323702-" + (Get-Date).ToString("s")
             $NewFolder2.DisplayName = $FolderName2
             $NewFolder2.FolderClass = "IPF.Journal"
             $NewFolder2.Save($NewFolder.Id)
-            $data.Folder =  $RootPath + $FolderName + "\" + $FolderName2
+            $data.Folder =  $RootPath + "\" + $FolderName + "\" + $FolderName2
             $jnJournal = New-Object Microsoft.Exchange.WebServices.Data.EmailMessage -ArgumentList $service  
                 #Set the Subject of the Note  
-            $jnJournal.Subject = "Journal : teset"
+            $jnJournal.Subject = "Journal : test"
              $jnJournal.ItemClass = "IPM.Activity"  
             #Set the Text body of the Note  
               
@@ -83,6 +83,8 @@ function Invoke-Test32370 {
             $NewId.Load($psPropertySet)  
             [Void]$NewId.TryGetProperty($PR_ENTRYID,[ref]$EntryIdVal)
             $data.MessageId = $EntryIdVal
+			$data.MessageSubject = $jnJournal.Subject
+
             $TestResults.Data = $data               
             $TestResults.TestResult = "Succeeded"
 		
