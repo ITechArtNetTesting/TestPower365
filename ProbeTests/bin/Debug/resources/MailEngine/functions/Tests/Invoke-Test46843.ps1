@@ -2,9 +2,7 @@ function Invoke-Test46843 {
     param( 
         [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
-        [Parameter(Position = 6, Mandatory = $false)][switch]$RunDelta,
-		[Parameter(Mandatory = $true)][String]$RootPath,
-		[Parameter(Mandatory = $true)][String]$TargetRootPath
+        [Parameter(Position = 6, Mandatory = $false)][switch]$RunDelta
     )  
     Begin {
         $Data = "" | Select OrginalId, MovedId, NewId
@@ -59,7 +57,7 @@ function Invoke-Test46843 {
        # Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
 
         #Invoke-P365MailboxCopy	-mappingfile $tfile	
-       # $Folder = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ("\" + $RootPath + "\" + $FolderName)
+       # $Folder = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ($RootPath + "\" + $FolderName)
         $TestResults = "" | Select TestCase, Description, TestLastRun, TestResult, Data, ValidationLastRun, ValidationResult, OverAllResult
         $TestResults.TestCase = "46843"
         $TestResults.Description = "Folder Permission"

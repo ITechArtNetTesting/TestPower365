@@ -434,14 +434,20 @@
             </entry>
             <entry>
               <metaname>entry19</metaname>
-              <source>P365PFAutoUser4@corp31.cmtsandbox.com</source>
-              <target>P365PFAutoUser4@corp32.cmtsandbox.com</target>
+              <source>P365AutoRemoteMBX12@corp31.cmtsandbox.com</source>
+              <target>P365AutoRemoteMBX12@corp32.cmtsandbox.com</target>
             </entry>           
             <entry>
               <metaname>entry20</metaname>
               <source>P365PFAutoUser5@corp31.cmtsandbox.com</source>
               <target>P365PFAutoUser5@corp32.cmtsandbox.com</target>
+            </entry>                   
+            <entry>
+              <metaname>entry21</metaname>
+              <source>P365AutoRemoteMBX13@corp31.cmtsandbox.com</source>
+              <target>P365AutoRemoteMBX13@corp32.cmtsandbox.com</target>
             </entry>
+                       
             <entry>
               <metaname>mailboxreset</metaname>
               <prefixArray>P365AutoRemote|P365AutoSAM</prefixArray>
