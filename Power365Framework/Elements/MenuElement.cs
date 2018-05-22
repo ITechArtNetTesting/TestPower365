@@ -97,7 +97,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         public HelpPage ClickHelp()
         {
             OpenMenu();
-            return ClickElementThatOpensLastWindowBy<HelpPage>(helpButton);
+            return ClickElementThatOpensNewWindowBy<HelpPage>(helpButton);
         }
 
         public HomePage ClickSignOut()

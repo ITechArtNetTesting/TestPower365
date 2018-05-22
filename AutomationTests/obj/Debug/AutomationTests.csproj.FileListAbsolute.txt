@@ -955,14 +955,11 @@ D:\Git\TestPower365\AutomationTests\bin\Debug\resources\ThreeTenants.csv
 D:\Git\TestPower365\AutomationTests\bin\Debug\AutomationTests.dll.config
 D:\Git\TestPower365\AutomationTests\bin\Debug\AutomationTests.dll
 D:\Git\TestPower365\AutomationTests\bin\Debug\AutomationTests.pdb
-D:\Git\TestPower365\AutomationTests\bin\Debug\log4net.dll
 D:\Git\TestPower365\AutomationTests\bin\Debug\Microsoft.Exchange.WebServices.dll
-D:\Git\TestPower365\AutomationTests\bin\Debug\Selenium.WebDriverBackedSelenium.dll
 D:\Git\TestPower365\AutomationTests\bin\Debug\System.Management.Automation.dll
 D:\Git\TestPower365\AutomationTests\bin\Debug\T2TMigrationTestUtil.dll
 D:\Git\TestPower365\AutomationTests\bin\Debug\ThoughtWorks.Selenium.Core.dll
 D:\Git\TestPower365\AutomationTests\bin\Debug\WebDriver.dll
-D:\Git\TestPower365\AutomationTests\bin\Debug\WebDriver.Support.dll
 D:\Git\TestPower365\AutomationTests\bin\Debug\DiffPlex.dll
 D:\Git\TestPower365\AutomationTests\bin\Debug\log4net.xml
 D:\Git\TestPower365\AutomationTests\bin\Debug\Selenium.WebDriverBackedSelenium.xml

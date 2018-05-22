@@ -269,7 +269,6 @@ D:\Git\TestPower365\Power365.Test\bin\Debug\BinaryTree.Power365.Test.dll
 D:\Git\TestPower365\Power365.Test\bin\Debug\BinaryTree.Power365.Test.pdb
 D:\Git\TestPower365\Power365.Test\bin\Debug\BinaryTree.Power365.AutomationFramework.dll
 D:\Git\TestPower365\Power365.Test\bin\Debug\log4net.dll
-D:\Git\TestPower365\Power365.Test\bin\Debug\nunit.framework.dll
 D:\Git\TestPower365\Power365.Test\bin\Debug\System.Management.Automation.dll
 D:\Git\TestPower365\Power365.Test\bin\Debug\WebDriver.dll
 D:\Git\TestPower365\Power365.Test\bin\Debug\WebDriver.Support.dll

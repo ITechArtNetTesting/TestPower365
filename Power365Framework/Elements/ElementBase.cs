@@ -54,7 +54,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             return (T)Activator.CreateInstance(typeof(T), WebDriver);
         }
 
-        protected T ClickElementThatOpensLastWindowBy<T>(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
+        protected T ClickElementThatOpensNewWindowBy<T>(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
             where T : PageBase
         {
             ClickElementBy(by, timeoutInSec, pollIntervalSec);

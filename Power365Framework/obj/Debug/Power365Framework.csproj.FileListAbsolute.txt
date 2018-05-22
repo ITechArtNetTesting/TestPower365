@@ -14,8 +14,6 @@ D:\Git\TestPower365\Power365Framework\bin\Debug\Resources\chromedriver.exe
 D:\Git\TestPower365\Power365Framework\bin\Debug\BinaryTree.Power365.AutomationFramework.dll
 D:\Git\TestPower365\Power365Framework\bin\Debug\BinaryTree.Power365.AutomationFramework.pdb
 D:\Git\TestPower365\Power365Framework\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-D:\Git\TestPower365\Power365Framework\bin\Debug\SeleniumExtras.WaitHelpers.dll
-D:\Git\TestPower365\Power365Framework\bin\Debug\WebDriver.dll
 D:\Git\TestPower365\Power365Framework\bin\Debug\WebDriver.Support.dll
 D:\Git\TestPower365\Power365Framework\bin\Debug\WebDriver.xml
 D:\Git\TestPower365\Power365Framework\bin\Debug\WebDriver.Support.xml
