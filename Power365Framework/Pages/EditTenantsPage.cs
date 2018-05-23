@@ -66,31 +66,30 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             }
         }
 
-        public void DisableTenant(string tenant)
+        public void DisableEnableTenant(string tenant,bool isDisable)
         {
-            By tenantEnable = By.XPath(string.Format(tenantEnableXPath, tenant));
+            if (isDisable)
+            {
+                doDisableEnable(tenantEnableXPath, tenantDisableXPath, tenant);
+            }
+            else
+            {
+                doDisableEnable(tenantDisableXPath, tenantEnableXPath, tenant);
+            }
+        }
+
+        private void doDisableEnable(string input,string output,string tenant)
+        {
+            By tenantEnable = By.XPath(string.Format(input, tenant));
             if (IsElementExists(tenantEnable))
             {
                 HowerElement(tenantEnable);
                 ClickElementBy(tenantEnable);
             }
-            By tenantDisable = By.XPath(string.Format(tenantDisableXPath, tenant));
+            By tenantDisable = By.XPath(string.Format(output, tenant));
             HowerElement(tenantDisable);
             ClickElementBy(tenantDisable);
-        }
-
-        public void EnableTenant(string tenant)
-        {
-            By tenantDisable = By.XPath(string.Format(tenantDisableXPath, tenant));
-            if (IsElementExists(tenantDisable))
-            {
-                HowerElement(tenantDisable);
-                ClickElementBy(tenantDisable);
-            }
-            By tenantEnable = By.XPath(string.Format(tenantEnableXPath, tenant));
-            HowerElement(tenantEnable);
-            ClickElementBy(tenantEnable);
-        }
+        }    
 
         public bool CheckTenantCanBeDisabled(string tenant)
         {
@@ -103,5 +102,5 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             By tenantDisable = By.XPath(string.Format(tenantDisableXPath, tenant));
             return IsElementExists(tenantDisable, 300, 5);
         }
-    }
+    }    
 }

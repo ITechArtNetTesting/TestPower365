@@ -164,6 +164,7 @@ namespace BinaryTree.Power365.AutomationFramework
     public class Tenant : Referential
     {
         public List<Credential> Credentials { get; set; }
+        [XmlAttribute]
         public string Name { get; set; }
         public string PrimaryDomain { get; set; }
         public string SecondaryDomain { get; set; }

@@ -39,16 +39,20 @@ namespace BinaryTree.Power365.Test.CommonTests.Discovery
                 .TenantsEdit()
                 .GetPage<EditTenantsPage>();
             tenantsEditPage.ClickDiscoveryTab();
-            Assert.IsTrue(discoveryCanBeDisabledAndEnabled());
+            Assert.IsTrue(discoveryCanBeDisabled());
+            Assert.IsTrue(discoveryCanBeEnabled());
         }
 
-        private bool discoveryCanBeDisabledAndEnabled()
+        private bool discoveryCanBeDisabled()
         {            
-            tenantsEditPage.DisableTenant(_tenant);
-            bool EnabledResult= tenantsEditPage.CheckTenantCanBeDisabled(_tenant);
-            tenantsEditPage.EnableTenant(_tenant);
-            bool DisabledResult = tenantsEditPage.CheckTenantCanBeEnabled(_tenant);
-            return DisabledResult&&EnabledResult;
+            tenantsEditPage.DisableEnableTenant(_tenant,true);
+            return tenantsEditPage.CheckTenantCanBeDisabled(_tenant);          
+        }
+
+        private bool discoveryCanBeEnabled()
+        {
+            tenantsEditPage.DisableEnableTenant(_tenant, false);
+            return tenantsEditPage.CheckTenantCanBeEnabled(_tenant);
         }
 
         [TestMethod]
