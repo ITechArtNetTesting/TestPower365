@@ -5,7 +5,8 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
     public abstract class WizardWorkflow : WorkflowBase
     {
         private readonly By _backButton = By.ClassName("btn-back");
-        private readonly By _nextButton = By.ClassName("btn-next");
+        //private readonly By _nextButton = By.ClassName("btn-next");
+        private readonly By _nextButton = By.XPath("//div[@class='modal-content']//*[contains(@class, 'btn-next')]");
 
         protected WizardWorkflow(PageBase rootPage, IWebDriver webDriver)
             : base(rootPage, webDriver) { }
