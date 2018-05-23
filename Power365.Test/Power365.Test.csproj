@@ -79,6 +79,7 @@
     <Compile Include="CommonTests\MigrationWaves\UsersViewHasTheTabToSwitchToMigrationWaveView_TC30917.cs" />
     <Compile Include="CommonTests\Migration\SubmittingDeltaSyncJobForASyncedUser_TC23091.cs" />
     <Compile Include="CommonTests\UITestBase.cs" />
+    <Compile Include="CommonTests\VerifyTheTabsOnTheManageErrorsPage_TC34718.cs" />
     <Compile Include="MailEngine\MailEngineTestBase.cs" />
     <Compile Include="MailEngine\PublicFolderTest.cs" />
     <Compile Include="Navigation\HelpURLShouldBeAliasedToBTDomain_TC39025.cs" />
