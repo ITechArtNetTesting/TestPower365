@@ -58,7 +58,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
                 User.AtUsersForm().PrepareFromDetails();
                 User.AtUsersForm().ConfirmAction();
                 User.AtUsersForm().WaitForState_DetailPage(sourceMailbox, State.Preparing, 2400000, 10);
-                User.AtUsersForm().WaitForState_DetailPage(sourceMailbox, State.Prepared, 2400000, 30);              
+                User.AtUsersForm().WaitForState_DetailPage(sourceMailbox, State.Prepared, 3600000, 30);              
             }
             User.AtUsersForm().SyncFromDetails();
             User.AtUsersForm().ConfirmAction();

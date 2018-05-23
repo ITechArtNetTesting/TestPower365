@@ -66,7 +66,7 @@
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Pages\EditProjectPage.cs" />
     <Compile Include="Pages\EditTenantsPage.cs" />
-    <Compile Include="Pages\ErrorsPage.cs" />
+    <Compile Include="Pages\EditWavePage.cs" />
     <Compile Include="Pages\HelpPage.cs" />
     <Compile Include="Pages\LicensesPage.cs" />
     <Compile Include="Pages\DisposablePopupPage.cs" />

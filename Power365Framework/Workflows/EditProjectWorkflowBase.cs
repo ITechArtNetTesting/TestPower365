@@ -151,7 +151,7 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
             : base(editProjectPage, webDriver) { }
     }
 
-    public class EmailWithDiscoveryProjectWorkflow : EditProjectWorkflowBase<EmailWithFileProjectWorkflow>
+        public class EmailWithDiscoveryProjectWorkflow : EditProjectWorkflowBase<EmailWithFileProjectWorkflow>
     {
         public EmailWithDiscoveryProjectWorkflow(EditProjectPage editProjectPage, IWebDriver webDriver)
             : base(editProjectPage, webDriver) { }

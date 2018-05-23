@@ -164,7 +164,6 @@ namespace BinaryTree.Power365.AutomationFramework
     public class Tenant : Referential
     {
         public List<Credential> Credentials { get; set; }
-        [XmlAttribute]
         public string Name { get; set; }
         public string PrimaryDomain { get; set; }
         public string SecondaryDomain { get; set; }
@@ -328,7 +327,7 @@ namespace BinaryTree.Power365.AutomationFramework
         public int TimeoutSec { get; set; }
         public string Browser { get; set; }
         public string Bitness { get; set; }
-        public string CorrectHelpURL { get; set; }
+        public string HelpURL { get; set; }
 
         public Settings()
         {

@@ -49,7 +49,8 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private readonly By _defineMigrationWaveYesRadio = By.Id("wavesYes");
         private readonly By _defineMigrationWaveNoRadio = By.Id("wavesNo");
 
-        private readonly By _migrationWaveNameText = By.Id("waveName");
+        //private readonly By _migrationWaveNameText = By.Id("waveName"); // same elements have this id
+        private readonly By _migrationWaveNameText = By.XPath("//*[contains(@class, 'modal-dialog')]//input[@id='waveName'][contains(@data-bind, 'waveName')]");
         private readonly By _migrationWaveGroupSelectorDropdownText = By.Id("groupSelector");
 
         private readonly By _addAnotherMigrationWaveButton = By.XPath("//button[contains(@data-bind, 'addWave')]");
@@ -88,6 +89,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         
         public EditProjectPage(IWebDriver webDriver) 
             : base(_locator, webDriver) { }
+      
 
         public void SelectProjectType(ProjectType projectType)
         {
@@ -154,7 +156,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
 
         public void AddMigrationWave(string migrationWave)
         {
-            var waveName = FindVisibleElement(_migrationWaveNameText);
+            var waveName = FindExistingElement(_migrationWaveNameText,5);
             waveName.SendKeys(migrationWave);
         }
 

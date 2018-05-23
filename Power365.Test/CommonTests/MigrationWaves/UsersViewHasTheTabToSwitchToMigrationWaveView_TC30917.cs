@@ -15,7 +15,7 @@ namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
     public class UsersViewHasTheTabToSwitchToMigrationWaveView_TC30917 : TestBase
     {
         public UsersViewHasTheTabToSwitchToMigrationWaveView_TC30917()
-                  : base(LogManager.GetLogger(typeof(MigrationWave_Sync_TC30919))) { }
+                  : base(LogManager.GetLogger(typeof(MigrationWave_Sync_TC30919_33610))) { }
 
         private string _client;
         private string _username;
@@ -88,7 +88,7 @@ namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
          
             //Verify migration Waves Tab is visible
             Assert.IsTrue(_manageUsersPage.MigrationWaveTabIsVisible(), "Migration Waves Tab is not visible");
-            _manageUsersPage.SwichToMigrationWavesTab();
+            _manageUsersPage.SwichToTab("Migration Waves");
 
             //Verify migration Waves Tab were opened
             Assert.IsTrue(_manageUsersPage.CheckMigrationWavesTabOpen(), "Migration Waves Tab was not opened");
