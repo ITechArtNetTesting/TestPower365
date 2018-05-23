@@ -49,14 +49,14 @@ namespace BinaryTree.Power365.Test.CommonTests.Discovery
             tenantsEditPage.EnableTenant(_tenant);
             bool DisabledResult = tenantsEditPage.CheckTenantCanBeEnabled(_tenant);
             return DisabledResult&&EnabledResult;
-        }        
+        }
 
-        //[TestMethod]
-        //[TestCategory("MailWithDiscovery")]
-        //public void VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage_MD_32699()
-        //{
-        //    VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage("client2", "project1");
-        //}
+        [TestMethod]
+        [TestCategory("MailWithDiscovery")]
+        public void VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage_MD_32699()
+        {
+            VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage("client2", "project1");
+        }
 
         [TestMethod]
         [TestCategory("Integration")]
