@@ -11,6 +11,8 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
 {
     public class EditTenantsPage: PageBase
     {
+
+
         private static By _locator = By.Id("tenantsManagementContainer");
 
         public EditTenantsPage(IWebDriver webDriver) : base(_locator, webDriver) { }
@@ -18,6 +20,10 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private readonly By _discoveryTab = By.XPath("//a[@role='tab' and contains(@href,'discovery')]");
 
         private string tenantLogsXPath = "//*[contains(text(), '{0}')]/ancestor::tr//a[contains(@data-bind, 'exportTenantLogs')]";
+
+        private string tenantDisableXPath = "//*[contains(text(), '{0}')]//ancestor::tr//span[contains(@data-translation,'Disable')]";
+
+        private string tenantEnableXPath = "//*[contains(text(), '{0}')]//ancestor::tr//a[contains(@data-bind,'enable')]";    
 
         public void ClickDiscoveryTab()
         {
@@ -44,6 +50,44 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             By tenantLogs = By.XPath(string.Format(tenantLogsXPath, tenant));
             HowerElement(tenantLogs);
             ClickElementBy(tenantLogs);
+        }
+
+        public void DisableTenant(string tenant)
+        {
+            By tenantEnable = By.XPath(string.Format(tenantEnableXPath, tenant));
+            if (IsElementExists(tenantEnable))
+            {
+                HowerElement(tenantEnable);
+                ClickElementBy(tenantEnable);
+            }
+            By tenantDisable = By.XPath(string.Format(tenantDisableXPath, tenant));
+            HowerElement(tenantDisable);
+            ClickElementBy(tenantDisable);            
+        }
+
+        public void EnableTenant(string tenant)
+        {
+            By tenantDisable = By.XPath(string.Format(tenantDisableXPath, tenant));
+            if (IsElementExists(tenantDisable))
+            {
+                HowerElement(tenantDisable);
+                ClickElementBy(tenantDisable);
+            }
+            By tenantEnable = By.XPath(string.Format(tenantEnableXPath, tenant));
+            HowerElement(tenantEnable);
+            ClickElementBy(tenantEnable);
+        }
+
+        public bool CheckTenantCanBeDisabled(string tenant)
+        {
+            By tenantEnable = By.XPath(string.Format(tenantEnableXPath, tenant));          
+            return IsElementExists(tenantEnable, 300,5);
+        }
+
+        public bool CheckTenantCanBeEnabled(string tenant)
+        {
+            By tenantDisable = By.XPath(string.Format(tenantDisableXPath, tenant));
+            return IsElementExists(tenantDisable, 300, 5);
         }
     }
 }
