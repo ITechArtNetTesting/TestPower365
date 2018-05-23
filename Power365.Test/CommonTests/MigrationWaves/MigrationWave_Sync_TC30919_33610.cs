@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
 {
     [TestClass]
-    public class MigrationWave_Sync_TC30919_33610 : TestBase
+    public class MigrationWave_Sync_TC30919_33610 : UITestBase
     {
         public MigrationWave_Sync_TC30919_33610()
                    : base(LogManager.GetLogger(typeof(MigrationWave_Sync_TC30919_33610))) { }
