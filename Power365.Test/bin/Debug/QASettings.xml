@@ -180,8 +180,11 @@
               <Source>C7O365SML26@btcorp7.onmicrosoft.com</Source>
               <Target>C7O365SML26@btcorp9.onmicrosoft.com</Target>
             </UserMigration>
-            
-            
+
+            <UserMigration Reference="entry6">
+              <Source>C7O365SML31@btcorp7.onmicrosoft.com</Source>
+              <Target>C7O365SML31@btcorp9.onmicrosoft.com</Target>
+            </UserMigration>           
           </UserMigrations>
           <Groups>
             <Group Reference="adgroup1">
@@ -241,7 +244,10 @@
             </UserMigration>
             <UserMigration Reference="entry10">
               <Source>P365AutoRemoteMBX11@corp31.cmtsandbox.com</Source>
-            </UserMigration>           
+            </UserMigration>
+            <UserMigration Reference="entry11">
+              <Source>P365AutoRemoteMBX14@corp31.cmtsandbox.com</Source>
+            </UserMigration>
           </UserMigrations>
           <Groups>
             <Group Reference="adgroup1">
@@ -415,10 +421,10 @@
     </Tenant>
   </Tenants>
   <BaseUrl>https://bt-qa-pa-web-ui.azurewebsites.net/</BaseUrl>
-  <CorrectHelpURL>https://help.binarytree.com/power365/</CorrectHelpURL>
   <DownloadsPath>downloads</DownloadsPath>
   <ChromeDriverPath>resources</ChromeDriverPath>
   <O365PowerShellUrl>https://ps.outlook.com/powershell</O365PowerShellUrl>
+  <HelpURL>https://help.binarytree.com/power365/</HelpURL>
   <TimeoutSec>60</TimeoutSec>
   <Browser>chrome</Browser>
   <Bitness>x86</Bitness>

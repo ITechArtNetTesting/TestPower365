@@ -41,12 +41,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             WebDriver.SwitchTo().Window(popupHandle);
 
             return new DisposablePopupPage<T>(currentWindowHandle, WebDriver);
-        }
-
-        //protected IWebElement GetElementBy(By by)
-        //{
-        //   return WebDriver.FindElement(by);          
-        //}
+        }            
 
         protected void ClickElementBy(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
@@ -58,14 +53,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             where T : PageBase
         {
             ClickElementBy(by, timeoutInSec, pollIntervalSec);
-            return (T)Activator.CreateInstance(typeof(T), WebDriver);
-        }
-
-        protected T ClickElementThatOpensNewWindowBy<T>(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
-            where T : PageBase
-        {
-            ClickElementBy(by, timeoutInSec, pollIntervalSec);
-            WebDriver.SwitchTo().Window(WebDriver.WindowHandles.Last());
+           
             return (T)Activator.CreateInstance(typeof(T), WebDriver);
         }
 
@@ -78,17 +66,25 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
 
         }
 
-        protected void HowerElement(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
+        protected T ClickElementToOpenNewWindowBy<T>(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
+            where T : PageBase
         {
-            var element = FindExistingElement(by, 20, 1);
-            new Actions(WebDriver).MoveToElement(element).Build().Perform();
+            ClickElementBy(by, timeoutInSec, pollIntervalSec);
+            WebDriver.SwitchTo().Window(WebDriver.WindowHandles.Last());
+            return (T)Activator.CreateInstance(typeof(T), WebDriver);
         }
 
         protected IWebElement FindExistingElement(By by, int timeoutInSeconds = 5, int pollIntervalSec = 0)
         {
             return EvaluateElement(by, ExpectedConditions.ElementExists(by), timeoutInSeconds, pollIntervalSec);
         }
-        
+
+        protected void HowerElement(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
+        {
+            var element = FindExistingElement(by, 20, 1);
+            new Actions(WebDriver).MoveToElement(element).Build().Perform();
+        }
+
         protected IWebElement FindVisibleElement(By by, int timeoutInSeconds = 5, int pollIntervalSec = 0)
         {
             return EvaluateElement(by, ExpectedConditions.ElementIsVisible(by), timeoutInSeconds, pollIntervalSec);
@@ -239,7 +235,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             }
         }
 
-        private void WaitForLoadComplete()
+        protected void WaitForLoadComplete()
         {
             if (!IsDocumentReady())
                 throw new Exception("Page failed to reach ready state in time.");

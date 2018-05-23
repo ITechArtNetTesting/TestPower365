@@ -8,14 +8,12 @@ using System.Threading.Tasks;
 
 namespace BinaryTree.Power365.AutomationFramework.Elements
 {
-    public class MenuElement : ElementBase
+    public class MenuElement: ElementBase
     {
         private static readonly By _locator = By.Id("hamburger");
-        private By helpButton= By.XPath("//li//span[contains(@data-translation,'Help')]");
-        private By errorButton= By.XPath("//li//span[contains(text(),'Errors')]");
 
         private By _clientsComboBox = By.ClassName("dropdown");
-
+        
         private string _menuSelectionLocatorFormat = "//span[contains(text(), '{0}')]";
         private string _clientLocatorFormat = "//div[contains(@class, 'open')]//a[contains(text(), '{0}')]";
 
@@ -36,10 +34,11 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         //GENERAL
         private const string EN_HELP = "Help";
         private const string EN_SIGNOUT = "Sign Out";
-
+        //HELP
+        private By EN_HelpButton = By.XPath("//li//span[contains(@data-translation,'Help')]");
 
         public MenuElement(IWebDriver webDriver)
-            : base(_locator, webDriver) { }
+            :base(_locator, webDriver) { }
 
         public void OpenMenu()
         {
@@ -49,15 +48,9 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
                 throw new Exception("Could not Open Menu");
         }
 
-        public ErrorsPage ClickErrors()
-        {
-            OpenMenu();
-            return ClickElementBy<ErrorsPage>(errorButton);            
-        }
-
         public ProjectListPage SelectClient(string clientName)
         {
-            if (!IsElementVisible(_clientsComboBox, 1))
+            if(!IsElementVisible(_clientsComboBox, 1))
                 OpenMenu();
 
             ClickElementBy(_clientsComboBox);
@@ -65,7 +58,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             var clientSelection = By.XPath(string.Format(_clientLocatorFormat, clientName));
             return ClickElementBy<ProjectListPage>(clientSelection);
         }
-
+        
         public ProjectListPage ClickAllProjects()
         {
             throw new NotImplementedException();
@@ -104,7 +97,9 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         public HelpPage ClickHelp()
         {
             OpenMenu();
-            return ClickElementThatOpensNewWindowBy<HelpPage>(helpButton);
+            var clientSelection = By.XPath(string.Format(_menuSelectionLocatorFormat, EN_HELP));
+
+            return ClickElementToOpenNewWindowBy<HelpPage>(clientSelection);
         }
 
         public HomePage ClickSignOut()
@@ -119,7 +114,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         /// <param name="selection">Page menu text.</param>
         /// <returns>Type of page that will be navigated to.</returns>
         private T ClickMenuSelection<T>(string selection)
-            where T : PageBase
+            where T: PageBase
         {
             if (!IsElementVisible(_clientsComboBox))
                 OpenMenu();

@@ -20,14 +20,14 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             return ClickElementBy<ManageUsersPage>(_usersEditLink);
         }
 
-        public ManagePublicFoldersPage ClickPublicFoldersEdit()
-        {
-            return ClickElementBy<ManagePublicFoldersPage>(_publicFoldersEditLink);
-        }
-
         public EditTenantsPage ClickTenantsEdit()
         {
             return ClickElementBy<EditTenantsPage>(_tenantsEditLink);
         }
-}
+
+        public ManagePublicFoldersPage ClickPublicFoldersEdit()
+        {
+            return ClickElementBy<ManagePublicFoldersPage>(_publicFoldersEditLink);
+        }
+    }
 }

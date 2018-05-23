@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace BinaryTree.Power365.Test.CommonTests.Migration
 {
     [TestClass]
-    public class SubmittingDeltaSyncJobForASyncedUser_TC23091 : TestBase
+    public class SubmittingDeltaSyncJobForASyncedUser_TC23091 : UITestBase
     {
         public SubmittingDeltaSyncJobForASyncedUser_TC23091()
                    : base(LogManager.GetLogger(typeof(SubmittingDeltaSyncJobForASyncedUser_TC23091))) { }
@@ -33,21 +33,21 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration
         [TestCategory("MailOnly")]
         public void VerifySubmittingDeltaSyncJobForASyncedUserFor_MO_23091()
         {
-            RunTest("client1", "project1", "entry6");           
+            RunTest("client1", "project1", "entry11");           
         }
 
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
         public void VerifySubmittingDeltaSyncJobForASyncedUserFor_MD_23091()
         {
-            RunTest("client2", "project1", "entry4");            
+            RunTest("client2", "project1", "entry6");            
         }
 
         [TestMethod]
         [TestCategory("Integration")]
         public void VerifySubmittingDeltaSyncJobForASyncedUserFor_Integration_23091()
         {
-            RunTest("client2", "project2", "entry9",true);            
+            RunTest("client2", "project2", "entry10",true);            
         }
 
         private void RunTest(string init_client, string init_project, string entry, bool isInetgrat=false)

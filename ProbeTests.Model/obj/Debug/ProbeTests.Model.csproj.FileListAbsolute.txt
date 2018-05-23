@@ -101,3 +101,14 @@ D:\Git\TestPower365\ProbeTests.Model\bin\Debug\EntityFramework.SqlServer.xml
 D:\Git\TestPower365\ProbeTests.Model\obj\Debug\ProbeTests.Model.csproj.CoreCompileInputs.cache
 D:\Git\TestPower365\ProbeTests.Model\obj\Debug\ProbeTests.Model.dll
 D:\Git\TestPower365\ProbeTests.Model\obj\Debug\ProbeTests.Model.pdb
+d:\Project\P356\ProbeTests.Model\bin\Debug\ProbeTests.Model.dll.config
+d:\Project\P356\ProbeTests.Model\bin\Debug\ProbeTests.Model.dll
+d:\Project\P356\ProbeTests.Model\bin\Debug\ProbeTests.Model.pdb
+d:\Project\P356\ProbeTests.Model\bin\Debug\EntityFramework.dll
+d:\Project\P356\ProbeTests.Model\bin\Debug\EntityFramework.SqlServer.dll
+d:\Project\P356\ProbeTests.Model\bin\Debug\EntityFramework.xml
+d:\Project\P356\ProbeTests.Model\bin\Debug\EntityFramework.SqlServer.xml
+d:\Project\P356\ProbeTests.Model\obj\Debug\ProbeTests.Model.csprojResolveAssemblyReference.cache
+d:\Project\P356\ProbeTests.Model\obj\Debug\ProbeTests.Model.csproj.CoreCompileInputs.cache
+d:\Project\P356\ProbeTests.Model\obj\Debug\ProbeTests.Model.dll
+d:\Project\P356\ProbeTests.Model\obj\Debug\ProbeTests.Model.pdb
