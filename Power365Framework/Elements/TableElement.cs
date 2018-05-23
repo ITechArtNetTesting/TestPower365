@@ -11,6 +11,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
     public class TableElement : ElementBase
     {
         private readonly string _rowInputAncestor = "/ancestor::tr//input";
+        private readonly string _rowClassLocator = "//div[contains(@class,'tab-pane active')]"; 
         private readonly string _rowTextAncestorFormat = "/ancestor::tr//*[contains(text(), '{0}')]";
 
         public TableElement(By locator, IWebDriver webDriver)
@@ -22,9 +23,10 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
                 throw new ArgumentNullException("value");
 
             var rowEntryLocator = string.Format(LowerCaseTextLocatorFormat, value.ToLowerInvariant());
-            var rowEntryInputAncestorLocator = string.Format("{0}{1}", rowEntryLocator, _rowInputAncestor);
+            var rowClassLocator = string.Format("{0}{1}", _rowClassLocator, rowEntryLocator);
+            var rowEntryInputAncestorLocator = string.Format("{0}{1}", rowClassLocator, _rowInputAncestor);
 
-            var rowEntry = By.XPath(rowEntryLocator);
+            var rowEntry = By.XPath(rowClassLocator);
             ClickElementBy(rowEntry);
             
             var rowCheckbox = By.XPath(rowEntryInputAncestorLocator);

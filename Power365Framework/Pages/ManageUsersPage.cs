@@ -30,7 +30,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private readonly By _usersTable = By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]");
         private readonly By _wavesTable = By.XPath("//div[contains(@id, 'waves')]//table[contains(@class, 'table-expanded')]");
         //@@@ REQ:ID
-        private readonly By _actionsDropdown = By.XPath("//div[@id='users']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]");
+        private readonly By _actionsDropdown = By.XPath("//div[@class='tab-pane active']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]");
         private readonly By _actionsDropdownExpanded = By.XPath("//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')][contains(@aria-expanded, 'true')]");
 
         private readonly By _rollbackResetPermissionsLabelYes = By.XPath("//label[contains(@for, 'resetPermissions')]");
@@ -53,7 +53,10 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private readonly By _migrationWaveTab = By.XPath("//a[contains(@href,'waves')]//span");
         private readonly By _usersTab = By.XPath("//a[contains(@href,'users')]//span");
 
-        private readonly By _Tab = By.XPath("//*[contains(@class,'nav nav-tabs')]/li");
+
+
+
+        private readonly string _Tab = ("//*[contains(@class, 'nav nav-tabs')]/li/a/*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{0}')]]");
 
         private readonly By _searchInput = By.XPath("//div[contains(@class, 'search-group')]//input"); 
         private readonly By _searchButton = By.XPath("//i[contains(@class,'search')]");
@@ -68,6 +71,16 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
 
         public void PerformAction(ActionType action)
         {
+            DropdownSelectionAction(action);
+
+            if (!IsElementVisible(_applyActionButtonEnabled))
+                throw new Exception("Could not find enabled Apply Action button.");
+
+            ClickElementBy(_applyActionButtonEnabled);
+        }
+
+        public void DropdownSelectionAction(ActionType action)
+        {
             ClickElementBy(_actionsDropdown);
 
             if (!IsElementVisible(_actionsDropdownExpanded))
@@ -75,11 +88,12 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
 
             var actionDropdownSelection = By.XPath(string.Format(_actionDropdownSelectionFormat, action.GetDescription()));
             ClickElementBy(actionDropdownSelection);
+        }
 
-            if (!IsElementVisible(_applyActionButtonEnabled))
-                throw new Exception("Could not find enabled Apply Action button.");
-
-            ClickElementBy(_applyActionButtonEnabled);
+        public bool isActionEnabled(ActionType action)
+        {
+            DropdownSelectionAction(action);
+            return IsElementVisible(_applyActionButtonEnabled);
         }
 
         public void ConfirmAction(bool isYes = true)
@@ -122,16 +136,13 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             return new PageElement(_actionsDropdown, WebDriver);
         }
 
-        public void SwichToMigrationWavesTab()
+        public void SwichToTab(String tabName)
         {
-            ClickElementBy(_migrationWaveTab,5);            
+            WaitForLoadComplete();
+            var tab=String.Format(_Tab, tabName.ToLower());
+            ClickElementBy(By.XPath(tab), 5);
         }
-
-        public void SwichToUsersTab()
-        {
-            ClickElementBy(_usersTab, 5);
-        }
-
+       
         public bool CheckMigrationWavesTabOpen()
         {
             return IsElementVisible(_newMigrationWaveButton);
@@ -142,9 +153,12 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             return IsElementVisible(_migrationWaveTab);
         }
 
-        public EditProjectPage clickNewWaveButton()
+        public EditWavePage clickNewWaveButton()
         {
-            return ClickElementBy<EditProjectPage>(_newMigrationWaveButton, 5);
+            var page= ClickElementBy<EditWavePage>(_newMigrationWaveButton);
+            IsElementVisible(page.Locator,30,0);
+            return page;
+
         }
 
         public UserDetailsPage OpenDetailsOf(String user)
@@ -171,6 +185,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             //create
         }
 
+       
     }
 }
 

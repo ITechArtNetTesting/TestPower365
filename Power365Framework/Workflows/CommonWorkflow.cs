@@ -37,6 +37,13 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
             return this;
         }
 
+        public CommonWorkflow UsersEdit()
+        {
+            var projectDetailsPage = GetCurrentPage<ProjectDetailsPage>();
+            CurrentPage = projectDetailsPage.ClickUsersEdit();
+            return this;
+        }
+
         public CommonWorkflow TenantsEdit()
         {
             var projectDetailsPage = GetCurrentPage<ProjectDetailsPage>();
@@ -44,19 +51,10 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
             return this;
         }
 
-            public CommonWorkflow UsersEdit()
-        {
-            var projectDetailsPage = GetCurrentPage<ProjectDetailsPage>();
-            CurrentPage = projectDetailsPage.ClickUsersEdit();
-            return this;
-        }
-        
         public CommonWorkflow UsersPerformAction(string user, ActionType action, bool isYes = true)
         {
             if (action == ActionType.Rollback)
-                throw new Exception("User method UsersPerformRollback.");
-            if (action == ActionType.AddToWave)
-                throw new Exception("User method UsersPerformAddToWave.");
+                throw new Exception("User method UsersPerformRollback.");           
 
             var manageUsersPage = GetCurrentPage<ManageUsersPage>();
             manageUsersPage.Users.ClickRowByValue(user);
@@ -69,9 +67,7 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
         {
             if (action == ActionType.Rollback)
                 throw new Exception("User method UsersPerformRollback.");
-            if (action == ActionType.AddToWave)
-                throw new Exception("User method UsersPerformAddToWave.");
-
+            
             var manageUsersPage = GetCurrentPage<ManageUsersPage>();
             manageUsersPage.Waves.ClickRowByValue(wave);
             manageUsersPage.PerformAction(action);
@@ -82,7 +78,7 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
         {
             var manageUsersPage = GetCurrentPage<ManageUsersPage>();
             manageUsersPage.PerformSearch(user);
-            return UsersPerformAction( user, action, isYes );
+            return UsersPerformAction(user, action, isYes );
         }
 
         public CommonWorkflow UsersPerformRollback(string user, bool resetPermissions = true)
