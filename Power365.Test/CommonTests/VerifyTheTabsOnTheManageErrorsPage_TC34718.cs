@@ -49,7 +49,7 @@ namespace BinaryTree.Power365.Test.CommonTests
         public void VerifyTheTabsOnTheManageErrorsPage_MO_34718()
         {
             VerifyTheTabsOnTheManageErrorsPage("client1", "project1");
-            Assert.IsTrue(atErrorsPage.UsersTenantsAreDisplayed());
+            Assert.IsTrue(atErrorsPage.UsersTenantsAreDisplayed(), "One of tabs of errors page are not displayed at mail from file project");
         }
 
         [TestMethod]
@@ -57,7 +57,7 @@ namespace BinaryTree.Power365.Test.CommonTests
         public void VerifyTheTabsOnTheManageErrorsPage_MD_34718()
         {
             VerifyTheTabsOnTheManageErrorsPage("client2", "project1");
-            Assert.IsTrue(atErrorsPage.UsersTenantsAreDisplayed());
+            Assert.IsTrue(atErrorsPage.UsersTenantsAreDisplayed(), "One of tabs of errors page are not displayed at mail with discovery project");
         }
 
         [TestMethod]
@@ -65,7 +65,7 @@ namespace BinaryTree.Power365.Test.CommonTests
         public void VerifyTheTabsOnTheManageErrorsPage_Integration_34718()
         {
             VerifyTheTabsOnTheManageErrorsPage("client2", "project2");
-            Assert.IsTrue(atErrorsPage.UsersGrpoupsTenantsAreDisplayed());
+            Assert.IsTrue(atErrorsPage.UsersGrpoupsTenantsAreDisplayed(), "One of tabs of errors page are not displayed at integration project");
         }
     }
 }

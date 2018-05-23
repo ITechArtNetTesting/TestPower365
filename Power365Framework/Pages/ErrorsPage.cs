@@ -9,36 +9,36 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
 {
     public class ErrorsPage: PageBase
     {
-        private static readonly By _locator = By.XPath("//div[@id='users']//input[contains(@placeholder,'error')]");
+        private static readonly By _locator = By.XPath("//div[@id='users']//input[contains(@placeholder,'error')]");       
 
-        private By _usersTab = By.XPath("//ul[@class='nav nav-tabs m-t-lg']//span[contains(text(),'Users')]");
-        private By _tenantsTab = By.XPath("//ul[@class='nav nav-tabs m-t-lg']//span[contains(text(),'Tenants')]");
-        private By _groupsTab = By.XPath("//ul[@class='nav nav-tabs m-t-lg']//span[contains(text(),'Groups')]");
+        private string tabsXPath = "//ul[@class='nav nav-tabs m-t-lg']//span[contains(text(),'{0}')]";
 
         public ErrorsPage(IWebDriver webDriver) : base(_locator,webDriver) { }
 
         public bool UsersGrpoupsTenantsAreDisplayed()
         {
-            bool result;
-            result= validateElement(_usersTab);
-            result = validateElement(_tenantsTab);
-            result = validateElement(_groupsTab);
-            return result;
+            By _usersTab = By.XPath(string.Format(tabsXPath, "Users"));
+            By _tenantsTab = By.XPath(string.Format(tabsXPath, "Tenants"));
+            By _groupsTab = By.XPath(string.Format(tabsXPath, "Groups"));
+            bool usersTabResult= validateElement(_usersTab);
+            bool tenantsTabResult = validateElement(_tenantsTab);
+            bool groupsTabResult = validateElement(_groupsTab);
+            return usersTabResult&&tenantsTabResult&&groupsTabResult;
         }
 
         public bool UsersTenantsAreDisplayed()
         {
-            bool result;
-            result = validateElement(_usersTab);
-            result = validateElement(_tenantsTab);            
-            return result;
+            By _usersTab = By.XPath(string.Format(tabsXPath, "Users"));
+            By _tenantsTab = By.XPath(string.Format(tabsXPath, "Tenants"));
+            bool usersTabResult = validateElement(_usersTab);
+            bool tenantsTabResult = validateElement(_tenantsTab);            
+            return usersTabResult&&tenantsTabResult;
         }
 
         private bool validateElement(By element)
         {
             bool result;
-            ClickElementBy(element);
-            result=IsElementExists(element);
+            ClickElementBy(element);            
             result=IsElementVisible(element);
             return result;
         }
