@@ -32,7 +32,7 @@ namespace BinaryTree.Power365.Test.CommonTests
             _projectName = _project.Name;
         }
 
-        private void VerifyTheTabsOnTheManageErrorsPage(string client, string project)
+        private void VerifyTheTabsOnTheManageErrorsPage(string client, string project,bool isIntegration=false)
         {
             SetTestCaseParams(client,project);
             atErrorsPage = Automation.Common
@@ -41,31 +41,35 @@ namespace BinaryTree.Power365.Test.CommonTests
                 .ProjectSelect(_projectName)
                 .GetPage<ProjectDetailsPage>()
                 .Menu
-                .ClickErrors();                
+                .ClickErrors();
+            if (isIntegration)
+            {
+                Assert.IsTrue(atErrorsPage.TabIsVisible("Groups"));
+            }
+            Assert.IsTrue(atErrorsPage.TabIsVisible("Users"));
+            Assert.IsTrue(atErrorsPage.TabIsVisible("Tenants"));
+
         }
 
         [TestMethod]
         [TestCategory("MailOnly")]
         public void VerifyTheTabsOnTheManageErrorsPage_MO_34718()
         {
-            VerifyTheTabsOnTheManageErrorsPage("client1", "project1");
-            Assert.IsTrue(atErrorsPage.UsersTenantsAreDisplayed(), "One of tabs of errors page are not displayed at mail from file project");
+            VerifyTheTabsOnTheManageErrorsPage("client1", "project1");            
         }
 
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
         public void VerifyTheTabsOnTheManageErrorsPage_MD_34718()
         {
-            VerifyTheTabsOnTheManageErrorsPage("client2", "project1");
-            Assert.IsTrue(atErrorsPage.UsersTenantsAreDisplayed(), "One of tabs of errors page are not displayed at mail with discovery project");
+            VerifyTheTabsOnTheManageErrorsPage("client2", "project1");          
         }
 
         [TestMethod]
         [TestCategory("Integration")]
         public void VerifyTheTabsOnTheManageErrorsPage_Integration_34718()
         {
-            VerifyTheTabsOnTheManageErrorsPage("client2", "project2");
-            Assert.IsTrue(atErrorsPage.UsersGrpoupsTenantsAreDisplayed(), "One of tabs of errors page are not displayed at integration project");
+            VerifyTheTabsOnTheManageErrorsPage("client2", "project2",true);           
         }
     }
 }
