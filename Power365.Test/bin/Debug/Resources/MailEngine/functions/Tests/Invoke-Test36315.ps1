@@ -3,7 +3,8 @@ function Invoke-Test36315 {
         [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
         [Parameter(Position = 4, Mandatory = $false)] [switch]$RunDelta,
-		[Parameter(Mandatory = $true)][String]$RootPath
+		[Parameter(Mandatory = $true)][String]$RootPath,
+		[Parameter(Mandatory = $true)][String]$TargetRootPath
     )  
     Begin {
         if ($TargetMailbox.IsPresent) {
@@ -80,7 +81,7 @@ function Invoke-Test36315 {
             $al = New-Object System.Collections.ArrayList
             $plPileLine = $session.runspace.CreatePipeline();
             $rfRemove = New-Object System.Management.Automation.Runspaces.Command("Enable-MailPublicFolder");
-            $rfRemove.Parameters.Add("Identity", ("\" + $RootPath + "\" + $FolderName));
+            $rfRemove.Parameters.Add("Identity", ($RootPath + "\" + $FolderName));
             $rfRemove.Parameters.Add("Confirm", $false);
             $plPileLine.Commands.Add($rfRemove);
             $RsResultsresults = $plPileLine.Invoke();
@@ -89,7 +90,7 @@ function Invoke-Test36315 {
             }
             else {
                 $data = "" | Select Folder
-                $data.Folder = ("\" + $RootPath + "\" + $FolderName)
+                $data.Folder = ($RootPath + "\" + $FolderName)
                 $TestResults.Data = $data
                 $TestResults.TestResult = "Succeeded"
             }
@@ -110,7 +111,7 @@ function Invoke-Test36315 {
         if ($RunDelta.IsPresent) {
             Get-p365TestResults
             # Write-host "Part 1 - Message Created"
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
         }
 		
     }

@@ -14,12 +14,18 @@ namespace BinaryTree.Power365.AutomationFramework.Enums
 
     public enum StateType: byte
     {
+        [Display(Name = "Ready")]
+        [Description("Ready")]
+        Ready,
         [Display(Name = "Syncing")]
         [Description("Syncing")]
         Syncing,
         [Display(Name = "sync(s) complete")]//Can be regular expressions maybe?
         [Description("Synced")]
         Synced,
+        [Display(Name = "Sync Error")]
+        [Description("Sync Error")]
+        SyncError,
         [Display(Name = "Finalizing")]
         [Description("Finalizing")]
         Finalizing,

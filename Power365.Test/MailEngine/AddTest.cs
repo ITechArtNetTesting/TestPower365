@@ -34,7 +34,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         private bool _is32Bit;
 
         public AddTest() 
-            : base(LogManager.GetLogger(typeof(AddTest))) { }
+            : base() { }
 
         [TestInitialize]
         public void Initialize()

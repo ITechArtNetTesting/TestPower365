@@ -11,7 +11,7 @@ namespace BinaryTree.Power365.Test.Setup
     public class ProjectSetup: TestBase
     {
         public ProjectSetup() 
-            : base(LogManager.GetLogger(typeof(ProjectSetup))) { }
+            : base() { }
         
         [Test]
         public void EmailWithFileProjectSetup()
@@ -49,10 +49,7 @@ namespace BinaryTree.Power365.Test.Setup
                 .ClientSelect(clientName)
                 .GetPage<ProjectListPage>();
 
-            var editProjectPage = projectListPage.ClickNewProject();
-            
-            var editProjectWorkflow = Automation.Browser
-                .CreateWorkflow<EmailWithFileProjectWorkflow, EditProjectPage>(editProjectPage);
+            var editProjectWorkflow = projectListPage.ClickNewProject<EmailWithFileProjectWorkflow>();
 
             var projectDetailsPage = editProjectWorkflow
                 .ProjectType(ProjectType.EmailByFile)

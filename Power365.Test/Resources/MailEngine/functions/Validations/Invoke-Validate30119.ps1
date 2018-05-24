@@ -12,12 +12,16 @@ function Invoke-Validate30119{
 			$Script:TestResults["Test30119"].ValidationLastRun = (Get-Date)
 			#try{
 				$plPileLine = $session.runspace.CreatePipeline();
+
+				$f1 = $Script:TestResults["Test30119"].Data.Folder
+				Write-Host "F1: $f1"
+
 				$gpAddmbPerms = new-object System.Management.Automation.Runspaces.Command("Get-MailPublicFolder");
-				$gpAddmbPerms.Parameters.Add("Identity", $Script:TestResults["Test30119"].Data.Folder);
+				$gpAddmbPerms.Parameters.Add("Identity", $f1);
 				$plPileLine.Commands.Add($gpAddmbPerms);
 				$Result = $plPileLine.Invoke();
 				if($Result -ne $null){
-					write-host $Result.ForwardingAddress	
+					write-host $Result.ForwardingAddress
 					write-host $Result.Identity
 					$plPileLine.Stop()
 					$plPileLine = $session.runspace.CreatePipeline();

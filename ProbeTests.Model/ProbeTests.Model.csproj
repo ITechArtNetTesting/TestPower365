@@ -82,6 +82,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Apps\BTCloud.Web\BTCloud.Lib\BTCloud.Lib.csproj">
+      <Project>{13769355-6704-46c6-a855-ebf61b828dc6}</Project>
+      <Name>BTCloud.Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

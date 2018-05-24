@@ -3,9 +3,9 @@ using OpenQA.Selenium;
 using UI = OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
-using System.Collections.Generic;
 using OpenQA.Selenium.Interactions;
 using System.Linq;
+using BinaryTree.Power365.AutomationFramework.Dialogs;
 
 namespace BinaryTree.Power365.AutomationFramework.Elements
 {
@@ -32,10 +32,10 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             FindVisibleElement(_locator);
         }
 
-        protected DisposablePopupPage<T> ClickPopupElementBy<T>(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
+        protected DisposablePopupPage<T> ClickPopupElementBy<T>(By by, int timeoutInSec = 5, int pollIntervalInSec = 0)
             where T : PageBase
         {
-            var element = FindClickableElement(by, timeoutInSec, pollIntervalSec);
+            var element = FindClickableElement(by, timeoutInSec, pollIntervalInSec);
             var currentWindowHandle = WebDriver.CurrentWindowHandle;
             var popupHandle = PopupFinder.Click(element);
             WebDriver.SwitchTo().Window(popupHandle);
@@ -43,63 +43,65 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             return new DisposablePopupPage<T>(currentWindowHandle, WebDriver);
         }            
 
-        protected void ClickElementBy(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
+        protected T ClickModelElementBy<T>(By by, int timeoutInSec = 4, int pollIntervalInSec = 0)
+            where T : ModalDialogBase
         {
-            var clickableElement = FindClickableElement(by, timeoutInSec, pollIntervalSec);
+            var element = FindClickableElement(by, timeoutInSec, pollIntervalInSec);
+            return (T)Activator.CreateInstance(typeof(T), WebDriver);
+        }
+        
+        protected void ClickElementBy(By by, int timeoutInSec = 5, int pollIntervalInSec = 0)
+        {
+            var clickableElement = FindClickableElement(by, timeoutInSec, pollIntervalInSec);
             clickableElement.Click();
         }
 
-        protected T ClickElementBy<T>(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
+        protected T ClickElementBy<T>(By by, int timeoutInSec = 5, int pollIntervalInSec = 0)
             where T : PageBase
         {
-            ClickElementBy(by, timeoutInSec, pollIntervalSec);
-           
+            ClickElementBy(by, timeoutInSec, pollIntervalInSec);
             return (T)Activator.CreateInstance(typeof(T), WebDriver);
         }
 
-        protected T DoubleClickElementBy<T>(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
+        protected void DoubleClickElementBy(By by, int timeoutInSec = 5, int pollIntervalInSec = 0)
+        {
+            var clickableElement = FindClickableElement(by, timeoutInSec, pollIntervalInSec);
+            new Actions(WebDriver).DoubleClick(clickableElement).Build().Perform();
+        }
+
+        protected T DoubleClickElementBy<T>(By by, int timeoutInSec = 5, int pollIntervalInSec = 0)
              where T : PageBase
         {
-            var clickableElement = FindClickableElement(by, timeoutInSec, pollIntervalSec);
-            new Actions(WebDriver).DoubleClick(clickableElement).Build().Perform();
-            return (T)Activator.CreateInstance(typeof(T), WebDriver);
-
-        }
-
-        protected T ClickElementToOpenNewWindowBy<T>(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
-            where T : PageBase
-        {
-            ClickElementBy(by, timeoutInSec, pollIntervalSec);
-            WebDriver.SwitchTo().Window(WebDriver.WindowHandles.Last());
+            DoubleClickElementBy(by, timeoutInSec, pollIntervalInSec);
             return (T)Activator.CreateInstance(typeof(T), WebDriver);
         }
 
-        protected IWebElement FindExistingElement(By by, int timeoutInSeconds = 5, int pollIntervalSec = 0)
+        protected void HoverElement(By by, int timeoutInSec = 5, int pollIntervalInSec = 0)
         {
-            return EvaluateElement(by, ExpectedConditions.ElementExists(by), timeoutInSeconds, pollIntervalSec);
-        }
-
-        protected void HowerElement(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
-        {
-            var element = FindExistingElement(by, 20, 1);
+            var element = FindExistingElement(by, timeoutInSec, pollIntervalInSec);
             new Actions(WebDriver).MoveToElement(element).Build().Perform();
         }
 
-        protected IWebElement FindVisibleElement(By by, int timeoutInSeconds = 5, int pollIntervalSec = 0)
+        protected IWebElement FindExistingElement(By by, int timeoutInSeconds = 5, int pollIntervalInSec = 0, Action refreshAction = null)
         {
-            return EvaluateElement(by, ExpectedConditions.ElementIsVisible(by), timeoutInSeconds, pollIntervalSec);
+            return EvaluateElement(ExpectedConditions.ElementExists(by), timeoutInSeconds, pollIntervalInSec, refreshAction);
+        }
+        
+        protected IWebElement FindVisibleElement(By by, int timeoutInSeconds = 5, int pollIntervalInSec = 0, Action refreshAction = null)
+        {
+            return EvaluateElement(ExpectedConditions.ElementIsVisible(by), timeoutInSeconds, pollIntervalInSec, refreshAction);
         }
 
-        protected IWebElement FindClickableElement(By by, int timeoutInSeconds = 5, int pollIntervalSec = 0)
+        protected IWebElement FindClickableElement(By by, int timeoutInSeconds = 5, int pollIntervalInSec = 0, Action refreshAction = null)
         {
-            return EvaluateElement(by, ExpectedConditions.ElementToBeClickable(by), timeoutInSeconds, pollIntervalSec);
+            return EvaluateElement(ExpectedConditions.ElementToBeClickable(by), timeoutInSeconds, pollIntervalInSec, refreshAction);
         }
 
-        protected bool IsElementTextPresentInValue(By by, string value, int timeoutInSec = 5, int pollIntervalSec = 0)
+        protected bool IsElementTextPresentInValue(By by, string value, int timeoutInSec = 5, int pollIntervalInSec = 0, Action refreshAction = null)
         {
             try
             {
-                return EvaluateElement(by, ExpectedConditions.TextToBePresentInElementValue(by, value), timeoutInSec, pollIntervalSec);
+                return EvaluateElement(ExpectedConditions.TextToBePresentInElementValue(by, value), timeoutInSec, pollIntervalInSec, refreshAction);
             }
             catch (Exception)
             {
@@ -107,11 +109,11 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             }
         }
 
-        protected bool IsElementExists(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
+        protected bool IsElementExists(By by, int timeoutInSec = 5, int pollIntervalInSec = 0, Action refreshAction = null)
         {
             try
             {
-                return EvaluateElement(by, ExpectedConditions.ElementExists(by), timeoutInSec, pollIntervalSec) != null;
+                return EvaluateElement(ExpectedConditions.ElementExists(by), timeoutInSec, pollIntervalInSec, refreshAction) != null;
             }
             catch (Exception)
             {
@@ -119,11 +121,24 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             }
         }
 
-        protected bool IsElementVisible(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
+        protected bool IsAnyElementExists(By[] bys, int timeoutInSec = 5, int pollIntervalInSec = 0, Action refreshAction = null)
         {
             try
             {
-                return EvaluateElement(by, ExpectedConditions.ElementIsVisible(by), timeoutInSec, pollIntervalSec) != null;
+                return EvaluateElement((driver) => {
+                    return bys.Any(b =>
+                    {
+                        try
+                        {
+                            return driver.FindElement(b) != null;
+                        }
+                        catch (NoSuchElementException)
+                        {
+                            return false;
+                        }
+                    });
+                },
+                timeoutInSec, pollIntervalInSec, refreshAction);
             }
             catch (Exception)
             {
@@ -131,11 +146,11 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             }
         }
 
-        protected bool IsElementClickable(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
+        protected bool IsElementVisible(By by, int timeoutInSec = 5, int pollIntervalInSec = 0, Action refreshAction = null)
         {
             try
             {
-                return EvaluateElement(by, ExpectedConditions.ElementToBeClickable(by), timeoutInSec, pollIntervalSec) != null;
+                return EvaluateElement(ExpectedConditions.ElementIsVisible(by), timeoutInSec, pollIntervalInSec, refreshAction) != null;
             }
             catch (Exception)
             {
@@ -143,11 +158,11 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             }
         }
 
-        protected bool IsElementSelectedState(By by, bool selected, int timeoutInSeconds = 5, int pollIntervalSec = 0)
+        protected bool IsElementClickable(By by, int timeoutInSec = 5, int pollIntervalInSec = 0, Action refreshAction = null)
         {
             try
             {
-                return EvaluateElement(by, ExpectedConditions.ElementSelectionStateToBe(by, selected), timeoutInSeconds, pollIntervalSec);
+                return EvaluateElement(ExpectedConditions.ElementToBeClickable(by), timeoutInSec, pollIntervalInSec, refreshAction) != null;
             }
             catch (Exception)
             {
@@ -155,23 +170,33 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             }
         }
 
-        protected T EvaluateElement<T>(By by, Func<IWebDriver, T> condition, int timeoutInSec = 5, int pollIntervalSec = 0)
+        protected bool IsElementSelectedState(By by, bool selected, int timeoutInSec = 5, int pollIntervalInSec = 0, Action refreshAction = null)
         {
-            return EvaluateElement(by, condition, () => WebDriver.Navigate().Refresh(), timeoutInSec, pollIntervalSec);
+            try
+            {
+                return EvaluateElement(ExpectedConditions.ElementSelectionStateToBe(by, selected), timeoutInSec, pollIntervalInSec, refreshAction);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
-
-        protected T EvaluateElement<T>(By by, Func<IWebDriver, T> condition, Action refreshAction, int timeoutInSec = 5, int pollIntervalSec = 0)
+        
+        protected T EvaluateElement<T>(Func<IWebDriver, T> condition, int timeoutInSec = 5, int pollIntervalInSec = 0, Action refreshAction = null)
         {
-            if (timeoutInSec > 0 || pollIntervalSec > 0)
+            if (timeoutInSec > 0 || pollIntervalInSec > 0)
             {
                 var wait = new UI.WebDriverWait(WebDriver, TimeSpan.FromSeconds(timeoutInSec));
                 wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-                if (pollIntervalSec > 0)
+                if (pollIntervalInSec > 0)
                 {
-                    wait.PollingInterval = TimeSpan.FromSeconds(pollIntervalSec);
+                    wait.PollingInterval = TimeSpan.FromSeconds(pollIntervalInSec);
                     return wait.Until((webDriver) =>
                     {
-                        refreshAction();
+                        if (refreshAction != null)
+                            refreshAction();
+                        else
+                            WebDriver.Navigate().Refresh();
 
                         if (!IsDocumentReady())
                             throw new Exception("Page failed to reach ready state in time.");
@@ -194,14 +219,14 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             return condition(WebDriver);
         }
 
-        protected T EvaluateScript<T>(string script, int timeoutInSec = 5, int pollIntervalSec = 0)
+        protected T EvaluateScript<T>(string script, int timeoutInSec = 5, int pollIntervalInSec = 0)
         {
-            if (timeoutInSec > 0 || pollIntervalSec > 0)
+            if (timeoutInSec > 0 || pollIntervalInSec > 0)
             {
                 var wait = new UI.WebDriverWait(WebDriver, TimeSpan.FromSeconds(timeoutInSec));
 
-                if (pollIntervalSec > 0)
-                    wait.PollingInterval = TimeSpan.FromSeconds(pollIntervalSec);
+                if (pollIntervalInSec > 0)
+                    wait.PollingInterval = TimeSpan.FromSeconds(pollIntervalInSec);
 
                 return wait.Until((webDriver) =>
                 {
@@ -235,7 +260,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             }
         }
 
-        protected void WaitForLoadComplete()
+        public void WaitForLoadComplete()
         {
             if (!IsDocumentReady())
                 throw new Exception("Page failed to reach ready state in time.");

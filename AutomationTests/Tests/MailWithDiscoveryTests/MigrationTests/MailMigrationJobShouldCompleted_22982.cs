@@ -43,6 +43,7 @@ namespace Product.Tests.MailWithDiscoveryTests.MigrationTests
             LoginAndSelectRole(login, password, client);
             SelectProject(projectName);
             User.AtProjectOverviewForm().OpenUsersList();
+            User.AtUsersForm().PerformSearch(sourceMailbox5);
             User.AtUsersForm().OpenDetailsByLocator(sourceMailbox5);
             //Run Syncing
             User.AtUsersForm().SyncFromDetails();
