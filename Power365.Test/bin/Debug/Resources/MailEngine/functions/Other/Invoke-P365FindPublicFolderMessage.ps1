@@ -22,7 +22,7 @@ function Invoke-P365FindPublicFolderMessage{
 		$sfSearchFilter = new-object Microsoft.Exchange.WebServices.Data.SearchFilter+IsEqualTo($btBinaryTreeMid,[System.Convert]::ToBase64String($MessageId))
 		$ivItemView = New-Object Microsoft.Exchange.WebServices.Data.ItemView(1) 
 		$fiItems =  $Folder.FindItems($sfSearchFilter,$ivItemView)
-		write-host ("Number of Items found" + $fiItems.Items.Count)
+		write-host ("Number of Items found: " + $fiItems.Items.Count)
 		if($fiItems.Items.Count -eq 1){
 			return, $fiItems.Items[0]
 		}

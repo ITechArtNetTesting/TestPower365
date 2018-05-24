@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using BinaryTree.Power365.AutomationFramework.Workflows;
+using OpenQA.Selenium;
+using System;
 
 namespace BinaryTree.Power365.AutomationFramework.Pages
 {
@@ -20,9 +22,11 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             return ClickElementBy<ProjectDetailsPage>(projectLink);
         }
 
-        public EditProjectPage ClickNewProject()
+        public T ClickNewProject<T>()
+            where T: EditProjectWorkflowBase<T>
         {
-            return ClickElementBy<EditProjectPage>(_newProjectButton);
+            var editProjectPage = ClickElementBy<EditProjectPage>(_newProjectButton);
+            return (T)Activator.CreateInstance(typeof(T), editProjectPage, WebDriver);
         }
     }
 }

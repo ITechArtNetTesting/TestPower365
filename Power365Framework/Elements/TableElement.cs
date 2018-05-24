@@ -1,14 +1,11 @@
-﻿using BinaryTree.Power365.AutomationFramework.Pages;
+﻿using BinaryTree.Power365.AutomationFramework.Dialogs;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BinaryTree.Power365.AutomationFramework.Elements
 {
-    public class TableElement : ElementBase
+    public class TableElement : Element
     {
         private readonly string _rowInputAncestor = "/ancestor::tr//input";
         private readonly string _rowClassLocator = "//div[contains(@class,'tab-pane active')]"; 
@@ -34,31 +31,20 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
                 throw new Exception("Failed to select row.");
         }
 
-        public PageBase DoubleClickRowByValue(string value, PageBase page)
+        public T DoubleClickRowByValue<T>(string value)
+            where T: ModalDialogBase
         {
             if (value == null)
                 throw new ArgumentNullException("value");
 
             var rowEntryLocator = string.Format(LowerCaseTextLocatorFormat, value.ToLowerInvariant());
-            var rowEntryInputAncestorLocator = string.Format("{0}{1}", rowEntryLocator, _rowInputAncestor);
-
-            var rowEntry = By.XPath(rowEntryLocator);
-           return DoubleClickElementBy<PageBase>(rowEntry);            
+            var rowClassLocator = string.Format("{0}{1}", _rowClassLocator, rowEntryLocator);
+            
+            var rowEntry = By.XPath(rowClassLocator);
+            DoubleClickElementBy(rowEntry);
+            return (T)Activator.CreateInstance(typeof(T), WebDriver);
         }
-
-        public By GetRowLocatorByValue(string value)
-        {
-            if (value == null)
-                throw new ArgumentNullException("value");
-
-            var rowEntryLocator = string.Format(LowerCaseTextLocatorFormat, value.ToLowerInvariant());
-            var rowEntryInputAncestorLocator = string.Format("{0}{1}", rowEntryLocator, _rowInputAncestor);
-
-            var rowEntry = By.XPath(rowEntryLocator);
-            return rowEntry;
-        }
-
-
+        
         public bool RowHasValue(string entry, string value, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
             if (value == null)
@@ -70,6 +56,25 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
 
             var rowEntryTextValue = By.XPath(rowEntryTextLocator);
             return IsElementExists(rowEntryTextValue, timeoutInSec, pollIntervalSec);
+        }
+
+        public bool RowHasAnyValue(string entry, string[] values, int timeoutInSec = 5, int pollIntervalSec = 0)
+        {
+            if (values == null)
+                throw new ArgumentNullException("values");
+
+            var bys = new List<By>();
+
+            foreach (var value in values)
+            {
+                var rowEntryLocator = string.Format(LowerCaseTextLocatorFormat, entry.ToLowerInvariant());
+                var rowTextAncestorLocator = string.Format(_rowTextAncestorFormat, value);
+                var rowEntryTextLocator = string.Format("{0}{1}", rowEntryLocator, rowTextAncestorLocator);
+                var rowEntryTextValue = By.XPath(rowEntryTextLocator);
+                bys.Add(rowEntryTextValue);
+            }
+            
+            return IsAnyElementExists(bys.ToArray(), timeoutInSec, pollIntervalSec);
         }
     }
 }

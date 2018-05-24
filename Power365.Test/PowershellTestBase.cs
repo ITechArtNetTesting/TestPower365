@@ -8,8 +8,8 @@ namespace BinaryTree.Power365.Test
     //    [DllImport("kernel32.dll", SetLastError = true)]
     //    public static extern bool Wow64DisableWow64FsRedirection(ref IntPtr ptr);
 
-        protected PowershellTestBase(ILog logger)
-            : base(logger) { }
+        protected PowershellTestBase()
+            : base() { }
 
         protected void RunScript(string scriptPath, string parameters, bool is32Bit = false, int exitTimeoutSec = 60)
         {

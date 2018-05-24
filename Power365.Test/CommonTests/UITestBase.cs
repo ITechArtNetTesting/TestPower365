@@ -11,7 +11,7 @@ namespace BinaryTree.Power365.Test.CommonTests
 {
     public class UITestBase : TestBase
     {
-        protected UITestBase(ILog logger) : base(logger)
+        protected UITestBase() : base()
         {
         }
         [TestCleanup]

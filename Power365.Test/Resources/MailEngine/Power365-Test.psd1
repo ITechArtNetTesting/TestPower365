@@ -364,6 +364,8 @@
 		'Invoke-Validate30519',
 		'Invoke-Test30522',
 		'Invoke-Validate30522',
+		'Invoke-Test32282',
+		'Invoke-Validate32282',
 		'Invoke-CreateFoldersAndItems'
 
 							

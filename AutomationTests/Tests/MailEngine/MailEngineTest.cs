@@ -445,7 +445,7 @@ namespace Product.Tests.PowerShellTests
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Sync")]
-        public void PublicFolder_PS_Test46843()
+        public void Mailbox_PS_Test46843()
         {
             AssertSyncTestPasses("46843", PerformSync);
         }

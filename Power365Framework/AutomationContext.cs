@@ -1,14 +1,7 @@
 ﻿using BinaryTree.Power365.AutomationFramework.Pages;
 using BinaryTree.Power365.AutomationFramework.Workflows;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BinaryTree.Power365.AutomationFramework
 {
@@ -18,7 +11,7 @@ namespace BinaryTree.Power365.AutomationFramework
         public BrowserAutomation Browser { get { return _browser ?? (_browser = new BrowserAutomation(Settings)); } }
         public PowershellAutomation Powershell { get { return _powershell ?? (_powershell = new PowershellAutomation()); } }
 
-        public CommonWorkflow Common { get{ return _common ?? (_common = Browser.CreateWorkflow<CommonWorkflow, HomePage>(Settings.BaseUrl)); } }
+        public CommonWorkflow Common { get{ return _common ?? (_common = new CommonWorkflow(Browser.Navigate<HomePage>(Settings.BaseUrl), _browser.WebDriver)); } }
 
         private BrowserAutomation _browser;
         private PowershellAutomation _powershell;

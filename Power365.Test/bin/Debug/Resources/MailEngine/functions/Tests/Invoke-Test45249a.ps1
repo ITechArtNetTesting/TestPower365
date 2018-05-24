@@ -2,8 +2,7 @@ function Invoke-Test45249a {
     param( 
         [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
-        [Parameter(Position = 4, Mandatory = $false)] [switch]$RunDelta,
-		[Parameter(Mandatory = $true)][String]$RootPath
+        [Parameter(Position = 4, Mandatory = $false)] [switch]$RunDelta
     )  
     Begin {
         if ($TargetMailbox.IsPresent) {

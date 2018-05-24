@@ -1,7 +1,8 @@
 ﻿using BinaryTree.Power365.AutomationFramework;
 using BinaryTree.Power365.AutomationFramework.Pages;
 using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+//using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,11 @@ using System.Threading.Tasks;
 
 namespace BinaryTree.Power365.Test.CommonTests.LandingPage
 {
-    [TestClass]
-    public class LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773: UITestBase
+
+    [TestFixture]
+    public class LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773: TestBase
     {
-        public LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773() : base(LogManager.GetLogger(typeof(LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773))) { }
+        public LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773() : base() { }
 
         private string _client;
         private string _username;
@@ -47,18 +49,21 @@ namespace BinaryTree.Power365.Test.CommonTests.LandingPage
             tenantsEditPage.ClickDiscoveryTab();
             tenantsEditPage.DeleteTenantLogs(_downloadsPath);
             tenantsEditPage.DownloadLogs(_tenant);
-            Assert.IsTrue(tenantsEditPage.CheckDiscoveryFileIsDownloaded(_downloadsPath,15),"");
+            NUnit.Framework.Assert.IsTrue(tenantsEditPage.CheckDiscoveryFileIsDownloaded(_downloadsPath,15),"");
         }
 
-        [TestMethod]
-        [TestCategory("MailWithDiscovery")]
+        [Test]
+      //  [TestCategory("MailWithDiscovery")]
+     //   [TestCategory("UI")]
         public void LogsButtonOnTheTenantManagementWillDownloadTenantLog_MD_25773()
         {
             LogsButtonOnTheTenantManagementWillDownloadTenantLog("client2", "project1");
         }
 
-        [TestMethod]
-        [TestCategory("Integration")]
+
+        //  [TestCategory("Integration")]
+        //   [TestCategory("UI")]
+        [Test]
         public void LogsButtonOnTheTenantManagementWillDownloadTenantLog_Integration_25773()
         {
             LogsButtonOnTheTenantManagementWillDownloadTenantLog("client2", "project2");

@@ -15,7 +15,10 @@ function Invoke-P365CopyPublicFolder{
 		$TargetDomain =  new-object System.net.mail.mailaddress($Script:TargetMailbox)
 		$DomainMappings.Add(($SourceDomain.Host).ToLower(), ($TargetDomain.Host).ToLower())
 		$DomainMappings.Add("_default_", ($TargetDomain.Host).ToLower())
-		Copy-T2TPublicFolders -SourceMailbox $Script:SourceMailbox -SourceCredentials $Script:SourcePSCreds -TargetMailbox $Script:TargetMailbox -TargetCredentials $Script:TargetPSCreds  -mappingfile $MappingFile  -ProcessingPath c:\temp -SourcePublicFolderPath $SourceFolderPath -TargetPublicFolderPath $TargetCopyPath -Delta:$true -SourceOnPremise $Script:SourceOnPrem -TargetOnPremise $Script:TargetOnPrem -SourceAutoDiscoverOverRide $Script:SourceAutoDiscoverOverRide -TargetAutoDiscoverOverRide $Script:TargetAutoDiscoverOverRide
+
+		Write-Host "Public Folder - Content Sync: '$SourceFolderPath' to '$TargetCopyPath'"
+
+		Copy-T2TPublicFolders -SourceMailbox $Script:SourceMailbox -SourceCredentials $Script:SourcePSCreds -TargetMailbox $Script:TargetMailbox -TargetCredentials $Script:TargetPSCreds  -mappingfile $MappingFile  -ProcessingPath c:\temp -SourcePublicFolderPath $SourceFolderPath -TargetPublicFolderPath $TargetCopyPath -Delta:$true -SourceOnPremise $Script:SourceOnPrem -TargetOnPremise $Script:TargetOnPrem -SourceAutoDiscoverOverRide $Script:SourceAutoDiscoverOverRide -TargetAutoDiscoverOverRide $Script:TargetAutoDiscoverOverRide -LogPath $Script:LogPath
 	}
 }
 

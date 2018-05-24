@@ -18,6 +18,7 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
         [TestMethod]
         [TestCategory("MailOnly")]
         [TestCategory("UI")]
+        [TestCategory("Sync")]
         public void CutoverAndCompletedAndSyncButtonsTest_MO_23096_23089()
         {
             CutoverAndCompletedButtonsTest(RunConfigurator.GetUserLogin("client1"), RunConfigurator.GetPassword("client1"),
@@ -28,6 +29,7 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
         [TestCategory("UI")]
+        [TestCategory("Sync")]
         public void CutoverAndCompletedAndSyncButtonsTest_MD_23096_23089()
         {
             CutoverAndCompletedButtonsTest(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"),

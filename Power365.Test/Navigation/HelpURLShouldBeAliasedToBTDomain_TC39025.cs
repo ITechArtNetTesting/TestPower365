@@ -1,6 +1,7 @@
 ﻿using BinaryTree.Power365.AutomationFramework;
 using BinaryTree.Power365.AutomationFramework.Elements;
 using BinaryTree.Power365.AutomationFramework.Pages;
+using BinaryTree.Power365.Test.CommonTests;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 namespace BinaryTree.Power365.Test.Navigation
 {
     [TestClass]
-    public class HelpURLShouldBeAliasedToBTDomain_TC39025 : TestBase
+    public class HelpURLShouldBeAliasedToBTDomain_TC39025 : UITestBase
     {
         private string CorrectDomain;
         private string _client;
@@ -22,7 +23,7 @@ namespace BinaryTree.Power365.Test.Navigation
         private PageBase _basePage;
         private HelpPage _helpPage;
 
-        public HelpURLShouldBeAliasedToBTDomain_TC39025() : base(LogManager.GetLogger(typeof(HelpURLShouldBeAliasedToBTDomain_TC39025))) { }
+        public HelpURLShouldBeAliasedToBTDomain_TC39025() : base() { }
 
       
         [TestInitialize]

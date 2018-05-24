@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BinaryTree.Power365.AutomationFramework.Elements
 {
-    public class MenuElement: ElementBase
+    public class MenuElement: Element
     {
         private static readonly By _locator = By.Id("hamburger");
 
@@ -106,8 +106,8 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         {
             OpenMenu();
             var clientSelection = By.XPath(string.Format(_menuSelectionLocatorFormat, EN_HELP));
-
-            return ClickElementToOpenNewWindowBy<HelpPage>(clientSelection);
+            return ClickMenuSelection<HelpPage>(EN_HELP);
+           // return ClickElementToOpenNewWindowBy<HelpPage>(clientSelection);
         }
 
         public HomePage ClickSignOut()

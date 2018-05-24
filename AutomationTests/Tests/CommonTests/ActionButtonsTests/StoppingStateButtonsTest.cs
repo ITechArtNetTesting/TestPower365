@@ -17,6 +17,8 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
                 
         [TestMethod]
         [TestCategory("MailOnly")]
+        [TestCategory("UI")]
+        [TestCategory("Stop")]
         public void StoppingStateButtonsTest_MO_23092()
         {
            
@@ -28,6 +30,7 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
         [TestCategory("UI")]
+        [TestCategory("Stop")]
         public void StoppingStateButtonsTest_mailWithDiscovery_25825()
         {
             StoppingStateButtons(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client1"), RunConfigurator.GetClient("client2"),
@@ -38,6 +41,7 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
         [TestMethod]
         [TestCategory("Integration")]
         [TestCategory("UI")]
+        [TestCategory("Stop")]
         public void StoppingStateButtonsTest_Integration_25825()
         {
             bool isIntegrate = true;          
