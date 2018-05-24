@@ -1,19 +1,13 @@
 ﻿using BinaryTree.Power365.AutomationFramework;
 using BinaryTree.Power365.AutomationFramework.Pages;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace BinaryTree.Power365.Test.CommonTests
 {
-    [TestClass]
+    [TestFixture]
     public class VerifyTheTabsOnTheManageErrorsPage_TC34718: TestBase
     {
-        public VerifyTheTabsOnTheManageErrorsPage_TC34718() : base(LogManager.GetLogger(typeof(VerifyTheTabsOnTheManageErrorsPage_TC34718))) { }
+        public VerifyTheTabsOnTheManageErrorsPage_TC34718() : base() { }
 
         private string _client;
         private string _username;        
@@ -51,22 +45,19 @@ namespace BinaryTree.Power365.Test.CommonTests
 
         }
 
-        [TestMethod]
-        [TestCategory("MailOnly")]
+        [Test]
         public void VerifyTheTabsOnTheManageErrorsPage_MO_34718()
         {
             VerifyTheTabsOnTheManageErrorsPage("client1", "project1");            
         }
 
-        [TestMethod]
-        [TestCategory("MailWithDiscovery")]
+        [Test]
         public void VerifyTheTabsOnTheManageErrorsPage_MD_34718()
         {
             VerifyTheTabsOnTheManageErrorsPage("client2", "project1");          
         }
 
-        [TestMethod]
-        [TestCategory("Integration")]
+        [Test]
         public void VerifyTheTabsOnTheManageErrorsPage_Integration_34718()
         {
             VerifyTheTabsOnTheManageErrorsPage("client2", "project2",true);           
