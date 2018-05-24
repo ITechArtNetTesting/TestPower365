@@ -1,14 +1,14 @@
 ﻿using BinaryTree.Power365.AutomationFramework;
 using BinaryTree.Power365.AutomationFramework.Pages;
 using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BinaryTree.Power365.Test.CommonTests.Discovery
 {
-    [TestClass]
+    [TestFixture]
     public class VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage_TC32699:TestBase
     {
-        public VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage_TC32699() : base(LogManager.GetLogger(typeof(VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage_TC32699))) { }
+        public VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage_TC32699() : base() { }
 
         private string _client;
         private string _username;
@@ -55,15 +55,13 @@ namespace BinaryTree.Power365.Test.CommonTests.Discovery
             return tenantsEditPage.CheckTenantCanBeEnabled(_tenant);
         }
 
-        [TestMethod]
-        [TestCategory("MailWithDiscovery")]
+        [Test]
         public void VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage_MD_32699()
         {
             VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage("client2", "project1");
         }
 
-        [TestMethod]
-        [TestCategory("Integration")]
+        [Test]
         public void VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage_Integration_32699()
         {
             VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage("client2", "project2");

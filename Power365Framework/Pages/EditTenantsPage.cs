@@ -11,6 +11,10 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
 {
     public class EditTenantsPage : PageBase
     {
+        private string tenantDisableXPath = "//*[contains(text(), '{0}')]//ancestor::tr//span[contains(@data-translation,'Disable')]";
+
+        private string tenantEnableXPath = "//*[contains(text(), '{0}')]//ancestor::tr//a[contains(@data-bind,'enable')]";
+
         private static By _locator = By.Id("tenantsManagementContainer");
 
         private readonly By _discoveryTab = By.XPath("//a[@role='tab' and contains(@href,'discovery')]");
@@ -60,6 +64,42 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             {
                 file.Delete();
             }
-}
+        }
+
+        public void DisableEnableTenant(string tenant, bool isDisable)
+        {
+               if (isDisable)
+            {
+                doDisableEnable(tenantEnableXPath, tenantDisableXPath, tenant);
+            }
+            else
+            {
+                doDisableEnable(tenantDisableXPath, tenantEnableXPath, tenant);
+            }
+        }
+        private void doDisableEnable(string input, string output, string tenant)
+        {
+            By tenantEnable = By.XPath(string.Format(input, tenant));
+            if (IsElementExists(tenantEnable))
+            {
+                HowerElement(tenantEnable);
+                ClickElementBy(tenantEnable);
+            }
+            By tenantDisable = By.XPath(string.Format(output, tenant));
+            HowerElement(tenantDisable);
+            ClickElementBy(tenantDisable);
+        }
+
+        public bool CheckTenantCanBeDisabled(string tenant)
+        {
+            By tenantEnable = By.XPath(string.Format(tenantEnableXPath, tenant));
+            return IsElementExists(tenantEnable, 300, 5);
+        }
+
+        public bool CheckTenantCanBeEnabled(string tenant)
+        {
+            By tenantDisable = By.XPath(string.Format(tenantDisableXPath, tenant));
+            return IsElementExists(tenantDisable, 300, 5);
+        }
     }
 }
