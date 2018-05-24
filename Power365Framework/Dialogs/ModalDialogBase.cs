@@ -6,7 +6,7 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
 {
     public class ModalDialogBase : Element, IDisposable
     {
-        private static By _locator = By.ClassName("close");
+        private static By _locator = By.XPath("//*[contains(@class,'modal in')]//*[contains(@class, 'close')]"); //By.ClassName("close") - not unique
         private readonly By _closeButton = By.ClassName("close");
 
         private bool _isOpen = false;

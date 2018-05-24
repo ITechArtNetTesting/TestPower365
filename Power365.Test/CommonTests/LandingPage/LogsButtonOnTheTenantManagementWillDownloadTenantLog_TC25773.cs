@@ -49,20 +49,20 @@ namespace BinaryTree.Power365.Test.CommonTests.LandingPage
             tenantsEditPage.ClickDiscoveryTab();
             tenantsEditPage.DeleteTenantLogs(_downloadsPath);
             tenantsEditPage.DownloadLogs(_tenant);
-            NUnit.Framework.Assert.IsTrue(tenantsEditPage.CheckDiscoveryFileIsDownloaded(_downloadsPath,15),"");
+            NUnit.Framework.Assert.IsTrue(tenantsEditPage.CheckDiscoveryFileIsDownloaded(_downloadsPath,15),"Logs could not be able to download");
         }
 
         [Test]
-      //  [TestCategory("MailWithDiscovery")]
-     //   [TestCategory("UI")]
+        [Category("MailWithDiscovery")]
+        [Category("UI")]
         public void LogsButtonOnTheTenantManagementWillDownloadTenantLog_MD_25773()
         {
             LogsButtonOnTheTenantManagementWillDownloadTenantLog("client2", "project1");
         }
 
 
-        //  [TestCategory("Integration")]
-        //   [TestCategory("UI")]
+        [Category("Integration")]
+        [Category("UI")]
         [Test]
         public void LogsButtonOnTheTenantManagementWillDownloadTenantLog_Integration_25773()
         {

@@ -10,3 +10,4 @@ D:\Project\BTCloud\SeleniumTests\Power365Framework\obj\Debug\Power365Framework.c
 D:\Project\BTCloud\SeleniumTests\Power365Framework\obj\Debug\BinaryTree.Power365.AutomationFramework.dll
 D:\Project\BTCloud\SeleniumTests\Power365Framework\obj\Debug\BinaryTree.Power365.AutomationFramework.pdb
 D:\Project\BTCloud\SeleniumTests\Power365Framework\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\Project\BTCloud\SeleniumTests\Power365Framework\obj\Debug\Power365Framework.csprojResolveAssemblyReference.cache

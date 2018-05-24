@@ -361,3 +361,4 @@ d:\Project\BTCloud\SeleniumTests\Power365.Test\bin\Debug\Resources\MailEngine\fu
 d:\Project\BTCloud\SeleniumTests\Power365.Test\bin\Debug\Resources\MailEngine\functions\Validations\Invoke-Validate45249b.ps1
 d:\Project\BTCloud\SeleniumTests\Power365.Test\bin\Debug\Resources\MailEngine\functions\Validations\Invoke-Validate46843.ps1
 D:\Project\BTCloud\SeleniumTests\Power365.Test\bin\Debug\Resources\PowerShell\PublicFolder.PrepareFolderPair.ps1
+D:\Project\BTCloud\SeleniumTests\Power365.Test\obj\Debug\Power365.Test.csprojResolveAssemblyReference.cache
