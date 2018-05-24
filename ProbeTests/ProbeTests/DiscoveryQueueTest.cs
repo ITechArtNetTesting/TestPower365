@@ -5,7 +5,7 @@ using Microsoft.WindowsAzure.Storage.Queue;
 using ProbeTests.Model;
 using Product.Framework;
 using System.Data.SqlClient;
-//using BTCloud.Lib;
+using BTCloud.Lib;
 using log4net;
 using log4net.Config;
 
@@ -21,7 +21,7 @@ namespace ProbeTests.ProbeTests
         public DiscoveryQueueTest()
         {
             RunConfigurator.RunPath = "resources/probeRun.xml";
-            //connectionString = RunConfigurator.GetValueByXpath("//DiscoveryQueueProbe/@connectionString").DecryptChk();
+            connectionString = RunConfigurator.GetValueByXpath("//DiscoveryQueueProbe/@connectionString").DecryptChk();
             threshold = int.Parse(RunConfigurator.GetValueByXpath("//DiscoveryQueueProbe/@threshold"));
             instanceName = ConfigurationManager.AppSettings.Get("Instance");
             XmlConfigurator.Configure();
@@ -61,7 +61,7 @@ namespace ProbeTests.ProbeTests
 
             probe.Completed = DateTime.UtcNow;
 
-            //SaveProbe(probe);
+            SaveProbe(probe);
         }
 
         private int? GetDiscoveryQueueSize()
@@ -75,19 +75,19 @@ namespace ProbeTests.ProbeTests
             return queue.ApproximateMessageCount;
         }
 
-        //private void SaveProbe(Probe probe)
-        //{
-        //    using (var probesDB = new ProbesDb())
-        //    {
-        //        probesDB.Probes.Add(probe);
-        //        probesDB.SaveChanges();
+        private void SaveProbe(Probe probe)
+        {
+            using (var probesDB = new ProbesDb())
+            {
+                probesDB.Probes.Add(probe);
+                probesDB.SaveChanges();
 
-        //        probesDB.Database.ExecuteSqlCommand(
-        //            "dbo.ArchiveProbes @ProbeType, @InstanceName",
-        //            new SqlParameter("@ProbeType", ProbeType.DiscoveryQueue),
-        //            new SqlParameter("@InstanceName", instanceName));
-        //    }
-        //}
+                probesDB.Database.ExecuteSqlCommand(
+                    "dbo.ArchiveProbes @ProbeType, @InstanceName",
+                    new SqlParameter("@ProbeType", ProbeType.DiscoveryQueue),
+                    new SqlParameter("@InstanceName", instanceName));
+            }
+        }
 
         public void SetUp() { }
 

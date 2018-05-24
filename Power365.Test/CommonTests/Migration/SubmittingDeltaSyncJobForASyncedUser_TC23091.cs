@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BinaryTree.Power365.AutomationFramework;
+using BinaryTree.Power365.AutomationFramework.Dialogs;
 using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Pages;
 using log4net;
@@ -15,7 +16,7 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration
     public class SubmittingDeltaSyncJobForASyncedUser_TC23091 : UITestBase
     {
         public SubmittingDeltaSyncJobForASyncedUser_TC23091()
-                   : base(LogManager.GetLogger(typeof(SubmittingDeltaSyncJobForASyncedUser_TC23091))) { }
+                   : base() { }
 
 
         private string _client;
@@ -24,27 +25,33 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration
         private string _password;
         private string _entry;
         private ManageUsersPage _manageUsersPage;
-        private UserDetailsPage _usersDetailsPage;
+        private UserDetailsDialog _usersDetailsPage;
 
         [ClassInitialize]
         public static void ClassInit(TestContext testContext){}
 
         [TestMethod]
+        [TestCategory("UI")]
         [TestCategory("MailOnly")]
+        [TestCategory("Sync")]
         public void VerifySubmittingDeltaSyncJobForASyncedUserFor_MO_23091()
         {
             RunTest("client1", "project1", "entry11");           
         }
 
         [TestMethod]
+        [TestCategory("UI")]
         [TestCategory("MailWithDiscovery")]
+        [TestCategory("Sync")]
         public void VerifySubmittingDeltaSyncJobForASyncedUserFor_MD_23091()
         {
             RunTest("client2", "project1", "entry6");            
         }
 
         [TestMethod]
+        [TestCategory("UI")]
         [TestCategory("Integration")]
+        [TestCategory("Sync")]
         public void VerifySubmittingDeltaSyncJobForASyncedUserFor_Integration_23091()
         {
             RunTest("client2", "project2", "entry10",true);            
@@ -79,25 +86,23 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration
                                        .ProjectSelect(projectName)
                                        .UsersEdit()
                                        .GetPage<ManageUsersPage>();
-            _manageUsersPage.PerformSearch(entry);
-            _usersDetailsPage = _manageUsersPage.OpenDetailsOf(entry);
+            _manageUsersPage.Search(entry);
+            _usersDetailsPage = _manageUsersPage.OpenUserDetails(entry);
             if (isIntegrat)
             {
-                _usersDetailsPage.PerformAction(ActionType.Prepare);
-                _usersDetailsPage.ConfirmAction();
-                _usersDetailsPage.WaitForState_DetailPage(entry, StateType.Preparing, 2700000, 5);
-                _usersDetailsPage.WaitForState_DetailPage(entry, StateType.Prepared, 2700000, 5);
+                _usersDetailsPage.PerformAction<UserDetailsDialog>(ActionType.Prepare); 
+               // _usersDetailsPage.ConfirmAction();
+                _usersDetailsPage.IsUserState(entry, StateType.Preparing, 2700000, 5);
+                _usersDetailsPage.IsUserState(entry, StateType.Prepared, 2700000, 5);
 
             }
-            _usersDetailsPage.PerformAction(ActionType.Sync);
-            _usersDetailsPage.ConfirmAction();
-            _usersDetailsPage.WaitForState_DetailPage(entry, StateType.Syncing, 2700000, 5);
-            _usersDetailsPage.WaitForState_DetailPage(entry, StateType.Synced1, 2700000, 5);
-            _usersDetailsPage.PerformAction(ActionType.Sync);
-            _usersDetailsPage.ConfirmAction();
-            _usersDetailsPage.WaitForState_DetailPage(entry, StateType.Syncing, 2700000, 5);
-            _usersDetailsPage.WaitForState_DetailPage(entry, StateType.Synced2, 2700000, 5);
-            _usersDetailsPage.CloseDetailsWindow();
+            _usersDetailsPage.PerformAction<UserDetailsDialog>(ActionType.Sync);           
+            _usersDetailsPage.IsUserState(entry, StateType.Syncing, 2700000, 5);
+            _usersDetailsPage.IsUserState(entry, StateType.Synced1, 2700000, 5);
+            _usersDetailsPage.PerformAction<UserDetailsDialog>(ActionType.Sync);          
+            _usersDetailsPage.IsUserState(entry, StateType.Syncing, 2700000, 5);
+            _usersDetailsPage.IsUserState(entry, StateType.Synced2, 2700000, 5);
+            _usersDetailsPage.Close(); 
         }
 
 

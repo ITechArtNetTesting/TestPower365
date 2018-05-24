@@ -3,7 +3,8 @@ function Invoke-Test30380 {
         [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
         [Parameter(Position = 4, Mandatory = $false)] [switch]$RunDelta,
-		[Parameter(Mandatory = $true)][String]$RootPath
+		[Parameter(Mandatory = $true)][String]$RootPath,
+		[Parameter(Mandatory = $true)][String]$TargetRootPath
     )  
     Begin {
         if ($TargetMailbox.IsPresent) {
@@ -49,7 +50,7 @@ function Invoke-Test30380 {
             $FolderName1 = "Test30380-" + (Get-Date).ToString("s")
             $NewFolder1.DisplayName = $FolderName1
             $NewFolder1.FolderClass = "IPF.Task"
-            $data.Folder =  $RootPath + $FolderName + "\" + $FolderName1
+            $data.Folder =  $RootPath + "\" + $FolderName + "\" + $FolderName1
             $NewFolder1.Save($NewFolder.Id)
             for($Im=0;$Im -lt 10;$Im++){
                 $Task = New-Object Microsoft.Exchange.WebServices.Data.Task -ArgumentList $service
@@ -82,8 +83,8 @@ function Invoke-Test30380 {
         if ($RunDelta.IsPresent) {
             Get-p365TestResults
             # Write-host "Part 1 - Message Created"
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
-            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
+            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
         }
 		
     }

@@ -11,8 +11,6 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
 {
     public class EditTenantsPage : PageBase
     {
-      
-
         private static By _locator = By.Id("tenantsManagementContainer");
 
         private readonly By _discoveryTab = By.XPath("//a[@role='tab' and contains(@href,'discovery')]");
@@ -51,7 +49,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         {
             
             By tenantLogs = By.XPath(string.Format(tenantLogsXPath, tenant));
-            HowerElement(tenantLogs);
+            HoverElement(tenantLogs);
             ClickElementBy(tenantLogs);
         }
 

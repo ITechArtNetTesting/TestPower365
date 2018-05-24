@@ -33,6 +33,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -75,7 +76,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CommonTests\LandingPage\LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773.cs" />
-    <Compile Include="CommonTests\MigrationWaves\MigrationWave_Sync_TC30919_33610.cs" />
+    <Compile Include="CommonTests\MigrationWaves\MigrationWave_ApplyAction_TC30919_33610.cs" />
     <Compile Include="CommonTests\MigrationWaves\UsersViewHasTheTabToSwitchToMigrationWaveView_TC30917.cs" />
     <Compile Include="CommonTests\Migration\SubmittingDeltaSyncJobForASyncedUser_TC23091.cs" />
     <Compile Include="CommonTests\UITestBase.cs" />
@@ -1022,6 +1023,9 @@
     </None>
     <None Include="Resources\MailEngine\working\064cf757-a755-4a04-b356-f34b8d920df5.csv" />
     <None Include="Resources\MailEngine\working\28e1db4c-6a15-47ad-91d4-45781d2e85f7.csv" />
+    <None Include="Resources\PowerShell\PublicFolder.PrepareFolderPair.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="QASettings.xml">
@@ -1120,6 +1124,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="IntegrationProjectTests\" />
     <Folder Include="Resources\MailEngine\internal\functions\" />
   </ItemGroup>
   <Choose>

@@ -20,7 +20,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
         }
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
-        [TestCategory("UI")]
+        [TestCategory("Powershell")]
         public void Automation_MO_RollbackTest()
         {
             string login = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user");

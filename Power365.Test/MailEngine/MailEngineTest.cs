@@ -44,7 +44,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         private ManageUsersPage _manageUsersPage;
 
         public MailEngineTest()
-            : base(LogManager.GetLogger(typeof(MailEngineTest))) { }
+            : base() { }
 
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
@@ -417,22 +417,17 @@ namespace BinaryTree.Power365.Test.MailEngine
             AssertSyncTestPasses("45249b", PerformSync);
         }
 
-        private void PerformSync(string user)
+        private void PerformSync(string user, ManageUsersPage manageUsersPage)
         {
-            _manageUsersPage = Automation.Common
-                                        .SingIn(_username, _password)
-                                        .ClientSelect(_client)
-                                        .ProjectSelect(_project)
-                                        .UsersEdit()
-                                        .UsersPerformAction(user, ActionType.Sync)
-                                        .UsersValidateState(user, StateType.Syncing)
-                                        .UsersValidateState(user, StateType.Synced)
-                                        .GetPage<ManageUsersPage>();
+            Automation.Common
+                .UsersPerformAction(user, ActionType.Sync)
+                .UsersValidateState(user, StateType.Syncing)
+                .UsersValidateState(user, StateType.Synced);
         }
 
-        private void PerformSyncWithRollback(string user)
+        private void PerformSyncWithRollback(string user, ManageUsersPage manageUsersPage)
         {
-            PerformSync(user);
+            PerformSync(user, manageUsersPage);
 
             Automation.Common
                     .UsersPerformRollback(user, false)
@@ -440,9 +435,16 @@ namespace BinaryTree.Power365.Test.MailEngine
                     .UsersValidateState(user, StateType.RollbackCompleted);
         }
         
-        private void AssertSyncTestPasses(string testId, Action<string> userInterfaceActions, params KeyValuePair<string, object>[] parameters)
+        private void AssertSyncTestPasses(string testId, Action<string, ManageUsersPage> userInterfaceActions, params KeyValuePair<string, object>[] parameters)
         {
-            AssertTestPasses(_powerShell, testId, _sourceMailbox, userInterfaceActions, parameters);
+            var manageUsersPage = Automation.Common
+                .SingIn(_username, _password)
+                .ClientSelect(_client)
+                .ProjectSelect(_project)
+                .UsersEdit()
+                .GetPage<ManageUsersPage>();
+
+            AssertTestPasses(_powerShell, testId, _sourceMailbox, manageUsersPage, userInterfaceActions, parameters);
         }
     }
 }

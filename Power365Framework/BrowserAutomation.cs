@@ -28,22 +28,7 @@ namespace BinaryTree.Power365.AutomationFramework
             _webDriver.Navigate().GoToUrl(url);
             return (T)Activator.CreateInstance(typeof(T), new[] { _webDriver });
         }
-
-        public TW CreateWorkflow<TW, TP>(string url)
-            where TW: WorkflowBase
-            where TP: PageBase
-        {
-            TP rootPage = Navigate<TP>(url);
-            return (TW)Activator.CreateInstance(typeof(TW), rootPage, _webDriver);
-        }
-
-        public TW CreateWorkflow<TW, TP>(TP rootPage)
-            where TW : WorkflowBase
-            where TP : PageBase
-        {
-            return (TW)Activator.CreateInstance(typeof(TW), rootPage, _webDriver);
-        }
-
+        
         public void Dispose()
         {
             if (_webDriver != null)

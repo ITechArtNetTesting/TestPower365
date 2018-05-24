@@ -3,7 +3,8 @@ function Invoke-Test32363 {
         [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
         [Parameter(Position = 4, Mandatory = $false)] [switch]$RunDelta,
-		[Parameter(Mandatory = $true)][String]$RootPath
+		[Parameter(Mandatory = $true)][String]$RootPath,
+		[Parameter(Mandatory = $true)][String]$TargetRootPath
     )  
     Begin {
         if ($TargetMailbox.IsPresent) {
@@ -48,7 +49,7 @@ function Invoke-Test32363 {
             $NewFolder1 = new-object Microsoft.Exchange.WebServices.Data.ContactsFolder($service)  
             $FolderName1 = "Test32363-" + (Get-Date).ToString("s")
             $NewFolder1.DisplayName = $FolderName1
-            $data.Folder = $RootPath + $FolderName + "\" + $FolderName1
+            $data.Folder = $RootPath + "\" + $FolderName + "\" + $FolderName1
             $NewFolder1.Save($NewFolder.Id)
 
              $jnJournal = New-Object Microsoft.Exchange.WebServices.Data.EmailMessage -ArgumentList $service  
@@ -71,8 +72,8 @@ function Invoke-Test32363 {
             $EntryIdVal = $null		
             [Void]$jnJournal.TryGetProperty($PR_ENTRYID, [ref]$EntryIdVal)  
             $data.MessageId = $EntryIdVal
-             Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
-            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+             Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
+            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
             $jnJournal.Delete([Microsoft.Exchange.WebServices.Data.DeleteMode]::HardDelete)
             $TestResults.Data = $data               
             $TestResults.TestResult = "Succeeded"
@@ -88,8 +89,8 @@ function Invoke-Test32363 {
         if ($RunDelta.IsPresent) {
             Get-p365TestResults
             # Write-host "Part 1 - Message Created"
-            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
-            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+            Invoke-p365SyncPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
+            Invoke-p365CopyPublicFolder -mappingfile $tfile -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
         }
 		
     }

@@ -17,7 +17,7 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		}
 		[TestMethod]
 		[TestCategory("MailOnly")]
-        [TestCategory("UI")]
+        [TestCategory("ApolloExampleThree")]
         public void Automation_MO_SortingTest()
 		{
 		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");

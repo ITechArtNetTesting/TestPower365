@@ -60,10 +60,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BrowserAutomation.cs" />
-    <Compile Include="Elements\PageElement.cs" />
+    <Compile Include="Dialogs\ConfirmationDialog.cs" />
+    <Compile Include="Dialogs\ModalDialogBase.cs" />
+    <Compile Include="Dialogs\RollbackConfirmationDialog.cs" />
+    <Compile Include="Dialogs\UserDetailsDialog.cs" />
+    <Compile Include="Elements\ButtonElement.cs" />
+    <Compile Include="Elements\Element.cs" />
+    <Compile Include="Elements\InputElement.cs" />
     <Compile Include="Elements\TableElement.cs" />
     <Compile Include="Enums\ActionType.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Pages\ActionPageBase.cs" />
     <Compile Include="Pages\EditProjectPage.cs" />
     <Compile Include="Pages\EditTenantsPage.cs" />
     <Compile Include="Pages\EditWavePage.cs" />
@@ -83,13 +90,13 @@
     <Compile Include="Pages\PageBase.cs" />
     <Compile Include="Pages\ProjectListPage.cs" />
     <Compile Include="AutomationContext.cs" />
-    <Compile Include="Pages\UserDetailsPage.cs" />
     <Compile Include="PowershellAutomation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Workflows\CommonWorkflow.cs" />
     <Compile Include="Workflows\AddPublicFolderWorkflow.cs" />
     <Compile Include="Workflows\EditProjectWorkflowBase.cs" />
+    <Compile Include="Workflows\MultiPageWorkflow.cs" />
     <Compile Include="Workflows\WizardWorkflow.cs" />
     <Compile Include="Workflows\WorkflowBase.cs" />
   </ItemGroup>

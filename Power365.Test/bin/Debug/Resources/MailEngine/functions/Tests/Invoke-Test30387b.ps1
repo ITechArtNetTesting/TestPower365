@@ -3,7 +3,8 @@ function Invoke-Test30387b {
         [Parameter(Position = 0, Mandatory = $false)] [switch]$SourceMailbox,
         [Parameter(Position = 1, Mandatory = $false)] [switch]$TargetMailbox,
         [Parameter(Position = 6, Mandatory = $false)][switch]$RunDelta,
-		[Parameter(Mandatory = $true)][String]$RootPath
+		[Parameter(Mandatory = $true)][String]$RootPath,
+		[Parameter(Mandatory = $true)][String]$TargetRootPath
     )  
     Begin {
         $Data = "" | Select OrginalId, MovedId, NewId
@@ -47,8 +48,8 @@ function Invoke-Test30387b {
         } 	
         
         # Write-host "Part 1 - Message Created"
-        Invoke-p365SyncPublicFolder -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
-	    Invoke-p365CopyPublicFolder -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+        Invoke-p365SyncPublicFolder -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
+	    Invoke-p365CopyPublicFolder -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
         # Invoke-P365MailboxCopy	-mappingfile $tfile	
         $Folder = Get-P365PublicFolderFromPath -TargetMailbox -FolderPath ($RootPath + "\" + $FolderName)
         $TestResults = "" | Select TestCase, Description, TestLastRun, TestResult, Data, ValidationLastRun, ValidationResult, OverAllResult
@@ -77,7 +78,7 @@ function Invoke-Test30387b {
         if ($RunDelta.IsPresent) {
             Get-p365TestResults
             # Write-host "Part 1 - Message Created"
-            Invoke-p365CopyPublicFolder -SourceFolderPath ("\" + $RootPath + "\" + $FolderName) -TargetCopyPath ("\" + $RootPath)
+            Invoke-p365CopyPublicFolder -SourceFolderPath ("\" + $RootPath) -TargetCopyPath ("\" + $TargetRootPath)
         }
         Write-Host "Done" -ForegroundColor Green
     }

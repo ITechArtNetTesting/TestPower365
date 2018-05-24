@@ -17,6 +17,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
         [TestMethod]
         [TestCategory("Integration")]
         [TestCategory("UI")]
+        [TestCategory("Rollback")]
         public void RollbackTest_InTheUserDetailView_Integrat_39559()
         {
             bool isIntegrate = true;
@@ -27,6 +28,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
         [TestMethod]
         [TestCategory("MailOnly")]
         [TestCategory("UI")]
+        [TestCategory("Rollback")]
         public void RollbackTest_InTheUserDetailView_MO_39559()
         {
             RollbackTest_InTheUserDetailView(RunConfigurator.GetUserLogin("client1"), RunConfigurator.GetPassword("client1"), RunConfigurator.GetClient("client1"),
@@ -36,6 +38,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
         [TestCategory("UI")]
+        [TestCategory("Rollback")]
         public void RollbackTest_InTheUserDetailView_MD_39559()
         {
             RollbackTest_InTheUserDetailView(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"), RunConfigurator.GetClient("client2"),

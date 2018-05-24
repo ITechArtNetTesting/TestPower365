@@ -6,7 +6,7 @@ using BinaryTree.Power365.AutomationFramework.Extensions;
 
 namespace BinaryTree.Power365.AutomationFramework.Workflows
 {
-    public class CommonWorkflow : WorkflowBase
+    public class CommonWorkflow : MutliPageWorkflow
     {
         private readonly HomePage _homePage;
         
@@ -57,7 +57,7 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
                 throw new Exception("User method UsersPerformRollback.");           
 
             var manageUsersPage = GetCurrentPage<ManageUsersPage>();
-            manageUsersPage.Users.ClickRowByValue(user);
+            manageUsersPage.UsersTable.ClickRowByValue(user);
             manageUsersPage.PerformAction(action);
             manageUsersPage.ConfirmAction(isYes);
             return this;
@@ -66,10 +66,10 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
         public CommonWorkflow WavesPerformAction(string wave, ActionType action, bool isYes = true)
         {
             if (action == ActionType.Rollback)
-                throw new Exception("User method UsersPerformRollback.");
+                throw new Exception("Wave method WavePerformRollback.");
             
             var manageUsersPage = GetCurrentPage<ManageUsersPage>();
-            manageUsersPage.Waves.ClickRowByValue(wave);
+            manageUsersPage.WavesTable.ClickRowByValue(wave);
             manageUsersPage.PerformAction(action);
             manageUsersPage.ConfirmAction(isYes);
             return this;
@@ -77,14 +77,14 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
         public CommonWorkflow UsersFindAndPerformAction(string user, ActionType action, bool isYes = true)
         {
             var manageUsersPage = GetCurrentPage<ManageUsersPage>();
-            manageUsersPage.PerformSearch(user);
+            manageUsersPage.Search(user);
             return UsersPerformAction(user, action, isYes );
         }
 
         public CommonWorkflow UsersPerformRollback(string user, bool resetPermissions = true)
         {
             var manageUsersPage = GetCurrentPage<ManageUsersPage>();
-            manageUsersPage.Users.ClickRowByValue(user);
+            manageUsersPage.UsersTable.ClickRowByValue(user);
             manageUsersPage.PerformAction(ActionType.Rollback);
             manageUsersPage.ConfirmRollback(resetPermissions);
             return this;
@@ -93,8 +93,8 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
         public CommonWorkflow UsersPerformAddToWave(string user, string waveName )
         {
             var manageUsersPage = GetCurrentPage<ManageUsersPage>();
-            manageUsersPage.PerformSearch(user);
-            manageUsersPage.Users.ClickRowByValue(user);
+            manageUsersPage.Search(user);
+            manageUsersPage.UsersTable.ClickRowByValue(user);
             manageUsersPage.PerformAction(ActionType.AddToWave);
             manageUsersPage.SelectWave(waveName);         
             return this;

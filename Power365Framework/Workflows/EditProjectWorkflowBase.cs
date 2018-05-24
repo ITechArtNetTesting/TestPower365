@@ -6,6 +6,8 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
 {
     public class EditProjectWorkflowBase<T> : WizardWorkflow
     {
+        private static By _locator = By.XPath("//*/span[@data-translation='ChooseYourProjectType']");
+
         private readonly By _projectTypeStep = By.XPath("//*/span[@data-translation='ChooseYourProjectType']");
         private readonly By _projectNameStep = By.XPath("//*/span[@data-translation='WhatShouldWeCallProject']");
         private readonly By _projectDescriptionStep = By.XPath("//*/span[@data-translation='DescribeThisProjectInJustAFewWords']");
@@ -17,25 +19,31 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
         //private readonly By _ = By.XPath("//*/span[@data-translation='']");
         //private readonly By _ = By.XPath("//*/span[@data-translation='']");
         //private readonly By _ = By.XPath("//*/span[@data-translation='']");
-
-
+        
         protected readonly EditProjectPage EditProjectPage;
 
         public EditProjectWorkflowBase(EditProjectPage editProjectPage, IWebDriver webDriver)
-            : base(editProjectPage, webDriver)
+            : base(_locator, webDriver)
         {
             EditProjectPage = editProjectPage;
         }
-        
+
+        public EditProjectWorkflowBase(By locator, EditProjectPage editProjectPage, IWebDriver webDriver)
+            : base(locator, webDriver)
+        {
+            EditProjectPage = editProjectPage;
+        }
+
         public T ProjectType(ProjectType projectType)
         {
+            //Probably don't need to validate steps becasue GetWorkflow will validate on init.
             ValidateStepBy(_projectTypeStep);
 
             EditProjectPage.SelectProjectType(projectType);
 
             ClickNext();
-
-            return GetWorkflow();
+            
+            return GetWorkflow(_projectNameStep);
         }
 
         public T ProjectName(string projectName)
@@ -46,7 +54,7 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
 
             ClickNext();
 
-            return GetWorkflow();
+            return GetWorkflow(_projectDescriptionStep);
         }
         
         public T ProjectDescription(string projectDescription)
@@ -57,7 +65,7 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
 
             ClickNext();
 
-            return GetWorkflow();
+            return GetWorkflow(_addTenantsStep);
         }
 
         public T AddTenant(string tenantUsername, string tenantPassword, bool isFinished = false)
@@ -68,8 +76,8 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
 
             if (isFinished)
                 ClickNext();
-            
-            return GetWorkflow();
+            throw new NotImplementedException();
+            //return GetWorkflow();
         }
 
         public T SyncSchedule(bool isEnabled)
@@ -77,8 +85,8 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
             EditProjectPage.SetSyncSchedule(isEnabled);
 
             ClickNext();
-
-            return GetWorkflow();
+            throw new NotImplementedException();
+            //return GetWorkflow();
         }
 
        public T MigrationWave(string migrationWave, bool isFinished = false)
@@ -87,8 +95,8 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
 
             if (isFinished)
                 ClickNext();
-
-            return GetWorkflow();
+            throw new NotImplementedException();
+            // return GetWorkflow();
         }
 
         public T AddMigrationWave(string migrationWave, bool isFinished = false)
@@ -97,8 +105,8 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
 
             if (isFinished)
                 ClickNext();
-
-            return GetWorkflow();
+            throw new NotImplementedException();
+            //return GetWorkflow();
         }
 
 
@@ -108,8 +116,8 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
 
             if (isFinished)
                 ClickNext();
-
-            return GetWorkflow();
+            throw new NotImplementedException();
+            // return GetWorkflow();
         }
 
         public T SelectTenantMachGroup(bool isFinished = false)
@@ -118,8 +126,8 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
 
             if (isFinished)
                 ClickNext();
-
-            return GetWorkflow();
+            throw new NotImplementedException();
+            //  return GetWorkflow();
         }
 
         public T AddADGroup(string groupName, bool isFinished = false)
@@ -128,20 +136,20 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
 
             if (isFinished)
                 ClickNext();
-
-            return GetWorkflow();
+            throw new NotImplementedException();
+            // return GetWorkflow();
         }
 
         public T Submit()
         {
             ClickNext();
-
-            return GetWorkflow();
+            throw new NotImplementedException();
+            // return GetWorkflow();
         }
         
-        private T GetWorkflow()
+        private T GetWorkflow(By locator)
         {
-            return (T)Activator.CreateInstance(typeof(T), (EditProjectPage)CurrentPage, WebDriver);
+            return (T)Activator.CreateInstance(typeof(T), locator, EditProjectPage, WebDriver);
         }
     }
 
