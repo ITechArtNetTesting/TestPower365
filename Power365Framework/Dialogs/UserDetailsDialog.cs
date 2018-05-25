@@ -117,7 +117,7 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
 
         public void ConfirmAction(bool isYes = true)
         {
-          var conformModal = details
+            var conformModal = _detailsState;
             var confirmDialogButton = By.XPath(string.Format(_confirmationDialogButtonFormat, isYes ? "Yes" : "No"));
             ClickElementBy(confirmDialogButton);
         }
