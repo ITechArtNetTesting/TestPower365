@@ -28,7 +28,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         }
 
         public void Validate()
-        {
+        {            
             FindVisibleElement(_locator);
         }
 

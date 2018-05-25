@@ -98,8 +98,8 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         {
             OpenMenu();
             var clientSelection = By.XPath(string.Format(_menuSelectionLocatorFormat, EN_HELP));
-            return ClickMenuSelection<HelpPage>(EN_HELP);
-           // return ClickElementToOpenNewWindowBy<HelpPage>(clientSelection);
+            return ClickPopupElementBy<HelpPage>(clientSelection).Page;
+            // return ClickElementToOpenNewWindowBy<HelpPage>(clientSelection);
         }
 
         public HomePage ClickSignOut()
