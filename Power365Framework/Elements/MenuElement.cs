@@ -13,7 +13,9 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         private static readonly By _locator = By.Id("hamburger");
 
         private By _clientsComboBox = By.ClassName("dropdown");
-        
+
+        private By errorButton = By.XPath("//li//a[contains(@href,'Errors')]");
+
         private string _menuSelectionLocatorFormat = "//span[contains(text(), '{0}')]";
         private string _clientLocatorFormat = "//div[contains(@class, 'open')]//a[contains(text(), '{0}')]";
 
@@ -87,6 +89,12 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         public ProbesPage ClickProbes()
         {
             throw new NotImplementedException();
+        }
+
+        public ErrorsPage ClickErrors()
+        {
+            OpenMenu();
+            return ClickElementBy<ErrorsPage>(errorButton);
         }
 
         public ResourcesPage ClickResources()
