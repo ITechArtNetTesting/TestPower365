@@ -600,5 +600,4 @@ d:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\TestResultsPubli
 d:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\BuildStatusRelay.ps1
 d:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\TestRunner.ps1
 D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.csprojResolveAssemblyReference.cache
-D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.exe.config
 D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.csproj.CoreCompileInputs.cache
