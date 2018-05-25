@@ -19,8 +19,7 @@ namespace BinaryTree.Power365.Test.Navigation
         private string _client;
         private string _username;
         private string _password;
-
-        private PageBase _basePage;
+        
         private HelpPage _helpPage;
 
         public HelpURLShouldBeAliasedToBTDomain_TC39025() : base() { }
@@ -38,11 +37,12 @@ namespace BinaryTree.Power365.Test.Navigation
 
         [Test]
         public void HelpURLShouldBeAliasedToBTDomain_39025()
-        {           
-            _basePage = Automation.Common
+        {
+            _helpPage = Automation.Common
                         .SingIn(_username, _password)
-                        .GetPage<PageBase>();
-            _helpPage=_basePage.Menu.ClickHelp();            
+                        .GetPage<PageBase>()
+                        .Menu
+                        .ClickHelp();                     
             Assert.IsTrue(_helpPage.GetUrl().Contains(CorrectDomain),"The help link incorrect");
         }
     }
