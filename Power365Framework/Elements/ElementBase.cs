@@ -47,6 +47,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             where T : ModalDialogBase
         {
             var element = FindClickableElement(by, timeoutInSec, pollIntervalInSec);
+            element.Click();
             return (T)Activator.CreateInstance(typeof(T), WebDriver);
         }
         
@@ -121,6 +122,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             }
         }
 
+        //may be - ExpectedConditions.VisibilityOfAllElementsLocatedBy(By locator); ?
         protected bool IsAnyElementExists(By[] bys, int timeoutInSec = 5, int pollIntervalInSec = 0, Action refreshAction = null)
         {
             try

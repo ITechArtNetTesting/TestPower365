@@ -50,8 +50,10 @@ namespace BinaryTree.Power365.AutomationFramework.Enums
         [Display(Name = "Rollback Complete")]
         [Description("Rollback Complete")]
         RollbackCompleted,
+        [Display(Name = "1 sync(s) complete")]
         [Description("1 sync(s) complete")]
         Synced1,
+        [Display(Name = "2 sync(s) complete")]
         [Description("2 sync(s) complete")]
         Synced2
     }
