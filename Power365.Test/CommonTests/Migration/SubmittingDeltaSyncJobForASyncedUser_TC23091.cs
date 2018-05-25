@@ -25,8 +25,7 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration
         private string _projectName;
         private string _password;
         private string _entry;
-        private ManageUsersPage _manageUsersPage;
-        private UserDetailsDialog _usersDetailsPage;
+        private ManageUsersPage _manageUsersPage;     
 
         
 
@@ -87,22 +86,23 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration
                                        .UsersEdit()
                                        .GetPage<ManageUsersPage>();
                 _manageUsersPage.Search(entry);
-                _usersDetailsPage = _manageUsersPage.OpenUserDetails(entry);
+                var _usersDetailsPage = _manageUsersPage.OpenUserDetails(entry);
                 if (isIntegrat)
                 {
-                    //_usersDetailsPage.PerformAction<UserDetailsDialog>(ActionType.Prepare); 
-                    _usersDetailsPage.PerformAction(ActionType.Prepare);
-                    _usersDetailsPage.ConfirmAction(true);
+                    _usersDetailsPage.PerformAction<UserDetailsDialog>(ActionType.Prepare)
+                                     .ConfirmAction(); 
+                    
                     _usersDetailsPage.IsUserState(entry, StateType.Preparing, 2700000, 5);
                     _usersDetailsPage.IsUserState(entry, StateType.Prepared, 2700000, 5);
 
                 }
-               _usersDetailsPage.PerformAction(ActionType.Sync);
-                _usersDetailsPage.ConfirmAction(true);
+               _usersDetailsPage.PerformAction<ConfirmationDialog>(ActionType.Sync)
+                                .Yes();
+                
                _usersDetailsPage.IsUserState(entry, StateType.Syncing, 2700000, 5);
                 _usersDetailsPage.IsUserState(entry, StateType.Synced1, 2700000, 5);
-               _usersDetailsPage.PerformAction(ActionType.Sync);
-               _usersDetailsPage.ConfirmAction(true);
+               _usersDetailsPage.PerformAction<UserDetailsDialog>(ActionType.Sync).ConfirmAction(); 
+           
                _usersDetailsPage.IsUserState(entry, StateType.Syncing, 2700000, 5);
                _usersDetailsPage.IsUserState(entry, StateType.Synced2, 2700000, 5);
         //    _usersDetailsPage.Close(); 

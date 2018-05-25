@@ -47,6 +47,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             where T : ModalDialogBase
         {
             var element = FindClickableElement(by, timeoutInSec, pollIntervalInSec);
+            element.Click();
             return (T)Activator.CreateInstance(typeof(T), WebDriver);
         }
         

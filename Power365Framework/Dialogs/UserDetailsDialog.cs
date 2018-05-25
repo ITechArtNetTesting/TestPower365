@@ -83,10 +83,9 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
         public UserDetailsDialog(IWebDriver webDriver)
             : base(webDriver) { }
         
-        //public T PerformAction<T>(ActionType action)
-        //    where T: ModalDialogBase
-          public void PerformAction(ActionType action)
-          //  where T : ModalDialogBase
+       public T PerformAction<T>(ActionType action)
+         where T: ModalDialogBase
+       //   public void PerformAction(ActionType action)          
         {
             ButtonElement button = null;
             switch (action)
@@ -110,16 +109,14 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
                     throw new Exception("Invalid action for this dialog.");
             }
 
-             button.Click();
+           //  button.Click();
 
-           // return button.ClickModal<T>();
+           return button.ClickModal<T>();
         }
 
-        public void ConfirmAction(bool isYes = true)
+        public void ConfirmAction()
         {
-          var conformModal = details
-            var confirmDialogButton = By.XPath(string.Format(_confirmationDialogButtonFormat, isYes ? "Yes" : "No"));
-            ClickElementBy(confirmDialogButton);
+            confirmationDialog.Yes();
         }
 
         public void IsUserState(string entry, StateType state, int timeoutInSec = 5, int pollIntervalInSec = 0)
@@ -129,8 +126,11 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
             var rowEntryTextValue = string.Format(_migrationStateTextLocatorFormat, value.ToLower());
             var stateLocator = By.XPath(rowEntryTextValue);
 
-          //  EvaluateElement(stateLocator, ExpectedConditions.ElementIsVisible(stateLocator), () => ClickElementBy(_refreshDetailsWindowButton), timeout, pollIntervalSec);
-            IsElementVisible(stateLocator, timeoutInSec, pollIntervalInSec, () => RefreshButton.Click());
+              //EvaluateElement(stateLocator, ExpectedConditions.ElementIsVisible(stateLocator), () => ClickElementBy(_refreshDetailsWindowButton), timeout, pollIntervalSec);
+            if (!IsElementVisible(stateLocator, timeoutInSec, pollIntervalInSec, () => RefreshButton.Click()))
+            {
+                throw new Exception(string.Format("Entry of '{0}' with state '{1}' was not found.", entry, value));
+            };
         }
     }
 }

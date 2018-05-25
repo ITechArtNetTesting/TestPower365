@@ -20,7 +20,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             }
         }
 
-        public TableElement WavesTables
+        public TableElement WavesTable
         {
             get
             {
@@ -57,8 +57,8 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
                 return new InputElement(_searchInput, WebDriver);
             }
         }
-
-         private static readonly By _locator = By.Id("manageUsersContainer");      
+       // private UserDetailsDialog _usersDetailsPage;
+        private static readonly By _locator = By.Id("manageUsersContainer");      
         //@@@ REQ:ID
         private readonly By _usersTable = By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]");
         private readonly By _wavesTable = By.XPath("//div[contains(@id, 'waves')]//table[contains(@class, 'table-expanded')]");
