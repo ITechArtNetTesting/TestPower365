@@ -16,22 +16,17 @@ namespace BinaryTree.Power365.Test.CommonTests.Discovery
         private string _password;
         private string _tenant;
 
-        private EditTenantsPage tenantsEditPage;
-
-        private void InitializeUser(string clientName, string projectName)
+        private EditTenantsPage tenantsEditPage;      
+        
+        private void VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage(string clientName, string project)
         {
             var client = Automation.Settings.GetByReference<Client>(clientName);
-            var _project = client.GetByReference<Project>(projectName);
+            var _project = client.GetByReference<Project>(project);
             _client = client.Name;
             _username = client.Administrator.Username;
             _password = client.Administrator.Password;
             _projectName = _project.Name;
-            _tenant = Automation.Settings.GetByReference<Tenant>(_project.Source).Name;
-        }
-        
-        private void VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage(string client, string project)
-        {
-            InitializeUser(client, project);
+            _tenant = Automation.Settings.GetByReference<Tenant>(_project.Source).Name;            
             tenantsEditPage = Automation.Common
                 .SingIn(_username, _password)
                 .ClientSelect(_client)
