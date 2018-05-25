@@ -18,7 +18,7 @@ namespace BinaryTree.Power365.Test.CommonTests.Discovery
 
         private EditTenantsPage tenantsEditPage;
 
-        private void SetTestCaseParams(string clientName, string projectName)
+        private void InitializeUser(string clientName, string projectName)
         {
             var client = Automation.Settings.GetByReference<Client>(clientName);
             var _project = client.GetByReference<Project>(projectName);
@@ -28,10 +28,10 @@ namespace BinaryTree.Power365.Test.CommonTests.Discovery
             _projectName = _project.Name;
             _tenant = Automation.Settings.GetByReference<Tenant>(_project.Source).Name;
         }
-
+        
         private void VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage(string client, string project)
         {
-            SetTestCaseParams(client, project);
+            InitializeUser(client, project);
             tenantsEditPage = Automation.Common
                 .SingIn(_username, _password)
                 .ClientSelect(_client)
@@ -39,8 +39,8 @@ namespace BinaryTree.Power365.Test.CommonTests.Discovery
                 .TenantsEdit()
                 .GetPage<EditTenantsPage>();
             tenantsEditPage.ClickDiscoveryTab();
-            Assert.IsTrue(discoveryCanBeDisabled());
-            Assert.IsTrue(discoveryCanBeEnabled());
+            Assert.IsTrue(discoveryCanBeDisabled(),"Discovery tenant can not be disabled");
+            Assert.IsTrue(discoveryCanBeEnabled(), "Discovery tenant can not be enabled");
         }
 
         private bool discoveryCanBeDisabled()
@@ -53,7 +53,7 @@ namespace BinaryTree.Power365.Test.CommonTests.Discovery
         {
             tenantsEditPage.DisableEnableTenant(_tenant, false);
             return tenantsEditPage.CheckTenantCanBeEnabled(_tenant);
-        }
+        }        
 
         [Test]
         public void VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage_MD_32699()

@@ -24,6 +24,7 @@ D:\Git\TestPower365\Power365Framework.Test\bin\Debug\SeleniumExtras.WaitHelpers.
 D:\Git\TestPower365\Power365Framework.Test\bin\Debug\BinaryTree.Power365.AutomationFramework.pdb
 D:\Git\TestPower365\Power365Framework.Test\bin\Debug\WebDriver.xml
 D:\Git\TestPower365\Power365Framework.Test\bin\Debug\WebDriver.Support.xml
+D:\Git\TestPower365\Power365Framework.Test\obj\Debug\Power365Framework.Test.csprojResolveAssemblyReference.cache
 D:\Git\TestPower365\Power365Framework.Test\obj\Debug\Power365Framework.Test.csproj.CoreCompileInputs.cache
 D:\Git\TestPower365\Power365Framework.Test\obj\Debug\Power365Framework.Test.dll
 D:\Git\TestPower365\Power365Framework.Test\obj\Debug\Power365Framework.Test.pdb
