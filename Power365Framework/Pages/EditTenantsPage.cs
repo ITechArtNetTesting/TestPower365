@@ -17,6 +17,8 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
 
         private static By _locator = By.Id("tenantsManagementContainer");
 
+        private readonly By addressBookTab = By.XPath("//a[@role='tab']//span[contains(@data-translation,'AddressBook')]");
+
         private readonly By _discoveryTab = By.XPath("//a[@role='tab' and contains(@href,'discovery')]");
 
         private string tenantLogsXPath = "//*[contains(text(), '{0}')]/ancestor::tr//a[contains(@data-bind, 'exportTenantLogs')]";
@@ -101,5 +103,11 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             By tenantDisable = By.XPath(string.Format(tenantDisableXPath, tenant));
             return IsElementExists(tenantDisable, 300, 5);
         }
+
+        public bool AddressBookTabIsVisible()
+        {
+            return IsElementVisible(addressBookTab);
+        }
+
     }
 }
