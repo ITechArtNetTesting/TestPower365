@@ -69,7 +69,8 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
                 return new ButtonElement(_closeButton, WebDriver);
             }
         }
-        
+
+        private ConfirmationDialog confirmationDialog;
         private readonly By _closeButton = By.XPath("//*[contains(@data-translation, 'Close')]");
 
         private readonly string _actionButtonFormat = "//div[contains(@class, 'modal in')]//*[contains(@data-bind, '{0}')]";
@@ -116,6 +117,7 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
 
         public void ConfirmAction(bool isYes = true)
         {
+          var conformModal = details
             var confirmDialogButton = By.XPath(string.Format(_confirmationDialogButtonFormat, isYes ? "Yes" : "No"));
             ClickElementBy(confirmDialogButton);
         }

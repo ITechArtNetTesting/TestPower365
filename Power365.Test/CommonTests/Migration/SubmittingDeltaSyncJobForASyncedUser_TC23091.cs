@@ -86,7 +86,7 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration
                                        .ProjectSelect(projectName)
                                        .UsersEdit()
                                        .GetPage<ManageUsersPage>();
-            _manageUsersPage.Search(entry);
+                _manageUsersPage.Search(entry);
                 _usersDetailsPage = _manageUsersPage.OpenUserDetails(entry);
                 if (isIntegrat)
                 {

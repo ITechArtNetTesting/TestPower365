@@ -1,5 +1,5 @@
-﻿using BinaryTree.Power365.AutomationFramework.Elements;
-using BinaryTree.Power365.AutomationFramework.Dialogs;
+﻿using BinaryTree.Power365.AutomationFramework.Dialogs;
+using BinaryTree.Power365.AutomationFramework.Elements;
 using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Extensions;
 using BinaryTree.Power365.AutomationFramework.Pages;
@@ -8,6 +8,8 @@ using System;
 
 namespace BinaryTree.Power365.AutomationFramework.Pages
 {
+    
+
     public class ManageUsersPage : ActionPageBase
     {
         public TableElement UsersTable
@@ -18,7 +20,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             }
         }
 
-        public TableElement WavesTable
+        public TableElement WavesTables
         {
             get
             {
@@ -52,25 +54,15 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         {
             get
             {
-                 return new InputElement(_searchInput, WebDriver);
-
+                return new InputElement(_searchInput, WebDriver);
             }
-
         }
-       
-        private static readonly By _locator = By.Id("manageUsersContainer");
 
+         private static readonly By _locator = By.Id("manageUsersContainer");      
         //@@@ REQ:ID
         private readonly By _usersTable = By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]");
         private readonly By _wavesTable = By.XPath("//div[contains(@id, 'waves')]//table[contains(@class, 'table-expanded')]");
-        //@@@ REQ:ID
-        private readonly By _actionsDropdown = By.XPath("//div[@class='tab-pane active']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]");
-        private readonly By _actionsDropdownExpanded = By.XPath("//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')][contains(@aria-expanded, 'true')]");
-               
-        private readonly By _applyActionButtonEnabled = By.XPath("//button[contains(@data-bind, 'applyAction')][not(@disabled='')]");
-        private readonly By _applyActionButtonDisabled = By.XPath("//button[contains(@data-bind, 'applyAction')][@disabled='']");
-      
-        private readonly By _newMigrationWaveButton = By.XPath("//span[contains(@data-bind,'addWave')]");
+        //@@@ REQ:ID      
 
         private readonly By _migrationWaveTab = By.XPath("//a[contains(@href,'waves')]//span");
         private readonly By _usersTab = By.XPath("//a[contains(@href,'users')]//span");
@@ -108,24 +100,23 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
        
         public bool CheckMigrationWavesTabOpen()
         {
-            return IsElementVisible(_newMigrationWaveButton);
+            return AddWaveButton.IsVisible();
         }
 
         public bool MigrationWaveTabIsVisible()
         {
-            return IsElementVisible(_migrationWaveTab);
+            return MigrationWavesTab.IsVisible();
         }
 
         public EditWavePage clickNewWaveButton()
         {
-            var page= ClickElementBy<EditWavePage>(_newMigrationWaveButton);
-            IsElementVisible(page.Locator,30,0);
-            return page;
+            return AddWaveButton.Click<EditWavePage>() ;
+        }        
+      
 
-        }
         public void Search(string query)
         {
-             SearchInput.SendKeys(query);
+            SearchInput.SendKeys(query);
             ClickElementBy(_searchButton);
         }
            
@@ -145,4 +136,3 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
        
     }
 }
-
