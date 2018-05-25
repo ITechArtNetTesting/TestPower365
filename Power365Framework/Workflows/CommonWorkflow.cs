@@ -69,7 +69,7 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
                 throw new Exception("Wave method WavePerformRollback.");
             
             var manageUsersPage = GetCurrentPage<ManageUsersPage>();
-            manageUsersPage.WavesTable.ClickRowByValue(wave);
+            //manageUsersPage.WavesTable.ClickRowByValue(wave);
             manageUsersPage.PerformAction(action);
             manageUsersPage.ConfirmAction(isYes);
             return this;

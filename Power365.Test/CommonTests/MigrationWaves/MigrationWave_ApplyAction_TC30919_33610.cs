@@ -103,7 +103,7 @@ namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
                             .UsersPerformAddToWave(_userMigration, WAVE_NAME)
                             .GetPage<ManageUsersPage>();
             _manageUsersPage.SwichToTab("Migration Waves");
-            _manageUsersPage.WavesTable.ClickRowByValue(WAVE_NAME);
+            //_manageUsersPage.WavesTable.ClickRowByValue(WAVE_NAME);
 
             //Verify
             if (isIntegrate)
