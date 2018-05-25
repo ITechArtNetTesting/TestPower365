@@ -4,13 +4,13 @@ using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Pages;
 using BinaryTree.Power365.AutomationFramework.Workflows;
 using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+//using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
 {
-    [TestClass]
-    public class MigrationWave_ApplyAction_TC30919_33610 : UITestBase
+    [TestFixture]
+    public class MigrationWave_ApplyAction_TC30919_33610 : TestBase
     {
         public MigrationWave_ApplyAction_TC30919_33610()
                    : base() { }
@@ -21,24 +21,30 @@ namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
         private string _password;
         private string _userMigration;
         private ManageUsersPage _manageUsersPage;
-        private static readonly string WAVE_NAME = "TC_30919_33610";
+        private static readonly string WAVE_NAME = "TC_30919_33610_4";
 
-        [TestMethod]
-        [TestCategory("MailOnly")]
+
+        // [TestCategory("MailOnly")]
+
+        [Test]
         public void MigrationWave_Sync_MO_30919()
         {
           RunTest("client1", "project1", "entry10",true, false);
         }
 
-        [TestMethod]
-        [TestCategory("MailWithDiscovery")]
+     
+        //  [TestCategory("MailWithDiscovery")]
+
+        [Test]
         public void MigrationWave_Sync_MD_30919_33610()
         {
             RunTest("client2", "project1", "entry6", false, false,"c7toc9smlgrp2");
         }
 
-        [TestMethod]
-        [TestCategory("Integration")]
+        //  [Test]
+        //   [TestCategory("Integration")]
+
+        [Test]
         public void MigrationWave_Sync_Integration_TC30919_33610()
         {
             RunTest("client2", "project2", "entry11",false, true, "P365AutoGrp1");

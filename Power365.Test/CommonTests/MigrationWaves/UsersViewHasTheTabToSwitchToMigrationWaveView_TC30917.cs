@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
 {
     [TestClass]
-    public class UsersViewHasTheTabToSwitchToMigrationWaveView_TC30917 : UITestBase
+    public class UsersViewHasTheTabToSwitchToMigrationWaveView_TC30917 :
+        TestBase
     {
-        public UsersViewHasTheTabToSwitchToMigrationWaveView_TC30917()
-                  : base() { }
+        public UsersViewHasTheTabToSwitchToMigrationWaveView_TC30917(): base() { }
 
         private string _client;
         private string _username;

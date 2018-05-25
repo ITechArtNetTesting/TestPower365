@@ -13,7 +13,7 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
             get
             {
                 var refreshButton = By.XPath(string.Format(_actionButtonFormat, "refresh"));
-                return new ButtonElement(_closeButton, WebDriver);
+                return new ButtonElement(refreshButton, WebDriver);
             }
         }
 
@@ -69,8 +69,9 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
                 return new ButtonElement(_closeButton, WebDriver);
             }
         }
-        
-        private readonly By _closeButton = By.XPath("//button[contains(@data-translation, 'Close')]");
+
+        private ConfirmationDialog confirmationDialog;
+        private readonly By _closeButton = By.XPath("//*[contains(@data-translation, 'Close')]");
 
         private readonly string _actionButtonFormat = "//div[contains(@class, 'modal in')]//*[contains(@data-bind, '{0}')]";
         private readonly string _confirmationDialogButtonFormat = "//div[@id='confirmationDialog'][contains(@class, 'modal in')]//*[contains(text(), '{0}')]";
@@ -82,8 +83,9 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
         public UserDetailsDialog(IWebDriver webDriver)
             : base(webDriver) { }
         
-        public T PerformAction<T>(ActionType action)
-            where T: ModalDialogBase
+       public T PerformAction<T>(ActionType action)
+         where T: ModalDialogBase
+       //   public void PerformAction(ActionType action)          
         {
             ButtonElement button = null;
             switch (action)
@@ -107,17 +109,28 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
                     throw new Exception("Invalid action for this dialog.");
             }
 
-            return button.ClickModal<T>();
+           //  button.Click();
+
+           return button.ClickModal<T>();
         }
-        
+
+        public void ConfirmAction()
+        {
+            confirmationDialog.Yes();
+        }
+
         public void IsUserState(string entry, StateType state, int timeoutInSec = 5, int pollIntervalInSec = 0)
         {
             var value = state.GetDisplay();
-
+           
             var rowEntryTextValue = string.Format(_migrationStateTextLocatorFormat, value.ToLower());
             var stateLocator = By.XPath(rowEntryTextValue);
 
-            IsElementVisible(stateLocator, timeoutInSec, pollIntervalInSec, () => RefreshButton.Click());
+              //EvaluateElement(stateLocator, ExpectedConditions.ElementIsVisible(stateLocator), () => ClickElementBy(_refreshDetailsWindowButton), timeout, pollIntervalSec);
+            if (!IsElementVisible(stateLocator, timeoutInSec, pollIntervalInSec, () => RefreshButton.Click()))
+            {
+                throw new Exception(string.Format("Entry of '{0}' with state '{1}' was not found.", entry, value));
+            };
         }
     }
 }
