@@ -16,7 +16,7 @@ namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
 
         public void CheckNoWavesDefined()
         {
-            Assert.IsTrue(NoWavesDefinedLabel.IsElementVisible(),"No Waves Defined in not displayed on the summary page");
+            Assert.IsTrue(NoWavesDefinedLabel.IsElementVisible(),"No Waves Defined is not displayed on the summary page");
         }
 	}
 }
