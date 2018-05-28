@@ -80,3 +80,8 @@ D:\Project\BTCloud\SeleniumTests\ProbeTests.Model\obj\Debug\ProbeTests.Model.dll
 D:\Project\BTCloud\SeleniumTests\ProbeTests.Model\obj\Debug\ProbeTests.Model.pdb
 D:\Project\BTCloud\SeleniumTests\ProbeTests.Model\bin\Debug\Microsoft.Graph.xml
 D:\Project\BTCloud\SeleniumTests\ProbeTests.Model\bin\Debug\Microsoft.Graph.Core.xml
+<<<<<<< HEAD
+D:\Git\TestPower365\ProbeTests.Model\obj\Debug\ProbeTests.Model.csproj.CoreCompileInputs.cache
+D:\Git\TestPower365\ProbeTests.Model\obj\Debug\ProbeTests.Model.csprojResolveAssemblyReference.cache
+=======
+>>>>>>> master
