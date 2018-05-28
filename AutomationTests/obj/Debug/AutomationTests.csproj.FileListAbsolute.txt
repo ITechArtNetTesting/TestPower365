@@ -981,3 +981,4 @@ D:\Git\TestPower365\AutomationTests\bin\Debug\WebDriver.Support.xml
 D:\Git\TestPower365\AutomationTests\obj\Debug\AutomationTests.csproj.CoreCompileInputs.cache
 D:\Git\TestPower365\AutomationTests\obj\Debug\AutomationTests.dll
 D:\Git\TestPower365\AutomationTests\obj\Debug\AutomationTests.pdb
+D:\Git\TestPower365\AutomationTests\obj\Debug\AutomationTests.csprojResolveAssemblyReference.cache

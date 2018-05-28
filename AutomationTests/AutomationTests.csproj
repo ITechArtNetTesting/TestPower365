@@ -216,6 +216,7 @@
     <Compile Include="Tests\CommonTests\Migration Tests\RollbackCanBeCanceled_TC39559.cs" />
     <Compile Include="Tests\CommonTests\Migration Tests\RollbackShouldBeCompleted_InTheUserDetailView.cs" />
     <Compile Include="Tests\CommonTests\Migration Tests\JobsCanBeArchived_TC23090.cs" />
+    <Compile Include="Tests\CommonTests\MigrationWaves\VerifyNoWavesDefinedIsDisplayedOnTheSummaryPage_TC37905.cs" />
     <Compile Include="Tests\CommonTests\ProbeTest.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\DatabaseCleanup.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\EnvironmentCleanup.cs" />
@@ -1714,7 +1715,6 @@
   <ItemGroup>
     <Folder Include="lib\" />
     <Folder Include="resources\MailEngine\internal\functions\" />
-    <Folder Include="Tests\CommonTests\MigrationWaves\" />
     <Folder Include="Tests\MailWithDiscoveryTests\ActionButtonsTests\" />
   </ItemGroup>
   <Choose>
