@@ -20,7 +20,6 @@ namespace Product.Tests.CommonTests.Menu_Tests
         
         [TestMethod]
         [TestCategory("Integration")]
-        [TestCategory("UI")]
         public void Menu_ManageErrorsPage_Integrat_34716()
         {
               Menu_ManageErrorsPage(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"), RunConfigurator.GetClient("client2"),
@@ -29,7 +28,6 @@ namespace Product.Tests.CommonTests.Menu_Tests
 
         [TestMethod]
         [TestCategory("MailOnly")]
-        [TestCategory("UI")]
         public void Menu_ManageErrorsPage_MO_34716()
         {
             Menu_ManageErrorsPage(RunConfigurator.GetUserLogin("client1"), RunConfigurator.GetPassword("client1"), RunConfigurator.GetClient("client1"),
@@ -38,7 +36,6 @@ namespace Product.Tests.CommonTests.Menu_Tests
 
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
-        [TestCategory("UI")]
         public void Menu_ManageErrorsPage_MD_34716()
         {
             Menu_ManageErrorsPage(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"), RunConfigurator.GetClient("client2"),

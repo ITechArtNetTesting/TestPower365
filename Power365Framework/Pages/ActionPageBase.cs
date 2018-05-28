@@ -1,4 +1,5 @@
-﻿using BinaryTree.Power365.AutomationFramework.Elements;
+﻿using BinaryTree.Power365.AutomationFramework.Dialogs;
+using BinaryTree.Power365.AutomationFramework.Elements;
 using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Extensions;
 using OpenQA.Selenium;
@@ -35,17 +36,24 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         public void PerformAction(ActionType action)
         {
             DropdownSelectionAction(action);          
+            if (!IsElementVisible(_applyActionButtonEnabled))
+              throw new Exception("Could not find enabled Apply Action button.");         
+            ClickElementBy(_applyActionButtonEnabled);
+        }
 
+        public T PerformAction<T>(ActionType action)
+        where T : ModalDialogBase
+        {
+            DropdownSelectionAction(action);
             if (!IsElementVisible(_applyActionButtonEnabled))
                 throw new Exception("Could not find enabled Apply Action button.");
 
-            ClickElementBy(_applyActionButtonEnabled);
+           ButtonElement button = new ButtonElement(_applyActionButtonEnabled, WebDriver);
+           return button.ClickModal<T>();           
         }
 
         public void ConfirmAction(bool isYes = true)
         {
-
-
             var confirmDialogButton = By.XPath(string.Format(_confirmationDialogButtonFormat, isYes ? "Yes" : "No"));
             ClickElementBy(confirmDialogButton);
         }
@@ -85,7 +93,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             ClickElementBy(actionDropdownSelection);
         }
 
-        public bool isActionEnabled(ActionType action)
+        public bool IsActionEnabled(ActionType action)
         {
             DropdownSelectionAction(action);
             return IsElementVisible(_applyActionButtonEnabled);

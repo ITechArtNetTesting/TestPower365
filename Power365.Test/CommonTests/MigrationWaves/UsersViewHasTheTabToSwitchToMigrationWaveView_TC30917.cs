@@ -23,19 +23,19 @@ namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
         private string _password;
         private ManageUsersPage _manageUsersPage;
 
-        [TestInitialize]
-        public void ClassInit()
-        {
-            var client = Automation.Settings.GetByReference<Client>("client2");
-            var project = client.GetByReference<Project>("project1");
-            var username = client.Administrator.Username;
-            var password = client.Administrator.Password;
+        //[TestInitialize]
+        //public void ClassInit()
+        //{
+        //    var client = Automation.Settings.GetByReference<Client>("client2");
+        //    var project = client.GetByReference<Project>("project1");
+        //    var username = client.Administrator.Username;
+        //    var password = client.Administrator.Password;
                        
-            _client = client.Name;
-            _username = client.Administrator.Username;
-            _password = client.Administrator.Password;
-            _project = project.Name;         
-        }
+        //    _client = client.Name;
+        //    _username = client.Administrator.Username;
+        //    _password = client.Administrator.Password;
+        //    _project = project.Name;         
+        //}
          
 
 

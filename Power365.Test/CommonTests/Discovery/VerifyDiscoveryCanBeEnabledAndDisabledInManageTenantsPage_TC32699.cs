@@ -9,57 +9,53 @@ namespace BinaryTree.Power365.Test.CommonTests.Discovery
     public class VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage_TC32699:TestBase
     {
         public VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage_TC32699() : base() { }
-
-        private string _client;
-        private string _username;
-        private string _projectName;
-        private string _password;
-        private string _tenant;
-
-        private EditTenantsPage tenantsEditPage;      
-        
-        private void VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage(string clientName, string project)
+     
+        private void VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage(string _client, string _username, string _projectName, string _password, string _tenant)
         {
-            var client = Automation.Settings.GetByReference<Client>(clientName);
-            var _project = client.GetByReference<Project>(project);
-            _client = client.Name;
-            _username = client.Administrator.Username;
-            _password = client.Administrator.Password;
-            _projectName = _project.Name;
-            _tenant = Automation.Settings.GetByReference<Tenant>(_project.Source).Name;            
-            tenantsEditPage = Automation.Common
+            
+            var tenantsEditPage = Automation.Common
                 .SingIn(_username, _password)
                 .ClientSelect(_client)
                 .ProjectSelect(_projectName)
                 .TenantsEdit()
                 .GetPage<EditTenantsPage>();
             tenantsEditPage.ClickDiscoveryTab();
-            Assert.IsTrue(discoveryCanBeDisabled(),"Discovery tenant can not be disabled");
-            Assert.IsTrue(discoveryCanBeEnabled(), "Discovery tenant can not be enabled");
+     
+            Assert.IsTrue(tenantsEditPage.CheckTenantCanBeEnabledOrDisabled(_tenant, false), "Discovery tenant can not be deasbled");
+            Assert.IsTrue(tenantsEditPage.CheckTenantCanBeEnabledOrDisabled(_tenant, true),"Discovery tenant can not be enabled");
+      
         }
 
-        private bool discoveryCanBeDisabled()
-        {            
-            tenantsEditPage.DisableEnableTenant(_tenant,true);
-            return tenantsEditPage.CheckTenantCanBeDisabled(_tenant);          
-        }
-
-        private bool discoveryCanBeEnabled()
+        public void TestRun(string clientName, string project)
         {
-            tenantsEditPage.DisableEnableTenant(_tenant, false);
-            return tenantsEditPage.CheckTenantCanBeEnabled(_tenant);
-        }        
+            var client = Automation.Settings.GetByReference<Client>(clientName);
+            var _project = client.GetByReference<Project>(project);
+            string _client = client.Name;
+            string  _username = client.Administrator.Username;
+            string  _password = client.Administrator.Password;
+            string _projectName = _project.Name;
+            string _tenant = Automation.Settings.GetByReference<Tenant>(_project.Source).Name;
+
+            VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage(_client,_username,_projectName,_password, _tenant);
+        }
+
 
         [Test]
-        public void VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage_MD_32699()
+        [Category("MailWithDiscovery")]
+        [Category("UI")]
+        [Category("Discovery")]
+        public void DiscoveryCanBeEnabledAndDisabledInManageTenantsPage_MD_32699()
         {
-            VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage("client2", "project1");
+            TestRun("client2", "project1");
         }
 
         [Test]
-        public void VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage_Integration_32699()
+        [Category("Integration")]
+        [Category("UI")]
+        [Category("Discovery")]
+        public void DiscoveryCanBeEnabledAndDisabledInManageTenantsPage_Integration_32699()
         {
-            VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage("client2", "project2");
+            TestRun("client2", "project2");
         }
     }
 }

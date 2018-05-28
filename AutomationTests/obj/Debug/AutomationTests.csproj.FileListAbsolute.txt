@@ -490,6 +490,7 @@ D:\Project\BTCloud\SeleniumTests\AutomationTests\bin\Debug\resources\MailEngine\
 d:\Project\BTCloud\SeleniumTests\AutomationTests\bin\Debug\resources\TestResultsPublisher.ps1
 d:\Project\BTCloud\SeleniumTests\AutomationTests\bin\Debug\resources\BuildStatusRelay.ps1
 D:\Project\BTCloud\SeleniumTests\AutomationTests\obj\Debug\AutomationTests.csprojResolveAssemblyReference.cache
+<<<<<<< HEAD
 D:\Git\TestPower365\AutomationTests\bin\Debug\resources\chromedriver.exe
 D:\Git\TestPower365\AutomationTests\bin\Debug\resources\MailEngine\Engine\BinaryTree-T2T.dll
 D:\Git\TestPower365\AutomationTests\bin\Debug\resources\MailEngine\Engine\BinaryTree-T2T.pdb
@@ -982,3 +983,5 @@ D:\Git\TestPower365\AutomationTests\obj\Debug\AutomationTests.csproj.CoreCompile
 D:\Git\TestPower365\AutomationTests\obj\Debug\AutomationTests.dll
 D:\Git\TestPower365\AutomationTests\obj\Debug\AutomationTests.pdb
 D:\Git\TestPower365\AutomationTests\obj\Debug\AutomationTests.csprojResolveAssemblyReference.cache
+=======
+>>>>>>> master

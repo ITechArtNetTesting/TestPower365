@@ -39,7 +39,6 @@ namespace Product.Tests.IntegrationTests.DistributionGroupTests
 
         [TestMethod]
         [TestCategory("Integration")]
-        [TestCategory("UI")]
         public void GroupsWillBeShownCorectly_31793()
         {
 

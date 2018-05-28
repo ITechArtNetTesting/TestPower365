@@ -1,8 +1,7 @@
 ﻿using BinaryTree.Power365.AutomationFramework;
 using BinaryTree.Power365.AutomationFramework.Pages;
 using log4net;
-//using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +10,12 @@ using System.Threading.Tasks;
 
 namespace BinaryTree.Power365.Test.CommonTests.LandingPage
 {
-
-    [TestFixture]
+    [TestClass]
     public class LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773: TestBase
     {
         public LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773() : base() { }
 
-        private string _client;
+        private  string _client;
         private string _username;
         private string _projectName;
         private string _password;
@@ -49,21 +47,20 @@ namespace BinaryTree.Power365.Test.CommonTests.LandingPage
             tenantsEditPage.ClickDiscoveryTab();
             tenantsEditPage.DeleteTenantLogs(_downloadsPath);
             tenantsEditPage.DownloadLogs(_tenant);
-            NUnit.Framework.Assert.IsTrue(tenantsEditPage.CheckDiscoveryFileIsDownloaded(_downloadsPath,15),"Logs could not be able to download");
+            Assert.IsTrue(tenantsEditPage.CheckDiscoveryFileIsDownloaded(_downloadsPath,15),"");
         }
 
-        [Test]
-        [Category("MailWithDiscovery")]
-        [Category("UI")]
+        [TestMethod]
+        [TestCategory("MailWithDiscovery")]
+        [TestCategory("UI")]
         public void LogsButtonOnTheTenantManagementWillDownloadTenantLog_MD_25773()
         {
             LogsButtonOnTheTenantManagementWillDownloadTenantLog("client2", "project1");
         }
 
-
-        [Category("Integration")]
-        [Category("UI")]
-        [Test]
+        [TestMethod]
+        [TestCategory("Integration")]
+        [TestCategory("UI")]
         public void LogsButtonOnTheTenantManagementWillDownloadTenantLog_Integration_25773()
         {
             LogsButtonOnTheTenantManagementWillDownloadTenantLog("client2", "project2");

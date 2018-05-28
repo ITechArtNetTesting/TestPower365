@@ -70,7 +70,7 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
             }
         }
 
-        private ConfirmationDialog confirmationDialog;
+     
         private readonly By _closeButton = By.XPath("//*[contains(@data-translation, 'Close')]");
 
         private readonly string _actionButtonFormat = "//div[contains(@class, 'modal in')]//*[contains(@data-bind, '{0}')]";
@@ -109,24 +109,17 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
                     throw new Exception("Invalid action for this dialog.");
             }
 
-           //  button.Click();
-
-           return button.ClickModal<T>();
+                    return button.ClickModal<T>();
         }
 
-        public void ConfirmAction()
-        {
-            confirmationDialog.Yes();
-        }
-
-        public void IsUserState(string entry, StateType state, int timeoutInSec = 5, int pollIntervalInSec = 0)
+       public void IsUserState(string entry, StateType state, int timeoutInSec = 5, int pollIntervalInSec = 0)
         {
             var value = state.GetDisplay();
            
             var rowEntryTextValue = string.Format(_migrationStateTextLocatorFormat, value.ToLower());
             var stateLocator = By.XPath(rowEntryTextValue);
 
-              //EvaluateElement(stateLocator, ExpectedConditions.ElementIsVisible(stateLocator), () => ClickElementBy(_refreshDetailsWindowButton), timeout, pollIntervalSec);
+             
             if (!IsElementVisible(stateLocator, timeoutInSec, pollIntervalInSec, () => RefreshButton.Click()))
             {
                 throw new Exception(string.Format("Entry of '{0}' with state '{1}' was not found.", entry, value));

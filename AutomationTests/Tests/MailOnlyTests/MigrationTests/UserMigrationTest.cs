@@ -18,8 +18,7 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
 
       [TestMethod]
 		[TestCategory("MailOnly")]
-        [TestCategory("UI")]
-        public void Automation_MO_UserMigrationTest()
+		public void Automation_MO_UserMigrationTest()
 		{
 		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
 		    string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");
@@ -35,8 +34,8 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
 		    string groupMailbox5 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//metaname[text()='entry5']/..//group");
 		    string filename2 = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//metaname[text()='project2']/..//metaname[text()='file1']/..//filename");
 
-		   // try
-		    //{
+		    try
+		    {
 		        LoginAndSelectRole(login, password, client);
 		        SelectProject(projectName3);
 		        User.AtProjectOverviewForm().OpenUsersList();
@@ -61,11 +60,11 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
 		        User.AtUsersForm().AddToWave();
 		        User.AtUsersForm().VerifyLinesCountAndProperties(groupMailbox5, RunConfigurator.GetCSVlinesCount(Path.GetFullPath(RunConfigurator.ResourcesPath + filename2)));
             }
-		   // catch (Exception)
-		  //  {
-		    ///    LogHtml(Browser.GetDriver().PageSource);
-             ///   throw;
-           //}
-		//}
+		    catch (Exception)
+		    {
+		        LogHtml(Browser.GetDriver().PageSource);
+                throw;
+            }
+		}
 	}
 }

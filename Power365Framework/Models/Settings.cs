@@ -163,7 +163,7 @@ namespace BinaryTree.Power365.AutomationFramework
     [Serializable]
     public class Tenant : Referential
     {
-        public List<Credential> Credentials { get; set; }        
+        public List<Credential> Credentials { get; set; }
         public string Name { get; set; }
         public string PrimaryDomain { get; set; }
         public string SecondaryDomain { get; set; }
@@ -210,7 +210,9 @@ namespace BinaryTree.Power365.AutomationFramework
     {
         public string InitialCatalog { get; set; }
         public Credential Credential { get; set; }
-
+        public string Server { get; set; }
+        private readonly string connectionStringFormat = "Server=tcp:{0},1433; Initial Catalog = {1}; Persist Security Info = False; User ID = {2}; Password ={3}; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;";
+        
         public override void BuildReferences()
         {
             if (Credential != null)
@@ -219,6 +221,10 @@ namespace BinaryTree.Power365.AutomationFramework
                 Credential.BuildReferences();
             }
 
+        }
+        public string GetConnectionString()
+        {                    
+            return String.Format(connectionStringFormat, Server, InitialCatalog, Credential.Username, Credential.Password);
         }
 
     }
