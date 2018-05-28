@@ -24,6 +24,7 @@ D:\Git\TestPower365\GraphHelper\bin\Debug\Newtonsoft.Json.dll
 D:\Git\TestPower365\GraphHelper\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.xml
 D:\Git\TestPower365\GraphHelper\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.xml
 D:\Git\TestPower365\GraphHelper\bin\Debug\Newtonsoft.Json.xml
+D:\Git\TestPower365\GraphHelper\obj\Debug\GraphHelper.csprojResolveAssemblyReference.cache
 D:\Git\TestPower365\GraphHelper\obj\Debug\GraphHelper.csproj.CoreCompileInputs.cache
 D:\Git\TestPower365\GraphHelper\obj\Debug\GraphHelper.dll
 D:\Git\TestPower365\GraphHelper\obj\Debug\GraphHelper.pdb
