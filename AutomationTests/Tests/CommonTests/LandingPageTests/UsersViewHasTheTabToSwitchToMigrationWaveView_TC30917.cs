@@ -20,7 +20,6 @@ namespace Product.Tests.CommonTests.LandingPageTests
 
         [TestMethod]
         [TestCategory("MailOnly")]
-        [TestCategory("UI")]
         public void UsersViewHasTheTabToSwitchToMigrationWaveView_MO_30917()
         {
             string login = RunConfigurator.GetUserLogin("client1");
@@ -32,7 +31,6 @@ namespace Product.Tests.CommonTests.LandingPageTests
 
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
-        [TestCategory("UI")]
         public void UsersViewHasTheTabToSwitchToMigrationWaveView_MD_30917()
         {
             string login = RunConfigurator.GetUserLogin("client2");
@@ -44,7 +42,6 @@ namespace Product.Tests.CommonTests.LandingPageTests
 
         [TestMethod]
         [TestCategory("Integration")]
-        [TestCategory("UI")]
         public void UsersViewHasTheTabToSwitchToMigrationWaveView_Integration_30917()
         {
             string login = RunConfigurator.GetUserLogin("client2");
@@ -56,8 +53,6 @@ namespace Product.Tests.CommonTests.LandingPageTests
 
         private void UsersViewHasTheTabToSwitchToMigrationWaveView(string login, string password, string client, string projectName)
         {
-
-           
             LoginAndSelectRole(login, password, client);
             SelectProject(projectName);
             User.AtProjectOverviewForm().OpenUsersList();

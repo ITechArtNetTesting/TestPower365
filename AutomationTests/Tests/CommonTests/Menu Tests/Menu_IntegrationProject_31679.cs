@@ -30,7 +30,6 @@ namespace Product.Tests.CommonTests.Menu_Tests
 
         [TestMethod]
         [TestCategory("Menu")]
-        [TestCategory("UI")]
         public void Menu_IntegrationProject_31679_part1_menuItemsShouldBeDisplayed()
         {
 
@@ -43,7 +42,6 @@ namespace Product.Tests.CommonTests.Menu_Tests
 
         [TestMethod]
         [TestCategory("Menu")]
-        [TestCategory("UI")]
         public void Menu_IntegrationProject_53237_correctLinkForEachMenuItems()
         {
 

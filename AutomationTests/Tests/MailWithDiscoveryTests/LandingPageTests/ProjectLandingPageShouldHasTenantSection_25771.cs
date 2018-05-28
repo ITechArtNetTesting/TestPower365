@@ -22,7 +22,6 @@ namespace Product.Tests.MailWithDiscoveryTests.LandingPageTests
       
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
-        [TestCategory("UI")]
         public void ProjectLandingPageHasTenantStatusSection_MD_25117()
         {
             ProjectLandingPageHasTenantStatusSection(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"), RunConfigurator.GetClient("client2"), RunConfigurator.GetProjectName("client2", "project1"));                    

@@ -1,27 +1,64 @@
-﻿using OpenQA.Selenium;
+﻿using BinaryTree.Power365.AutomationFramework.Elements;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BinaryTree.Power365.AutomationFramework.Pages
 {
     public class EditTenantsPage : PageBase
     {
-        private string tenantDisableXPath = "//*[contains(text(), '{0}')]//ancestor::tr//span[contains(@data-translation,'Disable')]";
 
-        private string tenantEnableXPath = "//*[contains(text(), '{0}')]//ancestor::tr//a[contains(@data-bind,'enable')]";
+       
+        public Element AddressBookTab
+        {
+            get
+            {
+                var tab = By.XPath(string.Format(_navigationTabFormat, "address book"));
+                return new Element(tab, WebDriver);
+            }
+        }
+
+        public Element DiscoveryTab
+        {
+            get
+            {
+                var tab = By.XPath(string.Format(_navigationTabFormat, "discovery"));
+                return new Element(tab, WebDriver);
+            }
+        }
+
+        public Element TenantsTab
+        {
+            get
+            {
+                var tab = By.XPath(string.Format(_navigationTabFormat, "tenants"));
+                return new Element(tab, WebDriver);
+            }
+        }
+
+
+        public Element DirectorySyncTab
+        {
+            get
+            {
+                var tab = By.XPath(string.Format(_navigationTabFormat, "directory sync"));
+                return new Element(tab, WebDriver);
+            }
+        }
 
         private static By _locator = By.Id("tenantsManagementContainer");
-
-        private readonly By addressBookTab = By.XPath("//a[@role='tab']//span[contains(@data-translation,'AddressBook')]");
 
         private readonly By _discoveryTab = By.XPath("//a[@role='tab' and contains(@href,'discovery')]");
 
         private string tenantLogsXPath = "//*[contains(text(), '{0}')]/ancestor::tr//a[contains(@data-bind, 'exportTenantLogs')]";
+
+        private string tenantDisableFormat = "//*[contains(text(), '{0}')]//ancestor::tr//span[contains(@data-translation,'Disable')]";
+
+        private string tenantEnableFormat = "//*[contains(text(), '{0}')]//ancestor::tr//a[contains(@data-bind,'enable')]";
+        private readonly string _navigationTabFormat = ("//*[contains(@class, 'nav nav-tabs')]/li/a/*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{0}')]]");
 
         public EditTenantsPage(IWebDriver webDriver) : base(_locator, webDriver) { }
 
@@ -50,10 +87,44 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
                 return false;
             }
         }
+        
+
+        public bool CheckTenantCanBeEnabledOrDisabled(string tenant, bool isCheckEnabled=true)
+        {
+            string outputState;
+            string inputState;
+            if (isCheckEnabled)
+            {
+                inputState = string.Format(tenantDisableFormat, tenant);
+                 outputState = string.Format(tenantEnableFormat, tenant);
+            }
+            else
+            {
+                outputState = string.Format(tenantDisableFormat, tenant);
+                inputState = string.Format(tenantEnableFormat, tenant);
+            }
+
+           ChangeTenantsDiscoveryState(inputState,  outputState,  tenant);
+           By tenantStateElement =By.XPath(inputState);
+           return IsElementExists(tenantStateElement, 300, 5);
+        }
+
+        private void ChangeTenantsDiscoveryState(string inputState, string outputState, string tenant)
+        {
+            By initTenantState = By.XPath(string.Format(inputState, tenant));
+            if (IsElementExists(initTenantState)) // check the initial state
+            {
+                HoverElement(initTenantState);
+                ClickElementBy(initTenantState);
+            }
+            By tenantOutputState = By.XPath(string.Format(outputState, tenant));
+            HoverElement(tenantOutputState);
+            ClickElementBy(tenantOutputState);
+        }
+
 
         public void DownloadLogs(string tenant)
         {
-            
             By tenantLogs = By.XPath(string.Format(tenantLogsXPath, tenant));
             HoverElement(tenantLogs);
             ClickElementBy(tenantLogs);
@@ -66,48 +137,6 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             {
                 file.Delete();
             }
-        }
-
-        public void DisableEnableTenant(string tenant, bool isDisable)
-        {
-               if (isDisable)
-            {
-                doDisableEnable(tenantEnableXPath, tenantDisableXPath, tenant);
-            }
-            else
-            {
-                doDisableEnable(tenantDisableXPath, tenantEnableXPath, tenant);
-            }
-        }
-        private void doDisableEnable(string input, string output, string tenant)
-        {
-            By tenantEnable = By.XPath(string.Format(input, tenant));
-            if (IsElementExists(tenantEnable))
-            {
-                HowerElement(tenantEnable);
-                ClickElementBy(tenantEnable);
-            }
-            By tenantDisable = By.XPath(string.Format(output, tenant));
-            HowerElement(tenantDisable);
-            ClickElementBy(tenantDisable);
-        }
-
-        public bool CheckTenantCanBeDisabled(string tenant)
-        {
-            By tenantEnable = By.XPath(string.Format(tenantEnableXPath, tenant));
-            return IsElementExists(tenantEnable, 300, 5);
-        }
-
-        public bool CheckTenantCanBeEnabled(string tenant)
-        {
-            By tenantDisable = By.XPath(string.Format(tenantDisableXPath, tenant));
-            return IsElementExists(tenantDisable, 300, 5);
-        }
-
-        public bool AddressBookTabIsVisible()
-        {
-            return IsElementVisible(addressBookTab);
-        }
-
+}
     }
 }

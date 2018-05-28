@@ -94,6 +94,8 @@
     <Compile Include="PowershellAutomation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Settings.cs" />
+    <Compile Include="Utilities\SqlClient.cs" />
+    <Compile Include="Utilities\UserMigrationQuery.cs" />
     <Compile Include="Workflows\CommonWorkflow.cs" />
     <Compile Include="Workflows\AddPublicFolderWorkflow.cs" />
     <Compile Include="Workflows\EditProjectWorkflowBase.cs" />

@@ -15,7 +15,6 @@ namespace Product.Tests.CommonTests.Migration_Tests
         }
         [TestMethod]
         [TestCategory("Integration")]
-        [TestCategory("UI")]
         public void JobsCanBeArchived_Integration_23090()
         {
             string login = RunConfigurator.GetUserLogin("client2");
@@ -27,7 +26,6 @@ namespace Product.Tests.CommonTests.Migration_Tests
         }
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
-        [TestCategory("UI")]
         public void JobsCanBeArchived_MD_23090()
         {
             string login = RunConfigurator.GetUserLogin("client2");

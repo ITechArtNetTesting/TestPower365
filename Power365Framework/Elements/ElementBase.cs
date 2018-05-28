@@ -28,7 +28,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         }
 
         public void Validate()
-        {            
+        {
             FindVisibleElement(_locator);
         }
 
@@ -219,12 +219,6 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
                 throw new Exception("Page failed to reach ready state in time.");
 
             return condition(WebDriver);
-        }
-
-        protected void HowerElement(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
-        {
-            var element = FindExistingElement(by, 20, 1);
-            new Actions(WebDriver).MoveToElement(element).Build().Perform();
         }
 
         protected T EvaluateScript<T>(string script, int timeoutInSec = 5, int pollIntervalInSec = 0)

@@ -250,6 +250,7 @@
             </UserMigration>
             <UserMigration Reference="entry12">
               <Source>P365AutoRemoteMBX15@corp31.cmtsandbox.com</Source>
+              <Target>P365AutoRemoteMBX15@corp32.cmtsandbox.com</Target>              
             </UserMigration>
           </UserMigrations>
           <Groups>
@@ -434,4 +435,14 @@
   <TimeoutSec>60</TimeoutSec>
   <Browser>chrome</Browser>
   <Bitness>x86</Bitness>
+  <Databases>    
+    <Database Reference="sqlt2t01">
+      <Server>bt-qa-sql.database.windows.net</Server>
+      <InitialCatalog>sqlt2t01-QA</InitialCatalog>    
+      <Credential>
+        <Username>btcloudsqladmin</Username>
+        <Password>NSHEtMDq0Q9zGJZfpFVemOr.</Password>
+      </Credential>
+    </Database>   
+  </Databases> 
 </Settings>

@@ -1,0 +1,3 @@
+Partition Key,Row Key,Timestamp,Log Timestamp,Level,Logger Name,Message,Machine Name,Exception
+Client2Project1146.UserMigration152193SyncJob10226,22F466667F363AAC_7FFFFFEB_9501965fa7164099b9c8eca7cee9fdfb,5/25/2018 7:16:39 AM,05/25/2018 07:16:38,Debug,SyncJob,"Sync has been stopped for C7O365SML14@btcorp7.onmicrosoft.com [UserMigrationId #152193]",mainpa000001,""
+Client2Project1146.UserMigration152193SyncJob10226,22F466667F389C5C_7FFFFFEC_9501965fa7164099b9c8eca7cee9fdfb,5/25/2018 7:16:39 AM,05/25/2018 07:16:38,Info,SyncJob,"Created sync job for C7O365SML14@btcorp7.onmicrosoft.com. [UserMigrationId #152193]",mainpa000001,""

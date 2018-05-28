@@ -9,36 +9,38 @@ namespace BinaryTree.Power365.Test.CommonTests.AddressBook
     {
         public VerifyAddressBookWillBeDisplayedInManageTenants_TC32860() : base() { }
 
-        private string _client;
-        private string _username;
-        private string _projectName;
-        private string _password;
-        private string _tenant;
 
-        private EditTenantsPage tenantsEditPage;
-
-        private void VerifyAddressBookWillBeDisplayedInManageTenants(string clientName, string project)
+        private void VerifyAddressBookWillBeDisplayedInManageTenants(string _client, string _username, string _projectName, string _password)
         {
-            var client = Automation.Settings.GetByReference<Client>(clientName);
-            var _project = client.GetByReference<Project>(project);
-            _client = client.Name;
-            _username = client.Administrator.Username;
-            _password = client.Administrator.Password;
-            _projectName = _project.Name;
-            _tenant = Automation.Settings.GetByReference<Tenant>(_project.Source).Name;
+            EditTenantsPage tenantsEditPage;
+
             tenantsEditPage = Automation.Common
                 .SingIn(_username, _password)
                 .ClientSelect(_client)
                 .ProjectSelect(_projectName)
                 .TenantsEdit()
                 .GetPage<EditTenantsPage>();
-            Assert.IsTrue(tenantsEditPage.AddressBookTabIsVisible());
+            Assert.IsTrue(tenantsEditPage.AddressBookTab.IsVisible(),"Addres book tab is not visible");
         }
        
         [Test]
         public void VerifyAddressBookWillBeDisplayedInManageTenants_Integration_32860()
         {
-            VerifyAddressBookWillBeDisplayedInManageTenants("client2", "project2");
+            TestRun("client2", "project2");
         }
+
+        public void TestRun(string clientName, string project)
+        {
+            var client = Automation.Settings.GetByReference<Client>(clientName);
+            var _project = client.GetByReference<Project>(project);
+            string _client = client.Name;
+            string _username = client.Administrator.Username;
+            string _password = client.Administrator.Password;
+            string _projectName = _project.Name;
+            
+
+            VerifyAddressBookWillBeDisplayedInManageTenants(_client, _username, _projectName, _password);
+        }
+
     }
 }

@@ -37,7 +37,6 @@ namespace Product.Tests.IntegrationTests.DistributionGroupTests
 
         [TestMethod]
         [TestCategory("Integration")]
-        [TestCategory("UI")]
         public void VerifyGroupSyncWillShowAccurateJobStatus_31796()
         {
                 LoginAndSelectRole(login, password, client);

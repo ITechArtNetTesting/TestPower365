@@ -13,9 +13,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         private static readonly By _locator = By.Id("hamburger");
 
         private By _clientsComboBox = By.ClassName("dropdown");
-
-        private By errorButton = By.XPath("//li//a[contains(@href,'Errors')]");
-
+        
         private string _menuSelectionLocatorFormat = "//span[contains(text(), '{0}')]";
         private string _clientLocatorFormat = "//div[contains(@class, 'open')]//a[contains(text(), '{0}')]";
 
@@ -36,8 +34,9 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         //GENERAL
         private const string EN_HELP = "Help";
         private const string EN_SIGNOUT = "Sign Out";
-        //HELP
-        private By EN_HelpButton = By.XPath("//li//span[contains(@data-translation,'Help')]");
+        private const string EN_ERRORS = "Errors";
+
+
 
         public MenuElement(IWebDriver webDriver)
             :base(_locator, webDriver) { }
@@ -91,12 +90,6 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             throw new NotImplementedException();
         }
 
-        public ErrorsPage ClickErrors()
-        {
-            OpenMenu();
-            return ClickElementBy<ErrorsPage>(errorButton);
-        }
-
         public ResourcesPage ClickResources()
         {
             throw new NotImplementedException();
@@ -106,13 +99,19 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         {
             OpenMenu();
             var clientSelection = By.XPath(string.Format(_menuSelectionLocatorFormat, EN_HELP));
-            return ClickPopupElementBy<HelpPage>(clientSelection).Page;
-            // return ClickElementToOpenNewWindowBy<HelpPage>(clientSelection);
+            return ClickPopupElementBy<HelpPage>(clientSelection).Page;          
         }
 
         public HomePage ClickSignOut()
         {
             return ClickMenuSelection<HomePage>(EN_SIGNOUT);
+        }
+
+        public ErrorsPage ClickErrors()
+        {
+            OpenMenu();
+            var clientSelection = By.XPath(string.Format(_menuSelectionLocatorFormat, EN_ERRORS));
+            return ClickElementBy<ErrorsPage>(clientSelection);
         }
 
         /// <summary>

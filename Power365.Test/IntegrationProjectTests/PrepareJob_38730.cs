@@ -1,65 +1,64 @@
 ﻿using BinaryTree.Power365.AutomationFramework;
+using BinaryTree.Power365.AutomationFramework.Dialogs;
 using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Pages;
-using BinaryTree.Power365.Test.CommonTests;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BinaryTree.Power365.AutomationFramework.Utilities;
+//using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+
 
 namespace BinaryTree.Power365.Test.IntegrationProjectTests
 {
-    public class PrepareJob_38730: UITestBase
+   
+    [TestFixture]
+    public class PrepareJob_38730: TestBase
     {
         public PrepareJob_38730()
-                  : base(LogManager.GetLogger(typeof(PrepareJob_38730))) { }
+                  : base() { }                    
 
-        private string _client;
-        private string _username;
-        private string _project;
-        private string _password;
-        private string _userMigration;
-        private ManageUsersPage _manageUsersPage;
-
-        [TestInitialize]
-        public void ClassInit()
+        [Test]
+        [Category("Integration")]
+        [Category("UI")]
+        [Category("Prepare")]
+        public void PrepareJob_Integration_38730()
         {
+            //init
             var client = Automation.Settings.GetByReference<Client>("client2");
             var project = client.GetByReference<Project>("project2");
             var username = client.Administrator.Username;
             var password = client.Administrator.Password;
 
-            _client = client.Name;
-            _username = client.Administrator.Username;
-            _password = client.Administrator.Password;
-            _project = project.Name;
-            _userMigration = project.GetByReference<UserMigration>("entry12").Source;
-        }
+            string _client = client.Name;
+            string _username = client.Administrator.Username;
+            string _password = client.Administrator.Password;
+            string _project = project.Name;
+            string _userMigration_source = project.GetByReference<UserMigration>("entry12").Source;
+            string _userMigration_target = project.GetByReference<UserMigration>("entry12").Target;
+
+            var database = Automation.Settings.GetByReference<Database>("sqlt2t01");
+            string _connectionString = database.GetConnectionString();
 
 
-        [TestMethod]
-        [TestCategory("Integration")]
-        public void PrepareJob_Integration_38730()
-        {
-            _manageUsersPage = Automation.Common
+            //test steps
+            var _manageUsersPage = Automation.Common
                                        .SingIn(_username, _password)
                                        .ClientSelect(_client)
                                        .ProjectSelect(_project)
-                                       .UsersEdit()
-                                       .UsersFindAndPerformAction(_userMigration,ActionType.Prepare)
-                                       .UsersValidateState(_userMigration, StateType.Preparing)
+                                       .UsersEdit()                                       
                                        .GetPage<ManageUsersPage>();
-           
-            PerformActionAndWaitForState(sourceMailbox1, ActionType.Prepare, State.Preparing, 60000, 10);
 
+            _manageUsersPage.Search(_userMigration_source);
+            _manageUsersPage.UsersTable.ClickRowByValue(_userMigration_source);
+            //_manageUsersPage.PerformAction<ConfirmationDialog>(ActionType.Prepare)
+            //                          .Yes();
+            _manageUsersPage.IsUserState(_userMigration_source, StateType.Preparing, 18000, 5);
 
-
+            //Verify
+            UserMigrationQuery queryExecuter = new UserMigrationQuery();
+            var  resultInDB= queryExecuter.SelectIsLockedByUsermail(_userMigration_target, _project, _connectionString);
+            Assert.AreEqual(resultInDB, true , "The  UserMigration record IsLocked column wasn't be set to True ");
+         
         }
 
     }
-
-
 }
