@@ -53,5 +53,19 @@ namespace BinaryTree.Power365.Test.CommonTests
             runTest("client2", "project2");
         }
 
+        [Test]
+        [Category("MailOnly")]
+        public void VerifyTheExportButtonExportsUserMigrationRecords_MO_45618()
+        {
+            runTest("client1", "project1");
+        }
+
+        [Test]
+        [Category("MailWithDiscovery")]
+        public void VerifyTheExportButtonExportsUserMigrationRecords_MD_45618()
+        {
+            runTest("client2", "project1");
+        }
+
     }
 }
