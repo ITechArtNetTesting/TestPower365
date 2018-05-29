@@ -10,7 +10,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
 {
     public class ErrorsPage : PageBase
     {
-        private static readonly By _locator = By.XPath("//div[@id='users']//input[contains(@placeholder,'error')]");
+        private static readonly By _locator = By.Id("users");
 
 
         public Element GroupsTab
@@ -77,8 +77,11 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
 
         public bool CheckDismissAndExportAreDisplayed()
         {
+            bool result;
             SelectActionButton.Click();
-            return DismissAction.IsVisible() && ExportAction.IsVisible();
+            result= DismissAction.IsVisible() && ExportAction.IsVisible();
+            SelectActionButton.Click();
+            return result;
         }
        
     }

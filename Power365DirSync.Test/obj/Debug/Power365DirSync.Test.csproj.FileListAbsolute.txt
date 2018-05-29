@@ -43,3 +43,4 @@ D:\Git\TestPower365\Power365DirSync.Test\bin\Debug\WebDriver.Support.xml
 D:\Git\TestPower365\Power365DirSync.Test\obj\Debug\Power365DirSync.Test.csproj.CoreCompileInputs.cache
 D:\Git\TestPower365\Power365DirSync.Test\obj\Debug\BinaryTree.Power365DirSync.Test.dll
 D:\Git\TestPower365\Power365DirSync.Test\obj\Debug\BinaryTree.Power365DirSync.Test.pdb
+D:\Git\TestPower365\Power365DirSync.Test\obj\Debug\Power365DirSync.Test.csprojResolveAssemblyReference.cache
