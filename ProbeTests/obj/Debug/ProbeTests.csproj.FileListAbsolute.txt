@@ -599,3 +599,8 @@ d:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\MailEngine\funct
 d:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\TestResultsPublisher.ps1
 d:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\BuildStatusRelay.ps1
 d:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\TestRunner.ps1
+D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.csprojResolveAssemblyReference.cache
+D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.exe.config
+D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.csproj.CoreCompileInputs.cache
+D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.exe
+D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.pdb

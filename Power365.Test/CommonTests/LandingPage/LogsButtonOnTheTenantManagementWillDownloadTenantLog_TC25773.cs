@@ -1,7 +1,7 @@
 ﻿using BinaryTree.Power365.AutomationFramework;
 using BinaryTree.Power365.AutomationFramework.Pages;
 using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BinaryTree.Power365.Test.CommonTests.LandingPage
 {
-    [TestClass]
+    [TestFixture]
     public class LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773: TestBase
     {
         public LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773() : base() { }
@@ -47,20 +47,20 @@ namespace BinaryTree.Power365.Test.CommonTests.LandingPage
             tenantsEditPage.ClickDiscoveryTab();
             tenantsEditPage.DeleteTenantLogs(_downloadsPath);
             tenantsEditPage.DownloadLogs(_tenant);
-            Assert.IsTrue(tenantsEditPage.CheckDiscoveryFileIsDownloaded(_downloadsPath,15),"");
+            Assert.IsTrue(tenantsEditPage.CheckDiscoveryFileIsDownloaded(_downloadsPath,15), "Error with downloading logs");
         }
 
-        [TestMethod]
-        [TestCategory("MailWithDiscovery")]
-        [TestCategory("UI")]
+        [Test]
+        [Category("MailWithDiscovery")]
+        [Category("UI")]
         public void LogsButtonOnTheTenantManagementWillDownloadTenantLog_MD_25773()
         {
             LogsButtonOnTheTenantManagementWillDownloadTenantLog("client2", "project1");
         }
 
-        [TestMethod]
-        [TestCategory("Integration")]
-        [TestCategory("UI")]
+        [Test]
+        [Category("Integration")]
+        [Category("UI")]
         public void LogsButtonOnTheTenantManagementWillDownloadTenantLog_Integration_25773()
         {
             LogsButtonOnTheTenantManagementWillDownloadTenantLog("client2", "project2");
