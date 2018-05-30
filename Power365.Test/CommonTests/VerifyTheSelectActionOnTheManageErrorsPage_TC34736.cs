@@ -25,7 +25,7 @@ namespace BinaryTree.Power365.Test.CommonTests
                 .GetPage<ProjectDetailsPage>()
                 .Menu
                 .ClickErrors();
-            Assert.IsTrue(atErrorsPage.CheckDismissAndExportAreDisplayed(), "Dismiss and export are not displayed");
+            Assert.IsTrue(atErrorsPage.CheckExportAndDismissDisplayed(),"Export or Dismiss actions are not diplayed");
         }
 
         private void runTest(string clientName, string projectName)

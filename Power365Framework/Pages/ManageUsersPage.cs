@@ -4,7 +4,10 @@ using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Extensions;
 using BinaryTree.Power365.AutomationFramework.Pages;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
+using System.IO;
+using System.Linq;
 
 namespace BinaryTree.Power365.AutomationFramework.Pages
 {
@@ -57,6 +60,38 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
                 return new InputElement(_searchInput, WebDriver);
             }
         }
+
+        public bool? CheckUserMigrationLogs(string downloadPath, int timeout)
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo(downloadPath);
+            DefaultWait<DirectoryInfo> wait = new DefaultWait<DirectoryInfo>(directoryInfo);
+            wait.Timeout = TimeSpan.FromSeconds(timeout);
+            wait.PollingInterval = TimeSpan.FromSeconds(1);
+            Func<DirectoryInfo, bool> fileIsDownloaded = new Func<DirectoryInfo, bool>((DirectoryInfo info) =>
+            {
+                var test = info.GetFiles("user-migrations-*.csv").Count() >= 1;
+                return test;
+            });
+            try
+            {
+                return wait.Until(fileIsDownloaded);
+            }
+            catch (WebDriverTimeoutException)
+            {
+                return false;
+            }
+        }
+
+        public void DeleteUserMigrationsJobsLogs(string downloadPath)
+        {
+            FileInfo[] downloadedFiles = new DirectoryInfo(downloadPath).GetFiles("user-migrations-*.csv");
+            foreach (var file in downloadedFiles)
+            {
+                file.Delete();
+            }
+        }
+
+        private readonly By _selectAllUsersButton = By.XPath("//div[@id='users']//*[contains(@data-bind,'allSelect')]");
        // private UserDetailsDialog _usersDetailsPage;
         private static readonly By _locator = By.Id("manageUsersContainer");      
         //@@@ REQ:ID
@@ -119,9 +154,13 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             SearchInput.SendKeys(query);
             ClickElementBy(_searchButton);
         }
-           
 
-       public void SelectWave(string waveName)
+        public void SelectAllUsers()
+        {
+            ClickExistingElement(_selectAllUsersButton);
+        }
+
+        public void SelectWave(string waveName)
         {
             var waveNameModalWindow = By.XPath(string.Format(_modalDialogWaveNameRadioFormat, waveName));
             ClickElementBy(waveNameModalWindow);
