@@ -60,39 +60,8 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
                 return new InputElement(_searchInput, WebDriver);
             }
         }
+        private readonly By _selectAllUsersButton = By.XPath("//div[@id='users']//*[contains(@data-bind,'allSelect')]"); 
 
-        public bool? CheckUserMigrationLogs(string downloadPath, int timeout)
-        {
-            DirectoryInfo directoryInfo = new DirectoryInfo(downloadPath);
-            DefaultWait<DirectoryInfo> wait = new DefaultWait<DirectoryInfo>(directoryInfo);
-            wait.Timeout = TimeSpan.FromSeconds(timeout);
-            wait.PollingInterval = TimeSpan.FromSeconds(1);
-            Func<DirectoryInfo, bool> fileIsDownloaded = new Func<DirectoryInfo, bool>((DirectoryInfo info) =>
-            {
-                var test = info.GetFiles("user-migrations-*.csv").Count() >= 1;
-                return test;
-            });
-            try
-            {
-                return wait.Until(fileIsDownloaded);
-            }
-            catch (WebDriverTimeoutException)
-            {
-                return false;
-            }
-        }
-
-        public void DeleteUserMigrationsJobsLogs(string downloadPath)
-        {
-            FileInfo[] downloadedFiles = new DirectoryInfo(downloadPath).GetFiles("user-migrations-*.csv");
-            foreach (var file in downloadedFiles)
-            {
-                file.Delete();
-            }
-        }
-
-        private readonly By _selectAllUsersButton = By.XPath("//div[@id='users']//*[contains(@data-bind,'allSelect')]");
-       // private UserDetailsDialog _usersDetailsPage;
         private static readonly By _locator = By.Id("manageUsersContainer");      
         //@@@ REQ:ID
         private readonly By _usersTable = By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]");
@@ -111,6 +80,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             
         private readonly string _modalDialogWaveNameRadioFormat = "//*[contains(@class,'modal-dialog')]//div[contains(@class, 'radio')]//span[contains(text(), '{0}')]";
         private readonly string _navigationTabFormat = ("//*[contains(@class, 'nav nav-tabs')]/li/a/*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{0}')]]");
+        private readonly static string USER_MIGRATIONS_FILE_NAME = "user-migrations-*.csv";
 
         public ManageUsersPage(IWebDriver webDriver)
                 : base(_locator, webDriver) { }
@@ -123,9 +93,15 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         public UserDetailsDialog OpenUserDetails(string user)
         {
             return UsersTable.DoubleClickRowByValue<UserDetailsDialog>(user);
-        }            
-       
-        
+        }
+
+        public void SelectAllUsers()
+        {
+
+            var selectAllUsers= FindExistingElement(_selectAllUsersButton, 10);
+            selectAllUsers.Click();
+        }
+
         public void SwichToTab(String tabName)
         {
             WaitForLoadComplete();
@@ -154,13 +130,9 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             SearchInput.SendKeys(query);
             ClickElementBy(_searchButton);
         }
+           
 
-        public void SelectAllUsers()
-        {
-            ClickExistingElement(_selectAllUsersButton);
-        }
-
-        public void SelectWave(string waveName)
+       public void SelectWave(string waveName)
         {
             var waveNameModalWindow = By.XPath(string.Format(_modalDialogWaveNameRadioFormat, waveName));
             ClickElementBy(waveNameModalWindow);
@@ -172,6 +144,34 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             //create
         }
 
-       
+        public bool CheckUserMigrationLogs(string downloadPath, int timeout)
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo(downloadPath);
+            DefaultWait<DirectoryInfo> wait = new DefaultWait<DirectoryInfo>(directoryInfo);
+            wait.Timeout = TimeSpan.FromSeconds(timeout);
+            wait.PollingInterval = TimeSpan.FromSeconds(1);
+            Func<DirectoryInfo, bool> fileIsDownloaded = new Func<DirectoryInfo, bool>((DirectoryInfo info) =>
+            {
+                var test = info.GetFiles(USER_MIGRATIONS_FILE_NAME).Count() >= 1;
+                return test;
+            });
+            try
+            {
+                return wait.Until(fileIsDownloaded);
+            }
+            catch (WebDriverTimeoutException)
+            {
+                return false;
+            }
+        }
+
+        public void DeleteUserMigrationsJobsLogs(string downloadPath)
+        {
+            FileInfo[] downloadedFiles = new DirectoryInfo(downloadPath).GetFiles(USER_MIGRATIONS_FILE_NAME);
+            foreach (var file in downloadedFiles)
+            {
+                file.Delete();
+            }
+        }
     }
 }

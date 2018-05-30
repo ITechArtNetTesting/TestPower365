@@ -26,7 +26,7 @@ namespace BinaryTree.Power365.Test.Menu
                 .GetPage<ProjectDetailsPage>()
                 .Menu
                 .ClickErrors();
-            //Assert.IsTrue(atErrorsPage.CheckDismissAndExportAreDisplayed(), "Dismiss or export action are not displayed");
+            Assert.IsTrue(atErrorsPage.CheckDismissAndExportAreDisplayed(), "Dismiss or export action are not displayed");
         }
 
         private void runTest(string clientName, string projectName)
@@ -42,6 +42,7 @@ namespace BinaryTree.Power365.Test.Menu
         }
 
         [Test]
+        [Category("UI")]
         [Category("Integration")]
         public void VerifyTheSelectActionOnTheManageErrorsPage_Integration_34736()
         {
@@ -49,13 +50,15 @@ namespace BinaryTree.Power365.Test.Menu
         }
 
         [Test]
+        [Category("UI")]
         [Category("MailWithDiscovery")]
         public void VerifyTheSelectActionOnTheManageErrorsPage_MD_34736()
         {
             runTest("client2", "project1");
         }
 
-        [Test]        
+        [Test]
+        [Category("UI")]
         [Category("MailOnly")]
         public void VerifyTheSelectActionOnTheManageErrorsPage_MO_34736()
         {

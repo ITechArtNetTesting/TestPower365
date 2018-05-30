@@ -60,10 +60,6 @@ namespace BinaryTree.Power365.AutomationFramework.Enums
 
     public enum ActionType : byte
     {
-        [Description("Dismiss")]
-        Dismiss,
-        [Description("Export")]
-        Export,
         [Description("Sync")]
         Sync,
         [Description("Stop")]
@@ -81,6 +77,10 @@ namespace BinaryTree.Power365.AutomationFramework.Enums
         [Description("Add To Profile")]
         AddToProfile,
         [Description("Rollback")]
-        Rollback
+        Rollback,
+        [Description("Dismiss")]
+        Dismiss,
+        [Description("Export")]
+        Export
     }
 }

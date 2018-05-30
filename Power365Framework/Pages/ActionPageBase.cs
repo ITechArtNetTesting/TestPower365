@@ -99,18 +99,6 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             return IsElementVisible(_applyActionButtonEnabled);
         }
 
-        public bool IsActionVisible(ActionType action)
-        {
-            bool result;
-            ClickElementBy(_actionsDropdown);
-            if (!IsElementVisible(_actionsDropdownExpanded))
-                throw new Exception("Could not find expanded Actions dropdown.");
-            var actionDropdownSelection = By.XPath(string.Format(_actionDropdownSelectionFormat, action.GetDescription()));
-            result= IsElementVisible(actionDropdownSelection);
-            ClickElementBy(_actionsDropdown);
-            return result;
-        }
-
         public Element GetActionsDropdown()
         {
             return new Element(_actionsDropdown, WebDriver);

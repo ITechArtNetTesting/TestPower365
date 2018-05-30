@@ -57,12 +57,6 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             clickableElement.Click();
         }
 
-        protected void ClickExistingElement(By by, int timeoutInSec = 5, int pollIntervalInSec = 0)
-        {
-            var existingElement = FindExistingElement(by, timeoutInSec, pollIntervalInSec);
-            existingElement.Click();
-        }
-
         protected T ClickElementBy<T>(By by, int timeoutInSec = 5, int pollIntervalInSec = 0)
             where T : PageBase
         {
