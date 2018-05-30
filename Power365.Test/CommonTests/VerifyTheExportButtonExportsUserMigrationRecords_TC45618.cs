@@ -1,4 +1,5 @@
 ﻿using BinaryTree.Power365.AutomationFramework;
+using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Pages;
 using NUnit.Framework;
 using System;
@@ -14,23 +15,21 @@ namespace BinaryTree.Power365.Test.CommonTests
     {
         public VerifyTheExportButtonExportsUserMigrationRecords_TC45618() : base() { }
 
-        private ErrorsPage atErrorsPage;
+        ManageUsersPage _manageUsersPage;
 
         private void verifyTheExportButtonExportsUserMigrationRecords(string username, string password, string client, string projectName,string downloadPath)
         {
-            atErrorsPage = Automation.Common
-                .SingIn(username, password)
-                .ClientSelect(client)
-                .ProjectSelect(projectName)
-                .GetPage<ProjectDetailsPage>()
-                .Menu
-                .ClickErrors();
-            Assert.IsTrue(atErrorsPage.CheckExportAreDisplayed());
-            atErrorsPage.SelectAllUsers();
-            atErrorsPage.ExportSelected();
-            atErrorsPage.DeleteUserMigrationsJobsLogs(downloadPath);
-            atErrorsPage.ClickYesButton();
-            Assert.IsTrue(atErrorsPage.CheckUserMigrationJobsLogs(downloadPath, 15), "Error with downloading logs");
+            _manageUsersPage = Automation.Common
+                                       .SingIn(username, password)
+                                       .ClientSelect(client)
+                                       .ProjectSelect(projectName)
+                                       .UsersEdit()
+                                       .GetPage<ManageUsersPage>();
+            _manageUsersPage.SelectAllUsers();
+            _manageUsersPage.DeleteUserMigrationsJobsLogs(downloadPath);
+            _manageUsersPage.PerformAction(ActionType.Export);
+            _manageUsersPage.ConfirmAction();
+            Assert.IsTrue(_manageUsersPage.CheckUserMigrationLogs(downloadPath, 15), "Error with downloading logs");           
         }
 
         private void runTest(string clientName, string projectName)
