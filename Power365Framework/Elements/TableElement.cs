@@ -20,10 +20,16 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
                 throw new ArgumentNullException("value");
 
             var rowEntryLocator = string.Format(LowerCaseTextLocatorFormat, value.ToLowerInvariant());
-            var rowClassLocator = string.Format("{0}{1}", _rowClassLocator, rowEntryLocator);
-            var rowEntryInputAncestorLocator = string.Format("{0}{1}", rowClassLocator, _rowInputAncestor);
+            var rowClassLocator = rowEntryLocator;
 
+            if (IsElementVisible(By.XPath(_rowClassLocator))) //id we have class= 'tab-pane active'
+            {
+            rowClassLocator = string.Format("{0}{1}", _rowClassLocator, rowEntryLocator);
+            }
+           
+            var rowEntryInputAncestorLocator = string.Format("{0}{1}", rowClassLocator, _rowInputAncestor);
             var rowEntry = By.XPath(rowClassLocator);
+
             ClickElementBy(rowEntry);
             
             var rowCheckbox = By.XPath(rowEntryInputAncestorLocator);

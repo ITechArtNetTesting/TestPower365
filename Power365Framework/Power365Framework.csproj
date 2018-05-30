@@ -63,6 +63,7 @@
     <Compile Include="Dialogs\ConfirmationDialog.cs" />
     <Compile Include="Dialogs\ModalDialogBase.cs" />
     <Compile Include="Dialogs\RollbackConfirmationDialog.cs" />
+    <Compile Include="Dialogs\SelectMigrationProfileDialog.cs" />
     <Compile Include="Dialogs\UserDetailsDialog.cs" />
     <Compile Include="Elements\ButtonElement.cs" />
     <Compile Include="Elements\Element.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Enums\ActionType.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Pages\ActionPageBase.cs" />
+    <Compile Include="Pages\EditMigrationProfilePage.cs" />
     <Compile Include="Pages\EditProjectPage.cs" />
     <Compile Include="Pages\EditTenantsPage.cs" />
     <Compile Include="Pages\EditWavePage.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Pages\LicensesPage.cs" />
     <Compile Include="Pages\DisposablePopupPage.cs" />
     <Compile Include="Pages\ManagePublicFolderPage.cs" />
+    <Compile Include="Pages\MigrationProfilesPage.cs" />
     <Compile Include="Pages\ProbesPage.cs" />
     <Compile Include="Pages\ProjectDetailsPage.cs" />
     <Compile Include="Pages\ResourcesPage.cs" />
@@ -112,7 +115,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Pages\MigrationProfileWizardPage\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

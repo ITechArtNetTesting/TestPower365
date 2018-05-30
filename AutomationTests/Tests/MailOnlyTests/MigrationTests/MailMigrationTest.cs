@@ -16,7 +16,9 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
 		}
         [TestMethod]
 		[TestCategory("MailOnly")]
-		public void Automation_MO_MailMigrationTest()
+        [TestCategory("UI")]
+        [TestCategory("SeleniumLegacy")]
+        public void Automation_MO_MailMigrationTest()
 		{
 		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
 		    string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");

@@ -16,8 +16,10 @@ namespace Product.Tests.MailOnlyTests.ProjectCreationTests
 		}
 
         [TestMethod]
-		[TestCategory("MailOnly")]
-        [TestCategory("ApolloExampleTwo")]
+        [TestCategory("UI")]
+        [TestCategory("MailOnly")]
+        [TestCategory("SeleniumLegacy")]
+        //22140
         public void Automation_MO_ReplaceUsersTest()
 		{
 		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");

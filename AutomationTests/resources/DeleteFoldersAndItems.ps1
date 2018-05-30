@@ -22,8 +22,10 @@ $TargetCreds= New-Object System.Management.Automation.PSCredential ($TargetUserN
 #Start the TestSession
 $TestSession = Start-T2tMigrationTests -SourceMailbox $SourceMailbox -SourceCredentials $SoruceCreds -TargetMailbox $TargetMailbox -TargetCredentials $TargetCreds -LogFilePath $LogPath -TestArchive:$false 
 
-#Add a message to test message delete 
+#create items, sync, then delete, TCs are marked for creates
 
+#Add a message to test message delete 
+#TC 22394
 $ItemAddSubjectD = "Banana Test New Mail Delete " + (Get-Date).ToString("yyyyMMddHHmm");
 $Test7D = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addmailitem" -SourceFolder "\\Inbox" -ItemSubject $ItemAddSubjectD
 if($Test7D.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
@@ -43,7 +45,7 @@ else
 }
 
 #Add a new Sticky Note to test delete
-
+#TC 48972
 $StickyNoteSubject = "YM Sticky Note Added on " + (Get-Date).ToString("yyyyMMddHHmm");
 $Test10D = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addcustomitem" -SourceFolder "\\Notes" -ItemSubject $StickyNoteSubject -ItemClass "IPM.StickyNote"
 if($Test10D.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
@@ -62,7 +64,7 @@ else
 }
 
 #Add an Appointment to test appointment delete
-
+#TC 22397
 $AppointmentAddSubject = "Banana Test Meeting " + (Get-Date).ToString("yyyyMMddHHmm");
 $TestAddAppointment = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addappointmentitem" -SourceFolder "\\Calendar" -ItemSubject $AppointmentAddSubject -Start (Get-Date) -End (Get-Date).AddHours(1)
 if($TestAddAppointment.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
@@ -81,7 +83,7 @@ else
 }
 
 #Add a Task to test task delete
-
+#TC 22399
 $TaskAddSubjectD = "Banana New Task to be deleted " + (Get-Date).ToString("yyyyMMddHHmm");
 $Test14TD = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addcustomitem" -SourceFolder "\\Tasks" -ItemSubject $TaskAddSubjectD -ItemClass "IPM.Task"
 if($Test14TD.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
@@ -100,7 +102,7 @@ else
 }
 
 #Add a Journal to test journal delete
-
+#TC 22401
 $JournalItemTestD = "Banana New Journal to be deleted " + (Get-Date).ToString("yyyyMMddHHmm");
 
 $Test14JD = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addcustomitem" -SourceFolder "\\Journal" -ItemSubject $JournalItemTestD -ItemClass "IPM.Activity"
@@ -120,7 +122,7 @@ else
 }
 
 #Add Contact to test delete
-
+#TC 22395
 $ContactAddSubject = "Brian Arnold Added on " + (Get-Date).ToString("yyyyMMddHHmm");
 $Test8D = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addcontactitem" -SourceFolder "\\Contacts" -ContactName $ContactAddSubject -ContactEmailAddress 'MyAddress@Fake.com'
 if($Test8D.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)

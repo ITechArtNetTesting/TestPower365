@@ -80,11 +80,13 @@
     <Compile Include="CommonTests\LandingPage\LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773.cs" />
     <Compile Include="CommonTests\MigrationWaves\MigrationWave_ApplyAction_TC30919_33610.cs" />
     <Compile Include="CommonTests\Migration\SubmittingDeltaSyncJobForASyncedUser_TC23091.cs" />
-    <Compile Include="CommonTests\VerifyTheSelectActionOnTheManageErrorsPage_TC34736.cs" />
+    <Compile Include="CommonTests\Rollback\TheRollbackCountIsDisplayed_TC43335.cs" />
+    <Compile Include="Menu\VerifyTheSelectActionOnTheManageErrorsPage_TC34736.cs" />
     <Compile Include="IntegrationProjectTests\PrepareJob_38730.cs" />
     <Compile Include="MailEngine\MailEngineTestBase.cs" />
     <Compile Include="MailEngine\PublicFolderTest.cs" />
     <Compile Include="Menu\HelpURLShouldBeAliasedToBTDomain_TC39025.cs" />
+    <Compile Include="Menu\PossibilityToDeleteProfile_TC32315.cs" />
     <Compile Include="Menu\VerifyTheTabsOnTheManageErrorsPage_TC34718.cs" />
     <Compile Include="SampleTest.cs" />
     <Compile Include="Services\MailEngineService.cs" />

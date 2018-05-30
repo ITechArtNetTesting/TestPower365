@@ -86,8 +86,7 @@ namespace Product.Tests.IntegrationTests
                 PerformActionAndWaitForState(sourceMailbox13, ActionType.Sync, State.Provisioning, 60000, 10);
                 PerformActionAndWaitForState(sourceMailbox14, ActionType.Sync, State.Provisioning, 60000, 10);
                 PerformActionAndWaitForState(sourceMailbox15, ActionType.Sync, State.Provisioning, 60000, 10);
-
-                //@@@ These are broken 
+                
                 WaitForAnyState(sourceMailbox1, new[] { State.Synced, State.SyncError }, 2600000, 60);
                 WaitForAnyState(sourceMailbox2, new[] { State.Synced, State.SyncError }, 2600000, 60);
                 WaitForAnyState(sourceMailbox3, new[] { State.Synced, State.SyncError }, 2600000, 60);

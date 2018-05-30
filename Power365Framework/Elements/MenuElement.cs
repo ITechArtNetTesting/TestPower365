@@ -14,7 +14,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
 
         private By _clientsComboBox = By.ClassName("dropdown");
         
-        private string _menuSelectionLocatorFormat = "//span[contains(text(), '{0}')]";
+        private string _menuSelectionLocatorFormat = "//*[@class='menulink']//span[contains(text(), '{0}')]";
         private string _clientLocatorFormat = "//div[contains(@class, 'open')]//a[contains(text(), '{0}')]";
 
         //PROJECTS
@@ -24,7 +24,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         //ADMIN
         private const string EN_CLIENTS = "Clients";
         private const string EN_LICENSES = "Licenses";
-        private const string EN_USERS = "Users";
+        
         private const string EN_PROBES = "Probes";
         private const string EN_RESOURCES = "Resources";
 
@@ -36,7 +36,9 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         private const string EN_SIGNOUT = "Sign Out";
         private const string EN_ERRORS = "Errors";
 
-
+        //MANAGE
+        private const string EN_MIGRATION_PROFILES = "Migration Profiles";
+        private const string EN_USERS = "Users";
 
         public MenuElement(IWebDriver webDriver)
             :base(_locator, webDriver) { }
@@ -80,9 +82,11 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             throw new NotImplementedException();
         }
 
-        public void ClickUsers()
+        public ManageUsersPage ClickUsers()
         {
-            throw new NotImplementedException();
+            OpenMenu();
+            var clientSelection = By.XPath(string.Format(_menuSelectionLocatorFormat, EN_USERS));
+            return ClickElementBy<ManageUsersPage>(clientSelection,15);
         }
 
         public ProbesPage ClickProbes()
@@ -112,6 +116,11 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             OpenMenu();
             var clientSelection = By.XPath(string.Format(_menuSelectionLocatorFormat, EN_ERRORS));
             return ClickElementBy<ErrorsPage>(clientSelection);
+        }
+
+        public MigrationProfilesPage  ClickMigrationProfiles()
+        {
+            return ClickMenuSelection<MigrationProfilesPage>(EN_MIGRATION_PROFILES);
         }
 
         /// <summary>

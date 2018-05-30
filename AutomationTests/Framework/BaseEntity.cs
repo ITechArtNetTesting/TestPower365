@@ -20,49 +20,13 @@ namespace Product.Framework
 			Log = LogManager.GetLogger(typeof(BaseEntity));
 
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-
         }
-
-        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            // Log the exception, display it, etc
-            Log.Error(string.Format("UNHANDLED EXCEPTION: {0}", (e.ExceptionObject as Exception).Message), e.ExceptionObject as Exception);
-        }
-
-        // Just logs current step number and name.
-        /// <summary>
-        ///     Logs the step.
-        /// </summary>
-        /// <param name="step">The step.</param>
-        /// <param name="message">The message.</param>
-        public void LogStep(int step, string message)
-		{
-			Log.Info($"----------[ Step {step} ]: {message}");
-		}
-
-		// Logs Test Case name.
-		/// <summary>
-		///     Logs the case.
-		/// </summary>
-		/// <param name="message">The message.</param>
-		public void LogCase(string message)
-		{
-			Log.Info("              ");
-			Log.Info(string.Format(message));
-			Log.Info("              ");
-		}
-
+        
 	    public void LogHtml(string message)
 	    {
-	        Console.WriteLine(" ");
-            Console.WriteLine("----------------------------------------------------");
-            Console.WriteLine(" ");
-	        Console.WriteLine(message);
-	        Console.WriteLine(" ");
-	        Console.WriteLine("----------------------------------------------------");
+            Log.Debug(message);
         }
-
-
+        
         protected void ClickElementBy(By by, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
             var clickableElement = FindClickableElement(by, timeoutInSec, pollIntervalSec);
@@ -246,7 +210,6 @@ namespace Product.Framework
             }
             return condition(Browser.GetDriver());
         }
-             
 
         protected bool IsAjaxActive(int timeoutInSec = 10)
         {
@@ -280,6 +243,12 @@ namespace Product.Framework
                 wait.PollingInterval = TimeSpan.FromMilliseconds(100);
                 wait.Until(wd => (bool)(Browser.GetDriver() as IJavaScriptExecutor).ExecuteScript("return jQuery.active == 0"));
             }
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            // Log the exception, display it, etc
+            Log.Error(string.Format("UNHANDLED EXCEPTION: {0}", (e.ExceptionObject as Exception).Message), e.ExceptionObject as Exception);
         }
     }
 

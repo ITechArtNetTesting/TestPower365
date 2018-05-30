@@ -651,10 +651,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="MailEngine.orderedtest">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Ordered.orderedtest">
       <SubType>Designer</SubType>
     </None>

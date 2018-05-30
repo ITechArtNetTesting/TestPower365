@@ -15,8 +15,10 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 			_testContext = testContext;
 		}
 		[TestMethod]
+        [TestCategory("UI")]
         [TestCategory("MailOnly")]
-		public void Automation_MO_FinalizingTest()
+        [TestCategory("SeleniumLegacy")]
+        public void Automation_MO_FinalizingTest()
 		{
 		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");
 		    string password = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//password");

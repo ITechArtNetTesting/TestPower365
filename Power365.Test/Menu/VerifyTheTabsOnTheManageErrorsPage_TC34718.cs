@@ -2,7 +2,7 @@
 using BinaryTree.Power365.AutomationFramework.Pages;
 using NUnit.Framework;
 
-namespace BinaryTree.Power365.Test.CommonTests.Menu
+namespace BinaryTree.Power365.Test.Menu
 {
     [TestFixture]
     public class VerifyTheTabsOnTheManageErrorsPage_TC34718: TestBase

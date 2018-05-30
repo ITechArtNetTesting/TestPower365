@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace BinaryTree.Power365.AutomationFramework.Pages
 {
-    public class ErrorsPage : PageBase
+    public class ErrorsPage: PageBase
     {
-        private static readonly By _locator = By.Id("users");
-
+        private static readonly By _locator = By.XPath("//div[@id='users']//input[contains(@placeholder,'error')]");
+      
 
         public Element GroupsTab
         {
@@ -45,7 +45,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             get
             {
                 var tab = By.XPath(string.Format(dropDownFormat, "Select action"));
-                return new ButtonElement(tab, WebDriver);                
+                return new ButtonElement(tab, WebDriver);
             }
         }
 
@@ -55,7 +55,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             get
             {
                 var tab = By.XPath(string.Format(dropDownFormat, "Dismiss"));
-                return new Element(tab, WebDriver);                
+                return new Element(tab, WebDriver);
             }
         }
 
@@ -64,25 +64,21 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             get
             {
                 var tab = By.XPath(string.Format(dropDownFormat, "Export"));
-                return new Element(tab, WebDriver);                
+                return new Element(tab, WebDriver);
             }
         }
 
-
         private readonly string tabFormat = "//ul[@class='nav nav-tabs m-t-lg']//span[contains(text(),'{0}')]";
-
         private readonly string dropDownFormat = "//div[@id='users']//*[contains(text(),'{0}')]";
 
         public ErrorsPage(IWebDriver webDriver) : base(_locator,webDriver) { }
 
         public bool CheckDismissAndExportAreDisplayed()
         {
-            bool result;
-            SelectActionButton.Click();
-            result= DismissAction.IsVisible() && ExportAction.IsVisible();
-            SelectActionButton.Click();
-            return result;
+            SelectActionButton.Click(); 
+            return DismissAction.IsVisible() && ExportAction.IsVisible();
         }
-       
+
+
     }
 }

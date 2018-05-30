@@ -49,8 +49,8 @@ namespace BinaryTree.Power365.Test.IntegrationProjectTests
 
             _manageUsersPage.Search(_userMigration_source);
             _manageUsersPage.UsersTable.ClickRowByValue(_userMigration_source);
-            //_manageUsersPage.PerformAction<ConfirmationDialog>(ActionType.Prepare)
-            //                          .Yes();
+            _manageUsersPage.PerformAction<ConfirmationDialog>(ActionType.Prepare)
+                                      .Yes();
             _manageUsersPage.IsUserState(_userMigration_source, StateType.Preparing, 18000, 5);
 
             //Verify

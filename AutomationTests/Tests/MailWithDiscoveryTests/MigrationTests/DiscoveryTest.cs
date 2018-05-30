@@ -15,7 +15,9 @@ namespace Product.Tests.MailWithDiscoveryTests.MigrationTests
 		}
 		[TestMethod]
 		[TestCategory("MailWithDiscovery")]
-		public void Automation_MD_DiscoveryProcessTest()
+        [TestCategory("UI")]
+        [TestCategory("SeleniumLegacy")]
+        public void Automation_MD_DiscoveryProcessTest()
 		{
 		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user");
 		    string password = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//password");

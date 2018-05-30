@@ -1,13 +1,11 @@
 ﻿using BinaryTree.Power365.AutomationFramework;
 using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Pages;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-//using NUnit.Framework;
+using NUnit.Framework;
 
 namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
 {
-    //  [TestFixture]
-    [TestClass]
+      [TestFixture]    
     public class MigrationWave_ApplyAction_TC30919_33610 : TestBase
     {
         public MigrationWave_ApplyAction_TC30919_33610()
@@ -15,30 +13,28 @@ namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
                     
         private static readonly string WAVE_NAME = "TC_30919_33610_4";
 
-        
-        //[Category("MailOnly")]
-        //[Category("UI")]
-        //[Test]
+
+        [Category("MailOnly")]
+        [Category("UI")]
+        [Test]
         public void MigrationWave_Sync_MO_30919()
         {
           RunTest("client1", "project1", "entry10",true, false);
         }
 
 
-        //[Category("MailWithDiscovery")]
-        //[Category("UI")]
-        //[Test]
-        [TestMethod]
+        [Category("MailWithDiscovery")]
+        [Category("UI")]
+        [Test]
         public void MigrationWave_Sync_MD_30919_33610()
         {
             RunTest("client2", "project1", "entry6", false, false,"c7toc9smlgrp2");
         }
 
 
-        //[Category("Integration")]
-        //[Category("UI")]
-        //[Test]
-        [TestMethod]
+        [Category("Integration")]
+        [Category("UI")]
+        [Test]       
         public void MigrationWave_Sync_Integration_TC30919_33610()
         {
             RunTest("client2", "project2", "entry11",false, true, "P365AutoGrp1");
@@ -110,7 +106,7 @@ namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
                 Assert.IsTrue(_manageUsersPage.IsActionEnabled(ActionType.Sync), "Sync action isn't enabled");
             }
 
-            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(_manageUsersPage.IsActionEnabled(ActionType.Archive), "Archive action isn't enabled");
+            Assert.IsTrue(_manageUsersPage.IsActionEnabled(ActionType.Archive), "Archive action isn't enabled");
             Assert.IsFalse(_manageUsersPage.IsActionEnabled(ActionType.Cutover), "Cutover action is enabled");
             Assert.IsFalse(_manageUsersPage.IsActionEnabled(ActionType.Stop), "Stop action is enabled");
             Assert.IsTrue(_manageUsersPage.IsActionEnabled(ActionType.AddToProfile), "AddToProfile action is enabled");

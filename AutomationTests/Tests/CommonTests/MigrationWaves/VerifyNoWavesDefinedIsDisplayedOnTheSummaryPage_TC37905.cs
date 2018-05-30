@@ -18,13 +18,13 @@ namespace Product.Tests.CommonTests.MigrationWaves
         }
 
         [TestMethod]
-        public void VerifyNoWavesDefinedIsDisplayedOnTheSummaryPage()
+        public void VerifyNoWavesDefinedIsDisplayedOnTheSummaryPage_37905()
         {
             LoginAndSelectRole(RunConfigurator.GetUserLogin("client2"),
                               RunConfigurator.GetPassword("client2"),
                               RunConfigurator.GetClient("client2"));
 
-            var projectName = "IntegrationProjectForTC37905";
+            var projectName = "IntegrationProjectForTC37905_1";
 
             User.AtTenantRestructuringForm().AddProjectClick();
             User.AtChooseYourProjectTypeForm().ChooseIntegration();
@@ -131,9 +131,9 @@ namespace Product.Tests.CommonTests.MigrationWaves
             User.AtConfigureEmailRewrittingForm().SelectNo();
             User.AtConfigureEmailRewrittingForm().GoNext();
             User.AtGoodToGoForm().ScrollToTheBottom();
+            //Verify
             User.AtGoodToGoForm().CheckNoWavesDefined();
-            User.AtGoodToGoForm().GoNext();
-            User.AtProjectOverviewForm().OpenUsersList();
+           
         }
     }
 }

@@ -2,6 +2,7 @@
 using BinaryTree.Power365.AutomationFramework.Pages;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,35 +11,29 @@ using System.Threading.Tasks;
 
 namespace BinaryTree.Power365.Test.CommonTests.LandingPage
 {
-    [TestClass]
+    [TestFixture]
     public class LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773: TestBase
     {
-        public LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773() : base() { }
-
-        private  string _client;
-        private string _username;
-        private string _projectName;
-        private string _password;
-        private string _tenant;
-        private string _downloadsPath;
-        private EditTenantsPage tenantsEditPage;        
+        public LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773() : base() { }        
 
         private void SetTestCaseParams(string clientName, string projectName)
-        {
-            var client = Automation.Settings.GetByReference<Client>(clientName);
-            var _project = client.GetByReference<Project>(projectName);
-            _client = client.Name;
-            _username = client.Administrator.Username;
-            _password = client.Administrator.Password;
-            _projectName = _project.Name;
-            _tenant = Automation.Settings.GetByReference<Tenant>(_project.Source).Name;
-            _downloadsPath = Automation.Settings.DownloadsPath;
-        }
+        {           
+          
+           var client = Automation.Settings.GetByReference<Client>(clientName);
+           var _project = client.GetByReference<Project>(projectName);
+           string  _client = client.Name;
+           string _username = client.Administrator.Username;
+           string _password = client.Administrator.Password;
+           string _projectName = _project.Name;
+           string _tenant = Automation.Settings.GetByReference<Tenant>(_project.Source).Name;
+           string _downloadsPath = Automation.Settings.DownloadsPath;
+           LogsButtonOnTheTenantManagementWillDownloadTenantLog(_client, _projectName, _username, _password, _downloadsPath, _tenant);
+    }
 
-        private void LogsButtonOnTheTenantManagementWillDownloadTenantLog(string client, string project)
+        private void LogsButtonOnTheTenantManagementWillDownloadTenantLog(string _client, string _projectName,string _username, string _password, string _downloadsPath, string _tenant)
         {
-            SetTestCaseParams(client, project);
-            tenantsEditPage = Automation.Common
+            
+           var  tenantsEditPage = Automation.Common
                 .SingIn(_username, _password)
                 .ClientSelect(_client)
                 .ProjectSelect(_projectName)
@@ -47,23 +42,23 @@ namespace BinaryTree.Power365.Test.CommonTests.LandingPage
             tenantsEditPage.ClickDiscoveryTab();
             tenantsEditPage.DeleteTenantLogs(_downloadsPath);
             tenantsEditPage.DownloadLogs(_tenant);
-            Assert.IsTrue(tenantsEditPage.CheckDiscoveryFileIsDownloaded(_downloadsPath,15),"");
+            NUnit.Framework.Assert.IsTrue(tenantsEditPage.CheckDiscoveryFileIsDownloaded(_downloadsPath,15),"");
         }
 
-        [TestMethod]
-        [TestCategory("MailWithDiscovery")]
-        [TestCategory("UI")]
+        [Test]
+        [Category("MailWithDiscovery")]
+        [Category("UI")]
         public void LogsButtonOnTheTenantManagementWillDownloadTenantLog_MD_25773()
         {
-            LogsButtonOnTheTenantManagementWillDownloadTenantLog("client2", "project1");
+            SetTestCaseParams("client2", "project1");
         }
 
-        [TestMethod]
-        [TestCategory("Integration")]
-        [TestCategory("UI")]
+        [Test]
+        [Category("Integration")]
+        [Category("UI")]
         public void LogsButtonOnTheTenantManagementWillDownloadTenantLog_Integration_25773()
         {
-            LogsButtonOnTheTenantManagementWillDownloadTenantLog("client2", "project2");
+            SetTestCaseParams("client2", "project2");
         }
     }
 }

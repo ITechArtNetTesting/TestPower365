@@ -6,6 +6,8 @@ using Product.Framework.Steps;
 using System.Management.Automation;
 using System.Threading;
 using TestContext = Microsoft.VisualStudio.TestTools.UnitTesting.TestContext;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace Product.Framework
 {
@@ -32,7 +34,9 @@ namespace Product.Framework
 		[TestInitialize]
 		public virtual void SetUp()
 		{
-			RunOnce();
+            //LogTestInfo();
+
+            RunOnce();
 			RunConfigurator.RunPath = "resources/run.xml";
 			RunConfigurator.DownloadPath = downloadPath;
 			RunConfigurator.ResourcesPath = "resources/";
@@ -54,13 +58,24 @@ namespace Product.Framework
 			Browser.GetInstance(RunConfigurator.DownloadPath);
 			Browser.GetDriver().Manage().Window.Maximize();
 			Browser.GetDriver().Navigate().GoToUrl(_baseUrl);
+            
+            
 		}
 
-		
-		/// <summary>
-		///     Tears down.
-		/// </summary>
-		[TestCleanup]
+        private void LogTestInfo()
+        {
+            var fullyQulifiedMethod = _testContext.FullyQualifiedTestClassName;
+            var className = fullyQulifiedMethod.Substring(0, fullyQulifiedMethod.LastIndexOf('.'));
+
+           
+
+        }
+
+
+        /// <summary>
+        ///     Tears down.
+        /// </summary>
+        [TestCleanup]
 		public void TearDown()
 		{
             Browser.GetDriver()?.Close();
