@@ -3,8 +3,6 @@ using BinaryTree.Power365.AutomationFramework.Elements;
 using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Extensions;
 using BinaryTree.Power365.AutomationFramework.Pages;
-using BinaryTree.Power365.AutomationFramework.Utilities;
-using Microsoft.Office.Interop.Excel;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -62,55 +60,13 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
                 return new InputElement(_searchInput, WebDriver);
             }
         }
+        private readonly By _selectAllUsersButton = By.XPath("//div[@id='users']//*[contains(@data-bind,'allSelect')]"); 
 
-        public bool? CheckUserMigrationLogs(string downloadPath, int timeout)
-        {            
-            IWebElement element = FindVisibleElement(_lastPage);
-            element.Click();
-            WaitForLoadComplete();
-            var numberOfRows = (Convert.ToInt32(element.Text) - 1) * 10 + WebDriver.FindElements(_usersRows).Count;
-            DirectoryInfo directoryInfo = new DirectoryInfo(downloadPath);
-            DefaultWait<DirectoryInfo> wait = new DefaultWait<DirectoryInfo>(directoryInfo);
-            wait.Timeout = TimeSpan.FromSeconds(timeout);
-            wait.PollingInterval = TimeSpan.FromSeconds(1);
-            Func<DirectoryInfo, bool> fileIsDownloaded = new Func<DirectoryInfo, bool>((DirectoryInfo info) =>
-            {
-                var path =info.GetFiles("user-migrations-*.csv")[0].FullName;
-                var test = info.GetFiles("user-migrations-*.csv").Count() >= 1;
-                ExcelReader exlRead = new ExcelReader();
-                int rowCount = exlRead.GetRowsCount(path);
-                return test&&rowCount==numberOfRows+1;
-            });
-            try
-            {
-                return wait.Until(fileIsDownloaded);
-            }
-            catch (WebDriverTimeoutException)
-            {
-                return false;
-            }
-        }
-       
-
-        public void DeleteUserMigrationsJobsLogs(string downloadPath)
-        {
-            FileInfo[] downloadedFiles = new DirectoryInfo(downloadPath).GetFiles("user-migrations-*.csv");
-            foreach (var file in downloadedFiles)
-            {
-                file.Delete();
-            }
-        }
-
-        private readonly By _usersRows = By.XPath("//div[@id='users']//table[@data-bind]//tbody//tr[child::td]");
-
-        private readonly By _lastPage = By.XPath("//ul[@class='pagination']//li[child::a[contains(@data-bind,'Number')]][last()]/a");
-
-        private readonly By _selectAllUsersButton = By.XPath("//div[@id='users']//*[contains(@data-bind,'allSelect')]");
-       // private UserDetailsDialog _usersDetailsPage;
         private static readonly By _locator = By.Id("manageUsersContainer");      
         //@@@ REQ:ID
         private readonly By _usersTable = By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]");
-        private readonly By _wavesTable = By.XPath("//div[contains(@id, 'waves')]//table[contains(@class, 'table-expanded')]");
+
+          private readonly By _wavesTable = By.XPath("//div[contains(@id, 'waves')]//table[contains(@class, 'table-expanded')]");
         //@@@ REQ:ID      
 
         private readonly By _migrationWaveTab = By.XPath("//a[contains(@href,'waves')]//span");
@@ -125,7 +81,10 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             
         private readonly string _modalDialogWaveNameRadioFormat = "//*[contains(@class,'modal-dialog')]//div[contains(@class, 'radio')]//span[contains(text(), '{0}')]";
         private readonly string _navigationTabFormat = ("//*[contains(@class, 'nav nav-tabs')]/li/a/*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{0}')]]");
+        private readonly static string USER_MIGRATIONS_FILE_NAME = "user-migrations-*.csv";
 
+        //  mailOnly
+        private readonly By _addOrFixUsersButton = By.XPath("//a[contains(@data-bind, 'uploadUser')]");
         public ManageUsersPage(IWebDriver webDriver)
                 : base(_locator, webDriver) { }
 
@@ -137,9 +96,15 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         public UserDetailsDialog OpenUserDetails(string user)
         {
             return UsersTable.DoubleClickRowByValue<UserDetailsDialog>(user);
-        }            
-       
-        
+        }
+
+        public void SelectAllUsers()
+        {
+
+            var selectAllUsers= FindExistingElement(_selectAllUsersButton, 10);
+            selectAllUsers.Click();
+        }
+
         public void SwichToTab(String tabName)
         {
             WaitForLoadComplete();
@@ -168,13 +133,9 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             SearchInput.SendKeys(query);
             ClickElementBy(_searchButton);
         }
+           
 
-        public void SelectAllUsers()
-        {
-            ClickExistingElement(_selectAllUsersButton);
-        }
-
-        public void SelectWave(string waveName)
+       public void SelectWave(string waveName)
         {
             var waveNameModalWindow = By.XPath(string.Format(_modalDialogWaveNameRadioFormat, waveName));
             ClickElementBy(waveNameModalWindow);
@@ -184,6 +145,11 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         public void SelectWave()
         {
             //create
+        }
+               
+        public UploadFileDialog AddOrFixUserClick()
+        {
+            return ClickModelElementBy<UploadFileDialog>(_addOrFixUsersButton);
         }
 
        

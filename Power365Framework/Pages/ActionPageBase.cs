@@ -3,8 +3,10 @@ using BinaryTree.Power365.AutomationFramework.Elements;
 using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Extensions;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -99,21 +101,43 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             return IsElementVisible(_applyActionButtonEnabled);
         }
 
-        public bool IsActionVisible(ActionType action)
-        {
-            bool result;
-            ClickElementBy(_actionsDropdown);
-            if (!IsElementVisible(_actionsDropdownExpanded))
-                throw new Exception("Could not find expanded Actions dropdown.");
-            var actionDropdownSelection = By.XPath(string.Format(_actionDropdownSelectionFormat, action.GetDescription()));
-            result= IsElementVisible(actionDropdownSelection);
-            ClickElementBy(_actionsDropdown);
-            return result;
-        }
-
         public Element GetActionsDropdown()
         {
             return new Element(_actionsDropdown, WebDriver);
         }
+
+       
+        //public bool IsLogsDownload(string downloadPath, string fileNameFormat, int timeout = 10)
+        //{
+        //    DirectoryInfo directoryInfo = new DirectoryInfo(downloadPath);
+        //    DefaultWait<DirectoryInfo> wait = new DefaultWait<DirectoryInfo>(directoryInfo);
+        //    wait.Timeout = TimeSpan.FromSeconds(timeout);
+        //    wait.PollingInterval = TimeSpan.FromSeconds(1);
+        //    Func<DirectoryInfo, bool> fileIsDownloaded = new Func<DirectoryInfo, bool>((DirectoryInfo info) =>
+        //    {
+        //        var test = info.GetFiles(fileNameFormat).Count() >= 1;
+        //        return test;
+        //    });
+        //    try
+        //    {
+        //        return wait.Until(fileIsDownloaded);
+        //    }
+        //    catch (WebDriverTimeoutException)
+        //    {
+        //        return false;
+        //    }
+        //}
+
+    
+        public void DeleteLogs(string downloadPath, string fileNameFormat)
+        {
+            FileInfo[] downloadedFiles = new DirectoryInfo(downloadPath).GetFiles(fileNameFormat);
+            foreach (var file in downloadedFiles)
+            {
+                file.Delete();
+            }
+        }
+
+
     }
 }

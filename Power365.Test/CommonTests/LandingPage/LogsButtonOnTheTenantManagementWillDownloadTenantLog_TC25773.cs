@@ -1,13 +1,9 @@
 ﻿using BinaryTree.Power365.AutomationFramework;
 using BinaryTree.Power365.AutomationFramework.Pages;
 using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BinaryTree.Power365.Test.CommonTests.LandingPage
 {
@@ -35,6 +31,7 @@ namespace BinaryTree.Power365.Test.CommonTests.LandingPage
             
            var  tenantsEditPage = Automation.Common
                 .SingIn(_username, _password)
+                .MigrateAndIntegrateSelect()
                 .ClientSelect(_client)
                 .ProjectSelect(_projectName)
                 .TenantsEdit()
@@ -42,7 +39,7 @@ namespace BinaryTree.Power365.Test.CommonTests.LandingPage
             tenantsEditPage.ClickDiscoveryTab();
             tenantsEditPage.DeleteTenantLogs(_downloadsPath);
             tenantsEditPage.DownloadLogs(_tenant);
-            NUnit.Framework.Assert.IsTrue(tenantsEditPage.CheckDiscoveryFileIsDownloaded(_downloadsPath,15),"");
+            Assert.IsTrue(tenantsEditPage.CheckDiscoveryFileIsDownloaded(_downloadsPath,15),"");
         }
 
         [Test]

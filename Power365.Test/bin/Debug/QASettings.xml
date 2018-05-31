@@ -79,6 +79,15 @@
               <Group>Wave2</Group>
               <Profile>Profile 1</Profile>
             </UserMigration>     
+          <UserMigration Reference="entry12">
+              <Source>C7O365SML15@btcorp7.onmicrosoft.com</Source>
+              <Target>C7O365SML15@btcorp9.onmicrosoft.com</Target>
+              <Group>Wave2</Group>
+              <Profile>Profile 1</Profile>
+            </UserMigration>
+            <UserMigration Reference="entry13">
+              <Source>C7O365SML16@btcorp7.onmicrosoft.com</Source>             
+            </UserMigration>
 
           </UserMigrations>
           <Groups />
@@ -184,7 +193,13 @@
             <UserMigration Reference="entry6">
               <Source>C7O365SML31@btcorp7.onmicrosoft.com</Source>
               <Target>C7O365SML31@btcorp9.onmicrosoft.com</Target>
-            </UserMigration>           
+            </UserMigration>
+
+            <UserMigration Reference="entry7">
+              <Source>C7O365SML32@btcorp7.onmicrosoft.com</Source>
+              <Target>C7O365SML32@btcorp9.onmicrosoft.com</Target>
+            </UserMigration>
+            
           </UserMigrations>
           <Groups>
             <Group Reference="adgroup1">

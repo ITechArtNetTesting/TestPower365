@@ -16,6 +16,11 @@ namespace Product.Framework.Steps
 			return new MainForm();
 		}
 
+        public LandingForm AtLandingForm()
+        {
+            return new LandingForm();
+        }
+
 		public RegistrationForm AtRegistrationForm()
 		{
 			return new RegistrationForm();

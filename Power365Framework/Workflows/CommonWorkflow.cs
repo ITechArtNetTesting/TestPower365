@@ -37,7 +37,7 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
             return this;
         }
 
-        public CommonWorkflow SelectMigrateAndIntegrate()
+        public CommonWorkflow MigrateAndIntegrateSelect()
         {
             var startPage = GetCurrentPage<StartPage>();
             CurrentPage = startPage.ClickMigrateAndIntegrateButton();

@@ -64,6 +64,7 @@
     <Compile Include="Dialogs\ModalDialogBase.cs" />
     <Compile Include="Dialogs\RollbackConfirmationDialog.cs" />
     <Compile Include="Dialogs\SelectMigrationProfileDialog.cs" />
+    <Compile Include="Dialogs\UploadFileDialog.cs" />
     <Compile Include="Dialogs\UserDetailsDialog.cs" />
     <Compile Include="Elements\ButtonElement.cs" />
     <Compile Include="Elements\Element.cs" />

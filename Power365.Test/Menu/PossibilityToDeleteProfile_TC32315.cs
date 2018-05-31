@@ -14,14 +14,14 @@ namespace BinaryTree.Power365.Test.Menu
         {
         }
 
-        //    [Test]
-        //    [Category("UI")]
-        //    [Category("MailOnly")]
-        //    public void PossibilityToDeleteProfile_MO_34718()
-        //    {
-        //        TestRun("client1", "project1");
-        //    }
-       
+        [Test]
+        [Category("UI")]
+        [Category("MailOnly")]
+        public void PossibilityToDeleteProfile_MO_34718()
+        {
+            TestRun("client1", "project1");
+        }
+
 
         [Test]
         [Category("UI")]
@@ -54,23 +54,28 @@ namespace BinaryTree.Power365.Test.Menu
         {
             var migrationProfilePage = Automation.Common
                  .SingIn(_username, _password)
+                 .MigrateAndIntegrateSelect()
                  .ClientSelect(_client)
                  .ProjectSelect(_projectName)
                  .GetPage<ProjectDetailsPage>()
                  .Menu
                  .ClickMigrationProfiles();
+
             if (!isIntegration)
             {
                var createProfile= migrationProfilePage.ClickAddNewProfile("TestProfile1");
                 createProfile.createSimpleProfile("TestProfile1");                
             }
+
            Assert.IsFalse(migrationProfilePage.IsDeleteLinkVisible("Default"), "Delete link is visible for Default profile");
            Assert.IsTrue(migrationProfilePage.IsDeleteLinkVisible("TestProfile1"), "Delete link is not visible for not Default profile");
 
-            var usersPage =  migrationProfilePage.Menu.
-                               ClickUsers();
+            var usersPage =  migrationProfilePage
+                   .Menu
+                   .ClickUsers();
             usersPage.Search(_userMigration);
             usersPage.UsersTable.ClickRowByValue(_userMigration);
+
             var migrationProfileDialog = usersPage.PerformAction<SelectMigrationProfileDialog>(ActionType.AddToProfile);
             Assert.IsFalse(migrationProfileDialog.IsProfileActionVisible("Default", "Delete"), "Delete link is visible for Default profile in the User Page");
             Assert.IsTrue(migrationProfileDialog.IsProfileActionVisible("TestProfile1", "Delete"), "Delete link is not visible for not Default profile in the User Page");

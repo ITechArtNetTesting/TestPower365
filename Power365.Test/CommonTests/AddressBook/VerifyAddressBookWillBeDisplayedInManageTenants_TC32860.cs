@@ -16,6 +16,7 @@ namespace BinaryTree.Power365.Test.CommonTests.AddressBook
 
             tenantsEditPage = Automation.Common
                 .SingIn(_username, _password)
+                .MigrateAndIntegrateSelect()
                 .ClientSelect(_client)
                 .ProjectSelect(_projectName)
                 .TenantsEdit()

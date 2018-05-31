@@ -69,23 +69,29 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
                 return new ButtonElement(_closeButton, WebDriver);
             }
         }
+        public TableElement JobsTable
+        {
+            get
+            {
+                return new TableElement(_jobsTable, WebDriver);
+            }
+        }
 
-     
         private readonly By _closeButton = By.XPath("//*[contains(@data-translation, 'Close')]");
+        private readonly By _jobsTable = By.XPath("//div[contains(@class, 'modal in')]//*[contains(@class, ' table-frame')]");
+        private readonly By _detailsState = By.XPath("//span[contains(@data-bind,'State')]");
 
         private readonly string _actionButtonFormat = "//div[contains(@class, 'modal in')]//*[contains(@data-bind, '{0}')]";
         private readonly string _confirmationDialogButtonFormat = "//div[@id='confirmationDialog'][contains(@class, 'modal in')]//*[contains(text(), '{0}')]";
+        private readonly string _migrationStateTextLocatorFormat = "//*[contains(@data-bind, 'migrationState')][contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{0}')]";
+       
 
-        private readonly By _detailsState = By.XPath("//span[contains(@data-bind,'State')]");
-
-        private string _migrationStateTextLocatorFormat = "//*[contains(@data-bind, 'migrationState')][contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{0}')]";
-        
         public UserDetailsDialog(IWebDriver webDriver)
             : base(webDriver) { }
-        
-       public T PerformAction<T>(ActionType action)
-         where T: ModalDialogBase
-       //   public void PerformAction(ActionType action)          
+
+        public T PerformAction<T>(ActionType action)
+          where T : ModalDialogBase
+            //   public void PerformAction(ActionType action)          
         {
             ButtonElement button = null;
             switch (action)
@@ -109,21 +115,24 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
                     throw new Exception("Invalid action for this dialog.");
             }
 
-                    return button.ClickModal<T>();
+            return button.ClickModal<T>();
         }
 
-       public void IsUserState(string entry, StateType state, int timeoutInSec = 5, int pollIntervalInSec = 0)
+        public void UsersValidateState(string entry, StateType state, int timeoutInSec = 5, int pollIntervalInSec = 0)
         {
             var value = state.GetDisplay();
-           
+
             var rowEntryTextValue = string.Format(_migrationStateTextLocatorFormat, value.ToLower());
             var stateLocator = By.XPath(rowEntryTextValue);
 
-             
+
             if (!IsElementVisible(stateLocator, timeoutInSec, pollIntervalInSec, () => RefreshButton.Click()))
             {
                 throw new Exception(string.Format("Entry of '{0}' with state '{1}' was not found.", entry, value));
             };
+
         }
-    }
+
+           
+}
 }

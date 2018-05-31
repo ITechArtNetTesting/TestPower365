@@ -42,6 +42,7 @@ namespace BinaryTree.Power365.Test.IntegrationProjectTests
             //test steps
             var _manageUsersPage = Automation.Common
                                        .SingIn(_username, _password)
+                                       .MigrateAndIntegrateSelect()
                                        .ClientSelect(_client)
                                        .ProjectSelect(_project)
                                        .UsersEdit()                                       

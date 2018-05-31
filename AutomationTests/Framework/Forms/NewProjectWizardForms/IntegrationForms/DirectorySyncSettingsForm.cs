@@ -19,9 +19,10 @@ namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 		}
 		private readonly Label accessUrlLabel = new Label(By.XPath("//h4[contains(@data-bind, 'accessUrl')]"), "Public URL label");
 		private readonly Label accessKeyLabel = new Label(By.XPath("//h4[contains(@data-bind, 'accessKey')]"), "Public key label");
+       
         private readonly Button accessKeyCopyButton = new Button(By.XPath("//div[child::h4[contains(@data-bind, 'accessKey')]]/a"), "Button to copy access key");
 
-		public void StoreAccessUrl()
+        public void StoreAccessUrl()
 		{
 			Log.Info("Storing access url");
 			Store.AccessUrl = accessUrlLabel.GetText();
@@ -42,5 +43,6 @@ namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
         {
             return accessKeyCopyButton.IsElementVisible();
         }
-	}
+
+    }
 }

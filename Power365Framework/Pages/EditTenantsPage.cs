@@ -59,7 +59,6 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
 
         private string tenantEnableFormat = "//*[contains(text(), '{0}')]//ancestor::tr//a[contains(@data-bind,'enable')]";
         private readonly string _navigationTabFormat = ("//*[contains(@class, 'nav nav-tabs')]/li/a/*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{0}')]]");
-
         private readonly string _tenantStatus = "//div[@id='discovery']//tr[child::*//strong[contains(text(),'{0}')]]//i[contains(@class,'check')]";
 
         public EditTenantsPage(IWebDriver webDriver) : base(_locator, webDriver) { }
@@ -69,6 +68,8 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             ClickElementBy(_discoveryTab);
         }
 
+
+        //delete
         public bool CheckDiscoveryFileIsDownloaded(string downloadPath, int timeout)
         {
             DirectoryInfo directoryInfo = new DirectoryInfo(downloadPath);            
@@ -141,7 +142,8 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             }
         }
 
-        public bool TenantHasOkStateAtDiscoveryTab(string tenantName)
+
+        public bool IsTenantDirSyncStatusSuccesfull(string tenantName)
         {
             var OkStatus = By.XPath(string.Format(_tenantStatus, tenantName));
             return IsElementVisible(OkStatus, 10, 1);

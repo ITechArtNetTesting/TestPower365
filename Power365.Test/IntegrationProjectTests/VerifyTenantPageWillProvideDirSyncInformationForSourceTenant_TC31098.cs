@@ -14,7 +14,7 @@ namespace BinaryTree.Power365.Test.IntegrationProjectTests
     {
         public VerifyTenantPageWillProvideDirSyncInformationForSourceTenant_TC31098() : base() { }
 
-        EditTenantsPage _editTenantsPage;
+        
 
         private void runTest(string clientName, string projectName)
         {
@@ -32,16 +32,18 @@ namespace BinaryTree.Power365.Test.IntegrationProjectTests
 
         private void verifyTenantPageWillProvideDirSyncInformationForSourceTenant(string username, string password, string client, string projectName, string sourceTenant, string targetTenant)
         {
+            EditTenantsPage _editTenantsPage;
             _editTenantsPage = Automation.Common
                 .SingIn(username, password)
+                .MigrateAndIntegrateSelect()
                 .ClientSelect(client)
-                .SelectMigrateAndIntegrate()                             
+                .MigrateAndIntegrateSelect()                             
                 .ProjectSelect(projectName)
                 .TenantsEdit()
                 .GetPage<EditTenantsPage>();
             _editTenantsPage.ClickDiscoveryTab();
-            Assert.IsTrue(_editTenantsPage.TenantHasOkStateAtDiscoveryTab(sourceTenant), "Source tenants status is not ok");
-            Assert.IsTrue(_editTenantsPage.TenantHasOkStateAtDiscoveryTab(targetTenant), "Target tenants status is not ok");
+            Assert.IsTrue(_editTenantsPage.IsTenantDirSyncStatusSuccesfull(sourceTenant), "Source tenants DirSync status is not sucessesfull");
+            Assert.IsTrue(_editTenantsPage.IsTenantDirSyncStatusSuccesfull(targetTenant), "Target tenants DirSync status is not sucessesfull");
         }
 
         [Test]

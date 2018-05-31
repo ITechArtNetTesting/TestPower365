@@ -14,17 +14,28 @@ namespace BinaryTree.Power365.Test.CommonTests.Rollback
         [Category("Integration")]
         public void TheRollbackCountIsDisplayed_Integration_34718()
         {
-            TestRun("client2", "project2", true);
+            // have to change entry
+            TestRun("client2", "project2","entry7");
         }
+
+        //[Test]
+        //[Category("UI")]
+        //[Category("MailOnly")]
+        //public void TheRollbackCountIsDisplayed_MO_34718()
+        //{
+        //    //TestRun("client1", "project1", "entry12", true);
+        //    TestRun("client1", "project1", "entry11");
+        //}
+
         [Test]
         [Category("UI")]
         [Category("MailWithDiscovery")]
         public void TheRollbackCountIsDisplayed_MD_34718()
         {
-            TestRun("client2", "project1", false);
+            TestRun("client2", "project1", "entry7");
         }
 
-        private void TestRun(string clientName, string projectName, bool isIntegration = false)
+        private void TestRun(string clientName, string projectName, string entry)
         {
             var client = Automation.Settings.GetByReference<Client>(clientName);
             var _project = client.GetByReference<Project>(projectName);
@@ -32,35 +43,34 @@ namespace BinaryTree.Power365.Test.CommonTests.Rollback
             string _username = client.Administrator.Username;
             string _password = client.Administrator.Password;
             string _projectName = _project.Name;
-            string _userMigration = _project.GetByReference<UserMigration>("entry2").Source;
+            string _userMigration = _project.GetByReference<UserMigration>(entry).Target;
 
             var database = Automation.Settings.GetByReference<Database>("sqlt2t01");
             string _connectionString = database.GetConnectionString();
-            TheRollbackCountIsDisplayed(_username, _password, _client, _projectName, _userMigration,  _connectionString,isIntegration);
+            TheRollbackCountIsDisplayed(_username, _password, _client, _projectName, _userMigration,  _connectionString);
         }
 
-        private void TheRollbackCountIsDisplayed(string _username, string _password, string _client, string _projectName, string _userMigration, string _connectionString, bool isIntegration)
+        private void TheRollbackCountIsDisplayed(string _username, string _password, string _client, string _projectName, string _userMigration, string _connectionString)
         {
            var _projectDetailsPage = Automation.Common
                                         .SingIn(_username,  _password)
+                                        .MigrateAndIntegrateSelect()
                                         .ClientSelect(_client)
                                         .ProjectSelect(_projectName)                                        
                                         .GetPage<ProjectDetailsPage>();
-            _projectDetailsPage.GetRollbackNumber();
-           // UserMigrationQuery queryExecuter = new UserMigrationQuery();
-           // queryExecuter.SetMigrtationStateId(_userMigration, _projectName, _connectionString);
+            int rollbackNumber= _projectDetailsPage.GetRollbackUsersNumber();
+            int errorNumber = _projectDetailsPage.GetErrorUsersNumber();
 
+            //Changing stateId
+            UserMigrationQuery queryExecuter = new UserMigrationQuery();
+            queryExecuter.SetMigrtationStateToRollbackError(_userMigration, _projectName, _connectionString);
+           
+            //Verify
+            Assert.AreEqual(_projectDetailsPage.GetErrorUsersNumber(), errorNumber,  "The error count is not correct");
+            Assert.Greater(_projectDetailsPage.GetRollbackUsersNumber(), rollbackNumber, "The rollback count is not correct");
                        
-            //Assert.IsFalse(migrationProfilePage.IsDeleteLinkVisible("Default"), "Delete link is visible for Default profile");
-            //Assert.IsTrue(migrationProfilePage.IsDeleteLinkVisible("TestProfile1"), "Delete link is not visible for not Default profile");
+            queryExecuter.SetMigrtationStateToMached(_userMigration, _projectName, _connectionString);
 
-            //var usersPage = migrationProfilePage.Menu.
-            //                   ClickUsers();
-            //usersPage.Search(_userMigration);
-            //usersPage.UsersTable.ClickRowByValue(_userMigration);
-            //var migrationProfileDialog = usersPage.PerformAction<SelectMigrationProfileDialog>(ActionType.AddToProfile);
-            //Assert.IsFalse(migrationProfileDialog.IsProfileActionVisible("Default", "Delete"), "Delete link is visible for Default profile in the User Page");
-            //Assert.IsTrue(migrationProfileDialog.IsProfileActionVisible("TestProfile1", "Delete"), "Delete link is not visible for not Default profile in the User Page");
 
         }
     }
