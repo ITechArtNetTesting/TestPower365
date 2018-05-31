@@ -17,21 +17,38 @@ namespace BinaryTree.Power365.AutomationFramework.Utilities
             
         }
 
-        public void SetMigrtationStateId(string usermail, string projectName, string connectionString)
+        public void SetMigrtationStateToRollbackError(string usermail, string projectName, string connectionString)
         {
             using (var sqlClient = new SqlClient(connectionString))
             {
-                sqlClient.ExecuteNonQuery($"update UserMigration set MigrationStateId=5 where lower(NewUserPrincipalName)=lower('{usermail}') and ProjectId in (select projectId from Project where ProjectName='{projectName}')");
+                sqlClient.ExecuteNonQuery($"update UserMigration set MigrationStateId=18 where lower(NewUserPrincipalName)=lower('{usermail}') and ProjectId in (select projectId from Project where ProjectName='{projectName}')");
             }
 
         }
 
+        public void SetMigrtationStateToMached(string usermail, string projectName, string connectionString)
+        {
+            using (var sqlClient = new SqlClient(connectionString))
+            {
+                sqlClient.ExecuteNonQuery($"update UserMigration set MigrationStateId=3 where lower(NewUserPrincipalName)=lower('{usermail}') and ProjectId in (select projectId from Project where ProjectName='{projectName}')");
+            }
+
+        }
 
         public void SetMigrtationStateToCompleted(string usermail, string projectName, string connectionString)
         {
             using (var sqlClient = new SqlClient(connectionString))
             {
                 sqlClient.ExecuteNonQuery($"update UserMigration set MigrationStateId=20 where lower(NewUserPrincipalName)=lower('{usermail}') and ProjectId in (select projectId from Project where ProjectName='{projectName}')");
+            }
+
+        }
+
+        public void SetMigrtationStateToMoved(string usermail, string projectName, string connectionString)
+        {
+            using (var sqlClient = new SqlClient(connectionString))
+            {
+                sqlClient.ExecuteNonQuery($"update UserMigration set MigrationStateId=10 where lower(NewUserPrincipalName)=lower('{usermail}') and ProjectId in (select projectId from Project where ProjectName='{projectName}')");
             }
 
         }

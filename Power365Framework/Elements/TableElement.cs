@@ -10,6 +10,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         private readonly string _rowInputAncestor = "/ancestor::tr//input";
         private readonly string _rowClassLocator = "//div[contains(@class,'tab-pane active')]"; 
         private readonly string _rowTextAncestorFormat = "/ancestor::tr//*[contains(text(), '{0}')]";
+        private readonly string _logsLocator = "//ancestor::tr//*[contains(@class,'fa-download')]";
 
         public TableElement(By locator, IWebDriver webDriver)
             : base(locator, webDriver) { }
@@ -82,5 +83,15 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             
             return IsAnyElementExists(bys.ToArray(), timeoutInSec, pollIntervalSec);
         }
+
+        public void ClickLogsByValue(string state)
+        {
+            var rowEntryLocator = string.Format(LowerCaseTextLocatorFormat, state.ToLowerInvariant());
+            var rowEntryLogsLocator = string.Format("{0}{1}", rowEntryLocator, _logsLocator);
+            var rowEntryLog = By.XPath(rowEntryLogsLocator);
+            ClickElementBy(rowEntryLog);
+        }
+
+
     }
 }

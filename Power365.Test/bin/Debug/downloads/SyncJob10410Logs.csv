@@ -1,0 +1,3 @@
+Partition Key,Row Key,Timestamp,Log Timestamp,Level,Logger Name,Message,Machine Name,Exception
+Client2Project1188.UserMigration153575SyncJob10410,22F46222AA66F92A_7FFFFFE9_aa52e2f2c7ae4dc3a9251ccd859963db,5/30/2018 5:32:17 PM,05/30/2018 17:32:16,Error,SyncJob,"Unable to sync user, mailbox not found for C7O365SML16@btcorp7.onmicrosoft.com and/or target@btcorp9.onmicrosoft.com. [UserMigrationId #153575]",mainpa000004,""
+Client2Project1188.UserMigration153575SyncJob10410,22F46222AA66F92A_7FFFFFEA_aa52e2f2c7ae4dc3a9251ccd859963db,5/30/2018 5:32:17 PM,05/30/2018 17:32:16,Info,SyncJob,"Created sync job for C7O365SML16@btcorp7.onmicrosoft.com. [UserMigrationId #153575]",mainpa000004,""

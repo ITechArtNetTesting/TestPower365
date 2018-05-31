@@ -65,7 +65,8 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private static readonly By _locator = By.Id("manageUsersContainer");      
         //@@@ REQ:ID
         private readonly By _usersTable = By.XPath("//div[contains(@id, 'users')]//table[contains(@class, 'table-expanded')]");
-        private readonly By _wavesTable = By.XPath("//div[contains(@id, 'waves')]//table[contains(@class, 'table-expanded')]");
+
+          private readonly By _wavesTable = By.XPath("//div[contains(@id, 'waves')]//table[contains(@class, 'table-expanded')]");
         //@@@ REQ:ID      
 
         private readonly By _migrationWaveTab = By.XPath("//a[contains(@href,'waves')]//span");
@@ -82,6 +83,8 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private readonly string _navigationTabFormat = ("//*[contains(@class, 'nav nav-tabs')]/li/a/*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{0}')]]");
         private readonly static string USER_MIGRATIONS_FILE_NAME = "user-migrations-*.csv";
 
+        //  mailOnly
+        private readonly By _addOrFixUsersButton = By.XPath("//a[contains(@data-bind, 'uploadUser')]");
         public ManageUsersPage(IWebDriver webDriver)
                 : base(_locator, webDriver) { }
 
@@ -143,35 +146,12 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         {
             //create
         }
-
-        public bool CheckUserMigrationLogs(string downloadPath, int timeout)
+               
+        public UploadFileDialog AddOrFixUserClick()
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo(downloadPath);
-            DefaultWait<DirectoryInfo> wait = new DefaultWait<DirectoryInfo>(directoryInfo);
-            wait.Timeout = TimeSpan.FromSeconds(timeout);
-            wait.PollingInterval = TimeSpan.FromSeconds(1);
-            Func<DirectoryInfo, bool> fileIsDownloaded = new Func<DirectoryInfo, bool>((DirectoryInfo info) =>
-            {
-                var test = info.GetFiles(USER_MIGRATIONS_FILE_NAME).Count() >= 1;
-                return test;
-            });
-            try
-            {
-                return wait.Until(fileIsDownloaded);
-            }
-            catch (WebDriverTimeoutException)
-            {
-                return false;
-            }
+            return ClickModelElementBy<UploadFileDialog>(_addOrFixUsersButton);
         }
 
-        public void DeleteUserMigrationsJobsLogs(string downloadPath)
-        {
-            FileInfo[] downloadedFiles = new DirectoryInfo(downloadPath).GetFiles(USER_MIGRATIONS_FILE_NAME);
-            foreach (var file in downloadedFiles)
-            {
-                file.Delete();
-            }
-        }
+       
     }
 }

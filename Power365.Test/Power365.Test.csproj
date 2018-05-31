@@ -78,10 +78,13 @@
     <Compile Include="CommonTests\AddressBook\VerifyAddressBookWillBeDisplayedInManageTenants_TC32860.cs" />
     <Compile Include="CommonTests\Discovery\VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage_TC32699.cs" />
     <Compile Include="CommonTests\LandingPage\LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773.cs" />
+    <Compile Include="CommonTests\LandingPage\CompletedUserColumnCountLinksToUsersPageWithFilter_TC52577.cs" />
     <Compile Include="CommonTests\MigrationWaves\MigrationWave_ApplyAction_TC30919_33610.cs" />
     <Compile Include="CommonTests\Migration\SubmittingDeltaSyncJobForASyncedUser_TC23091.cs" />
     <Compile Include="CommonTests\Rollback\TheRollbackCountIsDisplayed_TC43335.cs" />
     <Compile Include="CommonTests\ExportAndImport\TheExportButtonExportsUserMigrationRecords_TC45618.cs" />
+    <Compile Include="IntegrationProjectTests\VerifyTenantPageWillProvideDirSyncInformationForSourceTenant_TC31098.cs" />
+    <Compile Include="MailOnlyProjectTests\ErrorLogCanBeDownloadedForFailedMigration_TC22168.cs" />
     <Compile Include="Menu\VerifyTheSelectActionOnTheManageErrorsPage_TC34736.cs" />
     <Compile Include="IntegrationProjectTests\PrepareJob_38730.cs" />
     <Compile Include="MailEngine\MailEngineTestBase.cs" />
@@ -102,6 +105,9 @@
     <None Include="App.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\ImportFiles\MailOnlyCSVC7toC9SML_TC22168.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\ImportFiles\MailOnlyCSVC7toC9SML-Automation-part1.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

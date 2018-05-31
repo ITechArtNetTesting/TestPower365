@@ -74,6 +74,7 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration
             ManageUsersPage _manageUsersPage;
             _manageUsersPage = Automation.Common
                                        .SingIn(login, password)
+                                       .MigrateAndIntegrateSelect()
                                        .ClientSelect(client)
                                        .ProjectSelect(projectName)
                                        .UsersEdit()
@@ -85,24 +86,24 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration
                 // Integration project
                 _usersDetailsPage.PerformAction<ConfirmationDialog>(ActionType.Prepare)
                                       .Yes();
-                 _usersDetailsPage.IsUserState(entry, StateType.Preparing, 2700000, 5);
-                 _usersDetailsPage.IsUserState(entry, StateType.Prepared, 2700000, 5);
+                 _usersDetailsPage.UsersValidateState(entry, StateType.Preparing, 2700000, 5);
+                 _usersDetailsPage.UsersValidateState(entry, StateType.Prepared, 2700000, 5);
 
                 }
 
                 _usersDetailsPage.PerformAction<ConfirmationDialog>(ActionType.Sync)
                                    .Yes();
-                _usersDetailsPage.IsUserState(entry, StateType.Syncing, 2700000, 5);
+                _usersDetailsPage.UsersValidateState(entry, StateType.Syncing, 2700000, 5);
 
                 //verify Sync1
-               _usersDetailsPage.IsUserState(entry, StateType.Synced1, 2700000, 5);
+               _usersDetailsPage.UsersValidateState(entry, StateType.Synced1, 2700000, 5);
 
                //sync job is ran again
                _usersDetailsPage.PerformAction<ConfirmationDialog>(ActionType.Sync).Yes();
-               _usersDetailsPage.IsUserState(entry, StateType.Syncing, 2700000, 5);
+               _usersDetailsPage.UsersValidateState(entry, StateType.Syncing, 2700000, 5);
 
                //verify Sync2
-               _usersDetailsPage.IsUserState(entry, StateType.Synced2, 2700000, 5);
+               _usersDetailsPage.UsersValidateState(entry, StateType.Synced2, 2700000, 5);
       
         }
 

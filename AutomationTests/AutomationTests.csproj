@@ -114,6 +114,7 @@
     <Compile Include="Framework\Forms\CmtLoginForm.cs" />
     <Compile Include="Framework\Forms\CoexSettingsForm.cs" />
     <Compile Include="Framework\Forms\GroupsMigrationForm.cs" />
+    <Compile Include="Framework\Forms\LandingForm.cs" />
     <Compile Include="Framework\Forms\MainForm.cs" />
     <Compile Include="Framework\Forms\Menu\UsersMenuForm.cs" />
     <Compile Include="Framework\Forms\NewProjectWizardForms\AddTenantsForm.cs" />
@@ -236,7 +237,7 @@
     <Compile Include="Tests\IntegrationTests\GroupsViewTest.cs" />
     <Compile Include="Tests\IntegrationTests\SetUpTest\MailUPNandExtensionAttributesAreValidMatchingOptions_32951.cs" />
     <Compile Include="Tests\CommonTests\ActionButtonsTests\StoppingStateButtonsTest.cs" />
-    <Compile Include="Tests\IntegrationTests\VerifyIntegrationProjectSetupShowsDirSyncStatusAndConfig_TC27071.cs" />
+    <Compile Include="Tests\IntegrationTests\IntegrationProjectSetupShowsDirSyncStatusAndConfig_TC27071.cs" />
     <Compile Include="Tests\MailEngine\MailEngineTestBase.cs" />
     <Compile Include="Tests\MailEngine\PublicFolderTest.cs" />
     <Compile Include="Tests\MailOnlyTests\ActionButtonsTests\SyncingButtonsTest.cs" />

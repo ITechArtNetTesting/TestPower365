@@ -6,6 +6,8 @@ using System;
 using OpenQA.Selenium.Interactions;
 using System.Linq;
 using BinaryTree.Power365.AutomationFramework.Dialogs;
+using System.IO;
+
 
 namespace BinaryTree.Power365.AutomationFramework.Elements
 {
@@ -261,6 +263,29 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
                 return false;
             }
         }
+        public bool IsLogsDownload(string downloadPath, string fileNameFormat, int timeoutInSec = 10, int pollIntervalInSec = 1)
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo(downloadPath);
+            UI.DefaultWait<DirectoryInfo> wait = new UI.DefaultWait<DirectoryInfo>(directoryInfo);
+            wait.Timeout = TimeSpan.FromSeconds(timeoutInSec);
+            wait.PollingInterval = TimeSpan.FromSeconds(pollIntervalInSec);
+
+            Func<DirectoryInfo, bool> fileIsDownloaded = new Func<DirectoryInfo, bool>((DirectoryInfo info) =>
+            {
+                var test = info.GetFiles(fileNameFormat).Count() >= 1;
+                return test;
+            });
+
+            try
+            {
+                return wait.Until(fileIsDownloaded);
+            }
+            catch (WebDriverTimeoutException)
+            {
+                return false;
+            }
+        }
+
 
         public void WaitForLoadComplete()
         {

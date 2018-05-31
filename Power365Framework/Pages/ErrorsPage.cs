@@ -68,19 +68,10 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
                 return new Element(tab, WebDriver);
             }
         }
-
-              
-        private ButtonElement yesButton
-        {
-            get
-            {
-                return new ButtonElement(By.XPath("//button[contains(@data-bind,'confirm')]"), WebDriver);
-            }
-        }
-
-        private readonly string elementContainsText = "//div[@id='users']//*[contains(text(),'{0}')]";
-        private readonly string tabFormat = "//ul[@class='nav nav-tabs m-t-lg']//span[contains(text(),'{0}')]";
-        private readonly By actionsDropdown = By.XPath("//div[@class='tab-pane active']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]");
+                     
+            
+       private readonly string tabFormat = "//ul[@class='nav nav-tabs m-t-lg']//span[contains(text(),'{0}')]";
+       private readonly By actionsDropdown = By.XPath("//div[@class='tab-pane active']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]");
        private readonly string actionsFormat = "//div[@id='users']//*[contains(text(),'{0}')]";
 
         public ErrorsPage(IWebDriver webDriver) : base(_locator,webDriver) { }

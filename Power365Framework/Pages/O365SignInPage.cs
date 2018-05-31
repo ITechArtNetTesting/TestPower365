@@ -20,7 +20,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         public O365SignInPage(IWebDriver webDriver)
             : base(_locator, webDriver) { }
 
-        public ProjectListPage SignIn(string username, string password)
+        public StartPage SignIn(string username, string password)
         {
             var loginInputElement = FindVisibleElement(_loginInput);
             loginInputElement.SendKeys(username);
@@ -38,7 +38,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             }
             catch (Exception) { }
 
-            return ClickElementBy<ProjectListPage>(_primaryButton);
+            return ClickElementBy<StartPage>(_primaryButton);
         }
 
         public void AuthorizeTenant(string username, string password)

@@ -4,8 +4,8 @@ using OpenQA.Selenium;
 using System;
 namespace BinaryTree.Power365.AutomationFramework.Dialogs
 {
-    public class ModalDialogBase : Element, IDisposable
-    {
+   public class ModalDialogBase : Element, IDisposable
+      {
         private static By _locator = By.XPath("//*[contains(@class,'modal in')]//*[(contains(@class, 'close')) or (contains(text(), 'Cancel'))]"); //By.ClassName("close") - not unique
         private readonly By _closeButton = By.ClassName("close");
 

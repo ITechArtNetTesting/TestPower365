@@ -3,11 +3,6 @@ using BinaryTree.Power365.AutomationFramework.Dialogs;
 using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Pages;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BinaryTree.Power365.Test.CommonTests.ExportAndImport
 {
@@ -15,22 +10,22 @@ namespace BinaryTree.Power365.Test.CommonTests.ExportAndImport
     public class TheExportButtonExportsUserMigrationRecords_TC45618:TestBase
     {
         public TheExportButtonExportsUserMigrationRecords_TC45618() : base() { }
+        private readonly static string USER_MIGRATIONS_FILE_NAME = "user-migrations-*.csv";
 
-        private ErrorsPage atErrorsPage;
-
-        private void verifyTheExportButtonExportsUserMigrationRecords(string username, string password, string client, string projectName,string downloadPath)
+        private void TheExportButtonExportsUserMigrationRecords(string username, string password, string client, string projectName,string downloadPath)
         {
             var _manageUsersPage = Automation.Common
                                        .SingIn(username, password)
-                                       .ClientSelect(client)
+                                       .MigrateAndIntegrateSelect()
+                                       .ClientSelect(client)                                       
                                        .ProjectSelect(projectName)
                                        .UsersEdit()
                                        .GetPage<ManageUsersPage>();
             _manageUsersPage.SelectAllUsers();
-            _manageUsersPage.DeleteUserMigrationsJobsLogs(downloadPath);
+            _manageUsersPage.DeleteLogs(downloadPath, USER_MIGRATIONS_FILE_NAME);
             _manageUsersPage.PerformAction<ConfirmationDialog>(ActionType.Export).Yes();
           
-            Assert.IsTrue(_manageUsersPage.CheckUserMigrationLogs(downloadPath, 15), "Error with downloading logs");
+            Assert.IsTrue(_manageUsersPage.IsLogsDownload(downloadPath, USER_MIGRATIONS_FILE_NAME, 15), "Error with downloading logs");
         }
     
 
@@ -44,7 +39,7 @@ namespace BinaryTree.Power365.Test.CommonTests.ExportAndImport
             string _projectName = project.Name;
             string _downloadPath = Automation.Settings.DownloadsPath;
 
-            verifyTheExportButtonExportsUserMigrationRecords(_username, _password, _client, _projectName, _downloadPath);
+            TheExportButtonExportsUserMigrationRecords(_username, _password, _client, _projectName, _downloadPath);
         }        
 
         [Test]

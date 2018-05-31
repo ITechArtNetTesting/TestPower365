@@ -12,9 +12,10 @@ namespace BinaryTree.Power365.Test.CommonTests.Discovery
      
         private void VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage(string _client, string _username, string _projectName, string _password, string _tenant)
         {
-            
+
             var tenantsEditPage = Automation.Common
                 .SingIn(_username, _password)
+                .MigrateAndIntegrateSelect()
                 .ClientSelect(_client)
                 .ProjectSelect(_projectName)
                 .TenantsEdit()

@@ -66,6 +66,7 @@ namespace BinaryTree.Power365.Test.CommonTests.MigrationWaves
              ManageUsersPage _manageUsersPage;
            _manageUsersPage = Automation.Common
                                         .SingIn(_username, _password)
+                                        .MigrateAndIntegrateSelect()
                                         .ClientSelect(_client)
                                         .ProjectSelect(_project)
                                         .UsersEdit()                                        

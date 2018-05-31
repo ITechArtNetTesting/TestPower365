@@ -96,6 +96,7 @@ namespace BinaryTree.Power365.Test.MailEngine
             {
                 Automation.Common
                         .SingIn(_signInUser, _signInPassword)
+                        .MigrateAndIntegrateSelect()
                         .ClientSelect(_clientName)
                         .ProjectSelect(_projectName)
                         .UsersEdit()

@@ -16,12 +16,11 @@ namespace Product.Framework.Forms.NewProjectWizardForms.IntegrationForms
 
         private readonly Button _downloadDirSyncButton = new Button(By.XPath("//a[contains(@data-bind,'download')]//span[contains(@data-translation,'Start')]"), "Button to download DirSync Lite");
 
-
         public DownloadDirSyncForm() : base(TitleLocator, "Download dirsync app form")
         {
         }
 
-        public  bool SeeDownloadDirSync()
+        public bool SeeDownloadDirSync()
         {
             return _downloadDirSyncButton.IsElementVisible();
         }

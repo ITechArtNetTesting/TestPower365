@@ -14,6 +14,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private readonly By _tenantsEditLink = By.XPath("//div[contains(@class, 'ibox-title')]//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'tenant')]]//ancestor::div[contains(@class, 'ibox-title')]//a");
         private readonly By _completedUsers =By.XPath("//*[contains(text(), 'users')]/ancestor::div[(@class='ibox')]//*[contains(text(), 'All Users')]/ancestor::tr//a[contains(@data-bind, 'completedNumber')]");
         private readonly By _rollbackUsers = By.XPath("//*[contains(text(), 'users')]/ancestor::div[(@class='ibox')]//*[contains(text(), 'All Users')]/ancestor::tr//a[contains(@data-bind, 'rollbackNumber')]");
+        private readonly By _errorsUsers = By.XPath("//*[contains(text(), 'users')]/ancestor::div[(@class='ibox')]//*[contains(text(), 'All Users')]/ancestor::tr//a[contains(@data-bind, 'errors')]");
 
 
 
@@ -35,16 +36,28 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             return ClickElementBy<ManagePublicFoldersPage>(_publicFoldersEditLink);
         }
 
-        public int GetRollbackNumber()
+        public int GetRollbackUsersNumber()
         {
            var rollbackUsers = FindVisibleElement(_rollbackUsers);
            return int.Parse(rollbackUsers.Text);
         }
 
+        public int GetErrorUsersNumber()
+        {
+            var errorUsers = FindVisibleElement(_errorsUsers);
+            return int.Parse(errorUsers.Text);
+        } 
+
         public int GetCompletedNumber()
         {
            var completedUsers = FindVisibleElement(_completedUsers);
            return int.Parse( completedUsers.Text);
+        }
+
+        public ManageUsersPage clickCompletedCountUsers()
+        {
+           return ClickElementBy<ManageUsersPage>(_completedUsers);
+            
         }
     }
 }
