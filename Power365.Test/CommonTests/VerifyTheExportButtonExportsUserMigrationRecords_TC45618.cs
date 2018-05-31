@@ -21,7 +21,8 @@ namespace BinaryTree.Power365.Test.CommonTests
         {
             _manageUsersPage = Automation.Common
                                        .SingIn(username, password)
-                                       .ClientSelect(client)
+                                       .MigrateAndIntegrateSelect()
+                                       .ClientSelect(client)                                     
                                        .ProjectSelect(projectName)
                                        .UsersEdit()
                                        .GetPage<ManageUsersPage>();
@@ -29,7 +30,7 @@ namespace BinaryTree.Power365.Test.CommonTests
             _manageUsersPage.DeleteUserMigrationsJobsLogs(downloadPath);
             _manageUsersPage.PerformAction(ActionType.Export);
             _manageUsersPage.ConfirmAction();
-            Assert.IsTrue(_manageUsersPage.CheckUserMigrationLogs(downloadPath, 15), "Error with downloading logs");           
+            Assert.IsTrue(_manageUsersPage.CheckUserMigrationLogs(downloadPath, 15), "Error with downloading logs");            
         }
 
         private void runTest(string clientName, string projectName)
