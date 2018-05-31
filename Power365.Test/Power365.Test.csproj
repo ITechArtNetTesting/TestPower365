@@ -83,6 +83,7 @@
     <Compile Include="CommonTests\Rollback\TheRollbackCountIsDisplayed_TC43335.cs" />
     <Compile Include="CommonTests\VerifyTheExportButtonExportsUserMigrationRecords_TC45618.cs" />
     <Compile Include="CommonTests\VerifyTheSelectActionOnTheManageErrorsPage_TC34736.cs" />
+    <Compile Include="IntegrationProjectTests\VerifyTenantPageWillProvideDirSyncInformationForSourceTenant_TC31098.cs" />
     <Compile Include="Menu\VerifyTheSelectActionOnTheManageErrorsPage_TC34736.cs" />
     <Compile Include="IntegrationProjectTests\PrepareJob_38730.cs" />
     <Compile Include="MailEngine\MailEngineTestBase.cs" />
