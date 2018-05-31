@@ -21,8 +21,8 @@ namespace BinaryTree.Power365.Test.CommonTests
         {
             _manageUsersPage = Automation.Common
                                        .SingIn(username, password)
-                                       .ClientSelect(client)
-                                       .SelectMigrateAndIntegrate()
+                                       .MigrateAndIntegrateSelect()
+                                       .ClientSelect(client)                                     
                                        .ProjectSelect(projectName)
                                        .UsersEdit()
                                        .GetPage<ManageUsersPage>();
