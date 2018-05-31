@@ -67,6 +67,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         {            
             IWebElement element = FindVisibleElement(_lastPage);
             element.Click();
+            WaitForLoadComplete();
             var numberOfRows = (Convert.ToInt32(element.Text) - 1) * 10 + WebDriver.FindElements(_usersRows).Count;
             DirectoryInfo directoryInfo = new DirectoryInfo(downloadPath);
             DefaultWait<DirectoryInfo> wait = new DefaultWait<DirectoryInfo>(directoryInfo);
