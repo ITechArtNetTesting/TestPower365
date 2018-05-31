@@ -3,6 +3,8 @@ using BinaryTree.Power365.AutomationFramework.Elements;
 using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Extensions;
 using BinaryTree.Power365.AutomationFramework.Pages;
+using BinaryTree.Power365.AutomationFramework.Utilities;
+using Microsoft.Office.Interop.Excel;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -62,15 +64,21 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         }
 
         public bool? CheckUserMigrationLogs(string downloadPath, int timeout)
-        {
+        {            
+            IWebElement element = FindVisibleElement(_lastPage);
+            element.Click();
+            var numberOfRows = (Convert.ToInt32(element.Text) - 1) * 10 + WebDriver.FindElements(_usersRows).Count;
             DirectoryInfo directoryInfo = new DirectoryInfo(downloadPath);
             DefaultWait<DirectoryInfo> wait = new DefaultWait<DirectoryInfo>(directoryInfo);
             wait.Timeout = TimeSpan.FromSeconds(timeout);
             wait.PollingInterval = TimeSpan.FromSeconds(1);
             Func<DirectoryInfo, bool> fileIsDownloaded = new Func<DirectoryInfo, bool>((DirectoryInfo info) =>
             {
+                var path =info.GetFiles("user-migrations-*.csv")[0].FullName;
                 var test = info.GetFiles("user-migrations-*.csv").Count() >= 1;
-                return test;
+                ExcelReader exlRead = new ExcelReader();
+                int rowCount = exlRead.GetRowsCount(path);
+                return test&&rowCount==numberOfRows+1;
             });
             try
             {
@@ -81,6 +89,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
                 return false;
             }
         }
+       
 
         public void DeleteUserMigrationsJobsLogs(string downloadPath)
         {
@@ -90,6 +99,10 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
                 file.Delete();
             }
         }
+
+        private readonly By _usersRows = By.XPath("//div[@id='users']//table[@data-bind]//tbody//tr[child::td]");
+
+        private readonly By _lastPage = By.XPath("//ul[@class='pagination']//li[child::a[contains(@data-bind,'Number')]][last()]/a");
 
         private readonly By _selectAllUsersButton = By.XPath("//div[@id='users']//*[contains(@data-bind,'allSelect')]");
        // private UserDetailsDialog _usersDetailsPage;
