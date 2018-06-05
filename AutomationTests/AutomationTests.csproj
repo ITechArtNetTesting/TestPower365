@@ -238,6 +238,7 @@
     <Compile Include="Tests\IntegrationTests\SetUpTest\MailUPNandExtensionAttributesAreValidMatchingOptions_32951.cs" />
     <Compile Include="Tests\CommonTests\ActionButtonsTests\StoppingStateButtonsTest.cs" />
     <Compile Include="Tests\IntegrationTests\IntegrationProjectSetupShowsDirSyncStatusAndConfig_TC27071.cs" />
+    <Compile Include="Tests\IntegrationTests\VerifyProperErrorMessageIsDisplayedWhenNoMatchingGroupIsFound_TC37817.cs" />
     <Compile Include="Tests\MailEngine\MailEngineTestBase.cs" />
     <Compile Include="Tests\MailEngine\PublicFolderTest.cs" />
     <Compile Include="Tests\MailOnlyTests\ActionButtonsTests\SyncingButtonsTest.cs" />
