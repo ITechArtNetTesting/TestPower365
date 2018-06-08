@@ -1,10 +1,6 @@
-﻿using BinaryTree.Power365.AutomationFramework.Workflows;
+﻿using log4net;
 using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BinaryTree.Power365.AutomationFramework.Pages
 {
@@ -21,7 +17,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private string selectGroup = "//a[contains(@data-bind, 'selectGroup')][contains(text(), '{0}')]";
 
         public EditWavePage(IWebDriver webDriver)
-            : base(_locator, webDriver) { }
+            : base(LogManager.GetLogger(typeof(EditWavePage)), _locator, webDriver) { }
 
         public EditWavePage AddMigrationWave(string migrationWave)
         {
@@ -45,11 +41,11 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             discoveryGroupDropdownText.SendKeys(groupName);
             ClickElementBy(_discoveryGroupDropdownText);
             IWebElement ele = FindVisibleElement(By.XPath(String.Format(selectGroup, groupName)));
+          //  ClickElementBy(By.XPath(String.Format(selectGroup, groupName)));
             ele.Click();
           
             return ClickElementBy<ManageUsersPage>(_nextButton); 
         }
-
         
         protected void ClickNext()
         {

@@ -1,19 +1,22 @@
 ﻿using BinaryTree.Power365.AutomationFramework.Dialogs;
+using log4net;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 
 namespace BinaryTree.Power365.AutomationFramework.Elements
 {
+    //@@@ Todo: Row locator that contains LowerCaseTextLocatorFormat is too broad for tables, can find elements anywhere on the page, should prepend //tr for table row
     public class TableElement : Element
     {
         private readonly string _rowInputAncestor = "/ancestor::tr//input";
-        private readonly string _rowClassLocator = "//div[contains(@class,'tab-pane active')]"; 
+        private readonly string _tabPaneLocator = "//div[contains(@class,'tab-pane active')]"; 
         private readonly string _rowTextAncestorFormat = "/ancestor::tr//*[contains(text(), '{0}')]";
-        private readonly string _logsLocator = "//ancestor::tr//*[contains(@class,'fa-download')]";
+
+        private By _nextPageLocator = By.XPath("//ul[contains(@class, 'pagination')]/li[contains(@class, 'active')]/following-sibling::li[1]/a");
 
         public TableElement(By locator, IWebDriver webDriver)
-            : base(locator, webDriver) { }
+            : base(LogManager.GetLogger(typeof(TableElement)), locator, webDriver) { }
 
         public void ClickRowByValue(string value)
         {
@@ -23,10 +26,9 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             var rowEntryLocator = string.Format(LowerCaseTextLocatorFormat, value.ToLowerInvariant());
             var rowClassLocator = rowEntryLocator;
 
-            if (IsElementVisible(By.XPath(_rowClassLocator))) //id we have class= 'tab-pane active'
-            {
-            rowClassLocator = string.Format("{0}{1}", _rowClassLocator, rowEntryLocator);
-            }
+            //If it is part of a tab-pane there could be duplicates on the page
+            if (IsElementVisible(By.XPath(_tabPaneLocator), 0))
+                rowClassLocator = string.Format("{0}{1}", _tabPaneLocator, rowEntryLocator);
            
             var rowEntryInputAncestorLocator = string.Format("{0}{1}", rowClassLocator, _rowInputAncestor);
             var rowEntry = By.XPath(rowClassLocator);
@@ -38,6 +40,15 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
                 throw new Exception("Failed to select row.");
         }
 
+        public void ClickRowLinkByValue(string value, string linkLocator)
+        {
+            var rowEntryLocator = string.Format(LowerCaseTextLocatorFormat, value.ToLowerInvariant());
+            var rowEntryLinkLocator = string.Format("{0}{1}", rowEntryLocator, linkLocator);
+            var rowEntryLink = By.XPath(rowEntryLinkLocator);
+            HoverElement(rowEntryLink, 0);
+            ClickElementBy(rowEntryLink);
+        }
+
         public T DoubleClickRowByValue<T>(string value)
             where T: ModalDialogBase
         {
@@ -45,10 +56,12 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
                 throw new ArgumentNullException("value");
 
             var rowEntryLocator = string.Format(LowerCaseTextLocatorFormat, value.ToLowerInvariant());
-            var rowClassLocator = string.Format("{0}{1}", _rowClassLocator, rowEntryLocator);
+            var rowClassLocator = rowEntryLocator;
+
+            if (IsElementVisible(By.XPath(_tabPaneLocator), 0))
+                rowClassLocator = string.Format("{0}{1}", _tabPaneLocator, rowEntryLocator);                  
             
-            var rowEntry = By.XPath(rowClassLocator);
-            DoubleClickElementBy(rowEntry);
+            DoubleClickElementBy(By.XPath(rowClassLocator));
             return (T)Activator.CreateInstance(typeof(T), WebDriver);
         }
         
@@ -84,14 +97,34 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
             return IsAnyElementExists(bys.ToArray(), timeoutInSec, pollIntervalSec);
         }
 
-        public void ClickLogsByValue(string state)
+        public bool RowExists(string entry, int timeoutInSec = 5, int pollIntervalSec = 0)
         {
-            var rowEntryLocator = string.Format(LowerCaseTextLocatorFormat, state.ToLowerInvariant());
-            var rowEntryLogsLocator = string.Format("{0}{1}", rowEntryLocator, _logsLocator);
-            var rowEntryLog = By.XPath(rowEntryLogsLocator);
-            ClickElementBy(rowEntryLog);
+            var rowEntryLocator = string.Format(LowerCaseTextLocatorFormat, entry.ToLowerInvariant());
+            var rowEntry = By.XPath(rowEntryLocator);
+            return IsElementExists(rowEntry, timeoutInSec, pollIntervalSec);
         }
 
+        public bool PageToRow(string entry)
+        {
+            if (RowExists(entry, 0))
+                return true;
 
+            HoverElement(_nextPageLocator);
+            var nextPageElement = FindExistingElement(_nextPageLocator);
+
+            if (nextPageElement == null)
+                return false;
+
+            do
+            {
+                nextPageElement.Click();
+
+                if (RowExists(entry, 0))
+                    return true;
+            }
+            while ((nextPageElement = FindExistingElement(_nextPageLocator)) != null);
+
+            return false;
+        }
     }
 }

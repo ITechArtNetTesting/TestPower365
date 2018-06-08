@@ -365,5 +365,11 @@ namespace Product.Framework
             return ($"Server=tcp:{server},1433; Initial Catalog={initialCatalog}; Persist Security Info = False; User ID ={userID}; Password ={password}; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
         
         }
+
+        public static string GetDirSyncLiteConnectionString()
+        {
+            //Hardcoded ... need to move to run.xml
+            return string.Format("Data Source={0};Initial Catalog={1};Persist Security Info=True;User ID={2};Password={3}", "W12-C29-SQL\\SQLEXPRESS", "Power365DirSync-Nightly", "sa", "Password1");
+        }
     }
 }

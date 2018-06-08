@@ -16,6 +16,7 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
         }
 
         [TestMethod]
+        [TestCategory("SmokeTest")]
         [TestCategory("MailOnly")]
         [TestCategory("UI")]
         [TestCategory("Sync")]
@@ -27,6 +28,7 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
         }
 
         [TestMethod]
+        [TestCategory("SmokeTest")]
         [TestCategory("MailWithDiscovery")]
         [TestCategory("UI")]
         [TestCategory("Sync")]

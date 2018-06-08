@@ -44,13 +44,13 @@ namespace Product.Tests.IntegrationTests
                 SelectProject(project);
                 User.AtProjectOverviewForm().OpenUsersList();
 
-                PerformActionAndWaitForState(sourceMailbox13, ActionType.Sync, State.Syncing, 60000, 10);
-                PerformActionAndWaitForState(sourceMailbox14, ActionType.Sync, State.Syncing, 60000, 10);
-                PerformActionAndWaitForState(sourceMailbox15, ActionType.Sync, State.Syncing, 60000, 10);
+                //PerformActionAndWaitForState(sourceMailbox13, ActionType.Sync, State.Syncing, 60000, 10);
+                //PerformActionAndWaitForState(sourceMailbox14, ActionType.Sync, State.Syncing, 60000, 10);
+                //PerformActionAndWaitForState(sourceMailbox15, ActionType.Sync, State.Syncing, 60000, 10);
 
-                WaitForState(sourceMailbox13, State.Synced, 2400000, 60);
-                WaitForState(sourceMailbox14, State.Synced, 2400000, 60);
-                WaitForState(sourceMailbox15, State.Synced, 2400000, 60);
+                //WaitForState(sourceMailbox13, State.Synced, 2400000, 60);
+                //WaitForState(sourceMailbox14, State.Synced, 2400000, 60);
+                //WaitForState(sourceMailbox15, State.Synced, 2400000, 60);
 
                 PerformActionAndWaitForState(sourceMailbox13, ActionType.Cutover, State.Finalizing, 60000, 10);
                 PerformActionAndWaitForState(sourceMailbox14, ActionType.Cutover, State.Finalizing, 60000, 10);

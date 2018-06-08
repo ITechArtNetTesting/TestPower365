@@ -16,7 +16,9 @@ namespace Product.Tests.MailOnlyTests.ImportAndExportTests
 		}
         [TestMethod]
 		[TestCategory("MailOnly")]
+        [TestCategory("SeleniumLegacy")]
         [TestCategory("UI")]
+        //45618
         public void Automation_MO_ExportTest()
 		{
 		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");

@@ -20,7 +20,9 @@ namespace Product.Tests.IntegrationTests
         }
 
         [TestMethod]
-        [TestCategory("Integration_test")]
+        [TestCategory("Integration")]
+        [TestCategory("UI")]
+        [TestCategory("SeleniumLegacy")]
         public void Automation_IN_GroupsViewTest()
         {
             string userName = RunConfigurator.GetUserLogin("client2");

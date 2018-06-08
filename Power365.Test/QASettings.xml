@@ -138,15 +138,15 @@
         <Project Reference="project1" Source="tenant1" Target="tenant2">
           <Name>BT-AutoQA2-Project1</Name>
           <UserMigrations>
-            <UserMigration Reference="entryps1">
-              <Source>C7-Automation1@btcorp7.onmicrosoft.com</Source>
-              <Target>C7-Automation1@btcorp9.onmicrosoft.com</Target>
-              <Group>Wave1</Group>
-              <Profile>Profile 1</Profile>
-            </UserMigration>
             <UserMigration Reference="entryps1x500">
               <Source>/o=ExchangeLabs/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=6a84cbd5886341638d0a43ee93319ce0-C7-Automati</Source>
               <Target>/o=ExchangeLabs/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=e4003d7bc00c4f5da1129ae8865ffa66-C7-Automati</Target>
+              <Group>Wave1</Group>
+              <Profile>Profile 1</Profile>
+            </UserMigration>
+            <UserMigration Reference="entryps1">
+              <Source>C7-Automation1@btcorp7.onmicrosoft.com</Source>
+              <Target>C7-Automation1@btcorp9.onmicrosoft.com</Target>
               <Group>Wave1</Group>
               <Profile>Profile 1</Profile>
             </UserMigration>
@@ -199,7 +199,16 @@
               <Source>C7O365SML32@btcorp7.onmicrosoft.com</Source>
               <Target>C7O365SML32@btcorp9.onmicrosoft.com</Target>
             </UserMigration>
-            
+
+            <UserMigration Reference="entry8">
+              <Source>C7O365SML33@btcorp7.onmicrosoft.com</Source>
+              <Target>C7O365SML33@btcorp9.onmicrosoft.com</Target>
+            </UserMigration>
+
+            <UserMigration Reference="entry9">
+              <Source>C7O365SML34@btcorp7.onmicrosoft.com</Source>
+              <Target>C7O365SML34@btcorp9.onmicrosoft.com</Target>
+            </UserMigration>
           </UserMigrations>
           <Groups>
             <Group Reference="adgroup1">
@@ -208,7 +217,7 @@
           </Groups>
           <Files />
         </Project>
-            <Project Reference="project2" Source="tenant5" Target="tenant6">
+        <Project Reference="project2" Source="tenant5" Target="tenant6">
           <Name>BT-AutoQA2-Project2</Name>
           <UserMigrations>
             <UserMigration Reference="pfuser1">
@@ -249,7 +258,8 @@
               <Source>P365AutoRemoteMBX2@corp31.cmtsandbox.com</Source>
             </UserMigration>
             <UserMigration Reference="entry7">
-              <Source></Source>
+              <Source>P365AutoUsers22@corp31.cmtsandbox.com</Source>
+              <Target>P365AutoUsers22@corp32.cmtsandbox.com</Target>
             </UserMigration>
             <UserMigration Reference="entry8">
               <Source>P365AutoRemoteMBX4@corp31.cmtsandbox.com</Source>
@@ -266,6 +276,11 @@
             <UserMigration Reference="entry12">
               <Source>P365AutoRemoteMBX15@corp31.cmtsandbox.com</Source>
               <Target>P365AutoRemoteMBX15@corp32.cmtsandbox.com</Target>              
+            </UserMigration>
+
+            <UserMigration Reference="entry13">
+              <Source>P365AutoUsers21@corp31.cmtsandbox.com</Source>
+              <Target>P365AutoUsers21@corp32.cmtsandbox.com</Target>
             </UserMigration>
           </UserMigrations>
           <Groups>
@@ -448,16 +463,40 @@
   <O365PowerShellUrl>https://ps.outlook.com/powershell</O365PowerShellUrl>
   <HelpURL>https://help.binarytree.com/power365/</HelpURL>
   <TimeoutSec>60</TimeoutSec>
-  <Browser>chrome</Browser>
+  <Browser>chrom</Browser>
   <Bitness>x86</Bitness>
   <Databases>    
-    <Database Reference="sqlt2t01">
+    <Database Reference="clients">
       <Server>bt-qa-sql.database.windows.net</Server>
-      <InitialCatalog>sqlt2t01-QA</InitialCatalog>    
+      <InitialCatalog>sqlclients-QA</InitialCatalog>    
       <Credential>
         <Username>btcloudsqladmin</Username>
         <Password>NSHEtMDq0Q9zGJZfpFVemOr.</Password>
       </Credential>
-    </Database>   
+    </Database>
+    <Database Reference="t2t">
+      <Server>bt-qa-sql.database.windows.net</Server>
+      <InitialCatalog>sqlt2t01-QA</InitialCatalog>
+      <Credential>
+        <Username>btcloudsqladmin</Username>
+        <Password>NSHEtMDq0Q9zGJZfpFVemOr.</Password>
+      </Credential>
+    </Database>
+    <Database Reference="cds">
+      <Server>bt-qa-sql.database.windows.net</Server>
+      <InitialCatalog>sqlcds01-QA</InitialCatalog>
+      <Credential>
+        <Username>btcloudsqladmin</Username>
+        <Password>NSHEtMDq0Q9zGJZfpFVemOr.</Password>
+      </Credential>
+    </Database>
+    <Database Reference="dslite1">
+      <Server>W12-C29-SQL\SQLEXPRESS</Server>
+      <InitialCatalog>Power365DirSync-Nightly</InitialCatalog>
+      <Credential>
+        <Username>sa </Username>
+        <Password>Password1</Password>
+      </Credential>
+    </Database>
   </Databases> 
 </Settings>

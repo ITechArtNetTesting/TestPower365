@@ -1,4 +1,5 @@
 ﻿using BinaryTree.Power365.AutomationFramework.Pages;
+using log4net;
 using OpenQA.Selenium;
 using System;
 
@@ -46,7 +47,7 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
         protected readonly ManagePublicFoldersPage ManagePublicFoldersPage;
 
         public AddPublicFolderWorkflow(ManagePublicFoldersPage managePublicFoldersPage, IWebDriver webDriver)
-            : base(_locator, webDriver)
+            : base(LogManager.GetLogger(typeof(AddPublicFolderWorkflow)), _locator, webDriver)
         {
             ManagePublicFoldersPage = managePublicFoldersPage;
         }

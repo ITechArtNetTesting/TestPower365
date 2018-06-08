@@ -24,33 +24,32 @@ namespace Product.Tests.CommonTests.Menu_Tests
             password = RunConfigurator.GetPassword("client2");
             client = RunConfigurator.GetClient("client2");
             project = RunConfigurator.GetProjectName("client2", "project2");
-
-
         }
 
         [TestMethod]
+        [TestCategory("SmokeTest")]
+        [TestCategory("UI")]
+        [TestCategory("Integration")]
         [TestCategory("Menu")]
         public void Menu_IntegrationProject_31679_part1_menuItemsShouldBeDisplayed()
         {
-
             LoginAndSelectRole(userName, password, client);
             SelectProject(project);
             User.AtProjectOverviewForm().OpenMainMenu();
             User.AtProjectOverviewForm().AtMainMenu().AssertMenuForIntegrationProject();
-
         }
 
         [TestMethod]
+        [TestCategory("SmokeTest")]
+        [TestCategory("UI")]
+        [TestCategory("Integration")]
         [TestCategory("Menu")]
         public void Menu_IntegrationProject_53237_correctLinkForEachMenuItems()
         {
-
             LoginAndSelectRole(userName, password, client);
             SelectProject(project);
             User.AtProjectOverviewForm().OpenMainMenu();
             User.AtProjectOverviewForm().AtMainMenu().AssertMenuLinkForIntegrationProject();
-            
-
         }
       
     }

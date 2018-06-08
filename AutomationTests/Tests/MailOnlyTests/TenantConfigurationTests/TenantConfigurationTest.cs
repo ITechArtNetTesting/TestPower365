@@ -16,6 +16,7 @@ namespace Product.Tests.MailOnlyTests.TenantConfigurationTests
 		[TestMethod]
 		[TestCategory("MailOnly")]
         [TestCategory("SeleniumLegacy")]
+        [TestCategory("UI")]
         public void Automation_MO_TenantConfigurationTest()
 		{
 		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client1']/..//user");

@@ -39,6 +39,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BTCodex.DataModel, Version=1.1.6732.23073, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\BTCodex.DataModel.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>$(SolutionDir)packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
@@ -50,6 +54,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -58,6 +63,7 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="T2TMigrationTestUtil, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>resources\MailEngine\Engine\T2TMigrationTestUtil.dll</HintPath>
@@ -217,7 +223,6 @@
     <Compile Include="Tests\CommonTests\Migration Tests\RollbackCanBeCanceled_TC39559.cs" />
     <Compile Include="Tests\CommonTests\Migration Tests\RollbackShouldBeCompleted_InTheUserDetailView.cs" />
     <Compile Include="Tests\CommonTests\Migration Tests\JobsCanBeArchived_TC23090.cs" />
-    <Compile Include="Tests\CommonTests\MigrationWaves\VerifyNoWavesDefinedIsDisplayedOnTheSummaryPage_TC37905.cs" />
     <Compile Include="Tests\CommonTests\ProbeTest.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\DatabaseCleanup.cs" />
     <Compile Include="Tests\CommonTests\SetupTests\EnvironmentCleanup.cs" />
@@ -238,7 +243,7 @@
     <Compile Include="Tests\IntegrationTests\SetUpTest\MailUPNandExtensionAttributesAreValidMatchingOptions_32951.cs" />
     <Compile Include="Tests\CommonTests\ActionButtonsTests\StoppingStateButtonsTest.cs" />
     <Compile Include="Tests\IntegrationTests\IntegrationProjectSetupShowsDirSyncStatusAndConfig_TC27071.cs" />
-    <Compile Include="Tests\IntegrationTests\VerifyProperErrorMessageIsDisplayedWhenNoMatchingGroupIsFound_TC37817.cs" />
+    <Compile Include="Tests\IntegrationTests\SetUpTest\VerifyProperErrorMessageIsDisplayedWhenNoMatchingGroupIsFound_TC37817.cs" />
     <Compile Include="Tests\MailEngine\MailEngineTestBase.cs" />
     <Compile Include="Tests\MailEngine\PublicFolderTest.cs" />
     <Compile Include="Tests\MailOnlyTests\ActionButtonsTests\SyncingButtonsTest.cs" />
@@ -279,6 +284,7 @@
     <Compile Include="Tests\PowerShellTests\StartDeltaDiscoveryTest.cs" />
     <Compile Include="Tests\PublicFoldersTests\DemoTest.cs" />
     <Compile Include="Tests\PublicFoldersTests\PublicFoldersTest.cs" />
+    <Compile Include="Utilities\DirSyncLiteProfileService.cs" />
     <Compile Include="Utilities\SqlClient.cs" />
     <Compile Include="Utilities\SQLExecuter.cs" />
   </ItemGroup>
@@ -1714,7 +1720,7 @@
   <ItemGroup>
     <Folder Include="lib\" />
     <Folder Include="resources\MailEngine\internal\functions\" />
-    <Folder Include="Tests\MailWithDiscoveryTests\ActionButtonsTests\" />
+    <Folder Include="Tests\CommonTests\MigrationWaves\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

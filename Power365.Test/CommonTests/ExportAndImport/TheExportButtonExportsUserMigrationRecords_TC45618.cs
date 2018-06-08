@@ -7,29 +7,36 @@ using NUnit.Framework;
 namespace BinaryTree.Power365.Test.CommonTests.ExportAndImport
 {
     [TestFixture]
-    public class TheExportButtonExportsUserMigrationRecords_TC45618:TestBase
+    [Parallelizable(ParallelScope.Children)]
+    class TheExportButtonExportsUserMigrationRecords_TC45618:TestBase
     {
-        public TheExportButtonExportsUserMigrationRecords_TC45618() : base() { }
-        private readonly static string USER_MIGRATIONS_FILE_NAME = "user-migrations-*.csv";
+        private readonly static string USER_MIGRATIONS_FILE_NAME = "user*";
 
-        private void TheExportButtonExportsUserMigrationRecords(string username, string password, string client, string projectName,string downloadPath)
+        [Test]
+        [Category("Integration")]
+        [Category("UI")]
+        public void TheExportButtonExportsUserMigrationRecords_Integration_45618()
         {
-            var _manageUsersPage = Automation.Common
-                                       .SingIn(username, password)
-                                       .MigrateAndIntegrateSelect()
-                                       .ClientSelect(client)                                       
-                                       .ProjectSelect(projectName)
-                                       .UsersEdit()
-                                       .GetPage<ManageUsersPage>();
-            _manageUsersPage.SelectAllUsers();
-            _manageUsersPage.DeleteLogs(downloadPath, USER_MIGRATIONS_FILE_NAME);
-            _manageUsersPage.PerformAction<ConfirmationDialog>(ActionType.Export).Yes();
-          
-            Assert.IsTrue(_manageUsersPage.IsLogsDownload(downloadPath, USER_MIGRATIONS_FILE_NAME, 15), "Error with downloading logs");
+            RunTest("client2", "project2");
         }
-    
 
-        private void runTest(string clientName, string projectName)
+        [Test]
+        [Category("MailOnly")]
+        [Category("UI")]
+        public void TheExportButtonExportsUserMigrationRecords_MO_45618()
+        {
+            RunTest("client1", "project1");
+        }
+
+        [Test]
+        [Category("MailWithDiscovery")]
+        [Category("UI")]
+        public void TheExportButtonExportsUserMigrationRecords_MD_45618()
+        {
+            RunTest("client2", "project1");
+        }
+        
+        private void RunTest(string clientName, string projectName)
         {
             var client = Automation.Settings.GetByReference<Client>(clientName);
             var project = client.GetByReference<Project>(projectName);
@@ -40,30 +47,26 @@ namespace BinaryTree.Power365.Test.CommonTests.ExportAndImport
             string _downloadPath = Automation.Settings.DownloadsPath;
 
             TheExportButtonExportsUserMigrationRecords(_username, _password, _client, _projectName, _downloadPath);
-        }        
-
-        [Test]
-        [Category("Integration")]
-        [Category("UI")]
-        public void TheExportButtonExportsUserMigrationRecords_Integration_45618()
-        {
-            runTest("client2", "project2");
         }
 
-        [Test]
-        [Category("MailOnly")]
-        [Category("UI")]
-        public void TheExportButtonExportsUserMigrationRecords_MO_45618()
+        private void TheExportButtonExportsUserMigrationRecords(string username, string password, string client, string projectName, string downloadPath)
         {
-            runTest("client1", "project1");
-        }
+            var _manageUsersPage = Automation.Common
+                                    .SingIn(username, password)
+                                    .MigrateAndIntegrateSelect()
+                                    .ClientSelect(client)
+                                    .ProjectSelect(projectName)
+                                    .UsersEdit()
+                                    .GetPage<ManageUsersPage>();
 
-        [Test]
-        [Category("MailWithDiscovery")]
-        [Category("UI")]
-        public void TheExportButtonExportsUserMigrationRecords_MD_45618()
-        {
-            runTest("client2", "project1");
+            _manageUsersPage.SelectAllUsers();
+            _manageUsersPage
+                .PerformAction<ConfirmationDialog>(ActionType.Export)
+                .Yes();
+
+            var isFileDownloaded = Automation.Browser.IsFileDownloaded(USER_MIGRATIONS_FILE_NAME, WaitDefaults.FILE_DOWNLOAD_TIMEOUT_SEC, 3);
+        
+            Assert.IsTrue(isFileDownloaded, "Error with downloading logs");
         }
 
     }

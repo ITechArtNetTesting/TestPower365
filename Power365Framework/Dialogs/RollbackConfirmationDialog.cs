@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using log4net;
+using OpenQA.Selenium;
 using System;
 
 namespace BinaryTree.Power365.AutomationFramework.Dialogs
@@ -16,7 +17,7 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
         private readonly string _confirmationDialogButtonFormat = "//div[@id='confirmationDialog'][contains(@class, 'modal in')]//*[contains(text(), '{0}')]";
 
         public RollbackConfirmationDialog(IWebDriver webDriver) 
-            : base(webDriver) { }
+            : base(LogManager.GetLogger(typeof(RollbackConfirmationDialog)), webDriver) { }
 
         public void Yes(bool resetPermissions = true)
         {

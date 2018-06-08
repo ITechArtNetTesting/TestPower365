@@ -1,4 +1,5 @@
 ﻿using BinaryTree.Power365.AutomationFramework.Pages;
+using log4net;
 using OpenQA.Selenium;
 
 namespace BinaryTree.Power365.AutomationFramework.Elements
@@ -8,9 +9,7 @@ namespace BinaryTree.Power365.AutomationFramework.Elements
         private static readonly By _locator = By.XPath("//h1[text()=' Help Center']");
 
         public HelpPage(IWebDriver webDriver)
-            : base(_locator, webDriver)
-        {
-        }
+            : base(LogManager.GetLogger(typeof(EditWavePage)), _locator, webDriver) { }
 
         public string GetUrl()
         {

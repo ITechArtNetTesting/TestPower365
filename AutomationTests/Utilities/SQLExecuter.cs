@@ -9,11 +9,11 @@ namespace Product.Utilities
 {
     public class SQLExecuter
     {
-        public int SelectDiscoveryFrequencyHours(int clientId, string tenantName)
+        public int SelectDiscoveryFrequencyHours(int clientId, string tenantName, string projectName)
         {
             using (var sqlClient = new SqlClient(RunConfigurator.GetConnectionString()))
             {
-                return sqlClient.SelectValue<int>($"select DiscoveryFrequencyHours from [Tenant] where clientid={Convert.ToString(clientId)} and lower(TenantName)=lower('{tenantName}')");
+                return sqlClient.SelectValue<int>($"select DiscoveryFrequencyHours from [Tenant] where clientid={Convert.ToString(clientId)} and lower(TenantName)=lower('{tenantName}') and TenantId in (SELECT TenantId FROM [ProjectTenant] INNER JOIN Project ON ProjectTenant.ProjectId=Project.ProjectId WHERE Project.ProjectName = '{projectName}')");
             }
         }
 
@@ -24,6 +24,22 @@ namespace Product.Utilities
                 return sqlClient.SelectValue<int>($"SELECT ClientId FROM [Client] WHERE ClientName = '{clientName}'");
             }
         }
+
+        public int SelectProjectIdByName(string projectName)
+        {
+            using (var sqlClient = new SqlClient(RunConfigurator.GetConnectionString()))
+            {
+                return sqlClient.SelectValue<int>($"SELECT ProjectId FROM [Project] WHERE ProjectName = '{projectName}'");
+            }
+        }
+
+        //public int SelectTenantIdByProjectName(string projectName)
+        //{
+        //    using (var sqlClient = new SqlClient(RunConfigurator.GetConnectionString()))
+        //    {
+        //        return sqlClient.SelectValue<int>($"SELECT TenantId FROM [ProjectTenant] INNER JOIN Project ON ProjectTenant.ProjectId=Project.ProjectId WHERE Project.ProjectName = '{projectName}'");
+        //    }
+        //}
     }
 }
 

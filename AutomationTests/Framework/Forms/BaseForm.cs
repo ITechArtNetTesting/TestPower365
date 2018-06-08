@@ -28,8 +28,6 @@ namespace Product.Framework.Forms
 	    private readonly Button backToDashboardButton = new Button(
 	        By.XPath("//button[contains(@data-bind, 'goToDashboard')]"), "Back to dashboard button");
 
-        
-
         /// <summary>
         ///     The locator
         /// </summary>

@@ -1,4 +1,5 @@
 ﻿using BinaryTree.Power365.AutomationFramework.Pages;
+using log4net;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,8 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
         protected readonly PageBase RootPage;
         protected PageBase CurrentPage;
 
-        protected MutliPageWorkflow(PageBase page, IWebDriver webDriver)
-            : base(page.Locator, webDriver)
+        protected MutliPageWorkflow(ILog logger, PageBase page, IWebDriver webDriver)
+            : base(logger, page.Locator, webDriver)
         {
             RootPage = CurrentPage = page;
         }

@@ -1,19 +1,18 @@
-﻿using log4net;
+﻿using AutomationServices.PowerShell;
 using System.Threading.Tasks;
 
 namespace BinaryTree.Power365.Test
 {
-    public abstract class PowershellTestBase : TestBase
+    public abstract class PowerShellTestBase : TestBase
     {
-    //    [DllImport("kernel32.dll", SetLastError = true)]
-    //    public static extern bool Wow64DisableWow64FsRedirection(ref IntPtr ptr);
-
-        protected PowershellTestBase()
+        protected PowerShellTestBase()
             : base() { }
 
         protected void RunScript(string scriptPath, string parameters, bool is32Bit = false, int exitTimeoutSec = 60)
         {
-            using (var powershellProcess = Automation.Powershell.RunPowershellScript(scriptPath, parameters, is32Bit))
+            var powerShellService = Automation.GetService<PowerShellService>();
+
+            using (var powershellProcess = powerShellService.RunPowershellScript(scriptPath, parameters, is32Bit))
             {
                 Task stdout = Task.Run(() =>
                 {

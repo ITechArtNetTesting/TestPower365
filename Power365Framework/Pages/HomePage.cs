@@ -1,9 +1,5 @@
-﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using log4net;
+using OpenQA.Selenium;
 
 namespace BinaryTree.Power365.AutomationFramework.Pages
 {
@@ -14,7 +10,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private readonly By _signInButton = By.XPath("//a[contains(@href, 'SignIn')][contains(@class, 'btn')]");
 
         public HomePage(IWebDriver webDriver)
-            : base(_locator, webDriver) { }
+            : base(LogManager.GetLogger(typeof(HomePage)), _locator, webDriver) { }
 
         public O365SignInPage ClickSignIn()
         {

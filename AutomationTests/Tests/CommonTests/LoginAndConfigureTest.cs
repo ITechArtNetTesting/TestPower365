@@ -12,8 +12,7 @@ namespace Product.Tests.CommonTests
 		{
             LogIn(login, password);
             //NOTE: Temp solution to avoid 1 symbol in role textbox
-          
-
+            
             User.AtTenantRestructuringForm().OpenMainMenu();
 			User.AtTenantRestructuringForm().AtMainMenu().SelectRole(role);
             User.AtTenantRestructuringForm().GoToProjects();

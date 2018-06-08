@@ -1,4 +1,6 @@
-﻿using BinaryTree.Power365.AutomationFramework.Pages;
+﻿using BinaryTree.Power365.AutomationFramework.Enums;
+using BinaryTree.Power365.AutomationFramework.Pages;
+using log4net;
 using OpenQA.Selenium;
 using System;
 
@@ -23,13 +25,13 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
         protected readonly EditProjectPage EditProjectPage;
 
         public EditProjectWorkflowBase(EditProjectPage editProjectPage, IWebDriver webDriver)
-            : base(_locator, webDriver)
+            : base(LogManager.GetLogger(typeof(T)), _locator, webDriver)
         {
             EditProjectPage = editProjectPage;
         }
 
         public EditProjectWorkflowBase(By locator, EditProjectPage editProjectPage, IWebDriver webDriver)
-            : base(locator, webDriver)
+            : base(LogManager.GetLogger(typeof(T)), locator, webDriver)
         {
             EditProjectPage = editProjectPage;
         }

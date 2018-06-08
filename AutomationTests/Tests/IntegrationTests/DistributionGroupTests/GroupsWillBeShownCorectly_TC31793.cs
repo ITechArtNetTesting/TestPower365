@@ -34,14 +34,14 @@ namespace Product.Tests.IntegrationTests.DistributionGroupTests
             project = RunConfigurator.GetProjectName("client2", "project2");
             disrtibutionGroup = RunConfigurator.GetADGroupName("client2", "project2", "group1");
             securityGroup = RunConfigurator.GetADGroupName("client2", "project2", "adgroup1");
-
         }
 
         [TestMethod]
+        [TestCategory("SmokeTest")]
+        [TestCategory("UI")]
         [TestCategory("Integration")]
         public void GroupsWillBeShownCorectly_31793()
         {
-
             LoginAndSelectRole(login, password, client);
             SelectProject(project);
             User.AtProjectOverviewForm().OpenTotalGroups();
@@ -49,8 +49,6 @@ namespace Product.Tests.IntegrationTests.DistributionGroupTests
             User.AtGroupsMigrationForm().CheckSyncForGroup(disrtibutionGroup, false);
             User.AtGroupsMigrationForm().SearchGroup(disrtibutionGroup);
             User.AtGroupsMigrationForm().CheckSyncForGroup(disrtibutionGroup, true);           
-
         }
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BinaryTree.Power365.AutomationFramework.Workflows;
+using log4net;
 using OpenQA.Selenium;
 using System;
 
@@ -14,7 +15,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private string _projectSelectFormat = "//span[contains(text(), '{0}')][contains(@class, 'notranslate')]";
         
         public ProjectListPage(IWebDriver webDriver)
-            : base(_locator, webDriver) { }
+            : base(LogManager.GetLogger(typeof(ProjectListPage)), _locator, webDriver) { }
      
         public ProjectDetailsPage ClickProjectByName(string projectName)
         {

@@ -113,6 +113,7 @@ namespace Product.Framework.Forms
 		public void SelectProject(string projectName)
 		{
 			Log.Info("Selecting project: " + projectName);
+            WaitForAjaxLoad();
 			var projectButton = new Button(By.XPath($"//span[contains(text(), '{projectName}')][contains(@class, 'notranslate')]"), projectName + " button");
 			projectButton.Click();
 		}

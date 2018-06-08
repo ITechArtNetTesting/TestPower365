@@ -483,7 +483,8 @@ else
 #Add Send As Permissions and Proxy Address
 
 
-
+#TC 30101
+#TC 30103
 $Testsa = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addsendaspermissionpublicfolder" -SourceFolder ($SourceFolderPath + "\" + $AddFolderTestNameMailEnabled)  -Username $SendAsSourceUserName -TargetUserName $TargetAsSourceUserName
 if($Testsa.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 {
@@ -689,6 +690,7 @@ else
 
 #Modification Tests
 #Modify Folder Permissions
+#TC 30102
 $Test15 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "modifydefaultfolderpermission" -SourceFolder ($SourceFolderPath + "\" + $AddFolderTestName) -Permission Editor
 if($Test15.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 {
@@ -771,7 +773,7 @@ else
 }
 
 #Rename Folder
-
+#TC 30139
 $Test20 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "renamesourcefolder" -SourceFolder ($SourceFolderPath + "\" + $FolderTestNameR) -FolderName  $FolderTestNamer2
 if($Test20.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 {
@@ -788,6 +790,7 @@ else
 }
 
 #Move Folder to Drafts
+#TC 30140
 $Test21 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "movesourcefolder" -SourceFolder ($SourceFolderPath + "\" + $FolderTestName3) -DestinationFolderPath ($SourceFolderPath + "\" + $AddFolderTestName)   
 if($Test21.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 {
@@ -804,7 +807,7 @@ else
 }
 
 #Delete Folder
-
+#TC 30141
 $Test22 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "deletesourcefolder" -SourceFolder ($SourceFolderPath + "\" + $FolderTestName2)   
 if($Test22.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 {
@@ -1021,6 +1024,7 @@ else
     }         
 }
 #Validate Mail Enabled
+#TC 30109
 $ValidationME = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "validatemailenablefolder" -TestOutput $TestME.OutputObject
 if($ValidationME.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 {

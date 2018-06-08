@@ -1264,6 +1264,7 @@ namespace Product.Tests.MailEngine
             catch(Exception e)
             {
                 Log.Error("Failed to Assert Test Passes", e);
+                throw;
             }
             finally
             {

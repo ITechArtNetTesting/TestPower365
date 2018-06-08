@@ -19,6 +19,8 @@ namespace Product.Tests.CommonTests.LandingPageTests
         }
 
         [TestMethod]
+        [TestCategory("SmokeTest")]
+        [TestCategory("UI")]
         [TestCategory("Integration")]
         public void DiscoveryFrequencyCanBeSetted_Integration_32698()
         {
@@ -27,6 +29,8 @@ namespace Product.Tests.CommonTests.LandingPageTests
         }
 
         [TestMethod]
+        [TestCategory("SmokeTest")]
+        [TestCategory("UI")]
         [TestCategory("MailWithDiscovery")]
         public void DiscoveryFrequencyCanBeSetted_MD_32698()
         {
@@ -41,11 +45,11 @@ namespace Product.Tests.CommonTests.LandingPageTests
                 SelectProject(projectName);
                 User.AtProjectOverviewForm().EditTenants();
                 User.AtTenantsConfigurationForm().OpenDiscoveryTab();
-                User.AtDiscoveryOverviewForm().VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(client);
+                User.AtDiscoveryOverviewForm().VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(client, projectName);
                 User.AtDiscoveryOverviewForm().ChangeDiscoveryFrequencyHours(1);
-                User.AtDiscoveryOverviewForm().VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(client);
-                User.AtDiscoveryOverviewForm().ChangeDiscoveryFrequencyHours(24);
-                User.AtDiscoveryOverviewForm().VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(client);
+                User.AtDiscoveryOverviewForm().VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(client, projectName);
+                User.AtDiscoveryOverviewForm().ChangeDiscoveryFrequencyHours(24);          
+               User.AtDiscoveryOverviewForm().VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(client, projectName);
            
         }
 

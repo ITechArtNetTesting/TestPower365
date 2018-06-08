@@ -314,7 +314,7 @@ namespace Product.Framework.Forms
 			searchTextBox.ClearSetText(search);
 			searchTextBox.PressEnter();
           //  WaitForAjaxLoad();
-            Thread.Sleep(2000);//Badd fixme
+            Thread.Sleep(4000);//Badd fixme
 		}
 
 	    public void ModifyProfile(string profile)

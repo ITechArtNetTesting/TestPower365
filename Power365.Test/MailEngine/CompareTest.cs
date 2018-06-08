@@ -1,14 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BinaryTree.Power365.AutomationFramework;
+using NUnit.Framework;
+using IO = System.IO;
+using BinaryTree.Power365.AutomationFramework.Enums;
 
 namespace BinaryTree.Power365.Test.MailEngine
 {
-    [TestClass]
-    public class CompareTest : PowershellTestBase
+    [TestFixture]
+    public class CompareTest : PowerShellTestBase
     {
         private string _clientName;
         private string _projectName;
@@ -24,14 +22,14 @@ namespace BinaryTree.Power365.Test.MailEngine
 
         private string _sourceMailbox;
         private string _targetMailbox;
-
-        private string _stopFile;
-
+        
         private bool _is32Bit;
 
-        [TestMethod]
-        [TestCategory("Powershell")]
-        public void Automation_PS_MO_CompareTest()
+        bool _isFirstTestSuccess = false;
+        bool _isSecondTestSuccess = false;
+        
+        [SetUp]
+        public void TestSetUp()
         {
             var settings = Automation.Settings;
 
@@ -46,8 +44,8 @@ namespace BinaryTree.Power365.Test.MailEngine
             var sourceTenant = settings.GetByReference<Tenant>(project.Source);
             var targetTenant = settings.GetByReference<Tenant>(project.Target);
 
-            var sourceCredential = sourceTenant.GetByReference<Credential>("psuser");
-            var targetCredential = targetTenant.GetByReference<Credential>("psuser");
+            var sourceCredential = sourceTenant.GetByReference<Credential>("ps2");
+            var targetCredential = targetTenant.GetByReference<Credential>("ps2");
 
             _sourceAdminUser = sourceCredential.Username;
             _sourceAdminPassword = sourceCredential.Password;
@@ -55,95 +53,52 @@ namespace BinaryTree.Power365.Test.MailEngine
             _targetAdminUser = targetCredential.Username;
             _targetAdminPassword = targetCredential.Password;
 
-            var userMigration1 = project.GetByReference<UserMigration>("entryps1");
+            var userMigration1 = project.GetByReference<UserMigration>("entryps4");
 
             _sourceMailbox = userMigration1.Source;
             _targetMailbox = userMigration1.Target;
 
             _signInUser = client.Administrator.Username;
             _signInPassword = client.Administrator.Password;
+        }
 
-            _stopFile = IO.Path.Combine(IO.Path.GetTempPath(), IO.Path.GetRandomFileName());
+        [Test]
+        [Category("MailOnly")]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void Mailbox_CompareTest()
+        {
+            Automation.Common
+                    .SingIn(_signInUser, _signInPassword)
+                    .ClientSelect(_clientName)
+                    .ProjectSelect(_projectName)
+                    .UsersEdit()
+                    .UsersPerformAction(_sourceMailbox, ActionType.Sync)
+                    .UsersValidateState(_sourceMailbox, StateType.Syncing)
+                    .UsersValidateState(_sourceMailbox, StateType.Synced);
 
-            string userName = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user");
-            string password = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//password");
-            string client = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/../name");
-            string project = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//name");
-            string sourceMailbox = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps4']/..//source");
-            string sourceLogin = RunConfigurator.GetTenantValue("T1->T2", "source", "psuser2");
-            string sourcePassword = RunConfigurator.GetTenantValue("T1->T2", "source", "pspassword2");
-            string targetLogin = RunConfigurator.GetTenantValue("T1->T2", "target", "psuser2");
-            string targetPassword = RunConfigurator.GetTenantValue("T1->T2", "target", "pspassword2");
-            string targetMailbox = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project1']/..//metaname[text()='entryps4']/..//target");
+            Automation.ResetBrowser();
 
-            try
-            {
-                var IsFirstTestSuccess = false;
-                var IsSecondTestSuccess = false;
-                var IsExpectedFailed = false;
-                LoginAndSelectRole(userName, password, client);
-                SelectProject(project);
-                User.AtProjectOverviewForm().OpenUsersList();
-                User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
-                User.AtUsersForm().SelectAction(ActionType.Sync);
-                try
-                {
-                    User.AtUsersForm().Apply();
-                }
-                catch (Exception)
-                {
-                    Log.Info("Apply button is disabled");
-                    Browser.GetDriver().Navigate().Refresh();
-                    User.AtUsersForm().SelectEntryBylocator(sourceMailbox);
-                    User.AtUsersForm().SelectAction(ActionType.Sync);
-                    User.AtUsersForm().Apply();
-                }
-                User.AtUsersForm().ConfirmSync();
-                User.AtUsersForm().WaitForState(sourceMailbox, State.Syncing, 10000);
-                User.AtUsersForm().WaitForState(sourceMailbox, State.Synced, 600000, 30);
-                using (var process = new PsLauncher().LaunchPowerShellInstance("Compare.ps1",
-                    $" -slogin {sourceLogin}" +
-                    $" -spassword {sourcePassword}" +
-                    $" -tlogin {targetLogin}" +
-                    $" -tpassword {targetPassword}" +
-                    $" -smailbox {sourceMailbox}" +
-                    $" -tmailbox {targetMailbox}"))
-                {
-                    while (!process.StandardOutput.EndOfStream)
-                    {
-                        var line = process.StandardOutput.ReadLine();
-                        Log.Info(line);
-                        if (line.Contains("failed as expected") || line.Contains("Test 6 (Calendar with multiple attachments)") || line.Contains("Test 5 (Calendar with 1 Attachment)") || line.Contains("Test Case 3 (Calendar item with HTML Body)") || line.Contains("Test 15 Contact with 2 Attachments") || line.Contains("Test 14 Contact with 1 Attachment") || line.Contains("Testt 13 Contact with HTML Body") || line.Contains("Test Case 3 (Calendar item with HTML Body)") || line.Contains("Test 49, Task with two attachements") || line.Contains("Test 48, Task with one attachment") || line.Contains("Test 47, Task with HTML In body"))
-                        {
+            RunScript("Resources/PowerShell/MailEngine.CompareTest.ps1",
+                $" -slogin {_sourceAdminUser}" +
+                $" -spassword {_sourceAdminPassword}" +
+                $" -tlogin {_targetAdminUser}" +
+                $" -tpassword {_targetAdminPassword}" +
+                $" -smailbox {_sourceMailbox}" +
+                $" -tmailbox {_targetMailbox}",
+                _is32Bit);
 
-                            IsExpectedFailed = true;
-                        }
-                        if (line.Contains("Folder existance Check succeeded"))
-                        {
-                            IsFirstTestSuccess = true;
-                        }
-                        if (line.Contains("Source Target Item existance Check succeeded"))
-                        {
-                            IsSecondTestSuccess = true;
-                        }
-                    }
-                    process.WaitForExit();
-                }
-                Assert.IsTrue(IsFirstTestSuccess, "Folder existance Test failed");
-                if (!IsExpectedFailed)
-                {
-                    Assert.IsTrue(IsSecondTestSuccess, "Source Target Item existance failed");
-                }
-                else
-                {
-                    Log.Fatal("Source Target Item existance test failed as expected");
-                }
-            }
-            catch (Exception)
-            {
-                LogHtml(Browser.GetDriver().PageSource);
-                throw;
-            }
+            Assert.IsTrue(_isFirstTestSuccess, "Folder existance Test failed");
+            Assert.IsTrue(_isSecondTestSuccess, "Source Target Item existance failed");
+        }
+
+        protected override void ScriptOutputHandler(string line, bool isError = false)
+        {
+            if (line.Contains("Folder existance Check succeeded"))
+                _isFirstTestSuccess = true;
+            if (line.Contains("Source Target Item existance Check succeeded"))
+                _isSecondTestSuccess = true;
         }
     }
 }

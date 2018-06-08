@@ -48,19 +48,17 @@ namespace BinaryTree.Power365.Test.MailEngine
 
         private string _url;
 
-        private ManagePublicFoldersPage _managePublicFoldersPage;
-
         public PublicFolderTest() 
             : base() { }
 
         [OneTimeSetUp]
-        public void ClassInit()
+        public void OneTimeTestSetUp()
         {
             InitialStateSetup();
         }
         
         [SetUp]
-        public void TestInit()
+        public void TestSetUp()
         {
             var client = Automation.Settings.GetByReference<Client>("client2");
             var project = client.GetByReference<Project>("project2");
@@ -111,7 +109,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         //[Category("MailEngine")]
         //[Category("PublicFolder")]
         //[Category("Permissions")]
-        //public void PublicFolder_PS_Test27842()
+        //public void PublicFolder_Test27842()
         //{
         //    var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
         //    var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -126,7 +124,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test30070()
+        public void PublicFolder_Test30070()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -140,7 +138,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test30072()
+        public void PublicFolder_Test30072()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -154,7 +152,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test30075()
+        public void PublicFolder_Test30075()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -168,7 +166,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test30076()
+        public void PublicFolder_Test30076()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -182,7 +180,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test30077()
+        public void PublicFolder_Test30077()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -197,7 +195,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test30078()
+        public void PublicFolder_Test30078()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -211,7 +209,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test30079()
+        public void PublicFolder_Test30079()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -225,7 +223,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test30080()
+        public void PublicFolder_Test30080()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -239,7 +237,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test30091()
+        public void PublicFolder_Test30091()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -253,7 +251,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test30095()
+        public void PublicFolder_Test30095()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -267,7 +265,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test30096()
+        public void PublicFolder_Test30096()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -281,7 +279,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test30097()
+        public void PublicFolder_Test30097()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -295,7 +293,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test30098()
+        public void PublicFolder_Test30098()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -309,7 +307,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test30099()
+        public void PublicFolder_Test30099()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -323,7 +321,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Provisioning")]
-        public void PublicFolder_PS_Test30110()
+        public void PublicFolder_Test30110()
         {
             AssertPublicFolderSyncTestPasses("30110", PerformPublicFolderSync);
         }
@@ -333,7 +331,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Provisioning")]
-        public void PublicFolder_PS_Test30111()
+        public void PublicFolder_Test30111()
         {
             AssertPublicFolderSyncTestPasses("30111", PerformPublicFolderSync);
         }
@@ -344,7 +342,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         //[Category("MailEngine")]
         //[Category("PublicFolder")]
         //[Category("Provisioning")]
-        //public void PublicFolder_PS_Test30112()
+        //public void PublicFolder_Test30112()
         //{
         //    AssertPublicFolderSyncTestPasses("30112", PerformPublicFolderSync);
         //}
@@ -354,7 +352,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Provisioning")]
-        public void PublicFolder_PS_Test30119()
+        public void PublicFolder_Test30119()
         {
             //@@@
             var source1 = new KeyValuePair<string, object>("SourceForwardingAddress", _sourceMailboxExtra1);
@@ -367,7 +365,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Provisioning")]
-        public void PublicFolder_PS_Test30122()
+        public void PublicFolder_Test30122()
         {
             AssertPublicFolderSyncTestPasses("30122", PerformPublicFolderSync);
         }
@@ -376,7 +374,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Provisioning")]
-        public void PublicFolder_PS_Test30134()
+        public void PublicFolder_Test30134()
         {
             AssertPublicFolderSyncTestPasses("30134", PerformPublicFolderSync);
         }
@@ -385,7 +383,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Provisioning")]
-        public void PublicFolder_PS_Test30135()
+        public void PublicFolder_Test30135()
         {
             AssertPublicFolderSyncTestPasses("30135", PerformPublicFolderSync);
         }
@@ -394,7 +392,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Provisioning")]
-        public void PublicFolder_PS_Test30142()
+        public void PublicFolder_Test30142()
         {
             AssertPublicFolderSyncTestPasses("30142", PerformPublicFolderSync);
         }
@@ -403,7 +401,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Provisioning")]
-        public void PublicFolder_PS_Test30143()
+        public void PublicFolder_Test30143()
         {
             AssertPublicFolderSyncTestPasses("30143", PerformPublicFolderSync);
         }
@@ -412,7 +410,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Provisioning")]
-        public void PublicFolder_PS_Test30146a()
+        public void PublicFolder_Test30146a()
         {
             AssertPublicFolderSyncTestPasses("30146a", PerformPublicFolderSync);
         }
@@ -421,7 +419,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Provisioning")]
-        public void PublicFolder_PS_Test30146b()
+        public void PublicFolder_Test30146b()
         {
             AssertPublicFolderSyncTestPasses("30146b", PerformPublicFolderSync);
         }
@@ -430,7 +428,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test30336()
+        public void PublicFolder_Test30336()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -444,7 +442,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test30337()
+        public void PublicFolder_Test30337()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -458,7 +456,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30338()
+        public void PublicFolder_Test30338()
         {
             AssertPublicFolderSyncTestPasses("30338", PerformPublicFolderSync);
         }
@@ -468,7 +466,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30373()
+        public void PublicFolder_Test30373()
         {
             AssertPublicFolderSyncTestPasses("30373", PerformPublicFolderSync);
         }
@@ -478,7 +476,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test30377()
+        public void PublicFolder_Test30377()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -492,7 +490,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30378()
+        public void PublicFolder_Test30378()
         {
             AssertPublicFolderSyncTestPasses("30378", PerformPublicFolderSync);
         }
@@ -501,7 +499,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30379()
+        public void PublicFolder_Test30379()
         {
             AssertPublicFolderSyncTestPasses("30379", PerformPublicFolderSync);
         }
@@ -510,7 +508,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30380()
+        public void PublicFolder_Test30380()
         {
             AssertPublicFolderSyncTestPasses("30380", PerformPublicFolderSync);
         }
@@ -519,7 +517,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30381()
+        public void PublicFolder_Test30381()
         {
             AssertPublicFolderSyncTestPasses("30381", PerformPublicFolderSync);
         }
@@ -528,7 +526,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30382()
+        public void PublicFolder_Test30382()
         {
             AssertPublicFolderSyncTestPasses("30382", PerformPublicFolderSync);
         }
@@ -537,7 +535,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30383()
+        public void PublicFolder_Test30383()
         {
             AssertPublicFolderSyncTestPasses("30383", PerformPublicFolderSync);
         }
@@ -545,7 +543,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Test]
         [Category("MailEngine")]
         [Category("PublicFolder")]
-        public void PublicFolder_PS_Test30384()
+        public void PublicFolder_Test30384()
         {
             AssertPublicFolderSyncTestPasses("30384", PerformPublicFolderSync);
         }
@@ -554,7 +552,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30385()
+        public void PublicFolder_Test30385()
         {
             AssertPublicFolderSyncTestPasses("30385", PerformPublicFolderSync);
         }
@@ -563,7 +561,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30387a()
+        public void PublicFolder_Test30387a()
         {
             AssertPublicFolderSyncTestPasses("30387", PerformPublicFolderSync);
         }
@@ -572,7 +570,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30387b()
+        public void PublicFolder_Test30387b()
         {
             AssertPublicFolderSyncTestPasses("30387b", PerformPublicFolderSync);
         }
@@ -581,7 +579,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30391()
+        public void PublicFolder_Test30391()
         {
             AssertPublicFolderSyncTestPasses("30391", PerformPublicFolderSync);
         }
@@ -590,7 +588,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30392()
+        public void PublicFolder_Test30392()
         {
             AssertPublicFolderSyncTestPasses("30392", PerformPublicFolderSync);
         }
@@ -599,7 +597,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30393()
+        public void PublicFolder_Test30393()
         {
             AssertPublicFolderSyncTestPasses("30393", PerformPublicFolderSync);
         }
@@ -608,7 +606,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30394()
+        public void PublicFolder_Test30394()
         {
             AssertPublicFolderSyncTestPasses("30394", PerformPublicFolderSync);
         }
@@ -617,7 +615,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30469()
+        public void PublicFolder_Test30469()
         {
             AssertPublicFolderSyncTestPasses("30469", PerformPublicFolderSync);
         }
@@ -626,7 +624,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30470()
+        public void PublicFolder_Test30470()
         {
             AssertPublicFolderSyncTestPasses("30470", PerformPublicFolderSync);
         }
@@ -635,7 +633,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30471()
+        public void PublicFolder_Test30471()
         {
             AssertPublicFolderSyncTestPasses("30471", PerformPublicFolderSync);
         }
@@ -644,7 +642,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30475()
+        public void PublicFolder_Test30475()
         {
             AssertPublicFolderSyncTestPasses("30475", PerformPublicFolderSync);
         }
@@ -654,7 +652,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30477()
+        public void PublicFolder_Test30477()
         {
             AssertPublicFolderSyncTestPasses("30477", PerformPublicFolderSync);
         }
@@ -663,7 +661,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30478()
+        public void PublicFolder_Test30478()
         {
             AssertPublicFolderSyncTestPasses("30478", PerformPublicFolderSync);
         }
@@ -672,7 +670,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30479()
+        public void PublicFolder_Test30479()
         {
             AssertPublicFolderSyncTestPasses("30479", PerformPublicFolderSync);
         }
@@ -681,7 +679,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30485()
+        public void PublicFolder_Test30485()
         {
             AssertPublicFolderSyncTestPasses("30485", PerformPublicFolderSync);
         }
@@ -690,7 +688,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30488()
+        public void PublicFolder_Test30488()
         {
             AssertPublicFolderSyncTestPasses("30488", PerformPublicFolderSync);
         }
@@ -699,7 +697,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30489()
+        public void PublicFolder_Test30489()
         {
             AssertPublicFolderSyncTestPasses("30489", PerformPublicFolderSync);
         }
@@ -708,7 +706,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30490()
+        public void PublicFolder_Test30490()
         {
             AssertPublicFolderSyncTestPasses("30490", PerformPublicFolderSync);
         }
@@ -717,7 +715,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30501()
+        public void PublicFolder_Test30501()
         {
             AssertPublicFolderSyncTestPasses("30501", PerformPublicFolderSync);
         }
@@ -727,7 +725,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30503()
+        public void PublicFolder_Test30503()
         {
             AssertPublicFolderSyncTestPasses("30503", PerformPublicFolderSync);
         }
@@ -736,7 +734,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30504()
+        public void PublicFolder_Test30504()
         {
             AssertPublicFolderSyncTestPasses("30504", PerformPublicFolderSync);
         }
@@ -745,7 +743,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30511()
+        public void PublicFolder_Test30511()
         {
             AssertPublicFolderSyncTestPasses("30511", PerformPublicFolderSync);
         }
@@ -754,7 +752,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30512()
+        public void PublicFolder_Test30512()
         {
             AssertPublicFolderSyncTestPasses("30512", PerformPublicFolderSync);
         }
@@ -763,7 +761,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30513()
+        public void PublicFolder_Test30513()
         {
             AssertPublicFolderSyncTestPasses("30513", PerformPublicFolderSync);
         }
@@ -772,7 +770,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30518()
+        public void PublicFolder_Test30518()
         {
             AssertPublicFolderSyncTestPasses("30518", PerformPublicFolderSync);
         }
@@ -781,7 +779,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30519()
+        public void PublicFolder_Test30519()
         {
             AssertPublicFolderSyncTestPasses("30519", PerformPublicFolderSync);
         }
@@ -791,7 +789,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test30522()
+        public void PublicFolder_Test30522()
         {
             AssertPublicFolderSyncTestPasses("30522", PerformPublicFolderSync);
         }
@@ -800,7 +798,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Provisioning")]
-        public void PublicFolder_PS_Test30822()
+        public void PublicFolder_Test30822()
         {
             var source1 = new KeyValuePair<string, object>("SourceProxyAddress", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("TargetProxyAddress", _targetMailboxExtra1);
@@ -812,7 +810,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test32077()
+        public void PublicFolder_Test32077()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -826,7 +824,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32267()
+        public void PublicFolder_Test32267()
         {
             AssertPublicFolderSyncTestPasses("32267", PerformPublicFolderSync);
         }
@@ -835,7 +833,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32268()
+        public void PublicFolder_Test32268()
         {
             AssertPublicFolderSyncTestPasses("32268", PerformPublicFolderSync);
         }
@@ -845,7 +843,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32282()
+        public void PublicFolder_Test32282()
         {
             AssertPublicFolderSyncTestPasses("32282", PerformPublicFolderSync);
         }
@@ -855,7 +853,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32341()
+        public void PublicFolder_Test32341()
         {
             AssertPublicFolderSyncTestPasses("32341", PerformPublicFolderSync);
         }
@@ -864,7 +862,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32342()
+        public void PublicFolder_Test32342()
         {
             AssertPublicFolderSyncTestPasses("32342", PerformPublicFolderSync);
         }
@@ -872,7 +870,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32343()
+        public void PublicFolder_Test32343()
         {
             AssertPublicFolderSyncTestPasses("32343", PerformPublicFolderSync);
         }
@@ -881,7 +879,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32344()
+        public void PublicFolder_Test32344()
         {
             AssertPublicFolderSyncTestPasses("32344", PerformPublicFolderSync);
         }
@@ -890,7 +888,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32345()
+        public void PublicFolder_Test32345()
         {
             AssertPublicFolderSyncTestPasses("32345", PerformPublicFolderSync);
         }
@@ -899,7 +897,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32346()
+        public void PublicFolder_Test32346()
         {
             AssertPublicFolderSyncTestPasses("32346", PerformPublicFolderSync);
         }
@@ -908,7 +906,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32347()
+        public void PublicFolder_Test32347()
         {
             AssertPublicFolderSyncTestPasses("32347", PerformPublicFolderSync);
         }
@@ -918,7 +916,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32348()
+        public void PublicFolder_Test32348()
         {
             var attachment = new KeyValuePair<string, object>("Attachment", _attachment);
 
@@ -929,7 +927,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32349()
+        public void PublicFolder_Test32349()
         {
             var attachment = new KeyValuePair<string, object>("Attachment", _attachment);
 
@@ -941,7 +939,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32350()
+        public void PublicFolder_Test32350()
         {
             AssertPublicFolderSyncTestPasses("32350", PerformPublicFolderSync);
         }
@@ -950,7 +948,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32351()
+        public void PublicFolder_Test32351()
         {
             AssertPublicFolderSyncTestPasses("32351", PerformPublicFolderSync);
         }
@@ -959,7 +957,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32362()
+        public void PublicFolder_Test32362()
         {
             AssertPublicFolderSyncTestPasses("32362", PerformPublicFolderSync);
         }
@@ -968,7 +966,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32363()
+        public void PublicFolder_Test32363()
         {
             AssertPublicFolderSyncTestPasses("32363", PerformPublicFolderSync);
         }
@@ -978,7 +976,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32364()
+        public void PublicFolder_Test32364()
         {
             AssertPublicFolderSyncTestPasses("32364", PerformPublicFolderSync);
         }
@@ -987,7 +985,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32366()
+        public void PublicFolder_Test32366()
         {
             AssertPublicFolderSyncTestPasses("32366", PerformPublicFolderSync);
         }
@@ -996,7 +994,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32369()
+        public void PublicFolder_Test32369()
         {
             AssertPublicFolderSyncTestPasses("32369", PerformPublicFolderSync);
         }
@@ -1005,7 +1003,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test32370()
+        public void PublicFolder_Test32370()
         {
             AssertPublicFolderSyncTestPasses("32370", PerformPublicFolderSync);
         }
@@ -1014,7 +1012,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test34504()
+        public void PublicFolder_Test34504()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -1028,7 +1026,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test34505()
+        public void PublicFolder_Test34505()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -1042,21 +1040,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test34507()
-        {
-            var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
-            var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
-            var source2 = new KeyValuePair<string, object>("SecondSourcePermission", _sourceMailboxExtra2);
-            var target2 = new KeyValuePair<string, object>("SecondTargetPermission", _targetMailboxExtra2);
-
-            AssertPublicFolderSyncTestPasses("34507", PerformPublicFolderSync, source1, target1, source2, target2);
-        }
-
-        [Test]
-        [Category("MailEngine")]
-        [Category("PublicFolder")]
-        [Category("Permissions")]
-        public void PublicFolder_PS_Test34508()
+        public void PublicFolder_Test34508()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -1070,7 +1054,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test34510()
+        public void PublicFolder_Test34510()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -1084,7 +1068,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test34519()
+        public void PublicFolder_Test34519()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -1098,7 +1082,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test34520()
+        public void PublicFolder_Test34520()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -1112,7 +1096,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test34521()
+        public void PublicFolder_Test34521()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -1126,7 +1110,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test34522()
+        public void PublicFolder_Test34522()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -1140,7 +1124,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test34523()
+        public void PublicFolder_Test34523()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -1154,7 +1138,7 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Permissions")]
-        public void PublicFolder_PS_Test34524()
+        public void PublicFolder_Test34524()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -1168,89 +1152,77 @@ namespace BinaryTree.Power365.Test.MailEngine
         [Category("MailEngine")]
         [Category("PublicFolder")]
         [Category("Sync")]
-        public void PublicFolder_PS_Test36315()
+        public void PublicFolder_Test36315()
         {
             AssertPublicFolderSyncTestPasses("36315", PerformPublicFolderSync);
         }
 
-        [Test]
-        [Category("MailEngine")]
-        [Category("PublicFolder")]
-        [Category("Permissions")]
-        public void PublicFolder_PS_Test39557()
-        {
-            var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
-            var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
-            var source2 = new KeyValuePair<string, object>("SecondSourcePermission", _sourceMailboxExtra2);
-            var target2 = new KeyValuePair<string, object>("SecondTargetPermission", _targetMailboxExtra2);
-
-            AssertPublicFolderSyncTestPasses("39557", PerformPublicFolderSync, source1, target1, source2, target2);
-        }
-
-        [Test]
-        [Category("MailEngine")]
-        [Category("PublicFolder")]
-        [Category("Sync")]
-        public void PublicFolder_PS_Test46843()
-        {
-            AssertPublicFolderSyncTestPasses("46843", PerformPublicFolderSync);
-        }
 
         #endregion
-        
-        private void ArchivePublicFolder(string folderPath, ManagePublicFoldersPage managePublicFoldersPage)
+            
+        private void PerformPublicFolderSync(string sourceFolder)
         {
-            managePublicFoldersPage.PublicFolders.ClickRowByValue(folderPath);
-            managePublicFoldersPage.PerformAction(ActionType.Archive);
-            managePublicFoldersPage.ConfirmAction();
-        }
-
-        private void PerformPublicFolderSync(string testFolder, ManagePublicFoldersPage managePublicFoldersPage)
-        {
-            if (!managePublicFoldersPage.IsPublicFolderState(testFolder, StateType.Ready, 10 * 60, 10))
-                throw new Exception(string.Format("Public Folder: '{0}' failed to reach Ready state.", testFolder));
-
-            managePublicFoldersPage.PublicFolders.ClickRowByValue(testFolder);
-            managePublicFoldersPage.PerformAction(ActionType.Sync);
-            managePublicFoldersPage.ConfirmAction();
-
-            if (!managePublicFoldersPage.IsPublicFolderState(testFolder, StateType.Syncing, 10 * 60, 10))
-                throw new Exception(string.Format("Public Folder: '{0}' failed to reach Syncing state.", testFolder));
-
-            if(!managePublicFoldersPage.IsPublicFolderAnyState(testFolder, new[] { StateType.SyncError, StateType.Ready }, 15 * 60, 30))
-                throw new Exception(string.Format("Public Folder: '{0}' failed to complete Sync."));
-        }
-        
-        private void AssertPublicFolderSyncTestPasses(string testId, Action<string, ManagePublicFoldersPage> userInterfaceActions, params KeyValuePair<string, object>[] parameters)
-        {
-            var rootFolder = "\\Automation\\Tests";
-            var folderPath = string.Format("\\Automation\\Tests\\{0}", testId);
-            //spin up the browser 
-            var browser = Automation.Browser;
-
-            RunScript("Resources/PowerShell/PublicFolder.PrepareFolderPair.ps1",
-                   $" -sourceLogin {_sourceAdminUser}" +
-                   $" -sourcePassword {_sourceAdminPassword}" +
-                   $" -targetLogin {_targetAdminUser}" +
-                   $" -targetPassword {_targetAdminPassword}" +
-                   $" -folderPath {folderPath}", false);
+            var targetFolder = "\\Automation\\Tests";
             
             var addPublicFolderWorkflow = Automation.Common
                 .SingIn(_signInUser, _signInPassword)
+                .MigrateAndIntegrateSelect()
                 .ClientSelect(_clientName)
                 .ProjectSelect(_projectName)
                 .PublicFoldersEdit()
                 .GetPage<ManagePublicFoldersPage>()
                 .AddPublicFolderMigration();
 
-            var managePublicFoldersPage = addPublicFolderWorkflow
-                .ChooseFolders()
-                .TenantPair(_sourceTenant, _targetTenant)
-                .PathMapping(folderPath, rootFolder)
-                .SyncScope(false)
-                .OnDemand()
-                .Conflicts(false)
-                .Submit();
+            ManagePublicFoldersPage managePublicFoldersPage = null;
+            try
+            {
+                managePublicFoldersPage = addPublicFolderWorkflow
+                    .ChooseFolders()
+                    .TenantPair(_sourceTenant, _targetTenant)
+                    .PathMapping(sourceFolder, targetFolder)
+                    .SyncScope(false)
+                    .OnDemand()
+                    .Conflicts(false)
+                    .Submit();
+
+                if (!managePublicFoldersPage.PublicFolders.PageToRow(sourceFolder))
+                    throw new Exception(string.Format("Could not find Public Folder: {0}", sourceFolder));
+
+                if (!managePublicFoldersPage.IsPublicFolderState(sourceFolder, StateType.Ready, 10 * 60, 10))
+                    throw new Exception(string.Format("Public Folder: '{0}' failed to reach Ready state.", sourceFolder));
+
+                managePublicFoldersPage.PublicFolders.ClickRowByValue(sourceFolder);
+                managePublicFoldersPage.PerformAction(ActionType.Sync);
+                managePublicFoldersPage.ConfirmAction();
+
+                if (!managePublicFoldersPage.IsPublicFolderState(sourceFolder, StateType.Syncing, 10 * 60, 10))
+                    throw new Exception(string.Format("Public Folder: '{0}' failed to reach Syncing state.", sourceFolder));
+
+                if (!managePublicFoldersPage.IsPublicFolderAnyState(sourceFolder, new[] { StateType.SyncError, StateType.Ready }, 15 * 60, 30))
+                    throw new Exception(string.Format("Public Folder: '{0}' failed to complete Sync."));
+            }
+            finally
+            {
+                if(managePublicFoldersPage != null)
+                {
+                    Logger.Debug(string.Format("Archiving migration: {0}", sourceFolder));
+                    managePublicFoldersPage.PublicFolders.ClickRowByValue(sourceFolder);
+                    managePublicFoldersPage.PerformAction(ActionType.Archive);
+                    managePublicFoldersPage.ConfirmAction();
+                }
+                Automation.ResetBrowser();
+            }
+        }
+        
+        private void AssertPublicFolderSyncTestPasses(string testId, Action<string> userInterfaceActions, params KeyValuePair<string, object>[] parameters)
+        {
+            var folderPath = string.Format("\\Automation\\Tests\\{0}", testId);
+            RunScript("Resources/PowerShell/PublicFolder.PrepareFolderPair.ps1",
+                   $" -sourceLogin {_sourceAdminUser}" +
+                   $" -sourcePassword {_sourceAdminPassword}" +
+                   $" -targetLogin {_targetAdminUser}" +
+                   $" -targetPassword {_targetAdminPassword}" +
+                   $" -folderPath {folderPath}", false);
             
             var sourceFolderPath = string.Format("\\Automation\\Tests\\{0}", testId);
             var sourceFolderPathParam = new KeyValuePair<string, object>("RootPath", sourceFolderPath);
@@ -1267,22 +1239,42 @@ namespace BinaryTree.Power365.Test.MailEngine
 
             var powerShell = GetPowerShellSession();
 
+            powerShell.Streams.Information.DataAdded += (s, e) =>
+            {
+                if (Logger.IsInfoEnabled)
+                    Logger.Info(powerShell.Streams.Information[e.Index]);
+            };
+
+            powerShell.Streams.Debug.DataAdded += (s, e) =>
+            {
+                if (Logger.IsDebugEnabled)
+                    Logger.Debug(powerShell.Streams.Debug[e.Index]);
+            };
+
+            powerShell.Streams.Progress.DataAdded += (s, e) =>
+            {
+                if (Logger.IsDebugEnabled)
+                    Logger.Debug(powerShell.Streams.Progress[e.Index]);
+            };
+
+            powerShell.Streams.Error.DataAdded += (s, e) =>
+            {
+                if(Logger.IsErrorEnabled)
+                    Logger.Error(powerShell.Streams.Error[e.Index]);
+            };
+            
             try
             {
                 ConnectToMailboxes(powerShell, _sourceAdminUser, _sourceAdminPassword, _targetAdminUser, _targetAdminPassword, _sourceMailbox, _targetMailbox, _url, _url);
-                AssertTestPasses(powerShell, testId, folderPath, managePublicFoldersPage, userInterfaceActions, paramArray);
-            }
-            catch (RetryException)
-            {
-                AssertTestPasses(powerShell, testId, folderPath, managePublicFoldersPage, userInterfaceActions, paramArray);
+                AssertTestPasses(powerShell, testId, folderPath, userInterfaceActions, paramArray);
             }
             catch (Exception e)
             {
                 Logger.Error("Failed to Assert Test Passes", e);
+                throw;
             }
             finally
             {
-                ArchivePublicFolder(folderPath, managePublicFoldersPage);
                 if (powerShell != null)
                     powerShell.Dispose();
             }

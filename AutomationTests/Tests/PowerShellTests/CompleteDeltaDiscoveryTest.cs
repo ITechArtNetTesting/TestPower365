@@ -13,8 +13,8 @@ namespace Product.Tests.PowerShellTests
 		{
 			_testContext = testContext;
 		}
-
-		[TestMethod]
+        // remove from test suit due mo more "Updated mailbox properties for" in log
+        [TestMethod]
 		public void PS_MD_CompleteDeltaDiscoveryTest()
 		{
 		    string login = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user");

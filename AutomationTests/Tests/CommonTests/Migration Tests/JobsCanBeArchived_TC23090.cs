@@ -14,6 +14,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
             _testContext = testContext;
         }
         [TestMethod]
+        [TestCategory("SmokeTest")]
         [TestCategory("Integration")]
         public void JobsCanBeArchived_Integration_23090()
         {
@@ -25,6 +26,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
             UIVerifyJobsCanBeArchived(login, password, client, projectName, entry);
         }
         [TestMethod]
+        [TestCategory("SmokeTest")]
         [TestCategory("MailWithDiscovery")]
         public void JobsCanBeArchived_MD_23090()
         {

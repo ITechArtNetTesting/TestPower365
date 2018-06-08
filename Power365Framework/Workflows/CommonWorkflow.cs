@@ -3,6 +3,7 @@ using BinaryTree.Power365.AutomationFramework.Pages;
 using System;
 using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Extensions;
+using log4net;
 
 namespace BinaryTree.Power365.AutomationFramework.Workflows
 {
@@ -11,7 +12,7 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
         private readonly HomePage _homePage;
         
         public CommonWorkflow(HomePage homePage, IWebDriver webDriver) 
-            : base(homePage, webDriver)
+            : base(LogManager.GetLogger(typeof(CommonWorkflow)), homePage, webDriver)
         {
             _homePage = homePage;
         }
@@ -39,8 +40,8 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
 
         public CommonWorkflow MigrateAndIntegrateSelect()
         {
-            var startPage = GetCurrentPage<StartPage>();
-            CurrentPage = startPage.ClickMigrateAndIntegrateButton();
+            var landingPage = GetCurrentPage<LandingPage>();
+            CurrentPage = landingPage.ClickMigrateAndIntegrateButton();
             return this;
         }
 

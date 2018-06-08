@@ -19,7 +19,9 @@ namespace Product.Tests.MailOnlyTests.MigrationTests
             _testContext = testContext;
         }
         [TestMethod]
+        [TestCategory("SmokeTest")]
         [TestCategory("MailWithDiscovery")]
+        [TestCategory("Powershell")]
         [TestCategory("Powershell")]
         public void Automation_MO_RollbackTest()
         {

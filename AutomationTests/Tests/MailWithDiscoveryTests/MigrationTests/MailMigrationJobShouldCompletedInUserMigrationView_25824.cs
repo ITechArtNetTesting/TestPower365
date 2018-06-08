@@ -37,6 +37,8 @@ namespace Product.Tests.MailWithDiscoveryTests.MigrationTests
         }
 
         [TestMethod]
+        [TestCategory("SmokeTest")]
+        [TestCategory("UI")]
         [TestCategory("MailWithDiscovery")]
         public void MigrationJobShouldCompleted_InUserMigrationView_25824()
         {

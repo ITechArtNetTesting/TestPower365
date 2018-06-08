@@ -19,8 +19,12 @@ namespace Product.Tests.IntegrationTests
 		[DllImport("kernel32.dll", SetLastError = true)]
 		public static extern bool Wow64DisableWow64FsRedirection(ref IntPtr ptr);
         
-		[TestMethod] 
-		public void Automation_IN_PS_PrepareTest()
+		[TestMethod]
+        [TestCategory("SmokeTest")]
+        [TestCategory("Integration")]
+        [TestCategory("Prepare")]
+        [TestCategory("Sync")]
+        public void Automation_IN_PS_PrepareTest()
 		{
 		    string targetEntry = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='entry1']/..//target");
             string userName = RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//user");

@@ -1,15 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using log4net;
+﻿using System;
 using System.Runtime.InteropServices;
 using BinaryTree.Power365.AutomationFramework;
 using BinaryTree.Power365.AutomationFramework.Enums;
 using IO = System.IO;
+using NUnit.Framework;
 
 namespace BinaryTree.Power365.Test.MailEngine
 {
-    [TestClass]
-    public class AddTest : PowershellTestBase
+    [TestFixture]
+    public class AddTest : PowerShellTestBase
     {
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool Wow64DisableWow64FsRedirection(ref IntPtr ptr);
@@ -36,8 +35,8 @@ namespace BinaryTree.Power365.Test.MailEngine
         public AddTest() 
             : base() { }
 
-        [TestInitialize]
-        public void Initialize()
+        [SetUp]
+        public void TestSetUp()
         {
             var settings = Automation.Settings;
 
@@ -52,8 +51,8 @@ namespace BinaryTree.Power365.Test.MailEngine
             var sourceTenant = settings.GetByReference<Tenant>(project.Source);
             var targetTenant = settings.GetByReference<Tenant>(project.Target);
 
-            var sourceCredential = sourceTenant.GetByReference<Credential>("psuser");
-            var targetCredential = targetTenant.GetByReference<Credential>("psuser");
+            var sourceCredential = sourceTenant.GetByReference<Credential>("ps1");
+            var targetCredential = targetTenant.GetByReference<Credential>("ps1");
 
             _sourceAdminUser = sourceCredential.Username;
             _sourceAdminPassword = sourceCredential.Password;
@@ -71,20 +70,23 @@ namespace BinaryTree.Power365.Test.MailEngine
 
             _stopFile = IO.Path.Combine(IO.Path.GetTempPath(), IO.Path.GetRandomFileName());
         }
-
-
-        [TestMethod]
-        [TestCategory("Powershell")]
-        public void Automation_PS_MO_AddTest()
+        
+        [Test]
+        [Category("MailOnly")]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void Mailbox_AddTests()
         {
-            RunScript("AddTest.ps1", $" -slogin {_sourceAdminUser}" +
-                                    $" -spassword {_sourceAdminPassword}" +
-                                    $" -tlogin {_targetAdminUser}" +
-                                    $" -tpassword {_targetAdminPassword}" +
-                                    $" -smailbox {_sourceMailbox}" +
-                                    $" -tmailbox {_targetMailbox}" +
-                                    $" -StopFilePath1 {_stopFile}",
-                                    _is32Bit);
+            RunScript("Resources/PowerShell/MailEngine.AddTests.ps1", 
+                    $" -slogin {_sourceAdminUser}" +
+                    $" -spassword {_sourceAdminPassword}" +
+                    $" -tlogin {_targetAdminUser}" +
+                    $" -tpassword {_targetAdminPassword}" +
+                    $" -smailbox {_sourceMailbox}" +
+                    $" -tmailbox {_targetMailbox}" +
+                    $" -StopFilePath1 {_stopFile}",
+                    _is32Bit);
         }
 
         protected override void ScriptOutputHandler(string line, bool isError = false)
@@ -105,6 +107,8 @@ namespace BinaryTree.Power365.Test.MailEngine
                         .UsersValidateState(_sourceMailbox, StateType.Synced);
 
                 IO.File.Create(_stopFile).Dispose();
+
+                Automation.ResetBrowser();
             }
         }
     }

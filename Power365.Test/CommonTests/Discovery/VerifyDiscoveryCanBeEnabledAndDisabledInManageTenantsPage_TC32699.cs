@@ -6,7 +6,8 @@ using NUnit.Framework;
 namespace BinaryTree.Power365.Test.CommonTests.Discovery
 {
     [TestFixture]
-    public class VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage_TC32699:TestBase
+    [Parallelizable(ParallelScope.Children)]
+    class VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage_TC32699:TestBase
     {
         public VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage_TC32699() : base() { }
      
@@ -42,8 +43,9 @@ namespace BinaryTree.Power365.Test.CommonTests.Discovery
 
 
         [Test]
-        [Category("MailWithDiscovery")]
+        [Category("SmokeTest")]
         [Category("UI")]
+        [Category("MailWithDiscovery")]
         [Category("Discovery")]
         public void DiscoveryCanBeEnabledAndDisabledInManageTenantsPage_MD_32699()
         {
@@ -51,8 +53,9 @@ namespace BinaryTree.Power365.Test.CommonTests.Discovery
         }
 
         [Test]
-        [Category("Integration")]
+        [Category("SmokeTest")]
         [Category("UI")]
+        [Category("Integration")]
         [Category("Discovery")]
         public void DiscoveryCanBeEnabledAndDisabledInManageTenantsPage_Integration_32699()
         {

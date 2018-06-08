@@ -37,7 +37,8 @@ namespace Product.Tests.MailWithDiscoveryTests.MigrationTests
         }
 
         [TestMethod]
-        [TestCategory("MailWithDiscovery")] 
+        [TestCategory("MailWithDiscovery")]
+        [TestCategory("UI")]
         public void MigrationJobShouldCompleted_inDetailView_22982()
         {
             LoginAndSelectRole(login, password, client);

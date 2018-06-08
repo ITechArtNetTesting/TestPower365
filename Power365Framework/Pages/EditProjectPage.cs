@@ -1,5 +1,5 @@
-﻿using BinaryTree.Power365.AutomationFramework.Elements;
-using BinaryTree.Power365.AutomationFramework.Workflows;
+﻿using BinaryTree.Power365.AutomationFramework.Enums;
+using log4net;
 using OpenQA.Selenium;
 using System;
 
@@ -88,9 +88,8 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private readonly By _publicFoldersSelectFileButton = By.XPath("//button[contains(@data-bind, 'filesSelected')]");
         
         public EditProjectPage(IWebDriver webDriver) 
-            : base(_locator, webDriver) { }
+            : base(LogManager.GetLogger(typeof(EditProjectPage)), _locator, webDriver) { }
       
-
         public void SelectProjectType(ProjectType projectType)
         {
             By projectRadio = null;
@@ -166,11 +165,10 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             firstMachGroup.Click();
         }
 
-        public void AddADGroupName(String groupName)
+        public void AddADGroupName(string groupName)
         {
             var discoveryGroupDropdownText = FindVisibleElement(_discoveryGroupDropdownText);
             discoveryGroupDropdownText.SendKeys(groupName);
-
         }
 
     }

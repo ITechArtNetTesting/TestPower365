@@ -83,7 +83,7 @@ function Write-Settings()
     Write-Host ("")
 }
 
-function Start-AzureADSyncAndWait($session)
+function Start-AzureADSyncAndWaitWithSyncSchedule($session)
 {
     Invoke-Command -Session $session -ScriptBlock { 
 
@@ -135,6 +135,32 @@ function Start-AzureADSyncAndWait($session)
             Start-Sleep -Seconds 10
         }
         while($inProgress)
+    }
+}
+
+
+function Start-AzureADSyncAndWait($session)
+{
+    Invoke-Command -Session $session -ScriptBlock { 
+		$result = $null
+
+		do
+		{
+			try
+			{	
+				Write-Host "Start Sync"
+				$result = Start-ADSyncSyncCycle -PolicyType Delta
+				Write-Host "Sync Started"
+			}
+			catch
+			{
+
+				Write-Host $_
+				Write-Host "Busy - Sleeping..."
+				Start-Sleep -s 60
+			}
+		}
+		while(!$result)
     }
 }
 
@@ -250,51 +276,51 @@ try
 
 	Write-Host("Sleeping for $($azureAdSyncDelaySec) seconds, waiting for Azure AD Sync...");
 
-	Start-Sleep -Seconds $azureAdSyncDelaySec
+	#Start-Sleep -Seconds $azureAdSyncDelaySec
 
 	#endregion
 
-	##region Source Azure AD Sync
-	#Write-Host("Setting Trusted Hosts")
- #   $winRMSettings = [string]::Format('@{{TrustedHosts="{0}"}}', $sourceAzureAdSyncServer)
- #   winrm set winrm/config/client $winRMSettings
+	#region Source Azure AD Sync
+	Write-Host("Setting Trusted Hosts")
+    $winRMSettings = [string]::Format('@{{TrustedHosts="{0}"}}', $sourceAzureAdSyncServer)
+    winrm set winrm/config/client $winRMSettings
 
-	#Write-Host("Connecting to Source Azure AD Sync")
- #   $sourceAzureAdSyncSession = New-PSSession -ErrorAction Stop -ComputerName $sourceAzureAdSyncServer -Credential $sourceAzureAdSyncCredentials -SessionOption $sessionOptions
+	Write-Host("Connecting to Source Azure AD Sync")
+    $sourceAzureAdSyncSession = New-PSSession -ErrorAction Stop -ComputerName $sourceAzureAdSyncServer -Credential $sourceAzureAdSyncCredentials -SessionOption $sessionOptions
 
- #   if(!$simulationMode)
- #   {
- #       Start-AzureADSyncAndWait $sourceAzureAdSyncSession
- #   }
- #   else
- #   {
- #       Write-Host("SIMULATION: Invoking Azure AD Delta Sync")
- #   }
- #   Write-Host ("Removing PSSession sourceAzureAdSyncSession")
- #   Remove-PSSession $sourceAzureAdSyncSession
- #   $sourceAzureAdSyncSession = $null
-	##endregion
+    if(!$simulationMode)
+    {
+        Start-AzureADSyncAndWait $sourceAzureAdSyncSession
+    }
+    else
+    {
+        Write-Host("SIMULATION: Invoking Azure AD Delta Sync")
+    }
+    Write-Host ("Removing PSSession sourceAzureAdSyncSession")
+    Remove-PSSession $sourceAzureAdSyncSession
+    $sourceAzureAdSyncSession = $null
+	#endregion
 
-	##region Target Azure AD Sync
-	#Write-Host("Setting Trusted Hosts")
- #   $winRMSettings = [string]::Format('@{{TrustedHosts="{0}"}}', $targetAzureAdSyncServer)
- #   winrm set winrm/config/client $winRMSettings
+	#region Target Azure AD Sync
+	Write-Host("Setting Trusted Hosts")
+    $winRMSettings = [string]::Format('@{{TrustedHosts="{0}"}}', $targetAzureAdSyncServer)
+    winrm set winrm/config/client $winRMSettings
 
-	#Write-Host("Connecting to Target Azure AD Sync")
- #   $targetAzureAdSyncSession = New-PSSession -ErrorAction Stop -ComputerName $targetAzureAdSyncServer -Credential $targetAzureAdSyncCredentials -SessionOption $sessionOptions
+	Write-Host("Connecting to Target Azure AD Sync")
+    $targetAzureAdSyncSession = New-PSSession -ErrorAction Stop -ComputerName $targetAzureAdSyncServer -Credential $targetAzureAdSyncCredentials -SessionOption $sessionOptions
 
- #   if(!$simulationMode)
- #   {
- #       Start-AzureADSyncAndWait $targetAzureAdSyncSession
- #   }
- #   else
- #   {
- #       Write-Host("SIMULATION: Invoking Azure AD Delta Sync")
- #   }
- #   Write-Host ("Removing PSSession targetAzureAdSyncSession")
- #   Remove-PSSession $targetAzureAdSyncSession
- #   $targetAzureAdSyncSession = $null
-	##endregion
+    if(!$simulationMode)
+    {
+        Start-AzureADSyncAndWait $targetAzureAdSyncSession
+    }
+    else
+    {
+        Write-Host("SIMULATION: Invoking Azure AD Delta Sync")
+    }
+    Write-Host ("Removing PSSession targetAzureAdSyncSession")
+    Remove-PSSession $targetAzureAdSyncSession
+    $targetAzureAdSyncSession = $null
+	#endregion
 }
 catch
 {

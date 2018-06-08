@@ -1,24 +1,17 @@
 ﻿using BinaryTree.Power365.AutomationFramework;
-using BinaryTree.Power365.AutomationFramework.Elements;
 using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Pages;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Management.Automation;
-using System.Management.Automation.Runspaces;
-using System.Net;
 
 
 namespace BinaryTree.Power365.Test.MailEngine
 {
-    [TestClass]
+    [TestFixture]
+    [Parallelizable(ParallelScope.Fixtures)]
     public class MailEngineTest : MailEngineTestBase
     {
-        private static Runspace _runspace;
-        private static PowerShell _powerShell;
-        
         private string _client;
         private string _username;
         private string _password;
@@ -38,25 +31,19 @@ namespace BinaryTree.Power365.Test.MailEngine
         private string _targetMailboxExtra2;
 
         private string _url;
-        
-        private static bool _connectedToMailboxes;
-
-        private ManageUsersPage _manageUsersPage;
 
         public MailEngineTest()
             : base() { }
 
-        [ClassInitialize]
-        public static void ClassInit(TestContext testContext)
+        [OneTimeSetUp]
+        public void OneTimeTestSetUp()
         {
             InitialStateSetup();
         }
 
-        [TestInitialize]
-        public void Initialize()
+        [SetUp]
+        public void TestSetUp()
         {
-            _powerShell = GetPowerShellSession();
-
             var client = Automation.Settings.GetByReference<Client>("client2");
             var project = client.GetByReference<Project>("project1");
             var sourceTenant = Automation.Settings.GetByReference<Tenant>(project.Source);
@@ -90,191 +77,187 @@ namespace BinaryTree.Power365.Test.MailEngine
             _targetMailboxExtra2 = userMigration3.Target;
             
             _url = "https://outlook.office365.com/EWS/Exchange.asmx";
-
-            ConnectToMailboxes(_powerShell, _sourceAdminUser, _sourceAdminPassword, _targetAdminUser, _targetAdminPassword, _sourceMailbox, _targetMailbox, _url, _url);
         }
 
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            _powerShell.Dispose();
-        }
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Sync")]
-        public void MailEngine_PS_Test22384()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void Mailbox_Test22384()
         {
             AssertSyncTestPasses("22384", PerformSync);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Sync")]
-        public void MailEngine_PS_Test22490()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void Mailbox_Test22490()
         {
             AssertSyncTestPasses("22490", PerformSync);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Sync")]
-        public void MailEngine_PS_Test22491()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void Mailbox_Test22491()
         {
             AssertSyncTestPasses("22491", PerformSync);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Sync")]
-        public void MailEngine_PS_Test22497()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void Mailbox_Test22497()
         {
             AssertSyncTestPasses("22497", PerformSync);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Sync")]
-        public void MailEngine_PS_Test22504()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void Mailbox_Test22504()
         {
             AssertSyncTestPasses("22504", PerformSync);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Sync")]
-        public void MailEngine_PS_Test22507()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void Mailbox_Test22507()
         {
             AssertSyncTestPasses("22507", PerformSync);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Sync")]
-        public void MailEngine_PS_Test22513()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void Mailbox_Test22513()
         {
             AssertSyncTestPasses("22513", PerformSync);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Sync")]
-        public void MailEngine_PS_Test22623()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void Mailbox_Test22623()
         {
             AssertSyncTestPasses("22623", PerformSync);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Sync")]
-        public void MailEngine_PS_Test22624()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void Mailbox_Test22624()
         {
             AssertSyncTestPasses("22624", PerformSync);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Sync")]
-        public void MailEngine_PS_Test22625()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void Mailbox_Test22625()
         {
             AssertSyncTestPasses("22625", PerformSync);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Sync")]
-        public void MailEngine_PS_Test26765()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void Mailbox_Test26765()
         {
             AssertSyncTestPasses("26765", PerformSync);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Rollback")]
-        public void MailEngine_PS_Test39541()
+        [Test]
+        [Category("SmokeTest")]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Rollback")]
+        public void Mailbox_Test39541()
         {
             AssertSyncTestPasses("39541", PerformSyncWithRollback);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Rollback")]
-        public void MailEngine_PS_Test39544()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Rollback")]
+        public void Mailbox_Test39544()
         {
             AssertSyncTestPasses("39544", PerformSyncWithRollback);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Sync")]
-        public void MailEngine_PS_Test39545()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void Mailbox_Test39545()
         {
             AssertSyncTestPasses("39545", PerformSync);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Rollback")]
-        public void MailEngine_PS_Test39550()
+        [Test]
+        [Category("SmokeTest")]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Rollback")]
+        public void Mailbox_Test39550()
         {
             AssertSyncTestPasses("39550", PerformSyncWithRollback);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Sync")]
-        public void MailEngine_PS_Test39551()
+        [Test]
+        [Category("SmokeTest")]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void Mailbox_Test39551()
         {
             AssertSyncTestPasses("39551", PerformSync);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Rollback")]
-        public void MailEngine_PS_Test39570()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Rollback")]
+        public void Mailbox_Test39570()
         {
             AssertSyncTestPasses("39570", PerformSyncWithRollback);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Sync")]
-        public void MailEngine_PS_Test48980()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void Mailbox_Test48980()
         {
             AssertSyncTestPasses("48980", PerformSync);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Sync")]
-        public void MailEngine_PS_Test48983()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void Mailbox_Test48983()
         {
             AssertSyncTestPasses("48983", PerformSync);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Permissions")]
-        public void MailEngine_PS_Test22500()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Permissions")]
+        public void Mailbox_Test22500()
         {
             var source = new KeyValuePair<string, object>("SourcePermission", _sourceMailboxExtra1);
             var target = new KeyValuePair<string, object>("TargetPermission", _targetMailboxExtra1);
@@ -282,11 +265,11 @@ namespace BinaryTree.Power365.Test.MailEngine
             AssertSyncTestPasses("22500", PerformSync, source, target);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Permissions")]
-        public void MailEngine_PS_Test22516()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Permissions")]
+        public void Mailbox_Test22516()
         {
             var source = new KeyValuePair<string, object>("SourceAddress", _sourceMailboxExtra1);
             var target = new KeyValuePair<string, object>("TargetAddress", _targetMailboxExtra1);
@@ -294,11 +277,11 @@ namespace BinaryTree.Power365.Test.MailEngine
             AssertSyncTestPasses("22516", PerformSync, source, target);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Permissions")]
-        public void MailEngine_PS_Test22537()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Permissions")]
+        public void Mailbox_Test22537()
         {
             var source = new KeyValuePair<string, object>("SourceAddress", _sourceMailboxExtra1);
             var target = new KeyValuePair<string, object>("TargetAddress", _targetMailboxExtra1);
@@ -306,11 +289,11 @@ namespace BinaryTree.Power365.Test.MailEngine
             AssertSyncTestPasses("22537", PerformSync, source, target);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Permissions")]
-        public void MailEngine_PS_Test22546()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Permissions")]
+        public void Mailbox_Test22546()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -320,11 +303,11 @@ namespace BinaryTree.Power365.Test.MailEngine
             AssertSyncTestPasses("22546", PerformSync, source1, target1, source2, target2);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Permissions")]
-        public void MailEngine_PS_Test22728()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Permissions")]
+        public void Mailbox_Test22728()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -334,11 +317,11 @@ namespace BinaryTree.Power365.Test.MailEngine
             AssertSyncTestPasses("22728", PerformSync, source1, target1, source2, target2);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Permissions")]
-        public void MailEngine_PS_Test37613()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Permissions")]
+        public void Mailbox_Test37613()
         {
             var source = new KeyValuePair<string, object>("SourcePermission", _sourceMailboxExtra1);
             var target = new KeyValuePair<string, object>("TargetPermission", _targetMailboxExtra1);
@@ -346,11 +329,11 @@ namespace BinaryTree.Power365.Test.MailEngine
             AssertSyncTestPasses("37613", PerformSync, source, target);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Permissions")]
-        public void MailEngine_PS_Test37613b()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Permissions")]
+        public void Mailbox_Test37613b()
         {
             var source = new KeyValuePair<string, object>("SourcePermission", _sourceMailboxExtra1);
             var target = new KeyValuePair<string, object>("TargetPermission", _targetMailboxExtra1);
@@ -358,11 +341,11 @@ namespace BinaryTree.Power365.Test.MailEngine
             AssertSyncTestPasses("37613b", PerformSync, source, target);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Permissions")]
-        public void MailEngine_PS_Test37613c()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Permissions")]
+        public void Mailbox_Test37613c()
         {
             var source = new KeyValuePair<string, object>("SourcePermission", _sourceMailboxExtra1);
             var target = new KeyValuePair<string, object>("TargetPermission", _targetMailboxExtra1);
@@ -370,11 +353,11 @@ namespace BinaryTree.Power365.Test.MailEngine
             AssertSyncTestPasses("37613c", PerformSync, source, target);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Permissions")]
-        public void MailEngine_PS_Test37614()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Permissions")]
+        public void Mailbox_Test37614()
         {
             var source1 = new KeyValuePair<string, object>("SourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("TargetPermission", _targetMailboxExtra1);
@@ -384,11 +367,28 @@ namespace BinaryTree.Power365.Test.MailEngine
             AssertSyncTestPasses("37614", PerformSync, source1, target1, source2, target2);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Permissions")]
-        public void MailEngine_PS_Test48974()
+
+        [Test]
+        [Category("SmokeTest")]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Permissions")]
+        public void Mailbox_Test39557()
+        {
+            var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
+            var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
+            var source2 = new KeyValuePair<string, object>("SecondSourcePermission", _sourceMailboxExtra2);
+            var target2 = new KeyValuePair<string, object>("SecondTargetPermission", _targetMailboxExtra2);
+
+            AssertSyncTestPasses("39557", PerformSync, source1, target1, source2, target2);
+        }
+
+
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Permissions")]
+        public void Mailbox_Test48974()
         {
             var source1 = new KeyValuePair<string, object>("FirstSourcePermission", _sourceMailboxExtra1);
             var target1 = new KeyValuePair<string, object>("FirstTargetPermission", _targetMailboxExtra1);
@@ -397,27 +397,36 @@ namespace BinaryTree.Power365.Test.MailEngine
 
             AssertSyncTestPasses("48974", PerformSync, source1, target1, source2, target2);
         }
-
-        //New
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Sync")]
-        public void MailEngine_PS_Test45249a()
+        
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void Mailbox_Test45249a()
         {
             AssertSyncTestPasses("45249a", PerformSync);
         }
 
-        [TestMethod]
-        [TestCategory("MailEngine")]
-        [TestCategory("Mailbox")]
-        [TestCategory("Sync")]
-        public void MailEngine_PS_Test45249b()
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void Mailbox_Test45249b()
         {
             AssertSyncTestPasses("45249b", PerformSync);
         }
 
-        private void PerformSync(string user, ManageUsersPage manageUsersPage)
+
+        [Test]
+        [Category("MailEngine")]
+        [Category("Mailbox")]
+        [Category("Sync")]
+        public void PublicFolder_Test46843()
+        {
+            AssertSyncTestPasses("46843", PerformSync);
+        }
+
+        private void PerformSync(string user)
         {
             Automation.Common
                 .UsersPerformAction(user, ActionType.Sync)
@@ -425,17 +434,17 @@ namespace BinaryTree.Power365.Test.MailEngine
                 .UsersValidateState(user, StateType.Synced);
         }
 
-        private void PerformSyncWithRollback(string user, ManageUsersPage manageUsersPage)
+        private void PerformSyncWithRollback(string user)
         {
-            PerformSync(user, manageUsersPage);
+            PerformSync(user);
 
             Automation.Common
-                    .UsersPerformRollback(user, false)
-                    .UsersValidateState(user, StateType.RollbackInProgress)
-                    .UsersValidateState(user, StateType.RollbackCompleted);
+                .UsersPerformRollback(user, false)
+                .UsersValidateState(user, StateType.RollbackInProgress)
+                .UsersValidateState(user, StateType.RollbackCompleted);
         }
         
-        private void AssertSyncTestPasses(string testId, Action<string, ManageUsersPage> userInterfaceActions, params KeyValuePair<string, object>[] parameters)
+        private void AssertSyncTestPasses(string testId, Action<string> userInterfaceActions, params KeyValuePair<string, object>[] parameters)
         {
             var manageUsersPage = Automation.Common
                 .SingIn(_username, _password)
@@ -445,7 +454,11 @@ namespace BinaryTree.Power365.Test.MailEngine
                 .UsersEdit()
                 .GetPage<ManageUsersPage>();
 
-            AssertTestPasses(_powerShell, testId, _sourceMailbox, manageUsersPage, userInterfaceActions, parameters);
+            var powerShell = GetPowerShellSession();
+
+            ConnectToMailboxes(powerShell, _sourceAdminUser, _sourceAdminPassword, _targetAdminUser, _targetAdminPassword, _sourceMailbox, _targetMailbox, _url, _url);
+
+            AssertTestPasses(powerShell, testId, _sourceMailbox, userInterfaceActions, parameters);
         }
     }
 }

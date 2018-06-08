@@ -12,7 +12,6 @@ namespace Product.Tests.MailOnlyTests.ImportAndExportTests
     [TestClass]
     public class FixUserActionToApplyMigrationWave_TC33619 : LoginAndConfigureTest
     {
-
         string login;
         string password;
         string client;
@@ -36,26 +35,26 @@ namespace Product.Tests.MailOnlyTests.ImportAndExportTests
 
         }
 
+        //22167
         [TestMethod]
+        [TestCategory("SmokeTest")]
+        [TestCategory("UI")]
         [TestCategory("MailOnly")]
         [TestCategory("Import")]
-        [TestCategory("UI")]
-        //22167
         public void FixUserActionToApplyMigrationWave_33619()
         {
-            
-                LoginAndSelectRole(login, password, client);
-                SelectProject(projectName);
-                User.AtProjectOverviewForm().OpenUsersList();
-                User.AtUsersForm().OpenImportDialog();
-                //Import new file
-                User.AtUsersForm().ChooseFile(fileName2);
-                User.AtUsersForm().ConfirmUploading();
-                User.AtUsersForm().AssertImportSuccessful();
-                User.AtUsersForm().СloseSuccessfulImportWindow();
-                  //Verify count Wave
-                User.AtUsersForm().VerifyLinesCountAndProperties("Wave1", 6);
-                User.AtUsersForm().VerifyLinesCountAndProperties("Wave2", 4);
+            LoginAndSelectRole(login, password, client);
+            SelectProject(projectName);
+            User.AtProjectOverviewForm().OpenUsersList();
+            User.AtUsersForm().OpenImportDialog();
+            //Import new file
+            User.AtUsersForm().ChooseFile(fileName2);
+            User.AtUsersForm().ConfirmUploading();
+            User.AtUsersForm().AssertImportSuccessful();
+            User.AtUsersForm().СloseSuccessfulImportWindow();
+                //Verify count Wave
+            User.AtUsersForm().VerifyLinesCountAndProperties("Wave1", 6);
+            User.AtUsersForm().VerifyLinesCountAndProperties("Wave2", 4);
         }
     }
 }

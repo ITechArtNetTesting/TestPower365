@@ -21,18 +21,17 @@ namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
         {
         }
 
-        public void VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(string clientName)
+        public void VerifyDiscoveryFrequencyHoursMatchesDisplayedNumber(string clientName, string projectName)
         {
             SQLExecuter queryExecuter = new SQLExecuter();
             var clientId = queryExecuter.SelectClientIdByName(clientName);
-
-
+            
             WaitForAjaxLoad();
             var tenantElements = tenants.GetElements();
             foreach (var element in tenantElements)
             {
                 string tenantName = element.FindElement(By.XPath(".//strong")).Text;
-                var sqlFrequency = queryExecuter.SelectDiscoveryFrequencyHours(clientId, tenantName);
+                var sqlFrequency = queryExecuter.SelectDiscoveryFrequencyHours(clientId, tenantName, projectName);                             
                 var uiFrequency = Convert.ToInt32(element.FindElement(By.XPath(".//span[@data-bind='text: discoveryRunInterval']")).Text);
                 Assert.AreEqual(sqlFrequency, uiFrequency,String.Format("Tenant {0}. DiscoveryFrequencyHours does not match with UI value ", tenantName));
             }
@@ -43,7 +42,7 @@ namespace Product.Framework.Forms.NewProjectWizardForms.DiscoveryForms
             var tenantElements = tenants.GetElements();
             foreach (var element in tenantElements)
             {
-                var tenantInput = element.FindElement(By.XPath(".//input"));
+               var tenantInput = element.FindElement(By.XPath(".//input"));
                new Actions(Browser.GetDriver()).MoveToElement(element).Build().Perform();
                element.FindElement(By.XPath(".//input")).Clear();
                element.FindElement(By.XPath(".//input")).SendKeys(Convert.ToString(number));

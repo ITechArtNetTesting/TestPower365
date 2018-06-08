@@ -48,16 +48,31 @@
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Exchange.WebServices, Version=15.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Exchange.WebServices.2.2\lib\40\Microsoft.Exchange.WebServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Exchange.WebServices.Auth, Version=15.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Exchange.WebServices.2.2\lib\40\Microsoft.Exchange.WebServices.Auth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.10.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.10.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.1.2.6\lib\net45\StackExchange.Redis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Management.Automation.dll.10.0.10586.0\lib\net40\System.Management.Automation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <Choose>
@@ -77,38 +92,41 @@
   <ItemGroup>
     <Compile Include="CommonTests\AddressBook\VerifyAddressBookWillBeDisplayedInManageTenants_TC32860.cs" />
     <Compile Include="CommonTests\Discovery\VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage_TC32699.cs" />
+    <Compile Include="CommonTests\Help\HelpLinkUnderGeneralAndTheFootnotesWorks_36709TC.cs" />
     <Compile Include="CommonTests\LandingPage\LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773.cs" />
     <Compile Include="CommonTests\LandingPage\CompletedUserColumnCountLinksToUsersPageWithFilter_TC52577.cs" />
     <Compile Include="CommonTests\MigrationWaves\MigrationWave_ApplyAction_TC30919_33610.cs" />
     <Compile Include="CommonTests\Migration\SubmittingDeltaSyncJobForASyncedUser_TC23091.cs" />
     <Compile Include="CommonTests\Rollback\TheRollbackCountIsDisplayed_TC43335.cs" />
     <Compile Include="CommonTests\ExportAndImport\TheExportButtonExportsUserMigrationRecords_TC45618.cs" />
-    <Compile Include="CommonTests\VerifyTheExportButtonExportsUserMigrationRecords_TC45618.cs" />
     <Compile Include="IntegrationProjectTests\VerifyTenantPageWillProvideDirSyncInformationForSourceTenant_TC31098.cs" />
     <Compile Include="MailOnlyProjectTests\ErrorLogCanBeDownloadedForFailedMigration_TC22168.cs" />
     <Compile Include="Menu\VerifyTheSelectActionOnTheManageErrorsPage_TC34736.cs" />
     <Compile Include="IntegrationProjectTests\PrepareJob_38730.cs" />
+    <Compile Include="MailEngine\CompareTest.cs" />
     <Compile Include="MailEngine\MailEngineTestBase.cs" />
     <Compile Include="MailEngine\PublicFolderTest.cs" />
-    <Compile Include="Menu\HelpURLShouldBeAliasedToBTDomain_TC39025.cs" />
+    <Compile Include="CommonTests\Help\HelpURLShouldBeAliasedToBTDomain_TC39025_36709.cs" />
     <Compile Include="Menu\PossibilityToDeleteProfile_TC32315.cs" />
     <Compile Include="Menu\VerifyTheTabsOnTheManageErrorsPage_TC34718.cs" />
-    <Compile Include="SampleTest.cs" />
+    <Compile Include="Services\EwsService.cs" />
     <Compile Include="Services\MailEngineService.cs" />
     <Compile Include="MailEngine\AddTest.cs" />
     <Compile Include="MailEngine\MailEngineTest.cs" />
     <Compile Include="PowershellTestBase.cs" />
+    <Compile Include="Services\RemoteCacheServices.cs" />
     <Compile Include="Setup\ProjectSetup.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EwsServiceTest.cs" />
+    <Compile Include="TestResourceAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config">
+    <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Resources\ImportFiles\MailOnlyCSVC7toC9SML_TC22168.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Resources\ImportFiles\MailOnlyCSVC7toC9SML-Automation-part1.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -123,6 +141,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\MailEngine\Engine\BinaryTree-T2T.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\MailEngine\Engine\btT2TestUtilPSModule.psd1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\MailEngine\Engine\btT2TPSModule.psd1">
@@ -1036,6 +1057,12 @@
     </None>
     <None Include="Resources\MailEngine\working\064cf757-a755-4a04-b356-f34b8d920df5.csv" />
     <None Include="Resources\MailEngine\working\28e1db4c-6a15-47ad-91d4-45781d2e85f7.csv" />
+    <None Include="Resources\PowerShell\MailEngine.CompareTest.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\PowerShell\MailEngine.AddTests.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\PowerShell\PublicFolder.PrepareFolderPair.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1044,6 +1071,9 @@
     <Content Include="QASettings.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Resources\Attachments\attach.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\MailEngine\Engine\BinaryTree-T2T.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1055,6 +1085,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\MailEngine\Engine\BTCloud.Lib.pdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\MailEngine\Engine\DiffPlex.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\MailEngine\Engine\Logging.dll">
@@ -1120,10 +1153,25 @@
     <Content Include="Resources\MailEngine\Engine\NLog.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\MailEngine\Engine\Redemption.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\MailEngine\Engine\Redemption64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\MailEngine\Engine\System.Management.Automation.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\MailEngine\Engine\System.Spatial.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\MailEngine\Engine\System.Spatial.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\MailEngine\Engine\T2TMigrationTestUtil.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\MailEngine\Engine\T2TMigrationTestUtil.pdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\MailEngine\Microsoft.Exchange.WebServices.dll">
@@ -1131,6 +1179,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutomationServices.PowerShell\AutomationServices.PowerShell.csproj">
+      <Project>{82d890f9-a056-42ad-9cdd-b2012d37ecb2}</Project>
+      <Name>AutomationServices.PowerShell</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AutomationServices.SqlDatabase\AutomationServices.SqlDatabase.csproj">
+      <Project>{1f639aac-7c28-48e5-a33c-214d0a688ea4}</Project>
+      <Name>AutomationServices.SqlDatabase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Power365Framework\Power365Framework.csproj">
       <Project>{f4a99f12-f83f-4a1a-842e-9f17a8393b37}</Project>
       <Name>Power365Framework</Name>
@@ -1138,26 +1194,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\MailEngine\internal\functions\" />
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="Microsoft.Office.Core">
-      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>8</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="VBIDE">
-      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>5</VersionMajor>
-      <VersionMinor>3</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

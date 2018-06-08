@@ -14,9 +14,12 @@ namespace Product.Tests.MailOnlyTests.ImportAndExportTests
 		{
 			_testContext = testContext;
 		}
+
         [TestMethod]
 		[TestCategory("MailOnly")]
+        [TestCategory("SeleniumLegacy")]
         [TestCategory("UI")]
+        [TestCategory("SeleniumLegacy")]
         //22139
         public void Automation_MO_ImportTest()
 		{

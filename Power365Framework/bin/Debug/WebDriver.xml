@@ -500,6 +500,13 @@
             Gets or sets the performance logging preferences for the driver.
             </summary>
         </member>
+        <member name="P:OpenQA.Selenium.Chrome.ChromeOptions.UseSpecCompliantProtocol">
+            <summary>
+            Gets or sets a value indicating whether the <see cref="T:OpenQA.Selenium.Chrome.ChromeDriver" /> instance
+            should use the legacy OSS protocol dialect or a dialect compliant with the W3C
+            WebDriver Specification.
+            </summary>
+        </member>
         <member name="M:OpenQA.Selenium.Chrome.ChromeOptions.AddArgument(System.String)">
             <summary>
             Adds a single argument to the list of arguments to be appended to the Chrome.exe command line.
@@ -1304,6 +1311,31 @@
             Gets or sets a value indicating whether the service should use verbose logging.
             </summary>
         </member>
+        <member name="P:OpenQA.Selenium.Edge.EdgeDriverService.UseSpecCompliantProtocol">
+            <summary>
+            Gets or sets a value indicating whether the <see cref="T:OpenQA.Selenium.Edge.EdgeDriverService" /> instance
+            should use the a protocol dialect compliant with the W3C WebDriver Specification.
+            </summary>
+            <remarks>
+            Setting this property to a non-<see langword="null" /> value for driver
+            executables matched to versions of Windows before the 2018 Fall Creators
+            Update will result in a the driver executable shutting down without
+            execution, and all commands will fail. Do not set this property unless
+            you are certain your version of the MicrosoftWebDriver.exe supports the
+            --w3c and --jwp command-line arguments.
+            </remarks>
+        </member>
+        <member name="P:OpenQA.Selenium.Edge.EdgeDriverService.HasShutdown">
+            <summary>
+            Gets a value indicating whether the service has a shutdown API that can be called to terminate
+            it gracefully before forcing a termination.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Edge.EdgeDriverService.TerminationTimeout">
+            <summary>
+            Gets a value indicating the time to wait for the service to terminate before forcing it to terminate.
+            </summary>
+        </member>
         <member name="P:OpenQA.Selenium.Edge.EdgeDriverService.CommandLineArguments">
             <summary>
             Gets the command-line arguments for the driver service.
@@ -1773,26 +1805,33 @@
         <member name="M:OpenQA.Selenium.Firefox.FirefoxDriver.#ctor(System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxDriver" /> class using the specified path
-            to the directory containing ChromeDriver.exe.
+            to the directory containing geckodriver.exe.
             </summary>
             <param name="geckoDriverDirectory">The full path to the directory containing geckodriver.exe.</param>
         </member>
         <member name="M:OpenQA.Selenium.Firefox.FirefoxDriver.#ctor(System.String,OpenQA.Selenium.Firefox.FirefoxOptions)">
             <summary>
-            Initializes a new instance of the <see cref="!:ChromeDriver" /> class using the specified path
-            to the directory containing ChromeDriver.exe and options.
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxDriver" /> class using the specified path
+            to the directory containing geckodriver.exe and options.
             </summary>
-            <param name="geckoDriverDirectory">The full path to the directory containing ChromeDriver.exe.</param>
-            <param name="options">The <see cref="!:ChromeOptions" /> to be used with the Chrome driver.</param>
+            <param name="geckoDriverDirectory">The full path to the directory containing geckodriver.exe.</param>
+            <param name="options">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxOptions" /> to be used with the Firefox driver.</param>
         </member>
         <member name="M:OpenQA.Selenium.Firefox.FirefoxDriver.#ctor(System.String,OpenQA.Selenium.Firefox.FirefoxOptions,System.TimeSpan)">
             <summary>
-            Initializes a new instance of the <see cref="!:ChromeDriver" /> class using the specified path
-            to the directory containing ChromeDriver.exe, options, and command timeout.
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxDriver" /> class using the specified path
+            to the directory containing geckodriver.exe, options, and command timeout.
             </summary>
-            <param name="geckoDriverDirectory">The full path to the directory containing ChromeDriver.exe.</param>
-            <param name="options">The <see cref="!:ChromeOptions" /> to be used with the Chrome driver.</param>
+            <param name="geckoDriverDirectory">The full path to the directory containing geckodriver.exe.</param>
+            <param name="options">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxOptions" /> to be used with the Firefox driver.</param>
             <param name="commandTimeout">The maximum amount of time to wait for each command.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxDriver.#ctor(OpenQA.Selenium.Firefox.FirefoxDriverService,OpenQA.Selenium.Firefox.FirefoxOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxDriver" /> class using the specified options, driver service, and timeout. Uses the Mozilla-provided Marionette driver implementation.
+            </summary>
+            <param name="service">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxDriverService" /> to use.</param>
+            <param name="options">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxOptions" /> to be used with the Firefox driver.</param>
         </member>
         <member name="M:OpenQA.Selenium.Firefox.FirefoxDriver.#ctor(OpenQA.Selenium.Firefox.FirefoxDriverService,OpenQA.Selenium.Firefox.FirefoxOptions,System.TimeSpan)">
             <summary>
@@ -1826,13 +1865,6 @@
             <summary>
             In derived classes, the <see cref="M:OpenQA.Selenium.Firefox.FirefoxDriver.PrepareEnvironment" /> method prepares the environment for test execution.
             </summary>
-        </member>
-        <member name="M:OpenQA.Selenium.Firefox.FirefoxDriver.CreateElement(System.String)">
-            <summary>
-            Creates a <see cref="T:OpenQA.Selenium.Remote.RemoteWebElement" /> with the specified ID.
-            </summary>
-            <param name="elementId">The ID of this element.</param>
-            <returns>A <see cref="T:OpenQA.Selenium.Remote.RemoteWebElement" /> with the specified ID. For the FirefoxDriver this will be a <see cref="T:OpenQA.Selenium.Firefox.FirefoxWebElement" />.</returns>
         </member>
         <member name="T:OpenQA.Selenium.Firefox.FirefoxDriverCommandExecutor">
             <summary>
@@ -1991,6 +2023,12 @@
             instance of Firefox.
             </summary>
         </member>
+        <member name="P:OpenQA.Selenium.Firefox.FirefoxDriverService.OpenBrowserToolbox">
+            <summary>
+            Gets or sets a value indicating whether to open the Firefox Browser Toolbox
+            when Firefox is launched.
+            </summary>
+        </member>
         <member name="P:OpenQA.Selenium.Firefox.FirefoxDriverService.InitializationTimeout">
             <summary>
             Gets a value indicating the time to wait for an initial connection before timing out.
@@ -2102,12 +2140,13 @@
             Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxOptions" /> class.
             </summary>
         </member>
-        <member name="M:OpenQA.Selenium.Firefox.FirefoxOptions.#ctor(OpenQA.Selenium.Firefox.FirefoxProfile,OpenQA.Selenium.Firefox.FirefoxBinary)">
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxOptions.#ctor(OpenQA.Selenium.Firefox.FirefoxProfile,OpenQA.Selenium.Firefox.FirefoxBinary,OpenQA.Selenium.Remote.DesiredCapabilities)">
             <summary>
             Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxOptions" /> class for the given profile and binary.
             </summary>
             <param name="profile">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxProfile" /> to use in the options.</param>
             <param name="binary">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxBinary" /> to use in the options.</param>
+            <param name="capabilities">The <see cref="T:OpenQA.Selenium.Remote.DesiredCapabilities" /> to copy into the options.</param>
         </member>
         <member name="P:OpenQA.Selenium.Firefox.FirefoxOptions.UseLegacyImplementation">
             <summary>
@@ -3258,6 +3297,11 @@
             Specifies the scroll behavior of elements scrolled into view in the IE driver.
             </summary>
         </member>
+        <member name="F:OpenQA.Selenium.IE.InternetExplorerElementScrollBehavior.Default">
+            <summary>
+            Indicates the behavior is unspecified.
+            </summary>
+        </member>
         <member name="F:OpenQA.Selenium.IE.InternetExplorerElementScrollBehavior.Top">
             <summary>
             Scrolls elements to align with the top of the viewport.
@@ -3833,7 +3877,9 @@
             <param name="theKey">The key to be sent.</param>
             <returns>A self-reference to this <see cref="T:OpenQA.Selenium.Interactions.Actions" />.</returns>
             <exception cref="T:System.ArgumentException">If the key sent is not is not one
-            of <see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, or <see cref="F:OpenQA.Selenium.Keys.Alt" />.</exception>
+            of <see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, <see cref="F:OpenQA.Selenium.Keys.Alt" />,
+            <see cref="F:OpenQA.Selenium.Keys.Meta" />, <see cref="F:OpenQA.Selenium.Keys.Command" />,<see cref="F:OpenQA.Selenium.Keys.LeftAlt" />,
+            <see cref="F:OpenQA.Selenium.Keys.LeftControl" />,<see cref="F:OpenQA.Selenium.Keys.LeftShift" />.</exception>
         </member>
         <member name="M:OpenQA.Selenium.Interactions.Actions.KeyDown(OpenQA.Selenium.IWebElement,System.String)">
             <summary>
@@ -3843,7 +3889,9 @@
             <param name="theKey">The key to be sent.</param>
             <returns>A self-reference to this <see cref="T:OpenQA.Selenium.Interactions.Actions" />.</returns>
             <exception cref="T:System.ArgumentException">If the key sent is not is not one
-            of <see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, or <see cref="F:OpenQA.Selenium.Keys.Alt" />.</exception>
+            of <see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, <see cref="F:OpenQA.Selenium.Keys.Alt" />,
+            <see cref="F:OpenQA.Selenium.Keys.Meta" />, <see cref="F:OpenQA.Selenium.Keys.Command" />,<see cref="F:OpenQA.Selenium.Keys.LeftAlt" />,
+            <see cref="F:OpenQA.Selenium.Keys.LeftControl" />,<see cref="F:OpenQA.Selenium.Keys.LeftShift" />.</exception>
         </member>
         <member name="M:OpenQA.Selenium.Interactions.Actions.KeyUp(System.String)">
             <summary>
@@ -3852,7 +3900,9 @@
             <param name="theKey">The key to be sent.</param>
             <returns>A self-reference to this <see cref="T:OpenQA.Selenium.Interactions.Actions" />.</returns>
             <exception cref="T:System.ArgumentException">If the key sent is not is not one
-            of <see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, or <see cref="F:OpenQA.Selenium.Keys.Alt" />.</exception>
+            of <see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, <see cref="F:OpenQA.Selenium.Keys.Alt" />,
+            <see cref="F:OpenQA.Selenium.Keys.Meta" />, <see cref="F:OpenQA.Selenium.Keys.Command" />,<see cref="F:OpenQA.Selenium.Keys.LeftAlt" />,
+            <see cref="F:OpenQA.Selenium.Keys.LeftControl" />,<see cref="F:OpenQA.Selenium.Keys.LeftShift" />.</exception>
         </member>
         <member name="M:OpenQA.Selenium.Interactions.Actions.KeyUp(OpenQA.Selenium.IWebElement,System.String)">
             <summary>
@@ -3862,7 +3912,9 @@
             <param name="theKey">The key to be sent.</param>
             <returns>A self-reference to this <see cref="T:OpenQA.Selenium.Interactions.Actions" />.</returns>
             <exception cref="T:System.ArgumentException">If the key sent is not is not one
-            of <see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, or <see cref="F:OpenQA.Selenium.Keys.Alt" />.</exception>
+            of <see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, <see cref="F:OpenQA.Selenium.Keys.Alt" />,
+            <see cref="F:OpenQA.Selenium.Keys.Meta" />, <see cref="F:OpenQA.Selenium.Keys.Command" />,<see cref="F:OpenQA.Selenium.Keys.LeftAlt" />,
+            <see cref="F:OpenQA.Selenium.Keys.LeftControl" />,<see cref="F:OpenQA.Selenium.Keys.LeftShift" />.</exception>
         </member>
         <member name="M:OpenQA.Selenium.Interactions.Actions.SendKeys(System.String)">
             <summary>
@@ -3954,6 +4006,7 @@
             <param name="toElement">The element to which to move the mouse.</param>
             <param name="offsetX">The horizontal offset to which to move the mouse.</param>
             <param name="offsetY">The vertical offset to which to move the mouse.</param>
+            <param name="offsetOrigin">The <see cref="T:OpenQA.Selenium.Interactions.MoveToElementOffsetOrigin" /> value from which to calculate the offset.</param>
             <returns>A self-reference to this <see cref="T:OpenQA.Selenium.Interactions.Actions" />.</returns>
         </member>
         <member name="M:OpenQA.Selenium.Interactions.Actions.MoveByOffset(System.Int32,System.Int32)">
@@ -4458,7 +4511,9 @@
             <param name="keyboard">The <see cref="T:OpenQA.Selenium.IKeyboard" /> to use in performing the action.</param>
             <param name="mouse">The <see cref="T:OpenQA.Selenium.IMouse" /> to use in setting focus to the element on which to perform the action.</param>
             <param name="actionTarget">An <see cref="T:OpenQA.Selenium.ILocatable" /> object providing the element on which to perform the action.</param>
-            <param name="key">The modifier key (<see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, <see cref="F:OpenQA.Selenium.Keys.Alt" />) to use in the action.</param>
+            <param name="key">The modifier key (<see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, <see cref="F:OpenQA.Selenium.Keys.Alt" />,
+            <see cref="F:OpenQA.Selenium.Keys.Meta" />, <see cref="F:OpenQA.Selenium.Keys.Command" />,<see cref="F:OpenQA.Selenium.Keys.LeftAlt" />,
+            <see cref="F:OpenQA.Selenium.Keys.LeftControl" />,<see cref="F:OpenQA.Selenium.Keys.LeftShift" />) to use in the action.</param>
         </member>
         <member name="M:OpenQA.Selenium.Interactions.KeyDownAction.Perform">
             <summary>
@@ -4518,7 +4573,9 @@
             <param name="keyboard">The <see cref="T:OpenQA.Selenium.IKeyboard" /> to use in performing the action.</param>
             <param name="mouse">The <see cref="T:OpenQA.Selenium.IMouse" /> to use in setting focus to the element on which to perform the action.</param>
             <param name="actionTarget">An <see cref="T:OpenQA.Selenium.ILocatable" /> object providing the element on which to perform the action.</param>
-            <param name="key">The modifier key (<see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, <see cref="F:OpenQA.Selenium.Keys.Alt" />) to use in the action.</param>
+            <param name="key">The modifier key (<see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, <see cref="F:OpenQA.Selenium.Keys.Alt" />,
+            <see cref="F:OpenQA.Selenium.Keys.Meta" />, <see cref="F:OpenQA.Selenium.Keys.Command" />,<see cref="F:OpenQA.Selenium.Keys.LeftAlt" />,
+            <see cref="F:OpenQA.Selenium.Keys.LeftControl" />,<see cref="F:OpenQA.Selenium.Keys.LeftShift" />) to use in the action.</param>
         </member>
         <member name="M:OpenQA.Selenium.Interactions.KeyUpAction.Perform">
             <summary>
@@ -5267,6 +5324,16 @@
         <member name="T:OpenQA.Selenium.Internal.ResourceUtilities">
             <summary>
             Encapsulates methods for finding and extracting WebDriver resources.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Internal.ResourceUtilities.AssemblyVersion">
+            <summary>
+            Gets a string representing the version of the Selenium assembly.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Internal.ResourceUtilities.PlatformFamily">
+            <summary>
+            Gets a string representing the platform family on which the Selenium assembly is executing.
             </summary>
         </member>
         <member name="M:OpenQA.Selenium.Internal.ResourceUtilities.GetResourceStream(System.String,System.String)">
@@ -7705,6 +7772,14 @@
             <returns>A dictionary suitable for serializing to the W3C Specification
             dialect of the wire protocol.</returns>
         </member>
+        <member name="M:OpenQA.Selenium.Proxy.ToLegacyCapability">
+            <summary>
+            Returns a dictionary suitable for serializing to the OSS dialect of the
+            wire protocol.
+            </summary>
+            <returns>A dictionary suitable for serializing to the OSS dialect of the
+            wire protocol.</returns>
+        </member>
         <member name="T:OpenQA.Selenium.Remote.CapabilityType">
             <summary>
             Provides types of capabilities for the DesiredCapabilities object.
@@ -7823,6 +7898,16 @@
         <member name="F:OpenQA.Selenium.Remote.CapabilityType.SupportsWebStorage">
             <summary>
             Capability name used to indicate whether the driver supports web storage.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.CapabilityType.SetWindowRect">
+            <summary>
+            Capability name used to indicate whether the driver supports setting the browser window's size and position.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.CapabilityType.Timeouts">
+            <summary>
+            Capability name used to get or set timeout values when creating a session.
             </summary>
         </member>
         <member name="T:OpenQA.Selenium.Remote.Command">
@@ -8028,11 +8113,6 @@
         <member name="P:OpenQA.Selenium.Remote.DesiredCapabilities.AcceptInsecureCerts">
             <summary>
             Gets or sets a value indicating whether the browser accepts SSL certificates.
-            </summary>
-        </member>
-        <member name="P:OpenQA.Selenium.Remote.DesiredCapabilities.OpenQA#Selenium#Remote#ISpecificationCompliant#IsSpecificationCompliant">
-            <summary>
-            Gets or sets a value indicating whether this set of capabilities is compliant with the W3C WebDriver specification.
             </summary>
         </member>
         <member name="P:OpenQA.Selenium.Remote.DesiredCapabilities.CapabilitiesDictionary">
@@ -8738,6 +8818,20 @@
             <param name="commandToExecute">The command you wish to execute</param>
             <returns>A response from the browser</returns>
         </member>
+        <member name="M:OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Dispose">
+            <summary>
+            Releases all resources used by the <see cref="T:OpenQA.Selenium.Remote.DriverServiceCommandExecutor" />.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:OpenQA.Selenium.Remote.HttpCommandExecutor" /> and
+            optionally releases the managed resources.
+            </summary>
+            <param name="disposing">
+                <see langword="true" /> to release managed and resources;
+            <see langword="false" /> to only release unmanaged resources.</param>
+        </member>
         <member name="T:OpenQA.Selenium.Remote.ErrorResponse">
             <summary>
             Provides a way to store errors from a response
@@ -8809,6 +8903,26 @@
             <param name="commandToExecute">The command you wish to execute</param>
             <returns>A response from the browser</returns>
         </member>
+        <member name="M:OpenQA.Selenium.Remote.HttpCommandExecutor.OnSendingRemoteHttpRequest(OpenQA.Selenium.Remote.SendingRemoteHttpRequestEventArgs)">
+            <summary>
+            Raises the <see cref="E:OpenQA.Selenium.Remote.HttpCommandExecutor.SendingRemoteHttpRequest" /> event.
+            </summary>
+            <param name="eventArgs">A <see cref="T:OpenQA.Selenium.Remote.SendingRemoteHttpRequestEventArgs" /> that contains the event data.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.HttpCommandExecutor.Dispose">
+            <summary>
+            Releases all resources used by the <see cref="T:OpenQA.Selenium.Remote.HttpCommandExecutor" />.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.HttpCommandExecutor.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:OpenQA.Selenium.Remote.HttpCommandExecutor" /> and
+            optionally releases the managed resources.
+            </summary>
+            <param name="disposing">
+                <see langword="true" /> to release managed and resources;
+            <see langword="false" /> to only release unmanaged resources.</param>
+        </member>
         <member name="T:OpenQA.Selenium.Remote.ICommandExecutor">
             <summary>
             Provides a way to send commands to the remote server
@@ -8844,16 +8958,6 @@
         <member name="P:OpenQA.Selenium.Remote.IHasSessionId.SessionId">
             <summary>
             Gets the session ID of the current session.
-            </summary>
-        </member>
-        <member name="T:OpenQA.Selenium.Remote.ISpecificationCompliant">
-            <summary>
-            Interface used to determine whether an implementing object is compliant with the W3C WebDriver specification.
-            </summary>
-        </member>
-        <member name="P:OpenQA.Selenium.Remote.ISpecificationCompliant.IsSpecificationCompliant">
-            <summary>
-            Gets or sets a value indicating whether this set of capabilities is compliant with the W3C WebDriver specification.
             </summary>
         </member>
         <member name="T:OpenQA.Selenium.Remote.CharArrayJsonConverter">
@@ -9737,6 +9841,12 @@
             Gets the <see cref="T:OpenQA.Selenium.Remote.ICommandExecutor" /> which executes commands for this driver.
             </summary>
         </member>
+        <member name="P:OpenQA.Selenium.Remote.RemoteWebDriver.ElementFactory">
+            <summary>
+            Gets or sets the factory object used to create instances of <see cref="T:OpenQA.Selenium.Remote.RemoteWebElement" />
+            or its subclasses.
+            </summary>
+        </member>
         <member name="M:OpenQA.Selenium.Remote.RemoteWebDriver.FindElement(OpenQA.Selenium.By)">
             <summary>
             Finds the first element in the page that matches the <see cref="T:OpenQA.Selenium.By" /> object
@@ -10167,6 +10277,16 @@
             </summary>
             <seealso cref="T:OpenQA.Selenium.IWebElement" />
             <seealso cref="T:OpenQA.Selenium.ILocatable" />
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.RemoteWebElement.ElementReferencePropertyName">
+            <summary>
+            The property name that represents a web element in the wire protocol.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.RemoteWebElement.LegacyElementReferencePropertyName">
+            <summary>
+            The property name that represents a web element in the legacy dialect of the wire protocol.
+            </summary>
         </member>
         <member name="M:OpenQA.Selenium.Remote.RemoteWebElement.#ctor(OpenQA.Selenium.Remote.RemoteWebDriver,System.String)">
             <summary>
@@ -10616,6 +10736,21 @@
             <param name="commandToExecute">The <see cref="T:OpenQA.Selenium.Remote.DriverCommand" /> to execute against this element.</param>
             <param name="parameters">A <see cref="T:System.Collections.Generic.Dictionary`2" /> containing names and values of the parameters for the command.</param>
             <returns>The <see cref="T:OpenQA.Selenium.Remote.Response" /> object containing the result of the command execution.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.RemoteWebElementFactory.CreateElement(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Creates a <see cref="T:OpenQA.Selenium.Remote.RemoteWebElement" /> from a dictionary containing a reference to an element.
+            </summary>
+            <param name="elementDictionary">The dictionary containing the element reference.</param>
+            <returns>A <see cref="T:OpenQA.Selenium.Remote.RemoteWebElement" /> containing the information from the specified dictionary.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.RemoteWebElementFactory.ContainsElementReference(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Gets a value indicating wether the specified dictionary represents a reference to a web element.
+            </summary>
+            <param name="elementDictionary">The dictionary to check.</param>
+            <returns>
+                <see langword="true" /> if the dictionary contains an element reference; otherwise, <see langword="false" />.</returns>
         </member>
         <member name="T:OpenQA.Selenium.Remote.RemoteWebStorage">
             <summary>

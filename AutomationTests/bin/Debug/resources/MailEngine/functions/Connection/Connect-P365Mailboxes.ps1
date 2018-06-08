@@ -10,8 +10,8 @@ function Connect-P365Mailboxes{
 		[Parameter(Position=7, Mandatory=$false)] [string]$SourceAutoDiscoverOverRide,
 		[Parameter(Position=8, Mandatory=$false)] [string]$TargetAutoDiscoverOverRide,
 		[Parameter(Position=9, Mandatory=$false)] [string]$SourcePowerShellOverRide,
-		[Parameter(Position=10, Mandatory=$false)] [string]$TargetPowerShellOverRide
-		
+		[Parameter(Position=10, Mandatory=$false)] [string]$TargetPowerShellOverRide,
+		[Parameter(Position=11, Mandatory=$false)] [string]$LogPath
     )  
  	Begin
 	 {
@@ -35,6 +35,7 @@ function Connect-P365Mailboxes{
 		$Script:TargetAutoDiscoverOverRide = ""
 		$Script:SourcePowerShellOverRide = ""
 		$Script:TargetPowerShellOverRide = ""
+		$Script:LogPath = "C:\temp"
 		if(![String]::IsNullOrEmpty($SourceAutoDiscoverOverRide)){
 			$Script:SourceOnPrem = $true
 			$Script:SourceAutoDiscoverOverRide = $SourceAutoDiscoverOverRide
@@ -50,6 +51,9 @@ function Connect-P365Mailboxes{
 		if(![String]::IsNullOrEmpty($TargetPowerShellOverRide)){
 			$Script:TargetOnPrem = $true
 			$Script:TargetPowerShellOverRide = $TargetPowerShellOverRide
+		}
+		if(![String]::IsNullOrEmpty($LogPath)){
+			$Script:LogPath = $LogPath
 		}
 	 }
 }

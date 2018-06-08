@@ -1,6 +1,7 @@
 ﻿using System;
 using BinaryTree.Power365.AutomationFramework.Elements;
 using OpenQA.Selenium;
+using log4net;
 
 namespace BinaryTree.Power365.AutomationFramework.Pages
 {
@@ -12,14 +13,13 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private readonly By _usersEditLink = By.XPath("//div[contains(@data-bind, 'overallStatusViewModel')]//a[contains(@data-bind, 'totalLink')]//span");
         private readonly By _publicFoldersEditLink = By.XPath("//*[contains(text(), 'Public folders')]/ancestor::div[contains(@class, 'ibox')]//div[contains(@class, 'ibox-content')]//a[contains(@data-bind, 'totalLink')]");
         private readonly By _tenantsEditLink = By.XPath("//div[contains(@class, 'ibox-title')]//*[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'tenant')]]//ancestor::div[contains(@class, 'ibox-title')]//a");
-        private readonly By _completedUsers =By.XPath("//*[contains(text(), 'users')]/ancestor::div[(@class='ibox')]//*[contains(text(), 'All Users')]/ancestor::tr//a[contains(@data-bind, 'completedNumber')]");
-        private readonly By _rollbackUsers = By.XPath("//*[contains(text(), 'users')]/ancestor::div[(@class='ibox')]//*[contains(text(), 'All Users')]/ancestor::tr//a[contains(@data-bind, 'rollbackNumber')]");
-        private readonly By _errorsUsers = By.XPath("//*[contains(text(), 'users')]/ancestor::div[(@class='ibox')]//*[contains(text(), 'All Users')]/ancestor::tr//a[contains(@data-bind, 'errors')]");
-
-
+        private readonly By _completedUsers =By.XPath("//*[contains(@id, 'migrationWavesForUsers')]//*[contains(text(), 'All Users')]/ancestor::tr//a[contains(@data-bind, 'completedNumber')]");
+        private readonly By _rollbackUsers = By.XPath("//*[contains(@id, 'migrationWavesForUsers')]//*[contains(text(), 'All Users')]/ancestor::tr//a[contains(@data-bind, 'rollbackNumber')]");
+        private readonly By _errorsUsers = By.XPath("//*[contains(@id, 'migrationWavesForUsers')]//*[contains(text(), 'All Users')]/ancestor::tr//a[contains(@data-bind, 'errors')]");
+        private readonly By _help = By.XPath("//*[@class='footer']//*[text()='ONLINE HELP GUIDE']");
 
         public ProjectDetailsPage(IWebDriver webDriver)
-            : base(_locator, webDriver) { }
+            : base(LogManager.GetLogger(typeof(ProjectDetailsPage)), _locator, webDriver) { }
 
         public ManageUsersPage ClickUsersEdit()
         {
@@ -58,6 +58,12 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         {
            return ClickElementBy<ManageUsersPage>(_completedUsers);
             
+        }
+
+        public HelpPage ClickHelp()
+        {
+            IsElementVisible(_help);
+            return ClickPopupElementBy<HelpPage>(_help).Page;
         }
     }
 }

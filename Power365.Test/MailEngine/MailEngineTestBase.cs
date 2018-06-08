@@ -11,17 +11,13 @@ using System.Net;
 using System.Collections.ObjectModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BinaryTree.Power365.AutomationFramework.Pages;
+using BinaryTree.Power365.AutomationFramework;
 
 namespace BinaryTree.Power365.Test.MailEngine
 {
-    public abstract class MailEngineTestBase: PowershellTestBase
+    public abstract class MailEngineTestBase: PowerShellTestBase
     {
-        protected static InitialSessionState InitialState;
-
-        public MailEngineTestBase() 
-            : base() { }
-
-        protected class TestResults
+        protected class MailEngineTestResult
         {
             public string TestCase { get; private set; }
             public string Description { get; private set; }
@@ -33,7 +29,7 @@ namespace BinaryTree.Power365.Test.MailEngine
 
             public string OverallResult { get; private set; }
 
-            public TestResults(PSObject psObject)
+            public MailEngineTestResult(PSObject psObject)
             {
                 TestCase = psObject.Properties["TestCase"].Value?.ToString();
                 Description = psObject.Properties["Description"].Value?.ToString();
@@ -50,7 +46,12 @@ namespace BinaryTree.Power365.Test.MailEngine
             }
         }
 
-        protected static void InitialStateSetup()
+        protected InitialSessionState InitialState;
+
+        public MailEngineTestBase() 
+            : base() { }
+        
+        protected void InitialStateSetup()
         {
             var assemblyPath = System.Reflection.Assembly.GetAssembly(typeof(MailEngineTestBase)).Location;
             var assemblyDirectory = Path.GetDirectoryName(assemblyPath);
@@ -115,8 +116,6 @@ namespace BinaryTree.Power365.Test.MailEngine
 
             T result = convertReturn(powerShell.Invoke());
 
-            LogStreams(powerShell);
-
             return result;
         }
 
@@ -137,8 +136,6 @@ namespace BinaryTree.Power365.Test.MailEngine
             powerShell.Commands = command;
 
             T result = convertReturn(powerShell.Invoke<PT>());
-
-            LogStreams(powerShell);
 
             return result;
         }
@@ -171,24 +168,19 @@ namespace BinaryTree.Power365.Test.MailEngine
                 exceptions.Add(ex);
                 throw new AggregateException(string.Format("Failed to run {0}", cmd), exceptions);
             }
-            finally
-            {
-                LogStreams(powerShell);
-            }
         }
-
-        protected TestResults GetTestResults(PowerShell powerShell, string testId)
+        
+        protected MailEngineTestResult GetTestResults(PowerShell powerShell, string testId)
         {
-            return Invoke<TestResults, Dictionary<string, PSObject>>(powerShell, "Get-P365TestResults", (res) =>
+            return Invoke<MailEngineTestResult, Dictionary<string, PSObject>>(powerShell, "Get-P365TestResults", (res) =>
             {
                 var firstDictionary = res.FirstOrDefault();
                 var tr = firstDictionary[string.Format("Test{0}", testId)];
-                return new TestResults(tr);
+                return new MailEngineTestResult(tr);
             });
         }
 
-        protected void AssertTestPasses<T>(PowerShell powerShell, string testId, string inputId, T page, Action<string, T> userInterfaceActions, params KeyValuePair<string, object>[] parameters)
-            where T: PageBase
+        protected void AssertTestPasses(PowerShell powerShell, string testId, string inputId, Action<string> userInterfaceActions, params KeyValuePair<string, object>[] parameters)
         {
             Invoke(powerShell, string.Format("Invoke-Test{0}", testId), parameters);
 
@@ -198,9 +190,9 @@ namespace BinaryTree.Power365.Test.MailEngine
 
             Assert.AreEqual("Succeeded", testPrepareResults.TestPrepareResult);
 
-            userInterfaceActions(inputId, page);
+            userInterfaceActions(inputId);
 
-            TestResults validateResults = null;
+            MailEngineTestResult validateResults = null;
 
             try
             {
@@ -213,46 +205,6 @@ namespace BinaryTree.Power365.Test.MailEngine
                 Assert.AreEqual("Succeeded", validateResults.ValidationResult);
                 Assert.AreEqual("Succeeded", validateResults.OverallResult);
             }
-        }
-
-        protected void LogStreams(PowerShell powerShell)
-        {
-            Logger.Info("LogStreams Start");
-            if (powerShell.Streams == null)
-                return;
-
-            if (powerShell.Streams.Debug != null)
-            {
-                foreach (var debug in powerShell.Streams.Debug)
-                {
-                    Logger.Debug(debug?.Message);
-                }
-            }
-
-            if (powerShell.Streams.Information != null)
-            {
-                foreach (var info in powerShell.Streams.Information)
-                {
-                    Logger.Info(info?.MessageData);
-                }
-            }
-
-            if (powerShell.Streams.Warning != null)
-            {
-                foreach (var warn in powerShell.Streams.Warning)
-                {
-                    Logger.Warn(warn?.Message);
-                }
-            }
-
-            if (powerShell.Streams.Error != null)
-            {
-                foreach (var error in powerShell.Streams.Error)
-                {
-                    Logger.Error(error?.ErrorDetails?.Message, error?.Exception);
-                }
-            }
-            Logger.Info("LogStreams End");
         }
 
         protected override void ScriptOutputHandler(string line, bool isError = false) { }

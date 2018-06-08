@@ -43,7 +43,7 @@ namespace Product.Tests.CommonTests.SetupTests
             var testDistributionGroupPrefix = RunConfigurator.GetValueByXpath($"//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='groupreset']/..//prefix");
             var testMailboxNamePrefixArray = RunConfigurator.GetValueByXpath($"//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='mailboxreset']/..//prefixArray");
 
-            var syncDelaySec = Environment.GetEnvironmentVariable("AzureADSyncDelaySec") ?? "7200";
+            var syncDelaySec = Environment.GetEnvironmentVariable("AzureADSyncDelaySec") ?? "1200";
 
             using (var process = new PsLauncher().LaunchPowerShellInstance("resources\\IntegrationGroups-Cleanup.ps1",
                 $" -sourceLocalLogin {sourceLocalLogin}" +

@@ -496,7 +496,7 @@ Remove-pssession $SessionT
     }
 
     ##TC 32281 - Verify AllowExternalMessages will be synced (Initial Sync and Delta)
-
+	#TC 32494
 if ($ResultCode -eq 0)
 {
     If ($ExternalAuth = Get-DistributionGroup $SourceGrp4 | Select-Object RequireSenderAuthenticationEnabled )

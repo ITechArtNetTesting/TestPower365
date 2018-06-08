@@ -17,6 +17,8 @@ namespace Product.Tests.MailOnlyTests.SortingAndFilterTests
 		}
 		[TestMethod]
 		[TestCategory("MailOnly")]
+        [TestCategory("SeleniumLegacy")]
+        [TestCategory("UI")]
         //22169
         public void Automation_MO_SortingTest()
 		{

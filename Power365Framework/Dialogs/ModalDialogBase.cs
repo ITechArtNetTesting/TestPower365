@@ -1,5 +1,6 @@
 ﻿using BinaryTree.Power365.AutomationFramework.Elements;
 using BinaryTree.Power365.AutomationFramework.Enums;
+using log4net;
 using OpenQA.Selenium;
 using System;
 namespace BinaryTree.Power365.AutomationFramework.Dialogs
@@ -11,8 +12,8 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
 
         private bool _isOpen = false;
 
-        public ModalDialogBase(IWebDriver webDriver)
-            : base(_locator, webDriver)
+        public ModalDialogBase(ILog logger, IWebDriver webDriver)
+            : base(logger, _locator, webDriver)
         {
             _isOpen = true;
         }

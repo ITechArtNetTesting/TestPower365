@@ -1,20 +1,11 @@
 ﻿using BinaryTree.Power365.AutomationFramework.Elements;
+using log4net;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BinaryTree.Power365.AutomationFramework.Pages
 {
     public class ErrorsPage: ActionPageBase
     {
-        private static readonly By _locator = By.XPath("//div[@id='users']//input[contains(@placeholder,'error')]");
-      
-
         public Element GroupsTab
         {
             get
@@ -42,7 +33,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             }
         }
 
-        private ButtonElement selectActionDropdown
+        public ButtonElement ActionDropdown
         {
             get
             {
@@ -50,8 +41,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             }
         }
 
-
-        private Element DismissAction
+        public Element DismissAction
         {
             get
             {
@@ -60,7 +50,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             }
         }
 
-        private Element ExportAction
+        public Element ExportAction
         {
             get
             {
@@ -68,25 +58,25 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
                 return new Element(tab, WebDriver);
             }
         }
-                     
-            
-       private readonly string tabFormat = "//ul[@class='nav nav-tabs m-t-lg']//span[contains(text(),'{0}')]";
-       private readonly By actionsDropdown = By.XPath("//div[@class='tab-pane active']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]");
-       private readonly string actionsFormat = "//div[@id='users']//*[contains(text(),'{0}')]";
 
-        public ErrorsPage(IWebDriver webDriver) : base(_locator,webDriver) { }
+        private static readonly By _locator = By.XPath("//div[@id='users']//input[contains(@placeholder,'error')]");
+        private readonly string tabFormat = "//ul[@class='nav nav-tabs m-t-lg']//span[contains(text(),'{0}')]";
+        private readonly By actionsDropdown = By.XPath("//div[@class='tab-pane active']//div[contains(@class, 'dropdown-default')]//button[contains(@class, 'dropdown-toggle')]");
+        private readonly string actionsFormat = "//div[@id='users']//*[contains(text(),'{0}')]";
+
+        public ErrorsPage(IWebDriver webDriver) 
+            : base(LogManager.GetLogger(typeof(ErrorsPage)), _locator,webDriver) { }
 
         public bool CheckDismissAndExportAreDisplayed()
         {
-            selectActionDropdown.Click(); 
+            ActionDropdown.Click(); 
             return DismissAction.IsVisible() && ExportAction.IsVisible();
         }
 
         public bool IsExportDisplayed()
         {
-            selectActionDropdown.Click();           
+            ActionDropdown.Click();           
             return ExportAction.IsVisible();
-        }      
-
+        }
     }
 }

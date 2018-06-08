@@ -20,6 +20,7 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
         }
 
         [TestMethod]
+        [TestCategory("SmokeTest")]
         [TestCategory("Integration")]
         [TestCategory("UI")]
         [TestCategory("Stop")]
@@ -31,6 +32,7 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
         }
 
         [TestMethod]
+        [TestCategory("SmokeTest")]
         [TestCategory("MailOnly")]
         [TestCategory("UI")]
         [TestCategory("Stop")]
@@ -41,6 +43,7 @@ namespace Product.Tests.CommonTests.ActionButtonsTests
         }
 
         [TestMethod]
+        [TestCategory("SmokeTest")]
         [TestCategory("MailWithDiscovery")]
         [TestCategory("UI")]
         [TestCategory("Stop")]

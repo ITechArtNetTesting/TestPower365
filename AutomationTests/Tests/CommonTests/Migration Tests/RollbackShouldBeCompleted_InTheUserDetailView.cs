@@ -18,8 +18,9 @@ namespace Product.Tests.CommonTests.Migration_Tests
             _testContext = testContext;
         }
         [TestMethod]
-        [TestCategory("Integration")]
+        [TestCategory("SmokeTest")]
         [TestCategory("UI")]
+        [TestCategory("Integration")]
         [TestCategory("Rollback")]
         public void RollbackTest_InTheUserDetailView_Integrat_39552_39571_39558_39554_39553_39567()
         {
@@ -29,8 +30,9 @@ namespace Product.Tests.CommonTests.Migration_Tests
         }
 
         [TestMethod]
-        [TestCategory("MailOnly")]
+        [TestCategory("SmokeTest")]
         [TestCategory("UI")]
+        [TestCategory("MailOnly")]
         [TestCategory("Rollback")]
         public void RollbackTest_InTheUserDetailView_MO_39552_39571_39558_39554_39553_39567()
         {
@@ -39,8 +41,9 @@ namespace Product.Tests.CommonTests.Migration_Tests
         }
 
         [TestMethod]
-        [TestCategory("MailWithDiscovery")]
+        [TestCategory("SmokeTest")]
         [TestCategory("UI")]
+        [TestCategory("MailWithDiscovery")]
         [TestCategory("Rollback")]
         public void RollbackTest_InTheUserDetailView_MD_39552_39571_39558_39554_39553_39567()
         {
@@ -86,7 +89,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
             var startTime = DateTime.Now;
             User.AtUsersForm().WaitForState_DetailPage(sourceMailbox, State.RollbackInProgress, 600000, 30);
             User.AtUsersForm().WaitForJobIsCreated(sourceMailbox, State.RollbackInProgress, 600000, 30);
-            User.AtUsersForm().WaitForState_DetailPage(sourceMailbox, State.RollbackCompleted, 2400000, 30);
+            User.AtUsersForm().WaitForState_DetailPage(sourceMailbox, State.RollbackCompleted, 2700000, 30);
             //Verify
             User.AtUsersForm().WaitForJobIsCreated(sourceMailbox, State.RollbackCompleted, 600000, 30);
             User.AtUsersForm().JobProgressBarShouldShownCorrectProgress("Rollback Complete");

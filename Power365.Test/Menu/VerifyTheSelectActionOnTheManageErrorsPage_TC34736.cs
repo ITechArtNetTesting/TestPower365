@@ -10,35 +10,29 @@ using System.Threading.Tasks;
 namespace BinaryTree.Power365.Test.Menu
 {
     [TestFixture]
-    public class VerifyTheSelectActionOnTheManageErrorsPage_TC34736 : TestBase
+    [Parallelizable(ParallelScope.Children)]
+    class VerifyTheSelectActionOnTheManageErrorsPage_TC34736 : TestBase
     {
-        public VerifyTheSelectActionOnTheManageErrorsPage_TC34736() : base() { }
-       
-
-        private void verifyTheSelectActionOnTheManageErrorsPage(string username, string password, string client, string projectName)
+        private void VerifyTheSelectActionOnTheManageErrorsPage(string username, string password, string client, string projectName)
         {
-          ErrorsPage atErrorsPage;
-
-          atErrorsPage = Automation.Common
+            var atErrorsPage = Automation.Common
                 .SingIn(username, password)
+                .MigrateAndIntegrateSelect()
                 .ClientSelect(client)
                 .ProjectSelect(projectName)
                 .GetPage<ProjectDetailsPage>()
                 .Menu
                 .ClickErrors();
+                       
             Assert.IsTrue(atErrorsPage.CheckDismissAndExportAreDisplayed(), "Dismiss or export action are not displayed");
         }
 
-        private void runTest(string clientName, string projectName)
+        private void RunTest(string clientName, string projectName)
         {
             var client = Automation.Settings.GetByReference<Client>(clientName);
             var project = client.GetByReference<Project>(projectName);
-            string _client = client.Name;
-            string _username = client.Administrator.Username;
-            string _password = client.Administrator.Password;
-            string _projectName = project.Name;
 
-            verifyTheSelectActionOnTheManageErrorsPage(_username, _password, _client, _projectName);
+            VerifyTheSelectActionOnTheManageErrorsPage(client.Administrator.Username, client.Administrator.Password, client.Name, project.Name);
         }
 
         [Test]
@@ -46,7 +40,7 @@ namespace BinaryTree.Power365.Test.Menu
         [Category("Integration")]
         public void VerifyTheSelectActionOnTheManageErrorsPage_Integration_34736()
         {
-            runTest("client2", "project2");
+            RunTest("client2", "project2");
         }
 
         [Test]
@@ -54,7 +48,7 @@ namespace BinaryTree.Power365.Test.Menu
         [Category("MailWithDiscovery")]
         public void VerifyTheSelectActionOnTheManageErrorsPage_MD_34736()
         {
-            runTest("client2", "project1");
+            RunTest("client2", "project1");
         }
 
         [Test]
@@ -62,7 +56,7 @@ namespace BinaryTree.Power365.Test.Menu
         [Category("MailOnly")]
         public void VerifyTheSelectActionOnTheManageErrorsPage_MO_34736()
         {
-            runTest("client1", "project1");
+            RunTest("client1", "project1");
         }
     }
 }

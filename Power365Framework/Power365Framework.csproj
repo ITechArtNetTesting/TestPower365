@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="SeleniumExtras.WaitHelpers, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetSeleniumExtras.WaitHelpers.3.11.0\lib\net45\SeleniumExtras.WaitHelpers.dll</HintPath>
@@ -49,17 +53,17 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebDriver, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.WebDriver.3.11.0\lib\net45\WebDriver.dll</HintPath>
+    <Reference Include="WebDriver, Version=3.12.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.3.12.1\lib\net45\WebDriver.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WebDriver.Support, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.Support.3.11.0\lib\net45\WebDriver.Support.dll</HintPath>
+    <Reference Include="WebDriver.Support, Version=3.12.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.Support.3.12.1\lib\net45\WebDriver.Support.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BrowserAutomation.cs" />
+    <Compile Include="Services\BrowserAutomation.cs" />
     <Compile Include="Dialogs\ConfirmationDialog.cs" />
     <Compile Include="Dialogs\ModalDialogBase.cs" />
     <Compile Include="Dialogs\RollbackConfirmationDialog.cs" />
@@ -71,9 +75,33 @@
     <Compile Include="Elements\InputElement.cs" />
     <Compile Include="Elements\TableElement.cs" />
     <Compile Include="Enums\ActionType.cs" />
+    <Compile Include="Enums\MailboxLicenseType.cs" />
+    <Compile Include="Enums\StateType.cs" />
+    <Compile Include="Enums\WaitDefaults.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Enums\AddressBookSyncOption.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Credential.cs" />
+    <Compile Include="Models\Database.cs" />
+    <Compile Include="Enums\DiscoveryMethod.cs" />
+    <Compile Include="Models\DistributionGroup.cs" />
+    <Compile Include="Models\EditProjectWorkflowSettings.cs" />
+    <Compile Include="Models\File.cs" />
+    <Compile Include="Enums\FreeBusySyncOption.cs" />
+    <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\MigrationWave.cs" />
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Enums\ProjectType.cs" />
+    <Compile Include="Enums\PublicFolderSyncOption.cs" />
+    <Compile Include="Models\ReferenceStore.cs" />
+    <Compile Include="Models\Referential.cs" />
+    <Compile Include="Enums\SyncIntervalBy.cs" />
+    <Compile Include="Models\SyncSchedule.cs" />
+    <Compile Include="Models\Tenant.cs" />
+    <Compile Include="Enums\UserListOption.cs" />
+    <Compile Include="Models\UserMigration.cs" />
+    <Compile Include="Models\WorkflowSettings.cs" />
     <Compile Include="Pages\ActionPageBase.cs" />
-    <Compile Include="Pages\EditMigrationProfilePage.cs" />
     <Compile Include="Pages\EditProjectPage.cs" />
     <Compile Include="Pages\EditTenantsPage.cs" />
     <Compile Include="Pages\EditWavePage.cs" />
@@ -89,22 +117,21 @@
     <Compile Include="Pages\ManageUsersPage.cs" />
     <Compile Include="Pages\ClientsPage.cs" />
     <Compile Include="Elements\ElementBase.cs" />
-    <Compile Include="Elements\MenuElement.cs" />
+    <Compile Include="Components\MenuComponent.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Pages\O365SignInPage.cs" />
     <Compile Include="Pages\PageBase.cs" />
     <Compile Include="Pages\ProjectListPage.cs" />
     <Compile Include="AutomationContext.cs" />
-    <Compile Include="Pages\StartPage.cs" />
-    <Compile Include="PowershellAutomation.cs" />
+    <Compile Include="Pages\LandingPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Settings.cs" />
-    <Compile Include="Utilities\ExcelReader.cs" />
     <Compile Include="Utilities\SqlClient.cs" />
     <Compile Include="Utilities\UserMigrationQuery.cs" />
     <Compile Include="Workflows\CommonWorkflow.cs" />
     <Compile Include="Workflows\AddPublicFolderWorkflow.cs" />
     <Compile Include="Workflows\EditProjectWorkflowBase.cs" />
+    <Compile Include="Workflows\MigrationProfileWorkflow.cs" />
     <Compile Include="Workflows\MultiPageWorkflow.cs" />
     <Compile Include="Workflows\WizardWorkflow.cs" />
     <Compile Include="Workflows\WorkflowBase.cs" />
@@ -120,35 +147,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\MigrationProfileWizardPage\" />
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="Microsoft.Office.Core">
-      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>8</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="Microsoft.Office.Interop.Excel">
-      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>9</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="VBIDE">
-      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>5</VersionMajor>
-      <VersionMinor>3</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

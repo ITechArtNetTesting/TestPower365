@@ -4,6 +4,8 @@ using NUnit.Framework;
 using BinaryTree.Power365.AutomationFramework.Pages;
 using BinaryTree.Power365.AutomationFramework.Workflows;
 using BinaryTree.Power365.AutomationFramework;
+using BinaryTree.Power365.AutomationFramework.Enums;
+using AutomationServices.SqlDatabase;
 
 namespace BinaryTree.Power365.Test.Setup
 {
@@ -13,6 +15,13 @@ namespace BinaryTree.Power365.Test.Setup
         public ProjectSetup() 
             : base() { }
         
+        [Test]
+        public void DBAccesstest()
+        {
+            var databaseService =Automation.GetService<DatabaseService>();
+            databaseService.SetDirSyncLiteTenantId(null, 0);
+        }
+
         [Test]
         public void EmailWithFileProjectSetup()
         {

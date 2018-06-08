@@ -1,20 +1,18 @@
 ﻿using BinaryTree.Power365.AutomationFramework;
+using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Pages;
-using log4net;
-
 using NUnit.Framework;
-
 
 namespace BinaryTree.Power365.Test.CommonTests.LandingPage
 {
     [TestFixture]
-    public class LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773: TestBase
-    {
-        public LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773() : base() { }        
+    [Parallelizable(ParallelScope.Children)]
+    class LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773: TestBase
+    {   
+        private readonly static string EXPORT_FILE_NAME="Tenant*.csv";
 
         private void SetTestCaseParams(string clientName, string projectName)
-        {           
-          
+        {
            var client = Automation.Settings.GetByReference<Client>(clientName);
            var _project = client.GetByReference<Project>(projectName);
            string  _client = client.Name;
@@ -24,11 +22,10 @@ namespace BinaryTree.Power365.Test.CommonTests.LandingPage
            string _tenant = Automation.Settings.GetByReference<Tenant>(_project.Source).Name;
            string _downloadsPath = Automation.Settings.DownloadsPath;
            LogsButtonOnTheTenantManagementWillDownloadTenantLog(_client, _projectName, _username, _password, _downloadsPath, _tenant);
-    }
+        }
 
         private void LogsButtonOnTheTenantManagementWillDownloadTenantLog(string _client, string _projectName,string _username, string _password, string _downloadsPath, string _tenant)
         {
-            
            var  tenantsEditPage = Automation.Common
                 .SingIn(_username, _password)
                 .MigrateAndIntegrateSelect()
@@ -37,9 +34,11 @@ namespace BinaryTree.Power365.Test.CommonTests.LandingPage
                 .TenantsEdit()
                 .GetPage<EditTenantsPage>();
             tenantsEditPage.ClickDiscoveryTab();
-            tenantsEditPage.DeleteTenantLogs(_downloadsPath);
             tenantsEditPage.DownloadLogs(_tenant);
-            Assert.IsTrue(tenantsEditPage.CheckDiscoveryFileIsDownloaded(_downloadsPath,15),"");
+
+            var isFileDownloaded = Automation.Browser.IsFileDownloaded(EXPORT_FILE_NAME, WaitDefaults.FILE_DOWNLOAD_TIMEOUT_SEC, 3);
+
+            Assert.IsTrue(isFileDownloaded, "Tenant log file was not found in the downloads directory");
         }
 
         [Test]

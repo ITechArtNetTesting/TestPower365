@@ -15,6 +15,8 @@ namespace Product.Tests.CommonTests.SetupTests
 		
 		[TestMethod]
 		[TestCategory("Setup")]
+        //32381
+        //32384
 		public void SetupSecondUserSecondProject()
 		{
             LoginAndSelectRole(RunConfigurator.GetUserLogin("client2"),
@@ -113,11 +115,15 @@ namespace Product.Tests.CommonTests.SetupTests
             User.AtPublicFolderConflictsForm().Overwrites();
 		    User.AtPublicFolderConflictsForm().GoNext();
             User.AtPublicFolderCompleteForm().GoNext();
+            Assert.IsTrue(User.AtDirectorySyncStatusForm().AllTenantsHasOkStatus());
             User.AtDirectorySyncStatusForm().GoNext();
+            Assert.IsTrue(User.AtDownloadDirSyncForm().SeeDownloadDirSync());
             //User.AtConfigureDirectorySyncForm().GoNext();
-		    User.AtDownloadDirSyncForm().ScrollToTheBottom();
+            User.AtDownloadDirSyncForm().ScrollToTheBottom();
             User.AtDownloadDirSyncForm().GoNext();
-			User.AtDirectorySyncSettingsForm().StoreAccessKey();
+            Assert.IsTrue(User.AtDirectorySyncSettingsForm().SeeAccessKey());
+            Assert.IsTrue(User.AtDirectorySyncSettingsForm().SeeCopyAccessKey());
+            User.AtDirectorySyncSettingsForm().StoreAccessKey();
 			User.AtDirectorySyncSettingsForm().StoreAccessUrl();
 			User.AtDirectorySyncSettingsForm().GoNext();
 			User.AtEnterPasswordForm().SetPassword(RunConfigurator.GetValueByXpath("//metaname[text()='client2']/..//metaname[text()='project2']/..//metaname[text()='password1']/../value"));
@@ -135,11 +141,25 @@ namespace Product.Tests.CommonTests.SetupTests
             Assert.IsFalse(string.IsNullOrWhiteSpace(appKey));
             Assert.IsFalse(string.IsNullOrWhiteSpace(projectName));
 
+
+            int sourceTenantId = 0;
+            int targetTenantId = 0;
+            int projectId = 0;
             using (var dbT2T = new SqlClient(RunConfigurator.GetConnectionString()))
             {
                 var results = dbT2T.ExecuteNonQuery(string.Format("UPDATE Project SET DirSyncAppKey = '{1}' WHERE ProjectName = '{0}'", projectName, appKey));
                 Log.InfoFormat("Updated DirSyncAppKey for {0} projects", results);
+
+                projectId = dbT2T.SelectValue<int>(string.Format("SELECT ProjectId FROM Project WHERE ProjectName = '{0}'", projectName));
+
+                sourceTenantId = dbT2T.SelectValue<int>(string.Format("SELECT SourceTenantId FROM TenantMigration WHERE ProjectID = {0}", projectId));
+                targetTenantId = dbT2T.SelectValue<int>(string.Format("SELECT TargetTenantId FROM TenantMigration WHERE ProjectID = {0}", projectId));
             }
+            
+            var dsLiteProfileService = new DirSyncLiteProfileService(RunConfigurator.GetDirSyncLiteConnectionString());
+
+            dsLiteProfileService.SetTenantId("BTCloud7", sourceTenantId);
+            dsLiteProfileService.SetTenantId("BTCloud9", targetTenantId);
         }
 	}
 }

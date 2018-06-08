@@ -7,9 +7,10 @@ function Invoke-P365MailboxCopy{
 		 if([String]::IsNullOrEmpty($MappingFile)){
 			 $MappingFile = ($script:ModuleRoot + '\engine\mapping.csv')
 		 }
-		Import-Module ($script:ModuleRoot + '\engine\btT2TPSModule.psd1') -Force
-		Copy-T2TMailbox -SourceMailbox $Script:SourceMailbox -SourceCredentials $Script:SourcePSCreds -TargetMailbox $Script:TargetMailbox -TargetCredentials $Script:TargetPSCreds -mappingfile $MappingFile -ProcessingPath c:\temp -SkipFolderRetentionTags -CopyDumpster:$true -Delta:$true -SourceOnPremise $Script:SourceOnPrem -TargetOnPremise $Script:TargetOnPrem -SourceAutoDiscoverOverRide $Script:SourceAutoDiscoverOverRide -TargetAutoDiscoverOverRide $Script:TargetAutoDiscoverOverRide 
-		
+		 Write-Host "Start Copy-T2TMailbox"
+		 Import-Module ($script:ModuleRoot + '\engine\btT2TPSModule.psd1') -Force
+		 Copy-T2TMailbox -SourceMailbox $Script:SourceMailbox -SourceCredentials $Script:SourcePSCreds -TargetMailbox $Script:TargetMailbox -TargetCredentials $Script:TargetPSCreds -mappingfile $MappingFile -ProcessingPath c:\temp -SkipFolderRetentionTags -CopyDumpster:$true -Delta:$true -SourceOnPremise $Script:SourceOnPrem -TargetOnPremise $Script:TargetOnPrem -SourceAutoDiscoverOverRide $Script:SourceAutoDiscoverOverRide -TargetAutoDiscoverOverRide $Script:TargetAutoDiscoverOverRide 
+		 Write-Host "End Copy-T2TMailbox"
 	}
 }
 

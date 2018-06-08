@@ -16,7 +16,8 @@ namespace Product.Tests.IntegrationTests
             _testContext = testContext;
         }
         [TestMethod]
-        [TestCategory("Integration_test")]
+        [TestCategory("SmokeTest")]
+        [TestCategory("Integration")]
         public void Automation_IN_PS_DistributionGroupsValidationTest()
         {
             string userName = RunConfigurator.GetUserLogin("client2");

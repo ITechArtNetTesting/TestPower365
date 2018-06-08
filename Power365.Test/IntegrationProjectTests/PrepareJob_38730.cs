@@ -3,22 +3,19 @@ using BinaryTree.Power365.AutomationFramework.Dialogs;
 using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Pages;
 using BinaryTree.Power365.AutomationFramework.Utilities;
-//using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 
 
 namespace BinaryTree.Power365.Test.IntegrationProjectTests
-{
-   
+{  
     [TestFixture]
+    [Parallelizable(ParallelScope.Children)]
     public class PrepareJob_38730: TestBase
     {
-        public PrepareJob_38730()
-                  : base() { }                    
-
         [Test]
         [Category("Integration")]
         [Category("UI")]
+       // [TestResource("client2", "project2", "entry12")]
         [Category("Prepare")]
         public void PrepareJob_Integration_38730()
         {
@@ -35,8 +32,8 @@ namespace BinaryTree.Power365.Test.IntegrationProjectTests
             string _userMigration_source = project.GetByReference<UserMigration>("entry12").Source;
             string _userMigration_target = project.GetByReference<UserMigration>("entry12").Target;
 
-            var database = Automation.Settings.GetByReference<Database>("sqlt2t01");
-            string _connectionString = database.GetConnectionString();
+            var database = Automation.Settings.GetByReference<Database>("t2t");
+            string _connectionString = database.GetAzureSqlConnectionString();
 
 
             //test steps
@@ -52,13 +49,12 @@ namespace BinaryTree.Power365.Test.IntegrationProjectTests
             _manageUsersPage.UsersTable.ClickRowByValue(_userMigration_source);
             _manageUsersPage.PerformAction<ConfirmationDialog>(ActionType.Prepare)
                                       .Yes();
-            _manageUsersPage.IsUserState(_userMigration_source, StateType.Preparing, 18000, 5);
+            _manageUsersPage.IsUserState(_userMigration_source, StateType.Preparing, WaitDefaults.STATE_PREPARING_TIMEOUT_SEC, 5);
 
             //Verify
             UserMigrationQuery queryExecuter = new UserMigrationQuery();
             var  resultInDB= queryExecuter.SelectIsLockedByUsermail(_userMigration_target, _project, _connectionString);
             Assert.AreEqual(resultInDB, true , "The  UserMigration record IsLocked column wasn't be set to True ");
-         
         }
 
     }

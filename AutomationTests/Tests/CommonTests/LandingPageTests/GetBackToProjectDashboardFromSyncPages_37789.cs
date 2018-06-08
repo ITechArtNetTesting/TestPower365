@@ -20,6 +20,7 @@ namespace Product.Tests.CommonTests.LandingPageTests
 
         [TestMethod]
         [TestCategory("MailWithDiscovery")]
+        [TestCategory("UI")]
         public void ShouldGetBackToProjectDashboardFromSyncPages_MD_37789()
         {
             ShouldGetBackToProjectDashboardFromSyncPages(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"),
@@ -28,6 +29,7 @@ namespace Product.Tests.CommonTests.LandingPageTests
 
         [TestMethod]
         [TestCategory("MailOnly")]
+        [TestCategory("UI")]
         public void ShouldGetBackToProjectDashboardFromSyncPages_MO_37789()
         {
             ShouldGetBackToProjectDashboardFromSyncPages(RunConfigurator.GetUserLogin("client1"), RunConfigurator.GetPassword("client1"),
@@ -35,6 +37,7 @@ namespace Product.Tests.CommonTests.LandingPageTests
         }
         [TestMethod]
         [TestCategory("Integration")]
+        [TestCategory("UI")]
         public void ShouldGetBackToProjectDashboardFromSyncPages_Integration_37789()
         {
             ShouldGetBackToProjectDashboardFromSyncPages(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"),

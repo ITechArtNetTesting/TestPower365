@@ -1,6 +1,7 @@
 ﻿using BinaryTree.Power365.AutomationFramework.Elements;
 using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Extensions;
+using log4net;
 using OpenQA.Selenium;
 using System;
 
@@ -69,6 +70,7 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
                 return new ButtonElement(_closeButton, WebDriver);
             }
         }
+
         public TableElement JobsTable
         {
             get
@@ -84,14 +86,14 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
         private readonly string _actionButtonFormat = "//div[contains(@class, 'modal in')]//*[contains(@data-bind, '{0}')]";
         private readonly string _confirmationDialogButtonFormat = "//div[@id='confirmationDialog'][contains(@class, 'modal in')]//*[contains(text(), '{0}')]";
         private readonly string _migrationStateTextLocatorFormat = "//*[contains(@data-bind, 'migrationState')][contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'{0}')]";
-       
+
+        public const string DOWNLOAD_LOGS = "//ancestor::tr//*[contains(@class,'fa-download')]";
 
         public UserDetailsDialog(IWebDriver webDriver)
-            : base(webDriver) { }
+            : base(LogManager.GetLogger(typeof(UserDetailsDialog)), webDriver) { }
 
         public T PerformAction<T>(ActionType action)
-          where T : ModalDialogBase
-            //   public void PerformAction(ActionType action)          
+          where T : ModalDialogBase     
         {
             ButtonElement button = null;
             switch (action)
@@ -124,15 +126,9 @@ namespace BinaryTree.Power365.AutomationFramework.Dialogs
 
             var rowEntryTextValue = string.Format(_migrationStateTextLocatorFormat, value.ToLower());
             var stateLocator = By.XPath(rowEntryTextValue);
-
-
+            
             if (!IsElementVisible(stateLocator, timeoutInSec, pollIntervalInSec, () => RefreshButton.Click()))
-            {
                 throw new Exception(string.Format("Entry of '{0}' with state '{1}' was not found.", entry, value));
-            };
-
         }
-
-           
-}
+    }
 }

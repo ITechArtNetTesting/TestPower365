@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using log4net;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,9 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private readonly By _dontShowAgain = By.Name("DontShowAgain");
         
         public O365SignInPage(IWebDriver webDriver)
-            : base(_locator, webDriver) { }
+            : base(LogManager.GetLogger(typeof(O365SignInPage)), _locator, webDriver) { }
 
-        public StartPage SignIn(string username, string password)
+        public LandingPage SignIn(string username, string password)
         {
             var loginInputElement = FindVisibleElement(_loginInput);
             loginInputElement.SendKeys(username);
@@ -38,7 +39,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
             }
             catch (Exception) { }
 
-            return ClickElementBy<StartPage>(_primaryButton);
+            return ClickElementBy<LandingPage>(_primaryButton);
         }
 
         public void AuthorizeTenant(string username, string password)

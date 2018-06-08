@@ -5,7 +5,8 @@ using NUnit.Framework;
 namespace BinaryTree.Power365.Test.Menu
 {
     [TestFixture]
-    public class VerifyTheTabsOnTheManageErrorsPage_TC34718: TestBase
+    [Parallelizable(ParallelScope.Children)]
+     class VerifyTheTabsOnTheManageErrorsPage_TC34718: TestBase
     {
         public VerifyTheTabsOnTheManageErrorsPage_TC34718() : base() { }
 
@@ -21,22 +22,22 @@ namespace BinaryTree.Power365.Test.Menu
             VerifyTheTabsOnTheManageErrorsPage(_username, _password, _client, _projectName, isIntegration);
         }
 
-        private void VerifyTheTabsOnTheManageErrorsPage(string _username, string _password , string _client, string  _projectName, bool isIntegration )
+        private void VerifyTheTabsOnTheManageErrorsPage(string _username, string _password , string _client, string  _projectName, bool isIntegration)
         {
            var errorsPage = Automation.Common
                 .SingIn(_username, _password)
+                .MigrateAndIntegrateSelect()
                 .ClientSelect(_client)
                 .ProjectSelect(_projectName)
                 .GetPage<ProjectDetailsPage>()
                 .Menu
                 .ClickErrors();
+
             if (isIntegration)
-            {
                 Assert.IsTrue(errorsPage.GroupsTab.IsVisible());
-            }
+
             Assert.IsTrue(errorsPage.UsersTab.IsVisible());
             Assert.IsTrue(errorsPage.TenantsTab.IsVisible());
-
         }
 
         [Test]
@@ -60,7 +61,7 @@ namespace BinaryTree.Power365.Test.Menu
         [Category("Integration")]
         public void VerifyTheTabsOnTheManageErrorsPage_Integration_34718()
         {
-            TestRun("client2", "project2",true);           
+            TestRun("client2", "project2", true);           
         }
     }
 }

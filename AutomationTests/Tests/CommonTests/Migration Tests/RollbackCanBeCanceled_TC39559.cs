@@ -18,7 +18,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
         [TestCategory("Integration")]
         [TestCategory("UI")]
         [TestCategory("Rollback")]
-        public void RollbackTest_InTheUserDetailView_Integrat_39559()
+        public void RollbackTest_InTheUserDetailView_Integrat_39559_39560()
         {
             bool isIntegrate = true;
             RollbackTest_InTheUserDetailView(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"), RunConfigurator.GetClient("client2"),
@@ -29,7 +29,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
         [TestCategory("MailOnly")]
         [TestCategory("UI")]
         [TestCategory("Rollback")]
-        public void RollbackTest_InTheUserDetailView_MO_39559()
+        public void RollbackTest_InTheUserDetailView_MO_39559_39560()
         {
             RollbackTest_InTheUserDetailView(RunConfigurator.GetUserLogin("client1"), RunConfigurator.GetPassword("client1"), RunConfigurator.GetClient("client1"),
                 RunConfigurator.GetProjectName("client1", "project1"), RunConfigurator.GetSourceMailbox("client1", "project1", "entry13"));
@@ -39,7 +39,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
         [TestCategory("MailWithDiscovery")]
         [TestCategory("UI")]
         [TestCategory("Rollback")]
-        public void RollbackTest_InTheUserDetailView_MD_39559()
+        public void RollbackTest_InTheUserDetailView_MD_39559_39560()
         {
             RollbackTest_InTheUserDetailView(RunConfigurator.GetUserLogin("client2"), RunConfigurator.GetPassword("client2"), RunConfigurator.GetClient("client2"),
               RunConfigurator.GetProjectName("client2", "project1"), RunConfigurator.GetSourceMailbox("client2", "project1", "entry10"));
@@ -73,7 +73,7 @@ namespace Product.Tests.CommonTests.Migration_Tests
             User.AtUsersForm().SetSureCheckbox();
             User.AtUsersForm().RollbackCancelClick_modalWindow();
             User.AtUsersForm().RefreshData();
-            //Verify
+            //Verify  39560
             User.AtUsersForm().AssertRollBackJobNotStarted();
             User.AtUsersForm().DetailsClose();
             //Verify

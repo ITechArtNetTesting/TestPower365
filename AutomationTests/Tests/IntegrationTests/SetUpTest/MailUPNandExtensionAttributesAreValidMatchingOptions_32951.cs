@@ -37,13 +37,14 @@ namespace Product.Tests.IntegrationTests.SetUpTest
         [TestMethod]
         [TestCategory("Integration")]
         [TestCategory("SetUpProject")]
+        [TestCategory("UI")]
         public void MailUPNandExtensionAttributesAreValidMatchingOptions_32951()
         {
             LoginAndSelectRole(login, password, client);
             User.AtTenantRestructuringForm().AddProjectClick();
             User.AtChooseYourProjectTypeForm().ChooseIntegration();
             User.AtChooseYourProjectTypeForm().GoNext();
-            User.AtSetProjectNameForm().SetName("TC32951Project" + Convert.ToString(new Random().Next(1000)));
+            User.AtSetProjectNameForm().SetName("TC32951Project_" + Convert.ToString(new Random().Next(1000)));
             User.AtSetProjectNameForm().GoNext();
             User.AtSetProjectDescriptionForm().SetDescription(StringRandomazer.MakeRandomString(20));
             User.AtSetProjectDescriptionForm().GoNext();

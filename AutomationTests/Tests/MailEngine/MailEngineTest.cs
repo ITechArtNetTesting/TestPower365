@@ -210,6 +210,7 @@ namespace Product.Tests.PowerShellTests
         }
 
         [TestMethod]
+        [TestCategory("SmokeTest")]
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Rollback")]
@@ -237,6 +238,7 @@ namespace Product.Tests.PowerShellTests
         }
 
         [TestMethod]
+        [TestCategory("SmokeTest")]
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Rollback")]
@@ -246,6 +248,7 @@ namespace Product.Tests.PowerShellTests
         }
 
         [TestMethod]
+        [TestCategory("SmokeTest")]
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Sync")]
@@ -255,6 +258,7 @@ namespace Product.Tests.PowerShellTests
         }
 
         [TestMethod]
+        [TestCategory("SmokeTest")]
         [TestCategory("MailEngine")]
         [TestCategory("Mailbox")]
         [TestCategory("Rollback")]

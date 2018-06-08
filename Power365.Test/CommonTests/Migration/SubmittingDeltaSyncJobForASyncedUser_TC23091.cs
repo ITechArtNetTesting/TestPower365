@@ -1,55 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BinaryTree.Power365.AutomationFramework;
+﻿using BinaryTree.Power365.AutomationFramework;
 using BinaryTree.Power365.AutomationFramework.Dialogs;
 using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Pages;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 
 namespace BinaryTree.Power365.Test.CommonTests.Migration
 {
     [TestFixture]
-    public class SubmittingDeltaSyncJobForASyncedUser_TC23091 : TestBase
+    [Parallelizable(ParallelScope.Children)]
+    class SubmittingDeltaSyncJobForASyncedUser_TC23091 : TestBase
     {
         public SubmittingDeltaSyncJobForASyncedUser_TC23091()
                    : base() { }    
-             
-
+        
         [Test]
+        [Category("SmokeTest")]
         [Category("UI")]
         [Category("MailOnly")]
         [Category("Sync")]
+      //  [TestResource("client1", "project1", "entry11")]
         public void VerifySubmittingDeltaSyncJobForASyncedUserFor_MO_23091()
         {
             RunTest("client1", "project1", "entry11");           
         }
 
         [Test]
+        [Category("SmokeTest")]
         [Category("UI")]
         [Category("MailWithDiscovery")]
         [Category("Sync")]
+      //  [TestResource("client2", "project1", "entry8")]
         public void VerifySubmittingDeltaSyncJobForASyncedUserFor_MD_23091()
         {
-            RunTest("client2", "project1", "entry6");            
+            RunTest("client2", "project1", "entry8");            
         }
 
         [Test]
+        [Category("SmokeTest")]
         [Category("UI")]
         [Category("Integration")]
         [Category("Sync")]
+       // [TestResource("client2", "project2", "entry10")]
         public void VerifySubmittingDeltaSyncJobForASyncedUserFor_Integration_23091()
         {
-            RunTest("client2", "project2", "entry10",true);            
+            RunTest("client2", "project2", "entry10", true);
         }
 
         private void RunTest(string init_client, string init_project, string entry, bool isInetgrat=false)
         {
-          
             var  client = Automation.Settings.GetByReference<Client>(init_client);
             var project = client.GetByReference<Project>(init_project);
             string username = client.Administrator.Username;
@@ -73,39 +71,47 @@ namespace BinaryTree.Power365.Test.CommonTests.Migration
         {
             ManageUsersPage _manageUsersPage;
             _manageUsersPage = Automation.Common
-                                       .SingIn(login, password)
-                                       .MigrateAndIntegrateSelect()
-                                       .ClientSelect(client)
-                                       .ProjectSelect(projectName)
-                                       .UsersEdit()
-                                       .GetPage<ManageUsersPage>();
-                _manageUsersPage.Search(entry);
-                var _usersDetailsPage = _manageUsersPage.OpenUserDetails(entry);
-                if (isIntegrat)
-                {
+                                        .SingIn(login, password)
+                                        .MigrateAndIntegrateSelect()
+                                        .ClientSelect(client)
+                                        .ProjectSelect(projectName)
+                                        .UsersEdit()
+                                        .GetPage<ManageUsersPage>();
+
+            _manageUsersPage.Search(entry);
+            var _usersDetailsPage = _manageUsersPage.OpenUserDetails(entry);
+
+            if (isIntegrat)
+            {
                 // Integration project
-                _usersDetailsPage.PerformAction<ConfirmationDialog>(ActionType.Prepare)
-                                      .Yes();
-                 _usersDetailsPage.UsersValidateState(entry, StateType.Preparing, 2700000, 5);
-                 _usersDetailsPage.UsersValidateState(entry, StateType.Prepared, 2700000, 5);
+                _usersDetailsPage
+                    .PerformAction<ConfirmationDialog>(ActionType.Prepare)
+                    .Yes();
 
-                }
+                _usersDetailsPage.UsersValidateState(entry, StateType.Preparing, WaitDefaults.STATE_PREPARING_TIMEOUT_SEC, 5);
+                _usersDetailsPage.UsersValidateState(entry, StateType.Prepared, WaitDefaults.STATE_PREPARED_TIMEOUT_SEC, 60);
+            }
 
-                _usersDetailsPage.PerformAction<ConfirmationDialog>(ActionType.Sync)
-                                   .Yes();
-                _usersDetailsPage.UsersValidateState(entry, StateType.Syncing, 2700000, 5);
+            _usersDetailsPage
+                .PerformAction<ConfirmationDialog>(ActionType.Sync)
+                .Yes();
 
-                //verify Sync1
-               _usersDetailsPage.UsersValidateState(entry, StateType.Synced1, 2700000, 5);
+            //verify Sync1
+            _usersDetailsPage.UsersValidateState(entry, StateType.Syncing, WaitDefaults.STATE_SYNCING_TIMEOUT_SEC, 5);
+            _usersDetailsPage.UsersValidateState(entry, StateType.Synced1, WaitDefaults.STATE_SYNCED_TIMEOUT_SEC, 60);
 
-               //sync job is ran again
-               _usersDetailsPage.PerformAction<ConfirmationDialog>(ActionType.Sync).Yes();
-               _usersDetailsPage.UsersValidateState(entry, StateType.Syncing, 2700000, 5);
+            //sync job is ran again
+            _usersDetailsPage
+                .PerformAction<ConfirmationDialog>(ActionType.Sync)
+                .Yes();
 
-               //verify Sync2
-               _usersDetailsPage.UsersValidateState(entry, StateType.Synced2, 2700000, 5);
-      
+            //verify Sync2
+            _usersDetailsPage.UsersValidateState(entry, StateType.Syncing, WaitDefaults.STATE_SYNCING_TIMEOUT_SEC, 5);
+            _usersDetailsPage.UsersValidateState(entry, StateType.Synced2, WaitDefaults.STATE_SYNCED_TIMEOUT_SEC, 60);
+
         }
+
+
 
 
     }

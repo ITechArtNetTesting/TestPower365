@@ -1,10 +1,9 @@
 ﻿using BinaryTree.Power365.AutomationFramework.Elements;
 using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Extensions;
-using BinaryTree.Power365.AutomationFramework.Pages;
 using BinaryTree.Power365.AutomationFramework.Workflows;
+using log4net;
 using OpenQA.Selenium;
-using System;
 using System.Linq;
 
 namespace BinaryTree.Power365.AutomationFramework.Pages
@@ -25,7 +24,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private readonly By _publicFoldersTable = By.XPath("//table[contains(@class, 'table-expanded')]");
       
         public ManagePublicFoldersPage(IWebDriver webDriver)
-            : base(_locator, webDriver) { }
+            : base(LogManager.GetLogger(typeof(ManagePublicFoldersPage)), _locator, webDriver) { }
 
         public AddPublicFolderWorkflow AddPublicFolderMigration()
         {

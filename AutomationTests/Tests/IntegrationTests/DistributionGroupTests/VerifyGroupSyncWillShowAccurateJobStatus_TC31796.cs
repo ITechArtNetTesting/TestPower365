@@ -26,8 +26,8 @@ namespace Product.Tests.IntegrationTests.DistributionGroupTests
         [TestInitialize()]
         public void Initialize()
         {
-            login = RunConfigurator.GetUserLogin("client1");
-            password = RunConfigurator.GetPassword("client1");
+            login = RunConfigurator.GetUserLogin("client2");
+            password = RunConfigurator.GetPassword("client2");
             client = RunConfigurator.GetClient("client2");
             projectName = RunConfigurator.GetProjectName("client2", "project2");
             group = RunConfigurator.GetADGroupName("client2", "project2", "group7");
@@ -36,7 +36,10 @@ namespace Product.Tests.IntegrationTests.DistributionGroupTests
 
 
         [TestMethod]
+        [TestCategory("SmokeTest")]
+        [TestCategory("UI")]
         [TestCategory("Integration")]
+        [TestCategory("GroupSync")]
         public void VerifyGroupSyncWillShowAccurateJobStatus_31796()
         {
                 LoginAndSelectRole(login, password, client);
