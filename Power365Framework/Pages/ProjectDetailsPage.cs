@@ -2,6 +2,7 @@
 using BinaryTree.Power365.AutomationFramework.Elements;
 using OpenQA.Selenium;
 using log4net;
+using BinaryTree.Power365.AutomationFramework.Workflows;
 
 namespace BinaryTree.Power365.AutomationFramework.Pages
 {
@@ -17,6 +18,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         private readonly By _rollbackUsers = By.XPath("//*[contains(@id, 'migrationWavesForUsers')]//*[contains(text(), 'All Users')]/ancestor::tr//a[contains(@data-bind, 'rollbackNumber')]");
         private readonly By _errorsUsers = By.XPath("//*[contains(@id, 'migrationWavesForUsers')]//*[contains(text(), 'All Users')]/ancestor::tr//a[contains(@data-bind, 'errors')]");
         private readonly By _help = By.XPath("//*[@class='footer']//*[text()='ONLINE HELP GUIDE']");
+        private readonly By _projectEditLink = By.XPath("//*[text()='PROJECT']/ancestor::div[1]//*[text()='Edit']");
 
         public ProjectDetailsPage(IWebDriver webDriver)
             : base(LogManager.GetLogger(typeof(ProjectDetailsPage)), _locator, webDriver) { }
@@ -25,6 +27,14 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         {
             return ClickElementBy<ManageUsersPage>(_usersEditLink);
         }
+
+        public T ClickProjectEdit<T>()
+           where T : EditProjectWorkflowBase<T>
+        {
+            var editProjectPage = ClickElementBy<EditProjectPage>(_projectEditLink);
+            return (T)Activator.CreateInstance(typeof(T), editProjectPage, WebDriver);
+        }
+        
 
         public EditTenantsPage ClickTenantsEdit()
         {

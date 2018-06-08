@@ -217,6 +217,7 @@ while(![System.IO.File]::Exists($StopFilePath1)){
 $TestSession.EnumberateFolders()
 
 #validate permissions
+#TC 37608
 	$valTestacf = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "validateaddsendaspermissionmailbox"-TestOutput $Testacf.OutputObject
 	if($valTestacf.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 	{
@@ -229,6 +230,7 @@ $TestSession.EnumberateFolders()
 		("Validate SendAsPermission Check failed")  | Out-File -Append -FilePath $TestLogFile    
 		$overallResults = "Failed"
 	}
+#TC 37607
 	$valTestamb = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "validateaddmailboxpermission"-TestOutput $Testamb.OutputObject
 	if($valTestacf.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 	{
@@ -241,6 +243,7 @@ $TestSession.EnumberateFolders()
 		("Validate add Mailbox permission Check failed")  | Out-File -Append -FilePath $TestLogFile    
 		$overallResults = "Failed"
 	}
+#TC 37610
 	$valTestsob = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "validateaddsendonbehalfpermission"-TestOutput $Testsob.OutputObject
 	if($valTestsob.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 	{
@@ -275,7 +278,7 @@ while(![System.IO.File]::Exists($StopFilePathRollback1)){
 } 
 ###############################################################################################################################################
 $TestSession.EnumberateFolders()
-
+#TC 39539
 $Validation10 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "validateadditems" -TestOutput $SourceItemsTest.OutputObject
 if($Validation10.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 {
@@ -290,7 +293,7 @@ else
 
 
 }
-
+#TC 39539
 $Validation9 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "validatetargetaddfolder" -TestOutput $addtfFolder.OutputObject
 if($Validation9.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 {
@@ -303,6 +306,7 @@ else
     ("Validate Add target folder failed")| Out-File -Append -FilePath $TestLogFile    
      $overallResults = "failed"
 }
+#TC 39539
 $Validation8 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "validateaddleftitems" -TestOutput $ItemsTest.OutputObject
 if($Validation8.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 {
@@ -315,7 +319,7 @@ else
     ("Validate Add left items failed")| Out-File -Append -FilePath $TestLogFile    
     $overallResults = "failed"
 }
-
+#TC 39539
 $Validation12 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "validateaddfolder" -TestOutput $addSourceFolder1.OutputObject
 if($Validation12.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 {

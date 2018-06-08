@@ -79,7 +79,7 @@ else
 }
 
 #Add message to test subject change
-
+#TC 22382
 $ItemAddSubject = "Yoko's Message to test modifying subject " + (Get-Date).ToString("yyyyMMddHHmm");
 
 $Test7 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addmailitem" -SourceFolder "\\Inbox" -ItemSubject $ItemAddSubject
@@ -99,6 +99,7 @@ else
 }
 
 #Add contact to test modify email address
+#TC 22388
 $ContactAddSubject = "Contact to test email address change " + (Get-Date).ToString("yyyyMMddHHmm");
 
 $Test8 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addcontactitem" -SourceFolder "\\Contacts" -ContactName $ContactAddSubject -ContactEmailAddress 'Address@Fake.com'
@@ -118,7 +119,7 @@ else
 }
 
 #Add Sticky Note to test modify subject
-
+#TC 22544
 $AddStickyNoteSubject = "Sticky Note Add " + (Get-Date).ToString("yyyyMMddHHmm");
 $Test10 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addcustomitem" -SourceFolder "\\Notes" -ItemSubject $AddStickyNoteSubject -ItemClass "IPM.StickyNote"
 if($Test10.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
@@ -137,7 +138,7 @@ else
 }
 
 #Add task to test subject change
-
+#TC 22386
 $AddTaskSubject = "Task to test subject change " + (Get-Date).ToString("yyyyMMddHHmm");
 $Test10T = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addcustomitem" -SourceFolder "\\Tasks" -ItemSubject $AddTaskSubject -ItemClass "IPM.Task"
 if($Test10T.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
@@ -156,7 +157,7 @@ else
 }
 
 #Add Journal to test subject change
-
+#TC 22387
 $AddJournalSubject = "Journal to test subject change " + (Get-Date).ToString("yyyyMMddHHmm");
 $Test10J = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addcustomitem" -SourceFolder "\\Journal" -ItemSubject $AddJournalSubject -ItemClass "IPM.Activity"
 if($Test10J.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
@@ -175,7 +176,7 @@ else
 }
 
 #Add message to test move to a different folder
-
+#TC 22238
 $ItemAddSubjectMove = "Yoko's Message to test move to a different folder " + (Get-Date).ToString("yyyyMMddHHmm");
 
 $Test7Move = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addmailitem" -SourceFolder "\\Inbox" -ItemSubject $ItemAddSubjectMove
@@ -373,6 +374,7 @@ else
 #Modify Folders and Items
 
 #Rename Folder
+#TC 22573
 $FolderTestNameR2 = "Renamed 1NewFolder-" + (Get-Date).ToString("yyyyMMddHHmmss");
 $Test20 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "renamesourcefolder" -SourceFolder ("\\Inbox\" + $FolderTestNameR) -FolderName  $FolderTestNameR2
 if($Test20.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
@@ -424,7 +426,7 @@ else
 }
 
 #Modify Mail Item Subject
-
+#TC 22383
 $Test17 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "modifyitemsubject" -SourceFolder "\\Inbox" -ItemSubject $Validation7.ItemCheckedSubject 
 if($Test17.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 {
@@ -442,7 +444,7 @@ else
 }
 
 #Modify contact email address
-
+#TC 22414
 $Test18 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "modifycontactemail" -SourceFolder "\\Contacts" -ItemSubject $Validation8.ItemCheckedSubject -ContactEmailAddress 'NewAddress@fakeDomain.com'
 if($Test18.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 {
@@ -460,6 +462,7 @@ else
 }
 
 #Modify StickNote
+#TC 22544
 $Test19 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "modifyitemsubject" -SourceFolder "\\Notes" -ItemSubject $Validation10.ItemCheckedSubject 
 if($Test19.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 {
@@ -477,6 +480,7 @@ else
 }
 
 #Modify Task
+#TC 22488
 $Test19T = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "modifyitemsubject" -SourceFolder "\\Tasks" -ItemSubject $Validation10T.ItemCheckedSubject 
 if($Test19T.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 {
@@ -494,6 +498,7 @@ else
 }
 
 #Modify Journal
+#TC 22489
 $Test19J = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "modifyitemsubject" -SourceFolder "\\Journal" -ItemSubject $Validation10J.ItemCheckedSubject 
 if($Test19J.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 {
@@ -511,6 +516,7 @@ else
 }
 
 #Move message to Draft folder
+#TC 22389
 $Test23 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "moveitem" -SourceFolder "\\Inbox" -ItemSubject $ItemAddSubjectMove -TargetFolder "\\Drafts"   
 if($Test23.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 {

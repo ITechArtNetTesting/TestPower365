@@ -620,7 +620,7 @@
 			<additionaldomain>corp31.cmtsandbox.com</additionaldomain>
 			<aduser>Corp31\administrator</aduser>
 			<adpassword>Password31</adpassword>
-      <azureAdSyncServer>C31-EX13</azureAdSyncServer>
+      <azureAdSyncServer>w12-c31-ex13</azureAdSyncServer>
 			<uri>https://10.1.178.10/PowerShell</uri>
 		</tenant>
 		<tenant metaname="T6">
@@ -633,7 +633,7 @@
 			<adpassword>Password32</adpassword>
 			<domain>BTCorp32.onmicrosoft.com</domain>
 			<additionaldomain>corp32.cmtsandbox.com</additionaldomain>
-      <azureAdSyncServer>C32-EX13</azureAdSyncServer>
+      <azureAdSyncServer>w12-c32-ex13</azureAdSyncServer>
 			<uri>https://10.1.178.55/PowerShell</uri>
 		</tenant>
 	</tenants>

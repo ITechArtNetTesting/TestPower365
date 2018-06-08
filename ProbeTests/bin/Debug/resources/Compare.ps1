@@ -27,6 +27,7 @@ $TestSession = Start-T2tMigrationTests -SourceMailbox $SourceMailbox -SourceCred
 #PreDeleta Test
 
 #Test 1 Folder existance Test this test if the folderpath are the same in both Mailboxes
+#TC 22412 ?? This just tests that the folders in the source exist in the target, we don't even clear the target first.. could be verifying against old data.
 
 $Test1 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "folderexits" 
 if($Test1.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
@@ -45,7 +46,7 @@ else
 }
 
 #Test2 Item existance Test test if the Item exists in both mailboxes checks Receipents displayName and attachment count
-
+#Cannot find a TC for this..
 $Test2 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "sourcetargetitems" 
 if($Test2.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
 {

@@ -27,7 +27,7 @@ $TestSession = Start-T2tMigrationTests -SourceMailbox $SourceMailbox -SourceCred
 #Add Folders
 
 #Add Mail Folder
-
+#TC 22412
 $AddFolderTestName = "NewMailFolderAdd-" + (Get-Date).ToString("yyyyMMddHHmm");
 $Test3 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addfolder" -ParentSourceFolder "\\Inbox" -FolderName $AddFolderTestName -FolderClass "IPF.Note"
 if($Test3.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
@@ -46,7 +46,7 @@ else
 }
 
 #Add Contact Folder
-
+#TC 22412
 $FolderTestName = "NewContactFolderAdd-" + (Get-Date).ToString("yyyyMMddHHmm");
 $Test4 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addfolder" -ParentSourceFolder "\\Contacts" -FolderName $FolderTestName -FolderClass "IPF.Contact"
 if($Test4.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
@@ -65,7 +65,7 @@ else
 }
 
 #Add Calendar folder
-
+#TC 22412
 $FolderTestName = "NewCalendarFolderAdd-" + (Get-Date).ToString("yyyyMMddHHmm");
 $Test5 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addfolder" -ParentSourceFolder "\\Calendar" -FolderName $FolderTestName -FolderClass "IPF.Appointment"
 if($Test5.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
@@ -86,7 +86,7 @@ else
 #Add Items
 
 #Add Mail message
-
+#TC 22407
 $ItemAddSubject = "Test New Mail " + (Get-Date).ToString("yyyyMMddHHmm");
 $Test7 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addmailitem" -SourceFolder "\\Inbox" -ItemSubject $ItemAddSubject
 if($Test7.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
@@ -105,7 +105,7 @@ else
 }
 
 #Add contact
-
+#TC 22410
 $ContactAddSubject = "Contact New Item " + (Get-Date).ToString("yyyyMMddHHmm");
 $Test8 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addcontactitem" -SourceFolder "\\Contacts" -ContactName $ContactAddSubject -ContactEmailAddress 'Address@Fake.com'
 if($Test8.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
@@ -124,7 +124,7 @@ else
 }
 
 #Add Appointment
-
+#TC 22408
 $AppointmentAddSubject = "Test Meeting " + (Get-Date).ToString("yyyyMMddHHmm");
 $Test9 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addappointmentitem" -SourceFolder "\\Calendar" -ItemSubject $AppointmentAddSubject -Start (Get-Date) -End (Get-Date).AddHours(1)
 if($Test9.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
@@ -143,7 +143,7 @@ else
 }
 
 #Add Sticky Note
-
+#TC 22545
 $CustomItemTest = "Sticky Note Add " + (Get-Date).ToString("yyyyMMddHHmm");
 $Test10 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addcustomitem" -SourceFolder "\\Notes" -ItemSubject $CustomItemTest -ItemClass "IPM.StickyNote"
 if($Test10.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
@@ -162,7 +162,7 @@ else
 }
 
 #Add Personal Distribution List
-
+#TC 22410
 $dlName = "New PDL Test " + (Get-Date).ToString("yyyyMMddHHmm");
 $contactName = "New Contact "+ (Get-Date).ToString("yyyyMMddHHmm");
 
@@ -183,7 +183,7 @@ else
 }
 
 #Add Task
-
+#TC 22409
 $TaskAddSubject = "Eugeny New Task " + (Get-Date).ToString("yyyyMMddHHmm");
 $Test14T = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addcustomitem" -SourceFolder "\\Tasks" -ItemSubject $TaskAddSubject -ItemClass "IPM.Task"
 if($Test14T.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
@@ -202,7 +202,7 @@ else
 }
 
 #Add Journal Item
-
+#TC 22411
 $JournalItemTest = "Eugeny New Journal " + (Get-Date).ToString("yyyyMMddHHmm");
 $Test14J = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addcustomitem" -SourceFolder "\\Journal" -ItemSubject $JournalItemTest -ItemClass "IPM.Activity"
 if($Test14J.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
@@ -221,7 +221,7 @@ else
 }
 
 #Add New message for Attachment Test
-
+#TC 22407
 $ItemAddSubject = "Eugeny's test message " + (Get-Date).ToString("yyyyMMddHHmm");
 $Test13 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addmailitem" -SourceFolder "\\Inbox" -ItemSubject $ItemAddSubject
 if($Test13.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)
@@ -240,7 +240,7 @@ else
 }
 
 #Add Attachment to the message
-
+#TC 22407
 $AttachmentPath = $PSScriptRoot + "\attach.jpg"
 $Test16 = Invoke-T2TMigrationTest -TestSession $TestSession -TestName "addattachment" -SourceFolder "\\Inbox" -ItemSubject $ItemAddSubject -Attachment $AttachmentPath
 if($Test16.Result -eq [T2TMigrationTestUtil.Tests.TestResult]::Success)

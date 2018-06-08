@@ -93,6 +93,7 @@
     <Compile Include="CommonTests\AddressBook\VerifyAddressBookWillBeDisplayedInManageTenants_TC32860.cs" />
     <Compile Include="CommonTests\Discovery\VerifyDiscoveryCanBeEnabledAndDisabledInManageTenantsPage_TC32699.cs" />
     <Compile Include="CommonTests\Help\HelpLinkUnderGeneralAndTheFootnotesWorks_36709TC.cs" />
+    <Compile Include="CommonTests\Help\HelpVideoExist_TC.cs" />
     <Compile Include="CommonTests\LandingPage\LogsButtonOnTheTenantManagementWillDownloadTenantLog_TC25773.cs" />
     <Compile Include="CommonTests\LandingPage\CompletedUserColumnCountLinksToUsersPageWithFilter_TC52577.cs" />
     <Compile Include="CommonTests\MigrationWaves\MigrationWave_ApplyAction_TC30919_33610.cs" />

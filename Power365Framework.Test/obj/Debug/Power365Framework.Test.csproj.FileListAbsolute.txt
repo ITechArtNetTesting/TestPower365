@@ -14,4 +14,3 @@ D:\Project\BTCloud\SeleniumTests\Power365Framework.Test\obj\Debug\Power365Framew
 D:\Project\BTCloud\SeleniumTests\Power365Framework.Test\obj\Debug\Power365Framework.Test.pdb
 D:\Project\BTCloud\SeleniumTests\Power365Framework.Test\bin\Debug\log4net.dll
 D:\Project\BTCloud\SeleniumTests\Power365Framework.Test\bin\Debug\log4net.xml
-D:\Project\BTCloud\SeleniumTests\Power365Framework.Test\obj\Debug\Power365Framework.Test.csprojResolveAssemblyReference.cache

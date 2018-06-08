@@ -15,7 +15,10 @@ function Invoke-P365SyncPublicFolder{
 		$TargetDomain =  new-object System.net.mail.mailaddress($Script:TargetMailbox)
 		$DomainMappings.Add(($SourceDomain.Host).ToLower(), ($TargetDomain.Host).ToLower())
 		$DomainMappings.Add("_default_", ($TargetDomain.Host).ToLower())
-		Sync-T2TPublicFolderHierarchy -SourceMailbox $Script:SourceMailbox -SourceCredentials $Script:SourcePSCreds -TargetMailbox $Script:TargetMailbox -TargetCredentials $Script:TargetPSCreds  -mappingfile $MappingFile  -ProcessingPath c:\temp -SourcePublicFolderPath $SourceFolderPath -TargetPublicFolderPath $TargetCopyPath -DomainMappings $DomainMappings -SourceOnPremise $Script:SourceOnPrem -TargetOnPremise $Script:TargetOnPrem -SourceAutoDiscoverOverRide $Script:SourceAutoDiscoverOverRide -TargetAutoDiscoverOverRide $Script:TargetAutoDiscoverOverRide -SourcePowerShellOverRide $Script:SourcePowerShellOverRide -TargetPowerShellOverRide $Script:TargetPowerShellOverRide
+
+		Write-Host "Public Folder - Provisioning: '$SourceFolderPath' to '$TargetCopyPath'"
+
+		Sync-T2TPublicFolderHierarchy -SourceMailbox $Script:SourceMailbox -SourceCredentials $Script:SourcePSCreds -TargetMailbox $Script:TargetMailbox -TargetCredentials $Script:TargetPSCreds  -mappingfile $MappingFile  -ProcessingPath c:\temp -SourcePublicFolderPath $SourceFolderPath -TargetPublicFolderPath $TargetCopyPath -DomainMappings $DomainMappings -SourceOnPremise $Script:SourceOnPrem -TargetOnPremise $Script:TargetOnPrem -SourceAutoDiscoverOverRide $Script:SourceAutoDiscoverOverRide -TargetAutoDiscoverOverRide $Script:TargetAutoDiscoverOverRide -SourcePowerShellOverRide $Script:SourcePowerShellOverRide -TargetPowerShellOverRide $Script:TargetPowerShellOverRide -LogPath $Script:LogPath
 	}
 }
 

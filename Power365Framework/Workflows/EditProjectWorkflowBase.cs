@@ -14,6 +14,14 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
         private readonly By _projectNameStep = By.XPath("//*/span[@data-translation='WhatShouldWeCallProject']");
         private readonly By _projectDescriptionStep = By.XPath("//*/span[@data-translation='DescribeThisProjectInJustAFewWords']");
         private readonly By _addTenantsStep = By.XPath("//*/span[@data-translation='WeHaveToAddYourTenants']");
+        private readonly By _reviewTenantsStep = By.XPath("//*/span[@data-translation='LetsReviewYourTenantPairs']");
+        private readonly By _selectDomainStep = By.XPath("//*/span[@data-translation='DomainsYouHaveSelectedFrom']");
+        private readonly By _discoverUsersStep = By.XPath("//*/span[@data-translation='HowWouldYouLikeToDiscoverUsersFrom']");
+        private readonly By _discoverGroupsStep = By.XPath("//*/span[@data-translation='WhichADGroupsShouldWeUseToDiscoverUsers']");
+        private readonly By _reviewGroupsStep = By.XPath("//*/span[@data-translation='LetsReviewSelectedADGroups']");
+        private readonly By _matchUsersStep = By.XPath("//*/span[@data-translation='HowWouldYouLikeToMatchSourceUsers']");
+
+
         //private readonly By _ = By.XPath("//*/span[@data-translation='']");
         //private readonly By _ = By.XPath("//*/span[@data-translation='']");
         //private readonly By _ = By.XPath("//*/span[@data-translation='']");
@@ -21,7 +29,7 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
         //private readonly By _ = By.XPath("//*/span[@data-translation='']");
         //private readonly By _ = By.XPath("//*/span[@data-translation='']");
         //private readonly By _ = By.XPath("//*/span[@data-translation='']");
-        
+
         protected readonly EditProjectPage EditProjectPage;
 
         public EditProjectWorkflowBase(EditProjectPage editProjectPage, IWebDriver webDriver)
@@ -82,6 +90,24 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
             //return GetWorkflow();
         }
 
+        public T AddTenant( bool isFinished = false)  
+        {
+            ValidateStepBy(_addTenantsStep);          
+
+            if (isFinished)
+                ClickNext();
+            throw new NotImplementedException();
+            //return GetWorkflow();
+        } 
+
+        public T ReviewTenant()
+        {
+            ValidateStepBy(_reviewTenantsStep);
+
+            ClickNext();
+            throw new NotImplementedException();
+            //return GetWorkflow();
+        }
         public T SyncSchedule(bool isEnabled)
         {
             EditProjectPage.SetSyncSchedule(isEnabled);
@@ -91,7 +117,7 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
             //return GetWorkflow();
         }
 
-       public T MigrationWave(string migrationWave, bool isFinished = false)
+        public T MigrationWave(string migrationWave, bool isFinished = false)
         {
             EditProjectPage.SetMigrationWaveName(migrationWave);
 
@@ -110,8 +136,7 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
             throw new NotImplementedException();
             //return GetWorkflow();
         }
-
-
+        
         public T SelectMigrationWave(string migrationWave, bool isFinished = false)
         {
             EditProjectPage.SelectMigrationWave(migrationWave);
@@ -121,6 +146,22 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
             throw new NotImplementedException();
             // return GetWorkflow();
         }
+
+        public T SelectDomain(bool isFinished = false)
+        {
+            if (isFinished)
+                ClickNext();
+            throw new NotImplementedException();
+            // return GetWorkflow();
+        }
+
+        //public T SelectDomain(bool isFinished = false)
+        //{
+        //    if (isFinished)
+        //        ClickNext();
+        //    throw new NotImplementedException();
+        //    // return GetWorkflow();
+        //}
 
         public T SelectTenantMachGroup(bool isFinished = false)
         {

@@ -375,7 +375,6 @@ D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\MailEngine\Engin
 D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\MailEngine\working\0
 D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\MailEngine\internal\scripts\postimport.ps1
 D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\MailEngine\internal\scripts\preimport.ps1
-D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\MailEngine.orderedtest
 D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\MailOnlyCSVC3toC11ShMBX-TC33619_part2.csv
 D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\MailOnlyCSVC3toC11ShMBX-TC33619_part1.csv
 D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\MailEngine\functions\Other\Invoke-CreateFoldersAndItems.ps1
@@ -599,6 +598,5 @@ d:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\MailEngine\funct
 d:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\TestResultsPublisher.ps1
 d:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\BuildStatusRelay.ps1
 d:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\TestRunner.ps1
-D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.csprojResolveAssemblyReference.cache
-D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.exe.config
-D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.csproj.CoreCompileInputs.cache
+D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\BTCodex.DataModel.dll
+D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\BTCodex.DataModel.pdb
