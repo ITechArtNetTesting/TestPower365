@@ -600,3 +600,8 @@ d:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\BuildStatusRelay
 d:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\resources\TestRunner.ps1
 D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\BTCodex.DataModel.dll
 D:\Project\BTCloud\SeleniumTests\ProbeTests\bin\Debug\BTCodex.DataModel.pdb
+D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.csprojResolveAssemblyReference.cache
+D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.exe.config
+D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.csproj.CoreCompileInputs.cache
+D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.exe
+D:\Git\TestPower365\ProbeTests\obj\Debug\ProbeTests.pdb
