@@ -487,7 +487,7 @@ D:\Project\BTCloud\SeleniumTests\AutomationTests\bin\Debug\resources\TestRunner.
 D:\Project\BTCloud\SeleniumTests\AutomationTests\bin\Debug\resources\MailEngine\functions\Validations\Invoke-Validate32282.ps1
 d:\Project\BTCloud\SeleniumTests\AutomationTests\bin\Debug\resources\TestResultsPublisher.ps1
 d:\Project\BTCloud\SeleniumTests\AutomationTests\bin\Debug\resources\BuildStatusRelay.ps1
-D:\Project\BTCloud\SeleniumTests\AutomationTests\obj\Debug\AutomationTests.csprojResolveAssemblyReference.cache
-D:\Project\BTCloud\SeleniumTests\AutomationTests\obj\Debug\AutomationTests.csproj.CoreCompileInputs.cache
 D:\Project\BTCloud\SeleniumTests\AutomationTests\bin\Debug\BTCodex.DataModel.dll
 D:\Project\BTCloud\SeleniumTests\AutomationTests\bin\Debug\BTCodex.DataModel.pdb
+D:\Project\BTCloud\SeleniumTests\AutomationTests\obj\Debug\AutomationTests.csprojResolveAssemblyReference.cache
+D:\Project\BTCloud\SeleniumTests\AutomationTests\obj\Debug\AutomationTests.csproj.CoreCompileInputs.cache

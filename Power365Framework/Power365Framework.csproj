@@ -63,6 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\SetUpProjectPages\DirSyncDownloadPage.cs" />
+    <Compile Include="Pages\SetUpProjectPages\EmailSignaturesPage.cs" />
     <Compile Include="Services\BrowserAutomation.cs" />
     <Compile Include="Dialogs\ConfirmationDialog.cs" />
     <Compile Include="Dialogs\ModalDialogBase.cs" />
@@ -145,9 +147,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\MigrationProfileWizardPage\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,6 +1,6 @@
 D:\Project\BTCloud\SeleniumTests\AutomationServices.PowerShell\bin\Debug\AutomationServices.PowerShell.dll
 D:\Project\BTCloud\SeleniumTests\AutomationServices.PowerShell\bin\Debug\AutomationServices.PowerShell.pdb
-D:\Project\BTCloud\SeleniumTests\AutomationServices.PowerShell\obj\Debug\AutomationServices.PowerShell.csprojResolveAssemblyReference.cache
 D:\Project\BTCloud\SeleniumTests\AutomationServices.PowerShell\obj\Debug\AutomationServices.PowerShell.csproj.CoreCompileInputs.cache
 D:\Project\BTCloud\SeleniumTests\AutomationServices.PowerShell\obj\Debug\AutomationServices.PowerShell.dll
 D:\Project\BTCloud\SeleniumTests\AutomationServices.PowerShell\obj\Debug\AutomationServices.PowerShell.pdb
+D:\Project\BTCloud\SeleniumTests\AutomationServices.PowerShell\obj\Debug\AutomationServices.PowerShell.csprojResolveAssemblyReference.cache

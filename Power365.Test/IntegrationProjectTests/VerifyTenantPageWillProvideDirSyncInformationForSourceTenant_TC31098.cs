@@ -9,7 +9,7 @@ namespace BinaryTree.Power365.Test.IntegrationProjectTests
     {   
         [Test]
         [Category("Integration")]
-        [Category("UI")]     
+        [Category("UI")]
         public void VerifyTenantPageWillProvideDirSyncInformationForSourceTenant_Integration_31098()
         {
             var client = Automation.Settings.GetByReference<Client>("client2");

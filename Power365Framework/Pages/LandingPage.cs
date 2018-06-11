@@ -12,6 +12,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
 
         private readonly By _migrateAndIntegrateButton = By.XPath("//div[contains(@class,'power365')]");
 
+        //old version . 06/08/2018 something changed in UI
         //public LandingPage ClickMigrateAndIntegrateButton()
         //{
         //    return ClickElementBy<LandingPage>(_migrateAndIntegrateButton,10,1);

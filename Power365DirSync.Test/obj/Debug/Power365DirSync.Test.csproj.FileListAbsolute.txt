@@ -20,6 +20,6 @@ D:\Project\BTCloud\SeleniumTests\Power365DirSync.Test\bin\Debug\WebDriver.Suppor
 D:\Project\BTCloud\SeleniumTests\Power365DirSync.Test\obj\Debug\Power365DirSync.Test.csproj.CoreCompileInputs.cache
 D:\Project\BTCloud\SeleniumTests\Power365DirSync.Test\obj\Debug\BinaryTree.Power365DirSync.Test.dll
 D:\Project\BTCloud\SeleniumTests\Power365DirSync.Test\obj\Debug\BinaryTree.Power365DirSync.Test.pdb
-D:\Project\BTCloud\SeleniumTests\Power365DirSync.Test\obj\Debug\Power365DirSync.Test.csprojResolveAssemblyReference.cache
 D:\Project\BTCloud\SeleniumTests\Power365DirSync.Test\bin\Debug\log4net.dll
 D:\Project\BTCloud\SeleniumTests\Power365DirSync.Test\bin\Debug\log4net.xml
+D:\Project\BTCloud\SeleniumTests\Power365DirSync.Test\obj\Debug\Power365DirSync.Test.csprojResolveAssemblyReference.cache
