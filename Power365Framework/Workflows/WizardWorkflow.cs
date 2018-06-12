@@ -6,9 +6,8 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
 {
     public abstract class WizardWorkflow : WorkflowBase
     {
-        private readonly By _backButton = By.ClassName("btn-back");
-        //private readonly By _nextButton = By.ClassName("btn-next");
-        private readonly By _nextButton = By.XPath("//*[contains(@class, 'btn-next')]");
+        private readonly By _backButton = By.ClassName("btn-back");        
+        private readonly By _nextButton = By.XPath("//button[contains(@class, 'btn-next')]");
 
         protected WizardWorkflow(ILog logger, By locator, IWebDriver webDriver)
             : base(logger, locator, webDriver) { }

@@ -55,6 +55,7 @@ namespace BinaryTree.Power365.Test.Setup
 
             var projectListPage = Automation.Common
                 .SingIn(signInUser, signInPassword)
+                .MigrateAndIntegrateSelect()
                 .ClientSelect(clientName)
                 .GetPage<ProjectListPage>();
 

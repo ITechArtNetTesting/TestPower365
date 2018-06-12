@@ -1,27 +1,20 @@
 ﻿using BinaryTree.Power365.AutomationFramework;
-using BinaryTree.Power365.AutomationFramework.Enums;
 using BinaryTree.Power365.AutomationFramework.Pages;
+using BinaryTree.Power365.AutomationFramework.Pages.SetUpProjectPages;
 using BinaryTree.Power365.AutomationFramework.Workflows;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BinaryTree.Power365.Test.CommonTests.Help
 {
     [TestFixture]
     [Parallelizable(ParallelScope.Children)]
-    class HelpVideoExist_TC : TestBase
+    public class HelpVideoExist_TC : TestBase
     {
-
-
         [Test]
         [Category("UI")]
-        [Category("Integration")]
-        [TestResource("client2", "project2", "entry11")]
-        public void MigrationWave_Sync_Integration_TC30919_33610()
+        [Category("Integration")]       
+        public void DirSyncHelpVideoExist_39086TC()
         {
             var settings = Automation.Settings;
 
@@ -38,17 +31,12 @@ namespace BinaryTree.Power365.Test.CommonTests.Help
             var sourceTenant = settings.GetByReference<Tenant>(project.Source);
             var targetTenant = settings.GetByReference<Tenant>(project.Target);
 
-            var sourceCredential = sourceTenant.GetByReference<Credential>("ps1");
-            var targetCredential = targetTenant.GetByReference<Credential>("ps1");
+            var _sourceTenant = sourceTenant.Name;
+            var _targetTenant = targetTenant.Name;
 
-            var sourceTenantUser = sourceCredential.Username;
-            var sourceTenantPassword = sourceCredential.Password;
-
-            var targetTenantUser = targetCredential.Username;
-            var targetTenantPassword = targetCredential.Password;
-
-
-            // ManageUsersPage manageUsersPage;
+            string _sourceFolder = project.GetByReference<UserMigration>("entry4").Source;
+            string _targetFolder = project.GetByReference<UserMigration>("entry4").Target;
+          
             ProjectDetailsPage projectDetailPage = Automation.Common
                                         .SingIn(signInUser, signInPassword)
                                         .MigrateAndIntegrateSelect()
@@ -56,39 +44,97 @@ namespace BinaryTree.Power365.Test.CommonTests.Help
                                         .ProjectSelect(projectName)
                                         .GetPage<ProjectDetailsPage>();
 
-            //var editProjectWorkflow = projectDetailPage.ClickProjectEdit<IntegrationProjectWorkflow>();
-            //editProjectWorkflow
-            //    .ProjectName(projectName)
-            //    .ProjectDescription(projectDescription)
-            //    .AddTenant()  
-            //    .ReviewTenant()
-            //    .SelectDomain()
-            //    .
-            //    .UploadUserList(uploadFilePath)
-            //    .SyncSchedule(false)
+            var editProjectWorkflow = projectDetailPage.ClickProjectEdit<IntegrationProjectWorkflow>();
+            var dirSyncPage = editProjectWorkflow
+                 .ProjectName()
+                 .ProjectDescription(projectDescription)
+                 .AddTenant(true)
+                 .ReviewTenant()
+                 .SelectDomain(true)
+                 .DiscoverUsers(true)
+                 .DiscoverADGroups(true)
+                 .ReviewGroups(true)
+                 .MatchSourceUsers(true)
+                 .CreateUsers(true)
+                 .DiscoveDistribuitionGroups(true)
+                 .MatchDistribuitionGroups(true)
+                 .CreateGroupsInTarget(true)
+                 .MigrationWaves(true)
+                 .DefineMigrationWaves(false, true)
+                 .AssignSyncSheduleOfWave(true)
+                 .CreateAddressBook(true)
+                 .ShareCalendar(true)
+                 .IdentifyUsersThatWillShareCalendarAvailability(true)
+                 .SelectGroupToUseCalendar(true)
+                 .YesMigratePublicFolders(true)
+                 .KeepMyExistingPublicFolder()
+                 .TenantsAndAzureADConnectStatus()
+                 .DownloadDirSync()
+                 .GetPage<DirSyncDownloadPage>();
 
-
-            ////var projectListPage = Automation.ProjectWo
-            //// .SingIn(signInUser, signInPassword)
-            //// .ClientSelect(clientName)
-            //// .GetPage<ProjectListPage>();
-
-            //manageUsersPage = new IntegrationProjectWorkflow(projectListPage, webDriver);
-
-            //var editProjectWorkflow = projectListPage.ClickNewProject<EmailWithFileProjectWorkflow>();
-            //var projectDetailsPage = editProjectWorkflow
-            //       .ProjectType(ProjectType.EmailByFile)
-            //       .ProjectName(projectName)
-            //       .ProjectDescription(projectDescription)
-            //       .AddTenant(sourceTenantUser, sourceTenantPassword)
-            //       .AddTenant(targetTenantUser, targetTenantPassword, true)
-            //       .UploadUserList(uploadFilePath)
-            //       .SyncSchedule(false)
-            //       .Submit()
-            //       .GetPage<ProjectDetailsPage>();
-
+            Assert.True(dirSyncPage.IsVidioElementPresent(), "Video element should be visible and clickable");
         }
 
+        [Test]
+        [Category("UI")]
+        [Category("Integration")]     
+        public void DKIMHelpVideoExist_39087TC()
+        {
+            var settings = Automation.Settings;
+            var client = settings.GetByReference<Client>("client2");
+            var clientName = client.Name;
+
+            var signInUser = client.Administrator.Username;
+            var signInPassword = client.Administrator.Password;
+
+            var project = client.GetByReference<Project>("project2");
+            var projectName = project.Name;
+            var projectDescription = project.Description;
+
+           
+            ProjectDetailsPage projectDetailPage = Automation.Common
+                                        .SingIn(signInUser, signInPassword)
+                                        .MigrateAndIntegrateSelect()
+                                        .ClientSelect(clientName)
+                                        .ProjectSelect(projectName)
+                                        .GetPage<ProjectDetailsPage>();
+
+            var editProjectWorkflow = projectDetailPage.ClickProjectEdit<IntegrationProjectWorkflow>();
+            var emailSignaturePage = editProjectWorkflow
+                 .ProjectName()
+                 .ProjectDescription(projectDescription)
+                 .AddTenant(true)
+                 .ReviewTenant()
+                 .SelectDomain(true)
+                 .DiscoverUsers(true)
+                 .DiscoverADGroups(true)
+                 .ReviewGroups(true)
+                 .MatchSourceUsers(true)
+                 .CreateUsers(true)
+                 .DiscoveDistribuitionGroups(true)
+                 .MatchDistribuitionGroups(true)
+                 .CreateGroupsInTarget(true)
+                 .MigrationWaves(true)
+                 .DefineMigrationWaves(false, true)
+                 .AssignSyncSheduleOfWave(true)
+                 .CreateAddressBook(true)
+                 .ShareCalendar(true)
+                 .IdentifyUsersThatWillShareCalendarAvailability(true)
+                 .SelectGroupToUseCalendar(true)
+                 .YesMigratePublicFolders(true)
+                 .KeepMyExistingPublicFolder()
+                 .TenantsAndAzureADConnectStatus()
+                 .DownloadDirSync(true)
+                 .ConfiguringPower365(true)
+                 .PasswordToSecurePower365(true)
+                 .EmailRewriting(true)
+                 .WantToHaveEmailRewritten(true)
+                 .ExchangeOnlineEmailRewriteGroupSteps(true)
+                 .EmailSignatures(false)
+                 .GetPage<EmailSignaturesPage>();
+
+            Assert.True(emailSignaturePage.IsVidioElementPresent(), "Video element should be visible and clickable");
+        }
 
     }
 }
