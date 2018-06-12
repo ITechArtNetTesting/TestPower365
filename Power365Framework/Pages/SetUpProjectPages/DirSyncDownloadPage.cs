@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BinaryTree.Power365.AutomationFramework.Utilities;
 using log4net;
 using OpenQA.Selenium;
 
@@ -19,11 +20,11 @@ namespace BinaryTree.Power365.AutomationFramework.Pages.SetUpProjectPages
 
         public bool IsVidioElementPresent()
         {
+            FiddlerProxy.StartWritingRequests();
             IsElementVisible(_video);
             ClickElementBy(_video);
-
+            FiddlerProxy.StopFiddlerProxy();
             return IsElementVisible(_modalVideoDialog)&IsElementVisible(_video); 
         }
-
     }
 }

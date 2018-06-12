@@ -48,7 +48,7 @@ namespace BinaryTree.Power365.Test.CommonTests.Discovery
         [Category("MailWithDiscovery")]
         [Category("Discovery")]
         public void DiscoveryCanBeEnabledAndDisabledInManageTenantsPage_MD_32699()
-        {
+        {            
             TestRun("client2", "project1");
         }
 

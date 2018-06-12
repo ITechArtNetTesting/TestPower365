@@ -45,13 +45,13 @@ namespace BinaryTree.Power365.Test
         public void OneTimeSetUp()
         {
             _baseLogger.InfoFormat("OneTimeSetUp");
-
+            
             XmlConfigurator.Configure();
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
             var settingsFilePath = ConfigurationManager.AppSettings["SettingsFile"];
             _settings = GetSettings(settingsFilePath);
 
-            _remoteCacheService = new RemoteCacheService();
+            //_remoteCacheService = new RemoteCacheService();
         }
 
         [SetUp]

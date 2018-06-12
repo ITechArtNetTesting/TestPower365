@@ -15,7 +15,7 @@ namespace BinaryTree.Power365.Test.CommonTests.Help
         [Category("UI")]
         [Category("Integration")]       
         public void DirSyncHelpVideoExist_39086TC()
-        {
+        {            
             var settings = Automation.Settings;
 
             var client = settings.GetByReference<Client>("client2");

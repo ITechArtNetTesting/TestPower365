@@ -18,7 +18,7 @@ namespace BinaryTree.Power365.AutomationFramework.Workflows
         }
 
         public CommonWorkflow SingIn(string username, string password)
-        {
+        {                        
             var o365SignIn = _homePage.ClickSignIn();
             CurrentPage = o365SignIn.SignIn(username, password);
             return this;

@@ -1,4 +1,5 @@
 ﻿using BinaryTree.Power365.AutomationFramework.Pages;
+using BinaryTree.Power365.AutomationFramework.Utilities;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
@@ -30,10 +31,11 @@ namespace BinaryTree.Power365.AutomationFramework.Services
 
         public BrowserAutomation(Settings settings, object context = null)
         {
+            FiddlerProxy.StartFiddlerProxy(0);
             _context = context;
             _settings = settings;
             _webDriver = GetDriver();
-
+            
             //RemoteWebDriver does not support Maximize command
             if (_webDriver is RemoteWebDriver)
                 _webDriver.Manage().Window.Size = new System.Drawing.Size(1920, 1080);
@@ -137,10 +139,15 @@ namespace BinaryTree.Power365.AutomationFramework.Services
                         "application/octet-stream;application/csv;text/csv;application/vnd.ms-excel;");
                     return new FirefoxDriver(firefoxOptions);
                 case "chrome":
-                default:
+                default:                    
                     var chromeOptions = new ChromeOptions();
                     chromeOptions.AddUserProfilePreference("safebrowsing.enabled", true);
-                    chromeOptions.AddUserProfilePreference("download.default_directory", Path.GetFullPath(_testSpecificDownloadsFolder));
+                    chromeOptions.AddUserProfilePreference("download.default_directory", Path.GetFullPath(_testSpecificDownloadsFolder));                    
+                    chromeOptions.Proxy = FiddlerProxy.GetProxy();
+                    chromeOptions.AddArgument("ignore-certificate-errors");
+                    chromeOptions.AddArgument("--disable-web-security");
+                    chromeOptions.AddArgument("--allow-running-insecure-content");
+                    chromeOptions.AddArgument("--enable-automation");
                     return new ChromeDriver(Path.GetFullPath(chromeDriverDirectory), chromeOptions);
             }
         }
