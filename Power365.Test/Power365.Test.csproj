@@ -100,6 +100,7 @@
     <Compile Include="CommonTests\Migration\SubmittingDeltaSyncJobForASyncedUser_TC23091.cs" />
     <Compile Include="CommonTests\Rollback\TheRollbackCountIsDisplayed_TC43335.cs" />
     <Compile Include="CommonTests\ExportAndImport\TheExportButtonExportsUserMigrationRecords_TC45618.cs" />
+    <Compile Include="IntegrationProjectTests\VerifySortAndFilterOptionsForGroupSyncUI_TC31797.cs" />
     <Compile Include="IntegrationProjectTests\VerifyTenantPageWillProvideDirSyncInformationForSourceTenant_TC31098.cs" />
     <Compile Include="MailOnlyProjectTests\ErrorLogCanBeDownloadedForFailedMigration_TC22168.cs" />
     <Compile Include="Menu\VerifyTheSelectActionOnTheManageErrorsPage_TC34736.cs" />

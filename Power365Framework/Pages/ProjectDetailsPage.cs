@@ -9,7 +9,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
     public class ProjectDetailsPage : PageBase
     {
         private static readonly By _locator = By.Id("projectContainer");
-
+        private readonly By editGrpupsLink = By.XPath("//a[contains(@data-bind,'GroupsLink')]/span");
         //@@@ REQ:ID
         private readonly By _usersEditLink = By.XPath("//div[contains(@data-bind, 'overallStatusViewModel')]//a[contains(@data-bind, 'totalLink')]//span");
         private readonly By _publicFoldersEditLink = By.XPath("//*[contains(text(), 'Public folders')]/ancestor::div[contains(@class, 'ibox')]//div[contains(@class, 'ibox-content')]//a[contains(@data-bind, 'totalLink')]");
@@ -44,6 +44,11 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
         public ManagePublicFoldersPage ClickPublicFoldersEdit()
         {
             return ClickElementBy<ManagePublicFoldersPage>(_publicFoldersEditLink);
+        }
+
+        public GroupsPage ClickGroupsEdit()
+        {
+            return ClickElementBy<GroupsPage>(editGrpupsLink);
         }
 
         public int GetRollbackUsersNumber()
