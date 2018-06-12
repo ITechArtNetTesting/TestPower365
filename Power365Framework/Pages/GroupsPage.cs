@@ -47,6 +47,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
 
         public void SelectVisibleGroups()
         {
+            WaitForLoadComplete();
             foreach (var group in WebDriver.FindElements(allGroups))
             {
                 group.Click();
@@ -71,8 +72,7 @@ namespace BinaryTree.Power365.AutomationFramework.Pages
 
         public void ClickFilter()
         {
-            ClickElementBy(filter);
-            WaitForLoadComplete();
+            ClickElementBy(filter);            
         }
 
         public bool CheckSortWorkingCorrectly()
