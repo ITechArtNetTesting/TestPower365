@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using log4net;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace BinaryTree.Power365.AutomationFramework.Pages.SetUpProjectPages
 {
@@ -16,14 +17,14 @@ namespace BinaryTree.Power365.AutomationFramework.Pages.SetUpProjectPages
         }
         private static readonly By _video = By.XPath("//img[@class='video-thumbnail']");
         private static readonly By _modalVideoDialog = By.Id("modalDialog");
+        private readonly By _videoLoadingSpinner = By.XPath("//div[@class='video-spinner']");
 
         public bool IsVidioElementPresent()
         {
             IsElementVisible(_video);
-            ClickElementBy(_video);
-
-            return IsElementVisible(_modalVideoDialog)&IsElementVisible(_video); 
-        }
-
+            ClickElementBy(_video);            
+            EvaluateElement(ExpectedConditions.InvisibilityOfElementLocated(_videoLoadingSpinner), 10, 1, delegate { });
+            return IsElementVisible(_modalVideoDialog)&&IsElementVisible(_video); 
+        }       
     }
 }
