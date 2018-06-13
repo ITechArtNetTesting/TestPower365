@@ -51,7 +51,7 @@ namespace BinaryTree.Power365.Test
             var settingsFilePath = ConfigurationManager.AppSettings["SettingsFile"];
             _settings = GetSettings(settingsFilePath);
 
-            _remoteCacheService = new RemoteCacheService();
+            //_remoteCacheService = new RemoteCacheService();
         }
 
         [SetUp]
